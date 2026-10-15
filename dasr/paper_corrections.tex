@@ -1,0 +1,40 @@
+% Suggested replacements; insert into the full Overleaf project, not standalone.
+% Define separate uplink/downlink throughput in BYTES per second.
+\begin{align}
+\widehat{\ell}_t(a_t) ={}&
+\widehat{\ell}^{\mathrm{edge}}_t +
+\widehat{\ell}^{\mathrm{encode}}_t +
+\frac{\widehat{V}^{\uparrow}_t}{B^{\uparrow}_t} + R_t \\
+&+ \widehat{\ell}^{\mathrm{decode}}_t +
+\widehat{\ell}^{\mathrm{cloud+sampler}}_t +
+\frac{\widehat{V}^{\downarrow}_t}{B^{\downarrow}_t} +
+\widehat{\ell}^{\mathrm{apply}}_t +
+\widehat{\ell}^{\mathrm{switch}}_t .
+\end{align}
+% Include synchronized D2H/H2D transfer in encode/decode or report separately.
+% Count extra retry round trips explicitly. RTT is not charged twice per exchange.
+
+% If the sender references the receiver's reconstructed state, do NOT add the
+% previous reconstruction error to this residual a second time.
+\begin{align}
+u_i^{(t)} &= H_{k,i}^{(t)} - \widehat{H}_{k,i}^{(t-1)}, \\
+\widehat{H}_{k,i}^{(t)} &=
+\begin{cases}
+\widehat{H}_{k,i}^{(t-1)} + Q^{-1}(Q(u_i^{(t)})), & i\in A_t,\\
+\widehat{H}_{k,i}^{(t-1)}, & i\notin A_t .
+\end{cases}
+\end{align}
+% Floating-point residual addition remains approximate unless a reversible
+% representation and exact inverse are demonstrated. Exact deltas use XOR of
+% native activation bytes. The delivered sparse codec instead sends absolute
+% row replacements, avoiding floating-point residual inversion.
+
+% Replace the main result table's alignment declaration:
+% \begin{tabular}{llccccccccc} % 11 columns, matching the supplied header
+
+% Suggested scope statement matching the implementation:
+% The initial prototype evaluates communication-only boundary codecs and
+% approximate FFN row caching with dense attention. Live adaptation selects
+% codecs and refresh intervals at a fixed resident split; full layer-placement
+% adaptation is evaluated by measured-table trace replay pending a deployed
+% weight-migration implementation. Colab CPU--GPU results are edge emulation.

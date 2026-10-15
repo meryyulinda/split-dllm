@@ -1,0 +1,9 @@
+{
+  "description": "Approximate FFN-only row cache; attention is dense. Instrument memory overhead.",
+  "configurations": [
+    {"name": "full_dense", "codec": "full", "refresh": 4, "selective": false},
+    {"name": "ffn_50pct", "codec": "full", "refresh": 4, "selective": true, "active_fraction": 0.5},
+    {"name": "ffn_25pct", "codec": "full", "refresh": 4, "selective": true, "active_fraction": 0.25},
+    {"name": "ffn_sparse_int8", "codec": "sparse_int8", "threshold": 0.001, "refresh": 4, "selective": true, "active_fraction": 0.25}
+  ]
+}

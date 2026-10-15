@@ -1,0 +1,266 @@
+[
+  {
+    "name": "full_dense",
+    "config": {
+      "split": 2,
+      "codec": "full",
+      "threshold": 0.0,
+      "refresh": 4,
+      "active_fraction": 0.25,
+      "selective": false,
+      "audit_fraction": 0.02,
+      "gen_length": 8,
+      "steps": 8,
+      "block_length": 8,
+      "bandwidth_mbps": 100,
+      "rtt_ms": 20,
+      "sleep_network": false,
+      "seed": 7,
+      "trace_drift": false,
+      "adaptive_profile": null,
+      "network_trace": null,
+      "memory_budget_bytes": 12884901888,
+      "risk_budget": 0.0
+    },
+    "measured_queries": 3,
+    "publication_protocol_ready": false,
+    "latency_ms": {
+      "mean": 19.575700000000047,
+      "ci95": [
+        17.911800000000035,
+        22.115500000000065
+      ],
+      "n": 3
+    },
+    "modeled_latency_ms": {
+      "mean": 181.36892666666674,
+      "ci95": [
+        179.7052400000001,
+        183.90862000000004
+      ],
+      "n": 3
+    },
+    "application_bytes": {
+      "mean": 22415.333333333332,
+      "ci95": [
+        22414.0,
+        22418.0
+      ],
+      "n": 3
+    },
+    "token_agreement": {
+      "mean": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "n": 3
+    },
+    "numeric_score": {
+      "mean": null,
+      "ci95": [
+        null,
+        null
+      ],
+      "n": 0
+    }
+  },
+  {
+    "name": "ffn_50pct",
+    "config": {
+      "split": 2,
+      "codec": "full",
+      "threshold": 0.0,
+      "refresh": 4,
+      "active_fraction": 0.5,
+      "selective": true,
+      "audit_fraction": 0.02,
+      "gen_length": 8,
+      "steps": 8,
+      "block_length": 8,
+      "bandwidth_mbps": 100,
+      "rtt_ms": 20,
+      "sleep_network": false,
+      "seed": 7,
+      "trace_drift": false,
+      "adaptive_profile": null,
+      "network_trace": null,
+      "memory_budget_bytes": 12884901888,
+      "risk_budget": 0.0
+    },
+    "measured_queries": 3,
+    "publication_protocol_ready": false,
+    "latency_ms": {
+      "mean": 17.865166666666635,
+      "ci95": [
+        15.144499999999894,
+        20.717399999999884
+      ],
+      "n": 3
+    },
+    "modeled_latency_ms": {
+      "mean": 179.64500666666663,
+      "ci95": [
+        176.9246599999999,
+        182.49699999999987
+      ],
+      "n": 3
+    },
+    "application_bytes": {
+      "mean": 22248.0,
+      "ci95": [
+        22245.0,
+        22252.0
+      ],
+      "n": 3
+    },
+    "token_agreement": {
+      "mean": 0.625,
+      "ci95": [
+        0.625,
+        0.625
+      ],
+      "n": 3
+    },
+    "numeric_score": {
+      "mean": null,
+      "ci95": [
+        null,
+        null
+      ],
+      "n": 0
+    }
+  },
+  {
+    "name": "ffn_25pct",
+    "config": {
+      "split": 2,
+      "codec": "full",
+      "threshold": 0.0,
+      "refresh": 4,
+      "active_fraction": 0.25,
+      "selective": true,
+      "audit_fraction": 0.02,
+      "gen_length": 8,
+      "steps": 8,
+      "block_length": 8,
+      "bandwidth_mbps": 100,
+      "rtt_ms": 20,
+      "sleep_network": false,
+      "seed": 7,
+      "trace_drift": false,
+      "adaptive_profile": null,
+      "network_trace": null,
+      "memory_budget_bytes": 12884901888,
+      "risk_budget": 0.0
+    },
+    "measured_queries": 3,
+    "publication_protocol_ready": false,
+    "latency_ms": {
+      "mean": 11.55129999999997,
+      "ci95": [
+        10.691099999999842,
+        13.176300000000031
+      ],
+      "n": 3
+    },
+    "modeled_latency_ms": {
+      "mean": 173.3243933333333,
+      "ci95": [
+        172.46413999999984,
+        174.94934000000003
+      ],
+      "n": 3
+    },
+    "application_bytes": {
+      "mean": 22163.666666666668,
+      "ci95": [
+        22163.0,
+        22165.0
+      ],
+      "n": 3
+    },
+    "token_agreement": {
+      "mean": 0.625,
+      "ci95": [
+        0.625,
+        0.625
+      ],
+      "n": 3
+    },
+    "numeric_score": {
+      "mean": null,
+      "ci95": [
+        null,
+        null
+      ],
+      "n": 0
+    }
+  },
+  {
+    "name": "ffn_sparse_int8",
+    "config": {
+      "split": 2,
+      "codec": "sparse_int8",
+      "threshold": 0.001,
+      "refresh": 4,
+      "active_fraction": 0.25,
+      "selective": true,
+      "audit_fraction": 0.02,
+      "gen_length": 8,
+      "steps": 8,
+      "block_length": 8,
+      "bandwidth_mbps": 100,
+      "rtt_ms": 20,
+      "sleep_network": false,
+      "seed": 7,
+      "trace_drift": false,
+      "adaptive_profile": null,
+      "network_trace": null,
+      "memory_budget_bytes": 12884901888,
+      "risk_budget": 0.0
+    },
+    "measured_queries": 3,
+    "publication_protocol_ready": false,
+    "latency_ms": {
+      "mean": 21.5967999999999,
+      "ci95": [
+        19.839499999999788,
+        24.092099999999835
+      ],
+      "n": 3
+    },
+    "modeled_latency_ms": {
+      "mean": 182.75962666666658,
+      "ci95": [
+        181.00221999999977,
+        185.25489999999982
+      ],
+      "n": 3
+    },
+    "application_bytes": {
+      "mean": 14535.333333333334,
+      "ci95": [
+        14534.0,
+        14537.0
+      ],
+      "n": 3
+    },
+    "token_agreement": {
+      "mean": 0.625,
+      "ci95": [
+        0.625,
+        0.625
+      ],
+      "n": 3
+    },
+    "numeric_score": {
+      "mean": null,
+      "ci95": [
+        null,
+        null
+      ],
+      "n": 0
+    }
+  }
+]
