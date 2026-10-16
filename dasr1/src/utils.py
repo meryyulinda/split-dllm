@@ -3,12 +3,6 @@ import numpy as np
 import torch
 
 def set_seed(seed: int) -> None:
-    """
-    Set the random seed for reproducibility.
-
-    Args:
-        seed (int): The seed value to set.
-    """
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -16,9 +10,6 @@ def set_seed(seed: int) -> None:
         torch.cuda.manual_seed_all(seed)
 
 def print_gpu_info() -> None:
-    """
-    Print information about the available GPUs.
-    """
     if torch.cuda.is_available():
         print("GPU:", torch.cuda.get_device_name(0))
 

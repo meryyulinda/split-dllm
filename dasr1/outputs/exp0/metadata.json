@@ -1,0 +1,10 @@
+{
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "seed": 42,
+  "prompt": "What is 15 multiplied by 12? Explain briefly.",
+  "steps": 64,
+  "max_new_tokens": 64,
+  "temperature": 0.0,
+  "algorithm": "origin",
+  "output": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nWhat is 15 multiplied by 12? Explain briefly.<|im_end|>\n<|im_start|>assistant\n15 multiplied by 12 equals 180."
+}
