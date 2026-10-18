@@ -1,6 +1,7 @@
 import random
 import numpy as np
 import torch
+import time
 
 def set_seed(seed: int) -> None:
     random.seed(seed)
@@ -17,3 +18,21 @@ def print_gpu_info() -> None:
         print(f"GPU Memory: {total_memory:.2f} GB")
     else:
         print("No GPUs available.")
+
+def cuda_time(fn):
+    torch.cuda.synchronize()
+    start = time.perf_counter()
+
+    result = fn()
+
+    torch.cuda.synchronize()
+    elapsed_ms = (time.perf_counter() - start) * 1000
+
+    return result, elapsed_ms
+
+def boundary_size_mb(tensor):
+    return (
+        tensor.numel()
+        * tensor.element_size()
+        / (1024 ** 2)
+    )
