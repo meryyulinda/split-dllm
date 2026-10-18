@@ -5,13 +5,13 @@ df = pd.read_csv("outputs/exp1/token_changes.csv")
 
 plt.figure()
 
-plt.plot(df["step"], df["changed_ratio"],)
+plt.plot(df["transition"], df["changed_ratio"],)
 
-plt.xlabel("Diffusion step")
+plt.xlabel("Diffusion transition")
 
 plt.ylabel("Changed-token ratio")
 
-plt.title("Token Changes Across Dream Denoising Steps")
+plt.title("Token Changes Across Dream Denoising transitions")
 
 plt.tight_layout()
 

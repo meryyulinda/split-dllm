@@ -59,11 +59,29 @@ class HiddenDriftTracker:
 
             call_index = self.call_counts[layer_number]
 
+            # # TEMPORARY DEBUG to check whether forward calls equal to denoising steps.
+            # if layer_number == 4:
+            #     print(
+            #         f"Layer {layer_number} | "
+            #         f"forward call {call_index} | "
+            #         f"shape {current.shape}"
+            #     )
+
             if layer_number in self.previous:
 
                 previous = self.previous[layer_number]
 
                 drift = self._normalized_drift(current, previous,)
+                
+                thresholds = [1e-4, 5e-4, 1e-3, 5e-3, 1e-2,]
+
+                active_ratios = {}
+
+                for threshold in thresholds:
+
+                    active_ratio = ((drift > threshold).float().mean().item())
+
+                    active_ratios[threshold] = active_ratio
 
                 self.records.append({
                     "layer": layer_number,
@@ -72,6 +90,11 @@ class HiddenDriftTracker:
                     "median_drift": (drift.median().item()),
                     "max_drift": (drift.max().item()),
                     "min_drift": (drift.min().item()),
+                    "active_ratio_1e-4": (active_ratios[1e-4]),
+                    "active_ratio_5e-4": (active_ratios[5e-4]),
+                    "active_ratio_1e-3": (active_ratios[1e-3]),
+                    "active_ratio_5e-3": (active_ratios[5e-3]),
+                    "active_ratio_1e-2": (active_ratios[1e-2]),
                 })
 
             # Save current state for the next denoising iteration.

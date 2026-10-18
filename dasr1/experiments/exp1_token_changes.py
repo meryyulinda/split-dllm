@@ -1,7 +1,6 @@
 import os
 import sys
 import pandas as pd
-import torch
 
 sys.path.append(
     os.path.dirname(
@@ -11,7 +10,7 @@ sys.path.append(
     )
 )
 
-from configs.experiment_config import(
+from configs.experiment_config import (
     MODEL_NAME,
     SEED,
     MAX_NEW_TOKENS,
@@ -25,7 +24,9 @@ from configs.experiment_config import(
 
 from src.model_loader import load_dream_model
 
-from src.generation import (generate_baseline, generate_with_token_history,)
+from src.generation import (
+    generate_with_token_history,
+)
 
 from src.instrumentation import (
     create_token_history_hook,
@@ -36,13 +37,18 @@ from src.instrumentation import (
 
 from src.utils import set_seed
 
+
 def main():
 
     set_seed(SEED)
 
-    model, tokenizer = load_dream_model(MODEL_NAME)
+    model, tokenizer = load_dream_model(
+        MODEL_NAME
+    )
 
-    hook, history = (create_token_history_hook())
+    hook, history = (
+        create_token_history_hook()
+    )
 
     result = generate_with_token_history(
         model=model,
@@ -57,41 +63,148 @@ def main():
         history_hook=hook,
     )
 
-    mask_token_id = (model.config.mask_token_id if model.config.mask_token_id is not None else tokenizer.mask_token_id)
+    # --------------------------------
+    # Prompt / generated-region boundary
+    # --------------------------------
+
+    prompt_length = (
+        result["inputs"]["input_ids"]
+        .shape[1]
+    )
+
+    print(
+        f"Prompt length: "
+        f"{prompt_length}"
+    )
+
+    print(
+        f"Generated region length: "
+        f"{MAX_NEW_TOKENS}"
+    )
+
+    mask_token_id = (
+        model.config.mask_token_id
+    )
 
     rows = []
 
-    for step in range(1, len(history)):
-        previous = history[step-1]
-        current = history[step]
+    # --------------------------------
+    # Compare consecutive diffusion states
+    # --------------------------------
 
-        (changed_mask, changed_count, changed_ratio,) = count_token_changes(previous, current,)
+    for transition in range(
+        1,
+        len(history)
+    ):
 
-        masks_remaining = count_masks(current, mask_token_id,)
+        previous = history[
+            transition - 1
+        ]
 
-        indices = changed_indices(changed_mask)
+        current = history[
+            transition
+        ]
+
+        # Only analyze generated tokens,
+        # excluding the fixed prompt.
+        previous_generated = (
+            previous[prompt_length:]
+        )
+
+        current_generated = (
+            current[prompt_length:]
+        )
+
+        (
+            changed_mask,
+            changed_count,
+            changed_ratio,
+        ) = count_token_changes(
+            previous_generated,
+            current_generated,
+        )
+
+        masks_remaining = count_masks(
+            current_generated,
+            mask_token_id,
+        )
+
+        indices = changed_indices(
+            changed_mask
+        )
 
         rows.append({
-            "step":step,
+            "transition": transition,
             "changed_tokens": changed_count,
             "changed_ratio": changed_ratio,
             "masks_remaining": masks_remaining,
             "changed_indices": str(indices),
         })
 
-        df = pd.DataFrame(rows)
+    df = pd.DataFrame(rows)
 
-        os.makedirs("outputs/exp1", exist_ok=True)
-        
-        df.to_csv("outputs/exp1/token_changes.csv", index=False)
+    # --------------------------------
+    # Output
+    # --------------------------------
 
     print("\nGenerated output:")
     print(result["text"])
 
-    print("\nFinal token change statistics:")
-    print(df[["step", "changed_tokens", "changed_ratio", "masks_remaining",]].to_string(index=False))
+    print(
+        "\n=== EXPERIMENT 1 SUMMARY ==="
+    )
 
-        
+    print(
+        f"Recorded transitions: "
+        f"{len(df)}"
+    )
+
+    print(
+        f"Generated token rows: "
+        f"{MAX_NEW_TOKENS}"
+    )
+
+    print(
+        "\nLast transition:"
+    )
+
+    print(
+        df[
+            [
+                "transition",
+                "changed_tokens",
+                "changed_ratio",
+                "masks_remaining",
+            ]
+        ]
+        .tail(1)
+        .to_string(
+            index=False
+        )
+    )
+
+    # --------------------------------
+    # Save CSV
+    # --------------------------------
+
+    os.makedirs(
+        "outputs/exp1",
+        exist_ok=True,
+    )
+
+    df.to_csv(
+        "outputs/exp1/token_changes.csv",
+        index=False,
+    )
+
+    print(
+        "\nFull per-transition data saved to:"
+    )
+
+    print(
+        "outputs/exp1/token_changes.csv"
+    )
+
 
 if __name__ == "__main__":
     main()
