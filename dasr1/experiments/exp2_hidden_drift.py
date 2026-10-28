@@ -2,6 +2,7 @@ import os
 import sys
 import pandas as pd
 import matplotlib.pyplot as plt
+import torch
 
 sys.path.append(
     os.path.dirname(
@@ -83,7 +84,6 @@ def main():
     # --------------------------------
     # 4. Run ORIGINAL Dream generation
     # --------------------------------
-
     try:
 
         output = model.diffusion_generate(
@@ -97,6 +97,32 @@ def main():
             alg=ALGORITHM,
             return_dict_in_generate=True,
         )
+
+        # ------------------------------------------------
+        # Extra analysis-only forward on the final state.
+        #
+        # Dream performs 64 generation forward calls, but
+        # the final token state produced by the last update
+        # is not forwarded again.
+        #
+        # This extra forward captures the hidden state of
+        # that final token state, giving:
+        #   65 hidden states -> 64 transitions.
+        # ------------------------------------------------
+
+        final_sequence = output.sequences
+
+        final_attention_mask = torch.ones(
+            final_sequence.shape,
+            dtype=torch.bool,
+            device=final_sequence.device,
+        )
+
+        with torch.no_grad():
+            _ = model(
+                input_ids=final_sequence,
+                attention_mask=final_attention_mask,
+            )
 
     finally:
 

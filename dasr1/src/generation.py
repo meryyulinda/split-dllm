@@ -60,6 +60,7 @@ def generate_with_token_history(model, tokenizer, prompt, max_new_tokens, steps,
         "text": decoded,
         "inputs": inputs,
     }
+
 # def generate_instrumented():
 #     return None
 
