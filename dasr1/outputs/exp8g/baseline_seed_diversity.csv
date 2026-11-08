@@ -1,0 +1,4 @@
+task,seeds_tested,distinct_trajectories,stable_baselines
+factual_qa,3,3,3
+instruction,3,3,3
+reasoning,3,3,3

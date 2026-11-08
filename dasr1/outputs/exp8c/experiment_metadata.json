@@ -1,0 +1,54 @@
+{
+  "experiment": "8C actual single-block residual skip with periodic/adaptive refresh",
+  "research_stage": "single-GPU actual inference microbenchmark (NOT edge-cloud)",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "prompt": "What is 15 multiplied by 12? Explain briefly.",
+  "seed": 42,
+  "max_new_tokens": 64,
+  "steps": 64,
+  "temperature": 0.0,
+  "top_p": null,
+  "top_k": null,
+  "algorithm": "origin",
+  "layers_1_based": [
+    8,
+    20,
+    24
+  ],
+  "policies": [
+    {
+      "mode": "periodic",
+      "interval": 2,
+      "drift_threshold": null,
+      "max_age": null
+    },
+    {
+      "mode": "periodic",
+      "interval": 4,
+      "drift_threshold": null,
+      "max_age": null
+    },
+    {
+      "mode": "input_drift",
+      "interval": null,
+      "drift_threshold": 0.1,
+      "max_age": 4
+    }
+  ],
+  "repeats": 3,
+  "warmup_runs": 1,
+  "device": "cuda:0",
+  "gpu": "NVIDIA RTX A6000",
+  "python": "3.10.22",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "baseline_median_ms": 1932.2750167921185,
+  "baseline_reproduced_exactly": true,
+  "hf_cache_toggle_baseline_exact": true,
+  "hf_use_cache": false,
+  "hf_output_attentions": false,
+  "kv_cache_note": "Built-in Hugging Face KV caching disabled for both baseline and caching runs; Exp8C residual cache remains enabled. The Dream sampler recomputes the full sequence per denoising step.",
+  "cache_mechanism": "Refresh: original block.forward, cache FP32 residual H_out-H_in; reuse: skip original block.forward and return H_in(current) + cached residual",
+  "quality_limitations": "Generated-token exact agreement and trajectory match are measured, but no semantic benchmark is run. Any mismatch does NOT prove bad quality; an exact match is a stronger correctness control. Adaptive input drift requires GPU->CPU synchronization and is included in latency.",
+  "systems_limitations": "Only a single transformer block is cached at a time; edge/cloud split, boundary transfer, real network costs, and multi-block caching are NOT tested."
+}

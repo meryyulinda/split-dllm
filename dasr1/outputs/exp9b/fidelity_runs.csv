@@ -1,0 +1,13 @@
+trial_id,task,prompt_mode,seed,prompt_tokens,new_tokens,steps,prompt_interval_steps,gen_interval_steps,transfer_ratio,exact_trajectory,exact_transition_states,first_divergent_step,mean_generated_token_agreement,final_generated_token_agreement,exact_final_ids,baseline_history_control_exact,baseline_timing_vs_history_final_equal,cache_timing_vs_history_final_equal,baseline_trajectory_sha256
+1,factual_qa,short,42,26,64,64,100,7,0.25,True,64,,1.0,1.0,True,True,True,True,b7ef419c99bc3bf02c5093be27ab0f28681ff8bd44566d76b50b7529357bfdb9
+2,reasoning,short,42,33,64,64,100,7,0.25,True,64,,1.0,1.0,True,True,True,True,7ce4657ae7e44fe3a4de48d3fd807ea4fff70f1106ec6126f115cbfb8d21e29e
+3,instruction,short,42,31,64,64,100,7,0.25,False,1,2.0,0.75390625,0.453125,False,True,True,True,8886618c2fb7bf3d2abd42b5ff95e5dc23d9ca00f4eb992eb7b530e4578e2e40
+4,factual_qa,short,42,26,256,256,100,7,0.25,True,256,,1.0,1.0,True,True,True,True,a119b0c6801ea43b9a1fd4ffbd009767d238d444658c492a704e98f2dce8c24c
+5,reasoning,short,42,33,256,256,100,7,0.25,True,256,,1.0,1.0,True,True,True,True,b16cd3be65ac8ea37d841a6b8237e17d8eeb8b55120bd746fe4c2b1f01b4d92b
+6,instruction,short,42,31,256,256,100,7,0.25,False,6,7.0,0.9464111328125,0.89453125,False,True,True,True,2e2b049319e1829016563aa5e85e48178038ef1258831e704ff90a11cc240a34
+7,factual_qa,long,42,1051,64,64,100,7,0.25,True,64,,1.0,1.0,True,True,True,True,8b4d7b54a363b36f4374bc83a8d62678a4adf6d8fad41c638d439187824be860
+8,reasoning,long,42,1058,64,64,100,7,0.25,True,64,,1.0,1.0,True,True,True,True,bb3029336ed14a13df2b982ae957095a0a28f5f9f7569c57ffdabd491c222e9f
+9,instruction,long,42,1056,64,64,100,7,0.25,False,1,2.0,0.593505859375,0.1875,False,True,True,True,4b161cc856927d61e3e06465b9adf6f85174b1743270a62059c316ae10a1f356
+10,factual_qa,long,42,1051,256,256,100,7,0.25,True,256,,1.0,1.0,True,True,True,True,4db0ff3d17527932b36f5a36fe249b67f7a6b171f891f7d8914c8b86019323f2
+11,reasoning,long,42,1058,256,256,100,7,0.25,True,256,,1.0,1.0,True,True,True,True,3de886997b22fde7bde623160ea254f7b39bdae3589aead77ea40024c6fb9d16
+12,instruction,long,42,1056,256,256,100,7,0.25,False,106,107.0,0.9938201904296875,0.98046875,False,True,True,True,9d9addfcf2c2c7b33bad3aa1ab02af6e25d1b616c6fc4f18ec9fa75e16f576de

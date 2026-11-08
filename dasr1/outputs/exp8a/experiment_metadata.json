@@ -1,0 +1,28 @@
+{
+  "experiment": "8A: whole-block temporal drift (descriptive only)",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "seed": 42,
+  "prompt": "What is 15 multiplied by 12? Explain briefly.",
+  "max_new_tokens": 64,
+  "steps": 64,
+  "temperature": 0.0,
+  "top_p": null,
+  "top_k": null,
+  "algorithm": "origin",
+  "selected_layers_1_based": [
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28
+  ],
+  "prompt_length": 33,
+  "captured_states": 65,
+  "analyzed_transitions": 64,
+  "drift_epsilon": 1e-08,
+  "diagnostic_row_threshold": 0.001,
+  "gpu": "NVIDIA RTX A6000",
+  "warning": "Drift profiling is not an actual caching implementation, a cache correctness test, or an E2E latency measurement."
+}

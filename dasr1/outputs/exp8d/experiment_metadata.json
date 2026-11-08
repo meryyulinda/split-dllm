@@ -1,0 +1,51 @@
+{
+  "experiment": "Exp8D multi-block residual caching with periodic refresh",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "default_seed": 42,
+  "task_keys": [
+    "reasoning"
+  ],
+  "seeds": [
+    42
+  ],
+  "block_groups_1_based": [
+    [
+      20
+    ],
+    [
+      8,
+      20
+    ],
+    [
+      20,
+      24
+    ],
+    [
+      8,
+      20,
+      24
+    ]
+  ],
+  "refresh_intervals": [
+    2,
+    4
+  ],
+  "repeats": 5,
+  "max_new_tokens": 64,
+  "steps": 64,
+  "temperature": 0.0,
+  "top_p": null,
+  "top_k": null,
+  "algorithm": "origin",
+  "prompt_for_default_task": "What is 15 multiplied by 12? Explain briefly.",
+  "gpu": "NVIDIA RTX A6000",
+  "device": "cuda:0",
+  "python": "3.10.22",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "hf_use_cache": false,
+  "hf_cache_toggle_preserves_baseline_trajectory": true,
+  "benchmark_method": "Warmup; for every task, seed, repeat and config, synchronized B-C-B (baseline-cache-baseline) generation calls. Latency includes token-history hook and cache logic, excludes offline CSV processing. Paired baseline is average(before, after); report median paired saving.",
+  "cache_method": "For each selected layer, refresh runs original decoder block and stores FP32 residual output-input. Reuse bypasses block.forward() and computes current_input + cached_residual. Earlier cached layers may affect the inputs to later refreshed layers. Built-in HF KV cache disabled for both modes.",
+  "caveats": "Actual single-GPU whole-generation timings, not edge-cloud measured. Approximate internal activations despite exact token trajectory in some runs. Exact sequence agreement over tested prompts/seeds is not a general quality guarantee. CUDA overhead, synchronization, sampling, and system load affect latency."
+}

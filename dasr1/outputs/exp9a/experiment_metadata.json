@@ -1,0 +1,40 @@
+{
+  "experiment": "Exp9A official dLLM-Cache baseline reproduction (not split inference)",
+  "upstream_source": "https://github.com/maomaocun/dLLM-cache",
+  "upstream_repo_path": "/mnt/mydisk/mery-splitdllm/dLLM-cache-official",
+  "method": "Official cache APIs: dLLMCacheConfig/new_instance, register_cache_Dream, reset_cache, logout_cache_Dream",
+  "settings": {
+    "model": "Dream-org/Dream-v0-Instruct-7B",
+    "max_new_tokens": 64,
+    "steps": 64,
+    "algorithm": "origin",
+    "temperature": 0.0,
+    "top_p": null,
+    "top_k": null,
+    "tasks": [
+      "factual_qa",
+      "reasoning",
+      "instruction"
+    ],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "repeats": 2,
+    "cache_configs": [
+      [
+        100,
+        7,
+        0.25
+      ]
+    ]
+  },
+  "gpu": "NVIDIA RTX A6000",
+  "device": "cuda:0",
+  "python": "3.10.22",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "latency_definition": "CUDA-synchronized full-generation time with identical trajectory capture; cache registration/reset measured separately; report both times",
+  "limitations": "One GPU, not two-GPU split. Fidelity measured on observed token trajectories; approximate feature caching may change logits, decoding decisions or final quality. No wire bytes measured."
+}

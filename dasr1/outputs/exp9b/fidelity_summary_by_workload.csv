@@ -1,0 +1,5 @@
+prompt_mode,new_tokens,steps,cases,exact_trajectory_cases,exact_final_ids_cases,history_control_cases
+long,64,64,3,2,2,3
+long,256,256,3,2,2,3
+short,64,64,3,2,2,3
+short,256,256,3,2,2,3

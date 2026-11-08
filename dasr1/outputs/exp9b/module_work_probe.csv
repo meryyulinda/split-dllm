@@ -1,0 +1,17 @@
+run_label,task,prompt_mode,new_tokens,steps,prompt_tokens,component,calls,input_tokens,observed_layers
+baseline,reasoning,short,64,64,33,self_attn,1792,0,28
+baseline,reasoning,short,64,64,33,mlp,1792,173824,28
+official_cache,reasoning,short,64,64,33,self_attn,1792,47707,28
+official_cache,reasoning,short,64,64,33,mlp,1792,47707,28
+baseline,reasoning,short,256,256,33,self_attn,7168,0,28
+baseline,reasoning,short,256,256,33,mlp,7168,2071552,28
+official_cache,reasoning,short,256,256,33,self_attn,7168,710833,28
+official_cache,reasoning,short,256,256,33,mlp,7168,710833,28
+baseline,reasoning,long,64,64,1058,self_attn,1792,0,28
+baseline,reasoning,long,64,64,1058,mlp,1792,2010624,28
+official_cache,reasoning,long,64,64,1058,self_attn,1792,140982,28
+official_cache,reasoning,long,64,64,1058,mlp,1792,140982,28
+baseline,reasoning,long,256,256,1058,self_attn,7168,0,28
+baseline,reasoning,long,256,256,1058,mlp,7168,9418752,28
+official_cache,reasoning,long,256,256,1058,self_attn,7168,1056258,28
+official_cache,reasoning,long,256,256,1058,mlp,7168,1056258,28

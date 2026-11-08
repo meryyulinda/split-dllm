@@ -1,0 +1,4 @@
+task,prompt_interval_steps,gen_interval_steps,transfer_ratio,trials,distinct_baseline_trajectories,median_baseline_generation_ms,median_cached_generation_ms,median_generation_saving_pct,median_generation_speedup,median_cache_install_reset_ms,median_request_including_setup_saving_pct,exact_trajectory_trials,exact_final_ids_trials,exact_final_text_trials,mean_final_generated_token_agreement
+factual_qa,100,7,0.25,6,3,1910.1470853202045,1923.0738496407866,-0.964270967600378,0.9904497963266792,7.872308138757944,-1.3767943999793086,6,6,6,1.0
+instruction,100,7,0.25,6,3,1931.4929014071822,1920.9189172834158,0.39510732453956754,1.004041538133238,7.8927031718194485,-0.015697902712746847,0,0,0,0.3541666666666667
+reasoning,100,7,0.25,6,3,1933.524802327156,1921.8101291917264,0.4531829887844563,1.0045532768863321,7.968179881572723,0.026414602464530645,2,2,2,0.9010416666666666

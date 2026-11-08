@@ -1,0 +1,13 @@
+task,block_group,num_cached_blocks,refresh_interval,cases,exact_trajectory_cases,exact_final_ids_cases
+factual_qa,L4_L8_L12_L16_L18_L20_L22_L24,8,2,3,3,3
+factual_qa,L4_L8_L12_L16_L18_L20_L22_L24,8,4,3,3,3
+factual_qa,L8_L20_L24,3,2,3,3,3
+factual_qa,L8_L20_L24,3,4,3,3,3
+instruction,L4_L8_L12_L16_L18_L20_L22_L24,8,2,3,1,1
+instruction,L4_L8_L12_L16_L18_L20_L22_L24,8,4,3,0,0
+instruction,L8_L20_L24,3,2,3,1,1
+instruction,L8_L20_L24,3,4,3,0,0
+reasoning,L4_L8_L12_L16_L18_L20_L22_L24,8,2,3,2,2
+reasoning,L4_L8_L12_L16_L18_L20_L22_L24,8,4,3,2,2
+reasoning,L8_L20_L24,3,2,3,2,2
+reasoning,L8_L20_L24,3,4,3,2,2

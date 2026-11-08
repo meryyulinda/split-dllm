@@ -1,0 +1,52 @@
+{
+  "experiment": "Exp8E cross-task/seed/refresh robustness for Dream block-residual caching",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "max_new_tokens": 64,
+  "steps": 64,
+  "algorithm": "origin",
+  "temperature": 0.0,
+  "top_p": null,
+  "top_k": null,
+  "block_groups_1_based": [
+    [
+      8,
+      20,
+      24
+    ]
+  ],
+  "refresh_intervals": [
+    2,
+    4,
+    8
+  ],
+  "tasks": [
+    "factual_qa",
+    "reasoning",
+    "instruction"
+  ],
+  "prompts": {
+    "factual_qa": "What is the capital of Australia?",
+    "reasoning": "What is 15 multiplied by 12? Explain briefly.",
+    "instruction": "Explain in three short sentences why regular backups are important."
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "repeats_per_task_seed_config": 2,
+  "warmup_runs": 1,
+  "num_pairs": 54,
+  "num_stable_baseline_pairs": 54,
+  "num_exact_trajectory_pairs": 32,
+  "hf_kv_cache_toggle_preserves_trajectory_first_task_seed": true,
+  "hf_use_cache": false,
+  "device": "cuda:0",
+  "gpu": "NVIDIA RTX A6000",
+  "python": "3.10.22",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "benchmark": "Synchronized B-C-B baseline/cache/baseline full generation per trial; paired baseline=(before+after)/2; saving=1-cached/paired_baseline. Baseline token trajectories must match within pair for aggregate summaries.",
+  "cache_method": "Each patched Dream block stores FP32 residual output-input at refresh calls. At reuse, original block.forward is bypassed and current_input + cached_residual returned; all selected blocks use the same periodic k. Caches reset each generation.",
+  "limitations": "One model, single GPU; generated token trajectories evaluated, not probability/logit equivalence; no edge-cloud network; tested tasks/seeds only; latency includes generation + instrumentation and excludes report generation; no proof of quality preservation beyond tested trajectories."
+}

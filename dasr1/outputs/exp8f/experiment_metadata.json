@@ -1,0 +1,79 @@
+{
+  "experiment": "Exp8F controlled Dream block-residual caching scaling",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "tasks": [
+    "reasoning"
+  ],
+  "seeds": [
+    42
+  ],
+  "generation_cases": [
+    [
+      64,
+      64
+    ],
+    [
+      256,
+      256
+    ]
+  ],
+  "prompt_modes": [
+    "short",
+    "long"
+  ],
+  "long_prompt_target_tokens": 1024,
+  "layer_groups": [
+    [
+      8,
+      20,
+      24
+    ],
+    [
+      4,
+      8,
+      12,
+      16,
+      20,
+      24
+    ],
+    [
+      4,
+      8,
+      12,
+      16,
+      18,
+      20,
+      22,
+      24
+    ]
+  ],
+  "refresh_intervals": [
+    2,
+    4
+  ],
+  "repeats": 1,
+  "warmups": 1,
+  "hf_use_cache": false,
+  "hf_cache_toggle_check": {
+    "exact_trajectory": true,
+    "exact_transition_states": 64,
+    "first_divergent_step": null,
+    "mean_generated_token_agreement": 1.0,
+    "final_generated_token_agreement": 1.0,
+    "exact_final_ids": true
+  },
+  "generation_params": {
+    "temperature": 0.0,
+    "top_p": null,
+    "top_k": null,
+    "alg": "origin"
+  },
+  "gpu": "NVIDIA RTX A6000",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22",
+  "timing": "Direct diffusion_generate, output_history=False, CUDA synced, separate B-C-B, no history hooks or profiler. Patch installation excluded; per-call residual compute and skip overhead included.",
+  "fidelity": "Separate output_history=True runs; history contains steps 1..N; baseline history re-used for each group/interval and checked with second baseline-history run. Exact trajectories are token states, NOT logits or intermediate features.",
+  "comparison_warning": "Exp9B uses HF use_cache=True but Exp8F uses False. Cross-experiment raw latency comparison is not strictly controlled; compare per-run paired savings and explicitly disclose different forward settings.",
+  "quality_warning": "Synthetic long prompt is not real long-context benchmark. Manual quality review fields are NOT automatically scored. Single-GPU only; no edge-cloud communication measured."
+}

@@ -1,0 +1,5 @@
+prompt_mode,new_tokens,steps,trials,median_paired_saving_pct,median_prompt_tokens
+long,64,64,3,72.4460779394019,1056.0
+long,256,256,3,72.69075899678403,1056.0
+short,64,64,3,-0.3591436927419478,31.0
+short,256,256,3,39.614743230955355,31.0

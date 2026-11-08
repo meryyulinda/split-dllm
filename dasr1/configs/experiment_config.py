@@ -88,3 +88,112 @@ RQ5_PROMPTS = {
 }
 
 RQ5_LAYERS = [4, 8, 12, 16, 20, 24, 28]
+
+# Experiment 8C
+EXP8C_LAYERS = [8, 20, 24]
+EXP8C_REFRESH_INTERVALS = [2, 4]
+EXP8C_ADAPTIVE_INPUT_DRIFT_THRESHOLDS = [0.10]
+EXP8C_ADAPTIVE_MAX_AGE = 4
+EXP8C_REPEATS = 3
+EXP8C_WARMUP_RUNS = 1
+
+# Exp8D — measured multi-block residual caching (Dream)
+# Block numbers are 1-based, matching prior Exp8C.
+EXP8D_LAYER_GROUPS = [[20], [8, 20], [20, 24], [8, 20, 24]]
+EXP8D_REFRESH_INTERVALS = [2, 4]
+EXP8D_TASK_KEYS = ["reasoning"]  # Later: ["factual_qa", "reasoning", "instruction"]
+EXP8D_SEEDS = [SEED]              # Later: [SEED, SEED + 1]
+EXP8D_REPEATS = 5
+EXP8D_WARMUP_RUNS = 1
+
+# Experiment 8E — robustness of measured multi-block residual caching
+EXP8E_LAYER_GROUPS = [
+    [8, 20, 24],   # Best Exp8D group. Add [20] or [8, 20] for extra ablations.
+]
+EXP8E_REFRESH_INTERVALS = [2, 4, 8]
+EXP8E_TASK_KEYS = ["factual_qa", "reasoning", "instruction"]
+EXP8E_SEEDS = [SEED, SEED + 1, SEED + 2]
+EXP8E_REPEATS = 2
+EXP8E_WARMUP_RUNS = 1
+
+
+# Exp8F — append to dasr1/configs/experiment_config.py
+# Uses the same workload and synthetic long-prompt builder as Exp9B.
+# Start with reasoning only; expand to other tasks AFTER validating mechanism.
+EXP8F_GENERATION_CASES = [(64, 64), (256, 256)]
+EXP8F_PROMPT_MODES = ["short", "long"]
+EXP8F_LONG_PROMPT_TARGET_TOKENS = 1024
+EXP8F_TASK_KEYS = ["reasoning"]  # later: ["factual_qa", "reasoning", "instruction"]
+EXP8F_SEEDS = [SEED]
+EXP8F_LAYER_GROUPS = [
+    [8, 20, 24],                        # 3 blocks; Exp8E reference
+    [4, 8, 12, 16, 20, 24],            # 6 blocks; nested
+    [4, 8, 12, 16, 18, 20, 22, 24],    # 8 blocks; nested
+]
+EXP8F_REFRESH_INTERVALS = [2, 4]
+EXP8F_REPEATS = 1
+EXP8F_WARMUP_RUNS = 1
+EXP8F_RUN_FIDELITY = True
+EXP8F_VALIDATE_HF_TOGGLE = True
+
+
+# Exp8G
+# Reuses existing MODEL_NAME, SEED, RQ5_PROMPTS, MAX_NEW_TOKENS, STEPS,
+# TEMPERATURE, TOP_P, TOP_K, ALGORITHM.
+EXP8G_TASK_KEYS = ["factual_qa", "reasoning", "instruction"]
+EXP8G_SEEDS = [SEED, SEED + 1, SEED + 2]
+EXP8G_LAYER_GROUPS = [
+    [8, 20, 24],
+    [4, 8, 12, 16, 18, 20, 22, 24],
+]
+EXP8G_REFRESH_INTERVALS = [2, 4]
+EXP8G_NEW_TOKENS = 64
+EXP8G_STEPS = 64
+EXP8G_PROMPT_MODES = ["short"]
+EXP8G_WARMUP_RUNS = 1
+EXP8G_VALIDATE_HF_TOGGLE = True
+
+# Fidelity-first initial run (~36 cached generations + baseline controls).
+# Once fidelity is reviewed, set to True for separate CUDA-synced B-C-B timing.
+EXP8G_RUN_TIMING = False
+EXP8G_TIMING_REPEATS = 2
+
+
+
+# Exp9A
+EXP9A_OFFICIAL_CACHE_REPO = "../../dLLM-cache-official"
+
+EXP9A_PROMPT_INTERVAL_STEPS = [100]
+EXP9A_GEN_INTERVAL_STEPS = [7]
+EXP9A_TRANSFER_RATIOS = [0.25]
+
+EXP9A_TASK_KEYS = [
+    "factual_qa",
+    "reasoning",
+    "instruction",
+]
+EXP9A_SEEDS = [SEED, SEED + 1, SEED + 2]
+EXP9A_REPEATS = 2
+EXP9A_WARMUP_RUNS = 1
+
+# Experiment 9B
+EXP9B_GENERATION_CASES = [(64, 64), (256, 256)]
+
+EXP9B_PROMPT_MODES = ["short", "long"]
+EXP9B_LONG_PROMPT_TARGET_TOKENS = 1024
+
+EXP9B_TASK_KEYS = [
+    "factual_qa",
+    "reasoning",
+    "instruction",
+]
+
+EXP9B_SEEDS = [SEED]
+EXP9B_REPEATS = 1
+EXP9B_WARMUP_RUNS = 1
+
+EXP9B_CACHE_CONFIGS = [(100, 7, 0.25)]
+
+EXP9B_RUN_MODULE_PROBE = True
+EXP9B_PROBE_TASK_KEY = "reasoning"
+EXP9B_PROFILE_ONE_CASE = False

@@ -1,0 +1,52 @@
+{
+  "experiment": "Exp9B official Dream cache diagnostic, not a published benchmark",
+  "official_repo": "/mnt/mydisk/mery-splitdllm/dLLM-cache-official",
+  "official_source": "https://github.com/maomaocun/dLLM-cache",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "generation": {
+    "algorithm": "origin",
+    "temperature": 0.0,
+    "top_p": null,
+    "top_k": null
+  },
+  "cases": [
+    [
+      64,
+      64
+    ],
+    [
+      256,
+      256
+    ]
+  ],
+  "prompt_modes": [
+    "short",
+    "long"
+  ],
+  "synthetic_long_prompt_target_tokens": 1024,
+  "tasks": [
+    "factual_qa",
+    "reasoning",
+    "instruction"
+  ],
+  "seeds": [
+    42
+  ],
+  "repeats": 1,
+  "cache_configs": [
+    [
+      100,
+      7,
+      0.25
+    ]
+  ],
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22",
+  "gpu": "NVIDIA RTX A6000",
+  "hf_use_cache": true,
+  "timing": "Direct diffusion_generate, output_history=False, no history hook/probe/profiler. CUDA sync before and after. Setup excluded; measured separately.",
+  "fidelity": "Separate diffusion_generate calls with output_history=True; Dream output.history covers denoising steps 1..STEPS.",
+  "probes": "Submodule forward-pre-hook invocation and input token count; not FLOPs or kernel count; excluded from timing.",
+  "warning": "Synthetic long prompts are not official LongBench or real industrial tasks; no automatic semantic correctness scoring. This is single-GPU, no network transfer measured."
+}

@@ -1,0 +1,39 @@
+{
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "tasks": [
+    "factual_qa",
+    "reasoning",
+    "instruction"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "groups": [
+    [
+      8,
+      20,
+      24
+    ],
+    [
+      4,
+      8,
+      12,
+      16,
+      18,
+      20,
+      22,
+      24
+    ]
+  ],
+  "intervals": [
+    2,
+    4
+  ],
+  "new_tokens": 64,
+  "steps": 64,
+  "run_timing": false,
+  "hf_cache_disabled": true,
+  "note": "Approximate residual reuse. Exact tokens do not imply exact logits or equivalent semantic quality."
+}

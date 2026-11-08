@@ -1,0 +1,27 @@
+{
+  "experiment": "Exp8B corrected - one-step oracle cached single-block residual",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "prompt": "What is 15 multiplied by 12? Explain briefly.",
+  "seed": 42,
+  "max_new_tokens": 64,
+  "steps": 64,
+  "algorithm": "origin",
+  "temperature": 0.0,
+  "top_p": null,
+  "top_k": null,
+  "layers_1_based": [
+    4,
+    8,
+    12,
+    16,
+    20,
+    24,
+    28
+  ],
+  "mask_token_id": 151666,
+  "token_states": 65,
+  "transitions": 64,
+  "prompt_length": 33,
+  "mechanism": "H_out_approx(t) = H_in_exact(t) + [H_out_exact(t-1) - H_in_exact(t-1)]",
+  "caveat": "This is an oracle one-step teacher-forced fidelity test of a cached block residual update. The target block is still fully computed before its output is overwritten; no real block skipping or latency reduction occurs. An end-to-end free-running trajectory validation is not yet performed. The earlier Exp8B whole-output replacement always collapsed to stale previous-state logits regardless of injected layer; this method retains current upstream inputs."
+}
