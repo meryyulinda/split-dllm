@@ -211,3 +211,26 @@ EXP10A_RUN_TIMING = False
 EXP10A_TIMING_REPEATS = 2
 
 EXP10A_CASE_IDS = []  # Empty = run all 12 questions
+
+# Exp10B: root-cause ablation (prompt-tail off-by-one x decoding order)
+# Variants are defined in experiments/exp10b_prompt_tail_order_ablation.py;
+# override with EXP10B_VARIANTS = [...] if needed.
+EXP10B_SEEDS = [42, 43, 44]       # entropy + T=0 is deterministic -> uses seed 42 only
+EXP10B_NEW_TOKENS = 128
+EXP10B_STEPS = 128
+EXP10B_TEMPERATURE = 0.0
+EXP10B_CASE_IDS = []    # empty = all 12 Exp10A cases
+EXP10B_WARMUP_RUNS = 1
+EXP10B_RUN_TIMING = False
+
+# Exp10C: rule-based adaptive refresh (run after Exp10B)
+EXP10C_ALG = "entropy"            # set to "origin" if Exp10B does not support H2
+EXP10C_PROMPT_TAIL_ROWS = 1          # set to 0 if Exp10B does not support H1
+EXP10C_SEEDS = [42, 43, 44]
+EXP10C_NEW_TOKENS = 128           # also try 256 / 256 (official eval length)
+EXP10C_STEPS = 128
+EXP10C_TEMPERATURE = 0.0
+EXP10C_CASE_IDS = []
+EXP10C_WARMUP_RUNS = 1
+EXP10C_RUN_TIMING = False         # enable with a small EXP10C_CASE_IDS subset
+EXP10C_TIMING_REPEATS = 2

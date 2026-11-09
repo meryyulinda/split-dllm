@@ -1,0 +1,13 @@
+variant,task,runs,exact_final,exact_trajectory,first_token_equal,baseline_ok,cache_ok,regressions,improvements,diverged_at_pos0,median_first_divergent_step,mean_gen_refresh_frac,mean_prompt_refresh_frac,mean_row_work_frac
+A0_origin_official,factual,12,3,3,5,12,10,2,0,3,7.0,0.1484375,0.015625,0.06755948015272993
+A1_origin_tailfix,factual,12,6,6,7,12,9,3,0,1,7.0,0.1484375,0.015625,0.067965218278923
+B0_entropy_official,factual,4,1,0,2,4,2,2,0,0,3.0,0.1484375,0.015625,0.06755948015272994
+B1_entropy_tailfix,factual,4,4,0,4,4,4,0,0,0,3.0,0.1484375,0.015625,0.067965218278923
+A0_origin_official,math,12,0,0,0,4,2,3,1,4,9.0,0.1484375,0.015625,0.06703954167981772
+A1_origin_tailfix,math,12,7,7,8,4,4,0,0,0,7.0,0.1484375,0.015625,0.06744121778669132
+B0_entropy_official,math,4,0,0,0,3,0,3,0,0,64.5,0.1484375,0.015625,0.06703954167981771
+B1_entropy_tailfix,math,4,2,1,3,3,1,2,0,0,4.0,0.1484375,0.015625,0.06744121778669132
+A0_origin_official,instruction,12,3,3,9,7,4,3,0,3,9.0,0.1484375,0.015625,0.06689017045064766
+A1_origin_tailfix,instruction,12,5,5,9,7,3,4,0,1,7.0,0.1484375,0.015625,0.06729067959479333
+B0_entropy_official,instruction,4,0,0,3,3,3,0,0,2,3.5,0.1484375,0.015625,0.06689017045064766
+B1_entropy_tailfix,instruction,4,1,0,4,3,3,0,0,1,21.5,0.1484375,0.015625,0.06729067959479333

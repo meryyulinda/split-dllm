@@ -1,0 +1,77 @@
+case_id,task,alg,seed,prompt_tokens,gold_answer,baseline_ok,baseline_text,baseline_eos,pos0_commit_step,pos0_commit_prob,pos0_commit_margin
+library_factual,factual,origin,42,849,Mara Chen,True,Mara Chen,125,85,0.999104917049408,0.9987006187438965
+library_factual,factual,origin,43,849,Mara Chen,True,Mara Chen,125,9,0.8774343729019165,0.7849534749984741
+library_factual,factual,origin,44,849,Mara Chen,True,Mara Chen,125,70,0.9999556541442871,0.9999490976333618
+library_factual,factual,entropy,42,849,Mara Chen,True,Mara Chen,125,127,0.9996907711029053,0.9995818734169006
+library_math,math,origin,42,864,480,False,"If four technicians complete an average of 35 records per day for 6 days, that is 360 records completed. Therefore, 1,320 - 360 = 960 records remain.",80,85,0.6037905812263489,0.3001856207847595
+library_math,math,origin,43,864,480,False,120,125,9,0.1342504620552063,0.02295292168855667
+library_math,math,origin,44,864,480,False,"There are 4 technicians who complete 35 records per day. They work for 6 days. 4 technicians x 35 records/day x 6 days = 840 records. The remaining backlog is 1,320 - 840 = 780 records.",65,70,0.998189389705658,0.9974805116653442
+library_math,math,entropy,42,864,480,True,"The ordinary scanning backlog starts with 1,320 records. Each technician completes 35 records per day, and there are four technicians. Over six days, the total number of records completed is:
+
+4 technicians * 35 records/ day * 6 days = 840 records
+
+Subtracting the completed records from the initial backlog gives the remaining records:
+
+1,320 initial records - 840 completed records = 480 records remaining
+
+Therefore, after all four technicians work for six days, there are $\boxed{480}$ records remaining in the ordinary scanning backlog.",1,4,0.3912295997142792,0.2719113230705261
+library_instruction,instruction,origin,42,862,,True,"1. Review the intake for identifiers and item condition
+2. Review accessibility
+3. Review privacy, and escalate if necessary",103,85,0.9999792575836182,0.9999740719795227
+library_instruction,instruction,origin,43,862,,False,1.,126,9,0.2174256294965744,0.013173148036003113
+library_instruction,instruction,origin,44,862,,False,,128,70,0.8942285776138306,0.8497075438499451
+library_instruction,instruction,entropy,42,862,,True,"1. Intake review
+2. Accessibility review work
+3. Privacy review",112,89,0.8977535963058472,0.8841219544410706
+sensors_factual,factual,origin,42,726,14 days,True,14 days,125,85,0.981906533241272,0.9716594219207764
+sensors_factual,factual,origin,43,726,14 days,True,Every 14 days.,122,9,0.4213173985481262,0.025526314973831177
+sensors_factual,factual,origin,44,726,14 days,True,14 days,125,70,0.9999790191650391,0.9999735951423645
+sensors_factual,factual,entropy,42,726,14 days,True,Every 14 days,123,128,0.6489479541778564,0.3015911281108856
+sensors_math,math,origin,42,731,1200,False,300 readings,124,85,0.6134332418441772,0.42634668946266174
+sensors_math,math,origin,43,731,1200,False,300,125,9,0.4386579096317291,0.2962465286254883
+sensors_math,math,origin,44,731,1200,False,30,126,70,0.4943130314350128,0.3124653995037079
+sensors_math,math,entropy,42,731,1200,False,300 readings,124,128,0.6939708590507507,0.5573198795318604
+sensors_instruction,instruction,origin,42,736,,True,"1. Reading verification
+2. Backup communication
+3. Incident reporting",114,85,0.9999908208847046,0.9999884963035583
+sensors_instruction,instruction,origin,43,736,,False,1.,126,9,0.5846690535545349,0.47651615738868713
+sensors_instruction,instruction,origin,44,736,,False,,128,70,0.8267322778701782,0.7216250896453857
+sensors_instruction,instruction,entropy,42,736,,True,"1. Reading verification
+2. Backup communication
+3. Incident reporting",114,109,0.8622524738311768,0.8165547847747803
+clinic_factual,factual,origin,42,666,140,True,140,125,85,0.99989914894104,0.999859094619751
+clinic_factual,factual,origin,43,666,140,True,140,125,9,0.9524739980697632,0.9106252193450928
+clinic_factual,factual,origin,44,666,140,True,The reorder threshold for appointment-available doses is 140.,115,70,0.9998315572738647,0.9997767806053162
+clinic_factual,factual,entropy,42,666,140,True,The reorder threshold for appointment-available doses is 140.,115,118,0.9995831847190857,0.9994809031486511
+clinic_math,math,origin,42,673,320,True,320 doses,124,85,0.8726096749305725,0.7747055888175964
+clinic_math,math,origin,43,673,320,True,320 doses,124,9,0.6811839938163757,0.5193886160850525
+clinic_math,math,origin,44,673,320,False,340 doses,124,70,0.9380667209625244,0.9016939401626587
+clinic_math,math,entropy,42,673,320,True,320 doses,124,126,0.8515574932098389,0.7209669351577759
+clinic_instruction,instruction,origin,42,671,,True,"1. Verify temperature evidence
+2. Preserve lot tracking
+3. Confirm expiry status",111,85,0.9999898672103882,0.9999881982803345
+clinic_instruction,instruction,origin,43,671,,True,"1. Verify temperature evidence
+2. Check and preserve lot traceability
+3. Confirm expiry status",108,9,0.9281084537506104,0.9148697257041931
+clinic_instruction,instruction,origin,44,671,,True,"1. Verify temperature evidence.
+2. Preserve lot traceability.
+3. Confirm the expiry status.",108,70,0.9995467066764832,0.9994233250617981
+clinic_instruction,instruction,entropy,42,671,,True,"1. Verify temperature evidence.
+2. Preserve lot traceability.
+3. Confirm the expiry status.",108,107,0.8707753419876099,0.8475699424743652
+transit_factual,factual,origin,42,678,23 November 2026,True,23 November 2026,120,85,0.9998977184295654,0.9998493790626526
+transit_factual,factual,origin,43,678,23 November 2026,True,23 November 2026,120,9,0.9165652990341187,0.8762942552566528
+transit_factual,factual,origin,44,678,23 November 2026,True,23 November 2026,120,70,0.9999746084213257,0.9999656677246094
+transit_factual,factual,entropy,42,678,23 November 2026,True,23 November 2026,120,125,0.9996809959411621,0.9995849132537842
+transit_math,math,origin,42,687,630,True,630,125,85,0.9779771566390991,0.967771053314209
+transit_math,math,origin,43,687,630,True,630,125,9,0.4588267207145691,0.349845826625824
+transit_math,math,origin,44,687,630,False,,128,70,0.8365549445152283,0.7997992634773254
+transit_math,math,entropy,42,687,630,True,630,125,126,0.9626726508140564,0.9489408731460571
+transit_instruction,instruction,origin,42,695,,True,"1. Roadwork may occasionally cause delays near Market Street, if crews need the curb space.
+2. Accessible boarding islands near Market Street will have detectable boarding edges, legible signs, and a safe path from the pavement.
+3. Riders with mobility concerns can contact the service desk for the latest boarding arrangements.",64,85,0.999923825263977,0.9998936057090759
+transit_instruction,instruction,origin,43,695,,False,,128,9,0.2340938001871109,0.0275067538022995
+transit_instruction,instruction,origin,44,695,,True,"1. Roadwork near Market Street may cause bus delays. Riders should be advised of possible delays.
+2. Two stops may move to fully accessible boarding islands; others may have temporary accessibility features.
+3. The service desk is the contact point for boarding information.",76,70,0.9984996318817139,0.9979473948478699
+transit_instruction,instruction,entropy,42,695,,False,,128,128,0.8363876938819885,0.797269344329834

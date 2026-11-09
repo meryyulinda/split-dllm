@@ -1,0 +1,137 @@
+{
+  "experiment": "Exp10C rule-based adaptive refresh",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "official_repo": "/mnt/mydisk/mery-splitdllm/dLLM-cache-official",
+  "variants": [
+    {
+      "name": "F_k100r7",
+      "alg": "entropy",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "fixed",
+        100,
+        7,
+        0.25
+      ],
+      "policy_label": "fixed(Kp=100,Kr=7,rho=0.25)"
+    },
+    {
+      "name": "F_k25r2",
+      "alg": "entropy",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "fixed",
+        25,
+        2,
+        0.25
+      ],
+      "policy_label": "fixed(Kp=25,Kr=2,rho=0.25)"
+    },
+    {
+      "name": "F_k100r1",
+      "alg": "entropy",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "fixed",
+        100,
+        1,
+        0.25
+      ],
+      "policy_label": "fixed(Kp=100,Kr=1,rho=0.25)"
+    },
+    {
+      "name": "F_k50r1",
+      "alg": "entropy",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "fixed",
+        50,
+        1,
+        0.25
+      ],
+      "policy_label": "fixed(Kp=50,Kr=1,rho=0.25)"
+    },
+    {
+      "name": "F_k5r1",
+      "alg": "entropy",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "fixed",
+        5,
+        1,
+        0.25
+      ],
+      "policy_label": "fixed(Kp=5,Kr=1,rho=0.25)"
+    },
+    {
+      "name": "AD_frontier",
+      "alg": "entropy",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "adaptive",
+        {
+          "gen_content_commits": 2,
+          "gen_max_age": 4,
+          "prompt_content_commits": 16,
+          "prompt_max_age": 32,
+          "eos_frontier_window": 8,
+          "transfer_ratio": 0.25
+        }
+      ],
+      "policy_label": "adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)"
+    },
+    {
+      "name": "AD_frontier_tight",
+      "alg": "entropy",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "adaptive",
+        {
+          "gen_content_commits": 1,
+          "gen_max_age": 2,
+          "prompt_content_commits": 8,
+          "prompt_max_age": 16,
+          "eos_frontier_window": 8,
+          "transfer_ratio": 0.25
+        }
+      ],
+      "policy_label": "adaptive(G=1,Ag=2,P=8,Ap=16,W=8,conf=0.0,rho=0.25)"
+    }
+  ],
+  "cases": [
+    "library_factual",
+    "library_math",
+    "library_instruction",
+    "sensors_factual",
+    "sensors_math",
+    "sensors_instruction",
+    "clinic_factual",
+    "clinic_math",
+    "clinic_instruction",
+    "transit_factual",
+    "transit_math",
+    "transit_instruction"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "seeds_used_per_alg": {
+    "entropy": [
+      42
+    ]
+  },
+  "new_tokens": 128,
+  "steps": 128,
+  "temperature": 0.0,
+  "top_p": null,
+  "top_k": null,
+  "alg_temp": 0.0,
+  "timing": false,
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22",
+  "cuda_device": "NVIDIA RTX A6000",
+  "notes": "quality is advisory (gold substring / last number / 3-item format); review runs.csv manually. row_work_frac is a row-count proxy, not FLOPs. Single GPU, no edge-cloud transfer."
+}

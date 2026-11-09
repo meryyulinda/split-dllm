@@ -1,0 +1,96 @@
+{
+  "experiment": "Exp10B prompt-tail x decoding-order ablation",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "official_repo": "/mnt/mydisk/mery-splitdllm/dLLM-cache-official",
+  "variants": [
+    {
+      "name": "A0_origin_official",
+      "alg": "origin",
+      "prompt_tail_rows": 0,
+      "policy": [
+        "fixed",
+        100,
+        7,
+        0.25
+      ],
+      "policy_label": "fixed(Kp=100,Kr=7,rho=0.25)"
+    },
+    {
+      "name": "A1_origin_tailfix",
+      "alg": "origin",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "fixed",
+        100,
+        7,
+        0.25
+      ],
+      "policy_label": "fixed(Kp=100,Kr=7,rho=0.25)"
+    },
+    {
+      "name": "B0_entropy_official",
+      "alg": "entropy",
+      "prompt_tail_rows": 0,
+      "policy": [
+        "fixed",
+        100,
+        7,
+        0.25
+      ],
+      "policy_label": "fixed(Kp=100,Kr=7,rho=0.25)"
+    },
+    {
+      "name": "B1_entropy_tailfix",
+      "alg": "entropy",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "fixed",
+        100,
+        7,
+        0.25
+      ],
+      "policy_label": "fixed(Kp=100,Kr=7,rho=0.25)"
+    }
+  ],
+  "cases": [
+    "library_factual",
+    "library_math",
+    "library_instruction",
+    "sensors_factual",
+    "sensors_math",
+    "sensors_instruction",
+    "clinic_factual",
+    "clinic_math",
+    "clinic_instruction",
+    "transit_factual",
+    "transit_math",
+    "transit_instruction"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "seeds_used_per_alg": {
+    "origin": [
+      42,
+      43,
+      44
+    ],
+    "entropy": [
+      42
+    ]
+  },
+  "new_tokens": 128,
+  "steps": 128,
+  "temperature": 0.0,
+  "top_p": null,
+  "top_k": null,
+  "alg_temp": 0.0,
+  "timing": false,
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22",
+  "cuda_device": "NVIDIA RTX A6000",
+  "notes": "quality is advisory (gold substring / last number / 3-item format); review runs.csv manually. row_work_frac is a row-count proxy, not FLOPs. Single GPU, no edge-cloud transfer."
+}

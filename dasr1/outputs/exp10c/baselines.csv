@@ -1,0 +1,27 @@
+case_id,task,alg,seed,prompt_tokens,gold_answer,baseline_ok,baseline_text,baseline_eos,pos0_commit_step,pos0_commit_prob,pos0_commit_margin
+library_factual,factual,entropy,42,849,Mara Chen,True,Mara Chen,125,127,0.9996907711029053,0.9995818734169006
+library_math,math,entropy,42,864,480,True,"The ordinary scanning backlog starts with 1,320 records. Each technician completes 35 records per day, and there are four technicians. Over six days, the total number of records completed is:
+
+4 technicians * 35 records/ day * 6 days = 840 records
+
+Subtracting the completed records from the initial backlog gives the remaining records:
+
+1,320 initial records - 840 completed records = 480 records remaining
+
+Therefore, after all four technicians work for six days, there are $\boxed{480}$ records remaining in the ordinary scanning backlog.",1,4,0.3912295997142792,0.2719113230705261
+library_instruction,instruction,entropy,42,862,,True,"1. Intake review
+2. Accessibility review work
+3. Privacy review",112,89,0.8977535963058472,0.8841219544410706
+sensors_factual,factual,entropy,42,726,14 days,True,Every 14 days,123,128,0.6489479541778564,0.3015911281108856
+sensors_math,math,entropy,42,731,1200,False,300 readings,124,128,0.6939708590507507,0.5573198795318604
+sensors_instruction,instruction,entropy,42,736,,True,"1. Reading verification
+2. Backup communication
+3. Incident reporting",114,109,0.8622524738311768,0.8165547847747803
+clinic_factual,factual,entropy,42,666,140,True,The reorder threshold for appointment-available doses is 140.,115,118,0.9995831847190857,0.9994809031486511
+clinic_math,math,entropy,42,673,320,True,320 doses,124,126,0.8515574932098389,0.7209669351577759
+clinic_instruction,instruction,entropy,42,671,,True,"1. Verify temperature evidence.
+2. Preserve lot traceability.
+3. Confirm the expiry status.",108,107,0.8707753419876099,0.8475699424743652
+transit_factual,factual,entropy,42,678,23 November 2026,True,23 November 2026,120,125,0.9996809959411621,0.9995849132537842
+transit_math,math,entropy,42,687,630,True,630,125,126,0.9626726508140564,0.9489408731460571
+transit_instruction,instruction,entropy,42,695,,False,,128,128,0.8363876938819885,0.797269344329834

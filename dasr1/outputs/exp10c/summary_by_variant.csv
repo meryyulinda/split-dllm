@@ -1,0 +1,8 @@
+variant,alg,prompt_tail_rows,policy,runs,exact_final,exact_trajectory,first_token_equal,baseline_ok,cache_ok,regressions,improvements,diverged_at_pos0,median_first_divergent_step,mean_gen_refresh_frac,mean_prompt_refresh_frac,mean_row_work_frac
+F_k100r7,entropy,1,"fixed(Kp=100,Kr=7,rho=0.25)",12,7,1,11,10,8,2,0,1,3.0,0.1484375,0.015625,0.06756570522013589
+F_k25r2,entropy,1,"fixed(Kp=25,Kr=2,rho=0.25)",12,9,1,11,10,9,1,0,1,4.0,0.5,0.046875,0.133736292345538
+F_k100r1,entropy,1,"fixed(Kp=100,Kr=1,rho=0.25)",12,8,1,11,10,8,2,0,1,5.0,1.0,0.015625,0.16352395723699711
+F_k50r1,entropy,1,"fixed(Kp=50,Kr=1,rho=0.25)",12,8,1,11,10,8,2,0,1,5.0,1.0,0.0234375,0.17016265598908445
+F_k5r1,entropy,1,"fixed(Kp=5,Kr=1,rho=0.25)",12,10,3,11,10,9,1,0,1,4.0,1.0,0.203125,0.32285272728709297
+AD_frontier,entropy,1,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",12,8,2,11,10,8,2,0,2,3.0,0.2701822916666667,0.031901041666666664,0.09511028073857047
+AD_frontier_tight,entropy,1,"adaptive(G=1,Ag=2,P=8,Ap=16,W=8,conf=0.0,rho=0.25)",12,10,1,11,10,8,2,0,2,4.0,0.5358072916666666,0.06510416666666667,0.15326486548257812
