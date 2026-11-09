@@ -1,0 +1,64 @@
+case_id,task,seed,question,gold_answer,baseline_text,cache_text,exact_final_text,character_similarity_not_quality,baseline_advisory_gold_match,cache_advisory_gold_match,baseline_extracted_numeric,cache_extracted_numeric,baseline_instruction_format_pass,cache_instruction_format_pass,baseline_correct_human,cache_correct_human,quality_regression_human,review_notes,baseline_control_exact
+library_factual,factual,42,Who is the rollout coordinator? Answer with the name only.,Mara Chen,Mara Chen,Mara Chen,True,1.0,True,True,,,,,,,,,True
+library_factual,factual,43,Who is the rollout coordinator? Answer with the name only.,Mara Chen,Mara Chen,Mara Chen,True,1.0,True,True,,,,,,,,,True
+library_factual,factual,44,Who is the rollout coordinator? Answer with the name only.,Mara Chen,Mara Chen,Mara Chen,True,1.0,True,True,,,,,,,,,True
+library_math,math,42,"Starting from the ordinary scanning backlog, how many records remain after all four technicians work for six days? Give the final number of records.",480,"If four technicians complete an average of 35 records per day for 6 days, that is 360 records completed. Therefore, 1,320 - 360 = 960 records remain.","The technicians are expected to complete 35 records per day. Over six days, they will complete 35 x4 x 6 = 420 records.
+
+#### 420",False,0.4892086330935252,False,False,960.0,420.0,,,,,,,True
+library_math,math,43,"Starting from the ordinary scanning backlog, how many records remain after all four technicians work for six days? Give the final number of records.",480,120,"The backlog is 1,320 records.  35 records * 4 technicians * 6 days = 35 * 4 * 6 = 840 records.  1,320 - 840 =  ,480.",False,0.05042016806722689,False,True,120.0,480.0,,,,,,,True
+library_math,math,44,"Starting from the ordinary scanning backlog, how many records remain after all four technicians work for six days? Give the final number of records.",480,"There are 4 technicians who complete 35 records per day. They work for 6 days. 4 technicians x 35 records/day x 6 days = 840 records. The remaining backlog is 1,320 - 840 = 780 records.","The the ordinary scanning backlog: 1,320 records
+Each technician completes 35 * 6 days = 35 records/day * 6 days = 210 records per technician
+210 records * 4 technicians = 240 * 6 technicians = 240
+1,320 - 240 records = 1,320 - 6 technicians = 240",False,0.16666666666666666,False,False,780.0,240.0,,,,,,,True
+library_instruction,instruction,42,"Write exactly three numbered action items for volunteers, covering intake, accessibility, and privacy in that order. Use only this note.",,"1. Review the intake for identifiers and item condition
+2. Review accessibility
+3. Review privacy, and escalate if necessary","1. Verify and record item identifiers and item condition.
+2. Review catalogue interface navigation, alternative descriptions, and keyboard accessibility.
+3. Review item descriptions and flag potential privacy violations.",False,0.19186046511627908,,,,,True,True,,,,,True
+library_instruction,instruction,43,"Write exactly three numbered action items for volunteers, covering intake, accessibility, and privacy in that order. Use only this note.",,1.,1.,True,1.0,,,,,False,False,,,,,True
+library_instruction,instruction,44,"Write exactly three numbered action items for volunteers, covering intake, accessibility, and privacy in that order. Use only this note.",,,1,False,0.0,,,,,False,False,,,,,True
+sensors_factual,factual,42,How often is a scheduled field inspection performed? Answer with the interval only.,14 days,14 days,A 14 days,False,0.875,True,True,,,,,,,,,True
+sensors_factual,factual,43,How often is a scheduled field inspection performed? Answer with the interval only.,14 days,Every 14 days.,A scheduled field inspection is performed every 14 days,False,0.34782608695652173,True,True,,,,,,,,,True
+sensors_factual,factual,44,How often is a scheduled field inspection performed? Answer with the interval only.,14 days,14 days,A scheduled field inspection is performed every 14 days.,False,0.2222222222222222,True,True,,,,,,,,,True
+sensors_math,math,42,How many original readings will all active sensors transmit over five hours? Give the final number of readings.,1200,300 readings,The total,False,0.19047619047619047,False,False,300.0,,,,,,,,True
+sensors_math,math,43,How many original readings will all active sensors transmit over five hours? Give the final number of readings.,1200,300,The final answer is 300 readings.,False,0.16666666666666666,False,False,300.0,300.0,,,,,,,True
+sensors_math,math,44,How many original readings will all active sensors transmit over five hours? Give the final number of readings.,1200,30,The are 540 original readings.,False,0.0625,False,False,30.0,540.0,,,,,,,True
+sensors_instruction,instruction,42,"Write exactly three numbered actions for severe-storm monitoring: reading verification, backup communication, and incident reporting, in that order.",,"1. Reading verification
+2. Backup communication
+3. Incident reporting",1.,False,0.056338028169014086,,,,,True,False,,,,,True
+sensors_instruction,instruction,43,"Write exactly three numbered actions for severe-storm monitoring: reading verification, backup communication, and incident reporting, in that order.",,1.,1.,True,1.0,,,,,False,False,,,,,True
+sensors_instruction,instruction,44,"Write exactly three numbered actions for severe-storm monitoring: reading verification, backup communication, and incident reporting, in that order.",,,1,False,0.0,,,,,False,False,,,,,True
+clinic_factual,factual,42,What is the reorder threshold for appointment-available doses? Answer with the quantity only.,140,140,1 reorder threshold for appointment-available doses is 140.,False,0.0967741935483871,True,True,,,,,,,,,True
+clinic_factual,factual,43,What is the reorder threshold for appointment-available doses? Answer with the quantity only.,140,140,140140,False,0.6666666666666666,True,True,,,,,,,,,True
+clinic_factual,factual,44,What is the reorder threshold for appointment-available doses? Answer with the quantity only.,140,The reorder threshold for appointment-available doses is 140.,1 reorder threshold for appointment-available doses is 140.,False,0.9666666666666667,True,True,,,,,,,,,True
+clinic_math,math,42,How many doses from the received shipment remain for patient appointments after the training reservation? Give the final number of doses.,320,320 doses,The,False,0.16666666666666666,True,False,320.0,,,,,,,,True
+clinic_math,math,43,How many doses from the received shipment remain for patient appointments after the training reservation? Give the final number of doses.,320,320 doses,The answer is 320 doses.,False,0.5454545454545454,True,True,320.0,320.0,,,,,,,True
+clinic_math,math,44,How many doses from the received shipment remain for patient appointments after the training reservation? Give the final number of doses.,320,340 doses,The clinic receives 15 sealed boxes,False,0.18181818181818182,False,False,340.0,15.0,,,,,,,True
+clinic_instruction,instruction,42,"Write exactly three numbered receiving checks, covering temperature evidence, lot tracking, and expiry status in that order.",,"1. Verify temperature evidence
+2. Preserve lot tracking
+3. Confirm expiry status",1.,False,0.04878048780487805,,,,,True,False,,,,,True
+clinic_instruction,instruction,43,"Write exactly three numbered receiving checks, covering temperature evidence, lot tracking, and expiry status in that order.",,"1. Verify temperature evidence
+2. Check and preserve lot traceability
+3. Confirm expiry status",1.,False,0.041666666666666664,,,,,True,False,,,,,True
+clinic_instruction,instruction,44,"Write exactly three numbered receiving checks, covering temperature evidence, lot tracking, and expiry status in that order.",,"1. Verify temperature evidence.
+2. Preserve lot traceability.
+3. Confirm the expiry status.","1. Verify temperature evidence.
+2. Preserve lot traceability.
+3. Confirm the expiry status.",True,1.0,,,,,True,True,,,,,True
+transit_factual,factual,42,What is the rider feedback deadline? Answer with the date only.,23 November 2026,23 November 2026,The year 2026,False,0.5517241379310345,True,False,,,,,,,,,True
+transit_factual,factual,43,What is the rider feedback deadline? Answer with the date only.,23 November 2026,23 November 2026,The rider feedback deadline is 23 November 2026.,False,0.5,True,True,,,,,,,,,True
+transit_factual,factual,44,What is the rider feedback deadline? Answer with the date only.,23 November 2026,23 November 2026,The3 November 2026,False,0.8823529411764706,True,False,,,,,,,,,True
+transit_math,math,42,How many kilometres do all seven buses operate in total on the specified day? Give the final number of kilometres.,630,630,Each bus,False,0.0,True,False,630.0,,,,,,,,True
+transit_math,math,43,How many kilometres do all seven buses operate in total on the specified day? Give the final number of kilometres.,630,630,Each bus operates 180 kilometres.,False,0.05555555555555555,True,False,630.0,180.0,,,,,,,True
+transit_math,math,44,How many kilometres do all seven buses operate in total on the specified day? Give the final number of kilometres.,630,,Each,False,0.0,False,False,,,,,,,,,True
+transit_instruction,instruction,42,"Write exactly three numbered rider-advisory points, covering potential delays, accessible boarding information, and how to contact the service desk, in that order.",,"1. Roadwork may occasionally cause delays near Market Street, if crews need the curb space.
+2. Accessible boarding islands near Market Street will have detectable boarding edges, legible signs, and a safe path from the pavement.
+3. Riders with mobility concerns can contact the service desk for the latest boarding arrangements.","1. Roadwork may cause bus delays near Market Street, so plan for the extra time.
+2. Two stops on Market Street may have accessible temporary boarding islands.
+3. Accessible boarding information? Contact the service desk.",False,0.3613138686131387,,,,,True,True,,,,,True
+transit_instruction,instruction,43,"Write exactly three numbered rider-advisory points, covering potential delays, accessible boarding information, and how to contact the service desk, in that order.",,,1.,False,0.0,,,,,False,False,,,,,True
+transit_instruction,instruction,44,"Write exactly three numbered rider-advisory points, covering potential delays, accessible boarding information, and how to contact the service desk, in that order.",,"1. Roadwork near Market Street may cause bus delays. Riders should be advised of possible delays.
+2. Two stops may move to fully accessible boarding islands; others may have temporary accessibility features.
+3. The service desk is the contact point for boarding information.","1. Roadwork in Greenridge may cause delays on the bus network, especially near Market Street.
+2. Due to roadwork, some stops may become accessible or move to temporary boarding islands.
+3. Contact the Greenridge transit service desk for more information.",False,0.42045454545454547,,,,,True,True,,,,,True

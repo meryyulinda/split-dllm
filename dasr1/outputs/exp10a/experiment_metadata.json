@@ -1,0 +1,39 @@
+{
+  "experiment": "Exp10A controlled authored-context quality pilot",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "new_tokens": 128,
+  "steps": 128,
+  "cache_config": [
+    100,
+    7,
+    0.25
+  ],
+  "official_repo": "/mnt/mydisk/mery-splitdllm/dLLM-cache-official",
+  "cases": [
+    "library_factual",
+    "library_math",
+    "library_instruction",
+    "sensors_factual",
+    "sensors_math",
+    "sensors_instruction",
+    "clinic_factual",
+    "clinic_math",
+    "clinic_instruction",
+    "transit_factual",
+    "transit_math",
+    "transit_instruction"
+  ],
+  "num_independent_documents": 4,
+  "timing": false,
+  "timing_repeats": 2,
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22",
+  "cuda_device": "NVIDIA RTX A6000",
+  "limitations": "Coherent authored notes, not real documents/LongBench. 12 tasks share 4 contexts. Manual quality review required. Timings exclude cache initialization but setup time is recorded; no two-GPU or edge-cloud transfer."
+}

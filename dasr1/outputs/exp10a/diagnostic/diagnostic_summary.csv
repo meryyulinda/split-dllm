@@ -1,0 +1,6 @@
+case_id,task,seed,gold,prompt_tokens,baseline_history_vs_plain_equal,cache_history_vs_plain_equal,baseline_stable_after_cache,baseline_vs_cache_equal,baseline_text,cache_text,baseline_visible_tokens,cache_visible_tokens,cache_mask_count,cache_eos_count,cache_first_eos_position
+clinic_math,math,42,320,673,True,True,True,False,320 doses,The,4,1,0,127,1
+sensors_instruction,instruction,42,,736,True,True,True,False,"1. Reading verification
+2. Backup communication
+3. Incident reporting",1.,14,2,0,126,2
+transit_factual,factual,44,23 November 2026,678,True,True,True,False,23 November 2026,The3 November 2026,8,8,0,120,8

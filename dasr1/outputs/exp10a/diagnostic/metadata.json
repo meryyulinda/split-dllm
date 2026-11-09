@@ -1,0 +1,49 @@
+{
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "official_cache_repo": "/mnt/mydisk/mery-splitdllm/dLLM-cache-official",
+  "cache_config": [
+    100,
+    7,
+    0.25
+  ],
+  "new_tokens": 128,
+  "steps": 128,
+  "targets": [
+    [
+      "clinic_math",
+      42
+    ],
+    [
+      "sensors_instruction",
+      42
+    ],
+    [
+      "transit_factual",
+      44
+    ]
+  ],
+  "special_ids": [
+    151643,
+    151665,
+    151666
+  ],
+  "special_ids_by_kind": {
+    "mask": [
+      151666
+    ],
+    "eos": [
+      151643
+    ],
+    "pad": [
+      151643
+    ],
+    "bos": [
+      151643,
+      151665
+    ]
+  },
+  "temperature": 0.0,
+  "top_p": null,
+  "top_k": null,
+  "algorithm": "origin"
+}

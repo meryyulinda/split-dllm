@@ -1,0 +1,56 @@
+{
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "official_cache_repo": "/mnt/mydisk/mery-splitdllm/dLLM-cache-official",
+  "targets": [
+    [
+      "clinic_math",
+      42
+    ],
+    [
+      "sensors_instruction",
+      42
+    ],
+    [
+      "transit_factual",
+      44
+    ]
+  ],
+  "policies": [
+    [
+      100,
+      7,
+      0.25
+    ],
+    [
+      100,
+      3,
+      0.25
+    ],
+    [
+      100,
+      1,
+      0.25
+    ],
+    [
+      100,
+      7,
+      0.5
+    ],
+    [
+      1,
+      7,
+      0.25
+    ],
+    [
+      1,
+      1,
+      1.0
+    ]
+  ],
+  "new_tokens": 128,
+  "steps": 128,
+  "temperature": 0.0,
+  "top_p": null,
+  "top_k": null,
+  "algorithm": "origin"
+}

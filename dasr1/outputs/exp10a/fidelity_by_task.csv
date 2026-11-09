@@ -1,0 +1,4 @@
+task,cases,exact_trajectory,exact_final_ids,stable_baseline_controls
+factual,12,3,3,12
+instruction,12,3,3,12
+math,12,0,0,12
