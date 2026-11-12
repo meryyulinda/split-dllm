@@ -1,0 +1,211 @@
+{
+  "experiment": "Exp10D GSM8K refresh policies",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "official_repo": "/mnt/mydisk/mery-splitdllm/dLLM-cache-official",
+  "variants": [
+    {
+      "name": "F_full",
+      "alg": "entropy",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "fixed",
+        1,
+        1,
+        1.0
+      ],
+      "policy_label": "fixed(Kp=1,Kr=1,rho=1.0)"
+    },
+    {
+      "name": "F_k100r7",
+      "alg": "entropy",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "fixed",
+        100,
+        7,
+        0.25
+      ],
+      "policy_label": "fixed(Kp=100,Kr=7,rho=0.25)"
+    },
+    {
+      "name": "F_k25r2",
+      "alg": "entropy",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "fixed",
+        25,
+        2,
+        0.25
+      ],
+      "policy_label": "fixed(Kp=25,Kr=2,rho=0.25)"
+    },
+    {
+      "name": "F_k5r1",
+      "alg": "entropy",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "fixed",
+        5,
+        1,
+        0.25
+      ],
+      "policy_label": "fixed(Kp=5,Kr=1,rho=0.25)"
+    },
+    {
+      "name": "AD_frontier",
+      "alg": "entropy",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "adaptive",
+        {
+          "gen_content_commits": 2,
+          "gen_max_age": 4,
+          "prompt_content_commits": 16,
+          "prompt_max_age": 32,
+          "eos_frontier_window": 8,
+          "transfer_ratio": 0.25
+        }
+      ],
+      "policy_label": "adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)"
+    },
+    {
+      "name": "AD_frontier_tight",
+      "alg": "entropy",
+      "prompt_tail_rows": 1,
+      "policy": [
+        "adaptive",
+        {
+          "gen_content_commits": 1,
+          "gen_max_age": 2,
+          "prompt_content_commits": 8,
+          "prompt_max_age": 16,
+          "eos_frontier_window": 8,
+          "transfer_ratio": 0.25
+        }
+      ],
+      "policy_label": "adaptive(G=1,Ag=2,P=8,Ap=16,W=8,conf=0.0,rho=0.25)"
+    }
+  ],
+  "cases": [
+    "gsm8k_0000",
+    "gsm8k_0001",
+    "gsm8k_0002",
+    "gsm8k_0003",
+    "gsm8k_0004",
+    "gsm8k_0005",
+    "gsm8k_0006",
+    "gsm8k_0007",
+    "gsm8k_0008",
+    "gsm8k_0009",
+    "gsm8k_0010",
+    "gsm8k_0011",
+    "gsm8k_0012",
+    "gsm8k_0013",
+    "gsm8k_0014",
+    "gsm8k_0015",
+    "gsm8k_0016",
+    "gsm8k_0017",
+    "gsm8k_0018",
+    "gsm8k_0019",
+    "gsm8k_0020",
+    "gsm8k_0021",
+    "gsm8k_0022",
+    "gsm8k_0023",
+    "gsm8k_0024",
+    "gsm8k_0025",
+    "gsm8k_0026",
+    "gsm8k_0027",
+    "gsm8k_0028",
+    "gsm8k_0029",
+    "gsm8k_0030",
+    "gsm8k_0031",
+    "gsm8k_0032",
+    "gsm8k_0033",
+    "gsm8k_0034",
+    "gsm8k_0035",
+    "gsm8k_0036",
+    "gsm8k_0037",
+    "gsm8k_0038",
+    "gsm8k_0039",
+    "gsm8k_0040",
+    "gsm8k_0041",
+    "gsm8k_0042",
+    "gsm8k_0043",
+    "gsm8k_0044",
+    "gsm8k_0045",
+    "gsm8k_0046",
+    "gsm8k_0047",
+    "gsm8k_0048",
+    "gsm8k_0049",
+    "gsm8k_0050",
+    "gsm8k_0051",
+    "gsm8k_0052",
+    "gsm8k_0053",
+    "gsm8k_0054",
+    "gsm8k_0055",
+    "gsm8k_0056",
+    "gsm8k_0057",
+    "gsm8k_0058",
+    "gsm8k_0059",
+    "gsm8k_0060",
+    "gsm8k_0061",
+    "gsm8k_0062",
+    "gsm8k_0063",
+    "gsm8k_0064",
+    "gsm8k_0065",
+    "gsm8k_0066",
+    "gsm8k_0067",
+    "gsm8k_0068",
+    "gsm8k_0069",
+    "gsm8k_0070",
+    "gsm8k_0071",
+    "gsm8k_0072",
+    "gsm8k_0073",
+    "gsm8k_0074",
+    "gsm8k_0075",
+    "gsm8k_0076",
+    "gsm8k_0077",
+    "gsm8k_0078",
+    "gsm8k_0079",
+    "gsm8k_0080",
+    "gsm8k_0081",
+    "gsm8k_0082",
+    "gsm8k_0083",
+    "gsm8k_0084",
+    "gsm8k_0085",
+    "gsm8k_0086",
+    "gsm8k_0087",
+    "gsm8k_0088",
+    "gsm8k_0089",
+    "gsm8k_0090",
+    "gsm8k_0091",
+    "gsm8k_0092",
+    "gsm8k_0093",
+    "gsm8k_0094",
+    "gsm8k_0095",
+    "gsm8k_0096",
+    "gsm8k_0097",
+    "gsm8k_0098",
+    "gsm8k_0099"
+  ],
+  "seeds": [
+    42
+  ],
+  "seeds_used_per_alg": {
+    "entropy": [
+      42
+    ]
+  },
+  "new_tokens": 256,
+  "steps": 256,
+  "temperature": 0.1,
+  "top_p": 0.9,
+  "top_k": null,
+  "alg_temp": 0.0,
+  "timing": false,
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22",
+  "cuda_device": "NVIDIA RTX A6000",
+  "notes": "quality is advisory (gold substring / last number / 3-item format); review runs.csv manually. row_work_frac is a row-count proxy, not FLOPs. Single GPU, no edge-cloud transfer."
+}

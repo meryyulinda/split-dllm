@@ -234,3 +234,37 @@ EXP10C_CASE_IDS = []
 EXP10C_WARMUP_RUNS = 1
 EXP10C_RUN_TIMING = False         # enable with a small EXP10C_CASE_IDS subset
 EXP10C_TIMING_REPEATS = 2
+
+# Exp10D: refresh policies on GSM8K (first 200 test problems in data/gsm8k/)
+# Variants are defined in experiments/exp10d_gsm8k_refresh.py.
+EXP10D_N_QUESTIONS = 100           # quick check first (~15 min); then 100 (~2.5 h)
+EXP10D_START = 0
+EXP10D_NEW_TOKENS = 256           # official dLLM-Cache GSM8K length for Dream
+EXP10D_STEPS = 256
+EXP10D_RESUME = True              # restart skips finished questions
+EXP10D_WARMUP_RUNS = 1
+EXP10D_RUN_TIMING = False
+
+# Exp11: DASR prototype on two GPUs (edge = EXP11_EDGE_DEVICE, cloud = EXP11_CLOUD_DEVICE)
+# Smoke test first: EXP11_N_QUESTIONS = 2, EXP11_NEW_TOKENS = EXP11_STEPS = 64 (~3 min).
+# Output folder: outputs/exp11_<dataset>_k<split>_t<tokens>/
+EXP11_DATASET = "gsm8k"           # "gsm8k" (256/256) or "authored" (Exp10A docs, 128/128)
+EXP11_N_QUESTIONS = 2             # smoke test; then 30
+EXP11_NEW_TOKENS = 64             # smoke test; then 256 (gsm8k) / 128 (authored)
+EXP11_STEPS = 64
+EXP11_SPLIT_LAYER = 4             # edge runs layers 1..4 (best static split in RQ4)
+EXP11_EDGE_DEVICE = EDGE_DEVICE   # "cuda:2"
+EXP11_CLOUD_DEVICE = CLOUD_DEVICE # "cuda:0"
+EXP11_CACHE_POLICY = ("fixed", 25, 2, 0.25)   # official dLLM-Cache GSM8K setting
+EXP11_ANCHOR_INTERVAL = 32        # INT8 codec: bf16 anchor at least every 32 steps
+EXP11_RESUME = True
+
+# Exp11b: network emulation grid (no GPU)
+EXP11B_BANDWIDTHS_MBPS = [1, 5, 10, 25, 50, 100, 1000]
+EXP11B_RTTS_MS = [5, 20, 50, 100]
+EXP11B_EDGE_SLOWDOWNS = [1.0, 3.0]  # 3.0 ~ RTX 3060-class edge vs the measured A6000
+EXP10D_TEMPERATURE = 0.1          # Dream's official GSM8K eval: T=0.1, top_p=0.9 (T=0 collapses to EOS)
+EXP10D_TOP_P = 0.9
+EXP10D_SEEDS = [42]               # with T > 0, every seed is a separate paired run
+EXP11_TEMPERATURE = 0.1           # Dream's official GSM8K sampling (T=0 collapses to EOS)
+EXP11_TOP_P = 0.9

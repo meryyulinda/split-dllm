@@ -1,0 +1,573 @@
+case_id,task,alg,seed,prompt_tokens,gold_answer,baseline_ok,baseline_extracted,baseline_text,baseline_eos,pos0_commit_step,pos0_commit_prob,pos0_commit_margin
+gsm8k_0000,math,entropy,42,99,18,True,18.0,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast every morning, so she has 16 - 3 = 13 eggs left.
+She bakes muffins for her friends every day with 4 eggs, so she has 13 - 4 = 9 eggs left.
+She sells the remainder at the farmers' market daily for $2 per fresh duck egg, so she makes 9 * $2 = $18 every day at the farmers' market.
+The final answer: 18",143,2,0.7698591947555542,0.7104940414428711
+gsm8k_0001,math,entropy,42,60,3,True,3.0,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",199,2,0.3737083673477173,0.1168625950813293
+gsm8k_0002,math,entropy,42,91,70000,False,65000.0,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",130,2,0.6055593490600586,0.4320636987686157
+gsm8k_0003,math,entropy,42,69,540,True,540.0,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",182,2,0.6813107132911682,0.5552809238433838
+gsm8k_0004,math,entropy,42,145,20,True,20.0,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs to give a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her flock 15 cups of feed.
+In the afternoon, she gives her flock another 25 cups of feed.
+So far, she has given her flock 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her flock 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",126,2,0.8135596513748169,0.7330063581466675
+gsm8k_0005,math,entropy,42,90,64,True,64.0,"Kylar wants to buy 16 glasses, so he will need to buy 8 pairs of glasses.
+For each pair of glasses, the first glass costs $5, and the second glass costs 60% of the price, which is $5 * 0.6 = $3.
+So, for each pair of glasses, Kylar will need to pay $5 + $3 = $8.
+Since Kylar wants to buy 8 pairs of glasses, he will need to pay 8 * $8 = $64.
+Therefore, Kylar needs to pay $64 for the glasses.
+The final answer: 64",120,3,0.9984076619148254,0.9978724718093872
+gsm8k_0006,math,entropy,42,76,260,True,260.0,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+The total number of sheep is 20 + 80 + 160 = 260 sheep.
+#### 260
+The answer is: 260",155,2,0.583289384841919,0.5218111276626587
+gsm8k_0007,math,entropy,42,104,160,False,280.0,"Carla downloads 2 GB/minute, so it takes her 200/2 = 100 minutes to download the file.
+40% of the way through the download, Carla has downloaded 200 * 40 / 100 = 80 GB.
+She has 200 - 80 = 120 GB left to download.
+She downloads 2 GB/minute, so it takes her 120/2 = 60 minutes to download the remaining 120 GB.
+She has to restart the download from the beginning, so it takes her 100 minutes to download the file again.
+In total, it takes Carla 100 + 60 + 20 + 100 = 280 minutes to download the file.
+The answer is: 280",74,2,0.5936934351921082,0.4126271605491638
+gsm8k_0008,math,entropy,42,138,45,True,45.0,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he covers a distance of 2 * 0 = 0 miles.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers in the 4 hours is 0 + 15 + 120 = 135 miles.
+Since he started 180 miles away from home and covered 135 miles, he is 180 - 135 = 45 miles from home at the end of those 4 hours.
+#### 45
+The answer is: 45",17,2,0.6940007209777832,0.6057684421539307
+gsm8k_0009,math,entropy,42,94,460,True,460.0,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",103,2,0.5915588140487671,0.3871215581893921
+gsm8k_0010,math,entropy,42,94,366,True,366.0,"In the second month, the number of downloads was three times as many as the downloads in the first month, so it was 3 * 60 = 180 downloads.
+In the third month, the number of downloads was reduced by 30%, so it was 180 - (180 * 30/100) = 180 - 54 = 126 downloads.
+The total number of downloads over the three months is 60 + 180 + 126 = 366 downloads.
+The answer is: 366",127,2,0.5776489973068237,0.2485145628452301
+gsm8k_0011,math,entropy,42,99,694,True,694.0,"The cost of 3 dozen donuts is 3 * $68 = $204.
+The cost of 2 dozen mini cupcakes is 2 * $80 = $160.
+The cost of 6 dozen mini cheesecakes is 6 * $55 = $330.
+The total cost is $204 + $160 + $330 = $694.
+The answer is: 694",159,2,0.3779275417327881,0.14870290458202362
+gsm8k_0012,math,entropy,42,101,13,False,9.0,"Each year, Carlos will earn 7 lemons * $1.5 = $10.50 from selling the lemons.
+The total cost of planting the tree is $90.
+The total cost of watering and feeding the tree is $3 per year.
+The total cost of planting and watering the tree is $90 + $3 = $93.
+To break even, Carlos needs to earn $93 from selling the lemons.
+Since he will earn $10.50 per year, it will take him $93 / $10.50 = 9 years to earn $93.
+Therefore, it will take Carlos 9 years to start earning money on the lemon tree.
+The final answer is: 9",101,2,0.4534379243850708,0.27586907148361206
+gsm8k_0013,math,entropy,42,92,18,True,18.0,"Let's assume Melanie started with x vacuum cleaners.
+She sold a third of her vacuum cleaners at the green house, so she sold x/3 at the green house.
+After selling at the green house, she had x - x/3 = 2x/3 left.
+She sold 2 more vacuum cleaners at the red house, so she had 2x/3 - 2 left.
+After selling at the red house, she had 2x/3 - 2 left.
+She sold half of what was left at the orange house, so she sold (2x/3 - 2)/2 = x/3 - 1 at the orange house.
+After selling at the orange house, she had 2x/3 - 2 - (x/3 - 1) = x/3 - 1 left.
+We know that Melanie has 5 vacuum cleaners left, so we can set up the equation x/3 - 1 = 5.
+Adding 1 to both sides of the equation, we get x/3 = 6.
+Multiplying both sides of the equation by 3, we get x = 18.
+Therefore, Melanie started with 18 vacuum cleaners.
+The answer: 18",1,2,0.6508116722106934,0.42589718103408813
+gsm8k_0014,math,entropy,42,86,60,True,60.0,"First, let's find out how many students enrolled in contemporary dance. Since 20% of the 20 students enrolled in contemporary dance, we can calculate this as 20 * 0.2 = 4 students.
+Next, let's find out how many students enrolled in jazz dance. Since 25% of the remaining students enrolled in jazz dance, we can calculate this as (20 - 4) * 0.25 = 16 * 0.25 = 4 students.
+Now, let's find out how many students enrolled in hip-hop dance. Since the rest of the students enrolled in hip-hop dance, we can calculate this as 20 - 4 - 4 = 12 students.
+Finally, let's find out what percentage of the entire students enrolled in hip-hop dance. Since 12 out of the 20 students enrolled in hip-hop dance, we can calculate this as (12 / 20) * 100 = 0.6 * 100 = 60%.
+Therefore, 60% of the entire students enrolled in hip-hop dance.
+#### 60
+The answer is: 60",3,2,0.5769038796424866,0.4988284111022949
+gsm8k_0015,math,entropy,42,128,125,True,125.0,"First, let's calculate the potential increase in value for the jewelry market. If the jewelry market goes up 2.5%, the increase in value would be $5,000 * 2.5% = $125.
+Next, let's calculate the potential increase in value for the electronic gadgets market. If the electronic gadgets market rises 1.2%, the increase in value would be $8,000 * 1.2% = $96.
+To maximize profit, the merchant should choose the option with the higher potential increase in value. In this case, the jewelry market has a higher potential increase in value, so the merchant should choose to purchase the jewelry.
+The profit would be the increase in value of the jewelry market, which is $125.
+The final answer is: 125",84,2,0.3386731743812561,0.07491424679756165
+gsm8k_0016,math,entropy,42,87,230,True,230.0,"The trains travel 80 miles on the first day and 150 miles on the second day, so the total distance covered by each train is 80 + 150 = 230 miles.
+The final answer: 230",202,2,0.37914636731147766,0.14918246865272522
+gsm8k_0017,math,entropy,42,92,57500,True,57500.0,"Jill earns $20 per hour as a teacher, so she earns 20 * 35 = $700 per week as a teacher.
+Jill earns $30 per hour as a cheerleading coach, so she earns 30 * 15 = $450 per week as a coach.
+Her total weekly earnings are 700 + 450 = $1150 per week.
+Since she works 50 weeks a year, her annual salary is 1150 * 50 = $57500.
+Therefore, Jill's annual salary is $57500.
+The answer is: 57500",110,2,0.5067563652992249,0.3203310966491699
+gsm8k_0018,math,entropy,42,63,7,True,7.0,"Claire makes a 3 egg omelet every morning, so she eats 3 eggs per day.
+There are 7 days in a week, so in 1 week, Claire eats 3 eggs x 7 days = 21 eggs.
+In 4 weeks, Claire will eat 21 eggs x 4 weeks = 84 eggs.
+There are 12 eggs in a dozen, so 84 eggs is equal to 84 eggs / 12 eggs per dozen = 7 dozens of eggs.
+Therefore, Claire will eat 7 dozens of eggs in 4 weeks.
+The final answer: 7",125,2,0.39417764544487,0.1831895411014557
+gsm8k_0019,math,entropy,42,99,6,True,6.0,"Marissa has walked a total of 4 + 2 = 6 miles so far.
+She has taken 1 + 1 = 2 hours to walk 6 miles.
+To have an average speed of 4 miles per hour, she needs to walk a total of 12 miles in 3 hours.
+So, she needs to walk the remaining 12 - 6 = 6 miles in 3 - 2 = 1 hour.
+Therefore, she needs to walk the remaining distance at a speed of 6 miles / 1 hour = 6 miles per hour.
+The answer is: 6",129,2,0.4417513310909271,0.28908616304397583
+gsm8k_0020,math,entropy,42,97,15,False,14.67,"First, let's calculate the amount of water in the orange drink. Since the orange drink is two-thirds water, the amount of water is (2/3) * 10 liters = 6.67 liters.
+Next, let's calculate the amount of water in the pineapple drink. Since the pineapple drink is three-fifths water, the amount of water is (3/5) * 15 liters = 9 liters.
+Now, let's calculate the total amount of water in the mixture. The total amount of water is 6.67 liters + 9 liters = 15.67 liters.
+However, we spilled one liter of the orange drink, so the total amount of water in the remaining 24 liters is 15.67 liters - 1 liter = 14.67 liters.
+Therefore, the amount of water in the remaining 24 liters is 14.67 liters.
+The answer is: 14.67",49,3,0.9969496130943298,0.9961959719657898
+gsm8k_0021,math,entropy,42,80,14,False,2.0,"Raymond was born 6 years before Samantha, so if Samantha is now 31, then Raymond is 31 - 6 = 25 years old.
+Raymond had a son at the age of 23, so his son was born 25 - 23 = 2 years ago.
+Therefore, Raymond's son was born 2 years ago.
+The final answer: 2",172,2,0.40777572989463806,0.10944065451622009
+gsm8k_0022,math,entropy,42,89,7,True,7.0,"Billy's first 3 customers buy one DVD each, so he sells 3 DVDs to them.
+His next 2 customers buy 2 DVDs each, so he sells 2 * 2 = 4 DVDs to them.
+His last 3 customers don't buy any DVDs, so he sells 0 DVDs to them.
+In total, Billy sells 3 + 4 + 0 = 7 DVDs on Tuesday.
+The answer is: 7",164,2,0.7497385740280151,0.5925848484039307
+gsm8k_0023,math,entropy,42,74,8,True,8.0,"The candle burns from 1:00 PM to 5:00 PM, which is a total of 4 hours.
+Since the candle melts by 2 centimeters every hour, it will melt by 2 * 4 = 8 centimeters in total.
+Therefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.
+The answer is: 8",166,2,0.45331138372421265,0.34564048051834106
+gsm8k_0024,math,entropy,42,73,26,True,26.0,"Let's assume the original price of the book is $x.
+The discount is 25% of the original price, so the discount amount is 0.25x.
+The price Kyle paid is the original price minus the discount, which is x - 0.25x = 0.75x.
+We know that Kyle paid $19.50, so we can set up the equation 0.75x = 19.50.
+To solve for x, we divide both sides of the equation by 0.75: x = 19.50 / 0.75.
+Solving for x, we get x = 26.
+Therefore, the original price of the book was $26.
+The final answer is: 26",88,2,0.2835347354412079,0.06271764636039734
+gsm8k_0025,math,entropy,42,102,2,True,2.0,"First, let's calculate the total cost of the chicken meal, milk, and apples.
+The cost of the chicken meal is $12.
+The cost of 5 packs of milk is 5 * $3 = $15.
+The cost of 4 apples is 4 * $1.50 = $6.
+The total cost of the chicken meal, milk, and apples is $12 + $15 + $6 = $33.
+Marie paid a total of $50, so the cost of the boxes of pizza is $50 - $33 = $17.
+Since each box of pizza costs $8.50, the number of boxes of pizza Marie ordered is $17 / $8.50 = 2.
+Therefore, Marie ordered 2 boxes of pizza.
+The answer is: 2",80,3,0.9983747005462646,0.9979169368743896
+gsm8k_0026,math,entropy,42,103,243,True,243.0,"Mishka bought 3 pairs of shorts, so the total cost of shorts is 3 * $16.50 = $49.50.
+Mishka bought 3 pairs of pants, so the total cost of pants is 3 * $22.50 = $67.50.
+Mishka bought 3 pairs of shoes, so the total cost of shoes is 3 * $42 = $126.
+The total cost of all the clothing items is $49.50 + $67.50 + $126 = $243.
+Therefore, Mishka spent $243 on all the clothing items.
+The final answer: 243",103,2,0.39253103733062744,0.18242430686950684
+gsm8k_0027,math,entropy,42,93,16,True,16.0,"Cynthia eats one serving of ice cream every night, so she eats 60 servings of ice cream in 60 days.
+Each carton of ice cream has 15 servings, so she needs 60 / 15 = 4 cartons of ice cream.
+Each carton costs $4.00, so she will spend 4 * $4.00 = $16.00 on ice cream.
+Therefore, Cynthia will spend $16.00 on ice cream after 60 days.
+The answer is: 16",138,2,0.7887066006660461,0.7382862567901611
+gsm8k_0028,math,entropy,42,84,25,True,25.0,"Henry's first stop was 20 miles into the trip.
+His second stop was 15 miles before the end of the trip, so it was 60 - 15 = 45 miles into the trip.
+The distance between his first and second stops is 45 - 20 = 25 miles.
+Therefore, Henry traveled 25 miles between his first and second stops.
+The answer is: 25",165,2,0.3757607638835907,0.2375260889530182
+gsm8k_0029,math,entropy,42,103,104,True,104.0,"Let's assume the cost of the boots is x dollars.
+The cost of one pair of heels is $33.
+The cost of the other pair of heels is twice as much, so it is 2 * $33 = $66.
+The total cost of the two pairs of heels is $33 + $66 = $99.
+According to the problem, the total cost of the two pairs of heels is five dollars less than the cost of the boots.
+So, we can write the equation: $99 = x - $5.
+Adding $5 to both sides of the equation, we get: $104 = x.
+Therefore, the boots cost $104.
+#### 104
+The answer is: 104",97,2,0.4139587879180908,0.21841849386692047
+gsm8k_0030,math,entropy,42,73,109,True,109.0,"Let's assume Darrell's age is 7x and Allen's age is 11x, where x is a common multiplier.
+According to the problem, the sum of their ages is 162, so we can write the equation: 7x + 11x = 162.
+Combining like terms, we get: 18x = 162.
+Dividing both sides by 18, we find: x = 9.
+Now that we know the value of x, we can find Darrell's age: 7x = 7 * 9 = 63.
+And we can find Allen's age: 11x = 11 * 9 = 99.
+In 10 years, Allen's age will be 99 + 10 = 109.
+Therefore, Allen's age 10 years from now is 109.
+The answer is: 109",52,2,0.577207088470459,0.44841477274894714
+gsm8k_0031,math,entropy,42,97,80,True,80.0,"The first friend says 80 jelly beans.
+The second friend says 20 more than half the first one, which is 80/2 = 40 + 20 = 60 jelly beans.
+The third friend says 25% more than the first one, which is 80 + (80 * 25/100) = 80 + 20 = 100 jelly beans.
+The average guess is the sum of all the guesses divided by the number of friends, so (80 + 60 + 100) / 3 = 240 / 3 = 80 jelly beans.
+The final answer: 80",106,2,0.6676378846168518,0.5090599656105042
+gsm8k_0032,math,entropy,42,75,35,True,35.0,"John takes care of 10 dogs, and each dog takes 0.5 hours a day to walk and take care of their business.
+So, each day, John spends 10 * 0.5 = 5 hours taking care of the dogs.
+There are 7 days in a week, so John spends 5 * 7 = 35 hours a week taking care of the dogs.
+Therefore, John spends 35 hours a week taking care of the dogs.
+The answer is: 35",149,3,0.9561747312545776,0.9336876273155212
+gsm8k_0033,math,entropy,42,65,70,True,70.0,"Let's assume Gretchen has x silver coins.
+Since there are 30 more gold coins than silver coins, Gretchen has x + 30 gold coins.
+The total number of coins Gretchen has is x + (x + 30) = 2x + 30.
+We know that Gretchen has 110 coins in total, so we can set up the equation 2x + 30 = 110.
+Subtracting 30 from both sides of the equation, we get 2x = 80.
+Dividing both sides of the equation by 2, we get x = 40.
+Therefore, Gretchen has 40 silver coins and 40 + 30 = 70 gold coins.
+#### 70
+The answer is: 70",82,2,0.7729021310806274,0.7319397926330566
+gsm8k_0034,math,entropy,42,75,23,True,23.0,"Raymond has 40 jewels, so half of Raymond's jewels is 40 / 2 = 20 jewels.
+Aaron has 5 more jewels than half of Raymond's jewels, so Aaron has 20 + 5 = 25 jewels.
+Siobhan has 2 fewer jewels than Aaron, so Siobhan has 25 - 2 = 23 jewels.
+#### 23
+The answer is: 23",161,2,0.5541501641273499,0.4225279688835144
+gsm8k_0035,math,entropy,42,86,9,True,9.0,"In the first 20 minutes, Mike scores 4 points.
+In the second 20 minutes, he scores 25% more points, so he scores 4 + (4 * 25/100) = 4 + 1 = 5 points.
+In total, Mike scores 4 + 5 = 9 points.
+The answer is: 9",176,2,0.7853773236274719,0.664935827255249
+gsm8k_0036,math,entropy,42,78,75,True,75.0,"Terry eats 2 yogurts a day, so in 30 days, he will eat 2 * 30 = 60 yogurts.
+The sale price is 4 yogurts for $5.00, so the price per yogurt is $5.00 / 4 = $1.25.
+Over 30 days, Terry will spend 60 * $1.25 = $75.00 on yogurt.
+The answer is: 75",149,2,0.48618224263191223,0.15203437209129333
+gsm8k_0037,math,entropy,42,97,2,False,11.0,"John sells 13 lego sets for $15 each, so he earns 13 * $15 = $195.
+He buys 8 video games for $20 each, so he spends 8 * $20 = $160.
+He has $5 left, so he spent $195 - $160 - $5 = $30 on something else.
+Since he spent $30 on something else, he must have sold some of his lego sets for $15 each.
+So, he sold $30 / $15 = 2 lego sets.
+Therefore, he still has 13 - 2 = 11 lego sets.
+The answer is: 11",100,2,0.8199765086174011,0.7526687383651733
+gsm8k_0038,math,entropy,42,78,10,True,10.0,"John runs 3 hours the first day and half as much the other two days, so he runs 3/2 = 1.5 hours each of the other two days.
+In total, John runs 3 + 1.5 + 1.5 = 6 hours a week.
+He runs 60 miles a week, so his average speed is 60 miles / 6 hours = 10 miles per hour.
+#### 10
+The answer is: 10",153,2,0.4868977665901184,0.20947179198265076
+gsm8k_0039,math,entropy,42,107,18,True,18.0,"If Dana can skip at 3 miles per hour, then she can run at 3 * 2 = 6 miles per hour.
+If Dana can run at 6 miles per hour, then she can walk at 6 / 4 = 1.5 miles per hour.
+If Dana spends one-third of the time running, then she spends 6 / 3 = 2 hours running.
+If Dana spends two-thirds of the time walking, then she spends 6 * 2 / 3 = 4 hours walking.
+If Dana runs for 2 hours at 6 miles per hour, then she travels 2 * 6 = 12 miles.
+If Dana walks for 4 hours at 1.5 miles per hour, then she travels 4 * 1.5 = 6 miles.
+In total, Dana travels 12 + 6 = 18 miles in six hours.
+The answer is: 18",61,2,0.52128005027771,0.329511821269989
+gsm8k_0040,math,entropy,42,78,8,True,8.0,"If Suzy's iPhone is 1 year old, then Ben's iPhone is 2 * 1 = 2 years old.
+If Brandon's iPhone is four times as old as Ben's iPhone, then Brandon's iPhone is 4 * 2 = 8 years old.
+Therefore, Brandon's iPhone is 8 years old.
+The final answer: 8",182,2,0.588503360748291,0.37200504541397095
+gsm8k_0041,math,entropy,42,162,200,True,200.0,"When Polly holds the sapphire gemstone, she can throw the javelin three times farther than when not holding the gemstone.
+So, if she can throw the javelin 400 feet without the gemstone, she can throw it 3 * 400 = 1200 feet with the gemstone.
+The dragon's flames can reach up to 1000 feet, so Polly can stand 1200 - 1000 = 200 feet outside of the reach of the dragon's flames and still hit the dragon with the gold javelin.
+The answer is: 200",124,2,0.43323469161987305,0.29258400201797485
+gsm8k_0042,math,entropy,42,116,26,True,26.0,"Grandma Jones baked 5 apple pies, and each pie was cut into 8 pieces, so there were a total of 5 * 8 = 40 pieces of pie.
+At the end of the evening, there were 14 pieces of pie remaining, so the guests took 40 - 14 = 26 pieces of pie.
+The answer is: 26",175,2,0.7552846670150757,0.7038869261741638
+gsm8k_0043,math,entropy,42,95,48,False,1800.0,"First, let's calculate the total number of calories in the bag of chips. Since there are 5 servings and each serving has 250 calories, the total number of calories in the bag is 5 * 250 = 1250 calories.
+Next, let's calculate how many calories you have already consumed. Since your daily calorie target is 2000 and you have already consumed 1800 calories, you have 2000 - 1800 = 200 calories remaining.
+Now, let's calculate how many servings of chips you can eat with the remaining calories. Since each serving has 250 calories, you can eat 200 / 250 = 0.8 servings.
+Finally, let's calculate how many grams of chips you can eat. Since the bag has 300g and you can eat 0.8 servings, you can eat 300 * 0.8 = 240g of chips.
+Therefore, you can eat 240g of chips if your daily calorie target is 2000 and you have already consumed 1800 calories.",7,2,0.37180987000465393,0.21681645512580872
+gsm8k_0044,math,entropy,42,111,20,True,20.0,"For every pound of beeswax, Charlie can make 10 candles, so to make 20 candles, he needs 2 pounds of beeswax.
+The cost of 2 pounds of beeswax is 2 * $10.00 = $20.00.
+Charlie sells each candle for $2.00, so he makes 20 * $2.00 = $40.00 from selling the candles.
+His net profit is the difference between his revenue and his cost, so his net profit is $40.00 - $20.00 = $20.00.
+The answer is: 20",113,3,0.9862558245658875,0.9787256717681885
+gsm8k_0045,math,entropy,42,128,104,True,104.0,"On Tuesday, Meredith wrote 5 + (2/5 * 5) = 5 + 2 = 7 articles.
+On Wednesday, she wrote 2 * 7 = 14 articles.
+The total number of articles she wrote in the three days is 5 + 7 + 14 = 26 articles.
+The total number of hours she spent writing articles is 26 * 4 = 104 hours.
+#### 104
+The answer is: 104",149,2,0.679335355758667,0.5075724720954895
+gsm8k_0046,math,entropy,42,128,163,False,117.0,"Candice started with 80 post-it notes in her purse.
+She placed a single Post-it note on each of 220 different cups of coffee, so she used 220 post-it notes.
+She had 23 post-it notes remaining overall, so she had 80 + 23 = 103 post-it notes before the purchase.
+She used 220 post-it notes, so she must have purchased 220 - 103 = 117 post-it notes.
+Therefore, the package that she purchased had 117 post-it notes.
+The answer is: 117",121,2,0.830522358417511,0.7703595161437988
+gsm8k_0047,math,entropy,42,84,800,True,800.0,"John spent $200 on blue ties that cost $40 each, so he bought 200 / 40 = 5 blue ties.
+He bought twice as many red ties as blue ties, so he bought 2 * 5 = 10 red ties.
+The red ties cost 50% more than blue ties, so they cost 40 + (40 * 50/100) = 40 + 20 = $60 each.
+He spent 10 * 60 = $600 on red ties.
+In total, he spent 200 + 600 = $800 on ties.
+#### 800
+The answer is: 800",97,2,0.6008011698722839,0.37977874279022217
+gsm8k_0048,math,entropy,42,71,8,True,8.0,"First, we need to convert the length of the wire from feet to inches. Since there are 12 inches in a foot, we multiply 4 feet by 12 inches to get 48 inches.
+Next, we divide the total length of the wire by the length of each piece to find the number of pieces. So, 48 inches divided by 6 inches per piece is 8 pieces.
+Therefore, Tracy obtained 8 pieces of wire.
+The final answer is: 8",154,2,0.4295812249183655,0.2715471088886261
+gsm8k_0049,math,entropy,42,77,30,True,30.0,"First, let's find the total number of units in the building. Since there are 15 floors and each floor contains 8 units, the total number of units is 15 * 8 = 120 units.
+Next, let's find the number of occupied units. Since 3/4 of the building is occupied, the number of occupied units is (3/4) * 120 = 90 units.
+Finally, let's find the number of unoccupied units. The number of unoccupied units is the total number of units minus the number of occupied units, which is 120 - 90 = 30 units.
+Therefore, the total number of unoccupied units in the building is 30.
+The final answer is: 30",92,3,0.9961769580841064,0.9945826530456543
+gsm8k_0050,math,entropy,42,71,294,True,294.0,"First, we need to find out how many dozens of eggs Lloyd produces per day. Since there are 12 eggs in a dozen, we divide 252 by 12 to get 21 dozens per day.
+Next, we need to find out how much Lloyd makes per day. Since he sells each dozen for $2, we multiply 21 by $2 to get $42 per day.
+Finally, we need to find out how much Lloyd makes per week. Since there are 7 days in a week, we multiply $42 by 7 to get $294 per week.
+Therefore, Lloyd makes $294 per week on eggs.
+The answer is: 294",108,2,0.2652853727340698,0.08295756578445435
+gsm8k_0051,math,entropy,42,83,5,True,5.0,"Tom's ship travels at 10 miles per hour for 3 hours, so the distance he travels is 10 * 3 = 30 miles.
+He then travels back at a rate of 6 mph, so the time it takes him to get back is 30 / 6 = 5 hours.
+#### 5
+The answer is: 5",179,2,0.6231992244720459,0.4751764237880707
+gsm8k_0052,math,entropy,42,96,15,True,15.0,"Uriah needs to remove 15 pounds from his book bag.
+He removes 30 comic books, which weigh 1/4 pound each, so he removes 30 * 1/4 = 7.5 pounds of comic books.
+He still needs to remove 15 - 7.5 = 7.5 pounds from his book bag.
+Each toy weighs 1/2 pound, so he needs to remove 7.5 / (1/2) = 15 toys.
+Therefore, Uriah needs to remove 15 toys.
+The answer is: 15",131,2,0.7483335733413696,0.6974088549613953
+gsm8k_0053,math,entropy,42,134,40,True,40.0,"On Thursday, the mechanic repairs 6 truck tires, so the revenue from truck tires is 6 * $60 = $360.
+On Thursday, the mechanic repairs 4 car tires, so the revenue from car tires is 4 * $40 = $160.
+The total revenue on Thursday is $360 + $160 = $520.
+On Friday, the mechanic repairs 12 car tires, so the revenue from car tires is 12 * $40 = $480.
+The total revenue on Friday is $480.
+The day with higher revenue is Thursday, and the difference in revenue is $520 - $480 = $40.
+Therefore, the mechanic earned $40 more on the day with higher revenue.
+The answer is: 40",81,2,0.756489098072052,0.6767557263374329
+gsm8k_0054,math,entropy,42,116,40,True,40.0,"The Doubtfire sisters have 7 kittens adopted from the local animal shelter.
+Patchy, the first cat, has had thrice the number of adopted kittens, so she has had 3 * 7 = 21 kittens.
+Trixie, the other cat, has had 12 kittens.
+In total, the Doubtfire family now has 7 + 21 + 12 = 40 kittens.
+The final answer: 40",160,2,0.7237249612808228,0.6564080715179443
+gsm8k_0055,math,entropy,42,84,14,True,14.0,"Jean has 30 lollipops and eats 2, so she has 30 - 2 = 28 lollipops left.
+She wants to package 2 lollipops in one bag, so she can fill 28 / 2 = 14 bags.
+Therefore, Jean can fill 14 bags.
+The answer is: 14",176,2,0.7110627889633179,0.6148309111595154
+gsm8k_0056,math,entropy,42,79,3,True,3.0,"The total cost of going to the movies is $7 + $7 = $14.
+If Peter has $42 for the week, he can go to the movies $42 / $14 = 3 times.
+Therefore, the answer is 3.",201,2,0.3932124078273773,0.22929708659648895
+gsm8k_0057,math,entropy,42,111,83,True,83.0,"The combined weight of the driver and the empty truck is 3755 pounds.
+The bridge can carry no more than 5000 pounds, so the maximum weight that can be added to the truck is 5000 - 3755 = 1245 pounds.
+Each box weighs 15 pounds, so the maximum number of boxes that can be loaded onto the truck is 1245 / 15 = 83.
+Therefore, the maximum number of boxes that can be loaded onto the truck while not exceeding the bridge's weight limit is 83.
+The answer is: 83",123,2,0.34851762652397156,0.137131005525589
+gsm8k_0058,math,entropy,42,118,57,False,47.0,"First, let's calculate the 25% fee on Stephen's final bill. 25% of $40.00 is $40.00 * 0.25 = $10.00.
+Next, let's add the delivery fees to the final bill. $40.00 + $3.00 = $43.00.
+Finally, let's add the tip to the total. $43.00 + $4.00 = $47.00.
+Therefore, the final price of Stephen's groceries is $47.00.
+The answer is: 47",119,2,0.4440111219882965,0.17470476031303406
+gsm8k_0059,math,entropy,42,66,187,True,187.0,"There are 6 clusters of 20 fruit each, so there are 6 * 20 = 120 fruit in the clusters.
+There are also 67 individual fruit scattered across the bush.
+In total, there are 120 + 67 = 187 raspberries.
+The answer is: 187",183,3,0.9993025064468384,0.9990245699882507
+gsm8k_0060,math,entropy,42,72,17,True,17.0,"First, let's calculate the number of unripe oranges. Since 20% of the oranges are unripe, we can multiply the total number of oranges by 20% (or 0.20) to find the number of unripe oranges.
+25 oranges * 0.20 = 5 unripe oranges
+Next, let's add the number of bad, unripe, and sour oranges to find the total number of oranges that are not good.
+1 bad orange + 5 unripe oranges + 2 sour oranges = 8 oranges that are not good
+Finally, let's subtract the number of oranges that are not good from the total number of oranges to find the number of good oranges.
+25 oranges - 8 oranges that are not good = 17 good oranges
+Therefore, there are 17 good oranges in the basket.
+The final answer is: 17",69,2,0.4442557692527771,0.27028271555900574
+gsm8k_0061,math,entropy,42,96,1430,True,1430.0,"Janet pays $500 for the material and $800 for the jeweler to construct it, so the total cost before insurance is $500 + $800 = $1300.
+She pays 10% of the total cost to get it insured, so the insurance cost is 10% * $1300 = $130.
+The total cost after insurance is $1300 + $130 = $1430.
+Therefore, Janet paid $1430.
+The answer is: 1430",132,3,0.9453550577163696,0.9086996912956238
+gsm8k_0062,math,entropy,42,102,25000,False,100000.0,"If Marcy works for 40 years, she gets an annual pension of $50,000/year, so her total pension value is $50,000 * 40 = $2,000,000.
+Starting after 20 years, she becomes entitled to 5% of the value of the pension per year, so her annual pension is 5% of $2,000,000 = 0.05 * $2,000,000 = $100,000/year.
+If she quits after 30 years, she will be entitled to 5% of the value of the pension per year, so her annual pension will be 5% of $2,000,000 = 0.05 * $2,000,000 = $100,000/year.
+Therefore, Marcy's annual pension will be $100,000/year.
+The final answer: 100000",28,2,0.3514457046985626,0.12453530728816986
+gsm8k_0063,math,entropy,42,103,1596,True,1596.0,"The streaming company charged Aleena $140 per month for the first half of the year, which is 6 months, so she paid a total of $140 * 6 = $840 for the first half of the year.
+For the second half of the year, the streaming company charged her 10% less money, which means they charged her $140 * 10 / 100 = $14 less per month.
+So for the second half of the year, Aleena paid $140 - $14 = $126 per month.
+The total amount she paid for the second half of the year is $126 * 6 = $756.
+Therefore, the total amount Aleena paid for the streaming service by the end of the year is $840 + $756 = $1596.
+#### 1596
+The answer is: 1596",53,2,0.33562764525413513,0.17708836495876312
+gsm8k_0064,math,entropy,42,127,300,True,300.0,"Sophia has traveled 100 miles since last filling her tank, and she needed to put in 4 gallons of gas to fill it up again.
+This means that she used 4 gallons of gas to travel 100 miles.
+To find out how many miles she can drive on a single tank of gas, we need to calculate how many miles she can drive on 12 gallons of gas.
+Since she used 4 gallons of gas to travel 100 miles, we can set up a proportion to find out how many miles she can drive on 12 gallons of gas.
+The proportion is: 4 gallons / 100 miles = 12 gallons / x miles.
+Cross-multiplying, we get: 4x = 12 * 100.
+Simplifying, we get: 4x = 1200.
+Dividing both sides by 4, we get: x = 300.
+Therefore, Sophia can drive 300 miles on a single tank of gas.
+The answer is: 300",30,2,0.5723900198936462,0.4846111536026001
+gsm8k_0065,math,entropy,42,81,36,False,12.0,"Jim spends 2 hours watching TV and reads for half as long, so he reads for 2/2 = 1 hour.
+He does this 3 times a week, so he spends 2 + 1 = 3 hours per session.
+In 4 weeks, he spends 3 * 4 = 12 hours watching TV and reading.
+#### 12
+The answer is: 12",171,2,0.8470244407653809,0.7893837094306946
+gsm8k_0066,math,entropy,42,92,48,True,48.0,"Each school has sent a girls’ basketball team and a boys’ basketball team, so each school has sent a total of 2 teams.
+Each team has 5 players, so each school has sent a total of 2 * 5 = 10 players.
+Each school has also sent a coach for each team, so each school has sent a total of 1 + 1 = 2 coaches.
+There are 4 schools, so the total number of players is 4 * 10 = 40 players.
+There are 4 schools, so the total number of coaches is 4 * 2 = 8 coaches.
+Therefore, the total number of people sent by all the schools is 40 + 8 = 48 people.
+The answer is: 48",93,2,0.6378032565116882,0.4307388663291931
+gsm8k_0067,math,entropy,42,88,595,True,595.0,"The number of rubies is 35 fewer than the number of diamonds, so there are 175 - 35 = 140 rubies.
+The number of emeralds is twice the number of rubies, so there are 140 * 2 = 280 emeralds.
+The total number of gems is the sum of the number of diamonds, rubies, and emeralds, so there are 175 + 140 + 280 = 595 gems in the chest.
+The answer is: 595",131,2,0.3138405680656433,0.08422991633415222
+gsm8k_0068,math,entropy,42,71,36,True,36.0,"If there are 60 girls, then there are 60 * 2 = 120 boys.
+The total number of students is 60 + 120 = 180.
+If there are 5 students to every teacher, then there are 180 / 5 = 36 teachers.
+So, there are 36 teachers at Dr. Wertz's school.
+The final answer: 36",163,2,0.503654956817627,0.31837064027786255
+gsm8k_0069,math,entropy,42,86,60,True,60.0,"Bailey starts with an unknown amount of money, which we can call x.
+She receives a weekly allowance of $5 for 8 weeks, so she receives a total of $5 * 8 = $40.
+At the end of the 8 weeks, she has a total of $100, so we can set up the equation x + $40 = $100.
+To solve for x, we subtract $40 from both sides of the equation: x = $100 - $40 = $60.
+Therefore, Bailey started with $60.
+The final answer: 60",126,2,0.8174453377723694,0.7135188579559326
+gsm8k_0070,math,entropy,42,87,7425,True,7425.0,"Judy teaches 5 dance classes every day on the weekdays, so she teaches a total of 5 * 5 = 25 classes on the weekdays.
+She teaches 8 classes on Saturday, so in total, she teaches 25 + 8 = 33 classes in a week.
+Each class has 15 students, so she teaches a total of 33 * 15 = 495 students in a week.
+She charges $15.00 per student, so she makes 495 * 15 = $7425.00 in a week.
+Therefore, Judy makes $7425.00 in 1 week.
+The answer is: 7425",102,2,0.6259231567382812,0.39565885066986084
+gsm8k_0071,math,entropy,42,78,60,True,60.0,"The first recipe has 20 instructions.
+The second recipe has twice as many instructions as the first one, so it has 20 x 2 = 40 instructions.
+In total, Kelian has to read 20 + 40 = 60 instructions to prepare the two dishes.
+The answer is: 60",186,2,0.6853037476539612,0.6130732893943787
+gsm8k_0072,math,entropy,42,84,221,True,221.0,"Tommy sells 43 brownies at $3 each, so he raises 43 * $3 = $129 from the brownies.
+Tommy sells 23 slices of cheesecake at $4 each, so he raises 23 * $4 = $92 from the cheesecakes.
+In total, Tommy raises $129 + $92 = $221.
+The answer is: 221",163,2,0.7595641016960144,0.6795066595077515
+gsm8k_0073,math,entropy,42,79,255,True,255.0,"The total cost of the cell phones is 5 x $150 = $750.
+The total interest for the cell phones is 5 x 2% x $150 = $15.
+The total amount Shiela needs to pay is $750 + $15 = $765.
+Since she will pay in 3 months, the monthly payment is $765 / 3 = $255.
+#### 255
+The answer is: 255",148,2,0.5714178681373596,0.3739411234855652
+gsm8k_0074,math,entropy,42,160,88,True,88.0,"Artie sells 12 pots of marigolds at $3 per pot, so he makes 12 * $3 = $36 from marigolds.
+Artie sells 9 pots of petunias at $2 per pot, so he makes 9 * $2 = $18 from petunias.
+Artie sells 17 pots of begonias at $2 per pot, so he makes 17 * $2 = $34 from begonias.
+Artie makes a total of $36 + $18 + $34 = $88.
+The answer is: 88",124,2,0.5391685366630554,0.42615267634391785
+gsm8k_0075,math,entropy,42,100,60,False,7.5,"The second level has a square footage of 16 / 2 = 8.
+The third level has a square footage of 8 / 2 = 4.
+The fourth level has a square footage of 4 / 2 = 2.
+The total square footage of the sandcastle is 16 + 8 + 4 + 2 = 30.
+The average square footage of a level is 30 / 4 = 7.5.
+The answer is: 7.5",150,2,0.43063685297966003,0.21409903466701508
+gsm8k_0076,math,entropy,42,121,5,True,5.0,"For the first 180 days, Cecilia will need 1 cup of dog food per day, so she will need 180 cups of dog food.
+For the rest of the year, Cecilia will need 2 cups of dog food per day, so she will need 2 * 365 - 180) = 2 * 185 = 370 cups of dog food.
+In total, Cecilia will need 180 + 370 = 550 cups of dog food.
+Since one bag of dog food contains 110 cups, Cecilia will need 550 / 110 = 5 bags of dog food.
+Therefore, Cecilia will use 5 bags of dog food in the first year.
+The answer is: 5",83,3,0.6564972400665283,0.34638988971710205
+gsm8k_0077,math,entropy,42,79,100,True,100.0,"If Sarah does 4 times as much laundry as David, then David does 400 / 4 = 100 pounds of laundry.
+If Raymond does half as much laundry as Sarah, then Raymond does 400 / 2 = 200 pounds of laundry.
+The difference in the amount of laundry Raymond and David do is 200 - 100 = 100 pounds.
+The answer is: 100",160,2,0.6033815145492554,0.25958511233329773
+gsm8k_0078,math,entropy,42,77,6,True,6.0,"First, let's calculate the cost of buying 18 flowers in packages of 3 for $2.50 each.
+Vincent needs to buy 18 flowers, so he needs to buy 18/3 = 6 packages.
+The cost of 6 packages is 6 * $2.50 = $15.
+Next, let's calculate the cost of buying 18 flowers in packages of 2 for $1 each.
+Vincent needs to buy 18 flowers, so he needs to buy 18/2 = 9 packages.
+The cost of 9 packages is 9 * $1 = $9.
+Comparing the two costs, we can see that buying 18 flowers in packages of 2 for $1 each is cheaper.
+The difference in cost is $15 - $9 = $6.
+Therefore, Vincent saves $6 by buying 18 flowers at the better price.
+The final answer is: 6",55,3,0.9977568984031677,0.9972385168075562
+gsm8k_0079,math,entropy,42,82,70,True,70.0,"The groomer offers a 30% discount, so John will pay 70% of the original price.
+To find 70% of $100, we multiply $100 by 70/100.
+$100 * 70/100 = $70.
+So, the grooming costs $70.
+The answer is: 70",172,2,0.5190947651863098,0.24124333262443542
+gsm8k_0080,math,entropy,42,69,10,True,10.0,"Two girls each got 1/6 of the 24 liters of water, so they got 2 * (1/6) * 24 = 8 liters of water.
+Then a boy got 6 liters of water.
+The total amount of water given to the girls and the boy is 8 + 6 = 14 liters.
+Therefore, the amount of water left is 24 - 14 = 10 liters.
+The final answer: 10",155,2,0.29864269495010376,0.11750674247741699
+gsm8k_0081,math,entropy,42,93,17,True,17.0,"Charlie had 10 stickers and bought 21 stickers, so he had 10 + 21 = 31 stickers.
+He also got 23 stickers for his birthday, so he had 31 + 23 = 54 stickers.
+Charlie gave 9 stickers to his sister, so he had 54 - 9 = 45 stickers.
+He used 28 stickers to decorate a greeting card, so he had 45 - 28 = 17 stickers left.
+Therefore, Charlie has 17 stickers left.
+The answer is: 17",130,2,0.8452101945877075,0.7839833498001099
+gsm8k_0082,math,entropy,42,64,623,True,623.0,"Alex weighs 2 pounds less than 4 times what Grace weighs, so Alex weighs 4 * 125 - 2 = 500 - 2 = 498 pounds.
+Their combined weights are 125 + 498 = 623 pounds.
+The answer is: 623",186,2,0.4381551444530487,0.2867327928543091
+gsm8k_0083,math,entropy,42,66,600,True,600.0,"First, let's find the total number of roses.
+Dan has 3 rose bushes, and each rose bush has 25 roses.
+So, the total number of roses is 3 * 25 = 75 roses.
+Next, let's find the total number of thorns.
+Each rose has 8 thorns.
+So, the total number of thorns is 75 * 8 = 600 thorns.
+Therefore, there are 600 thorns in total.
+The final answer is: 600",143,2,0.3503958284854889,0.12416326999664307
+gsm8k_0084,math,entropy,42,58,15,True,15.0,"Let's assume the number of games they lost is x.
+Since they won 8 more than they lost, the number of games they won is x + 8.
+The total number of games they played is the sum of the games they won and the games they lost, so x + (x + 8) = 22.
+Simplifying the equation, we get 2x + 8 = 22.
+Subtracting 8 from both sides, we get 2x = 14.
+Dividing both sides by 2, we get x = 7.
+Therefore, the number of games they won is x + 8 = 7 + 8 = 15.
+#### 15",106,2,0.7714128494262695,0.7220980525016785
+gsm8k_0085,math,entropy,42,117,44,True,44.0,"Gene has been vacationing since he was 23 years old, so he has been vacationing for 34 - 23 = 11 years.
+He goes on four vacations a year, so he has been on 4 * 11 = 44 vacations.
+Each vacation has one quilt block, so he has 44 quilt blocks.
+The answer is: 44",174,2,0.7493646740913391,0.7164399027824402
+gsm8k_0086,math,entropy,42,122,22,True,22.0,"The first time the alarm went off, it rang four times.
+The second time it went off, it rang for three times as long as the first time, so it rang 4 * 3 = 12 times.
+The third time, it rang for half as long as the second time, so it rang 12 / 2 = 6 times.
+In total, the alarm rang 4 + 12 + 6 = 22 times.
+The answer is: 22",153,2,0.851610541343689,0.7899200916290283
+gsm8k_0087,math,entropy,42,113,9360,False,9583.2,"Sylvie's monthly salary is $600.
+After 5 years of service, her salary increases by 10% of the initial salary every year.
+So, after one year, her salary becomes $600 + (10/100) * $600 = $600 + $60 = $660.
+After two years, her salary becomes $660 + (10/100) * $660 = $660 + $66 = $726.
+After three years, her salary becomes $726 + (10/100) * $726 = $726 + $72.6 = $798.6.
+To find her annual salary, we multiply her monthly salary by 12.
+So, her annual salary is $798.6 * 12 = $9583.2.
+Therefore, Sylvie's annual salary after three more years of service is $9583.2.
+The answer is: 9583.2",22,2,0.4246494770050049,0.31035661697387695
+gsm8k_0088,math,entropy,42,74,8000,True,8000.0,"Let's assume that Harald's first record sold x copies.
+Marilyn's first record sold 10 times as many copies as Harald's, so it sold 10x copies.
+The total number of copies sold by both records is x + 10x = 11x.
+We know that the total number of copies sold is 88,000, so we can set up the equation 11x = 88,000.
+Dividing both sides of the equation by 11, we get x = 8,000.
+Therefore, Harald's first record sold 8,000 copies.
+The answer is: 8000",107,2,0.9388926029205322,0.919406533241272
+gsm8k_0089,math,entropy,42,84,24,True,24.0,"If 1/4 of attendees don't show up, then 3/4 of the invited guests will show up.
+So, if Christina invited 16 friends, she will need 16 * 3/4 = 12 gift bags.
+Each gift bag costs $2, so she will spend 12 * $2 = $24.
+Therefore, Christina will spend $24.
+The final answer: 24.",164,3,0.6163379549980164,0.32520049810409546
+gsm8k_0090,math,entropy,42,120,225,True,225.0,"An adult dinosaur will eat 10 lbs of potato salad, so 20 adults will eat 20 * 10 = 200 lbs of potato salad.
+A child will eat half as much as an adult, so a child will eat 10 / 2 = 5 lbs of potato salad.
+There will be 5 children at the picnic, so they will eat 5 * 5 = 25 lbs of potato salad.
+In total, Ted needs to bring 200 + 25 = 225 lbs of potato salad to the picnic.
+The answer is: 225",125,3,0.36291009187698364,0.1914834976196289
+gsm8k_0091,math,entropy,42,70,28,True,28.0,"If Cindy has four pets, then Marcia has 4 + 2 = 6 pets.
+Jan has three times the number of pets as Marcia, so Jan has 6 * 3 = 18 pets.
+The total number of pets the three have is 4 + 6 + 18 = 28 pets.
+The answer is: 28",179,2,0.48546141386032104,0.1518089771270752
+gsm8k_0092,math,entropy,42,85,4,True,4.0,"If James is 10 and is 1 year younger than Corey, then Corey is 10 + 1 = 11 years old.
+If Amy is 2 years younger than Corey, then Amy is 11 - 2 = 9 years old.
+If Amy is 5 years older than Jackson, then Jackson is 9 - 5 = 4 years old.
+Therefore, Jackson is 4 years old.
+The final answer: 4",161,2,0.5297697186470032,0.3958229422569275
+gsm8k_0093,math,entropy,42,118,36,True,36.0,"Lee used to be able to run the 400-meter hurdles two seconds faster than Gerald, so Gerald used to run the 400-meter hurdles in 38 + 2 = 40 seconds.
+Gerald changed his diet, which improved his speed by 10%, so his new speed is 100% + 10% = 110% of his original speed.
+If Gerald used to run the 400-meter hurdles in 40 seconds, then his original speed was 400 meters / 40 seconds = 10 meters per second.
+With his improved diet, Gerald's new speed is 110% * 10 meters per second = 11 meters per second.
+To find out how fast Gerald can run the 400-meter hurdles with his improved diet, we divide the distance by his new speed: 400 meters / 11 meters per second = 36.36 seconds.
+Rounding to the nearest whole number, Gerald can run the 400-meter hurdles with his improved diet in 36 seconds.
+The final answer is: 36",13,3,0.9867150187492371,0.9856954216957092
+gsm8k_0094,math,entropy,42,85,348,True,348.0,"If there are two cats for every dog, and the number of dogs is 60, then the number of cats is 2 * 60 = 120.
+The combined number of pet dogs and cats is 60 + 120 = 180.
+The number of rabbits pets is twelve less than the combined number of pet dogs and cats, so the number of rabbits pets is 180 - 12 = 168.
+The total number of pets in the neighborhood is 60 + 120 + 168 = 348.
+#### 348
+The answer is: 348",115,2,0.6234704256057739,0.5278581380844116
+gsm8k_0095,math,entropy,42,76,40,True,40.0,"First, let's find out how many boys there are. Since 2/5 of the students are boys, we can multiply 200 by 2/5 to get 80 boys.
+Next, let's find out how many girls there are. Since 2/5 of the students are boys, the remaining 3/5 must be girls. So, we can multiply 200 by 3/5 to get 120 girls.
+Now, let's find out how many girls are in the girl scout. Since 2/3 of the girls are in the girl scout, we can multiply 120 by 2/3 to get 80 girls in the girl scout.
+Finally, let's find out how many girls are not in the girl scout. Since there are 120 girls in total and 80 of them are in the girl scout, we can subtract 80 from 120 to get 40 girls not in the girl scout.
+Therefore, there are 40 girls not in the girl scout.
+The final answer is: 40",24,2,0.2744007706642151,0.1180519312620163
+gsm8k_0096,math,entropy,42,66,3,True,3.0,"James slept 2/3 of 9 hours, which is 2/3 * 9 = 6 hours.
+Harry slept 9 hours and James slept 6 hours, so Harry slept 9 - 6 = 3 more hours than James.
+#### 3
+The answer is: 3",193,3,0.607940137386322,0.23920580744743347
+gsm8k_0097,math,entropy,42,88,12,True,12.0,"When Freda cooks canned tomatoes into sauce, they lose half their volume, so the volume of the sauce is half the volume of the original tomatoes.
+If Freda’s last batch of tomato sauce made 32 ounces of sauce, then the original tomatoes had a volume of 32 * 2 = 64 ounces.
+Each 16 ounce can of tomatoes contains three tomatoes, so the number of cans of tomatoes Freda used is 64 / 16 = 4 cans.
+Therefore, Freda used 4 cans * 3 tomatoes per can = 12 tomatoes.
+The answer is: 12",127,2,0.2866930663585663,0.12334029376506805
+gsm8k_0098,math,entropy,42,130,5,False,15.0,"Let's assume that x cars drove through the traffic jam in the first 15 minutes.
+After the first 15 minutes, there are 30 - x cars left on the motorway.
+In the remaining 15 minutes, 20 more cars drive through, so the total number of cars on the motorway becomes 30 - x + 20 = 50 - x.
+However, 5 cars take an exit, so the number of cars on the motorway becomes 50 - x - 5 = 45 - x.
+We know that there are 30 cars left on the motorway after the traffic jam, so we can set up the equation 45 - x = 30.
+Solving for x, we get x = 15.
+Therefore, 15 cars drove through the traffic jam in the first 15 minutes.
+The answer is: 15",63,2,0.21731790900230408,0.06795762479305267
+gsm8k_0099,math,entropy,42,116,58,True,58.0,"Mary has 2 potted plants on each of the 40 window ledges, so she has a total of 2 * 40 = 80 potted plants.
+She received 18 new potted plants, so she now has 80 + 18 = 98 potted plants.
+She will give 1 potted plant from each ledge to friends and family, so she will give away 40 potted plants.
+Therefore, Mary will remain with 98 - 40 = 58 potted plants.
+The answer is: 58",133,2,0.8741468787193298,0.8460474610328674

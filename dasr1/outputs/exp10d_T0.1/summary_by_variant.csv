@@ -1,0 +1,7 @@
+variant,alg,prompt_tail_rows,policy,runs,exact_final,exact_trajectory,first_token_equal,baseline_ok,cache_ok,regressions,improvements,diverged_at_pos0,median_first_divergent_step,mean_gen_refresh_frac,mean_prompt_refresh_frac,mean_row_work_frac,baseline_no_answer,cache_no_answer,baseline_acc,cache_acc,mcnemar_p
+F_full,entropy,1,"fixed(Kp=1,Kr=1,rho=1.0)",100,100,100,100,86,86,0,0,0,,1.0,1.0,1.0,0,0,0.86,0.86,1.0
+F_k100r7,entropy,1,"fixed(Kp=100,Kr=7,rho=0.25)",100,11,1,100,86,82,4,0,4,13.0,0.14453125,0.01171875,0.26777129215902457,0,0,0.86,0.82,0.125
+F_k25r2,entropy,1,"fixed(Kp=25,Kr=2,rho=0.25)",100,25,5,100,86,84,3,1,3,14.0,0.5,0.04296875,0.47284851092050323,0,0,0.86,0.84,0.625
+F_k5r1,entropy,1,"fixed(Kp=5,Kr=1,rho=0.25)",100,46,17,100,86,86,1,1,0,20.0,1.0,0.203125,0.7916852095824338,0,0,0.86,0.86,1.0
+AD_frontier,entropy,1,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",100,22,4,100,86,86,2,2,4,14.0,0.3886328125,0.04859375,0.41224269802359836,0,0,0.86,0.86,1.0
+AD_frontier_tight,entropy,1,"adaptive(G=1,Ag=2,P=8,Ap=16,W=8,conf=0.0,rho=0.25)",100,38,9,100,86,86,1,1,3,16.0,0.7829296875,0.097890625,0.6429907446323005,0,0,0.86,0.86,1.0

@@ -164,6 +164,7 @@ def feature_cache_session(model, api, prompt_len, policy, prompt_tail_rows=0,
 
     inst.refresh_gen = refresh_gen
     inst.refresh_prompt = refresh_prompt
+    controller.step_fn = lambda: inst.current_step  # used by the split runtime
 
     hook_mod = sys.modules[HOOK_MODULE]
     original_refresh_index = hook_mod.refresh_index
@@ -193,11 +194,15 @@ def feature_cache_session(model, api, prompt_len, policy, prompt_tail_rows=0,
 def generate(model, tokenizer, ids, mask, new_tokens, steps, seed, *, alg,
              temperature, top_p=None, top_k=None, alg_temp=0.0,
              cache_api=None, policy=None, prompt_tail_rows=0, force_prompt_tail=True,
-             capture_trajectory=True, log_confidence=True, observe=True):
+             capture_trajectory=True, log_confidence=True, observe=True,
+             link=None, link_cfg=None):
     """One Dream generation (baseline when cache_api is None).
 
     observe=False skips the token hook (pure timing runs). It is forced on for
     adaptive policies, because the hook is part of the policy itself.
+    link: optional src.split_runtime.SplitLink (two-GPU split); link_cfg holds its
+    codec settings (rows / encoding / anchor_interval). Per-step split statistics
+    are returned under "split_steps".
     """
     plen = int(ids.shape[1])
     mask_id, non_content = special_ids(tokenizer, model)
@@ -219,13 +224,23 @@ def generate(model, tokenizer, ids, mask, new_tokens, steps, seed, *, alg,
             kwargs["generation_tokens_hook_func"] = observer
         if alg != "origin":
             kwargs["alg_temp"] = alg_temp
+        if link is not None:
+            link.begin(prompt_len=plen, controller=controller,
+                       prompt_tail_rows=prompt_tail_rows if controller is not None else 0,
+                       mask_id=mask_id, **(link_cfg or {}))
         set_seed(int(seed))  # after cache setup, exactly like Exp9B/10A
         torch.cuda.synchronize(device)
         start = time.perf_counter()
-        with torch.inference_mode():
-            out = model.diffusion_generate(ids, attention_mask=mask, **kwargs)
+        try:
+            with torch.inference_mode():
+                out = model.diffusion_generate(ids, attention_mask=mask, **kwargs)
+        except BaseException:
+            if link is not None:
+                link.active = False
+            raise
         torch.cuda.synchronize(device)
         elapsed_ms = (time.perf_counter() - start) * 1000.0
+        split_steps = link.end() if link is not None else None
         refresh = controller.summary() if controller is not None else None
 
     generated = out.sequences[0, plen:].detach().cpu().long().clone()
@@ -239,7 +254,7 @@ def generate(model, tokenizer, ids, mask, new_tokens, steps, seed, *, alg,
         if not torch.equal(history[-1][plen:], generated):
             raise RuntimeError("Last history state does not match final output")
     return {"ms": elapsed_ms, "generated_ids": generated, "history": history,
-            "commits": observer.commits, "refresh": refresh}
+            "commits": observer.commits, "refresh": refresh, "split_steps": split_steps}
 
 
 def first_commit_step(commits, pos):

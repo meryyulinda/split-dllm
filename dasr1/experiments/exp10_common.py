@@ -1,4 +1,7 @@
-"""Shared grid runner for Exp10B / Exp10C (official dLLM-Cache, Dream, single GPU).
+"""Shared grid runner for Exp10B / 10C / 10D (official dLLM-Cache, Dream, single GPU).
+
+Cases default to the 12 authored Exp10A cases; pass ``cases=`` and
+``score_fn=`` to evaluate another set (Exp10D: GSM8K).
 
 A *variant* is a dict:
     {"name": "B1_entropy_tailfix",
@@ -19,6 +22,7 @@ alg / seed / temperature. Outputs (in out_dir):
 from __future__ import annotations
 
 import json
+import math
 import platform
 import sys
 from pathlib import Path
@@ -46,6 +50,22 @@ def quality_ok(case, score):
     if case["task"] == "instruction":
         return score["instruction_format_pass"]
     return score["advisory_gold_match"]
+
+
+def default_score(case, text):
+    s = advisory_score(case, text)
+    return {"ok": quality_ok(case, s), "extracted": s["advisory_extracted_answer"]}
+
+
+def mcnemar_exact_p(regressions, improvements):
+    """Two-sided exact McNemar test on the discordant pairs (binomial, p=0.5).
+    Small p => cached accuracy really differs from the baseline."""
+    n = int(regressions) + int(improvements)
+    if n == 0:
+        return 1.0
+    k = min(int(regressions), int(improvements))
+    tail = sum(math.comb(n, i) for i in range(k + 1)) / 2 ** n
+    return min(1.0, 2 * tail)
 
 
 def seeds_for(alg, seeds, temperature):
@@ -80,12 +100,23 @@ def describe(tokenizer, ids):
             "first_token_str": tokenizer.convert_ids_to_tokens(lst[:1])[0] if lst else None}
 
 
+def as_bool(v):
+    """True/False from bools, numbers and CSV strings ("True", "False", "")."""
+    if isinstance(v, str):
+        return v.strip().lower() in {"true", "1", "yes"}
+    if v is None or v != v:  # None / NaN
+        return False
+    return bool(v)
+
+
 def summarize(runs):
     df = pd.DataFrame(runs)
     for col in ("exact_final_ids", "exact_trajectory", "first_token_equal", "baseline_ok",
                 "cache_ok", "quality_regression", "quality_improvement", "div_includes_pos0"):
-        df[col] = df[col].map(lambda v: bool(v) if v is not None and v == v else False)
-    df["first_divergent_step"] = pd.to_numeric(df["first_divergent_step"], errors="coerce")
+        df[col] = df[col].map(as_bool)
+    for col in ("first_divergent_step", "gen_refresh_frac", "prompt_refresh_frac",
+                "row_work_frac"):
+        df[col] = pd.to_numeric(df[col], errors="coerce")
     agg = dict(
         runs=("case_id", "size"),
         exact_final=("exact_final_ids", "sum"),
@@ -104,12 +135,28 @@ def summarize(runs):
     by_variant = df.groupby(["variant", "alg", "prompt_tail_rows", "policy"],
                             sort=False).agg(**agg).reset_index()
     by_task = df.groupby(["variant", "task"], sort=False).agg(**agg).reset_index()
+    for side in ("baseline", "cache"):
+        col = f"{side}_extracted"
+        if col in df:
+            df[f"{side}_no_answer"] = pd.to_numeric(df[col], errors="coerce").isna()
+            for table, keys in ((by_variant, ["variant", "alg", "prompt_tail_rows", "policy"]),
+                                (by_task, ["variant", "task"])):
+                counts = df.groupby(keys, sort=False)[f"{side}_no_answer"].sum()
+                table[f"{side}_no_answer"] = counts.values
+    for table in (by_variant, by_task):
+        table["baseline_acc"] = table["baseline_ok"] / table["runs"]
+        table["cache_acc"] = table["cache_ok"] / table["runs"]
+        table["mcnemar_p"] = [mcnemar_exact_p(r, i) for r, i in
+                              zip(table["regressions"], table["improvements"])]
     return by_variant, by_task
 
 
 def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, temperature,
              top_p=None, top_k=None, alg_temp=0.0, case_ids=(), warmup_runs=1,
-             run_timing=False, timing_repeats=2):
+             run_timing=False, timing_repeats=2, cases=None, score_fn=None,
+             resume=False):
+    """resume=True keeps finished cases from an earlier, interrupted run in
+    out_dir (a case counts as finished when every variant has a row)."""
     if not torch.cuda.is_available():
         raise RuntimeError(f"{experiment} requires a CUDA GPU")
     if "Dream" not in cfg.MODEL_NAME:
@@ -125,7 +172,8 @@ def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, tempera
     if len(set(names)) != len(names):
         raise ValueError("Variant names must be unique")
 
-    cases = make_cases()
+    score_fn = score_fn or default_score
+    cases = list(cases) if cases is not None else make_cases()
     if case_ids:
         unknown = set(case_ids) - {c["case_id"] for c in cases}
         if unknown:
@@ -135,7 +183,21 @@ def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, tempera
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     commits_path = out_dir / "commits.jsonl"
-    commits_path.write_text("", encoding="utf-8")
+    base_rows, runs, timing_rows = [], [], []
+    done = set()
+    if resume and (out_dir / "runs.csv").exists() and (out_dir / "baselines.csv").exists():
+        prev_runs = pd.read_csv(out_dir / "runs.csv", keep_default_na=False).to_dict("records")
+        prev_base = pd.read_csv(out_dir / "baselines.csv", keep_default_na=False).to_dict("records")
+        want = {v["name"] for v in variants}
+        have = {}
+        for r in prev_runs:
+            have.setdefault(r["case_id"], set()).add(r["variant"])
+        done = {c for c, vs in have.items() if want <= vs}
+        runs = [r for r in prev_runs if r["case_id"] in done]
+        base_rows = [r for r in prev_base if r["case_id"] in done]
+        print(f"resume: {len(done)} finished cases kept", flush=True)
+    else:
+        commits_path.write_text("", encoding="utf-8")
 
     repo, api = import_official()
     model, tokenizer = load_dream_model(cfg.MODEL_NAME)
@@ -167,8 +229,9 @@ def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, tempera
         with commits_path.open("a", encoding="utf-8") as fh:
             fh.write(json.dumps(record) + "\n")
 
-    base_rows, runs, timing_rows = [], [], []
     for case in cases:
+        if case["case_id"] in done:
+            continue
         ids, mask = prepare_input(tokenizer, case["prompt"], device)
         plen = int(ids.shape[1])
         print(f"\n{case['case_id']} | prompt tokens={plen}", flush=True)
@@ -177,13 +240,14 @@ def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, tempera
                 base = generate(model, tokenizer, ids, mask, new_tokens, steps, seed,
                                 alg=alg, **gen_kw)
                 b = describe(tokenizer, base["generated_ids"])
-                b_score = advisory_score(case, b["text"])
-                b_ok = quality_ok(case, b_score)
+                b_score = score_fn(case, b["text"])
+                b_ok = b_score["ok"]
                 pos0 = next((c for c in base["commits"] if c["pos"] == 0), None)
                 base_rows.append({
                     "case_id": case["case_id"], "task": case["task"], "alg": alg,
                     "seed": int(seed), "prompt_tokens": plen,
                     "gold_answer": case["gold_answer"], "baseline_ok": b_ok,
+                    "baseline_extracted": b_score.get("extracted"),
                     "baseline_text": b["text"], "baseline_eos": b["eos_count"],
                     "pos0_commit_step": pos0["step"] if pos0 else None,
                     "pos0_commit_prob": pos0["prob"] if pos0 else None,
@@ -204,8 +268,8 @@ def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, tempera
                                       force_prompt_tail=v.get("force_prompt_tail", True),
                                       **gen_kw)
                     c = describe(tokenizer, cached["generated_ids"])
-                    c_score = advisory_score(case, c["text"])
-                    c_ok = quality_ok(case, c_score)
+                    c_score = score_fn(case, c["text"])
+                    c_ok = c_score["ok"]
                     fid = compare_history(base, cached, plen)
                     div = divergence_detail(base, cached, plen)
                     refresh = cached["refresh"]
@@ -219,6 +283,8 @@ def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, tempera
                         "cache_first_token": c["first_token_str"],
                         "baseline_eos": b["eos_count"], "cache_eos": c["eos_count"],
                         "baseline_ok": b_ok, "cache_ok": c_ok,
+                        "baseline_extracted": b_score.get("extracted"),
+                        "cache_extracted": c_score.get("extracted"),
                         "quality_regression": bool(b_ok) and not bool(c_ok),
                         "quality_improvement": (not bool(b_ok)) and bool(c_ok),
                         **fid, **div,
@@ -299,6 +365,7 @@ def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, tempera
     (out_dir / "metadata.json").write_text(json.dumps(metadata, indent=2, default=str),
                                            encoding="utf-8")
     print(f"\n{experiment} completed. Output: {out_dir}")
-    print(by_variant[["variant", "runs", "exact_final", "first_token_equal", "baseline_ok",
-                      "cache_ok", "regressions", "mean_row_work_frac"]].to_string(index=False))
+    print(by_variant[["variant", "runs", "exact_final", "baseline_ok", "cache_ok",
+                      "regressions", "improvements", "mcnemar_p",
+                      "mean_row_work_frac"]].to_string(index=False))
     return by_variant
