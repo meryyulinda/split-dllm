@@ -1,0 +1,288 @@
+nohup: ignoring input
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.28it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  6.97it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  6.74it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.99it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.89it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Exp11 | gsm8k n=30 | split after layer 4 | edge=cuda:1 cloud=cuda:0 | 256 tok / 256 steps | cache ('fixed', 25, 2, 0.25)
+warmup done
+
+gsm8k_0000 | prompt tokens=99
+  S0_split_full              ok=True  up= 651.43 MB edge=   4045 ms cloud=  21518 ms "y day at the farmers' market.\nThe final answer: 18"
+  S1_split_exact_delta       ok=True  up= 649.25 MB edge=   4147 ms cloud=  20602 ms EXACT "y day at the farmers' market.\nThe final answer: 18"
+  C1_cache_full              ok=True  up= 651.43 MB edge=   3656 ms cloud=  15764 ms " per day at the farmers' market.\nThe answer is: 18"
+  C2_cache_aware             ok=True  up= 479.33 MB edge=   3548 ms cloud=  15605 ms EXACT " per day at the farmers' market.\nThe answer is: 18"
+  C3_cache_aware_exact       ok=True  up= 478.77 MB edge=   3542 ms cloud=  16885 ms EXACT " per day at the farmers' market.\nThe answer is: 18"
+  C4_cache_aware_int8        ok=True  up= 253.79 MB edge=   3649 ms cloud=  16306 ms " per day at the farmers' market.\nThe answer is: 18"
+  A1_adaptive_cache_aware    ok=True  up= 480.03 MB edge=   3406 ms cloud=  13579 ms "very day at the farmers' market.\nThe answer is: 18"
+
+gsm8k_0001 | prompt tokens=60
+  S0_split_full              ok=True  up= 579.87 MB edge=   3878 ms cloud=  20149 ms 'e takes 2 + 1 = 3 bolts of fiber.\nThe answer is: 3'
+  S1_split_exact_delta       ok=True  up= 577.92 MB edge=   4146 ms cloud=  19095 ms EXACT 'e takes 2 + 1 = 3 bolts of fiber.\nThe answer is: 3'
+  C1_cache_full              ok=True  up= 579.87 MB edge=   3388 ms cloud=  17156 ms 'e takes 2 + 1 = 3 bolts of fiber.\nThe answer is: 3'
+  C2_cache_aware             ok=True  up= 476.25 MB edge=   3518 ms cloud=  16209 ms EXACT 'e takes 2 + 1 = 3 bolts of fiber.\nThe answer is: 3'
+  C3_cache_aware_exact       ok=True  up= 475.75 MB edge=   3282 ms cloud=  15567 ms EXACT 'e takes 2 + 1 = 3 bolts of fiber.\nThe answer is: 3'
+  C4_cache_aware_int8        ok=True  up= 250.71 MB edge=   3119 ms cloud=  15362 ms 'kes 2 + 1 = 3 bolts of fiber.\nThe final answer: 3.'
+  A1_adaptive_cache_aware    ok=True  up= 475.83 MB edge=   3146 ms cloud=  13674 ms 'e takes 2 + 1 = 3 bolts of fiber.\nThe answer is: 3'
+
+gsm8k_0002 | prompt tokens=91
+  S0_split_full              ok=False up= 636.75 MB edge=   2649 ms cloud=  19406 ms '195,000 - $130,000 = $65,000.\nThe answer is: 65000'
+  S1_split_exact_delta       ok=False up= 634.62 MB edge=   2732 ms cloud=  18121 ms EXACT '195,000 - $130,000 = $65,000.\nThe answer is: 65000'
+  C1_cache_full              ok=False up= 636.75 MB edge=   3271 ms cloud=  16203 ms '195,000 - $130,000 = $65,000.\nThe answer is: 65000'
+  C2_cache_aware             ok=False up= 478.70 MB edge=   2227 ms cloud=  14617 ms EXACT '195,000 - $130,000 = $65,000.\nThe answer is: 65000'
+  C3_cache_aware_exact       ok=False up= 478.09 MB edge=   3361 ms cloud=  10646 ms EXACT '195,000 - $130,000 = $65,000.\nThe answer is: 65000'
+  C4_cache_aware_int8        ok=False up= 253.16 MB edge=   3322 ms cloud=  10415 ms '195,000 - $130,000 = $65,000.\nThe answer is: 65000'
+  A1_adaptive_cache_aware    ok=False up= 479.34 MB edge=   2877 ms cloud=   9589 ms 'rofit is $195,000 - $130,000 = $65,000.\n#### 65000'
+
+gsm8k_0003 | prompt tokens=69
+  S0_split_full              ok=True  up= 596.38 MB edge=   3120 ms cloud=  12826 ms '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  S1_split_exact_delta       ok=True  up= 594.38 MB edge=   3599 ms cloud=  16918 ms EXACT '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  C1_cache_full              ok=True  up= 596.38 MB edge=   3458 ms cloud=  10402 ms '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  C2_cache_aware             ok=True  up= 476.96 MB edge=   2405 ms cloud=  10331 ms EXACT '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  C3_cache_aware_exact       ok=True  up= 476.38 MB edge=   2219 ms cloud=  10417 ms EXACT '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  C4_cache_aware_int8        ok=True  up= 251.42 MB edge=   2209 ms cloud=  10331 ms '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  A1_adaptive_cache_aware    ok=True  up= 476.96 MB edge=   2115 ms cloud=   9238 ms '= 540 meters per week.\n#### 540\nThe answer is: 540'
+
+gsm8k_0004 | prompt tokens=145
+  S0_split_full              ok=True  up= 735.84 MB edge=   3573 ms cloud=  18373 ms 'ed in the final meal of the day.\nThe answer is: 20'
+  S1_split_exact_delta       ok=True  up= 733.38 MB edge=   3549 ms cloud=  18422 ms EXACT 'ed in the final meal of the day.\nThe answer is: 20'
+  C1_cache_full              ok=True  up= 735.84 MB edge=   2366 ms cloud=  10829 ms 'ed in the final meal of the day.\nThe answer is: 20'
+  C2_cache_aware             ok=True  up= 482.96 MB edge=   2450 ms cloud=  10900 ms EXACT 'ed in the final meal of the day.\nThe answer is: 20'
+  C3_cache_aware_exact       ok=True  up= 482.41 MB edge=   2460 ms cloud=  10899 ms EXACT 'ed in the final meal of the day.\nThe answer is: 20'
+  C4_cache_aware_int8        ok=True  up= 257.41 MB edge=   2452 ms cloud=  10875 ms 'ed in the final meal of the day.\nThe answer is: 20'
+  A1_adaptive_cache_aware    ok=True  up= 485.02 MB edge=   2406 ms cloud=  10252 ms 'ed in the final meal of the day.\nThe answer is: 20'
+
+gsm8k_0005 | prompt tokens=90
+  S0_split_full              ok=True  up= 634.92 MB edge=   2707 ms cloud=  13178 ms 's to pay $64 for the glasses.\nThe final answer: 64'
+  S1_split_exact_delta       ok=True  up= 632.79 MB edge=   2687 ms cloud=  13236 ms EXACT 's to pay $64 for the glasses.\nThe final answer: 64'
+  C1_cache_full              ok=False up= 634.92 MB edge=   2223 ms cloud=  10398 ms ' + 7 * $3 = $26 for the glasses.\nThe answer is: 26'
+  C2_cache_aware             ok=False up= 478.62 MB edge=   2268 ms cloud=  12538 ms EXACT ' + 7 * $3 = $26 for the glasses.\nThe answer is: 26'
+  C3_cache_aware_exact       ok=False up= 478.05 MB edge=   2180 ms cloud=  10503 ms EXACT ' + 7 * $3 = $26 for the glasses.\nThe answer is: 26'
+  C4_cache_aware_int8        ok=False up= 253.08 MB edge=   2091 ms cloud=  16053 ms 'st is $5 + 7 * $3 = $26.\n#### 26\nThe answer is: 26'
+  A1_adaptive_cache_aware    ok=True  up= 480.53 MB edge=   2157 ms cloud=  14218 ms 'cost is $40 + $24 = $64.\n#### 64\nThe answer is: 64'
+
+gsm8k_0006 | prompt tokens=76
+  S0_split_full              ok=True  up= 609.23 MB edge=   2673 ms cloud=  17010 ms ' 80 + 160 = 260 sheep.\n#### 260\nThe answer is: 260'
+  S1_split_exact_delta       ok=True  up= 607.18 MB edge=   2611 ms cloud=  17820 ms EXACT ' 80 + 160 = 260 sheep.\n#### 260\nThe answer is: 260'
+  C1_cache_full              ok=True  up= 609.23 MB edge=   2474 ms cloud=  14386 ms 'e 20 + 80 + 160 = 260 sheep.\nThe final answer: 260'
+  C2_cache_aware             ok=True  up= 477.51 MB edge=   3055 ms cloud=  10513 ms EXACT 'e 20 + 80 + 160 = 260 sheep.\nThe final answer: 260'
+  C3_cache_aware_exact       ok=True  up= 476.94 MB edge=   3358 ms cloud=  10580 ms EXACT 'e 20 + 80 + 160 = 260 sheep.\nThe final answer: 260'
+  C4_cache_aware_int8        ok=True  up= 251.97 MB edge=   3238 ms cloud=  10481 ms ' 80 + 160 = 260 sheep.\n#### 260\nThe answer is: 260'
+  A1_adaptive_cache_aware    ok=True  up= 477.51 MB edge=   2618 ms cloud=   9564 ms ' 80 + 160 = 260 sheep.\n#### 260\nThe answer is: 260'
+
+gsm8k_0007 | prompt tokens=104
+  S0_split_full              ok=False up= 660.61 MB edge=   3125 ms cloud=  13532 ms '0 minutes to download the file.\nThe answer is: 280'
+  S1_split_exact_delta       ok=False up= 658.39 MB edge=   2816 ms cloud=  13409 ms EXACT '0 minutes to download the file.\nThe answer is: 280'
+  C1_cache_full              ok=False up= 660.61 MB edge=   3367 ms cloud=  10415 ms '0 minutes to download the file.\nThe answer is: 120'
+  C2_cache_aware             ok=False up= 479.72 MB edge=   3497 ms cloud=  10380 ms EXACT '0 minutes to download the file.\nThe answer is: 120'
+  C3_cache_aware_exact       ok=False up= 479.19 MB edge=   2327 ms cloud=  13052 ms EXACT '0 minutes to download the file.\nThe answer is: 120'
+  C4_cache_aware_int8        ok=False up= 254.18 MB edge=   2658 ms cloud=  14090 ms ' minutes to download the file. The answer is: 120.'
+  A1_adaptive_cache_aware    ok=False up= 481.20 MB edge=   2515 ms cloud=   9855 ms 'ime is 60 + 20 = 80 minutes.\nThe final answer: 80.'
+
+gsm8k_0008 | prompt tokens=138
+  S0_split_full              ok=True  up= 723.00 MB edge=   3757 ms cloud=  18301 ms 'he end of those 4 hours.\n#### 45\nThe answer is: 45'
+  S1_split_exact_delta       ok=True  up= 720.57 MB edge=   3747 ms cloud=  19678 ms EXACT 'he end of those 4 hours.\n#### 45\nThe answer is: 45'
+  C1_cache_full              ok=True  up= 723.00 MB edge=   2349 ms cloud=  10792 ms '45 miles away from home.\n#### 45\nThe answer is: 45'
+  C2_cache_aware             ok=True  up= 482.40 MB edge=   2344 ms cloud=  15294 ms EXACT '45 miles away from home.\n#### 45\nThe answer is: 45'
+  C3_cache_aware_exact       ok=True  up= 481.87 MB edge=   2457 ms cloud=  13631 ms EXACT '45 miles away from home.\n#### 45\nThe answer is: 45'
+  C4_cache_aware_int8        ok=True  up= 256.86 MB edge=   2506 ms cloud=  12517 ms ' the end of the 4 hours.\n#### 45\nThe answer is: 45'
+  A1_adaptive_cache_aware    ok=True  up= 486.33 MB edge=   2506 ms cloud=  15726 ms '45 miles away from home.\n#### 45\nThe answer is: 45'
+
+gsm8k_0009 | prompt tokens=94
+  S0_split_full              ok=True  up= 642.26 MB edge=   2674 ms cloud=  18651 ms 'are $400 + $60 = $460.\n#### 460\nThe answer is: 460'
+  S1_split_exact_delta       ok=True  up= 640.10 MB edge=   2622 ms cloud=  19074 ms EXACT 'are $400 + $60 = $460.\n#### 460\nThe answer is: 460'
+  C1_cache_full              ok=True  up= 642.26 MB edge=   2152 ms cloud=  13891 ms 'are $400 + $60 = $460.\n#### 460\nThe answer is: 460'
+  C2_cache_aware             ok=True  up= 478.93 MB edge=   2023 ms cloud=  15053 ms EXACT 'are $400 + $60 = $460.\n#### 460\nThe answer is: 460'
+  C3_cache_aware_exact       ok=True  up= 478.40 MB edge=   2598 ms cloud=  10563 ms EXACT 'are $400 + $60 = $460.\n#### 460\nThe answer is: 460'
+  C4_cache_aware_int8        ok=True  up= 253.39 MB edge=   3291 ms cloud=  10349 ms 'are $400 + $60 = $460.\n#### 460\nThe answer is: 460'
+  A1_adaptive_cache_aware    ok=True  up= 480.27 MB edge=   2800 ms cloud=   9866 ms 'are $400 + $60 = $460.\n#### 460\nThe answer is: 460'
+
+gsm8k_0010 | prompt tokens=94
+  S0_split_full              ok=True  up= 642.26 MB edge=   3856 ms cloud=  13129 ms '60 + 180 + 126 = 366 downloads.\nThe answer is: 366'
+  S1_split_exact_delta       ok=True  up= 640.10 MB edge=   2739 ms cloud=  15534 ms EXACT '60 + 180 + 126 = 366 downloads.\nThe answer is: 366'
+  C1_cache_full              ok=True  up= 642.26 MB edge=   2240 ms cloud=  14181 ms '60 + 180 + 126 = 366 downloads.\nThe answer is: 366'
+  C2_cache_aware             ok=True  up= 478.93 MB edge=   2206 ms cloud=  15102 ms EXACT '60 + 180 + 126 = 366 downloads.\nThe answer is: 366'
+  C3_cache_aware_exact       ok=True  up= 478.37 MB edge=   2197 ms cloud=  12534 ms EXACT '60 + 180 + 126 = 366 downloads.\nThe answer is: 366'
+  C4_cache_aware_int8        ok=True  up= 253.39 MB edge=   2069 ms cloud=  15313 ms '60 + 180 + 126 = 366 downloads.\nThe answer is: 366'
+  A1_adaptive_cache_aware    ok=True  up= 479.60 MB edge=   2127 ms cloud=  13604 ms '60 + 180 + 126 = 366 downloads.\nThe answer is: 366'
+
+gsm8k_0011 | prompt tokens=99
+  S0_split_full              ok=True  up= 651.43 MB edge=   2667 ms cloud=  18559 ms 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+  S1_split_exact_delta       ok=True  up= 649.25 MB edge=   2732 ms cloud=  17436 ms EXACT 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+  C1_cache_full              ok=True  up= 651.43 MB edge=   2240 ms cloud=  10346 ms 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+  C2_cache_aware             ok=True  up= 479.33 MB edge=   2203 ms cloud=  10347 ms EXACT 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+  C3_cache_aware_exact       ok=True  up= 478.76 MB edge=   2185 ms cloud=  15782 ms EXACT 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+  C4_cache_aware_int8        ok=True  up= 253.79 MB edge=   2133 ms cloud=  15295 ms 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+  A1_adaptive_cache_aware    ok=True  up= 479.33 MB edge=   2007 ms cloud=  13552 ms ' + $160 + $330 = $694.\n#### 694\nThe answer is: 694'
+
+gsm8k_0012 | prompt tokens=101
+  S0_split_full              ok=False up= 655.10 MB edge=   3458 ms cloud=  15046 ms 'ng money on the lemon tree.\nThe final answer is: 9'
+  S1_split_exact_delta       ok=False up= 652.91 MB edge=   3572 ms cloud=  14447 ms EXACT 'ng money on the lemon tree.\nThe final answer is: 9'
+  C1_cache_full              ok=False up= 655.10 MB edge=   2655 ms cloud=  10323 ms ' money on the lemon tree.\nThe final answer is: 100'
+  C2_cache_aware             ok=False up= 479.49 MB edge=   3088 ms cloud=  10443 ms EXACT ' money on the lemon tree.\nThe final answer is: 100'
+  C3_cache_aware_exact       ok=False up= 478.93 MB edge=   3293 ms cloud=  10483 ms EXACT ' money on the lemon tree.\nThe final answer is: 100'
+  C4_cache_aware_int8        ok=False up= 253.95 MB edge=   3415 ms cloud=  10283 ms 'earning money on the lemon tree.\nThe answer is: 12'
+  A1_adaptive_cache_aware    ok=False up= 480.92 MB edge=   3420 ms cloud=   9602 ms 'earning money on the lemon tree.\nThe answer is: 12'
+
+gsm8k_0013 | prompt tokens=92
+  S0_split_full              ok=True  up= 638.59 MB edge=   3604 ms cloud=  14879 ms 'ie started with 18 vacuum cleaners.\nThe answer: 18'
+  S1_split_exact_delta       ok=True  up= 636.45 MB edge=   2518 ms cloud=  13240 ms EXACT 'ie started with 18 vacuum cleaners.\nThe answer: 18'
+  C1_cache_full              ok=True  up= 638.59 MB edge=   2069 ms cloud=  12184 ms 'with 18 vacuum cleaners.\n#### 18\nThe answer is: 18'
+  C2_cache_aware             ok=True  up= 478.78 MB edge=   2196 ms cloud=  15164 ms EXACT 'with 18 vacuum cleaners.\n#### 18\nThe answer is: 18'
+  C3_cache_aware_exact       ok=True  up= 478.19 MB edge=   2213 ms cloud=  14575 ms EXACT 'with 18 vacuum cleaners.\n#### 18\nThe answer is: 18'
+  C4_cache_aware_int8        ok=True  up= 253.24 MB edge=   2159 ms cloud=  11702 ms 'ie started with 18 vacuum cleaners.\nThe answer: 18'
+  A1_adaptive_cache_aware    ok=False up= 482.04 MB edge=   3258 ms cloud=  11853 ms 'for x, we find that x = 5.\n#### 5\nThe answer is: 5'
+
+gsm8k_0014 | prompt tokens=86
+  S0_split_full              ok=True  up= 627.58 MB edge=   2770 ms cloud=  13703 ms 'rolled in hip-hop dance.\n#### 60\nThe answer is: 60'
+  S1_split_exact_delta       ok=True  up= 625.47 MB edge=   2620 ms cloud=  13139 ms EXACT 'rolled in hip-hop dance.\n#### 60\nThe answer is: 60'
+  C1_cache_full              ok=True  up= 627.58 MB edge=   2185 ms cloud=  16133 ms 'rolled in hip-hop dance.\n#### 60\nThe answer is: 60'
+  C2_cache_aware             ok=True  up= 478.30 MB edge=   2638 ms cloud=  12302 ms EXACT 'rolled in hip-hop dance.\n#### 60\nThe answer is: 60'
+  C3_cache_aware_exact       ok=True  up= 477.79 MB edge=   2569 ms cloud=  10539 ms EXACT 'rolled in hip-hop dance.\n#### 60\nThe answer is: 60'
+  C4_cache_aware_int8        ok=True  up= 252.76 MB edge=   2552 ms cloud=  10470 ms 'hop dance is 12/20 * 100% = 60%.\nThe answer is: 60'
+  A1_adaptive_cache_aware    ok=True  up= 481.35 MB edge=   2212 ms cloud=  10247 ms ', the percentage is 12/20 = 60%.\nThe answer is: 60'
+
+gsm8k_0015 | prompt tokens=128
+  S0_split_full              ok=True  up= 704.65 MB edge=   3306 ms cloud=  13697 ms 'ry market, which is $125.\nThe final answer is: 125'
+  S1_split_exact_delta       ok=True  up= 702.28 MB edge=   3868 ms cloud=  13690 ms EXACT 'ry market, which is $125.\nThe final answer is: 125'
+  C1_cache_full              ok=True  up= 704.65 MB edge=   3304 ms cloud=  10427 ms 'd give him a profit of $125.\nThe final answer: 125'
+  C2_cache_aware             ok=True  up= 481.61 MB edge=   3377 ms cloud=  10407 ms EXACT 'd give him a profit of $125.\nThe final answer: 125'
+  C3_cache_aware_exact       ok=True  up= 481.03 MB edge=   3429 ms cloud=  10704 ms EXACT 'd give him a profit of $125.\nThe final answer: 125'
+  C4_cache_aware_int8        ok=True  up= 256.07 MB edge=   3493 ms cloud=  10397 ms 'chant can make is $125.\n#### 125The answer is: 125'
+  A1_adaptive_cache_aware    ok=True  up= 485.26 MB edge=   2433 ms cloud=  11232 ms 'make a profit of $125.\n#### 125\nThe answer is: 125'
+
+gsm8k_0016 | prompt tokens=87
+  S0_split_full              ok=True  up= 629.41 MB edge=   2521 ms cloud=  17364 ms 'ain is 80 + 150 = 230 miles.\nThe final answer: 230'
+  S1_split_exact_delta       ok=True  up= 627.30 MB edge=   2534 ms cloud=  16906 ms EXACT 'ain is 80 + 150 = 230 miles.\nThe final answer: 230'
+  C1_cache_full              ok=True  up= 629.41 MB edge=   2248 ms cloud=  10433 ms 'n the two days is 230 miles.\nThe final answer: 230'
+  C2_cache_aware             ok=True  up= 478.38 MB edge=   2258 ms cloud=  10324 ms EXACT 'n the two days is 230 miles.\nThe final answer: 230'
+  C3_cache_aware_exact       ok=True  up= 477.87 MB edge=   2159 ms cloud=  15477 ms EXACT 'n the two days is 230 miles.\nThe final answer: 230'
+  C4_cache_aware_int8        ok=True  up= 252.84 MB edge=   3035 ms cloud=  11804 ms 'n the two days is 230 miles.\nThe final answer: 230'
+  A1_adaptive_cache_aware    ok=True  up= 479.00 MB edge=   3211 ms cloud=  13048 ms 'n in the two days is 230 miles.\nThe answer is: 230'
+
+gsm8k_0017 | prompt tokens=92
+  S0_split_full              ok=True  up= 638.59 MB edge=   2957 ms cloud=  13307 ms "ll's annual salary is $57500.\nThe answer is: 57500"
+  S1_split_exact_delta       ok=True  up= 636.45 MB edge=   2683 ms cloud=  13242 ms EXACT "ll's annual salary is $57500.\nThe answer is: 57500"
+  C1_cache_full              ok=True  up= 638.59 MB edge=   3514 ms cloud=  10393 ms "ll's annual salary is $57500.\nThe answer is: 57500"
+  C2_cache_aware             ok=True  up= 478.78 MB edge=   2584 ms cloud=  11629 ms EXACT "ll's annual salary is $57500.\nThe answer is: 57500"
+  C3_cache_aware_exact       ok=True  up= 478.22 MB edge=   2165 ms cloud=  11914 ms EXACT "ll's annual salary is $57500.\nThe answer is: 57500"
+  C4_cache_aware_int8        ok=True  up= 253.24 MB edge=   2172 ms cloud=  14519 ms "ll's annual salary is $57500.\nThe answer is: 57500"
+  A1_adaptive_cache_aware    ok=True  up= 480.73 MB edge=   2771 ms cloud=  10159 ms ' her annual salary is $57500.\nThe answer is: 57500'
+
+gsm8k_0018 | prompt tokens=63
+  S0_split_full              ok=True  up= 585.37 MB edge=   2598 ms cloud=  12817 ms 't 7 dozens of eggs in 4 weeks.\nThe final answer: 7'
+  S1_split_exact_delta       ok=True  up= 583.41 MB edge=   3707 ms cloud=  12777 ms EXACT 't 7 dozens of eggs in 4 weeks.\nThe final answer: 7'
+  C1_cache_full              ok=True  up= 585.37 MB edge=   3094 ms cloud=  10404 ms ' eat 7 dozens of eggs in 4 weeks.\nThe answer is: 7'
+  C2_cache_aware             ok=True  up= 476.49 MB edge=   3333 ms cloud=  10263 ms EXACT ' eat 7 dozens of eggs in 4 weeks.\nThe answer is: 7'
+  C3_cache_aware_exact       ok=True  up= 475.96 MB edge=   3310 ms cloud=  10514 ms EXACT ' eat 7 dozens of eggs in 4 weeks.\nThe answer is: 7'
+  C4_cache_aware_int8        ok=True  up= 250.95 MB edge=   3228 ms cloud=  10418 ms 'r dozen = 7 dozens of eggs.\n#### 7The answer is: 7'
+  A1_adaptive_cache_aware    ok=True  up= 476.93 MB edge=   2029 ms cloud=   9551 ms ' eat 7 dozens of eggs in 4 weeks.\nThe answer is: 7'
+
+gsm8k_0019 | prompt tokens=99
+  S0_split_full              ok=True  up= 651.43 MB edge=   2777 ms cloud=  13302 ms 'iles / 1 hour = 6 miles per hour.\nThe answer is: 6'
+  S1_split_exact_delta       ok=True  up= 649.25 MB edge=   3688 ms cloud=  13270 ms EXACT 'iles / 1 hour = 6 miles per hour.\nThe answer is: 6'
+  C1_cache_full              ok=True  up= 651.43 MB edge=   3302 ms cloud=  10549 ms 'peed of 6 / 1 = 6 miles per hour.\nThe answer is: 6'
+  C2_cache_aware             ok=True  up= 479.33 MB edge=   3100 ms cloud=  10415 ms EXACT 'peed of 6 / 1 = 6 miles per hour.\nThe answer is: 6'
+  C3_cache_aware_exact       ok=True  up= 478.78 MB edge=   2695 ms cloud=  10483 ms EXACT 'peed of 6 / 1 = 6 miles per hour.\nThe answer is: 6'
+  C4_cache_aware_int8        ok=True  up= 253.79 MB edge=   2248 ms cloud=  10355 ms 'peed of 6 / 1 = 6 miles per hour.\nThe answer is: 6'
+  A1_adaptive_cache_aware    ok=True  up= 480.73 MB edge=   2207 ms cloud=   9650 ms 'peed of 6 / 1 = 6 miles per hour.\nThe answer is: 6'
+
+gsm8k_0020 | prompt tokens=97
+  S0_split_full              ok=False up= 647.76 MB edge=   3638 ms cloud=  13224 ms 'ng 24 liters is 14.67 liters.\nThe answer is: 14.67'
+  S1_split_exact_delta       ok=False up= 645.59 MB edge=   3023 ms cloud=  17310 ms EXACT 'ng 24 liters is 14.67 liters.\nThe answer is: 14.67'
+  C1_cache_full              ok=False up= 647.76 MB edge=   2232 ms cloud=  14640 ms 'iters = 0.61 liters.\n#### 0.61\nThe answer is: 0.61'
+  C2_cache_aware             ok=False up= 479.17 MB edge=   2133 ms cloud=  13090 ms EXACT 'iters = 0.61 liters.\n#### 0.61\nThe answer is: 0.61'
+  C3_cache_aware_exact       ok=False up= 478.60 MB edge=   2180 ms cloud=  10496 ms EXACT 'iters = 0.61 liters.\n#### 0.61\nThe answer is: 0.61'
+  C4_cache_aware_int8        ok=False up= 253.63 MB edge=   2192 ms cloud=  12339 ms 'ng 24 liters is 14.67 liters.\nThe answer is: 14.67'
+  A1_adaptive_cache_aware    ok=False up= 481.92 MB edge=   2145 ms cloud=  14771 ms 'ng 24 liters is 14.67 liters.\nThe answer is: 14.67'
+
+gsm8k_0021 | prompt tokens=80
+  S0_split_full              ok=False up= 616.57 MB edge=   2709 ms cloud=  14948 ms "nd's son was born 2 years ago.\nThe final answer: 2"
+  S1_split_exact_delta       ok=False up= 614.50 MB edge=   2576 ms cloud=  14784 ms EXACT "nd's son was born 2 years ago.\nThe final answer: 2"
+  C1_cache_full              ok=False up= 616.57 MB edge=   2187 ms cloud=  14790 ms "d's son was born 2 years ago.\nThe final answer: 2."
+  C2_cache_aware             ok=False up= 477.83 MB edge=   2223 ms cloud=  12262 ms EXACT "d's son was born 2 years ago.\nThe final answer: 2."
+  C3_cache_aware_exact       ok=False up= 477.24 MB edge=   2137 ms cloud=  10457 ms EXACT "d's son was born 2 years ago.\nThe final answer: 2."
+  C4_cache_aware_int8        ok=False up= 252.29 MB edge=   2010 ms cloud=  13447 ms "d's son was born 2 years ago.\nThe final answer: 2."
+  A1_adaptive_cache_aware    ok=False up= 477.83 MB edge=   2399 ms cloud=  10126 ms "nd's son was born 2 years ago.\nThe final answer: 2"
+
+gsm8k_0022 | prompt tokens=89
+  S0_split_full              ok=True  up= 633.08 MB edge=   2649 ms cloud=  13166 ms 'ls 3 + 4 + 0 = 7 DVDs on Tuesday.\nThe answer is: 7'
+  S1_split_exact_delta       ok=True  up= 630.96 MB edge=   3036 ms cloud=  13182 ms EXACT 'ls 3 + 4 + 0 = 7 DVDs on Tuesday.\nThe answer is: 7'
+  C1_cache_full              ok=True  up= 633.08 MB edge=   3350 ms cloud=  10292 ms 'ls 3 + 4 + 0 = 7 DVDs on Tuesday.\nThe answer is: 7'
+  C2_cache_aware             ok=True  up= 478.54 MB edge=   3480 ms cloud=  10329 ms EXACT 'ls 3 + 4 + 0 = 7 DVDs on Tuesday.\nThe answer is: 7'
+  C3_cache_aware_exact       ok=True  up= 477.97 MB edge=   2554 ms cloud=  13980 ms EXACT 'ls 3 + 4 + 0 = 7 DVDs on Tuesday.\nThe answer is: 7'
+  C4_cache_aware_int8        ok=True  up= 253.00 MB edge=   3126 ms cloud=  12000 ms '3 + 4 + 0 = 7 DVDs on Tuesday.\nThe final answer: 7'
+  A1_adaptive_cache_aware    ok=True  up= 478.54 MB edge=   3138 ms cloud=   9532 ms '3 + 4 + 0 = 7 DVDs on Tuesday.\nThe final answer: 7'
+
+gsm8k_0023 | prompt tokens=74
+  S0_split_full              ok=True  up= 605.56 MB edge=   2589 ms cloud=  18938 ms ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  S1_split_exact_delta       ok=True  up= 603.53 MB edge=   3654 ms cloud=  13894 ms EXACT ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  C1_cache_full              ok=True  up= 605.56 MB edge=   2431 ms cloud=  13337 ms ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  C2_cache_aware             ok=True  up= 477.36 MB edge=   2158 ms cloud=  15079 ms EXACT ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  C3_cache_aware_exact       ok=True  up= 476.81 MB edge=   3380 ms cloud=  10444 ms EXACT ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  C4_cache_aware_int8        ok=True  up= 251.82 MB edge=   2281 ms cloud=  10531 ms ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  A1_adaptive_cache_aware    ok=True  up= 477.36 MB edge=   2172 ms cloud=   9339 ms 'rning from 1:00 PM to 5:00 PM.\nThe final answer: 8'
+
+gsm8k_0024 | prompt tokens=73
+  S0_split_full              ok=True  up= 603.72 MB edge=   3165 ms cloud=  12895 ms 'price of the book was $26.\nThe final answer is: 26'
+  S1_split_exact_delta       ok=True  up= 601.70 MB edge=   3532 ms cloud=  12910 ms EXACT 'price of the book was $26.\nThe final answer is: 26'
+  C1_cache_full              ok=True  up= 603.72 MB edge=   3084 ms cloud=  11670 ms 'iginal price of the book is $26.\nThe answer is: 26'
+  C2_cache_aware             ok=True  up= 477.28 MB edge=   2160 ms cloud=  14788 ms EXACT 'iginal price of the book is $26.\nThe answer is: 26'
+  C3_cache_aware_exact       ok=True  up= 476.73 MB edge=   2774 ms cloud=  11752 ms EXACT 'iginal price of the book is $26.\nThe answer is: 26'
+  C4_cache_aware_int8        ok=True  up= 251.74 MB edge=   2914 ms cloud=  10499 ms 'iginal price of the book is $26.\nThe answer is: 26'
+  A1_adaptive_cache_aware    ok=True  up= 478.31 MB edge=   2094 ms cloud=   9703 ms 'iginal price of the book is $26.\nThe answer is: 26'
+
+gsm8k_0025 | prompt tokens=102
+  S0_split_full              ok=True  up= 656.94 MB edge=   2782 ms cloud=  13370 ms ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  S1_split_exact_delta       ok=True  up= 654.73 MB edge=   3246 ms cloud=  13527 ms EXACT ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  C1_cache_full              ok=True  up= 656.94 MB edge=   2317 ms cloud=  10396 ms ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  C2_cache_aware             ok=True  up= 479.56 MB edge=   3657 ms cloud=  10347 ms EXACT ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  C3_cache_aware_exact       ok=True  up= 479.04 MB edge=   2249 ms cloud=  10660 ms EXACT ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  C4_cache_aware_int8        ok=True  up= 254.02 MB edge=   2228 ms cloud=  10550 ms ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  A1_adaptive_cache_aware    ok=True  up= 481.74 MB edge=   3577 ms cloud=   9838 ms ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+
+gsm8k_0026 | prompt tokens=103
+  S0_split_full              ok=True  up= 658.77 MB edge=   3308 ms cloud=  13387 ms '3 on all the clothing items.\nThe final answer: 243'
+  S1_split_exact_delta       ok=True  up= 656.56 MB edge=   2524 ms cloud=  13397 ms EXACT '3 on all the clothing items.\nThe final answer: 243'
+  C1_cache_full              ok=True  up= 658.77 MB edge=   3543 ms cloud=  10394 ms ' $67.50 + $126 = $243.\n#### 243\nThe answer is: 243'
+  C2_cache_aware             ok=True  up= 479.64 MB edge=   3381 ms cloud=  10531 ms EXACT ' $67.50 + $126 = $243.\n#### 243\nThe answer is: 243'
+  C3_cache_aware_exact       ok=True  up= 479.07 MB edge=   3198 ms cloud=  10527 ms EXACT ' $67.50 + $126 = $243.\n#### 243\nThe answer is: 243'
+  C4_cache_aware_int8        ok=True  up= 254.10 MB edge=   3400 ms cloud=  10296 ms '3 on all the clothing items.\nThe final answer: 243'
+  A1_adaptive_cache_aware    ok=True  up= 481.11 MB edge=   3232 ms cloud=   9862 ms '3 on all the clothing items.\nThe final answer: 243'
+
+gsm8k_0027 | prompt tokens=93
+  S0_split_full              ok=True  up= 640.42 MB edge=   3097 ms cloud=  13265 ms '6.00 on ice cream after 60 days.\nThe answer is: 16'
+  S1_split_exact_delta       ok=True  up= 638.27 MB edge=   2631 ms cloud=  13237 ms EXACT '6.00 on ice cream after 60 days.\nThe answer is: 16'
+  C1_cache_full              ok=True  up= 640.42 MB edge=   3606 ms cloud=  10333 ms '6.00 on ice cream after 60 days.\nThe answer is: 16'
+  C2_cache_aware             ok=True  up= 478.86 MB edge=   2759 ms cloud=  10494 ms EXACT '6.00 on ice cream after 60 days.\nThe answer is: 16'
+  C3_cache_aware_exact       ok=True  up= 478.32 MB edge=   2430 ms cloud=  10450 ms EXACT '6.00 on ice cream after 60 days.\nThe answer is: 16'
+  C4_cache_aware_int8        ok=True  up= 253.31 MB edge=   2221 ms cloud=  10458 ms '6.00 on ice cream after 60 days.\nThe answer is: 16'
+  A1_adaptive_cache_aware    ok=True  up= 479.51 MB edge=   2698 ms cloud=   9539 ms '6.00 on ice cream after 60 days.\nThe answer is: 16'
+
+gsm8k_0028 | prompt tokens=84
+  S0_split_full              ok=True  up= 623.91 MB edge=   3377 ms cloud=  13005 ms 'ween his first and second stops.\nThe answer is: 25'
+  S1_split_exact_delta       ok=True  up= 621.82 MB edge=   3795 ms cloud=  13257 ms EXACT 'ween his first and second stops.\nThe answer is: 25'
+  C1_cache_full              ok=True  up= 623.91 MB edge=   2226 ms cloud=  10305 ms 'ween his first and second stops.\nThe answer is: 25'
+  C2_cache_aware             ok=True  up= 478.15 MB edge=   2269 ms cloud=  10332 ms EXACT 'ween his first and second stops.\nThe answer is: 25'
+  C3_cache_aware_exact       ok=True  up= 477.63 MB edge=   3667 ms cloud=  10433 ms EXACT 'ween his first and second stops.\nThe answer is: 25'
+  C4_cache_aware_int8        ok=False up= 252.60 MB edge=   2861 ms cloud=  10402 ms 'ween his first and second stops.\nThe answer is: 15'
+  A1_adaptive_cache_aware    ok=True  up= 478.74 MB edge=   2779 ms cloud=   9470 ms 's is 45 - 20 = 25 miles.\n#### 25\nThe answer is: 25'
+
+gsm8k_0029 | prompt tokens=103
+  S0_split_full              ok=True  up= 658.77 MB edge=   2845 ms cloud=  13454 ms ', the boots cost $104.\n#### 104\nThe answer is: 104'
+  S1_split_exact_delta       ok=True  up= 656.56 MB edge=   2850 ms cloud=  13386 ms EXACT ', the boots cost $104.\n#### 104\nThe answer is: 104'
+  C1_cache_full              ok=True  up= 658.77 MB edge=   2242 ms cloud=  10362 ms ', the boots cost $104.\n#### 104\nThe answer is: 104'
+  C2_cache_aware             ok=True  up= 479.64 MB edge=   3382 ms cloud=  10300 ms EXACT ', the boots cost $104.\n#### 104\nThe answer is: 104'
+  C3_cache_aware_exact       ok=True  up= 479.02 MB edge=   2374 ms cloud=  11903 ms EXACT ', the boots cost $104.\n#### 104\nThe answer is: 104'
+  C4_cache_aware_int8        ok=True  up= 254.10 MB edge=   2195 ms cloud=  10424 ms ', the boots cost $104.\n#### 104\nThe answer is: 104'
+  A1_adaptive_cache_aware    ok=True  up= 481.11 MB edge=   3277 ms cloud=  10037 ms ' of the boots is $104.\n#### 104\nThe answer is: 104'
+
+Exp11 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp11_gsm8k_k4_t256_T0.1
+                variant  runs      acc  regressions  exact_vs_ref  mean_up_mb  up_reduction_vs_S0  mean_edge_ms  mean_cloud_ms
+          S0_split_full    30 0.833333            0             0  641.339392            0.000000   3095.745445   15279.987169
+   S1_split_exact_delta    30 0.833333            0            30  639.189268            0.003353   3139.542546   15298.035537
+          C1_cache_full    30 0.800000            1             0  641.339392            0.000000   2759.112774   12070.863085
+         C2_cache_aware    30 0.800000            1            30  478.894592            0.251338   2730.734724   12179.550686
+   C3_cache_aware_exact    30 0.800000            1            30  478.339602            0.252205   2698.110073   11894.979028
+    C4_cache_aware_int8    30 0.766667            2             0  253.353962            0.603984   2682.237824   11942.676826
+A1_adaptive_cache_aware    30 0.800000            1             0  480.169540            0.249407   2657.667482   11009.119025

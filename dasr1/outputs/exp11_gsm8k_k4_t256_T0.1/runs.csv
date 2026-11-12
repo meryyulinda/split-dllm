@@ -1,0 +1,1330 @@
+variant,case_id,task,prompt_tokens,policy,rows,encoding,gold_answer,text,extracted,cache_ok,exact_vs_ref,exact_vs_S0,steps,edge_ms,encode_ms,cloud_ms,sample_ms,up_mb,full_mb,down_kb,mean_rows_sent,prompt_sent_steps,anchor_steps,refresh_reasons,ref_ok
+S0_split_full,gsm8k_0000,math,99,none,all,bf16,18,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast every morning, so she has 16 - 3 = 13 eggs left.
+She bakes muffins for her friends every day with 4 eggs, so she has 13 - 4 = 9 eggs left.
+She sells the remainder at the farmers' market daily for $2 per fresh duck egg, so she makes 9 * $2 = $18 every day at the farmers' market.
+The final answer: 18",18.0,True,,True,256,4045.224187850952,0.4429439997766167,21518.021202087402,6125.165297031403,651.431936,651.42784,3.564,355.0,256,1,,True
+S1_split_exact_delta,gsm8k_0000,math,99,none,all,exact_delta,18,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast every morning, so she has 16 - 3 = 13 eggs left.
+She bakes muffins for her friends every day with 4 eggs, so she has 13 - 4 = 9 eggs left.
+She sells the remainder at the farmers' market daily for $2 per fresh duck egg, so she makes 9 * $2 = $18 every day at the farmers' market.
+The final answer: 18",18.0,True,True,True,256,4147.097352027893,15.59203193616122,20602.461280822754,5493.025735378265,649.247976,651.42784,3.564,353.61328125,256,1,,True
+C1_cache_full,gsm8k_0000,math,99,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,18,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,,False,256,3656.49205493927,0.566495998413302,15764.134660720825,4813.594589948654,651.431936,651.42784,3.564,355.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0000,math,99,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,18,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,False,256,3548.048960208893,0.4649919995572418,15605.46471786499,4912.221595048904,479.328256,651.42784,3.564,261.2109375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0000,math,99,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,18,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,False,256,3542.155107498169,7.10816007014364,16884.84436416626,5345.999894142151,478.76968,651.42784,3.564,260.76953125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0000,math,99,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,18,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,,False,256,3649.455301761627,51.90969624835998,16305.857929229736,5353.507527351379,253.787626,651.42784,3.564,261.2109375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0000,math,99,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,18,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast every morning, so she has 16 - 3 = 13 eggs left.
+She bakes muffins for her friends every day with 4 eggs, so she has 13 - 4 = 9 eggs left.
+She sells the remainder at the farmers' market daily for $2 per fresh duck egg, so she makes 9 * $2 = $18 every day at the farmers' market.
+The answer is: 18",18.0,True,,False,256,3406.19385433197,0.4575359997106716,13578.916240692139,4525.963515758514,480.03072,651.42784,3.564,261.59375,12,12,"{""init"": 1, ""gen_content"": 53, ""prompt_content"": 7, ""gen_age"": 29, ""prompt_age"": 4}",True
+S0_split_full,gsm8k_0001,math,60,none,all,bf16,3,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,,True,256,3878.1831407546997,0.4399359992239624,20149.165184020996,5185.37885093689,579.866624,579.862528,3.564,316.0,256,1,,True
+S1_split_exact_delta,gsm8k_0001,math,60,none,all,exact_delta,3,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,True,256,4146.39058303833,7.7302399976179,19095.233638763428,5081.442291498184,577.922592,579.862528,3.564,314.765625,256,1,,True
+C1_cache_full,gsm8k_0001,math,60,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,3,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,,True,256,3388.328710079193,0.4536639996804297,17156.28398323059,5525.45468878746,579.866624,579.862528,3.564,316.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0001,math,60,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,3,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,True,256,3518.409056663513,0.4533439992228523,16209.167953491211,5520.577814340591,476.253184,579.862528,3.564,259.53515625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0001,math,60,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,3,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,True,256,3282.2816548347473,7.157440077513456,15567.017948150635,4598.399240970612,475.751984,579.862528,3.564,259.125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0001,math,60,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,3,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+So, in total, the robe takes 2 + 1 = 3 bolts of fiber.
+The final answer: 3.",3.0,True,,False,256,3119.080132484436,34.11872050957754,15362.158058166504,4790.490149259567,250.712554,579.862528,3.564,259.53515625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0001,math,60,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,3,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,,True,256,3145.5552620887756,0.43254399893339723,13673.659465789795,4902.1637840271,475.830272,579.862528,3.564,259.3046875,10,10,"{""init"": 1, ""gen_content"": 28, ""prompt_content"": 4, ""gen_age"": 42, ""prompt_age"": 5}",True
+S0_split_full,gsm8k_0002,math,91,none,all,bf16,70000,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,,True,256,2648.7811546325684,0.4133759990800172,19406.339443206787,5258.853799819946,636.751872,636.747776,3.564,347.0,256,1,,False
+S1_split_exact_delta,gsm8k_0002,math,91,none,all,exact_delta,70000,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,True,256,2731.729817390442,8.799136123619974,18121.229053497314,5327.402340888977,634.617128,636.747776,3.564,345.64453125,256,1,,False
+C1_cache_full,gsm8k_0002,math,91,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,70000,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,,True,256,3271.3624596595764,0.6126080036628991,16202.906150817871,4726.858651399612,636.751872,636.747776,3.564,347.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C2_cache_aware,gsm8k_0002,math,91,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,70000,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,True,256,2226.97750043869,0.4195199989480898,14617.317281723022,3658.1674342155457,478.697472,636.747776,3.564,260.8671875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C3_cache_aware_exact,gsm8k_0002,math,91,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,70000,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,True,256,3360.5337266921997,9.368383980821818,10645.526546478271,1986.3988771438599,478.088692,636.747776,3.564,260.3984375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C4_cache_aware_int8,gsm8k_0002,math,91,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,70000,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,,True,256,3321.8332533836365,31.826752218417823,10415.496133804321,1973.8531534671783,253.156842,636.747776,3.564,260.8671875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+A1_adaptive_cache_aware,gsm8k_0002,math,91,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,70000,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+#### 65000",65000.0,False,,False,256,2876.5663981437683,0.43779200012795627,9589.346517562866,1995.7752346992493,479.342592,636.747776,3.564,261.21875,12,12,"{""init"": 1, ""gen_content"": 57, ""prompt_content"": 8, ""gen_age"": 28, ""prompt_age"": 3}",False
+S0_split_full,gsm8k_0003,math,69,none,all,bf16,540,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,,True,256,3119.5418844223022,0.42099199909716845,12825.981243133545,2062.7312591075897,596.381696,596.3776,3.564,325.0,256,1,,True
+S1_split_exact_delta,gsm8k_0003,math,69,none,all,exact_delta,540,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,True,256,3599.4902667999268,15.541792112402618,16917.912086486816,4035.445864200592,594.382296,596.3776,3.564,323.73046875,256,1,,True
+C1_cache_full,gsm8k_0003,math,69,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,540,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,,True,256,3458.1905970573425,0.47446399938780814,10402.287034988403,1971.427461862564,596.381696,596.3776,3.564,325.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0003,math,69,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,540,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,True,256,2404.79337310791,0.4362879990367219,10330.934286117554,1965.160637140274,476.962816,596.3776,3.564,259.921875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0003,math,69,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,540,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,True,256,2219.07555437088,7.884256085846573,10416.634828567505,1957.6654942035675,476.375552,596.3776,3.564,259.46484375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0003,math,69,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,540,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,,True,256,2209.2093467712402,31.576416602358222,10330.747354507446,1956.52521276474,251.422186,596.3776,3.564,259.921875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0003,math,69,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,540,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,,True,256,2115.3618240356445,0.4285119993146509,9237.708501815796,1949.1136920452118,476.962816,596.3776,3.564,259.921875,11,11,"{""init"": 1, ""gen_content"": 36, ""prompt_content"": 5, ""gen_age"": 38, ""prompt_age"": 5}",True
+S0_split_full,gsm8k_0004,math,145,none,all,bf16,20,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs to give a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her flock 15 cups of feed.
+In the afternoon, she gives her flock another 25 cups of feed.
+So far, she has given her flock 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her flock 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,,True,256,3572.647075653076,0.43631999974604696,18372.85302734375,2068.6483516693115,735.842304,735.838208,3.564,401.0,256,1,,True
+S1_split_exact_delta,gsm8k_0004,math,145,none,all,exact_delta,20,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs to give a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her flock 15 cups of feed.
+In the afternoon, she gives her flock another 25 cups of feed.
+So far, she has given her flock 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her flock 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,True,256,3549.14501953125,19.694592295214534,18422.421836853027,2055.251713037491,733.375352,735.838208,3.564,399.43359375,256,1,,True
+C1_cache_full,gsm8k_0004,math,145,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,20,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, and in the afternoon, she gives them another 25 cups of feed.
+So far, she has given her chickens 15 cups + 25 cups = 40 cups of feed.
+She needs to give her chickens a total of 60 cups of feed per day, so she needs to give them 60 cups - 40 cups = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,,False,256,2366.017580986023,0.44211199902929366,10828.979393005371,2001.054843902588,735.842304,735.838208,3.564,401.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0004,math,145,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,20,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, and in the afternoon, she gives them another 25 cups of feed.
+So far, she has given her chickens 15 cups + 25 cups = 40 cups of feed.
+She needs to give her chickens a total of 60 cups of feed per day, so she needs to give them 60 cups - 40 cups = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,False,256,2450.3922233581543,0.5928640001220629,10899.667253494263,2003.0701446533203,482.955264,735.838208,3.564,263.1875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0004,math,145,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,20,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, and in the afternoon, she gives them another 25 cups of feed.
+So far, she has given her chickens 15 cups + 25 cups = 40 cups of feed.
+She needs to give her chickens a total of 60 cups of feed per day, so she needs to give them 60 cups - 40 cups = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,False,256,2460.4935393333435,7.797216061502695,10898.617956161499,1994.2570848464966,482.411032,735.838208,3.564,262.75390625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0004,math,145,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,20,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, so she still needs to feed 60 cups - 15 cups = 45 cups of feed.
+In the afternoon, she gives her chickens another 25 cups of feed, so she still needs to feed 45 cups - 25 cups = 20 cups of feed.
+Therefore, Wendi needs to give her chickens 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,,False,256,2451.846050262451,31.572288669645786,10874.517292022705,1999.8545336723328,257.414634,735.838208,3.564,263.1875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0004,math,145,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,20,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed.
+In the afternoon, she gives her chickens 25 cups of feed.
+So far, she has given her chickens 15 cups + 25 cups = 40 cups of feed.
+She needs to give her chickens 60 cups of feed in total, so she needs to give them 60 cups - 40 cups = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,,False,256,2405.8255729675293,0.429631999344565,10251.696182250977,1993.0567734241486,485.019648,735.838208,3.564,264.3125,13,13,"{""init"": 1, ""gen_content"": 67, ""prompt_content"": 9, ""gen_age"": 22, ""prompt_age"": 3}",True
+S0_split_full,gsm8k_0005,math,90,none,all,bf16,64,"Kylar wants to buy 16 glasses, so he will need to buy 8 pairs of glasses.
+For each pair of glasses, the first glass costs $5, and the second glass costs 60% of the price, which is $5 * 0.6 = $3.
+So, for each pair of glasses, Kylar will need to pay $5 + $3 = $8.
+Since Kylar wants to buy 8 pairs of glasses, he will need to pay 8 * $8 = $64.
+Therefore, Kylar needs to pay $64 for the glasses.
+The final answer: 64",64.0,True,,True,256,2706.6822395324707,0.4286719998344779,13178.214492797852,2079.9109406471252,634.916864,634.912768,3.564,346.0,256,1,,True
+S1_split_exact_delta,gsm8k_0005,math,90,none,all,exact_delta,64,"Kylar wants to buy 16 glasses, so he will need to buy 8 pairs of glasses.
+For each pair of glasses, the first glass costs $5, and the second glass costs 60% of the price, which is $5 * 0.6 = $3.
+So, for each pair of glasses, Kylar will need to pay $5 + $3 = $8.
+Since Kylar wants to buy 8 pairs of glasses, he will need to pay 8 * $8 = $64.
+Therefore, Kylar needs to pay $64 for the glasses.
+The final answer: 64",64.0,True,True,True,256,2687.0868854522705,8.605728060007095,13236.203533172607,2078.710047483444,632.788272,634.912768,3.564,344.6484375,256,1,,True
+C1_cache_full,gsm8k_0005,math,90,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,64,"Kylar wants to buy 16 glasses, so he will need to pay for 16 glasses.
+The first glass costs $5.
+The second glass costs 60% of the price, which is $5 * 60/100 = $3.
+The third glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fourth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fifth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The sixth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The seventh glass costs 60% of the price, which is $5 * 60/100 = $3.
+The eighth glass costs 60% of the price, which is $5 * 60/100 = $3.
+Kylar needs to pay $5 + 7 * $3 = $26 for the glasses.
+The answer is: 26",26.0,False,,False,256,2222.614017009735,0.4156479991506785,10398.076713562012,1987.188515663147,634.916864,634.912768,3.564,346.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0005,math,90,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,64,"Kylar wants to buy 16 glasses, so he will need to pay for 16 glasses.
+The first glass costs $5.
+The second glass costs 60% of the price, which is $5 * 60/100 = $3.
+The third glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fourth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fifth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The sixth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The seventh glass costs 60% of the price, which is $5 * 60/100 = $3.
+The eighth glass costs 60% of the price, which is $5 * 60/100 = $3.
+Kylar needs to pay $5 + 7 * $3 = $26 for the glasses.
+The answer is: 26",26.0,False,True,False,256,2267.627869129181,0.42447999911382794,12537.932252883911,3241.8599276542664,478.618624,634.912768,3.564,260.82421875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0005,math,90,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,64,"Kylar wants to buy 16 glasses, so he will need to pay for 16 glasses.
+The first glass costs $5.
+The second glass costs 60% of the price, which is $5 * 60/100 = $3.
+The third glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fourth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fifth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The sixth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The seventh glass costs 60% of the price, which is $5 * 60/100 = $3.
+The eighth glass costs 60% of the price, which is $5 * 60/100 = $3.
+Kylar needs to pay $5 + 7 * $3 = $26 for the glasses.
+The answer is: 26",26.0,False,True,False,256,2180.041115760803,7.081024058163166,10503.053701400757,1988.4019854068756,478.052876,634.912768,3.564,260.37890625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0005,math,90,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,64,"Kylar wants to buy 16 glasses, so he will need to pay for 16 glasses.
+The first glass costs $5.
+The second glass costs 60% of the price, which is $5 * 60/100 = $3.
+The third glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fourth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fifth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The sixth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The seventh glass costs 60% of the price, which is $5 * 60/100 = $3.
+The eighth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The total cost is $5 + 7 * $3 = $26.
+#### 26
+The answer is: 26",26.0,False,,False,256,2091.1095724105835,37.48332816828042,16053.421371459961,4645.149904727936,253.077994,634.912768,3.564,260.82421875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0005,math,90,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,64,"Kylar wants to buy 16 glasses, so he needs to pay for 16 glasses.
+The first glass costs $5.
+The second glass costs 60% of the price, which is $5 * 60/100 = $3.
+The third glass costs $5.
+The fourth glass costs 60% of the price, which is $5 * 60/100 = $3.
+This pattern continues, with every second glass costing $3.
+To find the total cost, we can calculate the cost of the first 8 glasses and the cost of the next 8 glasses.
+The cost of the first 8 glasses is 8 * $5 = $40.
+The cost of the next 8 glasses is 8 * $3 = $24.
+Therefore, the total cost is $40 + $24 = $64.
+#### 64
+The answer is: 64",64.0,True,,False,256,2157.4985270500183,0.42691199912223965,14217.964338302612,4089.7805738449097,480.53248,634.912768,3.564,261.8671875,14,14,"{""init"": 1, ""gen_content"": 91, ""prompt_content"": 12, ""gen_age"": 11, ""prompt_age"": 1}",True
+S0_split_full,gsm8k_0006,math,76,none,all,bf16,260,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+The total number of sheep is 20 + 80 + 160 = 260 sheep.
+#### 260
+The answer is: 260",260.0,True,,True,256,2673.1782445907593,0.4086079993285239,17009.96870803833,4703.051733016968,609.226752,609.222656,3.564,332.0,256,1,,True
+S1_split_exact_delta,gsm8k_0006,math,76,none,all,exact_delta,260,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+The total number of sheep is 20 + 80 + 160 = 260 sheep.
+#### 260
+The answer is: 260",260.0,True,True,True,256,2611.2370915412903,7.96281585842371,17820.306339263916,4101.907319545746,607.184288,609.222656,3.564,330.703125,256,1,,True
+C1_cache_full,gsm8k_0006,math,76,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,260,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Together, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep.
+The final answer: 260",260.0,True,,False,256,2473.912832260132,0.4487359995255247,14385.647651672363,3810.347116947174,609.226752,609.222656,3.564,332.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0006,math,76,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,260,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Together, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep.
+The final answer: 260",260.0,True,True,False,256,3055.1637115478516,0.4397439993917942,10512.81247138977,2047.406566143036,477.514752,609.222656,3.564,260.22265625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0006,math,76,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,260,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Together, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep.
+The final answer: 260",260.0,True,True,False,256,3357.808569908142,7.061600073240697,10580.402795791626,1977.150302886963,476.941832,609.222656,3.564,259.7734375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0006,math,76,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,260,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+The total number of sheep is 20 + 80 + 160 = 260 sheep.
+#### 260
+The answer is: 260",260.0,True,,True,256,3237.5162591934204,31.56918448768556,10480.930122375488,2067.433119058609,251.974122,609.222656,3.564,260.22265625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0006,math,76,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,260,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+The total number of sheep is 20 + 80 + 160 = 260 sheep.
+#### 260
+The answer is: 260",260.0,True,,True,256,2618.281690120697,0.4606720000738278,9564.151693344116,2024.7743034362793,477.514752,609.222656,3.564,260.22265625,11,11,"{""init"": 1, ""gen_content"": 48, ""prompt_content"": 6, ""gen_age"": 32, ""prompt_age"": 4}",True
+S0_split_full,gsm8k_0007,math,104,none,all,bf16,160,"Carla downloads 2 GB/minute, so it takes her 200/2 = 100 minutes to download the file.
+40% of the way through the download, Carla has downloaded 200 * 40 / 100 = 80 GB.
+She has 200 - 80 = 120 GB left to download.
+She downloads 2 GB/minute, so it takes her 120/2 = 60 minutes to download the remaining 120 GB.
+She has to restart the download from the beginning, so it takes her 100 minutes to download the file again.
+In total, it takes Carla 100 + 60 + 20 + 100 = 280 minutes to download the file.
+The answer is: 280",280.0,False,,True,256,3125.0247011184692,0.4335039990255609,13532.425170898438,2192.1690521240234,660.606976,660.60288,3.564,360.0,256,1,,False
+S1_split_exact_delta,gsm8k_0007,math,104,none,all,exact_delta,160,"Carla downloads 2 GB/minute, so it takes her 200/2 = 100 minutes to download the file.
+40% of the way through the download, Carla has downloaded 200 * 40 / 100 = 80 GB.
+She has 200 - 80 = 120 GB left to download.
+She downloads 2 GB/minute, so it takes her 120/2 = 60 minutes to download the remaining 120 GB.
+She has to restart the download from the beginning, so it takes her 100 minutes to download the file again.
+In total, it takes Carla 100 + 60 + 20 + 100 = 280 minutes to download the file.
+The answer is: 280",280.0,False,True,True,256,2816.343071460724,8.353887979872525,13408.766193389893,2073.604862689972,658.392256,660.60288,3.564,358.59375,256,1,,False
+C1_cache_full,gsm8k_0007,math,104,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,160,"Carla can download 2 GB/minute, so it takes her 200/2 = 100 minutes to download the file.
+40% of the way through the download is 40/100 * 100 = 40 minutes.
+So Carla downloads 2 GB/minute for 40 minutes, which is 2 * 40 = 80 GB.
+After the restart, Carla has to download 200 - 80 = 120 GB.
+It takes Carla 120/2 = 60 minutes to download the remaining 120 GB.
+So it takes Carla 40 + 20 + 60 = 120 minutes to download the file.
+The answer is: 120",120.0,False,,False,256,3366.8326420783997,0.43619200005196035,10414.997468948364,1984.4425885677338,660.606976,660.60288,3.564,360.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C2_cache_aware,gsm8k_0007,math,104,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,160,"Carla can download 2 GB/minute, so it takes her 200/2 = 100 minutes to download the file.
+40% of the way through the download is 40/100 * 100 = 40 minutes.
+So Carla downloads 2 GB/minute for 40 minutes, which is 2 * 40 = 80 GB.
+After the restart, Carla has to download 200 - 80 = 120 GB.
+It takes Carla 120/2 = 60 minutes to download the remaining 120 GB.
+So it takes Carla 40 + 20 + 60 = 120 minutes to download the file.
+The answer is: 120",120.0,False,True,False,256,3496.745117664337,0.39484799932688475,10379.78786277771,1983.4158718585968,479.722496,660.60288,3.564,261.42578125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C3_cache_aware_exact,gsm8k_0007,math,104,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,160,"Carla can download 2 GB/minute, so it takes her 200/2 = 100 minutes to download the file.
+40% of the way through the download is 40/100 * 100 = 40 minutes.
+So Carla downloads 2 GB/minute for 40 minutes, which is 2 * 40 = 80 GB.
+After the restart, Carla has to download 200 - 80 = 120 GB.
+It takes Carla 120/2 = 60 minutes to download the remaining 120 GB.
+So it takes Carla 40 + 20 + 60 = 120 minutes to download the file.
+The answer is: 120",120.0,False,True,False,256,2327.230208873749,6.97936005005613,13052.017683029175,3248.2268793582916,479.185436,660.60288,3.564,260.99609375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C4_cache_aware_int8,gsm8k_0007,math,104,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,160,"Carla can download 2 GB/minute, so it takes 200/2 = 100 minutes to download the file. 40% of the way through the download is 40/100 * 100 = 40 minutes. So it takes 40 minutes to download 40% of the file. The remaining 60% of the file is 100 - 40 = 60 minutes. So it takes 60 minutes to download the remaining 60% of the file. It takes 20 minutes to restart the download. So it takes 40 + 60 + 20 = 120 minutes to download the file. The answer is: 120.",120.0,False,,False,256,2658.447968006134,31.869664213620126,14089.65892982483,3913.1063373088837,254.181866,660.60288,3.564,261.42578125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+A1_adaptive_cache_aware,gsm8k_0007,math,104,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,160,"Carla can download 2 GB/minute, so it takes her 200/2 = 100 minutes to download the file.
+40% of the way through the download, Carla has downloaded 200 * 40 / 100 = 80 GB.
+She still has 200 - 80 = 120 GB left to download.
+It takes her 120/2 = 60 minutes to download the remaining 120 GB.
+The restart takes 20 minutes, so the total time is 60 + 20 = 80 minutes.
+The final answer: 80.",80.0,False,,False,256,2514.7131509780884,0.4719039996853098,9854.759874343872,2023.006783246994,481.199104,660.60288,3.564,262.23046875,13,13,"{""init"": 1, ""gen_content"": 66, ""prompt_content"": 9, ""gen_age"": 23, ""prompt_age"": 3}",False
+S0_split_full,gsm8k_0008,math,138,none,all,bf16,45,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he covers a distance of 2 * 0 = 0 miles.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers in the 4 hours is 0 + 15 + 120 = 135 miles.
+Since he started 180 miles away from home and covered 135 miles, he is 180 - 135 = 45 miles from home at the end of those 4 hours.
+#### 45
+The answer is: 45",45.0,True,,True,256,3756.5142135620117,0.4290559992659837,18300.651260375977,2067.3134372234344,722.997248,722.993152,3.564,394.0,256,1,,True
+S1_split_exact_delta,gsm8k_0008,math,138,none,all,exact_delta,45,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he covers a distance of 2 * 0 = 0 miles.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers in the 4 hours is 0 + 15 + 120 = 135 miles.
+Since he started 180 miles away from home and covered 135 miles, he is 180 - 135 = 45 miles from home at the end of those 4 hours.
+#### 45
+The answer is: 45",45.0,True,True,True,256,3747.058437347412,13.623264225199819,19677.896324157715,2394.0569853782654,720.57336,722.993152,3.564,392.4609375,256,1,,True
+C1_cache_full,gsm8k_0008,math,138,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,45,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he doesn't cover any distance during that time.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers during the 4 hours is 15 + 120 = 135 miles.
+Since he drove 180 miles away from home initially, he is now 180 - 135 = 45 miles away from home.
+Therefore, at the end of those 4 hours, John is 45 miles away from home.
+#### 45
+The answer is: 45",45.0,True,,False,256,2348.955963611603,0.4415359989507124,10791.62635421753,1998.2598044872284,722.997248,722.993152,3.564,394.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0008,math,138,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,45,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he doesn't cover any distance during that time.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers during the 4 hours is 15 + 120 = 135 miles.
+Since he drove 180 miles away from home initially, he is now 180 - 135 = 45 miles away from home.
+Therefore, at the end of those 4 hours, John is 45 miles away from home.
+#### 45
+The answer is: 45",45.0,True,True,False,256,2344.450270652771,0.4471359992166981,15294.44291305542,3786.51443195343,482.403328,722.993152,3.564,262.88671875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0008,math,138,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,45,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he doesn't cover any distance during that time.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers during the 4 hours is 15 + 120 = 135 miles.
+Since he drove 180 miles away from home initially, he is now 180 - 135 = 45 miles away from home.
+Therefore, at the end of those 4 hours, John is 45 miles away from home.
+#### 45
+The answer is: 45",45.0,True,True,False,256,2456.8773040771484,7.053664058446884,13630.950504302979,3471.8877489566803,481.87344,722.993152,3.564,262.4609375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0008,math,138,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,45,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he covers a distance of 2 * 0 = 0 miles.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers in the 4 hours is 0 + 15 + 120 = 135 miles.
+Since he started 180 miles away from home and covered 135 miles, he is 180 - 135 = 45 miles from home at the end of the 4 hours.
+#### 45
+The answer is: 45",45.0,True,,False,256,2505.7307562828064,32.61312051024288,12516.573934555054,2699.7509803771973,256.862698,722.993152,3.564,262.88671875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0008,math,138,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,45,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he doesn't cover any distance during that time.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers during the 4 hours is 15 + 120 = 135 miles.
+Since he was 180 miles away from home initially, he is now 180 - 135 = 45 miles away from home.
+#### 45
+The answer is: 45",45.0,True,,False,256,2505.6752038002014,0.6389120055828243,15725.87250328064,4459.05668592453,486.331392,722.993152,3.564,265.02734375,15,15,"{""init"": 1, ""gen_content"": 99, ""prompt_content"": 14, ""gen_age"": 7}",True
+S0_split_full,gsm8k_0009,math,94,none,all,bf16,460,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,,True,256,2673.562753677368,0.4308799993013963,18651.17706298828,4456.325923681259,642.256896,642.2528,3.564,350.0,256,1,,True
+S1_split_exact_delta,gsm8k_0009,math,94,none,all,exact_delta,460,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,True,True,256,2622.4955163002014,8.75929610338062,19073.788703918457,4284.246843338013,640.103696,642.2528,3.564,348.6328125,256,1,,True
+C1_cache_full,gsm8k_0009,math,94,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,460,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,,True,256,2152.334595680237,0.44153599941637367,13891.356575012207,3611.23180103302,642.256896,642.2528,3.564,350.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0009,math,94,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,460,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,True,True,256,2023.4041638374329,0.45695999870076776,15052.57935333252,4023.3638200759888,478.934016,642.2528,3.564,260.99609375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0009,math,94,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,460,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,True,True,256,2598.1124696731567,7.060416058637202,10562.631216049194,2018.9821712970734,478.396956,642.2528,3.564,260.56640625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0009,math,94,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,460,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked a total of 45 hours, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,,False,256,3291.299617767334,31.65484853554517,10348.523235321045,1979.4121296405792,253.393386,642.2528,3.564,260.99609375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0009,math,94,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,460,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+Eliza worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,,False,256,2799.7274193763733,0.4319359993096441,9866.157051086426,2008.5976917743683,480.267264,642.2528,3.564,261.72265625,13,13,"{""init"": 1, ""gen_content"": 71, ""prompt_content"": 10, ""gen_age"": 21, ""prompt_age"": 2}",True
+S0_split_full,gsm8k_0010,math,94,none,all,bf16,366,"In the second month, the number of downloads was three times as many as the downloads in the first month, so it was 3 * 60 = 180 downloads.
+In the third month, the number of downloads was reduced by 30%, so it was 180 - (180 * 30/100) = 180 - 54 = 126 downloads.
+The total number of downloads over the three months is 60 + 180 + 126 = 366 downloads.
+The answer is: 366",366.0,True,,True,256,3855.5487728118896,0.43379199935588986,13129.000862121582,2062.109155893326,642.256896,642.2528,3.564,350.0,256,1,,True
+S1_split_exact_delta,gsm8k_0010,math,94,none,all,exact_delta,366,"In the second month, the number of downloads was three times as many as the downloads in the first month, so it was 3 * 60 = 180 downloads.
+In the third month, the number of downloads was reduced by 30%, so it was 180 - (180 * 30/100) = 180 - 54 = 126 downloads.
+The total number of downloads over the three months is 60 + 180 + 126 = 366 downloads.
+The answer is: 366",366.0,True,True,True,256,2739.122556209564,8.716544087976217,15534.24951171875,3223.079799413681,640.103696,642.2528,3.564,348.6328125,256,1,,True
+C1_cache_full,gsm8k_0010,math,94,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,366,"In the second month, the number of downloads was three times as many as the downloads in the first month, so it was 3 * 60 = 180 downloads.
+In the third month, the number of downloads was reduced by 30%, so it was 180 - (180 * 30/100) = 180 - 54 = 126 downloads.
+The total number of downloads over the three months is 60 + 180 + 126 = 366 downloads.
+The answer is: 366",366.0,True,,True,256,2239.588291168213,0.44550399959553033,14181.152126312256,3804.329572200775,642.256896,642.2528,3.564,350.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0010,math,94,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,366,"In the second month, the number of downloads was three times as many as the downloads in the first month, so it was 3 * 60 = 180 downloads.
+In the third month, the number of downloads was reduced by 30%, so it was 180 - (180 * 30/100) = 180 - 54 = 126 downloads.
+The total number of downloads over the three months is 60 + 180 + 126 = 366 downloads.
+The answer is: 366",366.0,True,True,True,256,2205.9565773010254,0.7089920016005635,15101.82548713684,4143.926453590393,478.934016,642.2528,3.564,260.99609375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0010,math,94,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,366,"In the second month, the number of downloads was three times as many as the downloads in the first month, so it was 3 * 60 = 180 downloads.
+In the third month, the number of downloads was reduced by 30%, so it was 180 - (180 * 30/100) = 180 - 54 = 126 downloads.
+The total number of downloads over the three months is 60 + 180 + 126 = 366 downloads.
+The answer is: 366",366.0,True,True,True,256,2197.3729882240295,7.059840068221092,12533.538835525513,2965.2028074264526,478.368268,642.2528,3.564,260.55078125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0010,math,94,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,366,"In the second month, the number of downloads was three times as many as the first month, so it was 3 * 60 = 180 downloads.
+In the third month, the number of downloads was reduced by 30%, so it was 180 - (180 * 30/100) = 180 - 54 = 126 downloads.
+The total number of downloads over the three months is 60 + 180 + 126 = 366 downloads.
+The answer is: 366",366.0,True,,False,256,2068.741856575012,34.11276808893308,15313.095985412598,4175.7547519207,253.393386,642.2528,3.564,260.99609375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0010,math,94,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,366,"In the second month, the number of downloads was three times as many as the downloads in the first month, so it was 3 * 60 = 180 downloads.
+In the third month, the number of downloads was reduced by 30%, so it was 180 - (180 * 30/100) = 180 - 54 = 126 downloads.
+The total number of downloads over the three months is 60 + 180 + 126 = 366 downloads.
+The answer is: 366",366.0,True,,True,256,2126.7470088005066,0.42431999917607754,13604.469583511353,4004.564476966858,479.60064,642.2528,3.564,261.359375,12,12,"{""init"": 1, ""gen_content"": 60, ""prompt_content"": 8, ""gen_age"": 26, ""prompt_age"": 3}",True
+S0_split_full,gsm8k_0011,math,99,none,all,bf16,694,"The cost of 3 dozen donuts is 3 * $68 = $204.
+The cost of 2 dozen mini cupcakes is 2 * $80 = $160.
+The cost of 6 dozen mini cheesecakes is 6 * $55 = $330.
+The total cost is $204 + $160 + $330 = $694.
+The answer is: 694",694.0,True,,True,256,2667.2769560813904,0.4268159990897402,18559.357833862305,4152.569441080093,651.431936,651.42784,3.564,355.0,256,1,,True
+S1_split_exact_delta,gsm8k_0011,math,99,none,all,exact_delta,694,"The cost of 3 dozen donuts is 3 * $68 = $204.
+The cost of 2 dozen mini cupcakes is 2 * $80 = $160.
+The cost of 6 dozen mini cheesecakes is 6 * $55 = $330.
+The total cost is $204 + $160 + $330 = $694.
+The answer is: 694",694.0,True,True,True,256,2732.1725392341614,8.791712116450071,17435.838401794434,3949.525610923767,649.247976,651.42784,3.564,353.61328125,256,1,,True
+C1_cache_full,gsm8k_0011,math,99,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,694,"The cost of 3 dozen donuts is 3 * $68 = $204.
+The cost of 2 dozen mini cupcakes is 2 * $80 = $160.
+The cost of 6 dozen mini cheesecakes is 6 * $55 = $330.
+The total cost is $204 + $160 + $330 = $694.
+The answer is: 694",694.0,True,,True,256,2239.792709350586,0.4165760000469163,10346.347713470459,1966.1319012641907,651.431936,651.42784,3.564,355.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0011,math,99,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,694,"The cost of 3 dozen donuts is 3 * $68 = $204.
+The cost of 2 dozen mini cupcakes is 2 * $80 = $160.
+The cost of 6 dozen mini cheesecakes is 6 * $55 = $330.
+The total cost is $204 + $160 + $330 = $694.
+The answer is: 694",694.0,True,True,True,256,2203.47238445282,0.42310399946291,10347.003507614136,1965.177598953247,479.328256,651.42784,3.564,261.2109375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0011,math,99,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,694,"The cost of 3 dozen donuts is 3 * $68 = $204.
+The cost of 2 dozen mini cupcakes is 2 * $80 = $160.
+The cost of 6 dozen mini cheesecakes is 6 * $55 = $330.
+The total cost is $204 + $160 + $330 = $694.
+The answer is: 694",694.0,True,True,True,256,2184.6923866271973,7.150592094287276,15782.225141525269,4414.218245267868,478.762508,651.42784,3.564,260.765625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0011,math,99,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,694,"The cost of 3 dozen donuts is 3 * $68 = $204.
+The cost of 2 dozen mini cupcakes is 2 * $80 = $160.
+The cost of 6 dozen mini cheesecakes is 6 * $55 = $330.
+The total cost is $204 + $160 + $330 = $694.
+The answer is: 694",694.0,True,,True,256,2132.9164505004883,32.164896194823086,15294.755773544312,4202.776583909988,253.787626,651.42784,3.564,261.2109375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0011,math,99,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,694,"The cost of 3 dozen donuts is 3 * $68 = $204.
+The cost of 2 dozen mini cupcakes is 2 * $80 = $160.
+The cost of 6 dozen mini cheesecakes is 6 * $55 = $330.
+The total cost is $204 + $160 + $330 = $694.
+#### 694
+The answer is: 694",694.0,True,,False,256,2006.953058719635,0.4319679996697232,13551.979019165039,3937.2970271110535,479.328256,651.42784,3.564,261.2109375,11,11,"{""init"": 1, ""gen_content"": 49, ""prompt_content"": 6, ""gen_age"": 32, ""prompt_age"": 4}",True
+S0_split_full,gsm8k_0012,math,101,none,all,bf16,13,"Each year, Carlos will earn 7 lemons * $1.5 = $10.50 from selling the lemons.
+The total cost of planting the tree is $90.
+The total cost of watering and feeding the tree is $3 per year.
+The total cost of planting and watering the tree is $90 + $3 = $93.
+To break even, Carlos needs to earn $93 from selling the lemons.
+Since he will earn $10.50 per year, it will take him $93 / $10.50 = 9 years to earn $93.
+Therefore, it will take Carlos 9 years to start earning money on the lemon tree.
+The final answer is: 9",9.0,False,,True,256,3457.725347995758,0.433087999233976,15046.391860961914,3488.030146598816,655.101952,655.097856,3.564,357.0,256,1,,False
+S1_split_exact_delta,gsm8k_0012,math,101,none,all,exact_delta,13,"Each year, Carlos will earn 7 lemons * $1.5 = $10.50 from selling the lemons.
+The total cost of planting the tree is $90.
+The total cost of watering and feeding the tree is $3 per year.
+The total cost of planting and watering the tree is $90 + $3 = $93.
+To break even, Carlos needs to earn $93 from selling the lemons.
+Since he will earn $10.50 per year, it will take him $93 / $10.50 = 9 years to earn $93.
+Therefore, it will take Carlos 9 years to start earning money on the lemon tree.
+The final answer is: 9",9.0,False,True,True,256,3571.8590030670166,8.829952129162848,14446.820232391357,2372.232926130295,652.905688,655.097856,3.564,355.60546875,256,1,,False
+C1_cache_full,gsm8k_0012,math,101,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,13,"Each year, Carlos will earn 7 lemons * $1.5 = $10.50 from selling the lemons.
+The total cost of planting the tree is $90.
+The total cost of watering and feeding the tree is $3 per year.
+So, the total cost per year is $90 + $3 = $93.
+To find the number of years it will take before Carlos starts earning money, we need to find the number of years it will take for the total earnings to be greater than the total cost.
+Let's assume it takes x years for Carlos to start earning money.
+The total earnings after x years will be $10.50 * x.
+The total cost after x years will be $93 * x.
+We want to find the value of x such that $10.50 * x > $93 * x.
+Dividing both sides of the inequality by x, we get $10.50 > $93.
+This inequality is never true, which means that Carlos will never start earning money on the lemon tree.
+Therefore, it will take an infinite number of years for Carlos to start earning money on the lemon tree.
+The final answer is: 100",100.0,False,,False,256,2654.705219268799,0.4386879997327924,10323.004304885864,1976.30637216568,655.101952,655.097856,3.564,357.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C2_cache_aware,gsm8k_0012,math,101,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,13,"Each year, Carlos will earn 7 lemons * $1.5 = $10.50 from selling the lemons.
+The total cost of planting the tree is $90.
+The total cost of watering and feeding the tree is $3 per year.
+So, the total cost per year is $90 + $3 = $93.
+To find the number of years it will take before Carlos starts earning money, we need to find the number of years it will take for the total earnings to be greater than the total cost.
+Let's assume it takes x years for Carlos to start earning money.
+The total earnings after x years will be $10.50 * x.
+The total cost after x years will be $93 * x.
+We want to find the value of x such that $10.50 * x > $93 * x.
+Dividing both sides of the inequality by x, we get $10.50 > $93.
+This inequality is never true, which means that Carlos will never start earning money on the lemon tree.
+Therefore, it will take an infinite number of years for Carlos to start earning money on the lemon tree.
+The final answer is: 100",100.0,False,True,False,256,3088.108732700348,0.41958399990107864,10442.86752128601,2033.7491793632507,479.485952,655.097856,3.564,261.296875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C3_cache_aware_exact,gsm8k_0012,math,101,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,13,"Each year, Carlos will earn 7 lemons * $1.5 = $10.50 from selling the lemons.
+The total cost of planting the tree is $90.
+The total cost of watering and feeding the tree is $3 per year.
+So, the total cost per year is $90 + $3 = $93.
+To find the number of years it will take before Carlos starts earning money, we need to find the number of years it will take for the total earnings to be greater than the total cost.
+Let's assume it takes x years for Carlos to start earning money.
+The total earnings after x years will be $10.50 * x.
+The total cost after x years will be $93 * x.
+We want to find the value of x such that $10.50 * x > $93 * x.
+Dividing both sides of the inequality by x, we get $10.50 > $93.
+This inequality is never true, which means that Carlos will never start earning money on the lemon tree.
+Therefore, it will take an infinite number of years for Carlos to start earning money on the lemon tree.
+The final answer is: 100",100.0,False,True,False,256,3293.275831222534,7.036832056008279,10483.493883132935,1984.0059840679169,478.927376,655.097856,3.564,260.85546875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C4_cache_aware_int8,gsm8k_0012,math,101,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,13,"Each year, Carlos will sell 7 lemons for $1.5 each, so he will earn 7 * $1.5 = $10.50 per year.
+It costs him $3 per year to water and feed the tree, so his net earnings per year are $10.50 - $3 = $7.50.
+To break even, Carlos needs to earn back least $90, so it will take him $90 / $7.50 = 12 years to break even.
+Therefore, it will take Carlos 12 years to start earning money on the lemon tree.
+The answer is: 12",12.0,False,,False,256,3414.543336868286,31.573184478096664,10283.121213912964,1971.0071053504944,253.945322,655.097856,3.564,261.296875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+A1_adaptive_cache_aware,gsm8k_0012,math,101,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,13,"Each year, Carlos will earn 7 lemons * $1.5 = $10.50 from selling the lemons.
+Each year, Carlos will spend $3 to water and feed the tree.
+So, each year, Carlos will earn $10.50 - $3 = $7.50 from the lemon tree.
+To break even, Carlos needs to earn $90 from the lemon tree.
+So, it will take Carlos $90 / $7.50 = 12 years to earn $90 from the lemon tree.
+Therefore, it will take Carlos 12 years before he starts earning money on the lemon tree.
+The answer is: 12",12.0,False,,False,256,3419.886016845703,0.44313599925953895,9601.62063407898,1970.7115533351898,480.919552,655.097856,3.564,262.078125,13,13,"{""init"": 1, ""gen_content"": 67, ""prompt_content"": 9, ""gen_age"": 22, ""prompt_age"": 3}",False
+S0_split_full,gsm8k_0013,math,92,none,all,bf16,18,"Let's assume Melanie started with x vacuum cleaners.
+She sold a third of her vacuum cleaners at the green house, so she sold x/3 at the green house.
+After selling at the green house, she had x - x/3 = 2x/3 left.
+She sold 2 more vacuum cleaners at the red house, so she had 2x/3 - 2 left.
+After selling at the red house, she had 2x/3 - 2 left.
+She sold half of what was left at the orange house, so she sold (2x/3 - 2)/2 = x/3 - 1 at the orange house.
+After selling at the orange house, she had 2x/3 - 2 - (x/3 - 1) = x/3 - 1 left.
+We know that Melanie has 5 vacuum cleaners left, so we can set up the equation x/3 - 1 = 5.
+Adding 1 to both sides of the equation, we get x/3 = 6.
+Multiplying both sides of the equation by 3, we get x = 18.
+Therefore, Melanie started with 18 vacuum cleaners.
+The answer: 18",18.0,True,,True,256,3604.068461894989,0.42975999996997416,14878.792335510254,2686.2445793151855,638.58688,638.582784,3.564,348.0,256,1,,True
+S1_split_exact_delta,gsm8k_0013,math,92,none,all,exact_delta,18,"Let's assume Melanie started with x vacuum cleaners.
+She sold a third of her vacuum cleaners at the green house, so she sold x/3 at the green house.
+After selling at the green house, she had x - x/3 = 2x/3 left.
+She sold 2 more vacuum cleaners at the red house, so she had 2x/3 - 2 left.
+After selling at the red house, she had 2x/3 - 2 left.
+She sold half of what was left at the orange house, so she sold (2x/3 - 2)/2 = x/3 - 1 at the orange house.
+After selling at the orange house, she had 2x/3 - 2 - (x/3 - 1) = x/3 - 1 left.
+We know that Melanie has 5 vacuum cleaners left, so we can set up the equation x/3 - 1 = 5.
+Adding 1 to both sides of the equation, we get x/3 = 6.
+Multiplying both sides of the equation by 3, we get x = 18.
+Therefore, Melanie started with 18 vacuum cleaners.
+The answer: 18",18.0,True,True,True,256,2518.1841320991516,8.218591939657927,13239.715682983398,2060.429153442383,636.445984,638.582784,3.564,346.640625,256,1,,True
+C1_cache_full,gsm8k_0013,math,92,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,18,"Let's assume Melanie started with x vacuum cleaners.
+She sold a third of her vacuum cleaners at the green house, so she sold x/3 at the green house.
+After selling at the green house, she had x - x/3 = 2x/3 left.
+She sold 2 more vacuum cleaners at the red house, so she had 2x/3 - 2 left after selling at the red house.
+She sold half of what was left at the orange house, so she sold (2x/3 - 2)/2 = x/3 - 1 at the orange house.
+After selling at the orange house, she had 2x/3 - 2 - (x/3 - 1) = x/3 - 1 left.
+We know that Melanie has 5 vacuum cleaners left, so we can set up the equation x/3 - 1 = 5.
+Adding 1 to both sides of the equation, we get x/3 = 6.
+Multiplying both sides of the equation by 3, we get x = 18.
+Therefore, Melanie started with 18 vacuum cleaners.
+#### 18
+The answer is: 18",18.0,True,,False,256,2068.6408700942993,0.43759999983012676,12184.217517852783,2819.82758975029,638.58688,638.582784,3.564,348.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0013,math,92,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,18,"Let's assume Melanie started with x vacuum cleaners.
+She sold a third of her vacuum cleaners at the green house, so she sold x/3 at the green house.
+After selling at the green house, she had x - x/3 = 2x/3 left.
+She sold 2 more vacuum cleaners at the red house, so she had 2x/3 - 2 left after selling at the red house.
+She sold half of what was left at the orange house, so she sold (2x/3 - 2)/2 = x/3 - 1 at the orange house.
+After selling at the orange house, she had 2x/3 - 2 - (x/3 - 1) = x/3 - 1 left.
+We know that Melanie has 5 vacuum cleaners left, so we can set up the equation x/3 - 1 = 5.
+Adding 1 to both sides of the equation, we get x/3 = 6.
+Multiplying both sides of the equation by 3, we get x = 18.
+Therefore, Melanie started with 18 vacuum cleaners.
+#### 18
+The answer is: 18",18.0,True,True,False,256,2196.4312958717346,0.43401599931530654,15164.085391998291,4090.9316420555115,478.77632,638.582784,3.564,260.91015625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0013,math,92,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,18,"Let's assume Melanie started with x vacuum cleaners.
+She sold a third of her vacuum cleaners at the green house, so she sold x/3 at the green house.
+After selling at the green house, she had x - x/3 = 2x/3 left.
+She sold 2 more vacuum cleaners at the red house, so she had 2x/3 - 2 left after selling at the red house.
+She sold half of what was left at the orange house, so she sold (2x/3 - 2)/2 = x/3 - 1 at the orange house.
+After selling at the orange house, she had 2x/3 - 2 - (x/3 - 1) = x/3 - 1 left.
+We know that Melanie has 5 vacuum cleaners left, so we can set up the equation x/3 - 1 = 5.
+Adding 1 to both sides of the equation, we get x/3 = 6.
+Multiplying both sides of the equation by 3, we get x = 18.
+Therefore, Melanie started with 18 vacuum cleaners.
+#### 18
+The answer is: 18",18.0,True,True,False,256,2212.7207341194153,7.148704085033387,14575.355897903442,4051.4306807518005,478.189056,638.582784,3.564,260.453125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0013,math,92,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,18,"Let's assume Melanie started with x vacuum cleaners.
+She sold a third of her vacuum cleaners at the green house, so she sold x/3 at the green house.
+After selling at the green house, she had x - x/3 = 2x/3 left.
+She sold 2 more vacuum cleaners at the red house, so she had 2x/3 - 2 left.
+After selling at the red house, she had 2x/3 - 2 left.
+She sold half of what was left at the orange house, so she sold (2x/3 - 2)/2 = x/3 - 1 at the orange house.
+After selling at the orange house, she had 2x/3 - 2 - (x/3 - 1) = x/3 - 1 left.
+We know that Melanie has 5 vacuum cleaners left, so we can set up the equation x/3 - 1 = 5.
+Adding 1 to both sides of the equation, we get x/3 = 6.
+Multiplying both sides of the equation by 3, we get x = 18.
+Therefore, Melanie started with 18 vacuum cleaners.
+The answer: 18",18.0,True,,True,256,2159.3722224235535,31.660224531311542,11701.857604980469,2588.2781081199646,253.23569,638.582784,3.564,260.91015625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0013,math,92,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,18,"Let's assume Melanie started with x vacuum cleaners.
+She sold a third of her vacuum cleaners at the green house, so she sold x/3 vacuum cleaners.
+After selling at the green house, she had x - x/3 = 2x/3 vacuum cleaners left.
+She sold 2 more vacuum cleaners at the red house, so she had 2x/3 - 2 vacuum cleaners left.
+After selling at the red house, she had 2x/3 - 2 vacuum cleaners left.
+She sold half of what was left at the orange house, so she sold (2x/3 - 2)/2 vacuum cleaners.
+After selling at the orange house, she had 2x/3 - 2 - (2x/3 - 2)/2 vacuum cleaners left.
+Simplifying, she had 2x/3 - 2 - 2x/3 + 2 vacuum cleaners left.
+She had 2x/3 - 2x/3 = 0 vacuum cleaners left.
+Since Melanie has 5 vacuum cleaners left, we can set up the equation 0 = 5.
+Solving for x, we find that x = 5.
+#### 5
+The answer is: 5",5.0,False,,False,256,3258.3037695884705,0.4361599994590506,11853.330751419067,2819.70876789093,482.03776,638.582784,3.564,262.6875,16,16,"{""init"": 1, ""gen_content"": 112, ""prompt_content"": 15}",True
+S0_split_full,gsm8k_0014,math,86,none,all,bf16,60,"First, let's find out how many students enrolled in contemporary dance. Since 20% of the 20 students enrolled in contemporary dance, we can calculate this as 20 * 0.2 = 4 students.
+Next, let's find out how many students enrolled in jazz dance. Since 25% of the remaining students enrolled in jazz dance, we can calculate this as (20 - 4) * 0.25 = 16 * 0.25 = 4 students.
+Now, let's find out how many students enrolled in hip-hop dance. Since the rest of the students enrolled in hip-hop dance, we can calculate this as 20 - 4 - 4 = 12 students.
+Finally, let's find out what percentage of the entire students enrolled in hip-hop dance. Since 12 out of the 20 students enrolled in hip-hop dance, we can calculate this as (12 / 20) * 100 = 0.6 * 100 = 60%.
+Therefore, 60% of the entire students enrolled in hip-hop dance.
+#### 60
+The answer is: 60",60.0,True,,True,256,2769.6132187843323,0.42044799914583564,13702.726276397705,2351.9529869556427,627.576832,627.572736,3.564,342.0,256,1,,True
+S1_split_exact_delta,gsm8k_0014,math,86,none,all,exact_delta,60,"First, let's find out how many students enrolled in contemporary dance. Since 20% of the 20 students enrolled in contemporary dance, we can calculate this as 20 * 0.2 = 4 students.
+Next, let's find out how many students enrolled in jazz dance. Since 25% of the remaining students enrolled in jazz dance, we can calculate this as (20 - 4) * 0.25 = 16 * 0.25 = 4 students.
+Now, let's find out how many students enrolled in hip-hop dance. Since the rest of the students enrolled in hip-hop dance, we can calculate this as 20 - 4 - 4 = 12 students.
+Finally, let's find out what percentage of the entire students enrolled in hip-hop dance. Since 12 out of the 20 students enrolled in hip-hop dance, we can calculate this as (12 / 20) * 100 = 0.6 * 100 = 60%.
+Therefore, 60% of the entire students enrolled in hip-hop dance.
+#### 60
+The answer is: 60",60.0,True,True,True,256,2619.5690174102783,8.596672049723566,13138.939365386963,2062.8296661376953,625.472848,627.572736,3.564,340.6640625,256,1,,True
+C1_cache_full,gsm8k_0014,math,86,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,60,"First, let's find out how many students enrolled in contemporary dance. Since 20% of the 20 students enrolled in contemporary dance, we can calculate this as 20 * 0.2 = 4 students.
+Next, let's find out how many students enrolled in jazz dance. Since 25% of the remaining students enrolled in jazz dance, we can calculate this as (20 - 4) * 0.25 = 16 * 0.25 = 4 students.
+Now, let's find out how many students enrolled in hip-hop dance. Since the rest of the students enrolled in hip-hop dance, we can calculate this as 20 - 4 - 4 = 12 students.
+Finally, let's find out what percentage of the entire students enrolled in hip-hop dance. Since 12 out of the 20 students enrolled in hip-hop dance, we can calculate this as (12 / 20) * 100 = 0.6 * 100 = 60%.
+Therefore, 60% of the entire students enrolled in hip-hop dance.
+#### 60
+The answer is: 60",60.0,True,,True,256,2184.6430706977844,0.44265599898062646,16133.097257614136,4652.2327003479,627.576832,627.572736,3.564,342.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0014,math,86,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,60,"First, let's find out how many students enrolled in contemporary dance. Since 20% of the 20 students enrolled in contemporary dance, we can calculate this as 20 * 0.2 = 4 students.
+Next, let's find out how many students enrolled in jazz dance. Since 25% of the remaining students enrolled in jazz dance, we can calculate this as (20 - 4) * 0.25 = 16 * 0.25 = 4 students.
+Now, let's find out how many students enrolled in hip-hop dance. Since the rest of the students enrolled in hip-hop dance, we can calculate this as 20 - 4 - 4 = 12 students.
+Finally, let's find out what percentage of the entire students enrolled in hip-hop dance. Since 12 out of the 20 students enrolled in hip-hop dance, we can calculate this as (12 / 20) * 100 = 0.6 * 100 = 60%.
+Therefore, 60% of the entire students enrolled in hip-hop dance.
+#### 60
+The answer is: 60",60.0,True,True,True,256,2638.462688922882,0.4601919990964234,12301.704759597778,3016.905953168869,478.303232,627.572736,3.564,260.65234375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0014,math,86,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,60,"First, let's find out how many students enrolled in contemporary dance. Since 20% of the 20 students enrolled in contemporary dance, we can calculate this as 20 * 0.2 = 4 students.
+Next, let's find out how many students enrolled in jazz dance. Since 25% of the remaining students enrolled in jazz dance, we can calculate this as (20 - 4) * 0.25 = 16 * 0.25 = 4 students.
+Now, let's find out how many students enrolled in hip-hop dance. Since the rest of the students enrolled in hip-hop dance, we can calculate this as 20 - 4 - 4 = 12 students.
+Finally, let's find out what percentage of the entire students enrolled in hip-hop dance. Since 12 out of the 20 students enrolled in hip-hop dance, we can calculate this as (12 / 20) * 100 = 0.6 * 100 = 60%.
+Therefore, 60% of the entire students enrolled in hip-hop dance.
+#### 60
+The answer is: 60",60.0,True,True,True,256,2568.661029815674,7.527968076057732,10539.342016220093,1995.8945927619934,477.787688,627.572736,3.564,260.234375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0014,math,86,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,60,"First, let's find out how many students enrolled in contemporary dance. Since 20% of the 20 students enrolled in contemporary dance, we can calculate this as 20 * 20/100 = 4 students.
+Next, let's find out how many students are left after 4 students enrolled in contemporary dance. Since there were originally 20 students, we subtract the 4 students who enrolled in contemporary dance to get 20 - 4 = 16 students.
+Now, let's find out how many students enrolled in jazz dance. Since 25% of the remaining 16 students enrolled in jazz dance, we can calculate this as 16 * 25/100 = 4 students.
+Finally, let's find out how many students enrolled in hip-hop dance. Since 4 students enrolled in contemporary dance and 4 students enrolled in jazz dance, we subtract these from the total number of students to get 20 - 4 - 4 = 12 students.
+Therefore, the percentage of the entire students who enrolled in hip-hop dance is 12/20 * 100% = 60%.
+The answer is: 60",60.0,True,,False,256,2551.796667575836,31.828704421408474,10470.298915863037,2019.9100742340088,252.762602,627.572736,3.564,260.65234375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0014,math,86,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,60,"First, let's find out how many students enrolled in contemporary dance. Since 20% of the 20 students enrolled in contemporary dance, we can calculate this as 20 * 0.2 = 4 students.
+Next, let's find out how many students enrolled in jazz dance. Since 25% of the remaining students enrolled in jazz dance, we need to first find out how many students are left after 4 students enrolled in contemporary dance. There are 20 - 4 = 16 students left. Then, we can calculate 25% of 16 students, which is 16 * 0.25 = 4 students.
+Now, let's find out how many students enrolled in hip-hop dance. Since 4 students enrolled in contemporary dance and 4 students enrolled in jazz dance, there are 20 - 4 - 4 = 12 students left who enrolled in hip-hop dance.
+Finally, we can calculate the percentage of students who enrolled in hip-hop dance. Since there are 20 students in total and 12 students enrolled in hip-hop dance, the percentage is 12/20 = 60%.
+The answer is: 60",60.0,True,,False,256,2211.8815937042236,0.424767998396419,10246.981327056885,1981.3708453178406,481.349632,627.572736,3.564,262.3125,16,16,"{""init"": 1, ""gen_content"": 112, ""prompt_content"": 15}",True
+S0_split_full,gsm8k_0015,math,128,none,all,bf16,125,"First, let's calculate the potential increase in value for the jewelry market. If the jewelry market goes up 2.5%, the increase in value would be $5,000 * 2.5% = $125.
+Next, let's calculate the potential increase in value for the electronic gadgets market. If the electronic gadgets market rises 1.2%, the increase in value would be $8,000 * 1.2% = $96.
+To maximize profit, the merchant should choose the option with the higher potential increase in value. In this case, the jewelry market has a higher potential increase in value, so the merchant should choose to purchase the jewelry.
+The profit would be the increase in value of the jewelry market, which is $125.
+The final answer is: 125",125.0,True,,True,256,3305.84227848053,0.44425599928945303,13697.424129486084,2082.5024938583374,704.647168,704.643072,3.564,384.0,256,1,,True
+S1_split_exact_delta,gsm8k_0015,math,128,none,all,exact_delta,125,"First, let's calculate the potential increase in value for the jewelry market. If the jewelry market goes up 2.5%, the increase in value would be $5,000 * 2.5% = $125.
+Next, let's calculate the potential increase in value for the electronic gadgets market. If the electronic gadgets market rises 1.2%, the increase in value would be $8,000 * 1.2% = $96.
+To maximize profit, the merchant should choose the option with the higher potential increase in value. In this case, the jewelry market has a higher potential increase in value, so the merchant should choose to purchase the jewelry.
+The profit would be the increase in value of the jewelry market, which is $125.
+The final answer is: 125",125.0,True,True,True,256,3868.3719987869263,8.571264035999775,13690.015773773193,2089.810747385025,702.2848,704.643072,3.564,382.5,256,1,,True
+C1_cache_full,gsm8k_0015,math,128,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,125,"First, let's calculate the profit if the merchant chooses to buy the jewelry.
+The jewelry market goes up 2.5%, so the profit would be $5,000 * 2.5% = $125.
+Next, let's calculate the profit if the merchant chooses to buy the electronic gadgets.
+The electronic gadgets market goes up 1.2%, so the profit would be $8,000 * 1.2% = $96.
+To maximize profit, the merchant should choose to buy the jewelry, which would give him a profit of $125.
+The final answer: 125",125.0,True,,False,256,3304.3866877555847,0.42959999933373183,10426.60273361206,1990.3416965007782,704.647168,704.643072,3.564,384.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0015,math,128,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,125,"First, let's calculate the profit if the merchant chooses to buy the jewelry.
+The jewelry market goes up 2.5%, so the profit would be $5,000 * 2.5% = $125.
+Next, let's calculate the profit if the merchant chooses to buy the electronic gadgets.
+The electronic gadgets market goes up 1.2%, so the profit would be $8,000 * 1.2% = $96.
+To maximize profit, the merchant should choose to buy the jewelry, which would give him a profit of $125.
+The final answer: 125",125.0,True,True,False,256,3376.913022518158,0.434783999575302,10406.773086547852,1992.978497505188,481.614848,704.643072,3.564,262.45703125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0015,math,128,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,125,"First, let's calculate the profit if the merchant chooses to buy the jewelry.
+The jewelry market goes up 2.5%, so the profit would be $5,000 * 2.5% = $125.
+Next, let's calculate the profit if the merchant chooses to buy the electronic gadgets.
+The electronic gadgets market goes up 1.2%, so the profit would be $8,000 * 1.2% = $96.
+To maximize profit, the merchant should choose to buy the jewelry, which would give him a profit of $125.
+The final answer: 125",125.0,True,True,False,256,3428.6624913215637,11.467712083365768,10703.90188407898,2001.4963846206665,481.027584,704.643072,3.564,262.0,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0015,math,128,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,125,"First, let's calculate the potential profit if the merchant chooses to purchase the jewelry.
+The jewelry market will go up 2.5%, so the profit will be 2.5% of $5,000.
+2.5% of $5,000 is (2.5/100) * $5,000 = $125.
+So, the potential profit from purchasing the jewelry is $125.
+Next, let's calculate the potential profit if the merchant chooses to purchase the electronic gadgets.
+The electronic gadgets market will rise 1.2%, so the profit will be 1.2% of $8,000.
+1.2% of $8,000 is (1.2/100) * $8,000 = $96.
+So, the potential profit from purchasing the electronic gadgets is $96.
+To maximize profit, the merchant should choose the option with the higher potential profit.
+Since $125 is greater than $96, the merchant should choose to purchase the jewelry.
+Therefore, the maximum profit the merchant can make is $125.
+#### 125The answer is: 125",125.0,True,,False,256,3493.3432607650757,31.538656521588564,10396.929790496826,2019.0927321910858,256.074218,704.643072,3.564,262.45703125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0015,math,128,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,125,"First, let's calculate the potential profit if the merchant chooses to purchase the jewelry.
+The jewelry market is expected to go up 2.5%, so the potential profit would be 2.5% of $5,000.
+2.5% of $5,000 is (2.5/100) * $5,000 = $125.
+Next, let's calculate the potential profit if the merchant chooses to purchase the electronic gadgets.
+The electronic gadgets market is expected to rise 1.2%, so the potential profit would be 1.2% of $8,000.
+1.2% of $8,000 is (1.2/100) * $8,000 = $96.
+To maximize profit, the merchant should choose the option with the higher potential profit.
+Since $125 is greater than $96, the merchant should choose to purchase the jewelry.
+Therefore, the merchant would make a profit of $125.
+#### 125
+The answer is: 125",125.0,True,,False,256,2432.6530923843384,0.4497279991628602,11231.889949798584,2559.9551014900208,485.256192,704.643072,3.564,264.44140625,15,15,"{""init"": 1, ""gen_content"": 105, ""prompt_content"": 14, ""gen_age"": 4}",True
+S0_split_full,gsm8k_0016,math,87,none,all,bf16,230,"The trains travel 80 miles on the first day and 150 miles on the second day, so the total distance covered by each train is 80 + 150 = 230 miles.
+The final answer: 230",230.0,True,,True,256,2521.3445167541504,0.41871999902650714,17364.137935638428,4594.775963306427,629.41184,629.407744,3.564,343.0,256,1,,True
+S1_split_exact_delta,gsm8k_0016,math,87,none,all,exact_delta,230,"The trains travel 80 miles on the first day and 150 miles on the second day, so the total distance covered by each train is 80 + 150 = 230 miles.
+The final answer: 230",230.0,True,True,True,256,2534.2127361297607,8.737760088406503,16905.749156951904,3668.509514570236,627.301704,629.407744,3.564,341.66015625,256,1,,True
+C1_cache_full,gsm8k_0016,math,87,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,230,"The trains travel 80 miles westward on the first day, so the distance covered by each train on the first day is 80 miles.
+The next day, they travel 150 miles northwards, so the distance covered by each train on the second day is 150 miles.
+To find the total distance covered by each train in the two days, we add the distances covered on each day: 80 miles + 150 miles = 230 miles.
+Therefore, the distance covered by each train in the two days is 230 miles.
+The final answer: 230",230.0,True,,False,256,2248.2793593406677,0.438751999870874,10432.744415283203,1992.6006073951721,629.41184,629.407744,3.564,343.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0016,math,87,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,230,"The trains travel 80 miles westward on the first day, so the distance covered by each train on the first day is 80 miles.
+The next day, they travel 150 miles northwards, so the distance covered by each train on the second day is 150 miles.
+To find the total distance covered by each train in the two days, we add the distances covered on each day: 80 miles + 150 miles = 230 miles.
+Therefore, the distance covered by each train in the two days is 230 miles.
+The final answer: 230",230.0,True,True,False,256,2258.1057300567627,0.427359999390319,10323.611742019653,1971.2972795963287,478.38208,629.407744,3.564,260.6953125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0016,math,87,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,230,"The trains travel 80 miles westward on the first day, so the distance covered by each train on the first day is 80 miles.
+The next day, they travel 150 miles northwards, so the distance covered by each train on the second day is 150 miles.
+To find the total distance covered by each train in the two days, we add the distances covered on each day: 80 miles + 150 miles = 230 miles.
+Therefore, the distance covered by each train in the two days is 230 miles.
+The final answer: 230",230.0,True,True,False,256,2159.303740501404,7.104800082277507,15476.97407913208,4342.074399232864,477.873708,629.407744,3.564,260.28125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0016,math,87,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,230,"The trains travel 80 miles westward on the first day, so the distance covered by each train on the first day is 80 miles.
+The next day, they travel 150 miles northwards, so the distance covered by each train on the second day is 150 miles.
+To find the total distance covered by each train in the two days, we add the distances covered on each day: 80 miles + 150 miles = 230 miles.
+Therefore, the distance covered by each train in the two days is 230 miles.
+The final answer: 230",230.0,True,,False,256,3034.87708902359,32.10611252859235,11803.973205566406,2806.4772859811783,252.84145,629.407744,3.564,260.6953125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0016,math,87,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,230,"The trains travel 80 miles westward on the first day, so the distance covered by each train on the first day is 80 miles.
+On the second day, they travel 150 miles northwards, so the distance covered by each train on the second day is 150 miles.
+The total distance covered by each train in the two days is 80 miles + 150 miles = 230 miles.
+Therefore, the distance covered by each train in the two days is 230 miles.
+The answer is: 230",230.0,True,,False,256,3210.5964851379395,0.4665280006593093,13047.554082870483,3933.5693061351776,478.998528,629.407744,3.564,261.03125,12,12,"{""init"": 1, ""gen_content"": 56, ""prompt_content"": 8, ""gen_age"": 28, ""prompt_age"": 3}",True
+S0_split_full,gsm8k_0017,math,92,none,all,bf16,57500,"Jill earns $20 per hour as a teacher, so she earns 20 * 35 = $700 per week as a teacher.
+Jill earns $30 per hour as a cheerleading coach, so she earns 30 * 15 = $450 per week as a coach.
+Her total weekly earnings are 700 + 450 = $1150 per week.
+Since she works 50 weeks a year, her annual salary is 1150 * 50 = $57500.
+Therefore, Jill's annual salary is $57500.
+The answer is: 57500",57500.0,True,,True,256,2957.319814682007,0.42579199955798686,13307.059219360352,2148.245690345764,638.58688,638.582784,3.564,348.0,256,1,,True
+S1_split_exact_delta,gsm8k_0017,math,92,none,all,exact_delta,57500,"Jill earns $20 per hour as a teacher, so she earns 20 * 35 = $700 per week as a teacher.
+Jill earns $30 per hour as a cheerleading coach, so she earns 30 * 15 = $450 per week as a coach.
+Her total weekly earnings are 700 + 450 = $1150 per week.
+Since she works 50 weeks a year, her annual salary is 1150 * 50 = $57500.
+Therefore, Jill's annual salary is $57500.
+The answer is: 57500",57500.0,True,True,True,256,2682.9577598571777,8.175103910267353,13242.248168945312,2068.232416152954,636.445984,638.582784,3.564,346.640625,256,1,,True
+C1_cache_full,gsm8k_0017,math,92,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,57500,"Jill earns $20 per hour as a teacher and $30 per hour as a cheerleading coach.
+She works 35 hours a week as a teacher and 15 hours a week as a coach.
+So, her weekly earnings as a teacher are $20 * 35 = $700.
+Her weekly earnings as a cheerleading coach are $30 * 15 = $450.
+Her total weekly earnings are $700 + $450 = $1150.
+Since she works 50 weeks a year, her annual salary is $1150 * 50 = $57500.
+Therefore, Jill's annual salary is $57500.
+The answer is: 57500",57500.0,True,,False,256,3514.161346435547,0.4481599995633587,10392.67753791809,2013.1791393756866,638.58688,638.582784,3.564,348.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0017,math,92,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,57500,"Jill earns $20 per hour as a teacher and $30 per hour as a cheerleading coach.
+She works 35 hours a week as a teacher and 15 hours a week as a coach.
+So, her weekly earnings as a teacher are $20 * 35 = $700.
+Her weekly earnings as a cheerleading coach are $30 * 15 = $450.
+Her total weekly earnings are $700 + $450 = $1150.
+Since she works 50 weeks a year, her annual salary is $1150 * 50 = $57500.
+Therefore, Jill's annual salary is $57500.
+The answer is: 57500",57500.0,True,True,False,256,2583.84322309494,0.4091519992798567,11628.83879852295,2582.2130625247955,478.77632,638.582784,3.564,260.91015625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0017,math,92,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,57500,"Jill earns $20 per hour as a teacher and $30 per hour as a cheerleading coach.
+She works 35 hours a week as a teacher and 15 hours a week as a coach.
+So, her weekly earnings as a teacher are $20 * 35 = $700.
+Her weekly earnings as a cheerleading coach are $30 * 15 = $450.
+Her total weekly earnings are $700 + $450 = $1150.
+Since she works 50 weeks a year, her annual salary is $1150 * 50 = $57500.
+Therefore, Jill's annual salary is $57500.
+The answer is: 57500",57500.0,True,True,False,256,2165.0748438835144,7.147840090561658,11914.160820007324,2637.665826320648,478.224916,638.582784,3.564,260.47265625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0017,math,92,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,57500,"Jill earns $20 per hour as a teacher and $30 per hour as a cheerleading coach.
+She works 35 hours a week as a teacher and 15 hours a week as a coach.
+So, her weekly earnings as a teacher are $20 * 35 = $700.
+Her weekly earnings as a cheerleading coach are $30 * 15 = $450.
+Her total weekly earnings are $700 + $450 = $1150.
+Since she works 50 weeks a year, her annual salary is $1150 * 50 = $57500.
+Therefore, Jill's annual salary is $57500.
+The answer is: 57500",57500.0,True,,False,256,2172.091522216797,31.7797445403412,14518.985921859741,3547.164087295532,253.23569,638.582784,3.564,260.91015625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0017,math,92,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,57500,"Jill earns $20 per hour as a teacher and $30 per hour as a cheerleading coach.
+She works 35 hours a week as a teacher, so she earns $20 * 35 = $700 per week as a teacher.
+She works 15 hours a week as a cheerleading coach, so she earns $30 * 15 = $450 per week as a cheerleading coach.
+Her total weekly earnings are $700 + $450 = $1150 per week.
+She works 50 weeks a year, so her annual salary is $1150 * 50 = $57500.
+Therefore, her annual salary is $57500.
+The answer is: 57500",57500.0,True,,False,256,2771.033278942108,0.4505279988516122,10158.556482315063,2136.442689180374,480.733184,638.582784,3.564,261.9765625,14,14,"{""init"": 1, ""gen_content"": 78, ""prompt_content"": 11, ""gen_age"": 17, ""prompt_age"": 2}",True
+S0_split_full,gsm8k_0018,math,63,none,all,bf16,7,"Claire makes a 3 egg omelet every morning, so she eats 3 eggs per day.
+There are 7 days in a week, so in 1 week, Claire eats 3 eggs x 7 days = 21 eggs.
+In 4 weeks, Claire will eat 21 eggs x 4 weeks = 84 eggs.
+There are 12 eggs in a dozen, so 84 eggs is equal to 84 eggs / 12 eggs per dozen = 7 dozens of eggs.
+Therefore, Claire will eat 7 dozens of eggs in 4 weeks.
+The final answer: 7",7.0,True,,True,256,2597.5408601760864,0.41596799914259464,12816.783557891846,2034.8859241008759,585.371648,585.367552,3.564,319.0,256,1,,True
+S1_split_exact_delta,gsm8k_0018,math,63,none,all,exact_delta,7,"Claire makes a 3 egg omelet every morning, so she eats 3 eggs per day.
+There are 7 days in a week, so in 1 week, Claire eats 3 eggs x 7 days = 21 eggs.
+In 4 weeks, Claire will eat 21 eggs x 4 weeks = 84 eggs.
+There are 12 eggs in a dozen, so 84 eggs is equal to 84 eggs / 12 eggs per dozen = 7 dozens of eggs.
+Therefore, Claire will eat 7 dozens of eggs in 4 weeks.
+The final answer: 7",7.0,True,True,True,256,3706.6744651794434,9.242463931441307,12776.774196624756,2038.2772200107574,583.40916,585.367552,3.564,317.75390625,256,1,,True
+C1_cache_full,gsm8k_0018,math,63,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,7,"Claire makes a 3 egg omelet every morning, so she eats 3 eggs per day.
+There are 7 days in a week, so in 1 week, Claire eats 3 eggs x 7 days = 21 eggs.
+In 4 weeks, Claire eats 21 eggs x 4 weeks = 84 eggs.
+There are 12 eggs in a dozen, so 84 eggs is equal to 84 / 12 = 7 dozens of eggs.
+Therefore, Claire will eat 7 dozens of eggs in 4 weeks.
+The answer is: 7",7.0,True,,False,256,3093.8801894187927,0.4350079991854727,10403.50329208374,2008.4919304847717,585.371648,585.367552,3.564,319.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0018,math,63,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,7,"Claire makes a 3 egg omelet every morning, so she eats 3 eggs per day.
+There are 7 days in a week, so in 1 week, Claire eats 3 eggs x 7 days = 21 eggs.
+In 4 weeks, Claire eats 21 eggs x 4 weeks = 84 eggs.
+There are 12 eggs in a dozen, so 84 eggs is equal to 84 / 12 = 7 dozens of eggs.
+Therefore, Claire will eat 7 dozens of eggs in 4 weeks.
+The answer is: 7",7.0,True,True,False,256,3332.551552772522,0.4405759987421334,10262.85905456543,1962.642781496048,476.489728,585.367552,3.564,259.6640625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0018,math,63,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,7,"Claire makes a 3 egg omelet every morning, so she eats 3 eggs per day.
+There are 7 days in a week, so in 1 week, Claire eats 3 eggs x 7 days = 21 eggs.
+In 4 weeks, Claire eats 21 eggs x 4 weeks = 84 eggs.
+There are 12 eggs in a dozen, so 84 eggs is equal to 84 / 12 = 7 dozens of eggs.
+Therefore, Claire will eat 7 dozens of eggs in 4 weeks.
+The answer is: 7",7.0,True,True,False,256,3310.3141412734985,7.077344072517008,10514.072189331055,2001.3389427661896,475.95984,585.367552,3.564,259.23828125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0018,math,63,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,7,"Claire makes a 3 egg omelet every morning, so she eats 3 eggs per day.
+There are 7 days in a week, so in 1 week, Claire eats 3 eggs x 7 days = 21 eggs.
+In 4 weeks, Claire eats 21 eggs x 4 weeks = 84 eggs.
+There are 12 eggs in a dozen, so Claire eats 84 eggs / 12 eggs per dozen = 7 dozens of eggs.
+#### 7The answer is: 7",7.0,True,,False,256,3227.583364009857,31.726720449514687,10417.997117996216,2013.9830706119537,250.949098,585.367552,3.564,259.6640625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0018,math,63,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,7,"Claire makes a 3 egg omelet every morning, so she eats 3 eggs per day.
+There are 7 days in a week, so in 1 week, Claire eats 3 eggs x 7 days = 21 eggs.
+In 4 weeks, Claire eats 21 eggs x 4 weeks = 84 eggs.
+There are 12 eggs in a dozen, so 84 eggs is equal to 84 eggs / 12 eggs per dozen = 7 dozens of eggs.
+Therefore, Claire will eat 7 dozens of eggs in 4 weeks.
+The answer is: 7",7.0,True,,False,256,2029.0606718063354,0.4402879992267117,9551.293647766113,1957.7985886335373,476.934144,585.367552,3.564,259.90625,12,12,"{""init"": 1, ""gen_content"": 61, ""prompt_content"": 8, ""gen_age"": 26, ""prompt_age"": 3}",True
+S0_split_full,gsm8k_0019,math,99,none,all,bf16,6,"Marissa has walked a total of 4 + 2 = 6 miles so far.
+She has taken 1 + 1 = 2 hours to walk 6 miles.
+To have an average speed of 4 miles per hour, she needs to walk a total of 12 miles in 3 hours.
+So, she needs to walk the remaining 12 - 6 = 6 miles in 3 - 2 = 1 hour.
+Therefore, she needs to walk the remaining distance at a speed of 6 miles / 1 hour = 6 miles per hour.
+The answer is: 6",6.0,True,,True,256,2776.57497215271,0.44550399924628437,13302.063522338867,2064.6952679157257,651.431936,651.42784,3.564,355.0,256,1,,True
+S1_split_exact_delta,gsm8k_0019,math,99,none,all,exact_delta,6,"Marissa has walked a total of 4 + 2 = 6 miles so far.
+She has taken 1 + 1 = 2 hours to walk 6 miles.
+To have an average speed of 4 miles per hour, she needs to walk a total of 12 miles in 3 hours.
+So, she needs to walk the remaining 12 - 6 = 6 miles in 3 - 2 = 1 hour.
+Therefore, she needs to walk the remaining distance at a speed of 6 miles / 1 hour = 6 miles per hour.
+The answer is: 6",6.0,True,True,True,256,3687.9574117660522,8.653184082359076,13269.989086151123,2056.600923538208,649.247976,651.42784,3.564,353.61328125,256,1,,True
+C1_cache_full,gsm8k_0019,math,99,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,6,"Marissa has walked a total of 4 + 2 = 6 miles so far.
+She has walked a total of 1 + 1 = 2 hours so far.
+She wants her average speed to be 4 miles per hour, so she needs to walk a total of 4 * 3 = 12 miles in 3 hours.
+She still needs to walk 12 - 6 = 6 miles.
+She needs to walk the remaining 6 miles in 3 - 2 = 1 hour.
+Therefore, she needs to walk the remaining distance at a speed of 6 / 1 = 6 miles per hour.
+The answer is: 6",6.0,True,,False,256,3301.6946778297424,0.43839999951887876,10548.588314056396,2057.546174287796,651.431936,651.42784,3.564,355.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0019,math,99,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,6,"Marissa has walked a total of 4 + 2 = 6 miles so far.
+She has walked a total of 1 + 1 = 2 hours so far.
+She wants her average speed to be 4 miles per hour, so she needs to walk a total of 4 * 3 = 12 miles in 3 hours.
+She still needs to walk 12 - 6 = 6 miles.
+She needs to walk the remaining 6 miles in 3 - 2 = 1 hour.
+Therefore, she needs to walk the remaining distance at a speed of 6 / 1 = 6 miles per hour.
+The answer is: 6",6.0,True,True,False,256,3099.5149488449097,0.4404799989424646,10414.531505584717,1996.7736320495605,479.328256,651.42784,3.564,261.2109375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0019,math,99,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,6,"Marissa has walked a total of 4 + 2 = 6 miles so far.
+She has walked a total of 1 + 1 = 2 hours so far.
+She wants her average speed to be 4 miles per hour, so she needs to walk a total of 4 * 3 = 12 miles in 3 hours.
+She still needs to walk 12 - 6 = 6 miles.
+She needs to walk the remaining 6 miles in 3 - 2 = 1 hour.
+Therefore, she needs to walk the remaining distance at a speed of 6 / 1 = 6 miles per hour.
+The answer is: 6",6.0,True,True,False,256,2695.4794602394104,7.009248051792383,10482.596809387207,1985.0586557388306,478.784024,651.42784,3.564,260.77734375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0019,math,99,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,6,"Marissa has walked a total of 4 + 2 = 6 miles so far.
+She has walked a total of 1 + 1 = 2 hours so far.
+She wants her average speed to be 4 miles per hour, so she needs to walk a total of 4 * 3 = 12 miles in 3 hours.
+She has 12 - 6 = 6 miles left to walk.
+She needs to walk the remaining 6 miles in 3 - 2 = 1 hour.
+Therefore, she needs to walk the remaining distance at a speed of 6 / 1 = 6 miles per hour.
+The answer is: 6",6.0,True,,False,256,2248.493954181671,33.89446434844285,10354.895944595337,1978.3341753482819,253.787626,651.42784,3.564,261.2109375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0019,math,99,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,6,"Marissa has walked a total of 4 + 2 = 6 miles so far.
+She has walked 6 miles in 1 + 1 = 2 hours.
+To have an average speed of 4 miles per hour, she needs to walk a total of 4 * 3 = 12 miles in 3 hours.
+She still needs to walk 12 - 6 = 6 miles.
+Therefore, she needs to walk the remaining 6 miles in 3 - 2 = 1 hour.
+So, she needs to walk the remaining distance at a speed of 6 / 1 = 6 miles per hour.
+The answer is: 6",6.0,True,,False,256,2206.571933746338,0.4481599994469434,9649.711793899536,1979.0688045024872,480.733184,651.42784,3.564,261.9765625,13,13,"{""init"": 1, ""gen_content"": 64, ""prompt_content"": 9, ""gen_age"": 24, ""prompt_age"": 3}",True
+S0_split_full,gsm8k_0020,math,97,none,all,bf16,15,"First, let's calculate the amount of water in the orange drink. Since the orange drink is two-thirds water, the amount of water is (2/3) * 10 liters = 6.67 liters.
+Next, let's calculate the amount of water in the pineapple drink. Since the pineapple drink is three-fifths water, the amount of water is (3/5) * 15 liters = 9 liters.
+Now, let's calculate the total amount of water in the mixture. The total amount of water is 6.67 liters + 9 liters = 15.67 liters.
+However, we spilled one liter of the orange drink, so the total amount of water in the remaining 24 liters is 15.67 liters - 1 liter = 14.67 liters.
+Therefore, the amount of water in the remaining 24 liters is 14.67 liters.
+The answer is: 14.67",14.67,False,,True,256,3638.325827598572,0.43833599996287376,13224.176872253418,2082.3331468105316,647.76192,647.757824,3.564,353.0,256,1,,False
+S1_split_exact_delta,gsm8k_0020,math,97,none,all,exact_delta,15,"First, let's calculate the amount of water in the orange drink. Since the orange drink is two-thirds water, the amount of water is (2/3) * 10 liters = 6.67 liters.
+Next, let's calculate the amount of water in the pineapple drink. Since the pineapple drink is three-fifths water, the amount of water is (3/5) * 15 liters = 9 liters.
+Now, let's calculate the total amount of water in the mixture. The total amount of water is 6.67 liters + 9 liters = 15.67 liters.
+However, we spilled one liter of the orange drink, so the total amount of water in the remaining 24 liters is 15.67 liters - 1 liter = 14.67 liters.
+Therefore, the amount of water in the remaining 24 liters is 14.67 liters.
+The answer is: 14.67",14.67,False,True,True,256,3022.835425376892,8.750080101191998,17309.709022521973,3554.4338455200195,645.590264,647.757824,3.564,351.62109375,256,1,,False
+C1_cache_full,gsm8k_0020,math,97,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,15,"First, let's calculate the amount of water in the orange drink. Since the orange drink is two-thirds water, the amount of water is 2/3 * 10 liters = 6.67 liters.
+Next, let's calculate the amount of water in the pineapple drink. Since the pineapple drink is three-fifths water, the amount of water is 3/5 * 15 liters = 9 liters.
+Now, let's calculate the total amount of water in the mixture. The total amount of water is 6.67 liters + 9 liters = 15.67 liters.
+However, we spilled one liter of the orange drink, so the total amount of water in the mixture is 15.67 liters - 1 liter = 14.67 liters.
+Finally, let's calculate the amount of water in the remaining 24 liters. Since the total amount of water in the mixture is 14.67 liters, the amount of water in the remaining 24 liters is 14.67 liters / 24 liters = 0.61 liters.
+#### 0.61
+The answer is: 0.61",0.61,False,,False,256,2231.7212867736816,0.45919999945908785,14639.596700668335,3961.7931241989136,647.76192,647.757824,3.564,353.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C2_cache_aware,gsm8k_0020,math,97,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,15,"First, let's calculate the amount of water in the orange drink. Since the orange drink is two-thirds water, the amount of water is 2/3 * 10 liters = 6.67 liters.
+Next, let's calculate the amount of water in the pineapple drink. Since the pineapple drink is three-fifths water, the amount of water is 3/5 * 15 liters = 9 liters.
+Now, let's calculate the total amount of water in the mixture. The total amount of water is 6.67 liters + 9 liters = 15.67 liters.
+However, we spilled one liter of the orange drink, so the total amount of water in the mixture is 15.67 liters - 1 liter = 14.67 liters.
+Finally, let's calculate the amount of water in the remaining 24 liters. Since the total amount of water in the mixture is 14.67 liters, the amount of water in the remaining 24 liters is 14.67 liters / 24 liters = 0.61 liters.
+#### 0.61
+The answer is: 0.61",0.61,False,True,False,256,2133.0999341011047,0.4355200001737103,13090.400274276733,3514.33206987381,479.17056,647.757824,3.564,261.125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C3_cache_aware_exact,gsm8k_0020,math,97,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,15,"First, let's calculate the amount of water in the orange drink. Since the orange drink is two-thirds water, the amount of water is 2/3 * 10 liters = 6.67 liters.
+Next, let's calculate the amount of water in the pineapple drink. Since the pineapple drink is three-fifths water, the amount of water is 3/5 * 15 liters = 9 liters.
+Now, let's calculate the total amount of water in the mixture. The total amount of water is 6.67 liters + 9 liters = 15.67 liters.
+However, we spilled one liter of the orange drink, so the total amount of water in the mixture is 15.67 liters - 1 liter = 14.67 liters.
+Finally, let's calculate the amount of water in the remaining 24 liters. Since the total amount of water in the mixture is 14.67 liters, the amount of water in the remaining 24 liters is 14.67 liters / 24 liters = 0.61 liters.
+#### 0.61
+The answer is: 0.61",0.61,False,True,False,256,2179.842465400696,7.062592065427452,10495.795370101929,1989.612640619278,478.604812,647.757824,3.564,260.6796875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C4_cache_aware_int8,gsm8k_0020,math,97,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,15,"First, let's calculate the amount of water in the orange drink. Since the orange drink is two-thirds water, the amount of water is (2/3) * 10 liters = 6.67 liters.
+Next, let's calculate the amount of water in the pineapple drink. Since the pineapple drink is three-fifths water, the amount of water is (3/5) * 15 liters = 9 liters.
+Now, let's calculate the total amount of water in the mixture. The total amount of water is 6.67 liters + 9 liters = 15.67 liters.
+However, we spilled one liter of the orange drink, so we need to subtract that from the total amount of water. The remaining amount of water is 15.67 liters - 1 liter = 14.67 liters.
+Finally, we need to calculate the amount of water in the remaining 24 liters. Since the total amount of water is 14.67 liters, the amount of water in the remaining 24 liters is 14.67 liters.
+The answer is: 14.67",14.67,False,,False,256,2192.4104743003845,31.748352346010506,12339.411682128906,2755.0344076156616,253.62993,647.757824,3.564,261.125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+A1_adaptive_cache_aware,gsm8k_0020,math,97,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,15,"First, let's calculate the amount of water in the orange drink. Since the orange drink is two-thirds water, the amount of water is 2/3 * 10 liters = 6.67 liters.
+Next, let's calculate the amount of water in the pineapple drink. Since the pineapple drink is three-fifths water, the amount of water is 3/5 * 15 liters = 9 liters.
+Now, let's calculate the total amount of water in the mixture. The total amount of water is 6.67 liters + 9 liters = 15.67 liters.
+However, we spilled one liter of the orange drink, so the total amount of water in the remaining 24 liters is 15.67 liters - 1 liter = 14.67 liters.
+Therefore, the amount of water in the remaining 24 liters is 14.67 liters.
+The answer is: 14.67",14.67,False,,False,256,2145.052354335785,0.4423680001636967,14770.683738708496,4117.605759143829,481.923072,647.757824,3.564,262.625,15,15,"{""init"": 1, ""gen_content"": 93, ""prompt_content"": 13, ""gen_age"": 9, ""prompt_age"": 1}",False
+S0_split_full,gsm8k_0021,math,80,none,all,bf16,14,"Raymond was born 6 years before Samantha, so if Samantha is now 31, then Raymond is 31 - 6 = 25 years old.
+Raymond had a son at the age of 23, so his son was born 25 - 23 = 2 years ago.
+Therefore, Raymond's son was born 2 years ago.
+The final answer: 2",2.0,False,,True,256,2709.3848242759705,0.38783999939914793,14947.931240081787,3022.3494317531586,616.566784,616.562688,3.564,336.0,256,1,,False
+S1_split_exact_delta,gsm8k_0021,math,80,none,all,exact_delta,14,"Raymond was born 6 years before Samantha, so if Samantha is now 31, then Raymond is 31 - 6 = 25 years old.
+Raymond had a son at the age of 23, so his son was born 25 - 23 = 2 years ago.
+Therefore, Raymond's son was born 2 years ago.
+The final answer: 2",2.0,False,True,True,256,2575.9164175987244,8.375135910697281,14784.32823562622,2549.7645387649536,614.499712,616.562688,3.564,334.6875,256,1,,False
+C1_cache_full,gsm8k_0021,math,80,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,14,"Raymond was born 6 years before Samantha, so if Samantha is now 31, Raymond is 31 - 6 = 25 years old.
+Raymond had a son at the age of 23, so his son was born 25 - 23 = 2 years ago.
+Therefore, Raymond's son was born 2 years ago.
+The final answer: 2.",2.0,False,,False,256,2187.3098850250244,0.43852799967862666,14789.932628631592,4060.0587549209595,616.566784,616.562688,3.564,336.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C2_cache_aware,gsm8k_0021,math,80,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,14,"Raymond was born 6 years before Samantha, so if Samantha is now 31, Raymond is 31 - 6 = 25 years old.
+Raymond had a son at the age of 23, so his son was born 25 - 23 = 2 years ago.
+Therefore, Raymond's son was born 2 years ago.
+The final answer: 2.",2.0,False,True,False,256,2223.4657859802246,0.4388799996813759,12261.624826431274,3042.926370382309,477.830144,616.562688,3.564,260.39453125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C3_cache_aware_exact,gsm8k_0021,math,80,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,14,"Raymond was born 6 years before Samantha, so if Samantha is now 31, Raymond is 31 - 6 = 25 years old.
+Raymond had a son at the age of 23, so his son was born 25 - 23 = 2 years ago.
+Therefore, Raymond's son was born 2 years ago.
+The final answer: 2.",2.0,False,True,False,256,2137.261528491974,7.0636800662614405,10457.373094558716,1963.8506534099579,477.24288,616.562688,3.564,259.9375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+C4_cache_aware_int8,gsm8k_0021,math,80,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,14,"Raymond was born 6 years before Samantha, so if Samantha is now 31, Raymond is 31 - 6 = 25 years old.
+Raymond had a son at the age of 23, so his son was born 25 - 23 = 2 years ago.
+Therefore, Raymond's son was born 2 years ago.
+The final answer: 2.",2.0,False,,False,256,2010.4765400886536,33.77612780639902,13446.923160552979,3135.2424006462097,252.289514,616.562688,3.564,260.39453125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",False
+A1_adaptive_cache_aware,gsm8k_0021,math,80,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,14,"Raymond was born 6 years before Samantha, so if Samantha is now 31, Raymond is 31 - 6 = 25 years old.
+Raymond had a son at the age of 23, so his son was born 25 - 23 = 2 years ago.
+Therefore, Raymond's son was born 2 years ago.
+The final answer: 2",2.0,False,,False,256,2398.91228723526,0.6778240036219358,10126.102842330933,2400.991165161133,477.830144,616.562688,3.564,260.39453125,11,11,"{""init"": 1, ""gen_content"": 40, ""prompt_content"": 5, ""gen_age"": 36, ""prompt_age"": 5}",False
+S0_split_full,gsm8k_0022,math,89,none,all,bf16,7,"Billy's first 3 customers buy one DVD each, so he sells 3 DVDs to them.
+His next 2 customers buy 2 DVDs each, so he sells 2 * 2 = 4 DVDs to them.
+His last 3 customers don't buy any DVDs, so he sells 0 DVDs to them.
+In total, Billy sells 3 + 4 + 0 = 7 DVDs on Tuesday.
+The answer is: 7",7.0,True,,True,256,2649.007264614105,0.4121599989011884,13165.931106567383,2050.6618597507477,633.081856,633.07776,3.564,345.0,256,1,,True
+S1_split_exact_delta,gsm8k_0022,math,89,none,all,exact_delta,7,"Billy's first 3 customers buy one DVD each, so he sells 3 DVDs to them.
+His next 2 customers buy 2 DVDs each, so he sells 2 * 2 = 4 DVDs to them.
+His last 3 customers don't buy any DVDs, so he sells 0 DVDs to them.
+In total, Billy sells 3 + 4 + 0 = 7 DVDs on Tuesday.
+The answer is: 7",7.0,True,True,True,256,3036.377634525299,8.714048080146313,13181.874046325684,2052.7318987846375,630.959416,633.07776,3.564,343.65234375,256,1,,True
+C1_cache_full,gsm8k_0022,math,89,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,7,"Billy's first 3 customers buy one DVD each, so he sells 3 * 1 = 3 DVDs to these customers.
+His next 2 customers buy 2 DVDs each, so he sells 2 * 2 = 4 DVDs to these customers.
+His last 3 customers don't buy any DVDs, so he sells 0 DVDs to these customers.
+In total, Billy sells 3 + 4 + 0 = 7 DVDs on Tuesday.
+The answer is: 7",7.0,True,,False,256,3350.125213623047,0.4415679998928681,10291.70814704895,1969.4109752178192,633.081856,633.07776,3.564,345.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0022,math,89,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,7,"Billy's first 3 customers buy one DVD each, so he sells 3 * 1 = 3 DVDs to these customers.
+His next 2 customers buy 2 DVDs each, so he sells 2 * 2 = 4 DVDs to these customers.
+His last 3 customers don't buy any DVDs, so he sells 0 DVDs to these customers.
+In total, Billy sells 3 + 4 + 0 = 7 DVDs on Tuesday.
+The answer is: 7",7.0,True,True,False,256,3479.55668592453,0.4349759991746396,10328.502723693848,1980.252870798111,478.539776,633.07776,3.564,260.78125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0022,math,89,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,7,"Billy's first 3 customers buy one DVD each, so he sells 3 * 1 = 3 DVDs to these customers.
+His next 2 customers buy 2 DVDs each, so he sells 2 * 2 = 4 DVDs to these customers.
+His last 3 customers don't buy any DVDs, so he sells 0 DVDs to these customers.
+In total, Billy sells 3 + 4 + 0 = 7 DVDs on Tuesday.
+The answer is: 7",7.0,True,True,False,256,2553.8709411621094,7.0961600840091705,13980.243301391602,3470.8845415115356,477.966856,633.07776,3.564,260.33203125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0022,math,89,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,7,"Billy's first 3 customers buy one DVD each, so he sells 3 DVDs to these customers.
+His next 2 customers buy 2 DVDs each, so he sells 2 * 2 = 4 DVDs to these customers.
+His last 3 customers don't buy any DVDs, so he sells 0 DVDs to these customers.
+In total, Billy sells 3 + 4 + 0 = 7 DVDs on Tuesday.
+The final answer: 7",7.0,True,,False,256,3125.851487636566,31.814720395952463,12000.308755874634,2792.849885702133,252.999146,633.07776,3.564,260.78125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0022,math,89,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,7,"Billy's first 3 customers buy one DVD each, so he sells 3 DVDs to these customers.
+His next 2 customers buy 2 DVDs each, so he sells 2 * 2 = 4 DVDs to these customers.
+His last 3 customers don't buy any DVDs, so he sells 0 DVDs to these customers.
+In total, Billy sells 3 + 4 + 0 = 7 DVDs on Tuesday.
+The final answer: 7",7.0,True,,False,256,3137.791169166565,0.444927999866195,9531.975755691528,2053.8023653030396,478.539776,633.07776,3.564,260.78125,11,11,"{""init"": 1, ""gen_content"": 45, ""prompt_content"": 6, ""gen_age"": 34, ""prompt_age"": 4}",True
+S0_split_full,gsm8k_0023,math,74,none,all,bf16,8,"The candle burns from 1:00 PM to 5:00 PM, which is a total of 4 hours.
+Since the candle melts by 2 centimeters every hour, it will melt by 2 * 4 = 8 centimeters in total.
+Therefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.
+The answer is: 8",8.0,True,,True,256,2588.656229019165,0.41459199937526137,18938.09031677246,5054.338397502899,605.556736,605.55264,3.564,330.0,256,1,,True
+S1_split_exact_delta,gsm8k_0023,math,74,none,all,exact_delta,8,"The candle burns from 1:00 PM to 5:00 PM, which is a total of 4 hours.
+Since the candle melts by 2 centimeters every hour, it will melt by 2 * 4 = 8 centimeters in total.
+Therefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.
+The answer is: 8",8.0,True,True,True,256,3653.7227182388306,8.534016035497189,13893.516967773438,2787.855645418167,603.526576,605.55264,3.564,328.7109375,256,1,,True
+C1_cache_full,gsm8k_0023,math,74,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,8,"The candle burns for 4 hours from 1:00 PM to 5:00 PM.
+Since the candle melts by 2 centimeters every hour, it will melt by 2 * 4 = 8 centimeters.
+Therefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.
+The answer is: 8",8.0,True,,False,256,2430.609752178192,0.42921599943656474,13337.22170639038,3286.8637154102325,605.556736,605.55264,3.564,330.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0023,math,74,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,8,"The candle burns for 4 hours from 1:00 PM to 5:00 PM.
+Since the candle melts by 2 centimeters every hour, it will melt by 2 * 4 = 8 centimeters.
+Therefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.
+The answer is: 8",8.0,True,True,False,256,2158.373568534851,0.4339199996320531,15079.473310470581,3984.2953555583954,477.357056,605.55264,3.564,260.13671875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0023,math,74,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,8,"The candle burns for 4 hours from 1:00 PM to 5:00 PM.
+Since the candle melts by 2 centimeters every hour, it will melt by 2 * 4 = 8 centimeters.
+Therefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.
+The answer is: 8",8.0,True,True,False,256,3379.7994565963745,7.999296079855412,10443.697603225708,1967.673214673996,476.805652,605.55264,3.564,259.69921875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0023,math,74,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,8,"The candle burns for 4 hours from 1:00 PM to 5:00 PM.
+Since the candle melts by 2 centimeters every hour, it will melt by 2 * 4 = 8 centimeters.
+Therefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.
+The answer is: 8",8.0,True,,False,256,2281.3541173934937,32.91219226177782,10530.519706726074,2057.9285111427307,251.816426,605.55264,3.564,260.13671875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0023,math,74,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,8,"The candle burns from 1:00 PM to 5:00 PM, which is a total of 4 hours.
+Since the candle melts by 2 centimeters every hour, it will melt by 2 * 4 = 8 centimeters in total.
+Therefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.
+The final answer: 8",8.0,True,,False,256,2172.123773574829,0.7158400025218725,9338.649667739868,1964.7150374650955,477.357056,605.55264,3.564,260.13671875,11,11,"{""init"": 1, ""gen_content"": 43, ""prompt_content"": 6, ""gen_age"": 35, ""prompt_age"": 4}",True
+S0_split_full,gsm8k_0024,math,73,none,all,bf16,26,"Let's assume the original price of the book is $x.
+The discount is 25% of the original price, so the discount amount is 0.25x.
+The price Kyle paid is the original price minus the discount, which is x - 0.25x = 0.75x.
+We know that Kyle paid $19.50, so we can set up the equation 0.75x = 19.50.
+To solve for x, we divide both sides of the equation by 0.75: x = 19.50 / 0.75.
+Solving for x, we get x = 26.
+Therefore, the original price of the book was $26.
+The final answer is: 26",26.0,True,,True,256,3164.812735080719,0.4154879990965128,12894.825965881348,2063.890039205551,603.721728,603.717632,3.564,329.0,256,1,,True
+S1_split_exact_delta,gsm8k_0024,math,73,none,all,exact_delta,26,"Let's assume the original price of the book is $x.
+The discount is 25% of the original price, so the discount amount is 0.25x.
+The price Kyle paid is the original price minus the discount, which is x - 0.25x = 0.75x.
+We know that Kyle paid $19.50, so we can set up the equation 0.75x = 19.50.
+To solve for x, we divide both sides of the equation by 0.75: x = 19.50 / 0.75.
+Solving for x, we get x = 26.
+Therefore, the original price of the book was $26.
+The final answer is: 26",26.0,True,True,True,256,3531.5302057266235,8.590816043317318,12909.581314086914,2066.196921825409,601.69772,603.717632,3.564,327.71484375,256,1,,True
+C1_cache_full,gsm8k_0024,math,73,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,26,"Let's assume the original price of the book is $x.
+The discount is 25% of the original price, so the discount amount is 0.25x.
+The price Kyle paid is the original price minus the discount, which is x - 0.25x = 0.75x.
+We know that Kyle paid $19.50, so we can set up the equation 0.75x = 19.50.
+To solve for x, we divide both sides of the equation by 0.75: x = 19.50 / 0.75.
+The original price of the book is $19.50 / 0.75 = $26.
+The original price of the book is $26.
+The answer is: 26",26.0,True,,False,256,3084.490791797638,0.8539519860642031,11669.553857803345,2515.1396782398224,603.721728,603.717632,3.564,329.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0024,math,73,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,26,"Let's assume the original price of the book is $x.
+The discount is 25% of the original price, so the discount amount is 0.25x.
+The price Kyle paid is the original price minus the discount, which is x - 0.25x = 0.75x.
+We know that Kyle paid $19.50, so we can set up the equation 0.75x = 19.50.
+To solve for x, we divide both sides of the equation by 0.75: x = 19.50 / 0.75.
+The original price of the book is $19.50 / 0.75 = $26.
+The original price of the book is $26.
+The answer is: 26",26.0,True,True,False,256,2159.5913920402527,0.44115199928637594,14788.121871948242,3824.411204814911,477.278208,603.717632,3.564,260.09375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0024,math,73,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,26,"Let's assume the original price of the book is $x.
+The discount is 25% of the original price, so the discount amount is 0.25x.
+The price Kyle paid is the original price minus the discount, which is x - 0.25x = 0.75x.
+We know that Kyle paid $19.50, so we can set up the equation 0.75x = 19.50.
+To solve for x, we divide both sides of the equation by 0.75: x = 19.50 / 0.75.
+The original price of the book is $19.50 / 0.75 = $26.
+The original price of the book is $26.
+The answer is: 26",26.0,True,True,False,256,2773.629021167755,7.306208102963865,11751.751314163208,2747.3315558433533,476.733976,603.717632,3.564,259.66015625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0024,math,73,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,26,"Let's assume the original price of the book is $x.
+The discount is 25% of the original price, so the discount amount is 0.25x.
+The price Kyle paid is the original price minus the discount, which is x - 0.25x = 0.75x.
+We know that Kyle paid $19.50, so we can set up the equation 0.75x = 19.50.
+To solve for x, we divide both sides of the equation by 0.75: x = 19.50 / 0.75.
+The original price of the book is $19.50 / 0.75 = $26.
+The original price of the book is $26.
+The answer is: 26",26.0,True,,False,256,2913.55517244339,31.760000374168158,10499.239761352539,2025.8980784416199,251.737578,603.717632,3.564,260.09375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0024,math,73,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,26,"Let's assume the original price of the book is $x.
+The discount is 25% of the original price, so the discount amount is 0.25x.
+The price Kyle paid is the original price minus the discount, which is x - 0.25x = 0.75x.
+We know that Kyle paid $19.50, so we can set up the equation 0.75x = 19.50.
+To solve for x, we divide both sides of the equation by 0.75: x = 19.50 / 0.75.
+Therefore, the original price of the book is $26.
+The answer is: 26",26.0,True,,False,256,2093.5961632728577,0.4663679989753291,9702.683128356934,1965.8466277122498,478.3104,603.717632,3.564,260.65625,13,13,"{""init"": 1, ""gen_content"": 71, ""prompt_content"": 10, ""gen_age"": 21, ""prompt_age"": 2}",True
+S0_split_full,gsm8k_0025,math,102,none,all,bf16,2,"First, let's calculate the total cost of the chicken meal, milk, and apples.
+The cost of the chicken meal is $12.
+The cost of 5 packs of milk is 5 * $3 = $15.
+The cost of 4 apples is 4 * $1.50 = $6.
+The total cost of the chicken meal, milk, and apples is $12 + $15 + $6 = $33.
+Marie paid a total of $50, so the cost of the boxes of pizza is $50 - $33 = $17.
+Since each box of pizza costs $8.50, the number of boxes of pizza Marie ordered is $17 / $8.50 = 2.
+Therefore, Marie ordered 2 boxes of pizza.
+The answer is: 2",2.0,True,,True,256,2782.1044788360596,0.41849599953275174,13369.689628601074,2077.943608522415,656.93696,656.932864,3.564,358.0,256,1,,True
+S1_split_exact_delta,gsm8k_0025,math,102,none,all,exact_delta,2,"First, let's calculate the total cost of the chicken meal, milk, and apples.
+The cost of the chicken meal is $12.
+The cost of 5 packs of milk is 5 * $3 = $15.
+The cost of 4 apples is 4 * $1.50 = $6.
+The total cost of the chicken meal, milk, and apples is $12 + $15 + $6 = $33.
+Marie paid a total of $50, so the cost of the boxes of pizza is $50 - $33 = $17.
+Since each box of pizza costs $8.50, the number of boxes of pizza Marie ordered is $17 / $8.50 = 2.
+Therefore, Marie ordered 2 boxes of pizza.
+The answer is: 2",2.0,True,True,True,256,3245.683355331421,8.854592136107385,13527.116611480713,2149.5954217910767,654.734544,656.932864,3.564,356.6015625,256,1,,True
+C1_cache_full,gsm8k_0025,math,102,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,2,"First, let's calculate the total cost of the chicken meal, milk, and apples.
+The cost of the chicken meal is $12.
+The cost of 5 packs of milk is 5 * $3 = $15.
+The cost of 4 apples is 4 * $1.50 = $6.
+The total cost of the chicken meal, milk, and apples is $12 + $15 + $6 = $33.
+Marie paid a total of $50, so the cost of the boxes of pizza is $50 - $33 = $17.
+Since each box of pizza costs $8.50, the number of boxes of pizza Marie ordered is $17 / $8.50 = 2.
+Therefore, Marie ordered 2 boxes of pizza.
+The answer is: 2",2.0,True,,True,256,2317.484058380127,0.42473599885124713,10395.779964447021,1985.159680366516,656.93696,656.932864,3.564,358.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0025,math,102,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,2,"First, let's calculate the total cost of the chicken meal, milk, and apples.
+The cost of the chicken meal is $12.
+The cost of 5 packs of milk is 5 * $3 = $15.
+The cost of 4 apples is 4 * $1.50 = $6.
+The total cost of the chicken meal, milk, and apples is $12 + $15 + $6 = $33.
+Marie paid a total of $50, so the cost of the boxes of pizza is $50 - $33 = $17.
+Since each box of pizza costs $8.50, the number of boxes of pizza Marie ordered is $17 / $8.50 = 2.
+Therefore, Marie ordered 2 boxes of pizza.
+The answer is: 2",2.0,True,True,True,256,3656.8757071495056,0.4447039987426251,10347.361204147339,1988.2031981945038,479.5648,656.932864,3.564,261.33984375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0025,math,102,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,2,"First, let's calculate the total cost of the chicken meal, milk, and apples.
+The cost of the chicken meal is $12.
+The cost of 5 packs of milk is 5 * $3 = $15.
+The cost of 4 apples is 4 * $1.50 = $6.
+The total cost of the chicken meal, milk, and apples is $12 + $15 + $6 = $33.
+Marie paid a total of $50, so the cost of the boxes of pizza is $50 - $33 = $17.
+Since each box of pizza costs $8.50, the number of boxes of pizza Marie ordered is $17 / $8.50 = 2.
+Therefore, Marie ordered 2 boxes of pizza.
+The answer is: 2",2.0,True,True,True,256,2249.4071016311646,6.970592027530074,10659.974077224731,2043.9742074012756,479.042084,656.932864,3.564,260.91796875,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0025,math,102,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,2,"First, let's calculate the total cost of the chicken meal, milk, and apples.
+The cost of the chicken meal is $12.
+The cost of 5 packs of milk is 5 * $3 = $15.
+The cost of 4 apples is 4 * $1.50 = $6.
+The total cost of the chicken meal, milk, and apples is $12 + $15 + $6 = $33.
+Marie paid a total of $50, so the cost of the boxes of pizza is $50 - $33 = $17.
+Since each box of pizza costs $8.50, the number of boxes of pizza Marie ordered is $17 / $8.50 = 2.
+Therefore, Marie ordered 2 boxes of pizza.
+The answer is: 2",2.0,True,,True,256,2228.1986865997314,31.760096471756697,10550.374172210693,1985.2291145324707,254.02417,656.932864,3.564,261.33984375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0025,math,102,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,2,"First, let's calculate the total cost of the chicken meal, milk, and apples.
+The cost of the chicken meal is $12.
+The cost of 5 packs of milk is 5 * $3 = $15.
+The cost of 4 apples is 4 * $1.50 = $6.
+The total cost of the chicken meal, milk, and apples is $12 + $15 + $6 = $33.
+Marie paid a total of $50, so the cost of the boxes of pizza is $50 - $33 = $17.
+Since each box of pizza costs $8.50, the number of boxes of pizza Marie ordered is $17 / $8.50 = 2.
+Therefore, Marie ordered 2 boxes of pizza.
+The answer is: 2",2.0,True,,True,256,3576.7146859169006,0.4478399994550273,9837.84587097168,1989.4311373233795,481.736704,656.932864,3.564,262.5234375,14,14,"{""init"": 1, ""gen_content"": 81, ""prompt_content"": 11, ""gen_age"": 15, ""prompt_age"": 2}",True
+S0_split_full,gsm8k_0026,math,103,none,all,bf16,243,"Mishka bought 3 pairs of shorts, so the total cost of shorts is 3 * $16.50 = $49.50.
+Mishka bought 3 pairs of pants, so the total cost of pants is 3 * $22.50 = $67.50.
+Mishka bought 3 pairs of shoes, so the total cost of shoes is 3 * $42 = $126.
+The total cost of all the clothing items is $49.50 + $67.50 + $126 = $243.
+Therefore, Mishka spent $243 on all the clothing items.
+The final answer: 243",243.0,True,,True,256,3308.4031953811646,0.397695999359712,13386.516036987305,2134.6496036052704,658.771968,658.767872,3.564,359.0,256,1,,True
+S1_split_exact_delta,gsm8k_0026,math,103,none,all,exact_delta,243,"Mishka bought 3 pairs of shorts, so the total cost of shorts is 3 * $16.50 = $49.50.
+Mishka bought 3 pairs of pants, so the total cost of pants is 3 * $22.50 = $67.50.
+Mishka bought 3 pairs of shoes, so the total cost of shoes is 3 * $42 = $126.
+The total cost of all the clothing items is $49.50 + $67.50 + $126 = $243.
+Therefore, Mishka spent $243 on all the clothing items.
+The final answer: 243",243.0,True,True,True,256,2524.3675813674927,8.893888145685196,13397.382740020752,2080.803902387619,656.5634,658.767872,3.564,357.59765625,256,1,,True
+C1_cache_full,gsm8k_0026,math,103,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,243,"Mishka bought 3 pairs of shorts, so the total cost of the shorts is 3 * $16.50 = $49.50.
+Mishka bought 3 pairs of pants, so the total cost of the pants is 3 * $22.50 = $67.50.
+Mishka bought 3 pairs of shoes, so the total cost of the shoes is 3 * $42 = $126.
+The total amount Mishka spent on all the clothing items is $49.50 + $67.50 + $126 = $243.
+#### 243
+The answer is: 243",243.0,True,,False,256,3543.223735332489,0.42809599917382,10393.554573059082,1990.563721895218,658.771968,658.767872,3.564,359.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0026,math,103,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,243,"Mishka bought 3 pairs of shorts, so the total cost of the shorts is 3 * $16.50 = $49.50.
+Mishka bought 3 pairs of pants, so the total cost of the pants is 3 * $22.50 = $67.50.
+Mishka bought 3 pairs of shoes, so the total cost of the shoes is 3 * $42 = $126.
+The total amount Mishka spent on all the clothing items is $49.50 + $67.50 + $126 = $243.
+#### 243
+The answer is: 243",243.0,True,True,False,256,3381.1334385871887,0.7452480129431933,10530.594577789307,2015.3781106472015,479.643648,658.767872,3.564,261.3828125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0026,math,103,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,243,"Mishka bought 3 pairs of shorts, so the total cost of the shorts is 3 * $16.50 = $49.50.
+Mishka bought 3 pairs of pants, so the total cost of the pants is 3 * $22.50 = $67.50.
+Mishka bought 3 pairs of shoes, so the total cost of the shoes is 3 * $42 = $126.
+The total amount Mishka spent on all the clothing items is $49.50 + $67.50 + $126 = $243.
+#### 243
+The answer is: 243",243.0,True,True,False,256,3198.0174946784973,6.9860800341703,10527.47677230835,2006.9779167175293,479.070728,658.767872,3.564,260.93359375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0026,math,103,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,243,"Mishka bought 3 pairs of shorts, so the total cost of shorts is 3 * $16.50 = $49.50.
+Mishka bought 3 pairs of pants, so the total cost of pants is 3 * $22.50 = $67.50.
+Mishka bought 3 pairs of shoes, so the total cost of shoes is 3 * $42 = $126.
+The total cost of all the clothing items is $49.50 + $67.50 + $126 = $243.
+Therefore, Mishka spent $243 on all the clothing items.
+The final answer: 243",243.0,True,,True,256,3399.838885307312,31.675584526732564,10295.592485427856,1979.436856508255,254.103018,658.767872,3.564,261.3828125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0026,math,103,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,243,"Mishka bought 3 pairs of shorts, so the total cost of shorts is 3 * $16.50 = $49.50.
+Mishka bought 3 pairs of pants, so the total cost of pants is 3 * $22.50 = $67.50.
+Mishka bought 3 pairs of shoes, so the total cost of shoes is 3 * $42 = $126.
+The total cost of all the clothing items is $49.50 + $67.50 + $126 = $243.
+Therefore, Mishka spent $243 on all the clothing items.
+The final answer: 243",243.0,True,,True,256,3232.264353275299,0.4277119997423142,9861.598655700684,2052.055873155594,481.10592,658.767872,3.564,262.1796875,13,13,"{""init"": 1, ""gen_content"": 70, ""prompt_content"": 10, ""gen_age"": 21, ""prompt_age"": 2}",True
+S0_split_full,gsm8k_0027,math,93,none,all,bf16,16,"Cynthia eats one serving of ice cream every night, so she eats 60 servings of ice cream in 60 days.
+Each carton of ice cream has 15 servings, so she needs 60 / 15 = 4 cartons of ice cream.
+Each carton costs $4.00, so she will spend 4 * $4.00 = $16.00 on ice cream.
+Therefore, Cynthia will spend $16.00 on ice cream after 60 days.
+The answer is: 16",16.0,True,,True,256,3097.149543762207,0.42604799929540604,13265.024925231934,2128.6834943294525,640.421888,640.417792,3.564,349.0,256,1,,True
+S1_split_exact_delta,gsm8k_0027,math,93,none,all,exact_delta,16,"Cynthia eats one serving of ice cream every night, so she eats 60 servings of ice cream in 60 days.
+Each carton of ice cream has 15 servings, so she needs 60 / 15 = 4 cartons of ice cream.
+Each carton costs $4.00, so she will spend 4 * $4.00 = $16.00 on ice cream.
+Therefore, Cynthia will spend $16.00 on ice cream after 60 days.
+The answer is: 16",16.0,True,True,True,256,2631.0635857582092,9.025760065764189,13237.417209625244,2071.655680656433,638.27484,640.417792,3.564,347.63671875,256,1,,True
+C1_cache_full,gsm8k_0027,math,93,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,16,"Cynthia eats one serving of ice cream every night, so she eats 60 servings of ice cream in 60 days.
+Each carton of ice cream has 15 servings, so she needs 60 / 15 = 4 cartons of ice cream.
+Each carton costs $4.00, so she will spend 4 * $4.00 = $16.00 on ice cream.
+Therefore, Cynthia will spend $16.00 on ice cream after 60 days.
+The answer is: 16",16.0,True,,True,256,3606.1575589179993,0.44351999927312136,10333.1692237854,1982.3405165672302,640.421888,640.417792,3.564,349.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0027,math,93,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,16,"Cynthia eats one serving of ice cream every night, so she eats 60 servings of ice cream in 60 days.
+Each carton of ice cream has 15 servings, so she needs 60 / 15 = 4 cartons of ice cream.
+Each carton costs $4.00, so she will spend 4 * $4.00 = $16.00 on ice cream.
+Therefore, Cynthia will spend $16.00 on ice cream after 60 days.
+The answer is: 16",16.0,True,True,True,256,2759.2101135253906,0.4383999992860481,10494.14674949646,2026.4484481811523,478.855168,640.417792,3.564,260.953125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0027,math,93,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,16,"Cynthia eats one serving of ice cream every night, so she eats 60 servings of ice cream in 60 days.
+Each carton of ice cream has 15 servings, so she needs 60 / 15 = 4 cartons of ice cream.
+Each carton costs $4.00, so she will spend 4 * $4.00 = $16.00 on ice cream.
+Therefore, Cynthia will spend $16.00 on ice cream after 60 days.
+The answer is: 16",16.0,True,True,True,256,2429.925416946411,7.004032037220895,10450.075456619263,1972.148161649704,478.318108,640.417792,3.564,260.5234375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0027,math,93,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,16,"Cynthia eats one serving of ice cream every night, so she eats 60 servings of ice cream in 60 days.
+Each carton of ice cream has 15 servings, so she needs to buy 60 / 15 = 4 cartons of ice cream.
+Each carton costs $4.00, so she will spend 4 * $4.00 = $16.00 on ice cream.
+Therefore, Cynthia will spend $16.00 on ice cream after 60 days.
+The answer is: 16",16.0,True,,False,256,2220.5686383247375,31.807424309663475,10458.266248703003,2006.3142340183258,253.314538,640.417792,3.564,260.953125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0027,math,93,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,16,"Cynthia eats one serving of ice cream every night, so she eats 60 servings of ice cream in 60 days.
+Each carton of ice cream has 15 servings, so she needs 60 / 15 = 4 cartons of ice cream.
+Each carton costs $4.00, so she will spend 4 * $4.00 = $16.00 on ice cream.
+Therefore, Cynthia will spend $16.00 on ice cream after 60 days.
+The answer is: 16",16.0,True,,True,256,2698.2211141586304,0.4615679996786639,9538.933813095093,1983.8568971157074,479.514624,640.417792,3.564,261.3125,12,12,"{""init"": 1, ""gen_content"": 56, ""prompt_content"": 7, ""gen_age"": 28, ""prompt_age"": 4}",True
+S0_split_full,gsm8k_0028,math,84,none,all,bf16,25,"Henry's first stop was 20 miles into the trip.
+His second stop was 15 miles before the end of the trip, so it was 60 - 15 = 45 miles into the trip.
+The distance between his first and second stops is 45 - 20 = 25 miles.
+Therefore, Henry traveled 25 miles between his first and second stops.
+The answer is: 25",25.0,True,,True,256,3377.1723866462708,0.41564799926709384,13004.831405639648,2070.6947214603424,623.906816,623.90272,3.564,340.0,256,1,,True
+S1_split_exact_delta,gsm8k_0028,math,84,none,all,exact_delta,25,"Henry's first stop was 20 miles into the trip.
+His second stop was 15 miles before the end of the trip, so it was 60 - 15 = 45 miles into the trip.
+The distance between his first and second stops is 45 - 20 = 25 miles.
+Therefore, Henry traveled 25 miles between his first and second stops.
+The answer is: 25",25.0,True,True,True,256,3795.1850156784058,8.133759909309447,13257.265102386475,2180.414587497711,621.815136,623.90272,3.564,338.671875,256,1,,True
+C1_cache_full,gsm8k_0028,math,84,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,25,"Henry traveled for 20 miles before his first stop.
+His second stop was 15 miles before the end of the trip, so he traveled 60 - 15 = 45 miles before his second stop.
+Therefore, he traveled 45 - 20 = 25 miles between his first and second stops.
+The answer is: 25",25.0,True,,False,256,2225.5979180336,0.4238719999557361,10305.473054885864,1963.9496335983276,623.906816,623.90272,3.564,340.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0028,math,84,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,25,"Henry traveled for 20 miles before his first stop.
+His second stop was 15 miles before the end of the trip, so he traveled 60 - 15 = 45 miles before his second stop.
+Therefore, he traveled 45 - 20 = 25 miles between his first and second stops.
+The answer is: 25",25.0,True,True,False,256,2269.3267884254456,0.4396799999522045,10332.490795135498,1965.3411266803741,478.145536,623.90272,3.564,260.56640625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0028,math,84,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,25,"Henry traveled for 20 miles before his first stop.
+His second stop was 15 miles before the end of the trip, so he traveled 60 - 15 = 45 miles before his second stop.
+Therefore, he traveled 45 - 20 = 25 miles between his first and second stops.
+The answer is: 25",25.0,True,True,False,256,3666.9820375442505,7.029760064557195,10432.52892112732,1965.6835522651672,477.629992,623.90272,3.564,260.1484375,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0028,math,84,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,25,"Henry traveled 20 miles before his first stop, so he had 60 - 20 = 40 miles left to travel.
+His second stop was 15 miles before the end of the trip, so he traveled 40 - 15 = 25 miles after his second stop.
+Therefore, he traveled 40 - 25 = 15 miles between his first and second stops.
+The answer is: 15",15.0,False,,False,256,2861.055902481079,31.703872439451516,10401.6032371521,2007.7940180301666,252.604906,623.90272,3.564,260.56640625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0028,math,84,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,25,"Henry's first stop was after 20 miles, so he traveled 20 miles before stopping.
+His second stop was 15 miles before the end of the trip, so he traveled 60 - 15 = 45 miles before stopping.
+The distance between his first and second stops is the difference between the distance he traveled before the second stop and the distance he traveled before the first stop.
+So, the distance between his first and second stops is 45 - 20 = 25 miles.
+#### 25
+The answer is: 25",25.0,True,,False,256,2779.029662132263,0.4387839992996305,9470.242988586426,1968.6177315711975,478.74048,623.90272,3.564,260.890625,12,12,"{""init"": 1, ""gen_content"": 56, ""prompt_content"": 8, ""gen_age"": 28, ""prompt_age"": 3}",True
+S0_split_full,gsm8k_0029,math,103,none,all,bf16,104,"Let's assume the cost of the boots is x dollars.
+The cost of one pair of heels is $33.
+The cost of the other pair of heels is twice as much, so it is 2 * $33 = $66.
+The total cost of the two pairs of heels is $33 + $66 = $99.
+According to the problem, the total cost of the two pairs of heels is five dollars less than the cost of the boots.
+So, we can write the equation: $99 = x - $5.
+Adding $5 to both sides of the equation, we get: $104 = x.
+Therefore, the boots cost $104.
+#### 104
+The answer is: 104",104.0,True,,True,256,2845.1520657539368,0.41958400001749396,13454.063228607178,2148.0353560447693,658.771968,658.767872,3.564,359.0,256,1,,True
+S1_split_exact_delta,gsm8k_0029,math,103,none,all,exact_delta,104,"Let's assume the cost of the boots is x dollars.
+The cost of one pair of heels is $33.
+The cost of the other pair of heels is twice as much, so it is 2 * $33 = $66.
+The total cost of the two pairs of heels is $33 + $66 = $99.
+According to the problem, the total cost of the two pairs of heels is five dollars less than the cost of the boots.
+So, we can write the equation: $99 = x - $5.
+Adding $5 to both sides of the equation, we get: $104 = x.
+Therefore, the boots cost $104.
+#### 104
+The answer is: 104",104.0,True,True,True,256,2850.4387888908386,8.718912091106176,13386.31628036499,2072.375036716461,656.5634,658.767872,3.564,357.59765625,256,1,,True
+C1_cache_full,gsm8k_0029,math,103,"fixed(Kp=25,Kr=2,rho=0.25)",all,bf16,104,"Let's assume the cost of the boots is x dollars.
+The cost of one pair of heels is $33.
+The cost of the other pair of heels is twice as much, so it is 2 * $33 = $66.
+The total cost of the two pairs of heels is $33 + $66 = $99.
+According to the problem, the total cost of the two pairs of heels is five dollars less than the cost of the boots.
+So, we can write the equation: $99 = x - $5.
+Adding $5 to both sides of the equation, we get: $104 = x.
+Therefore, the boots cost $104.
+#### 104
+The answer is: 104",104.0,True,,True,256,2241.849156856537,0.4351999992504716,10361.67148399353,1973.3516178131104,658.771968,658.767872,3.564,359.0,256,1,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C2_cache_aware,gsm8k_0029,math,103,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,bf16,104,"Let's assume the cost of the boots is x dollars.
+The cost of one pair of heels is $33.
+The cost of the other pair of heels is twice as much, so it is 2 * $33 = $66.
+The total cost of the two pairs of heels is $33 + $66 = $99.
+According to the problem, the total cost of the two pairs of heels is five dollars less than the cost of the boots.
+So, we can write the equation: $99 = x - $5.
+Adding $5 to both sides of the equation, we get: $104 = x.
+Therefore, the boots cost $104.
+#### 104
+The answer is: 104",104.0,True,True,True,256,3382.0359120368958,0.4436799995601177,10299.597049713135,1978.4511361122131,479.643648,658.767872,3.564,261.3828125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C3_cache_aware_exact,gsm8k_0029,math,103,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,exact_delta,104,"Let's assume the cost of the boots is x dollars.
+The cost of one pair of heels is $33.
+The cost of the other pair of heels is twice as much, so it is 2 * $33 = $66.
+The total cost of the two pairs of heels is $33 + $66 = $99.
+According to the problem, the total cost of the two pairs of heels is five dollars less than the cost of the boots.
+So, we can write the equation: $99 = x - $5.
+Adding $5 to both sides of the equation, we get: $104 = x.
+Therefore, the boots cost $104.
+#### 104
+The answer is: 104",104.0,True,True,True,256,2374.3998374938965,7.265184092335403,11903.095836639404,2715.4843900203705,479.020524,658.767872,3.564,260.90625,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+C4_cache_aware_int8,gsm8k_0029,math,103,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_delta,104,"Let's assume the cost of the boots is x dollars.
+The cost of one pair of heels is $33.
+The cost of the other pair of heels is twice as much, so it is 2 * $33 = $66.
+The total cost of the two pairs of heels is $33 + $66 = $99.
+According to the problem, the total cost of the two pairs of heels is five dollars less than the cost of the boots.
+So, we can write the equation: $99 = x - $5.
+Adding $5 to both sides of the equation, we get: $104 = x.
+Therefore, the boots cost $104.
+#### 104
+The answer is: 104",104.0,True,,True,256,2194.5368366241455,33.603904522024095,10424.269737243652,2032.3270752429962,254.103018,658.767872,3.564,261.3828125,11,11,"{""init"": 1, ""gen_interval"": 127, ""prompt_interval"": 10}",True
+A1_adaptive_cache_aware,gsm8k_0029,math,103,"adaptive(G=2,Ag=4,P=16,Ap=32,W=8,conf=0.0,rho=0.25)",cache_aware,bf16,104,"Let's assume the price of the boots is x dollars.
+The price of one pair of heels is $33.
+The price of the other pair of heels is twice as much, so it is 2 * $33 = $66.
+The total cost of the two pairs of heels is $33 + $66 = $99.
+According to the problem, the total cost of the two pairs of heels is five dollars less than the price of the boots.
+So, we can write the equation: $99 = x - $5.
+Adding $5 to both sides of the equation, we get: $104 = x.
+Therefore, the price of the boots is $104.
+#### 104
+The answer is: 104",104.0,True,,False,256,3277.233078956604,0.918239985476248,10037.2346534729,2065.605273962021,481.10592,658.767872,3.564,262.1796875,13,13,"{""init"": 1, ""gen_content"": 75, ""prompt_content"": 10, ""gen_age"": 19, ""prompt_age"": 2}",True
