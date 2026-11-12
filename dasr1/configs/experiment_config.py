@@ -248,10 +248,10 @@ EXP10D_RUN_TIMING = False
 # Exp11: DASR prototype on two GPUs (edge = EXP11_EDGE_DEVICE, cloud = EXP11_CLOUD_DEVICE)
 # Smoke test first: EXP11_N_QUESTIONS = 2, EXP11_NEW_TOKENS = EXP11_STEPS = 64 (~3 min).
 # Output folder: outputs/exp11_<dataset>_k<split>_t<tokens>/
-EXP11_DATASET = "gsm8k"           # "gsm8k" (256/256) or "authored" (Exp10A docs, 128/128)
+EXP11_DATASET = "authored"           # "gsm8k" (256/256) or "authored" (Exp10A docs, 128/128)
 EXP11_N_QUESTIONS = 30            # smoke test 2; then 30
-EXP11_NEW_TOKENS = 256            # smoke test 64; then 256 (gsm8k) / 128 (authored)
-EXP11_STEPS = 256                 # smoke test 64; then 256 (gsm8k) / 128 (authored), must be aligned with EXP11_NEW_TOKENS
+EXP11_NEW_TOKENS = 128            # smoke test 64; then 256 (gsm8k) / 128 (authored)
+EXP11_STEPS = 128                 # smoke test 64; then 256 (gsm8k) / 128 (authored), must be aligned with EXP11_NEW_TOKENS
 EXP11_SPLIT_LAYER = 4             # edge runs layers 1..4 (best static split in RQ4)
 EXP11_EDGE_DEVICE = "cuda:1"    # = physical GPU 2 when launched with CUDA_VISIBLE_DEVICES=1,2
 EXP11_CLOUD_DEVICE = "cuda:0"   # = physical GPU 1

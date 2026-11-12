@@ -1,0 +1,121 @@
+{
+  "experiment": "Exp11 DASR two-GPU split prototype (closed loop)",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "official_repo": "/mnt/mydisk/mery-splitdllm/dLLM-cache-official",
+  "dataset": "authored",
+  "n_cases": 12,
+  "split_layer_1based": 4,
+  "edge": "cuda:1",
+  "cloud": "cuda:0",
+  "edge_gpu": "NVIDIA RTX A6000",
+  "cloud_gpu": "NVIDIA RTX A6000",
+  "new_tokens": 128,
+  "steps": 128,
+  "alg": "entropy",
+  "temperature": 0.1,
+  "top_p": 0.9,
+  "seed": 42,
+  "cache_policy": [
+    "fixed",
+    25,
+    2,
+    0.25
+  ],
+  "adaptive_policy": [
+    "adaptive",
+    {
+      "gen_content_commits": 2,
+      "gen_max_age": 4,
+      "prompt_content_commits": 16,
+      "prompt_max_age": 32,
+      "eos_frontier_window": 8,
+      "transfer_ratio": 0.25
+    }
+  ],
+  "anchor_interval": 32,
+  "variants": [
+    {
+      "name": "S0_split_full",
+      "policy": null,
+      "rows": "all",
+      "encoding": "bf16",
+      "same_as": null
+    },
+    {
+      "name": "S1_split_exact_delta",
+      "policy": null,
+      "rows": "all",
+      "encoding": "exact_delta",
+      "same_as": "S0_split_full"
+    },
+    {
+      "name": "C1_cache_full",
+      "policy": [
+        "fixed",
+        25,
+        2,
+        0.25
+      ],
+      "rows": "all",
+      "encoding": "bf16",
+      "same_as": null
+    },
+    {
+      "name": "C2_cache_aware",
+      "policy": [
+        "fixed",
+        25,
+        2,
+        0.25
+      ],
+      "rows": "cache_aware",
+      "encoding": "bf16",
+      "same_as": "C1_cache_full"
+    },
+    {
+      "name": "C3_cache_aware_exact",
+      "policy": [
+        "fixed",
+        25,
+        2,
+        0.25
+      ],
+      "rows": "cache_aware",
+      "encoding": "exact_delta",
+      "same_as": "C1_cache_full"
+    },
+    {
+      "name": "C4_cache_aware_int8",
+      "policy": [
+        "fixed",
+        25,
+        2,
+        0.25
+      ],
+      "rows": "cache_aware",
+      "encoding": "int8_delta",
+      "same_as": null
+    },
+    {
+      "name": "A1_adaptive_cache_aware",
+      "policy": [
+        "adaptive",
+        {
+          "gen_content_commits": 2,
+          "gen_max_age": 4,
+          "prompt_content_commits": 16,
+          "prompt_max_age": 32,
+          "eos_frontier_window": 8,
+          "transfer_ratio": 0.25
+        }
+      ],
+      "rows": "cache_aware",
+      "encoding": "bf16",
+      "same_as": null
+    }
+  ],
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22",
+  "notes": "Bytes from the wire format in src/split_runtime.py; compute from CUDA events per GPU; network latency added by exp11b (emulation)."
+}
