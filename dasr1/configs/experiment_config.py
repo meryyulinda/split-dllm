@@ -253,9 +253,12 @@ EXP11_N_QUESTIONS = 2             # smoke test; then 30
 EXP11_NEW_TOKENS = 64             # smoke test; then 256 (gsm8k) / 128 (authored)
 EXP11_STEPS = 64
 EXP11_SPLIT_LAYER = 4             # edge runs layers 1..4 (best static split in RQ4)
-EXP11_EDGE_DEVICE = EDGE_DEVICE   # "cuda:2"
-EXP11_CLOUD_DEVICE = CLOUD_DEVICE # "cuda:0"
+EXP11_EDGE_DEVICE = "cuda:1"    # = physical GPU 2 when launched with CUDA_VISIBLE_DEVICES=1,2
+EXP11_CLOUD_DEVICE = "cuda:0"   # = physical GPU 1
 EXP11_CACHE_POLICY = ("fixed", 25, 2, 0.25)   # official dLLM-Cache GSM8K setting
+EXP11_ADAPTIVE_POLICY = ("adaptive", {"gen_content_commits": 2, "gen_max_age": 4,
+                        "prompt_content_commits": 16, "prompt_max_age": 32,
+                        "eos_frontier_window": 8, "transfer_ratio": 0.25})
 EXP11_ANCHOR_INTERVAL = 32        # INT8 codec: bf16 anchor at least every 32 steps
 EXP11_RESUME = True
 
@@ -268,3 +271,4 @@ EXP10D_TOP_P = 0.9
 EXP10D_SEEDS = [42]               # with T > 0, every seed is a separate paired run
 EXP11_TEMPERATURE = 0.1           # Dream's official GSM8K sampling (T=0 collapses to EOS)
 EXP11_TOP_P = 0.9
+
