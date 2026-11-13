@@ -11,6 +11,9 @@ sys.path.append(
     )
 )
 
+import configs.experiment_config as _sfx_cfg  # noqa: E402
+SFX = getattr(_sfx_cfg, "OUTPUT_SUFFIX", "")  # "" = original folders, e.g. "_entropy"
+
 from configs.experiment_config import (
     MODEL_NAME,
     SEED,
@@ -246,12 +249,12 @@ def main():
     df = pd.DataFrame(records)
 
     os.makedirs(
-        "outputs/exp3d",
+        f"outputs/exp3d{SFX}",
         exist_ok=True,
     )
 
     df.to_csv(
-        "outputs/exp3d/"
+        f"outputs/exp3d{SFX}/"
         "stage_latency_per_state.csv",
         index=False,
     )
@@ -293,7 +296,7 @@ def main():
     )
 
     summary.to_csv(
-        "outputs/exp3d/"
+        f"outputs/exp3d{SFX}/"
         "stage_latency_summary.csv",
         index=False,
     )
@@ -313,7 +316,7 @@ def main():
     )
 
     print(
-        "outputs/exp3d/"
+        f"outputs/exp3d{SFX}/"
         "stage_latency_summary.csv"
     )
 

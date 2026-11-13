@@ -1,0 +1,822 @@
+nohup: ignoring input
+sampler=entropy T=0.1 top_p=0.9 -> outputs/exp*_entropy
+Exp4A/4B/5A/5B devices: edge=cuda:1 cloud=cuda:0 (within TWO_GPUS)
+
+=== exp1_token_changes
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.40it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.53it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.77it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.17it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.95it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Prompt length: 33
+Generated region length: 64
+
+Generated output:
+<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+What is 15 multiplied by 12? Explain briefly.<|im_end|>
+<|im_start|>assistant
+15 multiplied by 12 is 180. To calculate this, you can use the standard multiplication algorithm or break it down into smaller parts: 15 x 10 = 150 and 15 x 2 = 30, then add the two results together.
+
+=== EXPERIMENT 1 SUMMARY ===
+Recorded transitions: 64
+Generated token rows: 64
+
+Last transition:
+ transition  changed_tokens  changed_ratio  masks_remaining
+         64               2        0.03125                0
+
+Full per-transition data saved to:
+outputs/exp1_entropy/token_changes.csv
+
+=== exp1_plot
+
+=== exp2_hidden_drift
+============================================================
+EXPERIMENT 2: CROSS-STEP HIDDEN-STATE DRIFT
+============================================================
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.70it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.33it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.47it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.95it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.68it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Prompt tokens: 33
+Selected layers: [4, 8, 12, 16, 20, 24, 28]
+
+Generated output:
+<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+What is 15 multiplied by 12? Explain briefly.<|im_end|>
+<|im_start|>assistant
+15 multiplied by 12 is 180. To calculate this, you can use the standard multiplication algorithm or break it down into smaller parts: 15 x 10 = 150 and 15 x 2 = 30, then add the two results together.
+
+=== EXPERIMENT 2 SUMMARY ===
+Recorded transitions: 64
+Layers analyzed: 7
+ layer  mean_drift  median_drift  max_drift  active_1e_4  active_5e_4  active_1e_3  active_5e_3  active_1e_2
+     4    0.099175      0.035180   5.032906     0.984375     0.984375     0.984375     0.983643     0.947266
+     8    0.199231      0.109266  37.329445     0.984375     0.984375     0.984375     0.982910     0.980957
+    12    0.254375      0.151991  47.574043     0.984375     0.984375     0.984375     0.982422     0.980469
+    16    0.294079      0.170415  44.944744     0.984375     0.984375     0.984375     0.981934     0.978516
+    20    0.274366      0.159037  34.140610     0.984375     0.984375     0.984375     0.983154     0.978271
+    24    0.179634      0.123141  14.798593     0.984375     0.984375     0.984375     0.983398     0.973389
+    28    0.179734      0.130411   3.941346     0.984375     0.984375     0.984375     0.984375     0.984375
+
+=== ACTVE RATIO DIAGNOSTIC ===
+ transition  mean_drift  median_drift  active_ratio_1e-3  active_ratio_1e-2
+          1    0.000000      0.000000           0.000000           0.000000
+          2    0.809904      0.541910           1.000000           1.000000
+          3    0.350611      0.352697           1.000000           1.000000
+          4    0.479393      0.455344           1.000000           1.000000
+          5    0.137440      0.124372           1.000000           1.000000
+          6    0.203481      0.170134           1.000000           1.000000
+          7    0.097318      0.068491           1.000000           1.000000
+          8    0.354469      0.343562           1.000000           1.000000
+          9    0.223776      0.179938           1.000000           1.000000
+         10    0.255106      0.217383           1.000000           1.000000
+         11    0.098963      0.061858           1.000000           1.000000
+         12    0.358316      0.334846           1.000000           1.000000
+         13    0.451219      0.411420           1.000000           1.000000
+         14    0.297435      0.246245           1.000000           1.000000
+         15    0.457356      0.402613           1.000000           1.000000
+         16    0.281836      0.243420           1.000000           1.000000
+         17    0.378283      0.358870           1.000000           1.000000
+         18    0.168380      0.144322           1.000000           1.000000
+         19    0.373964      0.371610           1.000000           0.984375
+         20    0.284524      0.247846           1.000000           1.000000
+         21    0.361712      0.303513           1.000000           1.000000
+         22    0.256879      0.226716           1.000000           1.000000
+         23    0.367704      0.340753           1.000000           1.000000
+         24    0.254729      0.220137           1.000000           1.000000
+         25    0.373287      0.331713           1.000000           1.000000
+         26    0.253233      0.190622           1.000000           1.000000
+         27    0.415213      0.424673           1.000000           1.000000
+         28    0.320810      0.210966           1.000000           1.000000
+         29    0.266224      0.206477           1.000000           1.000000
+         30    0.197563      0.167652           1.000000           0.984375
+         31    0.267133      0.159659           1.000000           1.000000
+         32    0.802088      0.340766           1.000000           1.000000
+         33    0.219605      0.165648           1.000000           1.000000
+         34    1.055874      0.269601           1.000000           1.000000
+         35    0.065266      0.045430           1.000000           0.968750
+         36    0.199717      0.077185           1.000000           1.000000
+         37    0.214262      0.127688           1.000000           1.000000
+         38    0.154361      0.047427           1.000000           1.000000
+         39    0.068374      0.037057           1.000000           0.984375
+         40    0.245638      0.173122           1.000000           1.000000
+         41    0.169302      0.096645           1.000000           1.000000
+         42    0.081937      0.033049           1.000000           0.984375
+         43    0.056741      0.027937           1.000000           0.984375
+         44    0.211059      0.072245           1.000000           1.000000
+         45    0.259493      0.095002           1.000000           0.968750
+         46    0.216107      0.133688           1.000000           1.000000
+         47    0.140654      0.080376           1.000000           0.984375
+         48    0.057053      0.026867           1.000000           1.000000
+         49    0.119147      0.047886           1.000000           1.000000
+         50    0.169915      0.084951           1.000000           1.000000
+         51    0.082656      0.031897           1.000000           1.000000
+         52    0.086974      0.042014           1.000000           0.984375
+         53    0.167501      0.075427           1.000000           1.000000
+         54    0.047662      0.024578           1.000000           1.000000
+         55    0.080361      0.032254           1.000000           0.984375
+         56    0.093062      0.033365           1.000000           0.984375
+         57    0.162045      0.088304           1.000000           0.984375
+         58    0.809918      0.245330           1.000000           1.000000
+         59    0.135960      0.063258           1.000000           1.000000
+         60    0.095962      0.047774           1.000000           1.000000
+         61    0.111456      0.057035           1.000000           0.984375
+         62    0.117045      0.063166           1.000000           1.000000
+         63    0.102858      0.056057           1.000000           0.984375
+         64    0.283706      0.193349           1.000000           1.000000
+active_ratio_1e-3
+0.0     1
+1.0    63
+Name: count, dtype: int64
+
+Full per-step data saved to:
+outputs/exp2_entropy/hidden_drift.csv
+
+=== exp2c_token_vs_hidden
+
+=== EXPERIMENT 2C SUMMARY ===
+Transitions matched: 64
+Layers matched: 7
+
+Layer 12
+ transition  changed_tokens  changed_ratio  active_ratio_1e-3
+          1               0       0.000000           0.000000
+          2               1       0.015625           1.000000
+          3               1       0.015625           1.000000
+          4               1       0.015625           1.000000
+          5               1       0.015625           1.000000
+          6               1       0.015625           1.000000
+          7               1       0.015625           1.000000
+          8               1       0.015625           1.000000
+          9               1       0.015625           1.000000
+         10               1       0.015625           1.000000
+         11               1       0.015625           1.000000
+         12               1       0.015625           1.000000
+         13               1       0.015625           1.000000
+         14               1       0.015625           1.000000
+         15               1       0.015625           1.000000
+         16               1       0.015625           1.000000
+         17               1       0.015625           1.000000
+         18               1       0.015625           1.000000
+         19               1       0.015625           1.000000
+         20               1       0.015625           1.000000
+         21               1       0.015625           1.000000
+         22               1       0.015625           1.000000
+         23               1       0.015625           1.000000
+         24               1       0.015625           1.000000
+         25               1       0.015625           1.000000
+         26               1       0.015625           1.000000
+         27               1       0.015625           1.000000
+         28               1       0.015625           1.000000
+         29               1       0.015625           1.000000
+         30               1       0.015625           1.000000
+         31               1       0.015625           1.000000
+         32               1       0.015625           1.000000
+         33               1       0.015625           1.000000
+         34               1       0.015625           1.000000
+         35               1       0.015625           1.000000
+         36               1       0.015625           1.000000
+         37               1       0.015625           1.000000
+         38               1       0.015625           1.000000
+         39               1       0.015625           1.000000
+         40               1       0.015625           1.000000
+         41               1       0.015625           1.000000
+         42               1       0.015625           1.000000
+         43               1       0.015625           1.000000
+         44               1       0.015625           1.000000
+         45               1       0.015625           1.000000
+         46               1       0.015625           1.000000
+         47               1       0.015625           1.000000
+         48               1       0.015625           1.000000
+         49               1       0.015625           1.000000
+         50               1       0.015625           1.000000
+         51               1       0.015625           1.000000
+         52               1       0.015625           1.000000
+         53               1       0.015625           1.000000
+         54               1       0.015625           1.000000
+         55               1       0.015625           1.000000
+         56               1       0.015625           1.000000
+         57               1       0.015625           1.000000
+         58               1       0.015625           1.000000
+         59               1       0.015625           1.000000
+         60               1       0.015625           1.000000
+         61               1       0.015625           1.000000
+         62               1       0.015625           1.000000
+         63               1       0.015625           1.000000
+         64               2       0.031250           1.000000
+
+Correlation (changed token ratio vs active hidden ratio): 0.712697
+
+When token changes occur:
+Transitions: 63
+Mean active hidden ratio: 1.000000
+
+When no token changes occur:
+Transitions: 1
+Mean active hidden ratio: 0.000000
+
+=== exp4a_two_gpu_static_split
+============================================================
+EXPERIMENT 4A: PHYSICAL TWO-GPU STATIC SPLIT
+============================================================
+Available GPUs: 2
+GPU 0: NVIDIA RTX A6000
+GPU 1: NVIDIA RTX A6000
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.76it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.15it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.54it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.12it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.77it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+
+Captured states: 65
+
+Capturing full-model reference predictions...
+Reference predictions captured.
+
+============================================================
+PHYSICAL SPLIT LAYER 4
+============================================================
+Finished split 4
+
+============================================================
+PHYSICAL SPLIT LAYER 8
+============================================================
+Finished split 8
+
+============================================================
+PHYSICAL SPLIT LAYER 12
+============================================================
+Finished split 12
+
+============================================================
+PHYSICAL SPLIT LAYER 16
+============================================================
+Finished split 16
+
+============================================================
+PHYSICAL SPLIT LAYER 20
+============================================================
+Finished split 20
+
+============================================================
+PHYSICAL SPLIT LAYER 24
+============================================================
+Finished split 24
+
+=== EXPERIMENT 4A SUMMARY ===
+ split_layer  stage1_ms  transfer_ms  stage2_ms  component_sum_ms  measured_e2e_ms  orchestration_overhead_ms  boundary_mb  all_argmax_same  total_boundary_mb
+           4   4.724083     0.072859  25.709590         30.506533        30.630418                   0.123885     0.663086             True          43.100586
+           8   8.501409     0.069949  21.660162         30.231520        30.333885                   0.102365     0.663086             True          43.100586
+          12  12.262669     0.069992  17.792075         30.124736        30.227608                   0.102872     0.663086             True          43.100586
+          16  16.043484     0.069621  13.938798         30.051903        30.151094                   0.099191     0.663086             True          43.100586
+          20  20.022877     0.072344  10.170647         30.265868        30.372833                   0.106965     0.663086             True          43.100586
+          24  23.809615     0.072794   6.266245         30.148653        30.250370                   0.101717     0.663086             True          43.100586
+
+Results saved to:
+outputs/exp4a_entropy/two_gpu_static_summary.csv
+
+=== exp4b_synchronized_delta
+============================================================
+EXPERIMENT 4B: SYNCHRONIZED DELTA TRANSMISSION
+============================================================
+Available GPUs: 2
+EDGE_DEVICE : cuda:1
+CLOUD_DEVICE: cuda:0
+GPU 0: NVIDIA RTX A6000
+GPU 1: NVIDIA RTX A6000
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  5.85it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  6.62it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.03it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.39it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.08it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+
+Captured states: 65
+
+Capturing full-model reference predictions...
+Reference predictions captured.
+
+============================================================
+DELTA SPLIT LAYER 4
+============================================================
+Finished split 4
+
+============================================================
+DELTA SPLIT LAYER 8
+============================================================
+Finished split 8
+
+============================================================
+DELTA SPLIT LAYER 12
+============================================================
+Finished split 12
+
+============================================================
+DELTA SPLIT LAYER 16
+============================================================
+Finished split 16
+
+============================================================
+DELTA SPLIT LAYER 20
+============================================================
+Finished split 20
+
+============================================================
+DELTA SPLIT LAYER 24
+============================================================
+Finished split 24
+
+=== EXPERIMENT 4B SUMMARY ===
+ split_layer  avg_changed_row_ratio  steady_changed_row_ratio  full_boundary_mb  delta_mb  wire_reduction_pct  steady_wire_reduction_pct  encode_ms  transfer_ms  reconstruction_ms  measured_e2e_ms  all_boundary_exact  all_argmax_same
+           4               0.984615                  0.984375         43.100586 42.484863            1.428571                   1.452637   0.148732     0.086579           0.043359        30.833793                True             True
+           8               0.984615                  0.984375         43.100586 42.484863            1.428571                   1.452637   0.140442     0.085186           0.041322        30.730554                True             True
+          12               0.984615                  0.984375         43.100586 42.484863            1.428571                   1.452637   0.157777     0.089768           0.046089        30.990306                True             True
+          16               0.984615                  0.984375         43.100586 42.484863            1.428571                   1.452637   0.145399     0.086585           0.043271        30.585976                True             True
+          20               0.984615                  0.984375         43.100586 42.484863            1.428571                   1.452637   0.153883     0.089352           0.044979        30.872287                True             True
+          24               0.984615                  0.984375         43.100586 42.484863            1.428571                   1.452637   0.155096     0.088975           0.044927        30.870649                True             True
+
+Detailed results:
+outputs/exp4b_entropy/synchronized_delta_per_state.csv
+
+Summary:
+outputs/exp4b_entropy/synchronized_delta_summary.csv
+
+=== exp5a_selective_reuse
+======================================================================
+EXPERIMENT 5A: THRESHOLDED SELECTIVE BOUNDARY REUSE
+======================================================================
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.62it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.03it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.20it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.49it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.30it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+
+Captured states: 65
+Transitions: 64
+
+======================================================================
+SPLIT LAYER 4
+======================================================================
+
+======================================================================
+SPLIT LAYER 8
+======================================================================
+
+======================================================================
+SPLIT LAYER 12
+======================================================================
+
+======================================================================
+SPLIT LAYER 16
+======================================================================
+
+======================================================================
+SPLIT LAYER 20
+======================================================================
+
+======================================================================
+SPLIT LAYER 24
+======================================================================
+
+=== EXPERIMENT 5A SUMMARY ===
+ split_layer  threshold  avg_active_ratio  avg_reuse_ratio  mean_boundary_error  max_boundary_error  mean_logit_error  max_logit_error  avg_argmax_match_ratio  exact_transition_ratio
+           4   0.000100          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+           4   0.000500          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+           4   0.001000          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+           4   0.005000          0.983408         0.016592             0.000004            0.500000          0.008532         3.203125                0.998228                0.937500
+           4   0.010000          0.906572         0.093428             0.000173            0.500000          0.062303        11.875000                0.991302                0.609375
+           8   0.000100          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+           8   0.000500          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+           8   0.001000          0.984214         0.015786             0.000003            1.000000          0.001357         1.148438                1.000000                1.000000
+           8   0.005000          0.983570         0.016430             0.000007            1.000000          0.006702         1.906250                0.999195                0.968750
+           8   0.010000          0.979865         0.020135             0.000032            8.000000          0.025815         3.660156                0.998067                0.875000
+          12   0.000100          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+          12   0.000500          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+          12   0.001000          0.984214         0.015786             0.000004            1.000000          0.001311         0.812500                1.000000                1.000000
+          12   0.005000          0.983247         0.016753             0.000013            2.000000          0.008496         1.218750                0.999356                0.968750
+          12   0.010000          0.979059         0.020941             0.000085           16.000000          0.028706         4.000000                0.996617                0.812500
+          16   0.000100          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+          16   0.000500          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+          16   0.001000          0.984214         0.015786             0.000005            1.000000          0.001148         1.125000                1.000000                1.000000
+          16   0.005000          0.982120         0.017880             0.000040            2.000000          0.014605         2.125000                0.997262                0.890625
+          16   0.010000          0.976643         0.023357             0.000145            8.000000          0.038503         2.125000                0.994362                0.718750
+          20   0.000100          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+          20   0.000500          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+          20   0.001000          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+          20   0.005000          0.983408         0.016592             0.000027            2.000000          0.006626         0.812500                0.999033                0.953125
+          20   0.010000          0.978254         0.021746             0.000193           16.000000          0.029103         1.250000                0.997100                0.796875
+          24   0.000100          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+          24   0.000500          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+          24   0.001000          0.984375         0.015625             0.000000            0.000000          0.000000         0.000000                1.000000                1.000000
+          24   0.005000          0.984214         0.015786             0.000010            2.000000          0.001217         1.062500                1.000000                1.000000
+          24   0.010000          0.974388         0.025612             0.000232           16.000000          0.023199         2.062500                0.997745                0.828125
+
+Saved:
+outputs/exp5a_entropy/selective_reuse_per_transition.csv
+outputs/exp5a_entropy/selective_reuse_summary.csv
+
+=== exp5b_selective_compute_estimate
+======================================================================
+EXPERIMENT 5B: IDEAL SELECTIVE-COMPUTE ESTIMATE
+======================================================================
+
+Thresholds: [0.001, 0.005, 0.01]
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  9.07it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  9.30it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  9.09it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  9.37it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+
+Captured states: 65
+Transitions: 64
+
+======================================================================
+SPLIT LAYER 4
+======================================================================
+
+======================================================================
+SPLIT LAYER 8
+======================================================================
+
+======================================================================
+SPLIT LAYER 12
+======================================================================
+
+======================================================================
+SPLIT LAYER 16
+======================================================================
+
+======================================================================
+SPLIT LAYER 20
+======================================================================
+
+======================================================================
+SPLIT LAYER 24
+======================================================================
+
+=== EXPERIMENT 5B SUMMARY ===
+ split_layer  threshold  avg_active_ratio  avg_reuse_ratio  measured_full_stage2_ms  ideal_selective_stage2_ms  ideal_stage2_saving_ms  ideal_stage2_reduction_pct  measured_full_e2e_ms  ideal_e2e_no_overhead_ms  ideal_e2e_reduction_pct  mean_logit_error  avg_argmax_match_ratio  exact_transition_ratio
+           4   0.001000          0.984375         0.015625                25.733247                  25.332139                0.401108                    1.562506             30.538418                 30.137310                 1.317770          0.000000                1.000000                1.000000
+           4   0.005000          0.983408         0.016592                25.733247                  25.307246                0.426001                    1.659155             30.538418                 30.112418                 1.399118          0.008532                0.998228                0.937500
+           4   0.010000          0.906572         0.093428                25.733247                  23.323166                2.410081                    9.342787             30.538418                 28.128338                 7.857018          0.062303                0.991302                0.609375
+           8   0.001000          0.984214         0.015786                21.898659                  21.539934                0.358724                    1.578614             30.673579                 30.314855                 1.106085          0.001357                1.000000                1.000000
+           8   0.005000          0.983570         0.016430                21.898659                  21.525884                0.372775                    1.643047             30.673579                 30.300805                 1.152185          0.006702                0.999195                0.968750
+           8   0.010000          0.979865         0.020135                21.898659                  21.445052                0.453606                    2.013536             30.673579                 30.219973                 1.416852          0.025815                0.998067                0.875000
+          12   0.001000          0.984214         0.015786                17.975221                  17.688364                0.286857                    1.578614             30.566262                 30.279405                 0.921891          0.001311                1.000000                1.000000
+          12   0.005000          0.983247         0.016753                17.975221                  17.670895                0.304326                    1.675264             30.566262                 30.261936                 0.979133          0.008496                0.999356                0.968750
+          12   0.010000          0.979059         0.020941                17.975221                  17.595901                0.379320                    2.094077             30.566262                 30.186942                 1.226316          0.028706                0.996617                0.812500
+          16   0.001000          0.984214         0.015786                14.047194                  13.823143                0.224051                    1.578614             30.438957                 30.214906                 0.728695          0.001148                1.000000                1.000000
+          16   0.005000          0.982120         0.017880                14.047194                  13.793682                0.253512                    1.788021             30.438957                 30.185445                 0.825706          0.014605                0.997262                0.890625
+          16   0.010000          0.976643         0.023357                14.047194                  13.716587                0.330606                    2.335701             30.438957                 30.108351                 1.077930          0.038503                0.994362                0.718750
+          20   0.001000          0.984375         0.015625                10.176393                  10.019785                0.156608                    1.562506             30.400644                 30.244036                 0.519894          0.000000                1.000000                1.000000
+          20   0.005000          0.983408         0.016592                10.176393                  10.010012                0.166381                    1.659155             30.400644                 30.234263                 0.552269          0.006626                0.999033                0.953125
+          20   0.010000          0.978254         0.021746                10.176393                   9.957680                0.218714                    2.174619             30.400644                 30.181931                 0.725043          0.029103                0.997100                0.796875
+          24   0.001000          0.984375         0.015625                 6.261860                   6.166012                0.095848                    1.562506             30.304820                 30.208972                 0.318629          0.000000                1.000000                1.000000
+          24   0.005000          0.984214         0.015786                 6.261860                   6.165003                0.096857                    1.578614             30.304820                 30.207963                 0.321964          0.001217                1.000000                1.000000
+          24   0.010000          0.974388         0.025612                 6.261860                   6.103296                0.158564                    2.561216             30.304820                 30.146256                 0.525326          0.023199                0.997745                0.828125
+
+Saved:
+outputs/exp5b_entropy/selective_compute_per_transition.csv
+outputs/exp5b_entropy/selective_compute_summary.csv
+
+NOTE:
+'measured_full_*' = actual measured GPU latency
+'ideal_*' = derived estimate under proportional active-row scaling; NOT measured sparse execution.
+
+=== exp6_adaptive_scheduler
+======================================================================
+EXPERIMENT 6: DYNAMIC-PROGRAMMING ADAPTIVE SPLIT SCHEDULING
+======================================================================
+
+Scheduler threshold: 0.001
+Transitions: 64
+Split layers: [np.int64(4), np.int64(8), np.int64(12), np.int64(16), np.int64(20), np.int64(24)]
+
+=== STATIC SPLIT RESULTS ===
+ split_layer    total_ms    avg_ms
+           4 1928.787843 30.137310
+           8 1940.150713 30.314855
+          12 1937.881934 30.279405
+          16 1933.753962 30.214906
+          20 1935.618320 30.244036
+          24 1933.374213 30.208972
+
+Best static split: 4
+Best static total: 1928.787843 ms
+
+=== DP ADAPTIVE SCHEDULER SUMMARY ===
+ switch_overhead_ms  best_static_split  best_static_total_ms  adaptive_execution_ms  adaptive_switching_ms  adaptive_total_ms  num_switches  improvement_ms  improvement_pct  adaptive_better
+           0.000000                  4           1928.787843            1901.983335               0.000000        1901.983335            37       26.804507         1.389707             True
+           0.100000                  4           1928.787843            1903.011423               1.400000        1904.411423            14       24.376420         1.263821             True
+           0.500000                  4           1928.787843            1904.022618               5.000000        1909.022618            10       19.765224         1.024748             True
+           0.600000                  4           1928.787843            1904.588359               5.400000        1909.988359             9       18.799484         0.974679             True
+           0.700000                  4           1928.787843            1904.588359               6.300000        1910.888359             9       17.899484         0.928017             True
+           0.800000                  4           1928.787843            1906.128991               5.600000        1911.728991             7       17.058852         0.884434             True
+           0.900000                  4           1928.787843            1906.947147               5.400000        1912.347147             6       16.440696         0.852385             True
+           1.000000                  4           1928.787843            1908.889617               4.000000        1912.889617             4       15.898226         0.824260             True
+           2.000000                  4           1928.787843            1910.989677               4.000000        1914.989677             2       13.798166         0.715380             True
+           5.000000                  4           1928.787843            1913.991458               5.000000        1918.991458             1        9.796385         0.507904             True
+          10.000000                  4           1928.787843            1913.991458              10.000000        1923.991458             1        4.796385         0.248674             True
+
+Largest tested switching overhead where adaptive scheduling remains better than the best static split:
+10.000000 ms
+
+=== SELECTED SPLIT DISTRIBUTION ===
+
+Switch overhead 0.0 ms:
+selected_split
+4      1
+12    15
+16    19
+20     2
+24    27
+
+Switch overhead 0.1 ms:
+selected_split
+4      1
+12    11
+16    20
+24    32
+
+Switch overhead 0.5 ms:
+selected_split
+4      1
+12    22
+16     6
+24    35
+
+Switch overhead 0.6 ms:
+selected_split
+4      1
+12    24
+16     2
+20     6
+24    31
+
+Switch overhead 0.7 ms:
+selected_split
+4      1
+12    24
+16     2
+20     6
+24    31
+
+Switch overhead 0.8 ms:
+selected_split
+4      1
+12     4
+16    14
+20    18
+24    27
+
+Switch overhead 0.9 ms:
+selected_split
+4      1
+16    25
+20     6
+24    32
+
+Switch overhead 1.0 ms:
+selected_split
+4      1
+16    35
+24    28
+
+Switch overhead 2.0 ms:
+selected_split
+4      1
+16    24
+24    39
+
+Switch overhead 5.0 ms:
+selected_split
+4     12
+24    52
+
+Switch overhead 10.0 ms:
+selected_split
+4     12
+24    52
+
+NOTE:
+Adaptive execution costs use Exp5B's idealized selective-compute latency estimates.
+The scheduler is globally optimized with dynamic programming.
+Switching overhead is analytically swept and is not a measured model-migration latency.
+
+=== exp7d_dream_cross_task_hidden_drift
+Loading Dream...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.29it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.44it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.18it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.89it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.65it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Model device: cuda:0
+
+======================================================================
+TASK: factual_qa
+======================================================================
+Prompt      : What is the capital of Australia?
+Prompt len  : 26
+Gen length  : 64
+Steps       : 64
+Algorithm   : entropy
+Temperature : 0.1
+Top-p       : 0.9
+Top-k       : None
+Running generation...
+Token states: 65
+Running final analysis-only forward...
+
+Trajectory check
+Token states      : 65
+Token transitions : 64
+Layer  4 hidden states: 65
+Layer  8 hidden states: 65
+Layer 12 hidden states: 65
+Layer 16 hidden states: 65
+Layer 20 hidden states: 65
+Layer 24 hidden states: 65
+Layer 28 hidden states: 65
+Hidden transitions: 64
+Matched transitions: 64
+
+Final output:
+<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+What is the capital of Australia?<|im_end|>
+<|im_start|>assistant
+The capital of Australia is Canberra.
+
+FACTUAL_QA SUMMARY
+               model       task  layer  mean_changed_ratio  mean_drift  median_drift  mean_active_ratio_1e3  min_active_ratio_1e3  max_active_ratio_1e3
+Dream-v0-Instruct-7B factual_qa      4            0.015625    0.096820      0.034145               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B factual_qa      8            0.015625    0.225794      0.138738               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B factual_qa     12            0.015625    0.293618      0.186995               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B factual_qa     16            0.015625    0.388117      0.283250               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B factual_qa     20            0.015625    0.376763      0.301796               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B factual_qa     24            0.015625    0.260047      0.203972               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B factual_qa     28            0.015625    0.268273      0.213639               0.984375                   0.0                   1.0
+
+Layer 12 pattern
+Mean changed-token ratio: 0.015625
+Mean active hidden ratio: 0.984375
+Min active hidden ratio: 0.0
+Max active hidden ratio: 1.0
+Transitions with token changes: 63 / 64
+Fully unchanged transitions: 1 / 64
+Fully active hidden transitions: 63 / 64
+Mean active ratio when tokens changed: 1.0
+Mean active ratio when tokens unchanged: 0.0
+
+======================================================================
+TASK: reasoning
+======================================================================
+Prompt      : What is 15 multiplied by 12? Explain briefly.
+Prompt len  : 33
+Gen length  : 64
+Steps       : 64
+Algorithm   : entropy
+Temperature : 0.1
+Top-p       : 0.9
+Top-k       : None
+Running generation...
+Token states: 65
+Running final analysis-only forward...
+
+Trajectory check
+Token states      : 65
+Token transitions : 64
+Layer  4 hidden states: 65
+Layer  8 hidden states: 65
+Layer 12 hidden states: 65
+Layer 16 hidden states: 65
+Layer 20 hidden states: 65
+Layer 24 hidden states: 65
+Layer 28 hidden states: 65
+Hidden transitions: 64
+Matched transitions: 64
+
+Final output:
+<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+What is 15 multiplied by 12? Explain briefly.<|im_end|>
+<|im_start|>assistant
+15 multiplied by 12 is 180. To calculate this, you can use the standard multiplication algorithm or break it down into smaller parts: 15 x 10 = 150 and 15 x 2 = 30, then add the two results together.
+
+REASONING SUMMARY
+               model      task  layer  mean_changed_ratio  mean_drift  median_drift  mean_active_ratio_1e3  min_active_ratio_1e3  max_active_ratio_1e3
+Dream-v0-Instruct-7B reasoning      4            0.015625    0.099175      0.040983               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B reasoning      8            0.015625    0.199231      0.136909               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B reasoning     12            0.015625    0.254375      0.173377               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B reasoning     16            0.015625    0.294079      0.214973               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B reasoning     20            0.015625    0.274366      0.209583               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B reasoning     24            0.015625    0.179634      0.134076               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B reasoning     28            0.015625    0.179734      0.136763               0.984375                   0.0                   1.0
+
+Layer 12 pattern
+Mean changed-token ratio: 0.015625
+Mean active hidden ratio: 0.984375
+Min active hidden ratio: 0.0
+Max active hidden ratio: 1.0
+Transitions with token changes: 63 / 64
+Fully unchanged transitions: 1 / 64
+Fully active hidden transitions: 63 / 64
+Mean active ratio when tokens changed: 1.0
+Mean active ratio when tokens unchanged: 0.0
+
+======================================================================
+TASK: instruction
+======================================================================
+Prompt      : Explain in three short sentences why regular backups are important.
+Prompt len  : 31
+Gen length  : 64
+Steps       : 64
+Algorithm   : entropy
+Temperature : 0.1
+Top-p       : 0.9
+Top-k       : None
+Running generation...
+Token states: 65
+Running final analysis-only forward...
+
+Trajectory check
+Token states      : 65
+Token transitions : 64
+Layer  4 hidden states: 65
+Layer  8 hidden states: 65
+Layer 12 hidden states: 65
+Layer 16 hidden states: 65
+Layer 20 hidden states: 65
+Layer 24 hidden states: 65
+Layer 28 hidden states: 65
+Hidden transitions: 64
+Matched transitions: 64
+
+Final output:
+<|im_start|>system
+You are a helpful assistant.<|im_end|>
+<|im_start|>user
+Explain in three short sentences why regular backups are important.<|im_end|>
+<|im_start|>assistant
+Regular backups are important to protect against data loss due to hardware failure, software errors, or cyber attacks. They ensure that important files and information are not lost in case of system crashes or data corruption. Regular backups also provide a way to restore data to a previous state, allowing for quick recovery from any data loss.
+
+INSTRUCTION SUMMARY
+               model        task  layer  mean_changed_ratio  mean_drift  median_drift  mean_active_ratio_1e3  min_active_ratio_1e3  max_active_ratio_1e3
+Dream-v0-Instruct-7B instruction      4            0.015625    0.100254      0.040377               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B instruction      8            0.015625    0.188724      0.130995               0.982910                   0.0                   1.0
+Dream-v0-Instruct-7B instruction     12            0.015625    0.222302      0.159217               0.983398                   0.0                   1.0
+Dream-v0-Instruct-7B instruction     16            0.015625    0.256878      0.187977               0.983398                   0.0                   1.0
+Dream-v0-Instruct-7B instruction     20            0.015625    0.232503      0.175281               0.983398                   0.0                   1.0
+Dream-v0-Instruct-7B instruction     24            0.015625    0.150353      0.107981               0.983398                   0.0                   1.0
+Dream-v0-Instruct-7B instruction     28            0.015625    0.153225      0.101314               0.984375                   0.0                   1.0
+
+Layer 12 pattern
+Mean changed-token ratio: 0.015625
+Mean active hidden ratio: 0.9833984375
+Min active hidden ratio: 0.0
+Max active hidden ratio: 1.0
+Transitions with token changes: 63 / 64
+Fully unchanged transitions: 1 / 64
+Fully active hidden transitions: 59 / 64
+Mean active ratio when tokens changed: 0.9990079365079365
+Mean active ratio when tokens unchanged: 0.0
+
+======================================================================
+RQ5 DREAM CROSS-TASK SUMMARY
+======================================================================
+               model        task  layer  mean_changed_ratio  mean_drift  median_drift  mean_active_ratio_1e3  min_active_ratio_1e3  max_active_ratio_1e3
+Dream-v0-Instruct-7B  factual_qa      4            0.015625    0.096820      0.034145               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B  factual_qa      8            0.015625    0.225794      0.138738               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B  factual_qa     12            0.015625    0.293618      0.186995               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B  factual_qa     16            0.015625    0.388117      0.283250               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B  factual_qa     20            0.015625    0.376763      0.301796               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B  factual_qa     24            0.015625    0.260047      0.203972               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B  factual_qa     28            0.015625    0.268273      0.213639               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B   reasoning      4            0.015625    0.099175      0.040983               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B   reasoning      8            0.015625    0.199231      0.136909               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B   reasoning     12            0.015625    0.254375      0.173377               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B   reasoning     16            0.015625    0.294079      0.214973               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B   reasoning     20            0.015625    0.274366      0.209583               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B   reasoning     24            0.015625    0.179634      0.134076               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B   reasoning     28            0.015625    0.179734      0.136763               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B instruction      4            0.015625    0.100254      0.040377               0.984375                   0.0                   1.0
+Dream-v0-Instruct-7B instruction      8            0.015625    0.188724      0.130995               0.982910                   0.0                   1.0
+Dream-v0-Instruct-7B instruction     12            0.015625    0.222302      0.159217               0.983398                   0.0                   1.0
+Dream-v0-Instruct-7B instruction     16            0.015625    0.256878      0.187977               0.983398                   0.0                   1.0
+Dream-v0-Instruct-7B instruction     20            0.015625    0.232503      0.175281               0.983398                   0.0                   1.0
+Dream-v0-Instruct-7B instruction     24            0.015625    0.150353      0.107981               0.983398                   0.0                   1.0
+Dream-v0-Instruct-7B instruction     28            0.015625    0.153225      0.101314               0.984375                   0.0                   1.0
+
+Saved:
+/mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp7d_entropy/dream_rq5_hidden_drift_per_transition.csv
+/mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp7d_entropy/dream_rq5_hidden_drift_summary.csv
+/mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp7d_entropy/dream_rq5_token_changes.csv
+
+Done. Now set RERUN_ENTROPY = False in configs/experiment_config.py.

@@ -12,6 +12,9 @@ sys.path.append(
     )
 )
 
+import configs.experiment_config as _sfx_cfg  # noqa: E402
+SFX = getattr(_sfx_cfg, "OUTPUT_SUFFIX", "")  # "" = original folders, e.g. "_entropy"
+
 from configs.experiment_config import (
     MODEL_NAME,
     SEED,
@@ -148,12 +151,12 @@ def main():
     df = pd.DataFrame(tracker.records)
 
     os.makedirs(
-        "outputs/exp2",
+        f"outputs/exp2{SFX}",
         exist_ok=True,
     )
 
     df.to_csv(
-        "outputs/exp2/hidden_drift.csv",
+        f"outputs/exp2{SFX}/hidden_drift.csv",
         index=False,
     )
 
@@ -205,7 +208,7 @@ def main():
     plt.tight_layout()
 
     plt.savefig(
-        "outputs/exp2/"
+        f"outputs/exp2{SFX}/"
         "hidden_drift_heatmap.png",
         dpi=200,
     )
@@ -309,7 +312,7 @@ def main():
     )
 
     print(
-        "outputs/exp2/"
+        f"outputs/exp2{SFX}/"
         "hidden_drift.csv"
     )
 

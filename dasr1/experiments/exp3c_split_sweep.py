@@ -11,6 +11,9 @@ sys.path.append(
     )
 )
 
+import configs.experiment_config as _sfx_cfg  # noqa: E402
+SFX = getattr(_sfx_cfg, "OUTPUT_SUFFIX", "")  # "" = original folders, e.g. "_entropy"
+
 from configs.experiment_config import (
     MODEL_NAME,
     SEED,
@@ -440,12 +443,12 @@ def main():
     df = pd.DataFrame(records)
 
     os.makedirs(
-        "outputs/exp3c",
+        f"outputs/exp3c{SFX}",
         exist_ok=True,
     )
 
     df.to_csv(
-        "outputs/exp3c/"
+        f"outputs/exp3c{SFX}/"
         "split_sweep.csv",
         index=False,
     )
@@ -475,7 +478,7 @@ def main():
     )
 
     print(
-        "outputs/exp3c/"
+        f"outputs/exp3c{SFX}/"
         "split_sweep.csv"
     )
 

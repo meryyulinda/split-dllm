@@ -15,6 +15,9 @@ sys.path.append(
 )
 
 
+import configs.experiment_config as _sfx_cfg  # noqa: E402
+SFX = getattr(_sfx_cfg, "OUTPUT_SUFFIX", "")  # "" = original folders, e.g. "_entropy"
+
 from configs.experiment_config import (
     MODEL_NAME,
     SEED,
@@ -638,12 +641,12 @@ def main():
     )
 
     os.makedirs(
-        "outputs/exp4b",
+        f"outputs/exp4b{SFX}",
         exist_ok=True,
     )
 
     df.to_csv(
-        "outputs/exp4b/"
+        f"outputs/exp4b{SFX}/"
         "synchronized_delta_per_state.csv",
         index=False,
     )
@@ -830,7 +833,7 @@ def main():
     # -------------------------------------------------
 
     summary.to_csv(
-        "outputs/exp4b/"
+        f"outputs/exp4b{SFX}/"
         "synchronized_delta_summary.csv",
         index=False,
     )
@@ -870,7 +873,7 @@ def main():
     )
 
     print(
-        "outputs/exp4b/"
+        f"outputs/exp4b{SFX}/"
         "synchronized_delta_per_state.csv"
     )
 
@@ -879,7 +882,7 @@ def main():
     )
 
     print(
-        "outputs/exp4b/"
+        f"outputs/exp4b{SFX}/"
         "synchronized_delta_summary.csv"
     )
 

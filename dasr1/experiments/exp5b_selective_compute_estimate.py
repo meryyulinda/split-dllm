@@ -15,6 +15,9 @@ sys.path.append(
 )
 
 
+import configs.experiment_config as _sfx_cfg  # noqa: E402
+SFX = getattr(_sfx_cfg, "OUTPUT_SUFFIX", "")  # "" = original folders, e.g. "_entropy"
+
 from configs.experiment_config import (
     MODEL_NAME,
     SEED,
@@ -71,7 +74,7 @@ def main():
     # =====================================================
 
     exp5a = pd.read_csv(
-        "outputs/exp5a/"
+        f"outputs/exp5a{SFX}/"
         "selective_reuse_per_transition.csv"
     )
 
@@ -353,12 +356,12 @@ def main():
     # =====================================================
 
     os.makedirs(
-        "outputs/exp5b",
+        f"outputs/exp5b{SFX}",
         exist_ok=True,
     )
 
     merged.to_csv(
-        "outputs/exp5b/"
+        f"outputs/exp5b{SFX}/"
         "selective_compute_per_transition.csv",
         index=False,
     )
@@ -440,7 +443,7 @@ def main():
     )
 
     summary.to_csv(
-        "outputs/exp5b/"
+        f"outputs/exp5b{SFX}/"
         "selective_compute_summary.csv",
         index=False,
     )
@@ -464,12 +467,12 @@ def main():
     print("\nSaved:")
 
     print(
-        "outputs/exp5b/"
+        f"outputs/exp5b{SFX}/"
         "selective_compute_per_transition.csv"
     )
 
     print(
-        "outputs/exp5b/"
+        f"outputs/exp5b{SFX}/"
         "selective_compute_summary.csv"
     )
 

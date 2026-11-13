@@ -35,7 +35,7 @@ SPLIT_LAYERS = [4, 8, 12, 16, 20, 24]
 WARMUP = 3
 REPEATS = 10
 
-EDGE_DEVICE = "cuda:2"
+EDGE_DEVICE = "cuda:1"
 CLOUD_DEVICE = "cuda:0"
 
 SELECTIVE_THRESHOLDS = [
@@ -272,3 +272,18 @@ EXP10D_SEEDS = [42]               # with T > 0, every seed is a separate paired 
 EXP11_TEMPERATURE = 0.1           # Dream's official GSM8K sampling (T=0 collapses to EOS)
 EXP11_TOP_P = 0.9
 
+# ---------------------------------------------------------------------------
+# RQ1-RQ5 rerun under Dream's official sampler (entropy, T=0.1, top_p=0.9),
+# the same sampler as Exp10D/Exp11. Set RERUN_ENTROPY = True, run the Exp1-Exp7D
+# scripts, then set it back to False.
+# Every Exp1-Exp7D output folder gets OUTPUT_SUFFIX (outputs/exp2_entropy, ...),
+# so the original origin-sampler results stay untouched. Exp7C (LLaDA) already
+# uses LLaDA's confidence-based sampler and is not affected.
+# This block must stay at the END of the file: it overrides the values above.
+OUTPUT_SUFFIX = ""
+RERUN_ENTROPY = False
+if RERUN_ENTROPY:
+    ALGORITHM = "entropy"
+    TEMPERATURE = 0.1
+    TOP_P = 0.9
+    OUTPUT_SUFFIX = "_entropy"

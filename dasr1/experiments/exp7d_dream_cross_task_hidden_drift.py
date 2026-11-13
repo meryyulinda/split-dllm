@@ -14,6 +14,9 @@ import numpy as np
 import torch
 import pandas as pd
 
+import configs.experiment_config as _sfx_cfg  # noqa: E402
+SFX = getattr(_sfx_cfg, "OUTPUT_SUFFIX", "")  # "" = original folders, e.g. "_entropy"
+
 from configs.experiment_config import (
     MODEL_NAME,
     SEED,
@@ -57,7 +60,7 @@ PROJECT_ROOT = os.path.dirname(
 OUTPUT_DIR = os.path.join(
     PROJECT_ROOT,
     "outputs",
-    "exp7d",
+    "exp7d" + SFX,
 )
 
 os.makedirs(

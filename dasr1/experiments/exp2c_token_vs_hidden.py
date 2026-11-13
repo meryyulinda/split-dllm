@@ -1,6 +1,13 @@
 import os
 import pandas as pd
 
+import os as _os_sfx
+import sys as _sys_sfx
+_sys_sfx.path.append(_os_sfx.path.dirname(_os_sfx.path.dirname(_os_sfx.path.abspath(__file__))))
+import configs.experiment_config as _sfx_cfg  # noqa: E402
+SFX = getattr(_sfx_cfg, "OUTPUT_SUFFIX", "")  # "" = original folders, e.g. "_entropy"
+
+
 
 def main():
 
@@ -9,7 +16,7 @@ def main():
     # --------------------------------
 
     token_df = pd.read_csv(
-        "outputs/exp1/token_changes.csv"
+        f"outputs/exp1{SFX}/token_changes.csv"
     )
 
     # --------------------------------
@@ -17,7 +24,7 @@ def main():
     # --------------------------------
 
     hidden_df = pd.read_csv(
-        "outputs/exp2/hidden_drift.csv"
+        f"outputs/exp2{SFX}/hidden_drift.csv"
     )
 
     # --------------------------------
@@ -84,12 +91,12 @@ def main():
     # --------------------------------
 
     os.makedirs(
-        "outputs/exp2c",
+        f"outputs/exp2c{SFX}",
         exist_ok=True,
     )
 
     merged.to_csv(
-        "outputs/exp2c/"
+        f"outputs/exp2c{SFX}/"
         "token_vs_hidden.csv",
         index=False,
     )

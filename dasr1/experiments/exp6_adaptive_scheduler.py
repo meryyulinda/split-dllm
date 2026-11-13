@@ -13,6 +13,9 @@ sys.path.append(
 )
 
 
+import configs.experiment_config as _sfx_cfg  # noqa: E402
+SFX = getattr(_sfx_cfg, "OUTPUT_SUFFIX", "")  # "" = original folders, e.g. "_entropy"
+
 from configs.experiment_config import (
     SCHEDULER_THRESHOLD,
     SCHEDULER_SWITCH_OVERHEADS_MS,
@@ -384,7 +387,7 @@ def main():
     # =====================================================
 
     df = pd.read_csv(
-        "outputs/exp5b/"
+        f"outputs/exp5b{SFX}/"
         "selective_compute_per_transition.csv"
     )
 
@@ -495,7 +498,7 @@ def main():
     # =====================================================
 
     os.makedirs(
-        "outputs/exp6",
+        f"outputs/exp6{SFX}",
         exist_ok=True,
     )
 
@@ -593,7 +596,7 @@ def main():
         result[
             "schedule"
         ].to_csv(
-            "outputs/exp6/"
+            f"outputs/exp6{SFX}/"
             f"optimal_schedule_"
             f"{overhead_name}ms.csv",
             index=False,
@@ -608,7 +611,7 @@ def main():
     )
 
     summary.to_csv(
-        "outputs/exp6/"
+        f"outputs/exp6{SFX}/"
         "adaptive_scheduler_summary.csv",
         index=False,
     )
@@ -687,7 +690,7 @@ def main():
         )
 
         schedule = pd.read_csv(
-            "outputs/exp6/"
+            f"outputs/exp6{SFX}/"
             f"optimal_schedule_"
             f"{overhead_name}ms.csv"
         )
