@@ -1,0 +1,115 @@
+nohup: ignoring input
+note: C2_cache_aware runs without its exactness reference C1_cache_full (not in EXP11_VARIANT_NAMES)
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.56it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  6.79it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.07it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.50it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.25it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=290.7 W, cloud=65.5 W
+Exp11 | dream | authored n=12 | split after layer 4 | edge=cuda:1 cloud=cuda:0 | 128 tok / 128 steps | cache ('fixed', 25, 2, 0.25)
+warmup done
+
+library_factual | prompt tokens=849
+  S0_split_full              ok=True  up= 896.40 MB edge=   5652 ms cloud=  16920 ms mem=2.97/12.90 GiB E=6965+6038 J 'Mara Chen'
+  S1_split_exact_delta       ok=True  up= 889.89 MB edge=   5348 ms cloud=  17017 ms mem=2.97/12.90 GiB E=6855+6084 J EXACT 'Mara Chen'
+  S2_split_int8              ok=True  up= 462.45 MB edge=   4889 ms cloud=  17064 ms mem=2.97/12.90 GiB E=6655+6082 J 'Mara Chen'
+  C2_cache_aware             ok=True  up= 154.83 MB edge=   2668 ms cloud=   5538 ms mem=2.99/12.92 GiB E=2638+2220 J 'Mara Chen'
+  C4_cache_aware_int8        ok=True  up=  98.46 MB edge=   2728 ms cloud=   5578 ms mem=2.99/12.92 GiB E=2677+2207 J 'Mara Chen'
+  A1_adaptive_cache_aware    ok=True  up= 142.67 MB edge=   2592 ms cloud=   5115 ms mem=2.98/12.92 GiB E=2490+1992 J 'Mara Chen'
+
+library_math | prompt tokens=864
+  S0_split_full              ok=True  up= 910.17 MB edge=   5373 ms cloud=  17233 ms mem=2.98/12.93 GiB E=6886+6174 J 'days is 1,320 records - 840 records = 480 records.'
+  S1_split_exact_delta       ok=True  up= 903.56 MB edge=   5278 ms cloud=  17275 ms mem=2.98/12.93 GiB E=6918+6179 J EXACT 'days is 1,320 records - 840 records = 480 records.'
+  S2_split_int8              ok=True  up= 469.55 MB edge=   5124 ms cloud=  17274 ms mem=2.98/12.93 GiB E=6839+6174 J 'days is 1,320 records - 840 records = 480 records.'
+  C2_cache_aware             ok=True  up= 155.48 MB edge=   2585 ms cloud=   5572 ms mem=2.99/12.93 GiB E=2612+2224 J 'days is 1,320 records - 840 records = 480 records.'
+  C4_cache_aware_int8        ok=True  up=  99.10 MB edge=   2659 ms cloud=   5557 ms mem=2.99/12.93 GiB E=2638+2229 J 'days is 1,320 records - 840 records = 480 records.'
+  A1_adaptive_cache_aware    ok=True  up= 161.66 MB edge=   2763 ms cloud=   5699 ms mem=2.98/12.93 GiB E=2739+2266 J 'days is 1,320 records - 840 records = 480 records.'
+
+library_instruction | prompt tokens=862
+  S0_split_full              ok=True  up= 908.33 MB edge=   5146 ms cloud=  17283 ms mem=2.98/12.93 GiB E=6776+6143 J 'ses to the records officer for a privacy decision.'
+  S1_split_exact_delta       ok=True  up= 901.73 MB edge=   5212 ms cloud=  17300 ms mem=2.98/12.93 GiB E=6914+6185 J EXACT 'ses to the records officer for a privacy decision.'
+  S2_split_int8              ok=True  up= 468.60 MB edge=   5229 ms cloud=  17295 ms mem=2.98/12.93 GiB E=6888+6165 J ' records officer for a privacy or rights decision.'
+  C2_cache_aware             ok=True  up= 155.39 MB edge=   2602 ms cloud=   5558 ms mem=2.99/12.93 GiB E=2602+2248 J 'that could compromise privacy or copyright rights.'
+  C4_cache_aware_int8        ok=True  up=  99.02 MB edge=   2603 ms cloud=   5559 ms mem=2.99/12.93 GiB E=2592+2208 J 'itive content to the records officer for decision.'
+  A1_adaptive_cache_aware    ok=True  up= 167.73 MB edge=   2530 ms cloud=   5775 ms mem=2.98/12.93 GiB E=2665+2270 J ' tracked separately for privacy-related decisions.'
+
+sensors_factual | prompt tokens=726
+  S0_split_full              ok=True  up= 783.55 MB edge=   4605 ms cloud=  15498 ms mem=2.96/12.89 GiB E=6100+5558 J 'duled field inspection is performed every 14 days.'
+  S1_split_exact_delta       ok=True  up= 777.86 MB edge=   4698 ms cloud=  15511 ms mem=2.96/12.89 GiB E=6166+5579 J EXACT 'duled field inspection is performed every 14 days.'
+  S2_split_int8              ok=True  up= 404.23 MB edge=   4812 ms cloud=  15500 ms mem=2.96/12.89 GiB E=6324+5624 J 'duled field inspection is performed every 14 days.'
+  C2_cache_aware             ok=True  up= 149.54 MB edge=   2473 ms cloud=   5339 ms mem=2.96/12.84 GiB E=2564+2119 J 'duled field inspection is performed every 14 days.'
+  C4_cache_aware_int8        ok=True  up=  93.17 MB edge=   2450 ms cloud=   5259 ms mem=2.96/12.84 GiB E=2519+2078 J 'duled field inspection is performed every 14 days.'
+  A1_adaptive_cache_aware    ok=True  up= 144.34 MB edge=   2277 ms cloud=   4969 ms mem=2.95/12.84 GiB E=2325+1946 J 'duled field inspection is performed every 14 days.'
+
+sensors_math | prompt tokens=731
+  S0_split_full              ok=True  up= 788.14 MB edge=   4690 ms cloud=  15435 ms mem=2.95/12.85 GiB E=6054+5551 J 'gs is 240 readings/hour * 5 hours = 1200 readings.'
+  S1_split_exact_delta       ok=True  up= 782.41 MB edge=   4610 ms cloud=  15461 ms mem=2.95/12.85 GiB E=6088+5551 J EXACT 'gs is 240 readings/hour * 5 hours = 1200 readings.'
+  S2_split_int8              ok=True  up= 406.60 MB edge=   4680 ms cloud=  15454 ms mem=2.95/12.85 GiB E=6245+5586 J 'rom all active sensors is 40 * 30 = 1200 readings.'
+  C2_cache_aware             ok=True  up= 149.76 MB edge=   2473 ms cloud=   5377 ms mem=2.96/12.85 GiB E=2598+2126 J 'e 40 sensors * 30 readings/sensor = 1200 readings.'
+  C4_cache_aware_int8        ok=True  up=  93.38 MB edge=   2498 ms cloud=   5406 ms mem=2.96/12.85 GiB E=2571+2137 J 'e 40 sensors * 30 readings/sensor = 1200 readings.'
+  A1_adaptive_cache_aware    ok=True  up= 160.22 MB edge=   2485 ms cloud=   5451 ms mem=2.95/12.84 GiB E=2600+2152 J 'e 40 sensors * 30 readings/sensor = 1200 readings.'
+
+sensors_instruction | prompt tokens=736
+  S0_split_full              ok=True  up= 792.73 MB edge=   4655 ms cloud=  15456 ms mem=2.95/12.85 GiB E=6148+5557 J "es according to the city's existing incident plan."
+  S1_split_exact_delta       ok=True  up= 786.97 MB edge=   4642 ms cloud=  15483 ms mem=2.95/12.85 GiB E=6087+5554 J EXACT "es according to the city's existing incident plan."
+  S2_split_int8              ok=True  up= 408.96 MB edge=   4645 ms cloud=  15472 ms mem=2.95/12.85 GiB E=6178+5599 J "es according to the city's existing incident plan."
+  C2_cache_aware             ok=True  up= 149.97 MB edge=   2467 ms cloud=   5335 ms mem=2.96/12.85 GiB E=2535+2126 J "vel when safe to collect, and the reporter's name."
+  C4_cache_aware_int8        ok=True  up=  93.60 MB edge=   2524 ms cloud=   5271 ms mem=2.96/12.85 GiB E=2529+2102 J "vel when safe to collect, and the reporter's name."
+  A1_adaptive_cache_aware    ok=True  up= 155.24 MB edge=   2451 ms cloud=   5309 ms mem=2.95/12.84 GiB E=2540+2089 J "es according to the city's existing incident plan."
+
+clinic_factual | prompt tokens=666
+  S0_split_full              ok=True  up= 728.50 MB edge=   4614 ms cloud=  14926 ms mem=2.94/12.83 GiB E=6025+5373 J ' threshold for appointment-available doses is 140.'
+  S1_split_exact_delta       ok=True  up= 723.21 MB edge=   4577 ms cloud=  14927 ms mem=2.94/12.83 GiB E=5948+5405 J EXACT ' threshold for appointment-available doses is 140.'
+  S2_split_int8              ok=True  up= 375.83 MB edge=   4528 ms cloud=  14935 ms mem=2.94/12.83 GiB E=5914+5386 J ' threshold for appointment-available doses is 140.'
+  C2_cache_aware             ok=True  up= 146.96 MB edge=   2384 ms cloud=   5259 ms mem=2.94/12.80 GiB E=2469+2075 J '140'
+  C4_cache_aware_int8        ok=True  up=  90.59 MB edge=   2399 ms cloud=   5222 ms mem=2.94/12.80 GiB E=2476+2053 J '140'
+  A1_adaptive_cache_aware    ok=True  up= 137.43 MB edge=   2252 ms cloud=   4841 ms mem=2.94/12.80 GiB E=2297+1901 J '140'
+
+clinic_math | prompt tokens=673
+  S0_split_full              ok=True  up= 734.92 MB edge=   4551 ms cloud=  14961 ms mem=2.94/12.80 GiB E=5982+5393 J 'tient appointments after the training reservation.'
+  S1_split_exact_delta       ok=True  up= 729.58 MB edge=   4611 ms cloud=  14980 ms mem=2.94/12.80 GiB E=6054+5377 J EXACT 'tient appointments after the training reservation.'
+  S2_split_int8              ok=True  up= 379.14 MB edge=   4571 ms cloud=  14980 ms mem=2.94/12.80 GiB E=6031+5398 J 'tient appointments after the training reservation.'
+  C2_cache_aware             ok=True  up= 147.26 MB edge=   2417 ms cloud=   5245 ms mem=2.95/12.81 GiB E=2477+2111 J 'tient appointments after the training reservation.'
+  C4_cache_aware_int8        ok=True  up=  90.89 MB edge=   2274 ms cloud=   5212 ms mem=2.95/12.81 GiB E=2409+2072 J ' are 320 doses remaining for patient appointments.'
+  A1_adaptive_cache_aware    ok=True  up= 156.90 MB edge=   2361 ms cloud=   5371 ms mem=2.94/12.80 GiB E=2495+2122 J 'tient appointments after the training reservation.'
+
+clinic_instruction | prompt tokens=671
+  S0_split_full              ok=True  up= 733.09 MB edge=   4431 ms cloud=  14958 ms mem=2.94/12.81 GiB E=5888+5349 J 'ritize a particular lot following a safety notice.'
+  S1_split_exact_delta       ok=True  up= 727.76 MB edge=   4494 ms cloud=  14966 ms mem=2.94/12.81 GiB E=5974+5354 J EXACT 'ritize a particular lot following a safety notice.'
+  S2_split_int8              ok=True  up= 378.20 MB edge=   4676 ms cloud=  14957 ms mem=2.94/12.81 GiB E=6046+5417 J "eflect the correct status of the product's expiry."
+  C2_cache_aware             ok=True  up= 147.18 MB edge=   2458 ms cloud=   5250 ms mem=2.94/12.81 GiB E=2544+2099 J 'pancy and consult with the responsible pharmacist.'
+  C4_cache_aware_int8        ok=True  up=  90.80 MB edge=   2469 ms cloud=   5242 ms mem=2.94/12.81 GiB E=2541+2080 J 'sult with the responsible pharmacist for guidance.'
+  A1_adaptive_cache_aware    ok=True  up= 156.78 MB edge=   2351 ms cloud=   5442 ms mem=2.94/12.80 GiB E=2489+2129 J 'le pharmacist to determine the appropriate action.'
+
+transit_factual | prompt tokens=678
+  S0_split_full              ok=True  up= 739.51 MB edge=   4386 ms cloud=  15006 ms mem=2.94/12.81 GiB E=5861+5382 J 'The rider feedback deadline is 23 November 2026.'
+  S1_split_exact_delta       ok=True  up= 734.14 MB edge=   4419 ms cloud=  15019 ms mem=2.94/12.81 GiB E=5902+5386 J EXACT 'The rider feedback deadline is 23 November 2026.'
+  S2_split_int8              ok=True  up= 381.51 MB edge=   4483 ms cloud=  14999 ms mem=2.94/12.81 GiB E=5957+5397 J 'The rider feedback deadline is 23 November 2026.'
+  C2_cache_aware             ok=True  up= 147.48 MB edge=   2447 ms cloud=   5249 ms mem=2.95/12.81 GiB E=2543+2077 J 'The rider feedback deadline is 23 November 2026.'
+  C4_cache_aware_int8        ok=True  up=  91.10 MB edge=   2477 ms cloud=   5299 ms mem=2.95/12.81 GiB E=2547+2088 J 'The rider feedback deadline is 23 November 2026.'
+  A1_adaptive_cache_aware    ok=True  up= 142.62 MB edge=   2312 ms cloud=   4925 ms mem=2.94/12.81 GiB E=2358+1927 J 'The rider feedback deadline is 23 November 2026.'
+
+transit_math | prompt tokens=687
+  S0_split_full              ok=True  up= 747.77 MB edge=   4581 ms cloud=  15043 ms mem=2.95/12.82 GiB E=5999+5403 J 'te a total of 630 kilometres on the specified day.'
+  S1_split_exact_delta       ok=True  up= 742.34 MB edge=   4493 ms cloud=  15062 ms mem=2.95/12.82 GiB E=5923+5420 J EXACT 'te a total of 630 kilometres on the specified day.'
+  S2_split_int8              ok=True  up= 385.77 MB edge=   4376 ms cloud=  15062 ms mem=2.95/12.82 GiB E=5942+5366 J ' operated by all buses is 7 * 90 = 630 kilometres.'
+  C2_cache_aware             ok=True  up= 147.86 MB edge=   2428 ms cloud=   5271 ms mem=2.95/12.82 GiB E=2468+2121 J 'by all seven buses on the specified day is 630 km.'
+  C4_cache_aware_int8        ok=True  up=  91.49 MB edge=   2422 ms cloud=   5315 ms mem=2.95/12.82 GiB E=2511+2106 J 'te a total of 630 kilometres on the specified day.'
+  A1_adaptive_cache_aware    ok=True  up= 152.78 MB edge=   2412 ms cloud=   5248 ms mem=2.94/12.81 GiB E=2512+2082 J 'te a total of 630 kilometres on the specified day.'
+
+transit_instruction | prompt tokens=695
+  S0_split_full              ok=True  up= 755.11 MB edge=   4622 ms cloud=  15080 ms mem=2.94/12.82 GiB E=6080+5413 J 'rvice hours for assistance with your travel plans.'
+  S1_split_exact_delta       ok=True  up= 749.62 MB edge=   4574 ms cloud=  15094 ms mem=2.94/12.82 GiB E=6028+5410 J EXACT 'rvice hours for assistance with your travel plans.'
+  S2_split_int8              ok=True  up= 389.56 MB edge=   4519 ms cloud=  15089 ms mem=2.94/12.82 GiB E=5966+5422 J 'ber] or visit our website at [insert website URL].'
+  C2_cache_aware             ok=True  up= 148.21 MB edge=   2372 ms cloud=   5272 ms mem=2.95/12.82 GiB E=2470+2097 J 'desk at [insert service desk contact information].'
+  C4_cache_aware_int8        ok=True  up=  91.83 MB edge=   2390 ms cloud=   5267 ms mem=2.95/12.82 GiB E=2483+2086 J 'desk at [insert service desk contact information].'
+  A1_adaptive_cache_aware    ok=True  up= 158.16 MB edge=   2457 ms cloud=   5456 ms mem=2.94/12.82 GiB E=2563+2158 J "nformation] or visit the transit office's website."
+
+Exp11 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp11_authored_k4_t128_T0.1_addon
+                variant  runs  acc  regressions  exact_vs_ref  mean_up_mb  up_reduction_vs_S0  mean_edge_ms  mean_cloud_ms  mean_edge_peak_gib  mean_cloud_peak_gib  mean_edge_energy_j  mean_cloud_energy_j
+          S0_split_full    12  1.0            0             0  793.184256            0.000000   4775.515452   15649.891869            2.954543            12.852598         6230.413417          5611.162833
+   S1_split_exact_delta    12  1.0            0            12  787.423228            0.007263   4746.372987   15674.569425            2.954543            12.852598         6237.986833          5623.583500
+          S2_split_int8    12  1.0            0             0  409.201020            0.484103   4711.059777   15673.371151            2.954543            12.852598         6248.577333          5634.680667
+         C2_cache_aware    12  1.0            0             0  149.992448            0.809919   2481.141463    5355.378471            2.959901            12.849957         2543.554667          2136.820667
+    C4_cache_aware_int8    12  1.0            0             0   93.618932            0.881481   2491.132076    5348.843669            2.960288            12.849990         2541.181583          2120.504667
+A1_adaptive_cache_aware    12  1.0            0             0  153.044821            0.806050   2436.854302    5300.062007            2.951995            12.844332         2506.030667          2086.293917

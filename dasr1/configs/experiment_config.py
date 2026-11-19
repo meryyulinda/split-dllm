@@ -273,15 +273,26 @@ EXP11_TEMPERATURE = 0.1           # Dream's official GSM8K sampling (T=0 collaps
 EXP11_TOP_P = 0.9
 
 # Exp11 addon
-EXP11_MODEL = "dream"
-EXP11_OUTPUT_TAG = "_addon"
-EXP11_VARIANT_NAMES = ["S0_split_full", "S1_split_exact_delta", "S2_split_int8",
-                       "C2_cache_aware", "C4_cache_aware_int8", "A1_adaptive_cache_aware"]
-EXP11_IDLE_SECONDS = 5.0
+EXP11_MODEL = "llada" # dream or llada
+EXP11_OUTPUT_TAG = ""
+EXP11_VARIANT_NAMES = ["S0_split_full", "S1_split_exact_delta", "S2_split_int8", "C1_cache_full",
+                       "C2_cache_aware", "C3_cache_aware_exact", "C4_cache_aware_int8",
+                       "A1_adaptive_cache_aware"]
 EXP11_DATASET = "gsm8k"
-EXP11_N_QUESTIONS = 2            # smoke test
-EXP11_NEW_TOKENS = 64            # smoke test
-EXP11_STEPS = 64                 # smoke test
+EXP11_LLADA_CACHE_POLICY = ("fixed", 50, 7, 0.25)
+EXP11_LLADA_TEMPERATURE = 0.0
+EXP11_N_QUESTIONS = 30
+EXP11_NEW_TOKENS = 256
+EXP11_STEPS = 256
+
+# Exp12A
+LLADA_MODEL_NAME = "GSAI-ML/LLaDA-8B-Instruct"
+EXP12_BLOCK_LENGTH = 8
+EXP12_TEMPERATURE = 0.0
+EXP12A_RESUME = True
+EXP12A_N_QUESTIONS = 100
+EXP12_NEW_TOKENS = 256
+EXP12_STEPS = 256
 
 # ---------------------------------------------------------------------------
 # RQ1-RQ5 rerun under Dream's official sampler (entropy, T=0.1, top_p=0.9),
