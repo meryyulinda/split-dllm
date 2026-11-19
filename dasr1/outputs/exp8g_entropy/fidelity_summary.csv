@@ -1,0 +1,5 @@
+block_group,num_cached_blocks,refresh_interval,cases,exact_trajectory_cases,exact_final_ids_cases,min_exact_transition_states,mean_token_agreement,exact_trajectory_rate
+L4_L8_L12_L16_L18_L20_L22_L24,8,2,9,3,3,5,0.7884114583333334,0.3333333333333333
+L4_L8_L12_L16_L18_L20_L22_L24,8,4,9,3,3,3,0.7444661458333334,0.3333333333333333
+L8_L20_L24,3,2,9,3,3,3,0.8026529947916666,0.3333333333333333
+L8_L20_L24,3,4,9,3,3,3,0.7399088541666666,0.3333333333333333

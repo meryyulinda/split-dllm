@@ -89,7 +89,10 @@ CHECK_HF_TOGGLE = bool(
     getattr(cfg, "EXP8G_VALIDATE_HF_TOGGLE", True)
 )
 
-OUT = ROOT / "outputs" / "exp8g"
+# OUTPUT_SUFFIX comes from the RERUN_ENTROPY block at the end of the config:
+# "" = original folder (origin sampler), "_entropy" = outputs/exp8g_entropy/.
+SFX = str(getattr(cfg, "OUTPUT_SUFFIX", ""))
+OUT = ROOT / "outputs" / f"exp8g{SFX}"
 
 
 # ============================================================
@@ -1227,6 +1230,11 @@ def main():
         "steps": STEPS,
         "run_timing": RUN_TIMING,
         "hf_cache_disabled": True,
+        "generation_params": {
+            "alg": cfg.ALGORITHM, "temperature": cfg.TEMPERATURE,
+            "top_p": cfg.TOP_P, "top_k": cfg.TOP_K,
+        },
+        "output_suffix": SFX,
 
         "note": (
             "Approximate residual reuse. "

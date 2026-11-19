@@ -154,19 +154,31 @@ def summarize(runs):
 def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, temperature,
              top_p=None, top_k=None, alg_temp=0.0, case_ids=(), warmup_runs=1,
              run_timing=False, timing_repeats=2, cases=None, score_fn=None,
-             resume=False):
+             resume=False, backend=None):
     """resume=True keeps finished cases from an earlier, interrupted run in
-    out_dir (a case counts as finished when every variant has a row)."""
+    out_dir (a case counts as finished when every variant has a row).
+
+    backend=None runs Dream (cfg.MODEL_NAME). Another model passes a dict with
+    name, algs (allowed sampler names), api() -> (repo, cache api), load() ->
+    (model, tokenizer), prepare(tokenizer, prompt, device) -> (ids, mask) and
+    generate(...) with the signature of src.feature_cache_ext.generate."""
     if not torch.cuda.is_available():
         raise RuntimeError(f"{experiment} requires a CUDA GPU")
-    if "Dream" not in cfg.MODEL_NAME:
-        raise RuntimeError(f"{experiment} uses the official Dream cache hook only")
+    if backend is None:
+        if "Dream" not in cfg.MODEL_NAME:
+            raise RuntimeError(f"{experiment} uses the official Dream cache hook only")
+        backend = {"name": cfg.MODEL_NAME,
+                   "algs": {"origin", "entropy", "maskgit_plus", "topk_margin"},
+                   "api": import_official,
+                   "load": lambda: load_dream_model(cfg.MODEL_NAME),
+                   "prepare": prepare_input, "generate": generate}
+    generate_fn, prepare_fn = backend["generate"], backend["prepare"]
     # Accept the old key names from earlier configs ("boundary_rows" / "force_boundary").
     renamed = {"boundary_rows": "prompt_tail_rows", "force_boundary": "force_prompt_tail"}
     variants = [{renamed.get(k, k): val for k, val in v.items()} for v in variants]
     for v in variants:
         make_policy(v["policy"])  # validate early
-        if v["alg"] not in {"origin", "entropy", "maskgit_plus", "topk_margin"}:
+        if v["alg"] not in backend["algs"]:
             raise ValueError(f"Unknown alg in {v}")
     names = [v["name"] for v in variants]
     if len(set(names)) != len(names):
@@ -199,8 +211,8 @@ def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, tempera
     else:
         commits_path.write_text("", encoding="utf-8")
 
-    repo, api = import_official()
-    model, tokenizer = load_dream_model(cfg.MODEL_NAME)
+    repo, api = backend["api"]()
+    model, tokenizer = backend["load"]()
     model.eval()
     device = next(model.parameters()).device
     gen_kw = dict(temperature=temperature, top_p=top_p, top_k=top_k, alg_temp=alg_temp)
@@ -213,12 +225,12 @@ def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, tempera
               f"{make_policy(v['policy']).label()}", flush=True)
 
     if warmup_runs:
-        ids_w, mask_w = prepare_input(tokenizer, cases[0]["prompt"], device)
+        ids_w, mask_w = prepare_fn(tokenizer, cases[0]["prompt"], device)
         v0 = variants[0]
         for _ in range(warmup_runs):
-            generate(model, tokenizer, ids_w, mask_w, new_tokens, steps, seeds[0],
+            generate_fn(model, tokenizer, ids_w, mask_w, new_tokens, steps, seeds[0],
                      alg=v0["alg"], capture_trajectory=False, observe=False, **gen_kw)
-            generate(model, tokenizer, ids_w, mask_w, new_tokens, steps, seeds[0],
+            generate_fn(model, tokenizer, ids_w, mask_w, new_tokens, steps, seeds[0],
                      alg=v0["alg"], cache_api=api, policy=v0["policy"],
                      prompt_tail_rows=v0.get("prompt_tail_rows", 0),
                      force_prompt_tail=v0.get("force_prompt_tail", True),
@@ -232,12 +244,12 @@ def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, tempera
     for case in cases:
         if case["case_id"] in done:
             continue
-        ids, mask = prepare_input(tokenizer, case["prompt"], device)
+        ids, mask = prepare_fn(tokenizer, case["prompt"], device)
         plen = int(ids.shape[1])
         print(f"\n{case['case_id']} | prompt tokens={plen}", flush=True)
         for alg in algs:
             for seed in seeds_for(alg, seeds, temperature):
-                base = generate(model, tokenizer, ids, mask, new_tokens, steps, seed,
+                base = generate_fn(model, tokenizer, ids, mask, new_tokens, steps, seed,
                                 alg=alg, **gen_kw)
                 b = describe(tokenizer, base["generated_ids"])
                 b_score = score_fn(case, b["text"])
@@ -262,7 +274,7 @@ def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, tempera
                 for v in (v for v in variants if v["alg"] == alg):
                     policy = make_policy(v["policy"])
                     B = int(v.get("prompt_tail_rows", 0))
-                    cached = generate(model, tokenizer, ids, mask, new_tokens, steps, seed,
+                    cached = generate_fn(model, tokenizer, ids, mask, new_tokens, steps, seed,
                                       alg=alg, cache_api=api, policy=policy,
                                       prompt_tail_rows=B,
                                       force_prompt_tail=v.get("force_prompt_tail", True),
@@ -314,14 +326,14 @@ def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, tempera
             for v in variants:
                 for rep in range(int(timing_repeats)):
                     common = dict(alg=v["alg"], capture_trajectory=False, **gen_kw)
-                    b1 = generate(model, tokenizer, ids, mask, new_tokens, steps, seed,
+                    b1 = generate_fn(model, tokenizer, ids, mask, new_tokens, steps, seed,
                                   observe=False, **common)
-                    cc = generate(model, tokenizer, ids, mask, new_tokens, steps, seed,
+                    cc = generate_fn(model, tokenizer, ids, mask, new_tokens, steps, seed,
                                   cache_api=api, policy=v["policy"],
                                   prompt_tail_rows=v.get("prompt_tail_rows", 0),
                                   force_prompt_tail=v.get("force_prompt_tail", True),
                                   observe=False, log_confidence=False, **common)
-                    b2 = generate(model, tokenizer, ids, mask, new_tokens, steps, seed,
+                    b2 = generate_fn(model, tokenizer, ids, mask, new_tokens, steps, seed,
                                   observe=False, **common)
                     paired = (b1["ms"] + b2["ms"]) / 2
                     timing_rows.append({
@@ -349,7 +361,7 @@ def run_grid(*, experiment, variants, out_dir, seeds, new_tokens, steps, tempera
         ).reset_index().to_csv(out_dir / "timing_summary.csv", index=False)
 
     metadata = {
-        "experiment": experiment, "model": cfg.MODEL_NAME, "official_repo": str(repo),
+        "experiment": experiment, "model": backend["name"], "official_repo": str(repo),
         "variants": [{**v, "policy_label": make_policy(v["policy"]).label()} for v in variants],
         "cases": [c["case_id"] for c in cases], "seeds": list(seeds),
         "seeds_used_per_alg": {a: seeds_for(a, seeds, temperature) for a in algs},

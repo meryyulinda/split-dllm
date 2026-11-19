@@ -1,10 +1,18 @@
 """DASR two-GPU split runtime (simulated edge = one GPU, cloud = another GPU).
 
-Closed loop: Dream's own ``diffusion_generate`` runs unchanged; module hooks place
-and connect the two halves:
+Closed loop: the model's own sampler runs unchanged (Dream ``diffusion_generate``,
+or ``src.llada_cache_ext.llada_generate`` for LLaDA); module hooks place and
+connect the two halves:
 
-  edge  (EDGE GPU):  embed_tokens, rotary_emb, layers[0 : k]       (+ dLLM-Cache hook)
-  cloud (CLOUD GPU): layers[k : L], norm, lm_head, sampler        (+ dLLM-Cache hook)
+  edge  (EDGE GPU):  token embedding, layers[0 : k]                (+ dLLM-Cache hook)
+  cloud (CLOUD GPU): layers[k : L], final norm, LM head, sampler   (+ dLLM-Cache hook)
+
+Supported models (see ``model_parts``):
+  Dream  model.model.embed_tokens / .layers / .norm, model.lm_head; logit shift
+  LLaDA  model.model.transformer.wte / .blocks / .ln_f / .ff_out; no logit shift.
+         Each LLaDA block owns a RotaryEmbedding that shares ONE sin/cos buffer
+         cache; place_split gives the edge and the cloud blocks their own copy so
+         the buffers do not bounce between the GPUs at every step.
 
 Per denoising step:
   downlink  cloud -> edge : the tokens committed in the previous step
@@ -41,6 +49,8 @@ Simulation notes (state these in the paper):
 """
 from __future__ import annotations
 
+from types import SimpleNamespace
+
 import torch
 
 UP_HEADER_B = 16
@@ -65,24 +75,64 @@ def _move(obj, device, memo):
     return obj
 
 
+def model_parts(model):
+    """Modules the split runtime needs, for Dream or LLaDA."""
+    base = getattr(model, "model", None)
+    if base is not None and hasattr(base, "embed_tokens") and hasattr(base, "layers"):
+        return SimpleNamespace(arch="dream", embed=base.embed_tokens,
+                               edge_extra=[base.rotary_emb], layers=base.layers,
+                               cloud_extra=[base.norm], head=model.lm_head, logit_shift=True)
+    tr = getattr(base, "transformer", None)
+    if tr is not None and "blocks" in tr:
+        if "ff_out" not in tr:
+            raise NotImplementedError("LLaDA with weight tying (no transformer.ff_out) is not "
+                                      "supported by the split runtime")
+        return SimpleNamespace(arch="llada", embed=tr["wte"], edge_extra=[], layers=tr["blocks"],
+                               cloud_extra=[tr["ln_f"]], head=tr["ff_out"], logit_shift=False)
+    raise NotImplementedError(f"split runtime: unknown model {type(model).__name__}")
+
+
+def _split_rotary_caches(layers, split_layer, edge, cloud):
+    """LLaDA: one rotary sin/cos BufferCache per device instead of one shared cache."""
+    per_device = {}
+    for i, layer in enumerate(layers):
+        rot = getattr(layer, "rotary_emb", None)
+        if rot is None:
+            continue
+        dev = edge if i < split_layer else cloud
+        for name in [n for n in vars(rot) if n.endswith("__cache")]:
+            old = getattr(rot, name)
+            if not isinstance(old, dict):
+                continue
+            if dev not in per_device:
+                new = type(old)()
+                new.update({k: (v.to(dev) if torch.is_tensor(v) else v) for k, v in old.items()})
+                per_device[dev] = new
+            setattr(rot, name, per_device[dev])
+
+
 def place_split(model, split_layer, edge_device, cloud_device):
     """Move the two halves to their GPUs and make model.device report the cloud.
 
     split_layer k uses the README's 1-based numbering: the edge runs layers 1..k.
     """
     edge, cloud = torch.device(edge_device), torch.device(cloud_device)
-    base = model.model
-    n_layers = len(base.layers)
+    parts = model_parts(model)
+    n_layers = len(parts.layers)
     if not 1 <= split_layer < n_layers:
         raise ValueError(f"split_layer must be in [1, {n_layers - 1}]")
-    if model.lm_head.weight.data_ptr() == base.embed_tokens.weight.data_ptr():
-        model.lm_head.weight = torch.nn.Parameter(model.lm_head.weight.detach().clone())
-    base.embed_tokens.to(edge)
-    base.rotary_emb.to(edge)
-    for i, layer in enumerate(base.layers):
+    if parts.head.weight.data_ptr() == parts.embed.weight.data_ptr():
+        parts.head.weight = torch.nn.Parameter(parts.head.weight.detach().clone())
+    parts.embed.to(edge)
+    for m in parts.edge_extra:
+        m.to(edge)
+    for i, layer in enumerate(parts.layers):
         layer.to(edge if i < split_layer else cloud)
-    base.norm.to(cloud)
-    model.lm_head.to(cloud)
+    for m in parts.cloud_extra:
+        m.to(cloud)
+    parts.head.to(cloud)
+    if parts.arch == "llada":
+        _split_rotary_caches(parts.layers, split_layer, edge, cloud)
     # Dream's sampler allocates its work tensors on `self.device` (first parameter =
     # embedding = edge). The sampler belongs to the cloud, so report the cloud.
     cls = model.__class__
@@ -100,14 +150,15 @@ class SplitLink:
 
     def __init__(self, model, split_layer, edge, cloud):
         self.model, self.k, self.edge, self.cloud = model, int(split_layer), edge, cloud
-        base = model.model
-        self.d = int(base.embed_tokens.weight.shape[1])
+        parts = model_parts(model)
+        self.logit_shift = parts.logit_shift
+        self.d = int(parts.embed.weight.shape[1])
         self.handles = [
-            base.embed_tokens.register_forward_pre_hook(self._on_step_start),
-            base.layers[self.k].register_forward_pre_hook(self._on_boundary, with_kwargs=True),
-            model.lm_head.register_forward_hook(self._on_cloud_end),
+            parts.embed.register_forward_pre_hook(self._on_step_start),
+            parts.layers[self.k].register_forward_pre_hook(self._on_boundary, with_kwargs=True),
+            parts.head.register_forward_hook(self._on_cloud_end),
         ]
-        for layer in base.layers[self.k + 1:]:
+        for layer in parts.layers[self.k + 1:]:
             self.handles.append(layer.register_forward_pre_hook(self._on_cloud_layer,
                                                                 with_kwargs=True))
         self.active = False
@@ -127,7 +178,7 @@ class SplitLink:
         if rows == "cache_aware":
             if controller is None:
                 raise ValueError("rows='cache_aware' needs the feature cache (a policy)")
-            if prompt_tail_rows < 1:
+            if self.logit_shift and prompt_tail_rows < 1:
                 raise ValueError("rows='cache_aware' needs prompt_tail_rows >= 1 on Dream "
                                  "(answer token 0 is predicted from the last prompt row)")
         self.rows, self.encoding, self.controller = rows, encoding, controller

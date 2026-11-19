@@ -17,6 +17,25 @@ all variants of a question; prompt-tail fix whenever the cache is on):
   C3_cache_aware_exact     + only bitwise-changed rows                  (exact; vs C1)
   C4_cache_aware_int8      + INT8 deltas, bf16 anchors                  (approximate)
   A1_adaptive_cache_aware  C2 with the rule-based adaptive refresh
+  S2_split_int8            no cache, full boundary as INT8 deltas  (approximate;
+                           "compressed static split", not in the default set)
+
+Add-on run (S2 + peak memory + energy) WITHOUT touching the finished folders:
+  EXP11_OUTPUT_TAG = "_addon"
+  EXP11_VARIANT_NAMES = ["S0_split_full", "S2_split_int8", "C2_cache_aware",
+                         "C4_cache_aware_int8", "A1_adaptive_cache_aware"]
+  -> outputs/exp11_<dataset>_k<split>_t<tokens>_T<T>_addon/
+LLaDA (RQ5): EXP11_MODEL = "llada" runs the same variants on LLaDA-8B-Instruct with
+the official LLaDA sampler (low-confidence remasking, blocks of EXP12_BLOCK_LENGTH=8,
+T=0), the official dLLM-Cache LLaDA hook (default Kp=50, Kr=7: official LLaDA GSM8K
+setting, EXP11_LLADA_CACHE_POLICY) and no prompt-tail correction (no logit shift).
+  -> outputs/exp11_llada_<dataset>_k<split>_t<tokens>_T0/
+
+Every run also records peak GPU memory per side (torch.cuda.max_memory_allocated,
+weights included) and, if pynvml is installed (pip install nvidia-ml-py), the GPU
+energy per side from NVML's energy counter; *_active_j subtracts the idle power
+measured once at start-up. A folder whose runs.csv holds a different variant set
+is never overwritten: the script stops and asks for another EXP11_OUTPUT_TAG.
 
 Checks to read first in summary_by_variant.csv:
   exact_vs_ref = runs   for S1, C2, C3  -> the exact tier really is exact
@@ -25,8 +44,10 @@ Checks to read first in summary_by_variant.csv:
   edge_ms / cloud_ms totals               -> computation per side
 """
 import json
+import os
 import platform
 import sys
+import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -42,11 +63,19 @@ from exp9b_official_feature_cache_diagnostics import (  # noqa: E402
     import_official, prepare_input, compare_history,
 )
 from exp10a_official_feature_cache_quality import make_cases  # noqa: E402
-from src.feature_cache_ext import generate  # noqa: E402
+from src.feature_cache_ext import generate as dream_generate  # noqa: E402
+from src.llada_cache_ext import (  # noqa: E402
+    LLADA_MODEL_NAME, import_official_llada, llada_generate, llada_prepare_input,
+    load_llada_model,
+)
 from src.model_loader import load_dream_model  # noqa: E402
 from src.refresh_rules import make_policy  # noqa: E402
 from src.split_runtime import SplitLink, place_split  # noqa: E402
 
+MODEL = str(getattr(cfg, "EXP11_MODEL", "dream")).lower()  # "dream" or "llada"
+if MODEL not in {"dream", "llada"}:
+    raise ValueError(f"EXP11_MODEL must be 'dream' or 'llada', not {MODEL!r}")
+LLADA = MODEL == "llada"
 DATASET = getattr(cfg, "EXP11_DATASET", "gsm8k")  # "gsm8k" or "authored"
 N = int(getattr(cfg, "EXP11_N_QUESTIONS", 20))
 SPLIT = int(getattr(cfg, "EXP11_SPLIT_LAYER", 4))
@@ -55,16 +84,33 @@ CLOUD = getattr(cfg, "EXP11_CLOUD_DEVICE", getattr(cfg, "CLOUD_DEVICE", "cuda:0"
 DEFAULT_LEN = {"gsm8k": 256, "authored": 128}[DATASET]
 NEW_TOKENS = int(getattr(cfg, "EXP11_NEW_TOKENS", DEFAULT_LEN))
 STEPS = int(getattr(cfg, "EXP11_STEPS", DEFAULT_LEN))
-POLICY = tuple(getattr(cfg, "EXP11_CACHE_POLICY", ("fixed", 25, 2, 0.25)))
+if LLADA:  # official dLLM-Cache LLaDA GSM8K setting (Kp=50, Kr=7)
+    POLICY = tuple(getattr(cfg, "EXP11_LLADA_CACHE_POLICY", ("fixed", 50, 7, 0.25)))
+else:
+    POLICY = tuple(getattr(cfg, "EXP11_CACHE_POLICY", ("fixed", 25, 2, 0.25)))
 ADAPTIVE = getattr(cfg, "EXP11_ADAPTIVE_POLICY", (
     "adaptive", {"gen_content_commits": 1, "gen_max_age": 2, "prompt_content_commits": 8,
                  "prompt_max_age": 16, "eos_frontier_window": 8, "transfer_ratio": 0.25}))
 ANCHOR = int(getattr(cfg, "EXP11_ANCHOR_INTERVAL", 32))
 RESUME = bool(getattr(cfg, "EXP11_RESUME", True))
 SEED = int(getattr(cfg, "SEED", 42))
-TEMPERATURE = float(getattr(cfg, "EXP11_TEMPERATURE", 0.1))
-TOP_P = getattr(cfg, "EXP11_TOP_P", 0.9) if TEMPERATURE > 0 else None
-OUT = ROOT / "outputs" / f"exp11_{DATASET}_k{SPLIT}_t{NEW_TOKENS}_T{TEMPERATURE:g}"
+if LLADA:  # LLaDA official: low-confidence remasking, T=0, semi-AR blocks of 8
+    TEMPERATURE = float(getattr(cfg, "EXP11_LLADA_TEMPERATURE", 0.0))
+    TOP_P = None
+    ALG = "low_confidence"
+    BLOCK_LENGTH = int(getattr(cfg, "EXP12_BLOCK_LENGTH", 8))
+    PROMPT_TAIL = 0  # no logit shift
+else:
+    TEMPERATURE = float(getattr(cfg, "EXP11_TEMPERATURE", 0.1))
+    TOP_P = getattr(cfg, "EXP11_TOP_P", 0.9) if TEMPERATURE > 0 else None
+    ALG = "entropy"
+    BLOCK_LENGTH = None
+    PROMPT_TAIL = 1  # prompt-tail fix (Dream logit shift)
+OUTPUT_TAG = str(getattr(cfg, "EXP11_OUTPUT_TAG", ""))
+OVERWRITE = bool(getattr(cfg, "EXP11_OVERWRITE", False))
+IDLE_SECONDS = float(getattr(cfg, "EXP11_IDLE_SECONDS", 5.0))
+OUT = ROOT / "outputs" / (f"exp11_{'llada_' if LLADA else ''}{DATASET}_k{SPLIT}_t{NEW_TOKENS}"
+                          f"_T{TEMPERATURE:g}{OUTPUT_TAG}")
 
 
 def V(name, policy, rows, encoding, same_as=None):
@@ -81,7 +127,83 @@ DEFAULT_VARIANTS = [
     V("C4_cache_aware_int8", POLICY, "cache_aware", "int8_delta"),
     V("A1_adaptive_cache_aware", ADAPTIVE, "cache_aware", "bf16"),
 ]
+ALL_VARIANTS = {v["name"]: v for v in DEFAULT_VARIANTS + [
+    V("S2_split_int8", None, "all", "int8_delta"),
+]}
 REFERENCE = "S0_split_full"
+GIB = 2 ** 30
+
+
+class EnergyMeter:
+    """NVML total-energy counters for the edge and cloud GPUs (None if unavailable)."""
+
+    def __init__(self, devices):
+        self.handles = {}
+        try:
+            import pynvml
+            pynvml.nvmlInit()
+            self.nvml = pynvml
+        except Exception as exc:  # pragma: no cover - depends on the machine
+            print(f"[energy] pynvml unavailable ({exc}); energy columns stay empty. "
+                  f"pip install nvidia-ml-py to enable.", flush=True)
+            return
+        visible = [x.strip() for x in os.environ.get("CUDA_VISIBLE_DEVICES", "").split(",")
+                   if x.strip()]
+        for name, dev in devices.items():
+            handle = None
+            try:  # robust: match by UUID
+                uuid = str(torch.cuda.get_device_properties(dev).uuid)
+                handle = pynvml.nvmlDeviceGetHandleByUUID(
+                    uuid if uuid.startswith("GPU-") else f"GPU-{uuid}")
+            except Exception:
+                try:  # fallback: CUDA_VISIBLE_DEVICES=1,2 -> logical 0 = physical 1
+                    idx = dev.index or 0
+                    phys = int(visible[idx]) if visible else idx
+                    handle = pynvml.nvmlDeviceGetHandleByIndex(phys)
+                except Exception as exc:
+                    print(f"[energy] no NVML handle for {name} ({dev}): {exc}", flush=True)
+            if handle is not None:
+                try:
+                    pynvml.nvmlDeviceGetTotalEnergyConsumption(handle)
+                    self.handles[name] = handle
+                except Exception as exc:
+                    print(f"[energy] {name}: energy counter not supported ({exc})", flush=True)
+
+    def read_j(self):
+        return {n: self.nvml.nvmlDeviceGetTotalEnergyConsumption(h) / 1e3
+                for n, h in self.handles.items()}
+
+
+def measure_idle_w(meter, devices, seconds):
+    if not meter.handles or seconds <= 0:
+        return {}
+    for d in devices:
+        torch.cuda.synchronize(d)
+    e0, t0 = meter.read_j(), time.perf_counter()
+    time.sleep(seconds)
+    e1, dt = meter.read_j(), time.perf_counter() - t0
+    return {n: (e1[n] - e0[n]) / dt for n in e0}
+
+
+def check_output_folder(names):
+    """Never overwrite finished runs with a different variant set."""
+    runs_csv = OUT / "runs.csv"
+    if not runs_csv.exists():
+        return
+    prev = set(pd.read_csv(runs_csv, usecols=["variant"])["variant"])
+    if OVERWRITE:
+        print(f"EXP11_OVERWRITE=True: deleting the runs in {OUT}", flush=True)
+        for f in ("runs.csv", "steps.csv", "summary_by_variant.csv"):
+            (OUT / f).unlink(missing_ok=True)
+        return
+    if prev != set(names):
+        raise SystemExit(
+            f"{runs_csv} holds variants {sorted(prev)}, but this run asks for {sorted(names)}. "
+            f"Resuming would discard the finished rows. Set EXP11_OUTPUT_TAG (e.g. '_addon') "
+            f"to write to a new folder, or EXP11_OVERWRITE = True to replace it.")
+    if not RESUME:
+        raise SystemExit(f"{runs_csv} exists and EXP11_RESUME=False. Set EXP11_RESUME=True, "
+                         f"another EXP11_OUTPUT_TAG, or EXP11_OVERWRITE=True.")
 
 
 def load():
@@ -127,6 +249,11 @@ def summarize(runs):
     ).reset_index()
     out["mcnemar_p"] = [mcnemar_exact_p(r, i) for r, i in
                         zip(out["regressions"], out["improvements"])]
+    extra = [c for c in ("edge_peak_gib", "cloud_peak_gib", "edge_energy_j", "cloud_energy_j",
+                         "edge_active_j", "cloud_active_j", "wall_s") if c in df]
+    if extra:
+        means = df.groupby("variant", sort=False)[extra].mean().add_prefix("mean_")
+        out = out.merge(means, left_on="variant", right_index=True, how="left")
     return out
 
 
@@ -135,7 +262,15 @@ def main():
         raise RuntimeError("Exp11 needs two GPUs (edge + cloud)")
     if torch.device(EDGE) == torch.device(CLOUD):
         raise ValueError("EXP11_EDGE_DEVICE and EXP11_CLOUD_DEVICE must differ")
-    variants = list(getattr(cfg, "EXP11_VARIANTS", DEFAULT_VARIANTS))
+    if hasattr(cfg, "EXP11_VARIANTS"):
+        variants = list(cfg.EXP11_VARIANTS)
+    elif hasattr(cfg, "EXP11_VARIANT_NAMES"):
+        unknown = [n for n in cfg.EXP11_VARIANT_NAMES if n not in ALL_VARIANTS]
+        if unknown:
+            raise ValueError(f"unknown EXP11_VARIANT_NAMES {unknown}; known: {list(ALL_VARIANTS)}")
+        variants = [ALL_VARIANTS[n] for n in cfg.EXP11_VARIANT_NAMES]
+    else:
+        variants = list(DEFAULT_VARIANTS)
     names = [v["name"] for v in variants]
     if REFERENCE not in names or len(set(names)) != len(names):
         raise ValueError(f"Variants need unique names incl. {REFERENCE}")
@@ -146,6 +281,7 @@ def main():
             raise ValueError(f"{v['name']}: same_as={v['same_as']} is not a variant")
 
     cases, score_fn = load()
+    check_output_folder(names)
     OUT.mkdir(parents=True, exist_ok=True)
     runs, done = [], set()
     if RESUME and (OUT / "runs.csv").exists():
@@ -163,23 +299,64 @@ def main():
         (OUT / "steps.csv").unlink()
 
     repo, api = import_official()
-    model, tokenizer = load_dream_model(cfg.MODEL_NAME)
+    if LLADA:
+        model_name = getattr(cfg, "LLADA_MODEL_NAME", LLADA_MODEL_NAME)
+        api = import_official_llada(repo)
+        model, tokenizer = load_llada_model(model_name)
+        prepare = llada_prepare_input
+    else:
+        model_name = cfg.MODEL_NAME
+        model, tokenizer = load_dream_model(model_name)
+        prepare = prepare_input
     model.eval()
     edge, cloud = place_split(model, SPLIT, EDGE, CLOUD)
     link = SplitLink(model, SPLIT, edge, cloud)
-    print(f"Exp11 | {DATASET} n={len(cases)} | split after layer {SPLIT} | edge={edge} "
+    meter = EnergyMeter({"edge": edge, "cloud": cloud})
+    idle_w = measure_idle_w(meter, (edge, cloud), IDLE_SECONDS)
+    if idle_w:
+        print("idle power: " + ", ".join(f"{k}={v:.1f} W" for k, v in idle_w.items()), flush=True)
+    print(f"Exp11 | {MODEL} | {DATASET} n={len(cases)} | split after layer {SPLIT} | edge={edge} "
           f"cloud={cloud} | {NEW_TOKENS} tok / {STEPS} steps | cache {POLICY}", flush=True)
 
-    def run(case, v, ids, mask):
-        return generate(
-            model, tokenizer, ids, mask, NEW_TOKENS, STEPS, SEED, alg="entropy",
-            temperature=TEMPERATURE, top_p=TOP_P, cache_api=api if v["policy"] is not None else None,
-            policy=v["policy"], prompt_tail_rows=1 if v["policy"] is not None else 0,
-            capture_trajectory=True, log_confidence=False, link=link,
-            link_cfg={"rows": v["rows"], "encoding": v["encoding"],
-                      "anchor_interval": ANCHOR})
+    def generate_once(case, v, ids, mask):
+        kw = dict(alg=ALG, temperature=TEMPERATURE, top_p=TOP_P,
+                  cache_api=api if v["policy"] is not None else None, policy=v["policy"],
+                  prompt_tail_rows=PROMPT_TAIL if v["policy"] is not None else 0,
+                  capture_trajectory=True, log_confidence=False, link=link,
+                  link_cfg={"rows": v["rows"], "encoding": v["encoding"],
+                            "anchor_interval": ANCHOR})
+        if LLADA:  # sampler state lives on the cloud GPU
+            return llada_generate(model, tokenizer, ids, mask, NEW_TOKENS, STEPS, SEED,
+                                  block_length=BLOCK_LENGTH, device=cloud, **kw)
+        return dream_generate(model, tokenizer, ids, mask, NEW_TOKENS, STEPS, SEED, **kw)
 
-    ids_w, mask_w = prepare_input(tokenizer, cases[0]["prompt"], cloud)
+    def run(case, v, ids, mask):
+        """generate() + peak memory per side + NVML energy per side."""
+        for d in (edge, cloud):
+            torch.cuda.synchronize(d)
+            torch.cuda.reset_peak_memory_stats(d)
+        e0, t0 = (meter.read_j() if meter.handles else {}), time.perf_counter()
+        res = generate_once(case, v, ids, mask)
+        for d in (edge, cloud):
+            torch.cuda.synchronize(d)
+        wall = time.perf_counter() - t0
+        e1 = meter.read_j() if meter.handles else {}
+        res["resources"] = {
+            "wall_s": wall,
+            "edge_peak_gib": torch.cuda.max_memory_allocated(edge) / GIB,
+            "cloud_peak_gib": torch.cuda.max_memory_allocated(cloud) / GIB,
+            "edge_reserved_gib": torch.cuda.max_memory_reserved(edge) / GIB,
+            "cloud_reserved_gib": torch.cuda.max_memory_reserved(cloud) / GIB,
+        }
+        for side in ("edge", "cloud"):
+            if side in e0:
+                joules = e1[side] - e0[side]
+                res["resources"][f"{side}_energy_j"] = joules
+                res["resources"][f"{side}_active_j"] = (joules - idle_w[side] * wall
+                                                        if side in idle_w else None)
+        return res
+
+    ids_w, mask_w = prepare(tokenizer, cases[0]["prompt"], cloud)
     for v in (variants[0], next((x for x in variants if x["rows"] == "cache_aware"),
                                 variants[0])):
         run(cases[0], v, ids_w, mask_w)
@@ -188,7 +365,7 @@ def main():
     for case in cases:
         if case["case_id"] in done:
             continue
-        ids, mask = prepare_input(tokenizer, case["prompt"], cloud)
+        ids, mask = prepare(tokenizer, case["prompt"], cloud)
         plen = int(ids.shape[1])
         print(f"\n{case['case_id']} | prompt tokens={plen}", flush=True)
         results, case_rows, step_rows = {}, [], []
@@ -212,6 +389,7 @@ def main():
                 "exact_vs_S0": torch.equal(s0["generated_ids"], res["generated_ids"])
                 if s0 is not None else "",
                 **run_summary(res["split_steps"]),
+                **res["resources"],
                 "refresh_reasons": json.dumps(res["refresh"]["refresh_reasons"])
                 if res["refresh"] else "",
             }
@@ -220,8 +398,11 @@ def main():
                 step_rows.append({"case_id": case["case_id"], "variant": v["name"], **st})
             tag = ("" if ref is None else
                    (" EXACT" if row["exact_vs_ref"] else " NOT-EXACT(!)"))
+            energy = (f" E={row['edge_energy_j']:.0f}+{row['cloud_energy_j']:.0f} J"
+                      if "edge_energy_j" in row and "cloud_energy_j" in row else "")
             print(f"  {v['name']:<26s} ok={row['cache_ok']!s:<5} up={row['up_mb']:7.2f} MB "
-                  f"edge={row['edge_ms']:7.0f} ms cloud={row['cloud_ms']:7.0f} ms{tag} "
+                  f"edge={row['edge_ms']:7.0f} ms cloud={row['cloud_ms']:7.0f} ms "
+                  f"mem={row['edge_peak_gib']:.2f}/{row['cloud_peak_gib']:.2f} GiB{energy}{tag} "
                   f"{text[-50:]!r}", flush=True)
         ref_ok = next(r["cache_ok"] for r in case_rows if r["variant"] == REFERENCE)
         for r in case_rows:
@@ -237,21 +418,27 @@ def main():
     summary.to_csv(OUT / "summary_by_variant.csv", index=False)
     (OUT / "metadata.json").write_text(json.dumps({
         "experiment": "Exp11 DASR two-GPU split prototype (closed loop)",
-        "model": cfg.MODEL_NAME, "official_repo": str(repo), "dataset": DATASET,
+        "model": model_name, "official_repo": str(repo), "dataset": DATASET,
         "n_cases": len(cases), "split_layer_1based": SPLIT, "edge": str(edge),
         "cloud": str(cloud), "edge_gpu": torch.cuda.get_device_name(edge),
         "cloud_gpu": torch.cuda.get_device_name(cloud), "new_tokens": NEW_TOKENS,
-        "steps": STEPS, "alg": "entropy", "temperature": TEMPERATURE, "top_p": TOP_P,
+        "steps": STEPS, "alg": ALG, "block_length": BLOCK_LENGTH,
+        "temperature": TEMPERATURE, "top_p": TOP_P, "prompt_tail_rows": PROMPT_TAIL,
         "seed": SEED,
         "cache_policy": POLICY, "adaptive_policy": ADAPTIVE, "anchor_interval": ANCHOR,
-        "variants": variants, "torch": torch.__version__,
+        "variants": variants, "output_tag": OUTPUT_TAG, "idle_power_w": idle_w,
+        "energy_source": "NVML nvmlDeviceGetTotalEnergyConsumption" if meter.handles else None,
+        "torch": torch.__version__,
         "transformers": transformers.__version__, "python": platform.python_version(),
         "notes": "Bytes from the wire format in src/split_runtime.py; compute from CUDA "
                  "events per GPU; network latency added by exp11b (emulation).",
     }, indent=2, default=str), encoding="utf-8")
     print("\nExp11 completed. Output:", OUT)
-    print(summary[["variant", "runs", "acc", "regressions", "exact_vs_ref", "mean_up_mb",
-                   "up_reduction_vs_S0", "mean_edge_ms", "mean_cloud_ms"]].to_string(index=False))
+    cols = ["variant", "runs", "acc", "regressions", "exact_vs_ref", "mean_up_mb",
+            "up_reduction_vs_S0", "mean_edge_ms", "mean_cloud_ms"]
+    cols += [c for c in ("mean_edge_peak_gib", "mean_cloud_peak_gib", "mean_edge_energy_j",
+                         "mean_cloud_energy_j") if c in summary]
+    print(summary[cols].to_string(index=False))
 
 
 if __name__ == "__main__":

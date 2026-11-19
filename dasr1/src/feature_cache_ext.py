@@ -137,8 +137,13 @@ class StepObserver:
 
 @contextmanager
 def feature_cache_session(model, api, prompt_len, policy, prompt_tail_rows=0,
-                          force_prompt_tail=True):
-    """Register the official Dream hook with a controlled refresh plan."""
+                          force_prompt_tail=True, blocks_path="model.layers",
+                          hook_module=HOOK_MODULE):
+    """Register an official dLLM-Cache hook with a controlled refresh plan.
+
+    Defaults are Dream's; LLaDA passes blocks_path="model.transformer.blocks",
+    hook_module="dllm_cache.hooks.cache_hook_LLaDA" and prompt_tail_rows=0 (no
+    logit shift, so the official prompt/answer split is already right)."""
     dLLMCache, dLLMCacheConfig, register, logout = api
     policy = make_policy(policy)
     prompt_tail_rows = int(prompt_tail_rows)
@@ -166,7 +171,7 @@ def feature_cache_session(model, api, prompt_len, policy, prompt_tail_rows=0,
     inst.refresh_prompt = refresh_prompt
     controller.step_fn = lambda: inst.current_step  # used by the split runtime
 
-    hook_mod = sys.modules[HOOK_MODULE]
+    hook_mod = sys.modules[hook_module]
     original_refresh_index = hook_mod.refresh_index
     if prompt_tail_rows > 0 and force_prompt_tail:
         def refresh_index(new_features, cached_features=None, transfer_ratio=0.5, layer_id=0):
@@ -179,13 +184,13 @@ def feature_cache_session(model, api, prompt_len, policy, prompt_tail_rows=0,
 
     registered = False
     try:
-        register(model, "model.layers")
+        register(model, blocks_path)
         registered = True
         inst.reset_cache(split)
         yield controller
     finally:
         if registered:
-            logout(model, "model.layers")
+            logout(model, blocks_path)
         hook_mod.refresh_index = original_refresh_index
         for attr in _PATCHED_ATTRS:
             inst.__dict__.pop(attr, None)

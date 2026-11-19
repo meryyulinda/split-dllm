@@ -71,7 +71,10 @@ REPEATS = int(setting("EXP8F_REPEATS", 1))
 WARMUP_RUNS = int(setting("EXP8F_WARMUP_RUNS", 1))
 RUN_FIDELITY = bool(setting("EXP8F_RUN_FIDELITY", True))
 VALIDATE_HF_TOGGLE = bool(setting("EXP8F_VALIDATE_HF_TOGGLE", True))
-OUTPUT_DIR = Path(PROJECT_ROOT) / "outputs" / "exp8f"
+# OUTPUT_SUFFIX comes from the RERUN_ENTROPY block at the end of the config:
+# "" = original folder (origin sampler), "_entropy" = outputs/exp8f_entropy/.
+SFX = str(getattr(ec, "OUTPUT_SUFFIX", ""))
+OUTPUT_DIR = Path(PROJECT_ROOT) / "outputs" / f"exp8f{SFX}"
 
 
 def validate_configuration():
@@ -591,6 +594,7 @@ def main():
             "temperature": TEMPERATURE, "top_p": TOP_P, "top_k": TOP_K,
             "alg": ALGORITHM,
         },
+        "output_suffix": SFX,
         "gpu": torch.cuda.get_device_name(device),
         "torch": torch.__version__, "transformers": transformers.__version__,
         "python": platform.python_version(),
