@@ -272,6 +272,17 @@ EXP10D_SEEDS = [42]               # with T > 0, every seed is a separate paired 
 EXP11_TEMPERATURE = 0.1           # Dream's official GSM8K sampling (T=0 collapses to EOS)
 EXP11_TOP_P = 0.9
 
+# Exp11 addon
+EXP11_MODEL = "dream"
+EXP11_OUTPUT_TAG = "_addon"
+EXP11_VARIANT_NAMES = ["S0_split_full", "S1_split_exact_delta", "S2_split_int8",
+                       "C2_cache_aware", "C4_cache_aware_int8", "A1_adaptive_cache_aware"]
+EXP11_IDLE_SECONDS = 5.0
+EXP11_DATASET = "gsm8k"
+EXP11_N_QUESTIONS = 2            # smoke test
+EXP11_NEW_TOKENS = 64            # smoke test
+EXP11_STEPS = 64                 # smoke test
+
 # ---------------------------------------------------------------------------
 # RQ1-RQ5 rerun under Dream's official sampler (entropy, T=0.1, top_p=0.9),
 # the same sampler as Exp10D/Exp11. Set RERUN_ENTROPY = True, run the Exp1-Exp7D
