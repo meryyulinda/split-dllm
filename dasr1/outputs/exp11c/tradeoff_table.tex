@@ -1,6 +1,6 @@
 \begin{table}[t]
 \centering
-\caption{Quality--systems trade-off on GSM8K ($n=30$, Dream, split after layer 4). Latency emulated with 20\,ms RTT and an edge $3\times$ slower than an A6000. Configurations as in Table~\ref{tab:configs}.}
+\caption{Quality--systems trade-off on GSM8K ($n=30$, Dream, split after layer 4). Latency emulated with 20\,ms RTT and an edge $3\times$ slower than an A6000. Configurations as in Table~\ref{tab:configs}. C1 performs C2's computation and sends every row; its latency uses C2's measured computation.}
 \label{tab:tradeoff}
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lcccc}
@@ -8,13 +8,13 @@
  & & & \multicolumn{2}{c}{Latency (s) $\downarrow$} \\ \cmidrule(lr){4-5}
 Config. & Acc. $\uparrow$ & Uplink MB $\downarrow$ & 100\,Mbit/s & 10\,Mbit/s \\
 \midrule
-S0 static split (bf16) & 83.3\% & 641.3 & 84.0 & 545.7 \\
-S1 exact delta & 83.3\% & 639.2 & 83.9 & 544.1 \\
-S2 full boundary, INT8 & 80.0\% & 330.9 & 56.0 & 294.2 \\
-C1 cache, all rows & 80.0\% & 641.3 & 79.6 & 541.3 \\
-C2 cache-aware (bf16) & 80.0\% & 478.9 & 66.6 & 411.5 \\
-A1 adaptive, cache-aware & 80.0\% & 480.2 & 65.2 & 410.9 \\
-C4 cache-aware, INT8 & 76.7\% & 253.4 & 48.2 & 230.6 \\
+S0 static split (bf16) & 83.3\% & 641.3 & 78.4 & 540.2 \\
+S1 exact delta & 83.3\% & 639.2 & 78.3 & 538.5 \\
+S2 full boundary, INT8 & 80.0\% & 330.9 & 53.7 & 291.9 \\
+C1 cache, all rows & 80.0\% & 641.3 & 74.5 & 536.3 \\
+C2 cache-aware (bf16) & 80.0\% & 478.9 & 61.5 & 406.3 \\
+A1 adaptive, cache-aware & 80.0\% & 480.2 & 60.7 & 406.4 \\
+C4 cache-aware, INT8 & 76.7\% & 253.4 & 43.7 & 226.1 \\
 \bottomrule
 \end{tabular}}
 \end{table}

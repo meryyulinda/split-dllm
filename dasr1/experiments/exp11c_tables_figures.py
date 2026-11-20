@@ -12,9 +12,17 @@ Exp11b network emulation, and writes to outputs/exp11c/:
   fig_tradeoff_gsm8k.pdf      accuracy vs latency and vs uplink (GSM8K)
   fig_uplink_timeline.pdf     uplink bytes per denoising step, one prompt each
 
-If an Exp11 add-on folder exists (EXP11C_ADDON_DIRS, e.g. written with
-EXP11_OUTPUT_TAG = "_addon"), its runs supply the compressed-split baseline (S2)
-and the peak-memory / energy columns; otherwise those cells stay "pending".
+Data source (what the paper reports): the dedicated-GPU session written by
+run_exp11_clean.sh (EXP11C_WORKLOADS, default *_addon_clean / *_clean folders).
+Every timing and energy number comes from that session. The Dream clean runs do
+not contain C1 (feature cache, full boundary): C1 performs exactly the computation
+of C2 and only sends every row, so it is derived from C2's steps with full-boundary
+bytes (C2 reproduced C1 step by step on every prompt of the original session).
+If the earlier sessions' folders exist (EXP11C_CHECK_DIRS), the script checks that
+answers and byte counts are identical across sessions and that the derived C1
+bytes equal the measured ones.
+Optional add-on folders (EXP11C_ADDON_DIRS, default none) can still contribute
+variants that a workload folder lacks.
 
 FLOPs model (multiply-adds x 2, Dream-v0-Instruct-7B: d=3584, MLP 18944,
 28 query / 4 KV heads of 128, vocabulary 152064, 28 layers). Per layer and
@@ -58,22 +66,25 @@ ARCH = {
 }
 SPLIT = int(setting("EXP11_SPLIT_LAYER", 4))
 RHO = 0.25
-WORKLOADS = {  # label -> (folder, answer tokens, model); Dream first (figures use Dream)
-    "GSM8K": ("exp11_gsm8k_k4_t256_T0.1", 256, "dream"),
-    "Long prompts": ("exp11_authored_k4_t128_T0.1", 128, "dream"),
-}
-# LLaDA rows of the main table, used when Exp11 with EXP11_MODEL = "llada" has run
-OPTIONAL_WORKLOADS = dict(setting("EXP11C_LLADA_WORKLOADS", {
-    "GSM8K (LLaDA)": ("exp11_llada_gsm8k_k4_t256_T0", 256, "llada"),
-}))
-for _label, _spec in OPTIONAL_WORKLOADS.items():
-    if (ROOT / "outputs" / _spec[0] / "runs.csv").exists():
-        WORKLOADS[_label] = _spec
+UP_HEADER_B = 16  # uplink packet header, as in src/split_runtime.py
+# label -> (folder, answer tokens, model); Dream first (figures use Dream).
+# Default = the dedicated-GPU session (run_exp11_clean.sh); a workload whose folder
+# does not exist is skipped.
+WORKLOADS = {label: spec for label, spec in dict(setting("EXP11C_WORKLOADS", {
+    "GSM8K": ("exp11_gsm8k_k4_t256_T0.1_addon_clean", 256, "dream"),
+    "Long prompts": ("exp11_authored_k4_t128_T0.1_addon_clean", 128, "dream"),
+    "GSM8K (LLaDA)": ("exp11_llada_gsm8k_k4_t256_T0_clean", 256, "llada"),
+})).items() if (ROOT / "outputs" / spec[0] / "runs.csv").exists()}
 DREAM_LABELS = [k for k, v in WORKLOADS.items() if v[2] == "dream"]
-ADDON_DIRS = dict(setting("EXP11C_ADDON_DIRS", {
-    "GSM8K": "exp11_gsm8k_k4_t256_T0.1_addon",
-    "Long prompts": "exp11_authored_k4_t128_T0.1_addon",
+# Earlier sessions (shared GPUs): only used to check that outputs and bytes match.
+CHECK_DIRS = dict(setting("EXP11C_CHECK_DIRS", {
+    "GSM8K": ["exp11_gsm8k_k4_t256_T0.1", "exp11_gsm8k_k4_t256_T0.1_addon"],
+    "Long prompts": ["exp11_authored_k4_t128_T0.1", "exp11_authored_k4_t128_T0.1_addon"],
+    "GSM8K (LLaDA)": ["exp11_llada_gsm8k_k4_t256_T0"],
 }))
+ADDON_DIRS = dict(setting("EXP11C_ADDON_DIRS", {}))
+DISPLAY = {"GSM8K": "Dream, GSM8K", "Long prompts": "Dream, long prompts",
+           "GSM8K (LLaDA)": "LLaDA, GSM8K"}
 REF_NET = dict(bandwidth_mbps=100, rtt_ms=20, edge_slowdown=3.0)
 OUT = ROOT / "outputs" / "exp11c"
 
@@ -137,6 +148,42 @@ def to_bool(series):
     return series.map(lambda v: str(v).strip().lower() == "true")
 
 
+def derive_c1(label, runs, steps):
+    """C1 = C2's computation with the full boundary sent every step (see docstring)."""
+    if "C1_cache_full" in set(runs.variant) or "C2_cache_aware" not in set(runs.variant):
+        return runs, steps
+    c1s = steps[steps.variant == "C2_cache_aware"].copy()
+    c1s["variant"] = "C1_cache_full"
+    c1s["up_bytes"] = c1s["full_bytes"] + UP_HEADER_B
+    c1s["prompt_sent"] = True
+    c1r = runs[runs.variant == "C2_cache_aware"].copy()
+    c1r["variant"] = "C1_cache_full"
+    c1r["up_mb"] = (c1s.groupby("case_id").up_bytes.sum() / 1e6).reindex(c1r.case_id).values
+    for col in ("edge_peak_gib", "cloud_peak_gib", "edge_energy_j", "cloud_energy_j",
+                "edge_active_j", "cloud_active_j", "wall_s"):
+        if col in c1r:
+            c1r[col] = np.nan  # not measured for C1
+    print(f"[{label}] C1 derived from C2 (same computation, full boundary)", flush=True)
+    return (pd.concat([runs, c1r], ignore_index=True),
+            pd.concat([steps, c1s], ignore_index=True))
+
+
+def check_sessions(label, runs, steps):
+    """Answers and bytes must be identical to the earlier (shared-GPU) sessions."""
+    for folder in CHECK_DIRS.get(label, []):
+        f = ROOT / "outputs" / folder / "runs.csv"
+        if not f.exists():
+            continue
+        old = pd.read_csv(f)
+        m = runs.merge(old, on=["case_id", "variant"], suffixes=("", "_old"))
+        if m.empty:
+            continue
+        same_text = (m["text"] == m["text_old"]).mean()
+        max_db = (m["up_mb"] - m["up_mb_old"]).abs().max()
+        print(f"[{label}] vs {folder}: {len(m)} runs, identical answers {same_text:.0%}, "
+              f"max uplink difference {max_db:.4f} MB", flush=True)
+
+
 def load_workload(label, folder, answer_tokens, arch="dream"):
     d = ROOT / "outputs" / folder
     runs, steps = pd.read_csv(d / "runs.csv"), pd.read_csv(d / "steps.csv")
@@ -161,6 +208,8 @@ def load_workload(label, folder, answer_tokens, arch="dream"):
     for col in ("gen_refresh", "prompt_refresh"):
         if col in steps:
             steps[col] = to_bool(steps[col])
+    runs, steps = derive_c1(label, runs, steps)
+    check_sessions(label, runs, steps)
     rows = []
     for (case, var), st in steps.groupby(["case_id", "variant"], sort=False):
         r = runs[(runs.case_id == case) & (runs.variant == var)].iloc[0]
@@ -268,7 +317,7 @@ def main_table_tex(main):
             lines.append(r"\midrule")
         for _, r in grp.iterrows():
             pending = np.isnan(r.latency_s)
-            cells = [label if _ == grp.index[0] else "", r.method,
+            cells = [DISPLAY.get(label, label) if _ == grp.index[0] else "", r.method,
                      fmt(r.accuracy, 1, pct=True), fmt(r.edge_tflops, 0), fmt(r.cloud_tflops, 0),
                      "$<$0.01" if r.variant.startswith("cloud_only") else fmt(r.uplink_mb, 1),
                      fmt(r.cache_hit, 0, pct=True), fmt(r.latency_s, 1), fmt(r.throughput_tok_s, 2),
@@ -284,7 +333,8 @@ def trade_table_tex(trade):
     lines = [r"\begin{table}[t]", r"\centering",
              r"\caption{Quality--systems trade-off on GSM8K ($n=30$, Dream, split after layer 4). "
              r"Latency emulated with 20\,ms RTT and an edge $3\times$ slower than an A6000. "
-             r"Configurations as in Table~\ref{tab:configs}.}",
+             r"Configurations as in Table~\ref{tab:configs}. C1 performs C2's computation and sends every row; "
+             r"its latency uses C2's measured computation.}",
              r"\label{tab:tradeoff}", r"\resizebox{\columnwidth}{!}{%",
              r"\begin{tabular}{lcccc}", r"\toprule",
              r" & & & \multicolumn{2}{c}{Latency (s) $\downarrow$} \\ \cmidrule(lr){4-5}",
