@@ -1,0 +1,21 @@
+diff --git a/dasr1/experiments/exp11c_tables_figures.py b/dasr1/experiments/exp11c_tables_figures.py
+index 7e3a982..a622bad 100644
+--- a/dasr1/experiments/exp11c_tables_figures.py
++++ b/dasr1/experiments/exp11c_tables_figures.py
+@@ -11,6 +11,7 @@ Exp11b network emulation, and writes to outputs/exp11c/:
+   fig_latency_bandwidth.pdf   latency vs bandwidth, both workloads
+   fig_tradeoff_gsm8k.pdf      accuracy vs latency and vs uplink (GSM8K)
+   fig_uplink_timeline.pdf     uplink bytes per denoising step, one prompt each
++  emulated_summary_<folder>.csv   full latency grid per workload (latency table)
+ 
+ Data source (what the paper reports): the dedicated-GPU session written by
+ run_exp11_clean.sh (EXP11C_WORKLOADS, default *_addon_clean / *_clean folders).
+@@ -469,6 +470,8 @@ def main():
+     for label, (folder, tokens, arch) in WORKLOADS.items():
+         runs, steps, flops = load_workload(label, folder, tokens, arch)
+         _, summary = emu.emulate(steps, runs)
++        # full emulation grid (incl. C1 derived from C2): source of the latency table
++        summary.to_csv(OUT / f"emulated_summary_{folder}.csv", index=False)
+         all_runs.append(runs); all_flops.append(flops)
+         emulated[label], steps_by_label[label], answer_tokens[label] = summary, steps, tokens
+     all_runs, all_flops = pd.concat(all_runs, ignore_index=True), pd.concat(all_flops, ignore_index=True)
