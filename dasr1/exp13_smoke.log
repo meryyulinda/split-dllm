@@ -1,0 +1,50 @@
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.00it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  6.05it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  6.08it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.32it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.22it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=287.9 W, cloud=287.8 W
+Exp13 | dream | gsm8k n=2 | split after layer 4 | 64 tokens, blocks of 32 | thresholds [0.9, 0.8, 0.7] | T=0.1 top_p=0.9
+warmup done
+
+gsm8k_0000 | prompt tokens=99
+  F0_nocache_fixed         ok=True  steps=  64 up=  74.78 MB edge=   746 ms cloud=  4292 ms ' = 9 eggs per day.\nShe makes $2 * 9 = $18 per day.'
+  F1_nocache_thr0.9        ok=False steps=   3 up=   3.51 MB edge=    36 ms cloud=   207 ms '   9                     .\nThe answer answer is 9.'
+  K1_dual_fixed            ok=True  steps=  64 up=  16.56 MB edge=  2073 ms cloud= 11188 ms ' = 9 eggs per day.\nShe makes 9 * $2 = $18 per day.'
+  K2_dual_thr0.9           ok=False steps=   6 up=   3.25 MB edge=   141 ms cloud=   921 ms ' 9   day.             9   .\nThe final answer is 9.'
+  K2_dual_thr0.8           ok=False steps=   6 up=   3.25 MB edge=   173 ms cloud=   871 ms '9   day.\n             9   .\nThe final answer is 9.'
+  K2_dual_thr0.7           ok=False steps=   6 up=   3.25 MB edge=   169 ms cloud=   827 ms ' day.\n             9 ####9.\nThe final answer is 9.'
+  K3_dual_thr0.9_int8      ok=False steps=   7 up=   2.33 MB edge=   218 ms cloud=  1154 ms 's  day.\n              9\n####9\nThe final answer: 9.'
+
+gsm8k_0001 | prompt tokens=60
+  F0_nocache_fixed         ok=True  steps=  64 up=  56.89 MB edge=   634 ms cloud=  3584 ms ' 2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3'
+  F1_nocache_thr0.9        ok=False steps=   7 up=   6.22 MB edge=    66 ms cloud=   395 ms 'iber fiber fiber fiber fiber fiber     #### answer'
+  K1_dual_fixed            ok=True  steps=  64 up=  16.00 MB edge=  2010 ms cloud= 10914 ms ' bolts of fiber.\nTherefore, the final answer is 3.'
+  K2_dual_thr0.9           ok=True  steps=   7 up=   2.92 MB edge=   185 ms cloud=  1089 ms ' 1  1                1  bolts.\nTheThe answer is: 3'
+  K2_dual_thr0.8           ok=True  steps=   6 up=   2.70 MB edge=   163 ms cloud=   800 ms 's              3 bolts total.\nThe final answer: 3.'
+  K2_dual_thr0.7           ok=True  steps=   7 up=   2.92 MB edge=   190 ms cloud=   915 ms ' 1                 bolts3.\nThe answer answer is 3.'
+  K3_dual_thr0.9_int8      ok=True  steps=   8 up=   2.02 MB edge=   200 ms cloud=  1273 ms 'tal,  takes               = 3.\nTheThe answer is 3.'
+
+Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_dream_gsm8k_k4_t64_b32_smoke
+            variant  runs  acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms
+   F0_nocache_fixed     2  1.0            0             0        1.0        64.0   65.831936             0.000000    689.755424    3937.861032
+  F1_nocache_thr0.9     2  0.0            2             0        0.5         5.0    4.863568             0.921875     51.058416     300.863667
+      K1_dual_fixed     2  1.0            0             0        1.0        64.0   16.279552             0.748646   2041.508197   11050.769871
+     K2_dual_thr0.9     2  0.5            1             0        1.0         6.5    3.089512             0.952534    162.810193    1004.678028
+     K2_dual_thr0.8     2  0.5            1             0        1.0         6.0    2.974816             0.954550    167.751632     835.799789
+     K2_dual_thr0.7     2  0.5            1             0        1.0         6.5    3.089512             0.952534    179.074287     871.115810
+K3_dual_thr0.9_int8     2  0.5            1             0        1.0         7.5    2.174455             0.966669    208.729761    1213.472639
+
+Emulated latency (s), RTT 20 ms, edge 3x slower:
+bandwidth_mbps        1      5     10    25    50    100   1000
+variant                                                        
+F0_nocache_fixed     534.9  113.6  60.9  29.3  18.8  13.5   8.8
+F1_nocache_thr0.9     39.6    8.4   4.5   2.2   1.4   1.0   0.7
+K1_dual_fixed        149.5   45.3  32.3  24.5  21.9  20.6  19.4
+K2_dual_thr0.7        26.4    6.6   4.1   2.6   2.1   1.9   1.7
+K2_dual_thr0.8        25.4    6.3   3.9   2.5   2.0   1.8   1.6
+K2_dual_thr0.9        26.4    6.7   4.2   2.7   2.2   2.0   1.8
+K3_dual_thr0.9_int8   19.5    5.6   3.9   2.8   2.5   2.3   2.2
+cloud_only             5.6    5.6   5.6   5.6   5.6   5.6   5.6
+cloud_only_cache       1.3    1.3   1.3   1.3   1.3   1.3   1.3

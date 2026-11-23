@@ -294,6 +294,9 @@ EXP12A_N_QUESTIONS = 100
 EXP12_NEW_TOKENS = 256
 EXP12_STEPS = 256
 
+# EXP13
+FASTDLLM_REPO = "../../Fast-dLLM"
+
 # ---------------------------------------------------------------------------
 # RQ1-RQ5 rerun under Dream's official sampler (entropy, T=0.1, top_p=0.9),
 # the same sampler as Exp10D/Exp11. Set RERUN_ENTROPY = True, run the Exp1-Exp7D

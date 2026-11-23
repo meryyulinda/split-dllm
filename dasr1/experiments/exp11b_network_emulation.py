@@ -83,7 +83,10 @@ def bootstrap_ci(values, reps, rng):
 
 
 def emulate(steps, runs=None, bandwidths=BANDWIDTHS_MBPS, rtts=RTTS_MS,
-            slowdowns=EDGE_SLOWDOWNS, reps=BOOTSTRAP, seed=0):
+            slowdowns=EDGE_SLOWDOWNS, reps=BOOTSTRAP, seed=0,
+            reference=REFERENCE, cache_ref=CACHE_REF):
+    """reference: variant for saving_vs_S0 and cloud_only; cache_ref: cloud_only_cache.
+    Defaults are Exp11's S0 / C1; Exp13 passes its own variants."""
     terms = per_run_terms(steps)
     quality = {}
     if runs is not None and "cache_ok" in runs:
@@ -99,7 +102,7 @@ def emulate(steps, runs=None, bandwidths=BANDWIDTHS_MBPS, rtts=RTTS_MS,
                                  "bandwidth_mbps": mbps, "rtt_ms": rtt, "edge_slowdown": slow,
                                  "latency_s": value,
                                  "ok": quality.get((t["case_id"], t["variant"]))})
-                for ref, label in ((REFERENCE, "cloud_only"), (CACHE_REF, "cloud_only_cache")):
+                for ref, label in ((reference, "cloud_only"), (cache_ref, "cloud_only_cache")):
                     sub = terms[terms["variant"] == ref]
                     for (_, t), value in zip(sub.iterrows(), cloud_only_s(sub, rtt)):
                         rows.append({"case_id": t["case_id"], "variant": label,
@@ -116,7 +119,7 @@ def emulate(steps, runs=None, bandwidths=BANDWIDTHS_MBPS, rtts=RTTS_MS,
                         ci95_low=lo, ci95_high=hi, n=len(grp),
                         acc=grp["ok"].mean() if grp["ok"].notna().any() else None))
     summary = pd.DataFrame(out)
-    base = summary[summary["variant"] == REFERENCE].set_index(keys)["mean_latency_s"]
+    base = summary[summary["variant"] == reference].set_index(keys)["mean_latency_s"]
     cloud = summary[summary["variant"] == "cloud_only"].set_index(keys)["mean_latency_s"]
     idx = pd.MultiIndex.from_frame(summary[keys])
     summary["saving_vs_S0"] = 1 - summary["mean_latency_s"].values / base.reindex(idx).values
