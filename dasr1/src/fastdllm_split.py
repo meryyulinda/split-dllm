@@ -62,15 +62,17 @@ def import_fastdllm(arch, repo):
 
 
 def load_fastdllm_model(arch, model_name, repo, device="cuda"):
-    from transformers import AutoConfig, AutoTokenizer
+    from transformers import AutoTokenizer
     pkg = import_fastdllm(arch, repo)
     if arch == "dream":
         model = pkg.DreamModel.from_pretrained(model_name, torch_dtype=torch.bfloat16,
                                                trust_remote_code=True)
     elif arch == "llada":
-        config = AutoConfig.from_pretrained(model_name, trust_remote_code=True)
-        model = pkg.LLaDAModelLM.from_pretrained(model_name, trust_remote_code=True,
-                                                 torch_dtype=torch.bfloat16, config=config)
+        # Fast-dLLM's own LLaDAConfig: its ModelConfig has fields the Hub config lacks
+        # (e.g. train_max_sequence_length), filled with Fast-dLLM's defaults here.
+        config = pkg.LLaDAConfig.from_pretrained(model_name)
+        model = pkg.LLaDAModelLM.from_pretrained(model_name, torch_dtype=torch.bfloat16,
+                                                 config=config)
     else:
         raise ValueError(f"arch must be 'dream' or 'llada', not {arch!r}")
     tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)

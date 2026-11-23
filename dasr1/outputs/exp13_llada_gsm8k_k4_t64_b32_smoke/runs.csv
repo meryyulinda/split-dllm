@@ -1,0 +1,50 @@
+variant,case_id,task,prompt_tokens,cache,decode,threshold,encoding,gold_answer,text,extracted,ok,same_as_ref,n_steps,tokens_per_step,block_start_steps,edge_ms,encode_ms,cloud_ms,sample_ms,up_mb,full_mb,down_kb,mean_rows_sent,wall_s,edge_peak_gib,cloud_peak_gib,edge_energy_j,cloud_energy_j,ref_ok
+F0_nocache_fixed,gsm8k_0000,math,92,none,fixed,,bf16,18,"Janet has 16 eggs per day. She eats 3 for breakfast and bakes 4 for her friends, so she sells 16 - 3 - 4 = 9 eggs. Therefore, she makes 9 * $2 = $18 every day.
+#### 18",18.0,True,True,64,1.0,64,766.8432688713074,0.10019199957605451,4981.0694580078125,742.8332827091217,81.789952,81.788928,0.896,156.0,6.510114117525518,2.6231484413146973,12.449538230895996,1880.4399999380112,1876.1349999904633,True
+F1_nocache_thr0.9,gsm8k_0000,math,92,none,threshold,0.9,bf16,18,"Janet has 16 eggs per day. She eats 3 for breakfast and bakes 4 for her friends, so she sells 16 - 3 - 4 = 9 eggs. Therefore, she makes 9 * $2 = $18 every day.
+#### 18",18.0,True,True,51,1.2549019607843137,51,602.8529262542725,0.08895999973174185,3982.3926582336426,711.0898554325104,65.176368,65.175552,0.792,156.0,5.314543298445642,2.6231484413146973,12.449538230895996,1558.4969999790192,1534.692999958992,True
+K1_dual_fixed,gsm8k_0000,math,92,dual,fixed,,bf16,18,"Janet has 16 eggs per day. She eats 3 for breakfast and bakes 4 for muffins, so she sells 16 - 7 = 9 eggs. At $2 per egg, she makes 9 * $2 = $18 per day.
+#### 18",18.0,True,False,64,1.0,2,2296.064826488495,0.10415999963879585,16255.94457244873,705.4324502944946,18.809856,81.788928,0.896,35.875,19.277953972108662,2.6398115158081055,12.532728672027588,5260.587000012398,5537.067000031471,True
+K2_dual_thr0.9,gsm8k_0000,math,92,dual,threshold,0.9,bf16,18,"Janet has 16 eggs per day. She eats 3 for breakfast and bakes 4 for muffins, so she sells 16 - 7 = 9 eggs. At $2 per egg, she makes 9 * $2 = $18 per day.
+#### 18",18.0,True,False,52,1.2307692307692308,2,2018.7867889404297,0.08547199983149767,13173.247146606445,675.7539510726929,15.663936,66.453504,0.8,36.76923076923077,15.884146551601589,2.6398115158081055,12.532728672027588,4508.654000043869,4552.143000006676,True
+K2_dual_thr0.8,gsm8k_0000,math,92,dual,threshold,0.8,bf16,18,"Janet has 16 eggs per day. She eats 3 for breakfast and bakes 4 for muffins, so she sells 16 - 7 = 9 eggs. At $2 per egg, she makes 9 * $2 = $18 per day.
+#### 18",18.0,True,False,39,1.641025641025641,2,1562.969958305359,0.06540799967478961,9674.091209411621,509.91241574287415,12.255856,49.840128,0.696,38.35897435897436,11.760876080952585,2.6398115158081055,12.532728672027588,3391.707999944687,3375.5859999656677,True
+K2_dual_thr0.7,gsm8k_0000,math,92,dual,threshold,0.7,bf16,18,"Janet has 16 eggs per day. She eats 3 for breakfast and bakes 4 for muffins, so she sells 16 - 7 = 9 eggs. At $2 per egg, she makes 9 * $2 = $18 per day.
+#### 18",18.0,True,False,27,2.3703703703703702,2,1087.7038116455078,0.04710399988107383,5940.862499237061,330.64454460144043,9.109936,34.504704,0.6,41.18518518518518,7.369168831035495,2.6398115158081055,12.532728672027588,2136.7690000534058,2092.669000029564,True
+K3_dual_thr0.9_int8,gsm8k_0000,math,92,dual,threshold,0.9,int8_delta,18,"Janet has 16 eggs per day. She eats 3 for breakfast and bakes 4 for muffins, so she sells 16 - 7 = 9 eggs. At $2 per egg, she makes 9 * $2 = $18 per day.
+#### 18",18.0,True,False,53,1.2075471698113207,2,2111.10418510437,32.670432444196194,7295.004669189453,273.1420156955719,9.244688,67.731456,0.808,36.679245283018865,9.72888540290296,2.6398115158081055,12.532728672027588,2816.264999985695,2525.904000043869,True
+F0_nocache_fixed,gsm8k_0001,math,55,none,fixed,,bf16,3,"1. The robe takes 2 bolts of blue fiber.
+2. It also takes half that much white fiber, which is 2/2 = 1 bolt.
+3. Therefore, the total number of bolts needed is 2 + 1 = 3 bolts.
+
+#### 3",3.0,True,True,64,1.0,64,760.0589718818665,0.11846399959176779,3889.734479904175,685.4881286621094,62.391296,62.390272,0.896,119.0,5.354170974344015,2.6181588172912598,12.44045877456665,1535.6679999828339,1568.766000032425,True
+F1_nocache_thr0.9,gsm8k_0001,math,55,none,threshold,0.9,bf16,3,"1. The robe takes 2 bolts of blue fiber.
+2. It also takes half that much white fiber, which is 2/2 = 1 bolt.
+3. Therefore, the total number of bolts needed is 2 + 1 = 3 bolts.
+
+#### 3",3.0,True,True,31,2.064516129032258,31,284.37724685668945,0.06035199970938265,1962.6522483825684,418.4408938884735,30.220784,30.220288,0.632,119.0,2.678373315371573,2.6181588172912598,12.44045877456665,778.0489999055862,771.6709998846054,True
+K1_dual_fixed,gsm8k_0001,math,55,dual,fixed,,bf16,3,"1. The robe takes 2 bolts of blue fiber.
+2. It also takes half that much white fiber, which is 2/2 = 1 bolt.
+3. Therefore, the total number of bolts is 2 + 1 = 3 bolts.
+
+#### 3 bolts",3.0,True,False,64,1.0,2,2537.3735575675964,0.13574400008656085,16452.50650024414,700.6970238685608,18.203648,62.390272,0.896,34.71875,19.96280907187611,2.6308698654174805,12.4913010597229,5762.578999996185,5678.936000108719,True
+K2_dual_thr0.9,gsm8k_0001,math,55,dual,threshold,0.9,bf16,3,"1. The robe takes 2 bolts of blue fiber.
+2. It also takes half that much white fiber, which is 2/2 = 1 bolt.
+3. Therefore, the total number of bolts is 2 + 1 = 3 bolts.
+
+#### 3 bolts",3.0,True,False,28,2.2857142857142856,2,1135.5564107894897,0.062143999501131475,7348.2438888549805,369.4821789264679,8.765888,27.295744,0.608,38.214285714285715,8.988513968884945,2.6308698654174805,12.4913010597229,2608.417000055313,2549.6159999370575,True
+K2_dual_thr0.8,gsm8k_0001,math,55,dual,threshold,0.8,bf16,3,"1. The robe takes 2 bolts of blue fiber.
+2. It also takes half that much white fiber, which is 2/2 = 1 bolt.
+3. Therefore, the total number of bolts used is 2 + 1 = 3 bolts.
+
+#### 3",3.0,True,False,21,3.0476190476190474,2,828.7008104324341,0.04608000011648983,5356.609222412109,278.3255670070648,6.930768,20.471808,0.552,40.285714285714285,6.560286594554782,2.6308698654174805,12.4913010597229,1907.1009999513626,1836.7330000400543,True
+K2_dual_thr0.7,gsm8k_0001,math,55,dual,threshold,0.7,bf16,3,"1. The robe takes 2 bolts of blue fiber.
+2. It also takes half that much white fiber, which is 2/2 = 1 bolt.
+3. Therefore, the total number of bolts used is 2 + 1 = 3 bolts.
+
+#### 3",3.0,True,False,17,3.764705882352941,2,644.643162727356,0.03788800013717264,4187.897247314453,231.74048233032227,5.882128,16.572416,0.52,42.23529411764706,5.139615128748119,2.6308698654174805,12.4913010597229,1470.4580000638962,1434.5329999923706,True
+K3_dual_thr0.9_int8,gsm8k_0001,math,55,dual,threshold,0.9,int8_delta,3,"1. The robe takes 2 bolts of blue fiber.
+2. It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+3. Adding these together, we get 2 + 1 = 3 bolts.
+
+#### 3",3.0,True,False,34,1.8823529411764706,2,1236.7508883476257,2.0818560081534088,8757.36654663086,446.45106959342957,5.790414,33.144832,0.656,37.11764705882353,10.576607550494373,2.6308698654174805,12.4913010597229,2836.419000029564,3006.539999961853,True
