@@ -1,50 +1,58 @@
 The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
-Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.00it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  6.05it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  6.08it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.32it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.22it/s]
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  5.19it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  5.98it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  6.31it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.65it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.37it/s]
 /mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
   warnings.warn(
 /mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
   warnings.warn(
-idle power: edge=287.9 W, cloud=287.8 W
-Exp13 | dream | gsm8k n=2 | split after layer 4 | 64 tokens, blocks of 32 | thresholds [0.9, 0.8, 0.7] | T=0.1 top_p=0.9
+idle power: edge=289.2 W, cloud=285.4 W
+Exp13 | dream | gsm8k n=2 | split after layer 4 | 64 tokens, blocks of 32 | thresholds [0.9, 0.8, 0.7] | T=0.0 top_p=None
 warmup done
 
 gsm8k_0000 | prompt tokens=99
-  F0_nocache_fixed         ok=True  steps=  64 up=  74.78 MB edge=   746 ms cloud=  4292 ms ' = 9 eggs per day.\nShe makes $2 * 9 = $18 per day.'
-  F1_nocache_thr0.9        ok=False steps=   3 up=   3.51 MB edge=    36 ms cloud=   207 ms '   9                     .\nThe answer answer is 9.'
-  K1_dual_fixed            ok=True  steps=  64 up=  16.56 MB edge=  2073 ms cloud= 11188 ms ' = 9 eggs per day.\nShe makes 9 * $2 = $18 per day.'
-  K2_dual_thr0.9           ok=False steps=   6 up=   3.25 MB edge=   141 ms cloud=   921 ms ' 9   day.             9   .\nThe final answer is 9.'
-  K2_dual_thr0.8           ok=False steps=   6 up=   3.25 MB edge=   173 ms cloud=   871 ms '9   day.\n             9   .\nThe final answer is 9.'
-  K2_dual_thr0.7           ok=False steps=   6 up=   3.25 MB edge=   169 ms cloud=   827 ms ' day.\n             9 ####9.\nThe final answer is 9.'
-  K3_dual_thr0.9_int8      ok=False steps=   7 up=   2.33 MB edge=   218 ms cloud=  1154 ms 's  day.\n              9\n####9\nThe final answer: 9.'
+  F0_nocache_fixed         ok=False steps=  64 up=  74.78 MB edge=   775 ms cloud=  4299 ms "gs at the farmers' market.\n#### 9\nThe answer is: 9"
+  F1_nocache_thr0.9        ok=False steps=  39 up=  45.57 MB edge=   471 ms cloud=  2608 ms "gs at the farmers' market.\n#### 9\nThe answer is: 9"
+  K1_dual_fixed            ok=False steps=  64 up=  16.56 MB edge=  2067 ms cloud= 11248 ms '6 - 7 = 9*$2 = $9 per day.\n#### 9\nThe answer is: 9'
+  K2_dual_thr0.9           ok=False steps=  52 up=  13.81 MB edge=  1625 ms cloud=  9124 ms '6 - 7 = 9*$2 = $9 per day.\n#### 9\nThe answer is: 9'
+  K2_dual_thr0.8           ok=False steps=  49 up=  13.12 MB edge=  1608 ms cloud=  8677 ms '- 7 = $2/egg = $9 per day.\n#### 9\nThe answer is: 9'
+  K2_dual_thr0.7           ok=False steps=  42 up=  11.51 MB edge=  1261 ms cloud=  5842 ms '- 7 = $2/egg = $9 per day.\n#### 9\nThe answer is: 9'
+  K3_dual_thr0.9_int8      ok=False steps=  49 up=   7.26 MB edge=  1092 ms cloud=  5733 ms 'he farmers market per day.\n#### 9\nThe answer is: 9'
 
 gsm8k_0001 | prompt tokens=60
-  F0_nocache_fixed         ok=True  steps=  64 up=  56.89 MB edge=   634 ms cloud=  3584 ms ' 2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3'
-  F1_nocache_thr0.9        ok=False steps=   7 up=   6.22 MB edge=    66 ms cloud=   395 ms 'iber fiber fiber fiber fiber fiber     #### answer'
-  K1_dual_fixed            ok=True  steps=  64 up=  16.00 MB edge=  2010 ms cloud= 10914 ms ' bolts of fiber.\nTherefore, the final answer is 3.'
-  K2_dual_thr0.9           ok=True  steps=   7 up=   2.92 MB edge=   185 ms cloud=  1089 ms ' 1  1                1  bolts.\nTheThe answer is: 3'
-  K2_dual_thr0.8           ok=True  steps=   6 up=   2.70 MB edge=   163 ms cloud=   800 ms 's              3 bolts total.\nThe final answer: 3.'
-  K2_dual_thr0.7           ok=True  steps=   7 up=   2.92 MB edge=   190 ms cloud=   915 ms ' 1                 bolts3.\nThe answer answer is 3.'
-  K3_dual_thr0.9_int8      ok=True  steps=   8 up=   2.02 MB edge=   200 ms cloud=  1273 ms 'tal,  takes               = 3.\nTheThe answer is 3.'
+  F0_nocache_fixed         ok=True  steps=  64 up=  56.89 MB edge=   585 ms cloud=  3262 ms ' 2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3'
+  F1_nocache_thr0.9        ok=True  steps=  27 up=  24.00 MB edge=   273 ms cloud=  1480 ms 'e takes 2 + 1 = 3 bolts. \n#### 3\nThe answer is: 3.'
+  K1_dual_fixed            ok=True  steps=  64 up=  16.00 MB edge=  2098 ms cloud= 11484 ms ' 2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3'
+  K2_dual_thr0.9           ok=True  steps=  23 up=   6.59 MB edge=   687 ms cloud=  3828 ms '2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3.'
+  K2_dual_thr0.8           ok=True  steps=  23 up=   6.59 MB edge=   712 ms cloud=  3820 ms ' = 3 bolts of fiber.\n#### 3\nThe final answer is 3.'
+  K2_dual_thr0.7           ok=False steps=  17 up=   5.22 MB edge=   523 ms cloud=  2849 ms '2 + 1 = 3 bolts of fiber.\n#### 33\nThe answer is 3.'
+  K3_dual_thr0.9_int8      ok=True  steps=  27 up=   4.20 MB edge=   785 ms cloud=  4539 ms ' 2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3'
 
 Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_dream_gsm8k_k4_t64_b32_smoke
             variant  runs  acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms
-   F0_nocache_fixed     2  1.0            0             0        1.0        64.0   65.831936             0.000000    689.755424    3937.861032
-  F1_nocache_thr0.9     2  0.0            2             0        0.5         5.0    4.863568             0.921875     51.058416     300.863667
-      K1_dual_fixed     2  1.0            0             0        1.0        64.0   16.279552             0.748646   2041.508197   11050.769871
-     K2_dual_thr0.9     2  0.5            1             0        1.0         6.5    3.089512             0.952534    162.810193    1004.678028
-     K2_dual_thr0.8     2  0.5            1             0        1.0         6.0    2.974816             0.954550    167.751632     835.799789
-     K2_dual_thr0.7     2  0.5            1             0        1.0         6.5    3.089512             0.952534    179.074287     871.115810
-K3_dual_thr0.9_int8     2  0.5            1             0        1.0         7.5    2.174455             0.966669    208.729761    1213.472639
+   F0_nocache_fixed     2  0.5            0             0        1.0        64.0   65.831936             0.000000    679.876703    3780.488820
+  F1_nocache_thr0.9     2  0.5            0             0        1.0        33.0   34.783248             0.484375    372.102110    2043.850481
+      K1_dual_fixed     2  0.5            0             0        1.0        64.0   16.279552             0.748646   2082.533563   11366.058649
+     K2_dual_thr0.9     2  0.5            0             0        1.0        37.5   10.200664             0.849718   1155.949632    6475.886463
+     K2_dual_thr0.8     2  0.5            0             0        1.0        36.0    9.856576             0.854319   1160.123845    6248.325092
+     K2_dual_thr0.7     2  0.0            1             0        1.0        29.5    8.365528             0.877153    892.139030    4345.757441
+K3_dual_thr0.9_int8     2  0.5            0             0        1.0        38.0    5.732191             0.914505    938.435788    5136.336164
 
-Emulated latency (s), RTT 20 ms, edge 3x slower:
+Emulated split latency (s), RTT 20 ms, edge 3x slower:
 bandwidth_mbps        1      5     10    25    50    100   1000
 variant                                                        
-F0_nocache_fixed     534.9  113.6  60.9  29.3  18.8  13.5   8.8
-F1_nocache_thr0.9     39.6    8.4   4.5   2.2   1.4   1.0   0.7
+F0_nocache_fixed     534.2  112.9  60.2  28.6  18.1  12.8   8.1
+F1_nocache_thr0.9    282.4   59.8  32.0  15.3   9.7   6.9   4.4
 K1_dual_fixed        149.5   45.3  32.3  24.5  21.9  20.6  19.4
-K2_dual_thr0.7        26.4    6.6   4.1   2.6   2.1   1.9   1.7
-K2_dual_thr0.8        25.4    6.3   3.9   2.5   2.0   1.8   1.6
-K2_dual_thr0.9        26.4    6.7   4.2   2.7   2.2   2.0   1.8
-K3_dual_thr0.9_int8   19.5    5.6   3.9   2.8   2.5   2.3   2.2
-cloud_only             5.6    5.6   5.6   5.6   5.6   5.6   5.6
-cloud_only_cache       1.3    1.3   1.3   1.3   1.3   1.3   1.3
+K2_dual_thr0.7        74.8   21.2  14.5  10.5   9.2   8.5   7.9
+K2_dual_thr0.8        89.6   26.5  18.6  13.9  12.3  11.5  10.8
+K2_dual_thr0.9        92.6   27.3  19.2  14.3  12.6  11.8  11.1
+K3_dual_thr0.9_int8   54.9   18.2  13.6  10.8   9.9   9.5   9.0
+
+Cloud-only with the same cache and decoding (s):
+variant
+F0_nocache_fixed        4.93
+F1_nocache_thr0.9       2.77
+K1_dual_fixed          13.87
+K2_dual_thr0.7          5.48
+K2_dual_thr0.8          7.74
+K2_dual_thr0.9          7.96
+K3_dual_thr0.9_int8     6.33

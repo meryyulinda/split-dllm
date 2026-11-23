@@ -16,8 +16,11 @@ Variants (all on the same split, same prompts and seeds; blocks of EXP13_BLOCK_L
   K2_dual_thr<g>         DualCache + parallel decoding, one variant per threshold
   K3_dual_thr<g>_int8    K2 (first threshold) with the INT8 delta codec
 Quality is compared with F0 (paired flips, exact McNemar test). Timing and bytes
-are measured per step; exp11b's emulation is applied at the end (reference F0,
-cloud-only with cache = the first K2 variant).
+are measured per step; exp11b's emulation is applied at the end. Every variant also
+gets its own cloud-only reference (same cache and decoding, all layers on the cloud
+GPU, one round trip), so a split is always compared with cloud-only under the same
+policy: rows "cloud_only:<variant>" and column overhead_vs_own_cloud.
+Sampler: greedy for both models (Fast-dLLM's evaluation setting).
 
 Outputs: outputs/exp13_<model>_<dataset>_k<split>_t<tokens>_b<block><tag>/
   runs.csv, steps.csv, summary_by_variant.csv, emulated_summary.csv, metadata.json
@@ -62,8 +65,11 @@ SPLIT = int(setting("EXP13_SPLIT_LAYER", 4))
 EDGE = setting("EXP13_EDGE_DEVICE", "cuda:1")
 CLOUD = setting("EXP13_CLOUD_DEVICE", "cuda:0")
 if MODEL == "dream":
-    TEMPERATURE = float(setting("EXP13_DREAM_TEMPERATURE", 0.1))
-    TOP_P = setting("EXP13_DREAM_TOP_P", 0.9)
+    # Fast-dLLM's own Dream setting: greedy, no top-p. The threshold is compared with
+    # the token's probability *after* temperature / top-p, so T=0.1 + top-p 0.9 pushes
+    # almost every position above 0.9 and parallel decoding commits garbage.
+    TEMPERATURE = float(setting("EXP13_DREAM_TEMPERATURE", 0.0))
+    TOP_P = setting("EXP13_DREAM_TOP_P", None)
     MODEL_NAME = setting("MODEL_NAME", DREAM_MODEL_NAME)
 else:
     TEMPERATURE = float(setting("EXP13_LLADA_TEMPERATURE", 0.0))
@@ -282,7 +288,8 @@ def main():
     steps = pd.read_csv(OUT / "steps.csv")
     em, em_summary = emu.emulate(steps, pd.DataFrame(runs).rename(columns={"ok": "cache_ok"}),
                                  reference=REFERENCE,
-                                 cache_ref=CACHE_REF if CACHE_REF in names else REFERENCE)
+                                 cache_ref=CACHE_REF if CACHE_REF in names else REFERENCE,
+                                 own_cloud=True)
     em.to_csv(OUT / "emulated_runs.csv", index=False)
     em_summary.to_csv(OUT / "emulated_summary.csv", index=False)
     (OUT / "metadata.json").write_text(json.dumps({
@@ -301,9 +308,13 @@ def main():
                    "mean_steps", "mean_up_mb", "up_reduction_vs_ref", "mean_edge_ms",
                    "mean_cloud_ms"]].to_string(index=False))
     view = em_summary[(em_summary.rtt_ms == 20) & (em_summary.edge_slowdown == 3.0)]
-    print("\nEmulated latency (s), RTT 20 ms, edge 3x slower:")
-    print(view.pivot(index="variant", columns="bandwidth_mbps",
-                     values="mean_latency_s").round(1).to_string())
+    split = view[~view.variant.str.startswith("cloud_only")]
+    print("\nEmulated split latency (s), RTT 20 ms, edge 3x slower:")
+    print(split.pivot(index="variant", columns="bandwidth_mbps",
+                      values="mean_latency_s").round(1).to_string())
+    own = view[view.variant.str.startswith("cloud_only:")].groupby("variant")["mean_latency_s"].first()
+    print("\nCloud-only with the same cache and decoding (s):")
+    print(own.rename(lambda v: v.split(":", 1)[1]).round(2).to_string())
 
 
 if __name__ == "__main__":

@@ -13,8 +13,8 @@
     0.8,
     0.7
   ],
-  "temperature": 0.1,
-  "top_p": 0.9,
+  "temperature": 0.0,
+  "top_p": null,
   "seed": 42,
   "anchor_interval": 32,
   "variants": [
@@ -71,8 +71,8 @@
   "reference": "F0_nocache_fixed",
   "cloud_only_cache_ref": "K2_dual_thr0.9",
   "idle_power_w": {
-    "edge": 287.92635309679866,
-    "cloud": 287.8240935502578
+    "edge": 289.1619706848984,
+    "cloud": 285.44593539526903
   },
   "edge_gpu": "NVIDIA RTX A6000",
   "cloud_gpu": "NVIDIA RTX A6000",

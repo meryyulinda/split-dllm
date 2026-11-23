@@ -84,9 +84,11 @@ def bootstrap_ci(values, reps, rng):
 
 def emulate(steps, runs=None, bandwidths=BANDWIDTHS_MBPS, rtts=RTTS_MS,
             slowdowns=EDGE_SLOWDOWNS, reps=BOOTSTRAP, seed=0,
-            reference=REFERENCE, cache_ref=CACHE_REF):
+            reference=REFERENCE, cache_ref=CACHE_REF, own_cloud=False):
     """reference: variant for saving_vs_S0 and cloud_only; cache_ref: cloud_only_cache.
-    Defaults are Exp11's S0 / C1; Exp13 passes its own variants."""
+    Defaults are Exp11's S0 / C1; Exp13 passes its own variants.
+    own_cloud: also add "cloud_only:<variant>" for every variant (cloud-only under the
+    same cache and decoding policy) and the column overhead_vs_own_cloud."""
     terms = per_run_terms(steps)
     quality = {}
     if runs is not None and "cache_ok" in runs:
@@ -102,7 +104,10 @@ def emulate(steps, runs=None, bandwidths=BANDWIDTHS_MBPS, rtts=RTTS_MS,
                                  "bandwidth_mbps": mbps, "rtt_ms": rtt, "edge_slowdown": slow,
                                  "latency_s": value,
                                  "ok": quality.get((t["case_id"], t["variant"]))})
-                for ref, label in ((reference, "cloud_only"), (cache_ref, "cloud_only_cache")):
+                refs = [(reference, "cloud_only"), (cache_ref, "cloud_only_cache")]
+                if own_cloud:
+                    refs += [(v, f"cloud_only:{v}") for v in terms["variant"].unique()]
+                for ref, label in refs:
                     sub = terms[terms["variant"] == ref]
                     for (_, t), value in zip(sub.iterrows(), cloud_only_s(sub, rtt)):
                         rows.append({"case_id": t["case_id"], "variant": label,
@@ -125,6 +130,12 @@ def emulate(steps, runs=None, bandwidths=BANDWIDTHS_MBPS, rtts=RTTS_MS,
     summary["saving_vs_S0"] = 1 - summary["mean_latency_s"].values / base.reindex(idx).values
     summary["overhead_vs_cloud_only"] = (summary["mean_latency_s"].values
                                          / cloud.reindex(idx).values - 1)
+    if own_cloud:
+        own = summary.set_index(keys + ["variant"])["mean_latency_s"]
+        summary["overhead_vs_own_cloud"] = [
+            r.mean_latency_s / own.get((r.bandwidth_mbps, r.rtt_ms, r.edge_slowdown,
+                                        f"cloud_only:{r.variant}"), np.nan) - 1
+            for r in summary.itertuples()]
     return em, summary
 
 
