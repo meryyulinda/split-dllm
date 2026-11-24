@@ -9,7 +9,7 @@
 set -euo pipefail
 
 export CUDA_DEVICE_ORDER=PCI_BUS_ID
-export CUDA_VISIBLE_DEVICES=0,1          # cuda:0 = GPU 1 (cloud), cuda:1 = GPU 2 (edge)
+export CUDA_VISIBLE_DEVICES=0,1          # cuda:0 = GPU 0 (cloud), cuda:1 = GPU 1 (edge)
 SMOKE="${SMOKE:-0}"
 SKIP_IDLE_CHECK="${SKIP_IDLE_CHECK:-0}"
 
@@ -74,9 +74,9 @@ EXP13_EDGE_DEVICE = "cuda:1"
 EXP13_CLOUD_DEVICE = "cuda:0"
 EXP13_ANCHOR_INTERVAL = 32
 EXP13_RESUME = True
-EXP14_REFRESH_EVERY = 4
+EXP14_REFRESH_EVERY = 2
 EXP13_VARIANT_NAMES = ["F0_nocache_fixed", "K2_dual_thr0.9", "K3_dual_thr0.9_int8",
-                       "R1_dual_thr0.9_reuse", "R2_dual_thr0.9_reuse_r4",
+                       "R1_dual_thr0.9_reuse", "R2_dual_thr0.9_reuse_r2",
                        "R3_dual_thr0.9_reuse_int8"]
 '
 

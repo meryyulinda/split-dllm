@@ -1,0 +1,696 @@
+nohup: ignoring input
+GPU 0: max utilization over 5 s = 0%
+GPU 1: max utilization over 5 s = 0%
+
+=== 1/3 Dream, GSM8K  (2026-11-24 21:58:58)
+{'EXP13_MODEL': 'dream', 'EXP13_DATASET': 'gsm8k', 'EXP13_N_QUESTIONS': 30, 'EXP13_NEW_TOKENS': 256, 'EXP13_OUTPUT_TAG': '_reuse', 'EXP13_VARIANT_NAMES': ['F0_nocache_fixed', 'K2_dual_thr0.9', 'K3_dual_thr0.9_int8', 'R1_dual_thr0.9_reuse', 'R2_dual_thr0.9_reuse_r2', 'R3_dual_thr0.9_reuse_int8']}
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  8.56it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.81it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.35it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.27it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.37it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=60.6 W, cloud=77.5 W
+Exp13 | dream | gsm8k n=30 | split after layer 4 | 256 tokens, blocks of 32 | thresholds [0.9] | T=0.0 top_p=None
+warmup done
+
+gsm8k_0000 | prompt tokens=99
+  F0_nocache_fixed         ok=True  steps= 256 up= 651.43 MB edge=  2124 ms cloud= 13373 ms 'she makes 9 * $2 = $18 per day.\nThe answer is: 18.'
+  K2_dual_thr0.9           ok=True  steps=  63 up=  32.97 MB edge=   405 ms cloud=  2236 ms " per day at the farmers' market.\nThe answer is: 18"
+  K3_dual_thr0.9_int8      ok=True  steps=  65 up=  18.23 MB edge=   392 ms cloud=  2200 ms " per day at the farmers' market.\nThe answer is: 18"
+  R1_dual_thr0.9_reuse     ok=True  steps=  65 up=  17.99 MB edge=   394 ms cloud=  2212 ms "per day at the farmers' market.\nThe answer is: 18."
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  63 up=  24.19 MB edge=   379 ms cloud=  2163 ms =K2 " per day at the farmers' market.\nThe answer is: 18"
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  63 up=  10.18 MB edge=   374 ms cloud=  2124 ms " at the farmers' market.\n#### 18\nThe answer is: 18"
+
+gsm8k_0001 | prompt tokens=60
+  F0_nocache_fixed         ok=True  steps= 256 up= 579.87 MB edge=  2065 ms cloud= 12913 ms ' the robe takes 2 + 1 = 3 bolts.\nThe answer is: 3.'
+  K2_dual_thr0.9           ok=True  steps=  50 up=  27.76 MB edge=   314 ms cloud=  1749 ms ' the robe takes 2 + 1 = 3 bolts.\nThe answer is: 3.'
+  K3_dual_thr0.9_int8      ok=True  steps=  50 up=  15.13 MB edge=   319 ms cloud=  1787 ms ' the robe takes 2 + 1 = 3 bolts.\nThe answer is: 3.'
+  R1_dual_thr0.9_reuse     ok=True  steps=  50 up=  14.65 MB edge=   305 ms cloud=  1744 ms =K2 ' the robe takes 2 + 1 = 3 bolts.\nThe answer is: 3.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  50 up=  20.29 MB edge=   305 ms cloud=  1721 ms =K2 ' the robe takes 2 + 1 = 3 bolts.\nThe answer is: 3.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  50 up=   8.57 MB edge=   305 ms cloud=  1740 ms =K2 ' the robe takes 2 + 1 = 3 bolts.\nThe answer is: 3.'
+
+gsm8k_0002 | prompt tokens=91
+  F0_nocache_fixed         ok=False steps= 256 up= 636.75 MB edge=  2106 ms cloud= 13419 ms '95,000 - $130,000 = $65,000.\nThe answer is: 65000.'
+  K2_dual_thr0.9           ok=False steps=  50 up=  29.53 MB edge=   329 ms cloud=  1830 ms '130,000 = $65,000.\n#### 65000\nThe answer is: 65000'
+  K3_dual_thr0.9_int8      ok=False steps=  50 up=  16.13 MB edge=   329 ms cloud=  1831 ms '195,000 - $130,000 = $65,000.\nThe answer is: 65000'
+  R1_dual_thr0.9_reuse     ok=False steps=  46 up=  13.58 MB edge=   285 ms cloud=  1627 ms =K2 '130,000 = $65,000.\n#### 65000\nThe answer is: 65000'
+  R2_dual_thr0.9_reuse_r2  ok=False steps=  47 up=  20.29 MB edge=   295 ms cloud=  1676 ms =K2 '130,000 = $65,000.\n#### 65000\nThe answer is: 65000'
+  R3_dual_thr0.9_reuse_int8 ok=False steps=  49 up=   8.57 MB edge=   297 ms cloud=  1696 ms '195,000 - $130,000 = $65,000.\nThe answer is: 65000'
+
+gsm8k_0003 | prompt tokens=69
+  F0_nocache_fixed         ok=True  steps= 256 up= 596.38 MB edge=  2079 ms cloud= 13053 ms '0 = 540 meters a week.\n#### 540\nThe answer is: 540'
+  K2_dual_thr0.9           ok=True  steps=  42 up=  26.44 MB edge=   265 ms cloud=  1503 ms '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  K3_dual_thr0.9_int8      ok=True  steps=  41 up=  14.39 MB edge=   250 ms cloud=  1436 ms '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  R1_dual_thr0.9_reuse     ok=True  steps=  42 up=  12.89 MB edge=   259 ms cloud=  1484 ms =K2 '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  42 up=  18.72 MB edge=   276 ms cloud=  1543 ms =K2 '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  41 up=   7.61 MB edge=   269 ms cloud=  1511 ms =K2 '= 540 meters per week.\n#### 540\nThe answer is: 540'
+
+gsm8k_0004 | prompt tokens=145
+  F0_nocache_fixed         ok=True  steps= 256 up= 735.84 MB edge=  2896 ms cloud= 18794 ms 'd in the final meal of the day.\nThe answer is: 20.'
+  K2_dual_thr0.9           ok=True  steps=  72 up=  37.68 MB edge=   460 ms cloud=  2651 ms 'ed in the final meal of the day.\nThe answer is: 20'
+  K3_dual_thr0.9_int8      ok=True  steps=  71 up=  20.40 MB edge=   478 ms cloud=  2693 ms 'ed in the final meal of the day.\nThe answer is: 20'
+  R1_dual_thr0.9_reuse     ok=True  steps=  76 up=  20.83 MB edge=   485 ms cloud=  2768 ms 'e final meal of the day.\n#### 20\nThe answer is: 20'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  73 up=  27.80 MB edge=   471 ms cloud=  2688 ms =K2 'ed in the final meal of the day.\nThe answer is: 20'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  75 up=  11.97 MB edge=   505 ms cloud=  2841 ms 'e final meal of the day.\n#### 20\nThe answer is: 20'
+
+gsm8k_0005 | prompt tokens=90
+  F0_nocache_fixed         ok=False steps= 256 up= 634.92 MB edge=  2124 ms cloud= 13433 ms ' is 60% of $5, which is $5 * 0.6 = $3.\nThe cost of'
+  K2_dual_thr0.9           ok=True  steps= 112 up=  43.70 MB edge=   671 ms cloud=  3763 ms 's to pay $64 for the 16 glasses.\nThe answer is: 64'
+  K3_dual_thr0.9_int8      ok=True  steps=  90 up=  20.81 MB edge=   542 ms cloud=  3044 ms 'eeds to pay $64 for the glasses.\nThe answer is: 64'
+  R1_dual_thr0.9_reuse     ok=True  steps= 110 up=  27.64 MB edge=   678 ms cloud=  3803 ms 's to pay $64 for the 16 glasses.\nThe answer is: 64'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps= 113 up=  34.98 MB edge=   674 ms cloud=  3810 ms =K2 's to pay $64 for the 16 glasses.\nThe answer is: 64'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  86 up=  12.66 MB edge=   515 ms cloud=  2916 ms 's to pay $64 for the 16 glasses.\nThe answer is: 64'
+
+gsm8k_0006 | prompt tokens=76
+  F0_nocache_fixed         ok=True  steps= 256 up= 609.23 MB edge=  2082 ms cloud= 13266 ms 'have 20 + 80 + 160 = 260 sheep.\nThe answer is: 260'
+  K2_dual_thr0.9           ok=True  steps=  49 up=  28.44 MB edge=   311 ms cloud=  1775 ms ' 80 + 160 = 260 sheep together.\nThe answer is: 260'
+  K3_dual_thr0.9_int8      ok=True  steps=  49 up=  15.53 MB edge=   304 ms cloud=  1735 ms ' 80 + 160 = 260 sheep together.\nThe answer is: 260'
+  R1_dual_thr0.9_reuse     ok=True  steps=  49 up=  14.32 MB edge=   311 ms cloud=  1760 ms =K2 ' 80 + 160 = 260 sheep together.\nThe answer is: 260'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  49 up=  20.32 MB edge=   304 ms cloud=  1778 ms =K2 ' 80 + 160 = 260 sheep together.\nThe answer is: 260'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  49 up=   8.47 MB edge=   302 ms cloud=  1717 ms =K2 ' 80 + 160 = 260 sheep together.\nThe answer is: 260'
+
+gsm8k_0007 | prompt tokens=104
+  F0_nocache_fixed         ok=False steps= 256 up= 660.61 MB edge=  2138 ms cloud= 13677 ms ' minutes to download the file.\nThe answer is: 120.'
+  K2_dual_thr0.9           ok=False steps= 142 up=  51.38 MB edge=   844 ms cloud=  4733 ms '0 minutes to download the file.\nThe answer is: 120'
+  K3_dual_thr0.9_int8      ok=False steps= 114 up=  25.30 MB edge=   687 ms cloud=  3842 ms 'tes + 60 minutes = 120 minutes.\nThe answer is: 120'
+  R1_dual_thr0.9_reuse     ok=False steps= 121 up=  30.42 MB edge=   736 ms cloud=  4141 ms '0 minutes to download the file.\nThe answer is: 120'
+  R2_dual_thr0.9_reuse_r2  ok=False steps= 142 up=  42.02 MB edge=   887 ms cloud=  4920 ms =K2 '0 minutes to download the file.\nThe answer is: 120'
+  R3_dual_thr0.9_reuse_int8 ok=False steps= 117 up=  16.38 MB edge=   693 ms cloud=  3891 ms '0 minutes to download the file.\nThe answer is: 120'
+
+gsm8k_0008 | prompt tokens=138
+  F0_nocache_fixed         ok=True  steps= 256 up= 723.00 MB edge=  2892 ms cloud= 18767 ms ' the end of the 4 hours.\n#### 45\nThe answer is: 45'
+  K2_dual_thr0.9           ok=True  steps=  95 up=  42.55 MB edge=   623 ms cloud=  3475 ms ' 180 - 135 = 45 miles from home.\nThe answer is: 45'
+  K3_dual_thr0.9_int8      ok=True  steps=  95 up=  22.93 MB edge=   609 ms cloud=  3433 ms ' 180 - 135 = 45 miles from home.\nThe answer is: 45'
+  R1_dual_thr0.9_reuse     ok=False steps=  99 up=  25.44 MB edge=   622 ms cloud=  3523 ms 's 315 miles from home.\n#### 315\nThe answer is: 315'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  93 up=  31.85 MB edge=   617 ms cloud=  3461 ms ' 180 - 135 = 45 miles from home.\nThe answer is: 45'
+  R3_dual_thr0.9_reuse_int8 ok=False steps= 102 up=  14.83 MB edge=   668 ms cloud=  3732 ms 's 315 miles from home.\n#### 315\nThe answer is: 315'
+
+gsm8k_0009 | prompt tokens=94
+  F0_nocache_fixed         ok=True  steps= 256 up= 642.26 MB edge=  2109 ms cloud= 13497 ms 'this week is $400 + $60 = $460.\nThe answer is: 460'
+  K2_dual_thr0.9           ok=True  steps=  85 up=  37.73 MB edge=   543 ms cloud=  3010 ms 'this week is $400 + $60 = $460.\nThe answer is: 460'
+  K3_dual_thr0.9_int8      ok=True  steps=  85 up=  20.36 MB edge=   540 ms cloud=  3011 ms 'this week is $400 + $60 = $460.\nThe answer is: 460'
+  R1_dual_thr0.9_reuse     ok=True  steps=  84 up=  22.13 MB edge=   534 ms cloud=  2966 ms ' the week is $400 + $60 = $460.\nThe answer is: 460'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  85 up=  28.95 MB edge=   525 ms cloud=  2948 ms ' the week is $400 + $60 = $460.\nThe answer is: 460'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  82 up=  12.33 MB edge=   527 ms cloud=  2924 ms ' the week is $400 + $60 = $460.\nThe answer is: 460'
+
+gsm8k_0010 | prompt tokens=94
+  F0_nocache_fixed         ok=True  steps= 256 up= 642.26 MB edge=  2106 ms cloud= 13510 ms '0 + 180 + 126 = 366 downloads.\nThe answer is: 366.'
+  K2_dual_thr0.9           ok=True  steps=  59 up=  31.77 MB edge=   358 ms cloud=  2035 ms '0 + 180 + 126 = 366 downloads.\nThe answer is: 366.'
+  K3_dual_thr0.9_int8      ok=True  steps=  60 up=  17.38 MB edge=   365 ms cloud=  2066 ms '0 + 180 + 126 = 366 downloads.\nThe answer is: 366.'
+  R1_dual_thr0.9_reuse     ok=True  steps=  60 up=  16.78 MB edge=   366 ms cloud=  2084 ms =K2 '0 + 180 + 126 = 366 downloads.\nThe answer is: 366.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  59 up=  23.15 MB edge=   357 ms cloud=  2028 ms =K2 '0 + 180 + 126 = 366 downloads.\nThe answer is: 366.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  59 up=   9.67 MB edge=   351 ms cloud=  2014 ms =K2 '0 + 180 + 126 = 366 downloads.\nThe answer is: 366.'
+
+gsm8k_0011 | prompt tokens=99
+  F0_nocache_fixed         ok=True  steps= 256 up= 651.43 MB edge=  2138 ms cloud= 13603 ms ' is $204 + $160 + $330 = $694.\nThe answer is: 694.'
+  K2_dual_thr0.9           ok=True  steps=  35 up=  26.55 MB edge=   234 ms cloud=  1322 ms 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+  K3_dual_thr0.9_int8      ok=True  steps=  36 up=  15.94 MB edge=   240 ms cloud=  1358 ms 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+  R1_dual_thr0.9_reuse     ok=True  steps=  36 up=  11.59 MB edge=   240 ms cloud=  1355 ms =K2 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  35 up=  17.79 MB edge=   233 ms cloud=  1319 ms =K2 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  37 up=   7.30 MB edge=   245 ms cloud=  1388 ms ' + $160 + $330 = $694.\n#### 694\nThe answer is: 694'
+
+gsm8k_0012 | prompt tokens=101
+  F0_nocache_fixed         ok=False steps= 256 up= 655.10 MB edge=  2157 ms cloud= 13658 ms 'earning money on the lemon tree.\nThe answer is: 12'
+  K2_dual_thr0.9           ok=False steps= 106 up=  42.95 MB edge=   634 ms cloud=  3573 ms 'earning money on the lemon tree.\nThe answer is: 12'
+  K3_dual_thr0.9_int8      ok=False steps= 103 up=  22.77 MB edge=   609 ms cloud=  3424 ms 'earning money on the lemon tree.\nThe answer is: 12'
+  R1_dual_thr0.9_reuse     ok=False steps=  92 up=  23.96 MB edge=   542 ms cloud=  3068 ms 'earning money on the lemon tree.\nThe answer is: 12'
+  R2_dual_thr0.9_reuse_r2  ok=False steps= 106 up=  33.91 MB edge=   626 ms cloud=  3542 ms =K2 'earning money on the lemon tree.\nThe answer is: 12'
+  R3_dual_thr0.9_reuse_int8 ok=False steps=  92 up=  13.50 MB edge=   539 ms cloud=  3078 ms 'earning money on the lemon tree.\nThe answer is: 12'
+
+gsm8k_0013 | prompt tokens=92
+  F0_nocache_fixed         ok=True  steps= 256 up= 638.59 MB edge=  2100 ms cloud= 13604 ms 'started with 18 vacuum cleaners.\nThe answer is: 18'
+  K2_dual_thr0.9           ok=True  steps= 106 up=  42.44 MB edge=   644 ms cloud=  3622 ms 'started with 18 vacuum cleaners.\nThe answer is: 18'
+  K3_dual_thr0.9_int8      ok=True  steps= 107 up=  22.94 MB edge=   680 ms cloud=  4248 ms '.\nMelanie started with 18 vacuum cleaners.\n#### 18'
+  R1_dual_thr0.9_reuse     ok=True  steps=  99 up=  25.10 MB edge=   604 ms cloud=  7219 ms 'started with 18 vacuum cleaners.\nThe answer is: 18'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps= 100 up=  32.04 MB edge=   612 ms cloud=  5186 ms 'with 18 vacuum cleaners.\n#### 18\nThe answer is: 18'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps= 101 up=  14.38 MB edge=   632 ms cloud=  6393 ms '.\nMelanie started with 18 vacuum cleaners.\n#### 18'
+
+gsm8k_0014 | prompt tokens=86
+  F0_nocache_fixed         ok=True  steps= 256 up= 627.58 MB edge=  2119 ms cloud= 17258 ms 'dents enrolled in hip-hop dance.\nThe answer is: 60'
+  K2_dual_thr0.9           ok=True  steps= 106 up=  42.09 MB edge=   636 ms cloud=  6766 ms 'dents enrolled in hip-hop dance.\nThe answer is: 60'
+  K3_dual_thr0.9_int8      ok=True  steps= 108 up=  22.86 MB edge=   660 ms cloud=  6250 ms 'dents enrolled in hip-hop dance.\nThe answer is: 60'
+  R1_dual_thr0.9_reuse     ok=True  steps= 109 up=  27.55 MB edge=   669 ms cloud=  7289 ms 'ut of 20 is (12/20) * 100 = 60%.\nThe answer is: 60'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps= 107 up=  33.53 MB edge=   637 ms cloud=  3642 ms =K2 'dents enrolled in hip-hop dance.\nThe answer is: 60'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps= 117 up=  16.19 MB edge=   713 ms cloud=  4004 ms 'dents enrolled in hip-hop dance.\nThe answer is: 60'
+
+gsm8k_0015 | prompt tokens=128
+  F0_nocache_fixed         ok=True  steps= 256 up= 704.65 MB edge=  2176 ms cloud= 14195 ms 'rket, the profit would be $125.\nThe answer is: 125'
+  K2_dual_thr0.9           ok=False steps= 129 up=  49.78 MB edge=   766 ms cloud=  4310 ms 'purchase the electronic gadgets.\nThe answer is: 96'
+  K3_dual_thr0.9_int8      ok=False steps= 124 up=  26.05 MB edge=   753 ms cloud=  4228 ms 'efore, the profit would be $96. \nThe answer is: 96'
+  R1_dual_thr0.9_reuse     ok=False steps= 117 up=  29.52 MB edge=   701 ms cloud=  3948 ms ' which is $8,096 - $8,000 = $96.\nThe answer is: 96'
+  R2_dual_thr0.9_reuse_r2  ok=False steps= 126 up=  39.05 MB edge=   742 ms cloud=  4167 ms 'purchase the electronic gadgets.\nThe answer is: 96'
+  R3_dual_thr0.9_reuse_int8 ok=False steps= 106 up=  15.20 MB edge=   675 ms cloud=  3750 ms 't will be $8,096 - $8,000 = $96.\nThe answer is: 96'
+
+gsm8k_0016 | prompt tokens=87
+  F0_nocache_fixed         ok=False steps= 256 up= 629.41 MB edge=  2116 ms cloud= 13511 ms '160 + 300 = 460 miles.\n#### 460\nThe answer is: 460'
+  K2_dual_thr0.9           ok=True  steps=  52 up=  29.76 MB edge=   327 ms cloud=  1848 ms 'ays is 80 + 150 = 230 miles.\nThe final answer: 230'
+  K3_dual_thr0.9_int8      ok=True  steps=  54 up=  16.46 MB edge=   334 ms cloud=  1911 ms 'ays is 80 + 150 = 230 miles.\nThe final answer: 230'
+  R1_dual_thr0.9_reuse     ok=True  steps=  58 up=  16.34 MB edge=   361 ms cloud=  2054 ms 'n in the two days is 230 miles.\nThe answer is: 230'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  53 up=  21.54 MB edge=   326 ms cloud=  1858 ms =K2 'ays is 80 + 150 = 230 miles.\nThe final answer: 230'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  54 up=   9.03 MB edge=   335 ms cloud=  1917 ms =K2 'ays is 80 + 150 = 230 miles.\nThe final answer: 230'
+
+gsm8k_0017 | prompt tokens=92
+  F0_nocache_fixed         ok=True  steps= 256 up= 638.59 MB edge=  2103 ms cloud= 13556 ms '0 * 50 = $57500.\n#### 57,500\nThe answer is: 57,500'
+  K2_dual_thr0.9           ok=True  steps=  67 up=  33.49 MB edge=   437 ms cloud=  2422 ms 'lary is $1150 * 50 = $57,500.\nThe answer is: 57500'
+  K3_dual_thr0.9_int8      ok=True  steps=  67 up=  18.23 MB edge=   433 ms cloud=  2420 ms 'lary is $1150 * 50 = $57,500.\nThe answer is: 57500'
+  R1_dual_thr0.9_reuse     ok=True  steps=  64 up=  17.66 MB edge=   414 ms cloud=  2318 ms 'lary is $1150 * 50 = $57,500.\nThe answer is: 57500'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  69 up=  25.36 MB edge=   445 ms cloud=  2482 ms 'alary is $1150 * 50 = $57500.\nThe answer is: 57500'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  64 up=  10.20 MB edge=   406 ms cloud=  2278 ms 'alary is $1150 * 50 = $57500.\nThe answer is: 57500'
+
+gsm8k_0018 | prompt tokens=63
+  F0_nocache_fixed         ok=True  steps= 256 up= 585.37 MB edge=  2044 ms cloud= 13086 ms 'l eat 84 / 12 = 7 dozens of eggs.\nThe answer is: 7'
+  K2_dual_thr0.9           ok=True  steps=  69 up=  32.29 MB edge=   412 ms cloud=  2333 ms 'l eat 84 / 12 = 7 dozens of eggs.\nThe answer is: 7'
+  K3_dual_thr0.9_int8      ok=True  steps=  69 up=  17.52 MB edge=   422 ms cloud=  2392 ms 'l eat 84 / 12 = 7 dozens of eggs.\nThe answer is: 7'
+  R1_dual_thr0.9_reuse     ok=True  steps=  69 up=  18.67 MB edge=   408 ms cloud=  2336 ms =K2 'l eat 84 / 12 = 7 dozens of eggs.\nThe answer is: 7'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  68 up=  24.31 MB edge=   433 ms cloud=  2415 ms =K2 'l eat 84 / 12 = 7 dozens of eggs.\nThe answer is: 7'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  70 up=  10.97 MB edge=   446 ms cloud=  2489 ms =K2 'l eat 84 / 12 = 7 dozens of eggs.\nThe answer is: 7'
+
+gsm8k_0019 | prompt tokens=99
+  F0_nocache_fixed         ok=True  steps= 256 up= 651.43 MB edge=  2131 ms cloud= 13649 ms 'peed of 6 / 1 = 6 miles per hour.\nThe answer is: 6'
+  K2_dual_thr0.9           ok=True  steps=  77 up=  36.19 MB edge=   492 ms cloud=  2737 ms ' of 6 / 1 = 6 miles per hour.\nThe final answer: 6.'
+  K3_dual_thr0.9_int8      ok=True  steps=  74 up=  19.26 MB edge=   473 ms cloud=  2636 ms ' of 6 / 1 = 6 miles per hour.\nThe final answer: 6.'
+  R1_dual_thr0.9_reuse     ok=False steps= 103 up=  26.24 MB edge=   655 ms cloud=  3621 ms '/ 0.5 hours = 12 miles per hour.\nThe answer is: 12'
+  R2_dual_thr0.9_reuse_r2  ok=False steps=  71 up=  26.03 MB edge=   438 ms cloud=  2485 ms '6 miles / 1.5 = 4 miles per hour.\nThe answer is: 4'
+  R3_dual_thr0.9_reuse_int8 ok=False steps= 103 up=  14.76 MB edge=   616 ms cloud=  3480 ms '/ 0.5 hours = 12 miles per hour.\nThe answer is: 12'
+
+gsm8k_0020 | prompt tokens=97
+  F0_nocache_fixed         ok=True  steps= 256 up= 647.76 MB edge=  2107 ms cloud= 13744 ms 'emaining 24 liters is 15 liters.\nThe answer is: 15'
+  K2_dual_thr0.9           ok=False steps= 101 up=  41.58 MB edge=   597 ms cloud=  7516 ms 'ng 24 liters is 14.67 liters.\nThe answer is: 14.67'
+  K3_dual_thr0.9_int8      ok=False steps=  81 up=  20.00 MB edge=   484 ms cloud=  4151 ms 'ng 24 liters is 15.67 liters.\nThe answer is: 15.67'
+  R1_dual_thr0.9_reuse     ok=False steps=  81 up=  21.23 MB edge=   479 ms cloud=  6029 ms 's is 5.67 + 9 = 14.67 liters.\nThe answer is: 14.67'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  82 up=  28.27 MB edge=   484 ms cloud=  3085 ms 'ng amount of water is 15 liters.\nThe answer is: 15'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  84 up=  12.58 MB edge=   533 ms cloud=  2978 ms 'ter is 15.67 - 0.67 = 15 liters.\nThe answer is: 15'
+
+gsm8k_0021 | prompt tokens=80
+  F0_nocache_fixed         ok=False steps= 256 up= 616.57 MB edge=  2054 ms cloud= 13395 ms ' was born 25 - 23 = 2 years ago.\nThe answer is: 2.'
+  K2_dual_thr0.9           ok=False steps=  52 up=  29.36 MB edge=   319 ms cloud=  1820 ms 'n was born 25 - 23 = 2 years ago.\nThe answer is: 2'
+  K3_dual_thr0.9_int8      ok=False steps=  48 up=  15.55 MB edge=   293 ms cloud=  1682 ms "ymond's son was born 2 years ago.\nThe answer is: 2"
+  R1_dual_thr0.9_reuse     ok=False steps=  51 up=  14.85 MB edge=   307 ms cloud=  1767 ms "ymond's son was born 2 years ago.\nThe answer is: 2"
+  R2_dual_thr0.9_reuse_r2  ok=False steps=  51 up=  20.92 MB edge=   302 ms cloud=  1736 ms =K2 'n was born 25 - 23 = 2 years ago.\nThe answer is: 2'
+  R3_dual_thr0.9_reuse_int8 ok=False steps=  53 up=   9.01 MB edge=   310 ms cloud=  1797 ms "ymond's son was born 2 years ago.\nThe answer is: 2"
+
+gsm8k_0022 | prompt tokens=89
+  F0_nocache_fixed         ok=True  steps= 256 up= 633.08 MB edge=  2070 ms cloud= 13511 ms 'lly sells 3 + 4 + 0 = 7 DVDs.\nThe final answer: 7.'
+  K2_dual_thr0.9           ok=True  steps=  47 up=  28.73 MB edge=   281 ms cloud=  1628 ms '4 + 0 = 7 DVDs on Tuesday.\n#### 7\nThe answer is: 7'
+  K3_dual_thr0.9_int8      ok=True  steps=  47 up=  15.72 MB edge=   279 ms cloud=  1617 ms '4 + 0 = 7 DVDs on Tuesday.\n#### 7\nThe answer is: 7'
+  R1_dual_thr0.9_reuse     ok=True  steps=  46 up=  13.56 MB edge=   278 ms cloud=  1598 ms =K2 '4 + 0 = 7 DVDs on Tuesday.\n#### 7\nThe answer is: 7'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  47 up=  20.22 MB edge=   284 ms cloud=  1646 ms =K2 '4 + 0 = 7 DVDs on Tuesday.\n#### 7\nThe answer is: 7'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  46 up=   8.14 MB edge=   277 ms cloud=  1598 ms =K2 '4 + 0 = 7 DVDs on Tuesday.\n#### 7\nThe answer is: 7'
+
+gsm8k_0023 | prompt tokens=74
+  F0_nocache_fixed         ok=True  steps= 256 up= 605.56 MB edge=  2039 ms cloud= 13330 ms ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  K2_dual_thr0.9           ok=True  steps=  51 up=  28.79 MB edge=   309 ms cloud=  1772 ms ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  K3_dual_thr0.9_int8      ok=True  steps=  53 up=  15.93 MB edge=   314 ms cloud=  1806 ms 'horter after burning for 4 hours.\nThe answer is: 8'
+  R1_dual_thr0.9_reuse     ok=True  steps=  54 up=  15.45 MB edge=   321 ms cloud=  1849 ms ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  54 up=  21.40 MB edge=   325 ms cloud=  1860 ms ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  57 up=   9.38 MB edge=   346 ms cloud=  1964 ms 'horter after burning for 4 hours.\nThe answer is: 8'
+
+gsm8k_0024 | prompt tokens=73
+  F0_nocache_fixed         ok=True  steps= 256 up= 603.72 MB edge=  2043 ms cloud= 13312 ms ' 0.75: x = 19.50 / 0.75.\nx = 26.\nThe answer is: 26'
+  K2_dual_thr0.9           ok=True  steps=  85 up=  36.53 MB edge=   505 ms cloud=  2869 ms 'iginal price of the book is $26.\nThe answer is: 26'
+  K3_dual_thr0.9_int8      ok=True  steps=  84 up=  19.57 MB edge=   494 ms cloud=  2802 ms 'iginal price of the book is $26.\nThe answer is: 26'
+  R1_dual_thr0.9_reuse     ok=True  steps=  80 up=  21.20 MB edge=   484 ms cloud=  2723 ms 'ginal price of the book was $26.\nThe answer is: 26'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  80 up=  27.33 MB edge=   483 ms cloud=  2702 ms 'ginal price of the book was $26.\nThe answer is: 26'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  77 up=  11.66 MB edge=   456 ms cloud=  2603 ms 'ginal price of the book was $26.\nThe answer is: 26'
+
+gsm8k_0025 | prompt tokens=102
+  F0_nocache_fixed         ok=True  steps= 256 up= 656.94 MB edge=  2131 ms cloud= 13708 ms ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  K2_dual_thr0.9           ok=True  steps=  70 up=  34.75 MB edge=   448 ms cloud=  2496 ms ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  K3_dual_thr0.9_int8      ok=True  steps=  70 up=  18.90 MB edge=   446 ms cloud=  2502 ms ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  R1_dual_thr0.9_reuse     ok=True  steps=  72 up=  19.20 MB edge=   459 ms cloud=  2564 ms =K2 ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  69 up=  25.44 MB edge=   428 ms cloud=  2415 ms =K2 ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  72 up=  11.12 MB edge=   454 ms cloud=  2556 ms =K2 ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+
+gsm8k_0026 | prompt tokens=103
+  F0_nocache_fixed         ok=True  steps= 256 up= 658.77 MB edge=  2135 ms cloud= 13703 ms '$49.50 + $67.50 + $126 = $243.\nThe answer is: 243.'
+  K2_dual_thr0.9           ok=True  steps=  45 up=  29.07 MB edge=   295 ms cloud=  1661 ms '$243 on all the clothing items.\nThe answer is: 243'
+  K3_dual_thr0.9_int8      ok=True  steps=  45 up=  15.95 MB edge=   288 ms cloud=  1641 ms '$243 on all the clothing items.\nThe answer is: 243'
+  R1_dual_thr0.9_reuse     ok=True  steps=  40 up=  12.07 MB edge=   253 ms cloud=  1489 ms ' $49.50 + $67.50 + $126 = $243.\nThe answer is: 243'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  46 up=  20.24 MB edge=   291 ms cloud=  1652 ms =K2 '$243 on all the clothing items.\nThe answer is: 243'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  40 up=   7.44 MB edge=   255 ms cloud=  1465 ms ' $49.50 + $67.50 + $126 = $243.\nThe answer is: 243'
+
+gsm8k_0027 | prompt tokens=93
+  F0_nocache_fixed         ok=True  steps= 256 up= 640.42 MB edge=  2097 ms cloud= 13569 ms ' will spend $16.00 on ice cream.\nThe answer is: 16'
+  K2_dual_thr0.9           ok=True  steps=  58 up=  31.48 MB edge=   376 ms cloud=  2154 ms '4 * $4.00 = $16.00 on ice cream.\nThe answer is: 16'
+  K3_dual_thr0.9_int8      ok=True  steps=  59 up=  18.37 MB edge=   354 ms cloud=  2029 ms '4 * $4.00 = $16.00 on ice cream.\nThe answer is: 16'
+  R1_dual_thr0.9_reuse     ok=True  steps=  59 up=  16.55 MB edge=   374 ms cloud=  2151 ms '0 = $16.00 on ice cream.\n#### 16\nThe answer is: 16'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  58 up=  22.87 MB edge=   354 ms cloud=  2019 ms =K2 '4 * $4.00 = $16.00 on ice cream.\nThe answer is: 16'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  60 up=   9.76 MB edge=   400 ms cloud=  2165 ms '0 = $16.00 on ice cream.\n#### 16\nThe answer is: 16'
+
+gsm8k_0028 | prompt tokens=84
+  F0_nocache_fixed         ok=True  steps= 256 up= 623.91 MB edge=  2089 ms cloud= 13448 ms 'ond stops is 45 - 20 = 25 miles.\nThe answer is: 25'
+  K2_dual_thr0.9           ok=True  steps=  63 up=  32.11 MB edge=   386 ms cloud=  2197 ms 'ween his first and second stops.\nThe answer is: 25'
+  K3_dual_thr0.9_int8      ok=True  steps=  65 up=  17.74 MB edge=   401 ms cloud=  2263 ms 'ween his first and second stops.\nThe answer is: 25'
+  R1_dual_thr0.9_reuse     ok=True  steps=  59 up=  16.50 MB edge=   359 ms cloud=  2046 ms =K2 'ween his first and second stops.\nThe answer is: 25'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  60 up=  23.11 MB edge=   381 ms cloud=  2134 ms =K2 'ween his first and second stops.\nThe answer is: 25'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  62 up=   9.93 MB edge=   385 ms cloud=  2183 ms =K2 'ween his first and second stops.\nThe answer is: 25'
+
+gsm8k_0029 | prompt tokens=103
+  F0_nocache_fixed         ok=True  steps= 256 up= 658.77 MB edge=  2121 ms cloud= 13708 ms ' of the boots is $104.\n#### 104\nThe answer is: 104'
+  K2_dual_thr0.9           ok=True  steps=  96 up=  40.77 MB edge=   587 ms cloud=  3305 ms 'Therefore, the boots cost $104.\nThe answer is: 104'
+  K3_dual_thr0.9_int8      ok=True  steps=  96 up=  21.91 MB edge=   609 ms cloud=  3394 ms 'Therefore, the boots cost $104.\nThe answer is: 104'
+  R1_dual_thr0.9_reuse     ok=True  steps=  95 up=  24.65 MB edge=   603 ms cloud=  3350 ms ', the boots cost $104.\n#### 104\nThe answer is: 104'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  97 up=  31.91 MB edge=   617 ms cloud=  3425 ms =K2 'Therefore, the boots cost $104.\nThe answer is: 104'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  94 up=  13.74 MB edge=   603 ms cloud=  3346 ms 'Therefore, the boots cost $104.\nThe answer is: 104'
+
+Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_dream_gsm8k_k4_t256_b32_reuse
+                  variant  runs      acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms  mean_block_start_mb  same_as_cache_ref  regressions_vs_cache_ref  improvements_vs_cache_ref  mcnemar_p_vs_cache_ref
+         F0_nocache_fixed    30 0.800000            0             0     1.0000  256.000000  641.339392             0.000000   2156.297558   13974.972394           641.339392                  0                         2                          2                     1.0
+           K2_dual_thr0.9    30 0.800000            2             2     1.0000   74.466667   35.288778             0.945118    460.331773    2837.019355            20.041856                 30                         0                          0                     1.0
+      K3_dual_thr0.9_int8    30 0.800000            2             2     1.0000   72.000000   18.941727             0.970532    446.086055    2661.047460            11.405535                 19                         0                          0                     1.0
+     R1_dual_thr0.9_reuse    30 0.733333            4             2     0.6875   72.866667   19.619140             0.969519    449.512476    2896.180451             4.739246                 10                         2                          0                     0.5
+  R2_dual_thr0.9_reuse_r2    30 0.800000            2             2     1.0000   73.166667   26.260598             0.959179    451.019668    2616.867456            11.311886                 21                         1                          1                     1.0
+R3_dual_thr0.9_reuse_int8    30 0.766667            3             2     1.0000   72.066667   11.184259             0.982612    447.773288    2617.978723             3.667162                  9                         2                          1                     1.0
+
+Emulated split latency (s), RTT 20 ms, edge 3x slower:
+bandwidth_mbps               1       5      10     25     50    100   1000
+variant                                                                   
+F0_nocache_fixed           5156.6  1052.0  539.0  231.1  128.5  77.2  31.0
+K2_dual_thr0.9              288.1    62.2   34.0   17.1   11.4   8.6   6.1
+K3_dual_thr0.9_int8         157.1    35.8   20.7   11.6    8.5   7.0   5.7
+R1_dual_thr0.9_reuse        162.8    37.2   21.5   12.1    8.9   7.4   5.9
+R2_dual_thr0.9_reuse_r2     215.6    47.5   26.5   13.9    9.7   7.6   5.7
+R3_dual_thr0.9_reuse_int8    95.0    23.4   14.4    9.1    7.3   6.4   5.6
+
+Cloud-only with the same cache and decoding (s):
+variant
+F0_nocache_fixed             16.48
+K2_dual_thr0.9                3.38
+K3_dual_thr0.9_int8           3.19
+R1_dual_thr0.9_reuse          3.44
+R2_dual_thr0.9_reuse_r2       3.14
+R3_dual_thr0.9_reuse_int8     3.14
+
+=== 2/3 Dream, long prompts  (2026-11-24 22:16:01)
+{'EXP13_MODEL': 'dream', 'EXP13_DATASET': 'authored', 'EXP13_N_QUESTIONS': 12, 'EXP13_NEW_TOKENS': 128, 'EXP13_OUTPUT_TAG': '_reuse', 'EXP13_VARIANT_NAMES': ['F0_nocache_fixed', 'K2_dual_thr0.9', 'K3_dual_thr0.9_int8', 'R1_dual_thr0.9_reuse', 'R2_dual_thr0.9_reuse_r2', 'R3_dual_thr0.9_reuse_int8']}
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  8.13it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.01it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.16it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.36it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.32it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=66.9 W, cloud=88.4 W
+Exp13 | dream | authored n=12 | split after layer 4 | 128 tokens, blocks of 32 | thresholds [0.9] | T=0.0 top_p=None
+warmup done
+
+library_factual | prompt tokens=849
+  F0_nocache_fixed         ok=True  steps= 128 up= 896.40 MB edge=  2616 ms cloud= 23066 ms 'Mara Chen'
+  K2_dual_thr0.9           ok=True  steps=   8 up=  28.93 MB edge=   105 ms cloud=   943 ms 'Mara Chen'
+  K3_dual_thr0.9_int8      ok=True  steps=   8 up=  17.97 MB edge=   113 ms cloud=   688 ms 'Mara Chen'
+  R1_dual_thr0.9_reuse     ok=True  steps=   8 up=   9.28 MB edge=   107 ms cloud=   681 ms =K2 'Mara Chen'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=   8 up=  15.83 MB edge=   107 ms cloud=   672 ms =K2 'Mara Chen'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=   8 up=   8.14 MB edge=   106 ms cloud=   681 ms =K2 'Mara Chen'
+
+library_math | prompt tokens=864
+  F0_nocache_fixed         ok=True  steps= 128 up= 910.17 MB edge=  2631 ms cloud= 17622 ms 'klog after six days are 1,320 - 840 = 480 records.'
+  K2_dual_thr0.9           ok=True  steps=  72 up=  44.04 MB edge=   477 ms cloud=  2735 ms 'klog of 1,320 records gives 480 records remaining.'
+  K3_dual_thr0.9_int8      ok=True  steps=  71 up=  25.70 MB edge=   491 ms cloud=  2783 ms 'klog of 1,320 records gives 480 records remaining.'
+  R1_dual_thr0.9_reuse     ok=True  steps=  72 up=  23.44 MB edge=   499 ms cloud=  2815 ms =K2 'klog of 1,320 records gives 480 records remaining.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  72 up=  30.31 MB edge=   487 ms cloud=  2872 ms =K2 'klog of 1,320 records gives 480 records remaining.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  74 up=  15.74 MB edge=   538 ms cloud=  5204 ms 'g of 1,320 records gives us 480 records remaining.'
+
+library_instruction | prompt tokens=862
+  F0_nocache_fixed         ok=True  steps= 128 up= 908.33 MB edge=  2637 ms cloud= 23639 ms 'ying document. Report any uncertain content found.'
+  K2_dual_thr0.9           ok=True  steps=  79 up=  45.59 MB edge=   530 ms cloud=  4452 ms " uncertain cases for the records officer's review."
+  K3_dual_thr0.9_int8      ok=True  steps=  75 up=  26.12 MB edge=   517 ms cloud=  6086 ms 'd escalate uncertain cases to the records officer.'
+  R1_dual_thr0.9_reuse     ok=True  steps=  80 up=  25.26 MB edge=   554 ms cloud=  6297 ms =K2 " uncertain cases for the records officer's review."
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  79 up=  31.88 MB edge=   548 ms cloud=  5130 ms =K2 " uncertain cases for the records officer's review."
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  82 up=  16.64 MB edge=   564 ms cloud=  6640 ms 'd escalate uncertain cases to the records officer.'
+
+sensors_factual | prompt tokens=726
+  F0_nocache_fixed         ok=True  steps= 128 up= 783.55 MB edge=  2357 ms cloud= 21061 ms 'Every 14 days'
+  K2_dual_thr0.9           ok=True  steps=  10 up=  25.86 MB edge=   110 ms cloud=   888 ms 'duled field inspection is performed every 14 days.'
+  K3_dual_thr0.9_int8      ok=True  steps=  10 up=  16.00 MB edge=   111 ms cloud=   688 ms 'duled field inspection is performed every 14 days.'
+  R1_dual_thr0.9_reuse     ok=True  steps=  10 up=   8.66 MB edge=   110 ms cloud=   910 ms =K2 'duled field inspection is performed every 14 days.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  10 up=  14.33 MB edge=   109 ms cloud=  1094 ms =K2 'duled field inspection is performed every 14 days.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  10 up=   7.39 MB edge=   109 ms cloud=  1100 ms =K2 'duled field inspection is performed every 14 days.'
+
+sensors_math | prompt tokens=731
+  F0_nocache_fixed         ok=True  steps= 128 up= 788.14 MB edge=  2364 ms cloud= 21044 ms 'a total of 1200 original readings over five hours.'
+  K2_dual_thr0.9           ok=True  steps=  83 up=  42.75 MB edge=   564 ms cloud=  6798 ms 've sensors transmit 1200 readings over five hours.'
+  K3_dual_thr0.9_int8      ok=True  steps=  85 up=  27.89 MB edge=   572 ms cloud=  5097 ms 's:\n30 readings/sensor * 40 sensors = 1200 readings'
+  R1_dual_thr0.9_reuse     ok=True  steps=  76 up=  23.40 MB edge=   495 ms cloud=  5999 ms 'urs: 240 readings/hour * 5 hours = 1,200 readings.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  79 up=  30.00 MB edge=   540 ms cloud=  6157 ms '240 readings/hour * 5 hours = \n\n**1200** readings.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  79 up=  15.35 MB edge=   512 ms cloud=  6223 ms 'adings/sensor * 40 active sensors = 1200 readings.'
+
+sensors_instruction | prompt tokens=736
+  F0_nocache_fixed         ok=True  steps= 128 up= 792.73 MB edge=  2376 ms cloud= 20512 ms "vel when safe to collect, and the reporter's name."
+  K2_dual_thr0.9           ok=True  steps=  39 up=  32.80 MB edge=   295 ms cloud=  3144 ms "vel when safe to collect, and the reporter's name."
+  K3_dual_thr0.9_int8      ok=True  steps=  39 up=  19.62 MB edge=   271 ms cloud=  3007 ms "vel when safe to collect, and the reporter's name."
+  R1_dual_thr0.9_reuse     ok=True  steps=  38 up=  14.83 MB edge=   279 ms cloud=  3213 ms "es according to the city's existing incident plan."
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  39 up=  20.91 MB edge=   276 ms cloud=  3283 ms =K2 "vel when safe to collect, and the reporter's name."
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  38 up=  10.63 MB edge=   263 ms cloud=  3109 ms "es according to the city's existing incident plan."
+
+clinic_factual | prompt tokens=666
+  F0_nocache_fixed         ok=True  steps= 128 up= 728.50 MB edge=  2287 ms cloud= 19808 ms '140'
+  K2_dual_thr0.9           ok=True  steps=   8 up=  23.68 MB edge=    96 ms cloud=   940 ms '140'
+  K3_dual_thr0.9_int8      ok=True  steps=   8 up=  14.69 MB edge=    99 ms cloud=   911 ms '140'
+  R1_dual_thr0.9_reuse     ok=True  steps=   8 up=   7.96 MB edge=    95 ms cloud=   942 ms =K2 '140'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=   8 up=  13.20 MB edge=    95 ms cloud=   953 ms =K2 '140'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=   8 up=   6.83 MB edge=    94 ms cloud=   909 ms =K2 '140'
+
+clinic_math | prompt tokens=673
+  F0_nocache_fixed         ok=True  steps= 128 up= 734.92 MB edge=  2294 ms cloud= 19685 ms 'ing 360 - 40 = 320 doses for patient appointments.'
+  K2_dual_thr0.9           ok=True  steps=  43 up=  31.91 MB edge=   315 ms cloud=  3414 ms 'ing 360 - 40 = 320 doses for patient appointments.'
+  K3_dual_thr0.9_int8      ok=True  steps=  42 up=  18.83 MB edge=   309 ms cloud=  3450 ms 'ing 360 - 40 = 320 doses for patient appointments.'
+  R1_dual_thr0.9_reuse     ok=False steps=  51 up=  17.50 MB edge=   365 ms cloud=  3771 ms 'es per box, making a total of 15 * 24 = 360 doses.'
+  R2_dual_thr0.9_reuse_r2  ok=False steps=  51 up=  22.96 MB edge=   364 ms cloud=  3231 ms 'es per box, making a total of 15 * 24 = 360 doses.'
+  R3_dual_thr0.9_reuse_int8 ok=False steps=  50 up=  11.62 MB edge=   361 ms cloud=  4159 ms 'es per box, making a total of 15 * 24 = 360 doses.'
+
+clinic_instruction | prompt tokens=671
+  F0_nocache_fixed         ok=True  steps= 128 up= 733.09 MB edge=  2280 ms cloud= 19738 ms 'ritize a particular lot following a safety notice.'
+  K2_dual_thr0.9           ok=True  steps=  60 up=  35.75 MB edge=   416 ms cloud=  4813 ms 'es to ensure they are within the acceptable range.'
+  K3_dual_thr0.9_int8      ok=True  steps=  60 up=  20.86 MB edge=   402 ms cloud=  4698 ms ' received supplies to ensure they are still valid.'
+  R1_dual_thr0.9_reuse     ok=False steps=  66 up=  20.88 MB edge=   440 ms cloud=  5137 ms ' that each lot is separately tracked and recorded.'
+  R2_dual_thr0.9_reuse_r2  ok=False steps=  66 up=  26.37 MB edge=   447 ms cloud=  5204 ms ' that each lot is separately tracked and recorded.'
+  R3_dual_thr0.9_reuse_int8 ok=False steps=  66 up=  13.65 MB edge=   444 ms cloud=  3458 ms ' that each lot is separately tracked and recorded.'
+
+transit_factual | prompt tokens=678
+  F0_nocache_fixed         ok=True  steps= 128 up= 739.51 MB edge=  2289 ms cloud= 20317 ms '23 November 2026'
+  K2_dual_thr0.9           ok=True  steps=  11 up=  24.72 MB edge=   111 ms cloud=  1155 ms 'The rider feedback deadline is 23 November 2026.'
+  K3_dual_thr0.9_int8      ok=True  steps=  11 up=  15.25 MB edge=   112 ms cloud=  1104 ms 'The rider feedback deadline is 23 November 2026.'
+  R1_dual_thr0.9_reuse     ok=True  steps=  11 up=   8.54 MB edge=   119 ms cloud=  1192 ms =K2 'The rider feedback deadline is 23 November 2026.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  11 up=  13.87 MB edge=   113 ms cloud=  1164 ms =K2 'The rider feedback deadline is 23 November 2026.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  11 up=   7.16 MB edge=   113 ms cloud=  1164 ms =K2 'The rider feedback deadline is 23 November 2026.'
+
+transit_math | prompt tokens=687
+  F0_nocache_fixed         ok=False steps= 128 up= 747.77 MB edge=  2304 ms cloud= 19860 ms 'erefore, each bus operates 5 * 18 = 90 kilometres.'
+  K2_dual_thr0.9           ok=True  steps=  51 up=  34.15 MB edge=   372 ms cloud=  4093 ms 'tance operated by all seven buses is 7 * 90 = 630.'
+  K3_dual_thr0.9_int8      ok=True  steps=  51 up=  20.12 MB edge=   373 ms cloud=  4132 ms 'tance operated by all seven buses is 7 * 90 = 630.'
+  R1_dual_thr0.9_reuse     ok=True  steps=  51 up=  17.56 MB edge=   363 ms cloud=  4173 ms =K2 'tance operated by all seven buses is 7 * 90 = 630.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  51 up=  23.16 MB edge=   357 ms cloud=  3288 ms =K2 'tance operated by all seven buses is 7 * 90 = 630.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  51 up=  11.82 MB edge=   348 ms cloud=  3554 ms =K2 'tance operated by all seven buses is 7 * 90 = 630.'
+
+transit_instruction | prompt tokens=695
+  F0_nocache_fixed         ok=True  steps= 128 up= 755.11 MB edge=  2313 ms cloud= 20510 ms 'rt contact information] during service-desk hours.'
+  K2_dual_thr0.9           ok=True  steps=  72 up=  39.20 MB edge=   484 ms cloud=  5923 ms 'he latest information about boarding arrangements.'
+  K3_dual_thr0.9_int8      ok=True  steps=  73 up=  25.73 MB edge=   487 ms cloud=  5903 ms 'he latest information about boarding arrangements.'
+  R1_dual_thr0.9_reuse     ok=False steps=  68 up=  21.51 MB edge=   466 ms cloud=  3689 ms 'e service desk can provide the latest information.'
+  R2_dual_thr0.9_reuse_r2  ok=False steps=  68 up=  27.17 MB edge=   447 ms cloud=  5378 ms 'e service desk can provide the latest information.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  83 up=  15.56 MB edge=   551 ms cloud=  6605 ms 'rm.\n3. Contact the service desk at 1-800-BUS-HELP.'
+
+Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_dream_authored_k4_t128_b32_reuse
+                  variant  runs      acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms  mean_block_start_mb  same_as_cache_ref  regressions_vs_cache_ref  improvements_vs_cache_ref  mcnemar_p_vs_cache_ref
+         F0_nocache_fixed    12 0.916667            0             0      1.000  128.000000  793.184256             0.000000   2395.703247   20571.886854           793.184256                  0                         1                          0                    1.00
+           K2_dual_thr0.9    12 1.000000            0             1      1.000   44.666667   34.115616             0.957068    323.079754    3275.003507            24.787008                 12                         0                          0                    1.00
+      K3_dual_thr0.9_int8    12 1.000000            0             1      1.000   44.416667   20.733228             0.973878    321.354469    3212.070225            15.999168                  9                         0                          0                    1.00
+     R1_dual_thr0.9_reuse    12 0.750000            3             1      0.625   44.916667   16.569387             0.979157    324.472611    3234.702548             7.183431                  7                         3                          0                    0.25
+  R2_dual_thr0.9_reuse_r2    12 0.750000            3             1      0.625   45.166667   22.498902             0.971681    324.259234    3202.198522            13.055598                  8                         3                          0                    0.25
+R3_dual_thr0.9_reuse_int8    12 0.833333            2             1      1.000   46.666667   11.710943             0.985257    333.625957    3567.220749             6.709103                  5                         2                          0                    0.50
+
+Emulated split latency (s), RTT 20 ms, edge 3x slower:
+bandwidth_mbps               1       5      10     25     50    100   1000
+variant                                                                   
+F0_nocache_fixed           6376.7  1300.3  665.8  285.1  158.2  94.7  37.6
+K2_dual_thr0.9              278.2    59.9   32.6   16.2   10.7   8.0   5.5
+K3_dual_thr0.9_int8         171.1    38.4   21.8   11.8    8.5   6.9   5.4
+R1_dual_thr0.9_reuse        137.8    31.8   18.5   10.5    7.9   6.6   5.4
+R2_dual_thr0.9_reuse_r2     185.2    41.2   23.2   12.4    8.8   7.0   5.4
+R3_dual_thr0.9_reuse_int8    99.4    24.4   15.0    9.4    7.5   6.6   5.8
+
+Cloud-only with the same cache and decoding (s):
+variant
+F0_nocache_fixed             23.92
+K2_dual_thr0.9                3.75
+K3_dual_thr0.9_int8           3.67
+R1_dual_thr0.9_reuse          3.71
+R2_dual_thr0.9_reuse_r2       3.67
+R3_dual_thr0.9_reuse_int8     4.07
+
+=== 3/3 LLaDA, GSM8K  (2026-11-24 22:25:20)
+{'EXP13_MODEL': 'llada', 'EXP13_DATASET': 'gsm8k', 'EXP13_N_QUESTIONS': 30, 'EXP13_NEW_TOKENS': 256, 'EXP13_OUTPUT_TAG': '_reuse', 'EXP13_VARIANT_NAMES': ['F0_nocache_fixed', 'K2_dual_thr0.9', 'K3_dual_thr0.9_int8', 'R1_dual_thr0.9_reuse', 'R2_dual_thr0.9_reuse_r2', 'R3_dual_thr0.9_reuse_int8']}
+Loading checkpoint shards:   0%|          | 0/6 [00:00<?, ?it/s]Loading checkpoint shards:  17%|█▋        | 1/6 [00:00<00:00,  5.86it/s]Loading checkpoint shards:  33%|███▎      | 2/6 [00:00<00:00,  6.35it/s]Loading checkpoint shards:  50%|█████     | 3/6 [00:00<00:00,  6.32it/s]Loading checkpoint shards:  67%|██████▋   | 4/6 [00:00<00:00,  6.36it/s]Loading checkpoint shards:  83%|████████▎ | 5/6 [00:00<00:00,  6.09it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:01<00:00,  5.78it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:01<00:00,  5.99it/s]
+idle power: edge=66.2 W, cloud=269.7 W
+Exp13 | llada | gsm8k n=30 | split after layer 4 | 256 tokens, blocks of 32 | thresholds [0.9] | T=0.0 top_p=None
+warmup done
+
+gsm8k_0000 | prompt tokens=92
+  F0_nocache_fixed         ok=True  steps= 256 up= 729.81 MB edge=  2442 ms cloud= 17787 ms "#### Janet makes $18 daily at the farmers' market."
+  K2_dual_thr0.9           ok=True  steps= 102 up=  47.45 MB edge=   694 ms cloud=  4685 ms "et makes **$18** every day at the farmers' market."
+  K3_dual_thr0.9_int8      ok=True  steps= 104 up=  25.82 MB edge=   720 ms cloud=  4848 ms "et makes **$18** every day at the farmers' market."
+  R1_dual_thr0.9_reuse     ok=True  steps=  98 up=  28.38 MB edge=   660 ms cloud=  4397 ms "every day at the farmers' market.\n\n#### \\boxed{18}"
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  92 up=  34.56 MB edge=   633 ms cloud=  4204 ms "every day at the farmers' market.\n\n#### \\boxed{18}"
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  94 up=  15.36 MB edge=   678 ms cloud=  4600 ms "every day at the farmers' market.\n\n#### \\boxed{18}"
+
+gsm8k_0001 | prompt tokens=55
+  F0_nocache_fixed         ok=True  steps= 256 up= 652.22 MB edge=  2486 ms cloud= 17271 ms ' number of bolts required for the robe is 3.\n\n####'
+  K2_dual_thr0.9           ok=True  steps=  81 up=  39.52 MB edge=   581 ms cloud=  3814 ms 'al number of bolts needed for the robe is 3.\n\n####'
+  K3_dual_thr0.9_int8      ok=True  steps=  80 up=  22.32 MB edge=   555 ms cloud=  3697 ms 'al number of bolts needed for the robe is 3.\n\n####'
+  R1_dual_thr0.9_reuse     ok=True  steps=  81 up=  24.09 MB edge=   570 ms cloud=  3784 ms =K2 'al number of bolts needed for the robe is 3.\n\n####'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  80 up=  30.40 MB edge=   562 ms cloud=  3751 ms =K2 'al number of bolts needed for the robe is 3.\n\n####'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  80 up=  13.47 MB edge=   561 ms cloud=  3758 ms =K2 'al number of bolts needed for the robe is 3.\n\n####'
+
+gsm8k_0002 | prompt tokens=86
+  F0_nocache_fixed         ok=False steps= 256 up= 717.23 MB edge=  2452 ms cloud= 17673 ms ",000 = 120,000\\).\n\n#### Josh's profit is $120,000."
+  K2_dual_thr0.9           ok=False steps=  92 up=  44.43 MB edge=   646 ms cloud=  4307 ms "sh's profit from flipping the house is \\(90,000\\)."
+  K3_dual_thr0.9_int8      ok=False steps=  93 up=  24.02 MB edge=   651 ms cloud=  4359 ms "sh's profit from flipping the house is \\(90,000\\)."
+  R1_dual_thr0.9_reuse     ok=False steps= 100 up=  28.82 MB edge=   697 ms cloud=  4681 ms 'fit from flipping the house is \\(\\boxed{170000}\\).'
+  R2_dual_thr0.9_reuse_r2  ok=False steps=  82 up=  31.70 MB edge=   568 ms cloud=  3835 ms "00\\).\n\nThus, Josh's profit is \\(\\boxed{150,000}\\)."
+  R3_dual_thr0.9_reuse_int8 ok=False steps=  99 up=  16.08 MB edge=   677 ms cloud=  4545 ms 'fit from flipping the house is \\(\\boxed{170000}\\).'
+
+gsm8k_0003 | prompt tokens=64
+  F0_nocache_fixed         ok=True  steps= 256 up= 671.09 MB edge=  2412 ms cloud= 17319 ms '  \\]\n\nSo, James runs a total of 540 meters a week.'
+  K2_dual_thr0.9           ok=True  steps=  71 up=  37.49 MB edge=   498 ms cloud=  3340 ms '  \\]\n\nSo, James runs a total of 540 meters a week.'
+  K3_dual_thr0.9_int8      ok=True  steps=  70 up=  21.37 MB edge=   480 ms cloud=  3235 ms '  \\]\n\nSo, James runs a total of 540 meters a week.'
+  R1_dual_thr0.9_reuse     ok=True  steps=  73 up=  21.71 MB edge=   495 ms cloud=  3367 ms ']\n\nSo, James runs a total of 540 meters in a week.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  73 up=  28.61 MB edge=   511 ms cloud=  3451 ms =K2 '  \\]\n\nSo, James runs a total of 540 meters a week.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  74 up=  12.56 MB edge=   524 ms cloud=  3482 ms ']\n\nSo, James runs a total of 540 meters in a week.'
+
+gsm8k_0004 | prompt tokens=139
+  F0_nocache_fixed         ok=True  steps= 256 up= 828.38 MB edge=  2714 ms cloud= 20553 ms ' **20 cups** of feed in the final meal of the day.'
+  K2_dual_thr0.9           ok=True  steps=  85 up=  46.07 MB edge=   607 ms cloud=  4068 ms ' **20 cups** of feed in the final meal of the day.'
+  K3_dual_thr0.9_int8      ok=True  steps=  83 up=  24.67 MB edge=   596 ms cloud=  4003 ms ' **20 cups** of feed in the final meal of the day.'
+  R1_dual_thr0.9_reuse     ok=True  steps=  83 up=  24.96 MB edge=   595 ms cloud=  4003 ms =K2 ' **20 cups** of feed in the final meal of the day.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  83 up=  33.75 MB edge=   598 ms cloud=  4015 ms =K2 ' **20 cups** of feed in the final meal of the day.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  82 up=  14.24 MB edge=   591 ms cloud=  3981 ms =K2 ' **20 cups** of feed in the final meal of the day.'
+
+gsm8k_0005 | prompt tokens=85
+  F0_nocache_fixed         ok=False steps= 256 up= 715.13 MB edge=  2442 ms cloud= 17665 ms 'refore, Kylar needs to pay $64 for the 16 glasses.'
+  K2_dual_thr0.9           ok=True  steps= 118 up=  51.19 MB edge=   798 ms cloud=  5401 ms 'r 8 pairs is \\(8 \\times 8 = 64\\) dollars.\n\n#### 64'
+  K3_dual_thr0.9_int8      ok=True  steps= 120 up=  28.92 MB edge=   855 ms cloud=  5748 ms 'r 8 pairs is \\(8 \\times 8 = 64\\) dollars.\n\n#### 64'
+  R1_dual_thr0.9_reuse     ok=True  steps= 122 up=  34.57 MB edge=   859 ms cloud=  5660 ms '\\]\n\nSo, Kylar needs to pay **64** for the glasses.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps= 121 up=  41.89 MB edge=   822 ms cloud=  5513 ms =K2 'r 8 pairs is \\(8 \\times 8 = 64\\) dollars.\n\n#### 64'
+  R3_dual_thr0.9_reuse_int8 ok=False steps= 108 up=  17.27 MB edge=   774 ms cloud=  5135 ms 'ar needs to pay \\boxed{64} dollars for 16 glasses.'
+
+gsm8k_0006 | prompt tokens=72
+  F0_nocache_fixed         ok=True  steps= 256 up= 687.87 MB edge=  2406 ms cloud= 17383 ms 'use, Charleston, and Seattle have together is 260.'
+  K2_dual_thr0.9           ok=True  steps=  61 up=  35.39 MB edge=   435 ms cloud=  2905 ms 'le have together is \\( 260 \\).\n\n####\n\\boxed{260}\\)'
+  K3_dual_thr0.9_int8      ok=True  steps=  61 up=  19.18 MB edge=   438 ms cloud=  2925 ms 'le have together is \\( 260 \\).\n\n####\n\\boxed{260}\\)'
+  R1_dual_thr0.9_reuse     ok=True  steps=  62 up=  19.14 MB edge=   443 ms cloud=  2967 ms 'use, Charleston, and Seattle have together is 260.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  60 up=  25.54 MB edge=   429 ms cloud=  2877 ms =K2 'le have together is \\( 260 \\).\n\n####\n\\boxed{260}\\)'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  63 up=  11.23 MB edge=   450 ms cloud=  3024 ms 'use, Charleston, and Seattle have together is 260.'
+
+gsm8k_0007 | prompt tokens=99
+  F0_nocache_fixed         ok=False steps= 256 up= 744.49 MB edge=  2456 ms cloud= 22390 ms '120 minutes\n\n#### The final answer is 120 minutes.'
+  K2_dual_thr0.9           ok=False steps=  84 up=  43.19 MB edge=   607 ms cloud=  8909 ms 'utes\n\n#### The total download time is 120 minutes.'
+  K3_dual_thr0.9_int8      ok=False steps=  92 up=  24.37 MB edge=   657 ms cloud=  9730 ms 'download time to complete the file is 120 minutes.'
+  R1_dual_thr0.9_reuse     ok=False steps=  93 up=  27.08 MB edge=   644 ms cloud=  9890 ms 'answer: It takes 120 minutes to download the file.'
+  R2_dual_thr0.9_reuse_r2  ok=False steps=  83 up=  32.38 MB edge=   601 ms cloud=  9213 ms =K2 'utes\n\n#### The total download time is 120 minutes.'
+  R3_dual_thr0.9_reuse_int8 ok=False steps=  92 up=  15.13 MB edge=   639 ms cloud= 10030 ms ' Answer\nIt takes 120 minutes to download the file.'
+
+gsm8k_0008 | prompt tokens=133
+  F0_nocache_fixed         ok=False steps= 256 up= 815.80 MB edge=  2727 ms cloud= 27310 ms ' the 4 hours, John is \\boxed{275} miles from home.'
+  K2_dual_thr0.9           ok=False steps=  76 up=  43.32 MB edge=   537 ms cloud=  7741 ms 'iles from home at the end of the 4 hours.\n\n####275'
+  K3_dual_thr0.9_int8      ok=False steps=  74 up=  23.26 MB edge=   524 ms cloud=  7917 ms 'iles from home at the end of the 4 hours.\n\n####275'
+  R1_dual_thr0.9_reuse     ok=False steps=  77 up=  23.26 MB edge=   560 ms cloud=  8705 ms =K2 'iles from home at the end of the 4 hours.\n\n####275'
+  R2_dual_thr0.9_reuse_r2  ok=False steps=  75 up=  31.43 MB edge=   536 ms cloud=  7967 ms =K2 'iles from home at the end of the 4 hours.\n\n####275'
+  R3_dual_thr0.9_reuse_int8 ok=False steps=  77 up=  13.49 MB edge=   600 ms cloud=  8530 ms 'iles from home at the end of the 4 hours.\n\n####275'
+
+gsm8k_0009 | prompt tokens=88
+  F0_nocache_fixed         ok=True  steps= 256 up= 721.42 MB edge=  2466 ms cloud= 24611 ms 'r this week are $460.\n\n#### Final Answer: **$460**'
+  K2_dual_thr0.9           ok=True  steps=  99 up=  46.40 MB edge=   691 ms cloud=  8678 ms "herefore, Eliza's earnings for this week are $460."
+  K3_dual_thr0.9_int8      ok=True  steps=  99 up=  25.01 MB edge=   691 ms cloud= 10557 ms "herefore, Eliza's earnings for this week are $460."
+  R1_dual_thr0.9_reuse     ok=True  steps=  96 up=  27.88 MB edge=   679 ms cloud= 10105 ms "herefore, Eliza's earnings for this week are $460."
+  R2_dual_thr0.9_reuse_r2  ok=True  steps= 102 up=  37.02 MB edge=   715 ms cloud= 10786 ms "herefore, Eliza's earnings for this week are $460."
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  99 up=  16.13 MB edge=   678 ms cloud=  8524 ms "herefore, Eliza's earnings for this week are $460."
+
+gsm8k_0010 | prompt tokens=89
+  F0_nocache_fixed         ok=True  steps= 256 up= 723.52 MB edge=  2450 ms cloud= 24316 ms ' months is 366.\n\n#### Final Answer: 366 downloads.'
+  K2_dual_thr0.9           ok=True  steps=  80 up=  41.49 MB edge=   571 ms cloud=  8134 ms 'over the three months is \\( 366 \\) downloads. ####'
+  K3_dual_thr0.9_int8      ok=True  steps=  75 up=  23.05 MB edge=   526 ms cloud=  7749 ms 'r of downloads over the three months is \\( 366 \\).'
+  R1_dual_thr0.9_reuse     ok=True  steps=  82 up=  24.15 MB edge=   581 ms cloud=  8717 ms 'ds over the three months is 366.\n\n#### Answer: 366'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  79 up=  31.09 MB edge=   558 ms cloud=  8358 ms =K2 'over the three months is \\( 366 \\) downloads. ####'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  74 up=  12.80 MB edge=   529 ms cloud=  7831 ms 'r of downloads over the three months is \\( 366 \\).'
+
+gsm8k_0011 | prompt tokens=91
+  F0_nocache_fixed         ok=True  steps= 256 up= 727.72 MB edge=  2470 ms cloud= 23832 ms 'fore, the total cost of the pastries is \\( 694 \\).'
+  K2_dual_thr0.9           ok=True  steps=  52 up=  34.28 MB edge=   376 ms cloud=  5806 ms 'Therefore, the total cost of the pastries is $694.'
+  K3_dual_thr0.9_int8      ok=True  steps=  52 up=  18.70 MB edge=   365 ms cloud=  5262 ms 'Therefore, the total cost of the pastries is $694.'
+  R1_dual_thr0.9_reuse     ok=False steps=  53 up=  17.34 MB edge=   386 ms cloud=  5643 ms ' 204 + 160 + 330 = 794 \\]\n\nThe total cost is $794.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  54 up=  24.77 MB edge=   393 ms cloud=  5913 ms ' 204 + 160 + 330 = 694 \\]\n\nThe total cost is $694.'
+  R3_dual_thr0.9_reuse_int8 ok=False steps=  56 up=  10.62 MB edge=   409 ms cloud=  6027 ms ' 204 + 160 + 330 = 794 \\]\n\nThe total cost is $794.'
+
+gsm8k_0012 | prompt tokens=96
+  F0_nocache_fixed         ok=False steps= 256 up= 738.20 MB edge=  2484 ms cloud= 24496 ms 'rt earning money on the lemon tree after 12 years.'
+  K2_dual_thr0.9           ok=False steps= 108 up=  49.28 MB edge=   763 ms cloud= 11787 ms 's needed = $90 / $7.50 = 12 years\n\n#### \\boxed{12}'
+  K3_dual_thr0.9_int8      ok=False steps= 108 up=  26.49 MB edge=   760 ms cloud= 11992 ms 's needed = $90 / $7.50 = 12 years\n\n#### \\boxed{12}'
+  R1_dual_thr0.9_reuse     ok=False steps= 104 up=  29.96 MB edge=   771 ms cloud= 11925 ms 'e lemon tree.\n\n#### Final Answer: \\( \\boxed{12} \\)'
+  R2_dual_thr0.9_reuse_r2  ok=False steps= 106 up=  38.31 MB edge=   742 ms cloud= 10674 ms 'on tree.\n\n#### The final answer is \\(\\boxed{12}\\).'
+  R3_dual_thr0.9_reuse_int8 ok=False steps= 103 up=  16.69 MB edge=   730 ms cloud=  4863 ms ' years to start earning money from the lemon tree.'
+
+gsm8k_0013 | prompt tokens=87
+  F0_nocache_fixed         ok=False steps= 256 up= 719.33 MB edge=  2468 ms cloud= 17705 ms 'ners.\n\n####Melanie started with 9 vacuum cleaners.'
+  K2_dual_thr0.9           ok=False steps= 117 up=  51.05 MB edge=   789 ms cloud=  5373 ms 'Therefore, Melanie started with 6 vacuum cleaners.'
+  K3_dual_thr0.9_int8      ok=True  steps= 128 up=  28.78 MB edge=   898 ms cloud=  5964 ms 'herefore, Melanie started with 18 vacuum cleaners.'
+  R1_dual_thr0.9_reuse     ok=False steps= 140 up=  39.36 MB edge=  1009 ms cloud=  6696 ms ' x = 6 \\]\n\nMelanie started with 6 vacuum cleaners.'
+  R2_dual_thr0.9_reuse_r2  ok=False steps= 116 up=  40.65 MB edge=   806 ms cloud=  5372 ms =K2 'Therefore, Melanie started with 6 vacuum cleaners.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps= 132 up=  20.59 MB edge=   910 ms cloud=  6100 ms ' Melanie started with 18 vacuum cleaners.\n\n#### 18'
+
+gsm8k_0014 | prompt tokens=81
+  F0_nocache_fixed         ok=True  steps= 256 up= 706.74 MB edge=  2423 ms cloud= 17581 ms 'e students enrolled in hip-hop dance is 60%.\n\n####'
+  K2_dual_thr0.9           ok=True  steps=  84 up=  42.01 MB edge=   588 ms cloud=  3928 ms 'udents enrolled in hip-hop dance is **60%**.\n\n####'
+  K3_dual_thr0.9_int8      ok=True  steps=  83 up=  22.53 MB edge=   583 ms cloud=  3899 ms 'udents enrolled in hip-hop dance is **60%**.\n\n####'
+  R1_dual_thr0.9_reuse     ok=True  steps=  78 up=  23.23 MB edge=   551 ms cloud=  3678 ms 'ents = \\(0.60 \\times 100 = 60\\%\\)\n\n#### \\boxed{60}'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  72 up=  28.98 MB edge=   513 ms cloud=  3417 ms 'f students enrolled in hip-hop dance is 60%.\n\n####'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  84 up=  14.02 MB edge=   589 ms cloud=  3971 ms 'enrolled in hip-hop dance is 60%.\n\n#### \\boxed{60}'
+
+gsm8k_0015 | prompt tokens=123
+  F0_nocache_fixed         ok=True  steps= 256 up= 794.82 MB edge=  2555 ms cloud= 19003 ms 't from choosing the jewelry purchase plan is $125.'
+  K2_dual_thr0.9           ok=False steps= 104 up=  50.01 MB edge=   730 ms cloud=  4879 ms 'ey have a higher future value.\n\n**Profit:** $8,096'
+  K3_dual_thr0.9_int8      ok=False steps= 104 up=  26.96 MB edge=   728 ms cloud=  4883 ms 'ey have a higher future value.\n\n**Answer:** $8,096'
+  R1_dual_thr0.9_reuse     ok=False steps= 105 up=  30.91 MB edge=   758 ms cloud=  5155 ms 'ey have a higher future value.\n\n**Answer:** $8,996'
+  R2_dual_thr0.9_reuse_r2  ok=False steps= 106 up=  39.69 MB edge=   777 ms cloud=  5170 ms 'ey have a higher future value.\n\n**Answer:** $8,996'
+  R3_dual_thr0.9_reuse_int8 ok=False steps= 106 up=  17.54 MB edge=   735 ms cloud=  4972 ms 'ey have a higher future value.\n\n**Answer:** $8,996'
+
+gsm8k_0016 | prompt tokens=82
+  F0_nocache_fixed         ok=True  steps= 256 up= 708.84 MB edge=  2429 ms cloud= 17607 ms 'rain in the two days is 230 miles.\n\n####\n230 miles'
+  K2_dual_thr0.9           ok=True  steps=  88 up=  43.12 MB edge=   619 ms cloud=  4135 ms ' by each train in the two days is 230 miles.\n\n####'
+  K3_dual_thr0.9_int8      ok=True  steps=  75 up=  21.51 MB edge=   522 ms cloud=  3520 ms 'les\n- **Second Train:** 230 miles\n\n#### \n230 miles'
+  R1_dual_thr0.9_reuse     ok=True  steps=  83 up=  24.59 MB edge=   575 ms cloud=  3824 ms 'swer: Each train covers 230 miles in the two days.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  79 up=  30.77 MB edge=   563 ms cloud=  3681 ms '\n####\nEach train covers 230 miles in the two days.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  90 up=  14.75 MB edge=   630 ms cloud=  4219 ms =K2 ' by each train in the two days is 230 miles.\n\n####'
+
+gsm8k_0017 | prompt tokens=86
+  F0_nocache_fixed         ok=True  steps= 256 up= 717.23 MB edge=  2461 ms cloud= 22668 ms 'r = $57,500/year.\n\n#### Final Answer: $57,500/year'
+  K2_dual_thr0.9           ok=True  steps=  76 up=  40.24 MB edge=   529 ms cloud=  7739 ms 'ings = \\( \\$1150 \\times 50 = \\$57500 \\)\n\n####57500'
+  K3_dual_thr0.9_int8      ok=True  steps=  78 up=  22.06 MB edge=   551 ms cloud=  8093 ms 'ings = \\( \\$1150 \\times 50 = \\$57500 \\)\n\n####57500'
+  R1_dual_thr0.9_reuse     ok=True  steps=  78 up=  23.37 MB edge=   550 ms cloud=  8291 ms ")\n\nTherefore, Jill's annual salary is **$57,500**."
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  78 up=  30.92 MB edge=   546 ms cloud=  8520 ms '5000/year + $22500/year = $57500/year\n\n#### $57500'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  79 up=  13.49 MB edge=   555 ms cloud=  8549 ms ")\n\nTherefore, Jill's annual salary is **$57,500**."
+
+gsm8k_0018 | prompt tokens=56
+  F0_nocache_fixed         ok=True  steps= 256 up= 654.32 MB edge=  2382 ms cloud= 24143 ms 'aire will eat 7 dozens of eggs in 4 weeks.\n\n#### 7'
+  K2_dual_thr0.9           ok=False steps=  77 up=  38.54 MB edge=   541 ms cloud=  8958 ms 'Claire will eat 7 dozens of eggs in 4 weeks.\n\n####'
+  K3_dual_thr0.9_int8      ok=False steps=  78 up=  20.95 MB edge=   546 ms cloud=  8818 ms 'Claire will eat 7 dozens of eggs in 4 weeks.\n\n####'
+  R1_dual_thr0.9_reuse     ok=False steps=  76 up=  22.30 MB edge=   544 ms cloud=  8400 ms 'Claire will eat 7 dozens of eggs in 4 weeks.\n\n####'
+  R2_dual_thr0.9_reuse_r2  ok=False steps=  79 up=  29.93 MB edge=   544 ms cloud=  8827 ms =K2 'Claire will eat 7 dozens of eggs in 4 weeks.\n\n####'
+  R3_dual_thr0.9_reuse_int8 ok=False steps=  76 up=  12.70 MB edge=   520 ms cloud=  8683 ms 'Claire will eat 7 dozens of eggs in 4 weeks.\n\n####'
+
+gsm8k_0019 | prompt tokens=94
+  F0_nocache_fixed         ok=False steps= 256 up= 734.01 MB edge=  2480 ms cloud= 24950 ms 'speed of 3 miles per hour.\n\n#### \n3 miles per hour'
+  K2_dual_thr0.9           ok=False steps= 121 up=  52.56 MB edge=   858 ms cloud= 14112 ms 'ining distance at a speed of **3** miles per hour.'
+  K3_dual_thr0.9_int8      ok=False steps= 122 up=  28.25 MB edge=   833 ms cloud= 13811 ms 'ining distance at a speed of **3** miles per hour.'
+  R1_dual_thr0.9_reuse     ok=False steps= 117 up=  33.38 MB edge=   800 ms cloud= 10754 ms 'ng 6 miles at a speed of \\boxed{3} miles per hour.'
+  R2_dual_thr0.9_reuse_r2  ok=False steps= 123 up=  42.73 MB edge=   833 ms cloud= 12943 ms =K2 'ining distance at a speed of **3** miles per hour.'
+  R3_dual_thr0.9_reuse_int8 ok=False steps= 116 up=  18.40 MB edge=   774 ms cloud= 11993 ms 'ng 6 miles at a speed of \\boxed{3} miles per hour.'
+
+gsm8k_0020 | prompt tokens=92
+  F0_nocache_fixed         ok=True  steps= 256 up= 729.81 MB edge=  2489 ms cloud= 24504 ms 'ers, after accounting for the spill, is 15 liters.'
+  K2_dual_thr0.9           ok=True  steps= 115 up=  50.86 MB edge=   775 ms cloud= 12740 ms ' 15 liters - 0 liters = 15 liters.\n\n#### 15 liters'
+  K3_dual_thr0.9_int8      ok=False steps= 122 up=  28.18 MB edge=   793 ms cloud= 13146 ms 'f water in the remaining 24 liters is 14.7 liters.'
+  R1_dual_thr0.9_reuse     ok=False steps= 127 up=  36.20 MB edge=   872 ms cloud= 14335 ms ' of water in the remaining 24 liters is 13 liters.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps= 117 up=  41.06 MB edge=   811 ms cloud= 13448 ms =K2 ' 15 liters - 0 liters = 15 liters.\n\n#### 15 liters'
+  R3_dual_thr0.9_reuse_int8 ok=False steps= 126 up=  19.79 MB edge=   874 ms cloud= 14647 ms ' of water in the remaining 24 liters is 13 liters.'
+
+gsm8k_0021 | prompt tokens=75
+  F0_nocache_fixed         ok=False steps= 256 up= 694.16 MB edge=  2430 ms cloud= 24306 ms "Thus, Raymond's son was born \\boxed{75} years ago."
+  K2_dual_thr0.9           ok=False steps=  93 up=  43.98 MB edge=   654 ms cloud= 11034 ms "aymond's son was born 0 years ago.\n\n####\n\\boxed{0}"
+  K3_dual_thr0.9_int8      ok=False steps=  91 up=  23.35 MB edge=   627 ms cloud= 10277 ms "us, Raymond's son was born 21 years ago.\n\n#### \n21"
+  R1_dual_thr0.9_reuse     ok=False steps= 106 up=  30.39 MB edge=   744 ms cloud= 12808 ms "\\]\n\nTherefore, Raymond's son was born 2 years ago."
+  R2_dual_thr0.9_reuse_r2  ok=False steps=  94 up=  34.49 MB edge=   659 ms cloud= 11212 ms =K2 "aymond's son was born 0 years ago.\n\n####\n\\boxed{0}"
+  R3_dual_thr0.9_reuse_int8 ok=False steps= 113 up=  17.87 MB edge=   791 ms cloud= 12357 ms "erefore, Raymond's son was born 2 years ago.\n\n####"
+
+gsm8k_0022 | prompt tokens=84
+  F0_nocache_fixed         ok=True  steps= 256 up= 713.04 MB edge=  2424 ms cloud= 23992 ms 'herefore, Billy sold a total of 7 DVDs on Tuesday.'
+  K2_dual_thr0.9           ok=True  steps=  78 up=  40.63 MB edge=   549 ms cloud=  8387 ms 'herefore, Billy sold \\( \\boxed{7} DVDs on Tuesday.'
+  K3_dual_thr0.9_int8      ok=True  steps=  84 up=  22.77 MB edge=   567 ms cloud=  8453 ms 'e, Billy sold a total of 7 DVDs on Tuesday.\n\n####7'
+  R1_dual_thr0.9_reuse     ok=True  steps=  77 up=  23.27 MB edge=   547 ms cloud=  8596 ms 'ly sold a total of 7 DVDs on Tuesday.\n\n#### 7 DVDs'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  74 up=  29.57 MB edge=   523 ms cloud=  8147 ms 'herefore, Billy sold a total of 7 DVDs on Tuesday.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  84 up=  13.98 MB edge=   592 ms cloud=  9199 ms 'efore, Billy sold \\( \\boxed{7} \\) DVDs on Tuesday.'
+
+gsm8k_0023 | prompt tokens=67
+  F0_nocache_fixed         ok=False steps= 256 up= 677.38 MB edge=  2409 ms cloud= 24120 ms 'orter after burning from 1:00 PM to 5:00 PM.\n\n####'
+  K2_dual_thr0.9           ok=False steps= 111 up=  48.17 MB edge=   774 ms cloud= 12672 ms 'eters shorter after burning for the 4-hour period.'
+  K3_dual_thr0.9_int8      ok=True  steps=  93 up=  24.51 MB edge=   636 ms cloud= 10110 ms 'ter after burning from 1:00 PM to 5:00 PM.\n\n#### 8'
+  R1_dual_thr0.9_reuse     ok=True  steps=  81 up=  24.01 MB edge=   574 ms cloud=  9131 ms 'ter after burning from 1:00 PM to 5:00 PM.\n\n#### 8'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  84 up=  31.88 MB edge=   626 ms cloud=  9573 ms 'ter after burning from 1:00 PM to 5:00 PM.\n\n#### 8'
+  R3_dual_thr0.9_reuse_int8 ok=False steps=  88 up=  14.37 MB edge=   621 ms cloud= 10135 ms 'orter after burning from 1:00 PM to 5:00 PM.\n\n####'
+
+gsm8k_0024 | prompt tokens=68
+  F0_nocache_fixed         ok=True  steps= 256 up= 679.48 MB edge=  2456 ms cloud= 24673 ms 'So, the original price of the book was $26.\n\n####.'
+  K2_dual_thr0.9           ok=True  steps=  79 up=  39.85 MB edge=   584 ms cloud=  9415 ms ' original price of the book was \\(\\boxed{26.00}\\).'
+  K3_dual_thr0.9_int8      ok=True  steps=  80 up=  21.65 MB edge=   560 ms cloud=  9599 ms ' original price of the book was \\(\\boxed{26.00}\\).'
+  R1_dual_thr0.9_reuse     ok=True  steps=  84 up=  24.78 MB edge=   591 ms cloud= 10133 ms ' price of the book was $26.00.\n\n####\n\\boxed{26.00}'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  84 up=  31.68 MB edge=   591 ms cloud=  8436 ms ' price of the book was $26.00.\n\n####\n\\boxed{26.00}'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  85 up=  14.12 MB edge=   597 ms cloud=  8655 ms ' price of the book was $26.00.\n\n####\n\\boxed{26.00}'
+
+gsm8k_0025 | prompt tokens=96
+  F0_nocache_fixed         ok=True  steps= 256 up= 738.20 MB edge=  2452 ms cloud= 24574 ms 'Therefore, Marie ordered 2 boxes of pizza.\n\n#### 2'
+  K2_dual_thr0.9           ok=True  steps=  75 up=  40.63 MB edge=   534 ms cloud=  8252 ms ' \\$8.50 = 2\n   \\]\n\nMarie ordered 2 boxes of pizza.'
+  K3_dual_thr0.9_int8      ok=True  steps=  73 up=  21.77 MB edge=   509 ms cloud=  7845 ms ' \\$8.50 = 2\n   \\]\n\nMarie ordered 2 boxes of pizza.'
+  R1_dual_thr0.9_reuse     ok=True  steps=  64 up=  19.71 MB edge=   463 ms cloud=  7180 ms 'Therefore, Marie ordered 2 boxes of pizza.\n\n#### 2'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  66 up=  27.94 MB edge=   474 ms cloud=  7285 ms '\\$8.50} = 2\n   \\]\n\nMarie ordered 2 boxes of pizza.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  71 up=  12.42 MB edge=   507 ms cloud=  7955 ms ' \\[\n   \\frac{\\$17}{\\$8.50} = 2\n   \\]\n\n#### 2 boxes'
+
+gsm8k_0026 | prompt tokens=98
+  F0_nocache_fixed         ok=False steps= 256 up= 742.40 MB edge=  2476 ms cloud= 24956 ms ' 67 + 126 = 242\n\\]\n\n#### Mishka spent 242 dollars.'
+  K2_dual_thr0.9           ok=False steps=  61 up=  37.09 MB edge=   443 ms cloud=  6971 ms '\n#### Mishka spent $242 on all the clothing items.'
+  K3_dual_thr0.9_int8      ok=False steps=  60 up=  20.01 MB edge=   430 ms cloud=  7074 ms '\n#### Mishka spent $242 on all the clothing items.'
+  R1_dual_thr0.9_reuse     ok=True  steps=  65 up=  20.24 MB edge=   439 ms cloud=  6952 ms 'the items:\n\\[ 49.50 + 67.50 + 126 = 243 \\] dollars'
+  R2_dual_thr0.9_reuse_r2  ok=False steps=  63 up=  27.18 MB edge=   433 ms cloud=  6846 ms =K2 '\n#### Mishka spent $242 on all the clothing items.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  67 up=  12.10 MB edge=   471 ms cloud=  7638 ms 'the items:\n\\[ 49.50 + 67.50 + 126 = 243 \\] dollars'
+
+gsm8k_0027 | prompt tokens=88
+  F0_nocache_fixed         ok=False steps= 256 up= 721.42 MB edge=  2449 ms cloud= 25682 ms 'Cynthia will spend $16 on ice cream after 60 days.'
+  K2_dual_thr0.9           ok=False steps=  61 up=  36.44 MB edge=   418 ms cloud=  6955 ms 'thia will spend $16.00 on ice cream after 60 days.'
+  K3_dual_thr0.9_int8      ok=False steps=  61 up=  19.77 MB edge=   434 ms cloud=  6807 ms 'thia will spend $16.00 on ice cream after 60 days.'
+  R1_dual_thr0.9_reuse     ok=False steps=  65 up=  19.78 MB edge=   442 ms cloud=  4668 ms 'hia will spend **$16** on ice cream after 60 days.'
+  R2_dual_thr0.9_reuse_r2  ok=False steps=  69 up=  28.48 MB edge=   501 ms cloud=  7760 ms 'a will spend **16.00** on ice cream after 60 days.'
+  R3_dual_thr0.9_reuse_int8 ok=False steps=  68 up=  11.96 MB edge=   485 ms cloud=  6934 ms 'hia will spend **$16** on ice cream after 60 days.'
+
+gsm8k_0028 | prompt tokens=79
+  F0_nocache_fixed         ok=True  steps= 256 up= 702.55 MB edge=  2443 ms cloud= 24096 ms '25 miles between his first and second stops.\n\n####'
+  K2_dual_thr0.9           ok=True  steps=  72 up=  38.73 MB edge=   516 ms cloud=  8028 ms 'miles between his first and second stops.\n\n#### 25'
+  K3_dual_thr0.9_int8      ok=True  steps=  67 up=  20.35 MB edge=   482 ms cloud=  7052 ms 'miles between his first and second stops.\n\n#### 25'
+  R1_dual_thr0.9_reuse     ok=True  steps=  75 up=  22.24 MB edge=   525 ms cloud=  8394 ms 'miles between his first and second stops.\n\n#### 25'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps=  71 up=  28.57 MB edge=   486 ms cloud=  7695 ms =K2 'miles between his first and second stops.\n\n#### 25'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  77 up=  13.11 MB edge=   554 ms cloud=  8359 ms '25 miles between his first and second stops.\n\n####'
+
+gsm8k_0029 | prompt tokens=98
+  F0_nocache_fixed         ok=True  steps= 256 up= 742.40 MB edge=  2475 ms cloud= 25028 ms '.\n\nThus, the cost of the boots is \\(\\boxed{104}\\).'
+  K2_dual_thr0.9           ok=True  steps= 101 up=  47.58 MB edge=   708 ms cloud= 11295 ms '\n   - \\(104 = B\\)\n\nTherefore, the boots cost $104.'
+  K3_dual_thr0.9_int8      ok=True  steps=  92 up=  24.33 MB edge=   651 ms cloud= 11010 ms 'erefore, the cost of the boots is \\(\\boxed{104}\\).'
+  R1_dual_thr0.9_reuse     ok=True  steps= 100 up=  28.94 MB edge=   704 ms cloud= 11984 ms 'e boots is $104.\n\n#### The boots cost 104 dollars.'
+  R2_dual_thr0.9_reuse_r2  ok=True  steps= 104 up=  37.87 MB edge=   731 ms cloud= 12688 ms '.\n\nThus, the cost of the boots is \\(104\\) dollars.'
+  R3_dual_thr0.9_reuse_int8 ok=True  steps=  99 up=  16.19 MB edge=   692 ms cloud= 11734 ms 'e boots is $104.\n\n#### The boots cost 104 dollars.'
+
+Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_llada_gsm8k_k4_t256_b32_reuse
+                  variant  runs      acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms  mean_block_start_mb  same_as_cache_ref  regressions_vs_cache_ref  improvements_vs_cache_ref  mcnemar_p_vs_cache_ref
+         F0_nocache_fixed    30 0.633333            0             0     1.0000  256.000000  721.634099             0.000000   2470.345979   22073.015289           721.634099                  0                         1                          2                     1.0
+           K2_dual_thr0.9    30 0.600000            2             1     1.0000   87.400000   43.366570             0.939867    613.755371    7481.622801            22.551066                 30                         0                          0                     1.0
+      K3_dual_thr0.9_int8    30 0.633333            3             3     1.0000   86.733333   23.497336             0.967412    605.593671    7412.749199            12.913653                 18                         1                          2                     1.0
+     R1_dual_thr0.9_reuse    30 0.600000            4             3     1.0000   88.166667   25.935718             0.964024    620.970180    7494.112094             4.919225                  3                         2                          2                     1.0
+  R2_dual_thr0.9_reuse_r2    30 0.633333            2             2     1.0000   85.633333   32.794666             0.954529    602.890116    7385.827544            12.442311                 15                         0                          1                     1.0
+R3_dual_thr0.9_reuse_int8    30 0.566667            4             2     0.6875   88.733333   14.749478             0.979537    624.591424    7347.598470             3.886023                  3                         3                          2                     1.0
+
+Emulated split latency (s), RTT 20 ms, edge 3x slower:
+bandwidth_mbps               1       5      10     25     50    100   1000
+variant                                                                   
+F0_nocache_fixed           5808.9  1190.4  613.1  266.7  151.2  93.5  41.6
+K2_dual_thr0.9              358.3    80.8   46.1   25.3   18.3  14.8  11.7
+K3_dual_thr0.9_int8         199.3    48.9   30.1   18.8   15.1  13.2  11.5
+R1_dual_thr0.9_reuse        218.9    52.9   32.2   19.7   15.6  13.5  11.6
+R2_dual_thr0.9_reuse_r2     273.6    63.7   37.5   21.7   16.5  13.8  11.5
+R3_dual_thr0.9_reuse_int8   129.3    34.9   23.1   16.1   13.7  12.5  11.5
+
+Cloud-only with the same cache and decoding (s):
+variant
+F0_nocache_fixed             25.74
+K2_dual_thr0.9                8.42
+K3_dual_thr0.9_int8           8.35
+R1_dual_thr0.9_reuse          8.44
+R2_dual_thr0.9_reuse_r2       8.32
+R3_dual_thr0.9_reuse_int8     8.30
+
+Done (2026-11-24 23:00:05).
