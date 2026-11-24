@@ -1,0 +1,55 @@
+variant,case_id,task,prompt_tokens,cache,decode,threshold,encoding,gold_answer,text,extracted,ok,same_as_ref,same_as_cache_ref,n_steps,tokens_per_step,block_start_steps,edge_ms,encode_ms,cloud_ms,sample_ms,up_mb,full_mb,down_kb,mean_rows_sent,block_start_mb,rows_reused,wall_s,edge_peak_gib,cloud_peak_gib,edge_energy_j,cloud_energy_j,ref_ok,cache_ref_ok
+F0_nocache_fixed,gsm8k_0000,math,99,none,fixed,,bf16,18,"Janet eats 3 eggs for breakfast and bakes 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs at the farmers' market.
+#### 9
+The answer is: 9",9.0,False,True,False,64,1.0,64,338.5952625274658,0.09814399993047118,1934.0144939422607,58.632607996463776,74.7776,74.776576,0.896,163.0,74.7776,0,2.345116480253637,2.788910388946533,11.617939949035645,230.02100002765656,648.0909999608994,False,False
+K2_dual_thr0.9,gsm8k_0000,math,99,dual,threshold,0.9,bf16,18,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9*$2 = $9 per day.
+#### 9
+The answer is: 9",9.0,False,False,True,52,1.2307692307692308,2,310.0053105354309,0.07673599978443235,1686.474136352539,32.19056016206741,13.8064,60.755968,0.8,37.03846153846154,2.3368,0,2.0389877632260323,2.791398048400879,11.595051765441895,151.1490000486374,394.4520000219345,False,False
+K3_dual_thr0.9_int8,gsm8k_0000,math,99,dual,threshold,0.9,int8_delta,18,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs at the farmers market per day.
+#### 9
+The answer is: 9",9.0,False,False,False,49,1.3061224489795917,2,288.97059202194214,20.36451290315017,1601.1740798950195,32.77414429187775,7.261654,57.250816,0.776,37.3469387755102,1.752934,0,1.9529215404763818,2.7928647994995117,11.595051765441895,145.12800002098083,392.9819999933243,False,False
+R1_dual_thr0.9_reuse,gsm8k_0000,math,99,dual,threshold,0.9,bf16,18,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9*$2 = $9 per day.
+#### 9
+The answer is: 9",9.0,False,False,True,52,1.2307692307692308,2,303.85478258132935,15.56051200767979,1659.304573059082,31.381344079971313,12.88177,60.755968,0.8,34.55769230769231,1.41217,129,2.0203520385548472,2.7928647994995117,11.595051765441895,151.8730000257492,399.65499997138977,False,False
+R2_dual_thr0.9_reuse_r4,gsm8k_0000,math,99,dual,threshold,0.9,bf16,18,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9*$2 = $9 per day.
+#### 9
+The answer is: 9",9.0,False,False,True,52,1.2307692307692308,2,308.1405749320984,0.7784320036880672,1745.301305770874,32.56969606876373,12.881749,60.755968,0.8,34.55769230769231,1.412149,129,2.0969238178804517,2.7928647994995117,11.595051765441895,157.5329999923706,411.8289999961853,False,False
+R3_dual_thr0.9_reuse_int8,gsm8k_0000,math,99,dual,threshold,0.9,int8_delta,18,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs for $18 per day.
+#### 9
+The answer is: 9",9.0,False,False,False,49,1.3061224489795917,2,292.04604864120483,3.1875519840978086,1583.998888015747,29.830016016960144,6.799102,57.250816,0.776,34.714285714285715,1.290382,129,1.9190149391070008,2.7928647994995117,11.595051765441895,150.76699995994568,381.14200007915497,False,False
+F0_nocache_fixed,gsm8k_0001,math,60,none,fixed,,bf16,3,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2 / 2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,True,False,64,1.0,64,314.8932189941406,0.10185599990654737,1641.9472618103027,50.274496018886566,56.886272,56.885248,0.896,124.0,56.886272,0,2.0203067008405924,2.7823357582092285,11.582659721374512,177.07299995422363,576.5,True,True
+K2_dual_thr0.9,gsm8k_0001,math,60,dual,threshold,0.9,bf16,3,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3.",3.0,True,False,True,23,2.782608695652174,2,153.92422342300415,0.03775999986100942,833.1115589141846,17.37353605031967,6.594928,20.443136,0.568,40.0,1.777696,0,1.0104059483855963,2.7842283248901367,11.567954063415527,74.59600007534027,193.04099988937378,True,True
+K3_dual_thr0.9_int8,gsm8k_0001,math,60,dual,threshold,0.9,int8_delta,3,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+Therefore, the robe takes a total of 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,False,False,27,2.3703703703703702,2,190.44889736175537,1.930623977445066,983.46994972229,19.987903892993927,4.202728,23.998464,0.6,38.81481481481482,1.333528,0,1.2044789651408792,2.785057544708252,11.567954063415527,95.61899995803833,223.51600003242493,True,True
+R1_dual_thr0.9_reuse,gsm8k_0001,math,60,dual,threshold,0.9,bf16,3,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+Therefore, it takes a total of 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,False,False,29,2.206896551724138,2,164.83875131607056,0.820095990318805,916.3828086853027,17.272224009037018,7.362032,25.776128,0.616,35.41379310344828,1.168448,85,1.1054730983451009,2.785057544708252,11.567954063415527,83.25600004196167,218.48500001430511,True,True
+R2_dual_thr0.9_reuse_r4,gsm8k_0001,math,60,dual,threshold,0.9,bf16,3,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+Therefore, it takes a total of 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,False,False,29,2.206896551724138,2,169.67900848388672,0.46387200243771076,937.4947910308838,18.56684798002243,7.362016,25.776128,0.616,35.41379310344828,1.168432,85,1.1324545098468661,2.785057544708252,11.567954063415527,82.7960000038147,240.67799997329712,True,True
+R3_dual_thr0.9_reuse_int8,gsm8k_0001,math,60,dual,threshold,0.9,int8_delta,3,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+So in total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3.",3.0,True,False,False,28,2.2857142857142856,2,167.86732816696167,2.196895945817232,928.839750289917,19.929791808128357,3.994788,24.887296,0.608,35.357142857142854,1.01082,90,1.1253296602517366,2.785057544708252,11.567954063415527,81.93599998950958,216.3050000667572,True,True

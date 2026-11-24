@@ -1,0 +1,85 @@
+{
+  "experiment": "Exp13 Fast-dLLM (DualCache + parallel decoding) on the two-GPU split",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "arch": "dream",
+  "fastdllm_repo": "../../Fast-dLLM",
+  "dataset": "gsm8k",
+  "n_cases": 2,
+  "split_layer_1based": 4,
+  "new_tokens": 64,
+  "block_length": 32,
+  "thresholds": [
+    0.9
+  ],
+  "temperature": 0.0,
+  "top_p": null,
+  "seed": 42,
+  "anchor_interval": 32,
+  "variants": [
+    {
+      "name": "F0_nocache_fixed",
+      "cache": "none",
+      "decode": "fixed",
+      "threshold": null,
+      "encoding": "bf16",
+      "reuse": false,
+      "refresh_every": 0
+    },
+    {
+      "name": "K2_dual_thr0.9",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "bf16",
+      "reuse": false,
+      "refresh_every": 0
+    },
+    {
+      "name": "K3_dual_thr0.9_int8",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "int8_delta",
+      "reuse": false,
+      "refresh_every": 0
+    },
+    {
+      "name": "R1_dual_thr0.9_reuse",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "bf16",
+      "reuse": true,
+      "refresh_every": 0
+    },
+    {
+      "name": "R2_dual_thr0.9_reuse_r4",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "bf16",
+      "reuse": true,
+      "refresh_every": 4
+    },
+    {
+      "name": "R3_dual_thr0.9_reuse_int8",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "int8_delta",
+      "reuse": true,
+      "refresh_every": 0
+    }
+  ],
+  "reference": "F0_nocache_fixed",
+  "cloud_only_cache_ref": "K2_dual_thr0.9",
+  "idle_power_w": {
+    "edge": 61.7047279451663,
+    "cloud": 77.65555975917889
+  },
+  "edge_gpu": "NVIDIA RTX A6000",
+  "cloud_gpu": "NVIDIA RTX A6000",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22"
+}

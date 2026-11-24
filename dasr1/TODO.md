@@ -1,7 +1,10 @@
 # To do
 
 ## Now
-- [ ] **Exp13: Fast-dLLM on the split** (DualCache + parallel decoding): smoke test, full run, add results to the paper (RQ2 bytes, latency vs. round trips; new γ trade-off).
+- [x] **Exp13: Fast-dLLM on the split** (DualCache + parallel decoding): full run done (`outputs/exp13_*_b32/`). Split ~10x faster than the static split, ~2x cloud-only, accuracy unchanged.
+- [ ] **Exp14: block-start row reuse** (`EXP14_NOTES.md`): smoke test, full run.
+- [ ] Paper: Exp13/14 section and table; define "block" (token span) in the background; rename Exp8 wording to "layers"; explain greedy Dream in Exp13 (left-to-right blocks, no empty-answer collapse).
+- [ ] **Leakage check for the privacy argument**: how much of the prompt can be recovered from the layer-4 boundary states (train a small inverter), and at deeper splits.
 
 ## For a strong SIGCOMM submission
 - [ ] **(a) Show when splitting is the right choice.** Cloud-only is faster in every current result, so quantify a regime where splitting wins: cloud GPU time / cost per answer with several concurrent users (cloud throughput), keeping the raw prompt on the device (plus a basic look at what the boundary activations leak), and cutting the per-step round-trip floor with parallel decoding (Exp13).

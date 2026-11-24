@@ -15,6 +15,13 @@ Fast-dLLM (NVlabs, v1) changes two things that matter for a split:
 Both halves keep the KV cache of their own layers on their own GPU; only the
 boundary rows of the rows being computed cross the link.
 
+Exp14 adds block-start row reuse to the link (reuse=True): at a block-start step
+the edge still computes every row (it needs them for its own cache) but sends only
+the rows whose token changed since the cloud last received that row, plus the
+rows that predict the current block; the cloud reuses its stored copy of every
+other row (approximate, like DualCache itself). refresh_every=m sends all rows at
+every m-th block start.
+
 This module provides
   load_fastdllm_model(arch, name, repo)   Fast-dLLM's modified Dream / LLaDA model
   KVBlockLink                              split link for variable-length forwards
@@ -98,6 +105,11 @@ class KVBlockLink:
       int8_delta  per-row INT8 delta vs the reference both sides hold at the same
                   absolute positions, fp16 scale, closed loop; bf16 anchor at the
                   first step and at least every `anchor_interval` steps (approximate)
+    Row reuse (Exp14, reuse=True, block-start steps only): send the rows whose
+    token changed since the cloud last received them, rows the cloud never
+    received, and the span that predicts the current block (set_chunk(span=...));
+    every other row is taken from the reference the cloud already holds. The
+    payload then carries a 1-bit-per-row bitmap of the sent rows.
     Per-step statistics use the same columns as src.split_runtime.SplitLink, so
     experiments/exp11b_network_emulation.py works unchanged.
     """
@@ -120,20 +132,27 @@ class KVBlockLink:
             h.remove()
         self.handles.clear()
 
-    def begin(self, *, n_total, encoding="bf16", anchor_interval=32):
+    def begin(self, *, n_total, encoding="bf16", anchor_interval=32, reuse=False,
+              refresh_every=0):
         if encoding not in {"bf16", "int8_delta"}:
             raise ValueError(f"encoding={encoding!r}")
         self.n_total, self.encoding = int(n_total), encoding
         self.anchor_interval = int(anchor_interval)
+        self.reuse, self.refresh_every = bool(reuse), int(refresh_every or 0)
         self.ref = None          # (1, n_total, d) on the edge; the cloud holds the same values
+        self.valid = None        # (n_total,) rows the cloud holds (reuse only)
+        self.sent_tok = None     # (n_total,) token of each row when the cloud last got it
         self.last_anchor = 0
         self.step = 0
-        self.offset, self.kind, self.block = 0, "full", 0
+        self.offset, self.kind, self.block, self.span = 0, "full", 0, None
+        self.ids = None
         self.memo, self.ev, self.stats = {}, [], []
         self.active = True
 
-    def set_chunk(self, offset, kind, block):
+    def set_chunk(self, offset, kind, block, span=None):
+        """span = (lo, hi) absolute rows that predict the current block (row reuse)."""
         self.offset, self.kind, self.block = int(offset), kind, int(block)
+        self.span = None if span is None else (int(span[0]), int(span[1]))
 
     def end_step(self, n_commits):
         if self.active and self.stats:
@@ -175,6 +194,7 @@ class KVBlockLink:
         self.stats.append({"step": self.step, "kind": self.kind, "block": self.block,
                            "offset": self.offset, "n_commits": 0})
         ids_edge = args[0].to(self.edge)
+        self.ids = ids_edge
         ev["edge_start"] = self._event(self.edge)
         self.ev.append(ev)
         return (ids_edge,) + tuple(args[1:])
@@ -188,27 +208,56 @@ class KVBlockLink:
         m, d = h.shape[1], h.shape[2]
         lo, hi = self.offset, self.offset + m
         row_b = d * h.element_size()
-        if self.ref is None:
+        keep_ref = self.encoding != "bf16" or self.reuse
+        if keep_ref and self.ref is None:
             self.ref = torch.zeros(1, self.n_total, d, dtype=h.dtype, device=h.device)
+            self.valid = torch.zeros(self.n_total, dtype=torch.bool, device=h.device)
+            self.sent_tok = torch.full((self.n_total,), -1, dtype=torch.long, device=h.device)
+        refresh = self.refresh_every > 0 and self.block % self.refresh_every == 0
+        sel = None               # None = every row of the chunk
+        if self.reuse and self.kind == "full" and not refresh:
+            ids = self.ids[0].to(h.device)
+            sel = (ids != self.sent_tok[lo:hi]) | ~self.valid[lo:hi]
+            if self.span is not None:
+                a, b = max(self.span[0], lo) - lo, min(self.span[1], hi) - lo
+                if b > a:
+                    sel[a:b] = True
+        rows = h if sel is None else h[:, sel]
+        r = int(rows.shape[1])
         anchor = (self.step == 1 or self.encoding == "bf16"
                   or self.step - self.last_anchor >= self.anchor_interval)
         if anchor:
-            new = h
-            payload = m * row_b
+            enc = rows
+            payload = r * row_b
             if self.encoding != "bf16":
                 self.last_anchor = self.step
         else:  # int8_delta against the synchronized reference at the same positions
-            ref = self.ref[:, lo:hi].float()
-            delta = h.float() - ref
+            ref = self.ref[:, lo:hi] if sel is None else self.ref[:, lo:hi][:, sel]
+            ref = ref.float()
+            delta = rows.float() - ref
             scale = delta.abs().amax(dim=-1, keepdim=True).clamp_min(1e-12) / 127.0
             q = torch.clamp(torch.round(delta / scale), -127, 127)
-            new = (ref + q * scale.half().float()).to(h.dtype)
-            payload = m * (d + 2)
-        if self.encoding != "bf16":
-            self.ref[:, lo:hi] = new
+            enc = (ref + q * scale.half().float()).to(h.dtype)
+            payload = r * (d + 2)
+        if sel is not None:
+            payload += (m + 7) // 8          # bitmap of the rows that were sent
+        if keep_ref:
+            if sel is None:
+                self.ref[:, lo:hi] = enc
+                self.valid[lo:hi] = True
+                if self.ids is not None and self.ids.shape[1] == m:
+                    self.sent_tok[lo:hi] = self.ids[0].to(h.device)
+            else:
+                idx = torch.nonzero(sel).squeeze(1) + lo
+                self.ref[:, idx] = enc
+                self.valid[idx] = True
+                self.sent_tok[idx] = self.ids[0].to(h.device)[idx - lo]
+            new = self.ref[:, lo:hi]
+        else:
+            new = enc
         ev["encode_end"] = self._event(self.edge)
         self.stats[-1].update({
-            "rows_sent": int(m), "anchor": bool(anchor),
+            "rows_sent": r, "rows_reused": int(m - r), "anchor": bool(anchor),
             "up_bytes": UP_HEADER_B + int(payload),
             "full_bytes": self.n_total * row_b,   # static split without cache, for reference
         })
@@ -318,9 +367,11 @@ def kv_generate(model, arch, tokenizer, ids, gen_length, block_length, seed, *,
     x[:, :lp] = ids.to(device)
     commits = []
 
-    def forward(lo, hi, kind, block, pkv=None, rp=None, use_cache=False):
+    shift = 1 if arch == "dream" else 0   # Dream predicts position i from row i-1
+
+    def forward(lo, hi, kind, block, pkv=None, rp=None, use_cache=False, span=None):
         if link is not None:
-            link.set_chunk(lo, kind, block)
+            link.set_chunk(lo, kind, block, span=span)
         inp = x[:, lo:hi]
         if arch == "dream":
             if pkv is None:
@@ -356,7 +407,7 @@ def kv_generate(model, arch, tokenizer, ids, gen_length, block_length, seed, *,
             quota = tokens_per_step(int((x[:, s:e] == mask_id).sum()), steps_per_block)
             i = 0
             if cache == "dual":
-                logits, pkv = forward(0, n, "full", b, use_cache=True)
+                logits, pkv = forward(0, n, "full", b, use_cache=True, span=(s - shift, e))
                 conf, x0 = propose(arch, logits[:, s:e], temperature, top_p)
                 mask_b = x[:, s:e] == mask_id
                 if arch == "dream":  # first block token from the correctly shifted full logits
@@ -382,7 +433,7 @@ def kv_generate(model, arch, tokenizer, ids, gen_length, block_length, seed, *,
                     i += 1
             else:
                 while bool((x[:, s:e] == mask_id).any()):
-                    logits, _ = forward(0, n, "full", b)
+                    logits, _ = forward(0, n, "full", b, span=(s - shift, e))
                     conf, x0 = propose(arch, logits[:, s:e], temperature, top_p)
                     mask_b = x[:, s:e] == mask_id
                     q = quota[i] if i < len(quota) else 1

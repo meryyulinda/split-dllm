@@ -15,6 +15,11 @@ Variants (all on the same split, same prompts and seeds; blocks of EXP13_BLOCK_L
   K1_dual_fixed          DualCache, 1 token per step
   K2_dual_thr<g>         DualCache + parallel decoding, one variant per threshold
   K3_dual_thr<g>_int8    K2 (first threshold) with the INT8 delta codec
+Exp14, block-start row reuse (same script, run_exp14.sh selects these):
+  R1_dual_thr<g>_reuse       K2 + row reuse at every block start
+  R2_dual_thr<g>_reuse_r<m>  R1 with all rows sent at every m-th block start
+  R3_dual_thr<g>_reuse_int8  R1 + INT8 delta for the rows that are sent
+  Row reuse is also compared with K2 (cache_ref): same_as_cache_ref, flips, McNemar.
 Quality is compared with F0 (paired flips, exact McNemar test). Timing and bytes
 are measured per step; exp11b's emulation is applied at the end. Every variant also
 gets its own cloud-only reference (same cache and decoding, all layers on the cloud
@@ -76,6 +81,7 @@ else:
     TOP_P = None
     MODEL_NAME = setting("LLADA_MODEL_NAME", LLADA_MODEL_NAME)
 ANCHOR = int(setting("EXP13_ANCHOR_INTERVAL", 32))
+REUSE_REFRESH = int(setting("EXP14_REFRESH_EVERY", 4))
 SEED = int(setting("SEED", 42))
 REPO = setting("FASTDLLM_REPO", "../../Fast-dLLM")
 RESUME = bool(setting("EXP13_RESUME", True))
@@ -86,9 +92,9 @@ GIB = 2 ** 30
 REFERENCE = "F0_nocache_fixed"
 
 
-def V(name, cache, decode, threshold=None, encoding="bf16"):
+def V(name, cache, decode, threshold=None, encoding="bf16", reuse=False, refresh_every=0):
     return {"name": name, "cache": cache, "decode": decode, "threshold": threshold,
-            "encoding": encoding}
+            "encoding": encoding, "reuse": reuse, "refresh_every": refresh_every}
 
 
 def gname(g):
@@ -102,6 +108,10 @@ ALL_VARIANTS = [
     V("K1_dual_fixed", "dual", "fixed"),
     *[V(f"K2_dual_thr{gname(g)}", "dual", "threshold", g) for g in THRESHOLDS],
     V(f"K3_dual_thr{gname(g0)}_int8", "dual", "threshold", g0, "int8_delta"),
+    V(f"R1_dual_thr{gname(g0)}_reuse", "dual", "threshold", g0, reuse=True),
+    V(f"R2_dual_thr{gname(g0)}_reuse_r{REUSE_REFRESH}", "dual", "threshold", g0, reuse=True,
+      refresh_every=REUSE_REFRESH),
+    V(f"R3_dual_thr{gname(g0)}_reuse_int8", "dual", "threshold", g0, "int8_delta", reuse=True),
 ]
 CACHE_REF = f"K2_dual_thr{gname(g0)}"
 
@@ -145,13 +155,16 @@ def run_summary(steps):
         "cloud_ms": df["cloud_ms"].sum(), "sample_ms": df["sample_ms"].sum(),
         "up_mb": df["up_bytes"].sum() / 1e6, "full_mb": df["full_bytes"].sum() / 1e6,
         "down_kb": df["down_bytes"].sum() / 1e3, "mean_rows_sent": df["rows_sent"].mean(),
+        "block_start_mb": df.loc[df["kind"] == "full", "up_bytes"].sum() / 1e6,
+        "rows_reused": int(df["rows_reused"].sum()) if "rows_reused" in df else 0,
     }
 
 
 def summarize(runs):
     df = pd.DataFrame(runs)
-    for col in ("ok", "ref_ok", "same_as_ref"):
-        df[col] = df[col].map(lambda v: str(v).strip().lower() == "true")
+    for col in ("ok", "ref_ok", "same_as_ref", "cache_ref_ok", "same_as_cache_ref"):
+        if col in df:
+            df[col] = df[col].map(lambda v: str(v).strip().lower() == "true")
     df["regression"] = df["ref_ok"] & ~df["ok"]
     df["improvement"] = ~df["ref_ok"] & df["ok"]
     ref_up = df[df["variant"] == REFERENCE].set_index("case_id")["up_mb"]
@@ -168,9 +181,21 @@ def summarize(runs):
     for c in ("edge_peak_gib", "cloud_peak_gib", "edge_energy_j", "cloud_energy_j", "wall_s"):
         if c in df:
             cols[f"mean_{c}"] = (c, "mean")
+    if "block_start_mb" in df:
+        cols["mean_block_start_mb"] = ("block_start_mb", "mean")
+    if "cache_ref_ok" in df:  # flips against K2 (DualCache, first threshold, no reuse)
+        df["reg_vs_cache_ref"] = df["cache_ref_ok"] & ~df["ok"]
+        df["imp_vs_cache_ref"] = ~df["cache_ref_ok"] & df["ok"]
+        cols.update(same_as_cache_ref=("same_as_cache_ref", "sum"),
+                    regressions_vs_cache_ref=("reg_vs_cache_ref", "sum"),
+                    improvements_vs_cache_ref=("imp_vs_cache_ref", "sum"))
     out = df.groupby("variant", sort=False).agg(**cols).reset_index()
     out["mcnemar_p"] = [mcnemar_exact_p(r, i) for r, i in zip(out["regressions"],
                                                                 out["improvements"])]
+    if "regressions_vs_cache_ref" in out:
+        out["mcnemar_p_vs_cache_ref"] = [
+            mcnemar_exact_p(r, i) for r, i in zip(out["regressions_vs_cache_ref"],
+                                                   out["improvements_vs_cache_ref"])]
     return out
 
 
@@ -184,7 +209,7 @@ def main():
         raise ValueError(f"unknown EXP13_VARIANT_NAMES {unknown}; known: {list(by_name)}")
     if REFERENCE not in names:
         raise ValueError(f"{REFERENCE} must be in EXP13_VARIANT_NAMES (quality reference)")
-    variants = [by_name[n] for n in names]
+    variants = [v for v in ALL_VARIANTS if v["name"] in names]  # K2 runs before R*
 
     cases, score_fn = load_cases()
     check_output_folder(names)
@@ -223,7 +248,8 @@ def main():
         res = kv_generate(model, MODEL, tokenizer, ids, NEW_TOKENS, BLOCK, SEED,
                           cache=v["cache"], decode=v["decode"], threshold=v["threshold"],
                           temperature=TEMPERATURE, top_p=TOP_P, link=link,
-                          link_cfg={"encoding": v["encoding"], "anchor_interval": ANCHOR},
+                          link_cfg={"encoding": v["encoding"], "anchor_interval": ANCHOR,
+                                    "reuse": v["reuse"], "refresh_every": v["refresh_every"]},
                           device=cloud)
         for d in (edge, cloud):
             torch.cuda.synchronize(d)
@@ -257,6 +283,7 @@ def main():
             text = describe(tokenizer, res["generated_ids"])["text"]
             score = score_fn(case, text)
             ref = results.get(REFERENCE)
+            cref = results.get(CACHE_REF)
             row = {
                 "variant": v["name"], "case_id": case["case_id"], "task": case["task"],
                 "prompt_tokens": plen, "cache": v["cache"], "decode": v["decode"],
@@ -265,6 +292,8 @@ def main():
                 "extracted": score.get("extracted"), "ok": bool(score["ok"]),
                 "same_as_ref": bool(ref is not None and torch.equal(ref["generated_ids"],
                                                                     res["generated_ids"])),
+                "same_as_cache_ref": bool(cref is not None and torch.equal(
+                    cref["generated_ids"], res["generated_ids"])),
                 **run_summary(res["split_steps"]), **res["resources"],
             }
             case_rows.append(row)
@@ -272,10 +301,15 @@ def main():
                 step_rows.append({"case_id": case["case_id"], "variant": v["name"], **st})
             print(f"  {v['name']:<24s} ok={row['ok']!s:<5} steps={row['n_steps']:4d} "
                   f"up={row['up_mb']:7.2f} MB edge={row['edge_ms']:6.0f} ms "
-                  f"cloud={row['cloud_ms']:6.0f} ms {text[-50:]!r}", flush=True)
+                  f"cloud={row['cloud_ms']:6.0f} ms "
+                  f"{'=K2 ' if v['reuse'] and row['same_as_cache_ref'] else ''}"
+                  f"{text[-50:]!r}", flush=True)
         ref_ok = next(r["ok"] for r in case_rows if r["variant"] == REFERENCE)
+        cref_ok = next((r["ok"] for r in case_rows if r["variant"] == CACHE_REF), None)
         for r in case_rows:
             r["ref_ok"] = ref_ok
+            if cref_ok is not None:
+                r["cache_ref_ok"] = cref_ok
         runs.extend(case_rows)
         pd.DataFrame(runs).to_csv(OUT / "runs.csv", index=False)
         steps_path = OUT / "steps.csv"
@@ -304,9 +338,12 @@ def main():
         "python": platform.python_version(),
     }, indent=2, default=str), encoding="utf-8")
     print("\nExp13 completed. Output:", OUT)
-    print(summary[["variant", "runs", "acc", "regressions", "improvements", "mcnemar_p",
-                   "mean_steps", "mean_up_mb", "up_reduction_vs_ref", "mean_edge_ms",
-                   "mean_cloud_ms"]].to_string(index=False))
+    show = ["variant", "runs", "acc", "regressions", "improvements", "mcnemar_p",
+            "mean_steps", "mean_up_mb", "up_reduction_vs_ref", "mean_edge_ms", "mean_cloud_ms"]
+    if any(v["reuse"] for v in variants) and "same_as_cache_ref" in summary:
+        show += ["mean_block_start_mb", "same_as_cache_ref", "regressions_vs_cache_ref",
+                 "improvements_vs_cache_ref", "mcnemar_p_vs_cache_ref"]
+    print(summary[show].to_string(index=False))
     view = em_summary[(em_summary.rtt_ms == 20) & (em_summary.edge_slowdown == 3.0)]
     split = view[~view.variant.str.startswith("cloud_only")]
     print("\nEmulated split latency (s), RTT 20 ms, edge 3x slower:")

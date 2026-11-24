@@ -1,53 +1,0 @@
-Loading checkpoint shards:   0%|          | 0/6 [00:00<?, ?it/s]Loading checkpoint shards:  17%|█▋        | 1/6 [00:00<00:01,  4.24it/s]Loading checkpoint shards:  33%|███▎      | 2/6 [00:00<00:00,  4.75it/s]Loading checkpoint shards:  50%|█████     | 3/6 [00:00<00:00,  4.87it/s]Loading checkpoint shards:  67%|██████▋   | 4/6 [00:00<00:00,  5.06it/s]Loading checkpoint shards:  83%|████████▎ | 5/6 [00:00<00:00,  5.44it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:01<00:00,  5.21it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:01<00:00,  5.08it/s]
-idle power: edge=286.2 W, cloud=285.0 W
-Exp13 | llada | gsm8k n=2 | split after layer 4 | 64 tokens, blocks of 32 | thresholds [0.9, 0.8, 0.7] | T=0.0 top_p=None
-warmup done
-
-gsm8k_0000 | prompt tokens=92
-  F0_nocache_fixed         ok=True  steps=  64 up=  81.79 MB edge=   767 ms cloud=  4981 ms 'erefore, she makes 9 * $2 = $18 every day.\n#### 18'
-  F1_nocache_thr0.9        ok=True  steps=  51 up=  65.18 MB edge=   603 ms cloud=  3982 ms 'erefore, she makes 9 * $2 = $18 every day.\n#### 18'
-  K1_dual_fixed            ok=True  steps=  64 up=  18.81 MB edge=  2296 ms cloud= 16256 ms '2 per egg, she makes 9 * $2 = $18 per day.\n#### 18'
-  K2_dual_thr0.9           ok=True  steps=  52 up=  15.66 MB edge=  2019 ms cloud= 13173 ms '2 per egg, she makes 9 * $2 = $18 per day.\n#### 18'
-  K2_dual_thr0.8           ok=True  steps=  39 up=  12.26 MB edge=  1563 ms cloud=  9674 ms '2 per egg, she makes 9 * $2 = $18 per day.\n#### 18'
-  K2_dual_thr0.7           ok=True  steps=  27 up=   9.11 MB edge=  1088 ms cloud=  5941 ms '2 per egg, she makes 9 * $2 = $18 per day.\n#### 18'
-  K3_dual_thr0.9_int8      ok=True  steps=  53 up=   9.24 MB edge=  2111 ms cloud=  7295 ms '2 per egg, she makes 9 * $2 = $18 per day.\n#### 18'
-
-gsm8k_0001 | prompt tokens=55
-  F0_nocache_fixed         ok=True  steps=  64 up=  62.39 MB edge=   760 ms cloud=  3890 ms 'number of bolts needed is 2 + 1 = 3 bolts.\n\n#### 3'
-  F1_nocache_thr0.9        ok=True  steps=  31 up=  30.22 MB edge=   284 ms cloud=  1963 ms 'number of bolts needed is 2 + 1 = 3 bolts.\n\n#### 3'
-  K1_dual_fixed            ok=True  steps=  64 up=  18.20 MB edge=  2537 ms cloud= 16453 ms ' number of bolts is 2 + 1 = 3 bolts.\n\n#### 3 bolts'
-  K2_dual_thr0.9           ok=True  steps=  28 up=   8.77 MB edge=  1136 ms cloud=  7348 ms ' number of bolts is 2 + 1 = 3 bolts.\n\n#### 3 bolts'
-  K2_dual_thr0.8           ok=True  steps=  21 up=   6.93 MB edge=   829 ms cloud=  5357 ms 'l number of bolts used is 2 + 1 = 3 bolts.\n\n#### 3'
-  K2_dual_thr0.7           ok=True  steps=  17 up=   5.88 MB edge=   645 ms cloud=  4188 ms 'l number of bolts used is 2 + 1 = 3 bolts.\n\n#### 3'
-  K3_dual_thr0.9_int8      ok=True  steps=  34 up=   5.79 MB edge=  1237 ms cloud=  8757 ms 'ng these together, we get 2 + 1 = 3 bolts.\n\n#### 3'
-
-Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_llada_gsm8k_k4_t64_b32_smoke
-            variant  runs  acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms
-   F0_nocache_fixed     2  1.0            0             0        1.0        64.0   72.090624             0.000000    763.451120    4435.401969
-  F1_nocache_thr0.9     2  1.0            0             0        1.0        41.0   47.698576             0.359375    443.615087    2972.522453
-      K1_dual_fixed     2  1.0            0             0        1.0        64.0   18.506752             0.739128   2416.719192   16354.225536
-     K2_dual_thr0.9     2  1.0            0             0        1.0        40.0   12.214912             0.833994   1577.171600   10260.745518
-     K2_dual_thr0.8     2  1.0            0             0        1.0        30.0    9.593312             0.869535   1195.835384    7515.350216
-     K2_dual_thr0.7     2  1.0            0             0        1.0        22.0    7.496032             0.897170    866.173487    5064.379873
-K3_dual_thr0.9_int8     2  1.0            0             0        1.0        43.5    7.517551             0.897081   1673.927537    8026.185608
-
-Emulated split latency (s), RTT 20 ms, edge 3x slower:
-bandwidth_mbps        1      5     10    25    50    100   1000
-variant                                                        
-F0_nocache_fixed     585.5  124.1  66.4  31.8  20.3  14.5   9.3
-F1_nocache_thr0.9    387.3   82.0  43.8  21.0  13.3   9.5   6.1
-K1_dual_fixed        173.6   55.2  40.4  31.5  28.5  27.1  25.7
-K2_dual_thr0.7        68.4   20.4  14.4  10.8   9.6   9.0   8.4
-K2_dual_thr0.8        88.8   27.4  19.8  15.2  13.6  12.9  12.2
-K2_dual_thr0.9       114.0   35.9  26.1  20.2  18.3  17.3  16.4
-K3_dual_thr0.9_int8   74.5   26.4  20.3  16.7  15.5  14.9  14.4
-
-Cloud-only with the same cache and decoding (s):
-variant
-F0_nocache_fixed        5.93
-F1_nocache_thr0.9       4.00
-K1_dual_fixed          19.49
-K2_dual_thr0.7          6.23
-K2_dual_thr0.8          9.13
-K2_dual_thr0.9         12.38
-K3_dual_thr0.9_int8    10.08
