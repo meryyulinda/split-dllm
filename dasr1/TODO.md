@@ -2,7 +2,8 @@
 
 ## Now
 - [x] **Exp13: Fast-dLLM on the split** (DualCache + parallel decoding): full run done (`outputs/exp13_*_b32/`). Split ~10x faster than the static split, ~2x cloud-only, accuracy unchanged.
-- [ ] **Exp14: block-start row reuse** (`EXP14_NOTES.md`): smoke test, full run.
+- [x] **Exp14: block-start row reuse** (`EXP14_NOTES.md`, `EXP14B_NOTES.md`): full run done (`outputs/exp13_*_reuse/`); bytes -40-51% vs K2, long prompts lose 3/12 (answers stop early); long-prompt/LLaDA timings disturbed.
+- [ ] **Exp14b**: clean rerun on GPUs 1,2 + prompt-only reuse (R4, R5), `experiments/run_exp14b.sh`.
 - [ ] Paper: Exp13/14 section and table; define "block" (token span) in the background; rename Exp8 wording to "layers"; explain greedy Dream in Exp13 (left-to-right blocks, no empty-answer collapse).
 - [ ] **Leakage check for the privacy argument**: how much of the prompt can be recovered from the layer-4 boundary states (train a small inverter), and at deeper splits.
 

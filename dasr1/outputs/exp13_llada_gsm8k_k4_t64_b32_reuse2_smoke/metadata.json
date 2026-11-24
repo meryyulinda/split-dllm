@@ -1,0 +1,101 @@
+{
+  "experiment": "Exp13 Fast-dLLM (DualCache + parallel decoding) on the two-GPU split",
+  "model": "GSAI-ML/LLaDA-8B-Instruct",
+  "arch": "llada",
+  "fastdllm_repo": "../../Fast-dLLM",
+  "dataset": "gsm8k",
+  "n_cases": 2,
+  "split_layer_1based": 4,
+  "new_tokens": 64,
+  "block_length": 32,
+  "thresholds": [
+    0.9
+  ],
+  "temperature": 0.0,
+  "top_p": null,
+  "seed": 42,
+  "anchor_interval": 32,
+  "variants": [
+    {
+      "name": "F0_nocache_fixed",
+      "cache": "none",
+      "decode": "fixed",
+      "threshold": null,
+      "encoding": "bf16",
+      "reuse": false,
+      "refresh_every": 0,
+      "reuse_scope": "all"
+    },
+    {
+      "name": "K2_dual_thr0.9",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "bf16",
+      "reuse": false,
+      "refresh_every": 0,
+      "reuse_scope": "all"
+    },
+    {
+      "name": "K3_dual_thr0.9_int8",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "int8_delta",
+      "reuse": false,
+      "refresh_every": 0,
+      "reuse_scope": "all"
+    },
+    {
+      "name": "R1_dual_thr0.9_reuse",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "bf16",
+      "reuse": true,
+      "refresh_every": 0,
+      "reuse_scope": "all"
+    },
+    {
+      "name": "R3_dual_thr0.9_reuse_int8",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "int8_delta",
+      "reuse": true,
+      "refresh_every": 0,
+      "reuse_scope": "all"
+    },
+    {
+      "name": "R4_dual_thr0.9_reuse_prompt",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "bf16",
+      "reuse": true,
+      "refresh_every": 0,
+      "reuse_scope": "prompt"
+    },
+    {
+      "name": "R5_dual_thr0.9_reuse_prompt_int8",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "int8_delta",
+      "reuse": true,
+      "refresh_every": 0,
+      "reuse_scope": "prompt"
+    }
+  ],
+  "reference": "F0_nocache_fixed",
+  "cloud_only_cache_ref": "K2_dual_thr0.9",
+  "idle_power_w": {
+    "edge": 204.8251177325943,
+    "cloud": 221.35477441285926
+  },
+  "edge_gpu": "NVIDIA RTX A6000",
+  "cloud_gpu": "NVIDIA RTX A6000",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22"
+}

@@ -110,6 +110,7 @@ class KVBlockLink:
     received, and the span that predicts the current block (set_chunk(span=...));
     every other row is taken from the reference the cloud already holds. The
     payload then carries a 1-bit-per-row bitmap of the sent rows.
+    reuse_scope="prompt" reuses prompt rows only and sends every answer row.
     Per-step statistics use the same columns as src.split_runtime.SplitLink, so
     experiments/exp11b_network_emulation.py works unchanged.
     """
@@ -133,12 +134,16 @@ class KVBlockLink:
         self.handles.clear()
 
     def begin(self, *, n_total, encoding="bf16", anchor_interval=32, reuse=False,
-              refresh_every=0):
+              refresh_every=0, reuse_scope="all", n_prompt=None):
         if encoding not in {"bf16", "int8_delta"}:
             raise ValueError(f"encoding={encoding!r}")
         self.n_total, self.encoding = int(n_total), encoding
         self.anchor_interval = int(anchor_interval)
         self.reuse, self.refresh_every = bool(reuse), int(refresh_every or 0)
+        if reuse_scope not in {"all", "prompt"}:
+            raise ValueError(f"reuse_scope={reuse_scope!r}")
+        self.reuse_scope = reuse_scope   # "prompt": reuse prompt rows only, send every answer row
+        self.n_prompt = None if n_prompt is None else int(n_prompt)
         self.ref = None          # (1, n_total, d) on the edge; the cloud holds the same values
         self.valid = None        # (n_total,) rows the cloud holds (reuse only)
         self.sent_tok = None     # (n_total,) token of each row when the cloud last got it
@@ -222,6 +227,10 @@ class KVBlockLink:
                 a, b = max(self.span[0], lo) - lo, min(self.span[1], hi) - lo
                 if b > a:
                     sel[a:b] = True
+            if self.reuse_scope == "prompt" and self.n_prompt is not None:
+                a = max(self.n_prompt, lo) - lo
+                if a < m:
+                    sel[a:] = True
         rows = h if sel is None else h[:, sel]
         r = int(rows.shape[1])
         anchor = (self.step == 1 or self.encoding == "bf16"
@@ -398,7 +407,7 @@ def kv_generate(model, arch, tokenizer, ids, gen_length, block_length, seed, *,
 
     set_seed(int(seed))
     if link is not None:
-        link.begin(n_total=n, **(link_cfg or {}))
+        link.begin(n_total=n, n_prompt=lp, **(link_cfg or {}))
     torch.cuda.synchronize(device)
     start = time.perf_counter()
     try:

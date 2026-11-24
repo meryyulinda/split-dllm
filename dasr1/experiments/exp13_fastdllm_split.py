@@ -19,6 +19,8 @@ Exp14, block-start row reuse (same script, run_exp14.sh selects these):
   R1_dual_thr<g>_reuse       K2 + row reuse at every block start
   R2_dual_thr<g>_reuse_r<m>  R1 with all rows sent at every m-th block start
   R3_dual_thr<g>_reuse_int8  R1 + INT8 delta for the rows that are sent
+  R4_dual_thr<g>_reuse_prompt       reuse prompt rows only (every answer row is sent)
+  R5_dual_thr<g>_reuse_prompt_int8  R4 + INT8 delta for the rows that are sent
   Row reuse is also compared with K2 (cache_ref): same_as_cache_ref, flips, McNemar.
 Quality is compared with F0 (paired flips, exact McNemar test). Timing and bytes
 are measured per step; exp11b's emulation is applied at the end. Every variant also
@@ -92,9 +94,11 @@ GIB = 2 ** 30
 REFERENCE = "F0_nocache_fixed"
 
 
-def V(name, cache, decode, threshold=None, encoding="bf16", reuse=False, refresh_every=0):
+def V(name, cache, decode, threshold=None, encoding="bf16", reuse=False, refresh_every=0,
+      reuse_scope="all"):
     return {"name": name, "cache": cache, "decode": decode, "threshold": threshold,
-            "encoding": encoding, "reuse": reuse, "refresh_every": refresh_every}
+            "encoding": encoding, "reuse": reuse, "refresh_every": refresh_every,
+            "reuse_scope": reuse_scope}
 
 
 def gname(g):
@@ -112,6 +116,10 @@ ALL_VARIANTS = [
     V(f"R2_dual_thr{gname(g0)}_reuse_r{REUSE_REFRESH}", "dual", "threshold", g0, reuse=True,
       refresh_every=REUSE_REFRESH),
     V(f"R3_dual_thr{gname(g0)}_reuse_int8", "dual", "threshold", g0, "int8_delta", reuse=True),
+    V(f"R4_dual_thr{gname(g0)}_reuse_prompt", "dual", "threshold", g0, reuse=True,
+      reuse_scope="prompt"),
+    V(f"R5_dual_thr{gname(g0)}_reuse_prompt_int8", "dual", "threshold", g0, "int8_delta",
+      reuse=True, reuse_scope="prompt"),
 ]
 CACHE_REF = f"K2_dual_thr{gname(g0)}"
 
@@ -249,7 +257,8 @@ def main():
                           cache=v["cache"], decode=v["decode"], threshold=v["threshold"],
                           temperature=TEMPERATURE, top_p=TOP_P, link=link,
                           link_cfg={"encoding": v["encoding"], "anchor_interval": ANCHOR,
-                                    "reuse": v["reuse"], "refresh_every": v["refresh_every"]},
+                                    "reuse": v["reuse"], "refresh_every": v["refresh_every"],
+                                    "reuse_scope": v["reuse_scope"]},
                           device=cloud)
         for d in (edge, cloud):
             torch.cuda.synchronize(d)

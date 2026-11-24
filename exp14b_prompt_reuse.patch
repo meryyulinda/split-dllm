@@ -1,0 +1,249 @@
+diff --git a/dasr1/EXP14B_NOTES.md b/dasr1/EXP14B_NOTES.md
+new file mode 100644
+index 0000000..121d9a7
+--- /dev/null
++++ b/dasr1/EXP14B_NOTES.md
+@@ -0,0 +1,23 @@
++# Exp14b: clean rerun of Exp14 + prompt-only row reuse
++
++See EXP14_NOTES.md for the idea and variants R1-R3.
++## Exp14 first full run (outputs/exp13_*_reuse/)
++
++* Row reuse works as intended for bytes: R1 cuts uplink vs K2 by 40-51%, R3 (+INT8) by 66-68%.
++* Accuracy: no significant change on GSM8K (Dream, LLaDA), but on the long prompts R1/R2 lose 3 of 12 answers vs K2. The lost answers stop early (mean answer length 207 vs 234 characters): the reused rows of the future, still-masked blocks keep the cloud's "short answer" state from earlier blocks.
++* R2 (refresh every 2nd block start) does not fix the long prompts.
++* Timings of the long-prompt and LLaDA workloads were disturbed (a llama-server on GPU 0, the cloud GPU, was active ~35% of the time); Dream GSM8K is clean.
++
++Exp14b (`experiments/run_exp14b.sh`, outputs `..._reuse2/`) reruns on GPUs 1,2 and adds
++
++| Variant | What it is |
++|---|---|
++| `R4_dual_thr0.9_reuse_prompt` | reuse prompt rows only; every answer row is sent at block start |
++| `R5_dual_thr0.9_reuse_prompt_int8` | R4 + INT8 delta for the rows that are sent |
++
++If R4 keeps K2's accuracy, prompt rows are safe to reuse and the stale future answer rows caused the losses. Texts, steps and bytes of F0/K2/K3/R1/R3 are deterministic and are reproduced; only the timings change.
++
++```bash
++SMOKE=1 SKIP_IDLE_CHECK=1 bash experiments/run_exp14b.sh > exp14b_smoke.log 2>&1
++nohup bash experiments/run_exp14b.sh > exp14b.log 2>&1 &
++```
+diff --git a/dasr1/TODO.md b/dasr1/TODO.md
+index 92db5ad..495f5e8 100644
+--- a/dasr1/TODO.md
++++ b/dasr1/TODO.md
+@@ -2,7 +2,8 @@
+ 
+ ## Now
+ - [x] **Exp13: Fast-dLLM on the split** (DualCache + parallel decoding): full run done (`outputs/exp13_*_b32/`). Split ~10x faster than the static split, ~2x cloud-only, accuracy unchanged.
+-- [ ] **Exp14: block-start row reuse** (`EXP14_NOTES.md`): smoke test, full run.
++- [x] **Exp14: block-start row reuse** (`EXP14_NOTES.md`, `EXP14B_NOTES.md`): full run done (`outputs/exp13_*_reuse/`); bytes -40-51% vs K2, long prompts lose 3/12 (answers stop early); long-prompt/LLaDA timings disturbed.
++- [ ] **Exp14b**: clean rerun on GPUs 1,2 + prompt-only reuse (R4, R5), `experiments/run_exp14b.sh`.
+ - [ ] Paper: Exp13/14 section and table; define "block" (token span) in the background; rename Exp8 wording to "layers"; explain greedy Dream in Exp13 (left-to-right blocks, no empty-answer collapse).
+ - [ ] **Leakage check for the privacy argument**: how much of the prompt can be recovered from the layer-4 boundary states (train a small inverter), and at deeper splits.
+ 
+diff --git a/dasr1/experiments/exp13_fastdllm_split.py b/dasr1/experiments/exp13_fastdllm_split.py
+index 9baec08..75872fb 100644
+--- a/dasr1/experiments/exp13_fastdllm_split.py
++++ b/dasr1/experiments/exp13_fastdllm_split.py
+@@ -19,6 +19,8 @@ Exp14, block-start row reuse (same script, run_exp14.sh selects these):
+   R1_dual_thr<g>_reuse       K2 + row reuse at every block start
+   R2_dual_thr<g>_reuse_r<m>  R1 with all rows sent at every m-th block start
+   R3_dual_thr<g>_reuse_int8  R1 + INT8 delta for the rows that are sent
++  R4_dual_thr<g>_reuse_prompt       reuse prompt rows only (every answer row is sent)
++  R5_dual_thr<g>_reuse_prompt_int8  R4 + INT8 delta for the rows that are sent
+   Row reuse is also compared with K2 (cache_ref): same_as_cache_ref, flips, McNemar.
+ Quality is compared with F0 (paired flips, exact McNemar test). Timing and bytes
+ are measured per step; exp11b's emulation is applied at the end. Every variant also
+@@ -92,9 +94,11 @@ GIB = 2 ** 30
+ REFERENCE = "F0_nocache_fixed"
+ 
+ 
+-def V(name, cache, decode, threshold=None, encoding="bf16", reuse=False, refresh_every=0):
++def V(name, cache, decode, threshold=None, encoding="bf16", reuse=False, refresh_every=0,
++      reuse_scope="all"):
+     return {"name": name, "cache": cache, "decode": decode, "threshold": threshold,
+-            "encoding": encoding, "reuse": reuse, "refresh_every": refresh_every}
++            "encoding": encoding, "reuse": reuse, "refresh_every": refresh_every,
++            "reuse_scope": reuse_scope}
+ 
+ 
+ def gname(g):
+@@ -112,6 +116,10 @@ ALL_VARIANTS = [
+     V(f"R2_dual_thr{gname(g0)}_reuse_r{REUSE_REFRESH}", "dual", "threshold", g0, reuse=True,
+       refresh_every=REUSE_REFRESH),
+     V(f"R3_dual_thr{gname(g0)}_reuse_int8", "dual", "threshold", g0, "int8_delta", reuse=True),
++    V(f"R4_dual_thr{gname(g0)}_reuse_prompt", "dual", "threshold", g0, reuse=True,
++      reuse_scope="prompt"),
++    V(f"R5_dual_thr{gname(g0)}_reuse_prompt_int8", "dual", "threshold", g0, "int8_delta",
++      reuse=True, reuse_scope="prompt"),
+ ]
+ CACHE_REF = f"K2_dual_thr{gname(g0)}"
+ 
+@@ -249,7 +257,8 @@ def main():
+                           cache=v["cache"], decode=v["decode"], threshold=v["threshold"],
+                           temperature=TEMPERATURE, top_p=TOP_P, link=link,
+                           link_cfg={"encoding": v["encoding"], "anchor_interval": ANCHOR,
+-                                    "reuse": v["reuse"], "refresh_every": v["refresh_every"]},
++                                    "reuse": v["reuse"], "refresh_every": v["refresh_every"],
++                                    "reuse_scope": v["reuse_scope"]},
+                           device=cloud)
+         for d in (edge, cloud):
+             torch.cuda.synchronize(d)
+diff --git a/dasr1/experiments/run_exp14b.sh b/dasr1/experiments/run_exp14b.sh
+new file mode 100644
+index 0000000..0e8a166
+--- /dev/null
++++ b/dasr1/experiments/run_exp14b.sh
+@@ -0,0 +1,102 @@
++#!/usr/bin/env bash
++# Exp14b: rerun of Exp14 on clean GPUs, adding prompt-only row reuse (R4, R5).
++# Exp14's long-prompt and LLaDA timings were disturbed by another job on the cloud GPU;
++# texts, steps and bytes are deterministic (greedy) and are reproduced here.
++# Same three workloads as Exp13:
++#   1. Dream, GSM8K (30)        2. Dream, long prompts (12)        3. LLaDA, GSM8K (30)
++# Run from dasr1/:
++#   SMOKE=1 SKIP_IDLE_CHECK=1 bash experiments/run_exp14b.sh > exp14b_smoke.log 2>&1   # 2 questions, 64 tokens
++#   nohup bash experiments/run_exp14b.sh > exp14b.log 2>&1 &                            # full run, idle GPUs
++#   GPUS=0,1 ...   other GPUs (first = cloud, second = edge). Default 1,2: GPU 0 hosts a
++#                  llama-server that wakes up on requests and disturbed Exp14's timings.
++# Outputs: outputs/exp13_<model>_<dataset>_k4_t<tokens>_b32_reuse2[_smoke]/
++set -euo pipefail
++
++export CUDA_DEVICE_ORDER=PCI_BUS_ID
++GPUS="${GPUS:-1,2}"
++export CUDA_VISIBLE_DEVICES="$GPUS"      # cuda:0 = first GPU (cloud), cuda:1 = second GPU (edge)
++echo "cloud = GPU ${GPUS%,*}, edge = GPU ${GPUS#*,}"
++SMOKE="${SMOKE:-0}"
++SKIP_IDLE_CHECK="${SKIP_IDLE_CHECK:-0}"
++
++if [ "$SKIP_IDLE_CHECK" != "1" ]; then
++  for gpu in ${GPUS//,/ }; do
++    max_util=0
++    for _ in 1 2 3 4 5; do
++      u=$(nvidia-smi -i "$gpu" --query-gpu=utilization.gpu --format=csv,noheader,nounits | tr -d ' ')
++      [ "$u" -gt "$max_util" ] && max_util=$u
++      sleep 1
++    done
++    echo "GPU $gpu: max utilization over 5 s = ${max_util}%"
++    if [ "$max_util" -gt 10 ]; then
++      echo "GPU $gpu is busy right now; try again later (or SKIP_IDLE_CHECK=1 for a smoke test)."
++      nvidia-smi -i "$gpu"; exit 1
++    fi
++  done
++fi
++
++nvidia-smi pmon -s um -d 5 -o T > "gpu_pmon_exp14b$([ "$SMOKE" = "1" ] && echo _smoke).log" 2>&1 &
++PMON_PID=$!
++trap 'kill $PMON_PID 2>/dev/null || true' EXIT
++
++run() {  # $1 = label, $2 = Python assignments that override config values
++  echo; echo "=== $1  ($(date '+%F %T'))"
++  python - "$2" <<'PY'
++import runpy
++import sys
++
++import configs.experiment_config as c
++
++exec(sys.argv[1], vars(c))
++print({k: getattr(c, k) for k in ("EXP13_MODEL", "EXP13_DATASET", "EXP13_N_QUESTIONS",
++                                  "EXP13_NEW_TOKENS", "EXP13_OUTPUT_TAG",
++                                  "EXP13_VARIANT_NAMES")}, flush=True)
++sys.argv = ["experiments/exp13_fastdllm_split.py"]
++runpy.run_path("experiments/exp13_fastdllm_split.py", run_name="__main__")
++PY
++}
++
++if [ "$SMOKE" = "1" ]; then
++  SIZE_G='EXP13_N_QUESTIONS = 2
++EXP13_NEW_TOKENS = 64
++EXP13_OUTPUT_TAG = "_reuse2_smoke"'
++  SIZE_A="$SIZE_G"
++else
++  SIZE_G='EXP13_N_QUESTIONS = 30
++EXP13_NEW_TOKENS = 256
++EXP13_OUTPUT_TAG = "_reuse2"'
++  SIZE_A='EXP13_N_QUESTIONS = 12
++EXP13_NEW_TOKENS = 128
++EXP13_OUTPUT_TAG = "_reuse2"'
++fi
++
++# F0 is the quality reference the script requires; K2/K3 are the Exp13 baselines
++# (K2 = cache_ref, run before the R* variants in the same process).
++COMMON='
++EXP13_BLOCK_LENGTH = 32
++EXP13_THRESHOLDS = [0.9]
++EXP13_SPLIT_LAYER = 4
++EXP13_EDGE_DEVICE = "cuda:1"
++EXP13_CLOUD_DEVICE = "cuda:0"
++EXP13_ANCHOR_INTERVAL = 32
++EXP13_RESUME = True
++EXP14_REFRESH_EVERY = 2
++EXP13_VARIANT_NAMES = ["F0_nocache_fixed", "K2_dual_thr0.9", "K3_dual_thr0.9_int8",
++                       "R1_dual_thr0.9_reuse", "R3_dual_thr0.9_reuse_int8",
++                       "R4_dual_thr0.9_reuse_prompt", "R5_dual_thr0.9_reuse_prompt_int8"]
++'
++
++run "1/3 Dream, GSM8K" "$COMMON
++EXP13_MODEL = \"dream\"
++EXP13_DATASET = \"gsm8k\"
++$SIZE_G"
++run "2/3 Dream, long prompts" "$COMMON
++EXP13_MODEL = \"dream\"
++EXP13_DATASET = \"authored\"
++$SIZE_A"
++run "3/3 LLaDA, GSM8K" "$COMMON
++EXP13_MODEL = \"llada\"
++EXP13_DATASET = \"gsm8k\"
++$SIZE_G"
++
++echo; echo "Done ($(date '+%F %T'))."
+diff --git a/dasr1/src/fastdllm_split.py b/dasr1/src/fastdllm_split.py
+index 9383650..4e3d897 100644
+--- a/dasr1/src/fastdllm_split.py
++++ b/dasr1/src/fastdllm_split.py
+@@ -110,6 +110,7 @@ class KVBlockLink:
+     received, and the span that predicts the current block (set_chunk(span=...));
+     every other row is taken from the reference the cloud already holds. The
+     payload then carries a 1-bit-per-row bitmap of the sent rows.
++    reuse_scope="prompt" reuses prompt rows only and sends every answer row.
+     Per-step statistics use the same columns as src.split_runtime.SplitLink, so
+     experiments/exp11b_network_emulation.py works unchanged.
+     """
+@@ -133,12 +134,16 @@ class KVBlockLink:
+         self.handles.clear()
+ 
+     def begin(self, *, n_total, encoding="bf16", anchor_interval=32, reuse=False,
+-              refresh_every=0):
++              refresh_every=0, reuse_scope="all", n_prompt=None):
+         if encoding not in {"bf16", "int8_delta"}:
+             raise ValueError(f"encoding={encoding!r}")
+         self.n_total, self.encoding = int(n_total), encoding
+         self.anchor_interval = int(anchor_interval)
+         self.reuse, self.refresh_every = bool(reuse), int(refresh_every or 0)
++        if reuse_scope not in {"all", "prompt"}:
++            raise ValueError(f"reuse_scope={reuse_scope!r}")
++        self.reuse_scope = reuse_scope   # "prompt": reuse prompt rows only, send every answer row
++        self.n_prompt = None if n_prompt is None else int(n_prompt)
+         self.ref = None          # (1, n_total, d) on the edge; the cloud holds the same values
+         self.valid = None        # (n_total,) rows the cloud holds (reuse only)
+         self.sent_tok = None     # (n_total,) token of each row when the cloud last got it
+@@ -222,6 +227,10 @@ class KVBlockLink:
+                 a, b = max(self.span[0], lo) - lo, min(self.span[1], hi) - lo
+                 if b > a:
+                     sel[a:b] = True
++            if self.reuse_scope == "prompt" and self.n_prompt is not None:
++                a = max(self.n_prompt, lo) - lo
++                if a < m:
++                    sel[a:] = True
+         rows = h if sel is None else h[:, sel]
+         r = int(rows.shape[1])
+         anchor = (self.step == 1 or self.encoding == "bf16"
+@@ -398,7 +407,7 @@ def kv_generate(model, arch, tokenizer, ids, gen_length, block_length, seed, *,
+ 
+     set_seed(int(seed))
+     if link is not None:
+-        link.begin(n_total=n, **(link_cfg or {}))
++        link.begin(n_total=n, n_prompt=lp, **(link_cfg or {}))
+     torch.cuda.synchronize(device)
+     start = time.perf_counter()
+     try:
