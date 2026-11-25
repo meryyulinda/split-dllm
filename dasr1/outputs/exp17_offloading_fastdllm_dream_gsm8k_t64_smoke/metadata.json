@@ -41,12 +41,12 @@
     "edge_slowdown": 3.0
   },
   "idle_power_w": {
-    "edge": 62.193545710324074,
-    "cloud": 286.8981483760857
+    "edge": 61.69671596340299,
+    "cloud": 68.01398353596169
   },
   "anchor_interval": 32,
   "seed": 42,
-  "notes": "cloud-only cloud_s = generation time with the whole model on the cloud GPU; split cloud_s = cloud layers + sampler (CUDA events); no network in this run",
+  "notes": "cloud-only cloud_s = all layers + sampler on the cloud GPU, split cloud_s = cloud layers + sampler; both from the same CUDA events; no network in this run",
   "edge_gpu": "NVIDIA RTX A6000",
   "cloud_gpu": "NVIDIA RTX A6000",
   "torch": "2.5.1+cu124",

@@ -8,8 +8,10 @@ experiment measures that benefit per answer, and how it trades against latency
 and edge memory as the split moves deeper (the boundary rows have the same size
 at every layer, so the bytes sent do not depend on the split layer k):
 
-  1. cloud-only: the whole model on the cloud GPU, same cache and decoding
-     (no link). Cloud GPU time = generation time; NVML energy of the cloud GPU.
+  1. cloud-only: the whole model on the cloud GPU, same cache and decoding. The
+     split hooks stay attached with edge = cloud (nothing is copied), so its GPU
+     time is measured with the same CUDA events as the split: cloud GPU time =
+     all layers + sampler. NVML energy of the cloud GPU.
   2. for every split layer k in EXP17_SPLIT_LAYERS: DASR on two GPUs (no network,
      as Exp11 / Exp13). Cloud GPU time = cloud layers + sampler (CUDA events),
      edge GPU time = edge layers + codec; NVML energy and peak memory per side.
@@ -214,6 +216,10 @@ def main():
     idle_w = measure_idle_w(meter, (edge, cloud), IDLE_SECONDS)
     if idle_w:
         print("idle power: " + ", ".join(f"{k}={v:.1f} W" for k, v in idle_w.items()), flush=True)
+        busy = [k for k, v in idle_w.items() if v > 150]
+        if busy:
+            print(f"WARNING: idle power of {busy} above 150 W -- another job is using the GPU; "
+                  f"energy (and timing) of this run are not valid", flush=True)
     print(f"Exp17 | {BACKEND} | {DATASET} n={len(cases)} | {NEW_TOKENS} tokens | splits {SPLITS} "
           f"of {n_layers} layers | variants {names}", flush=True)
 
@@ -249,9 +255,12 @@ def main():
                "same_as_cloud": bool(ref_ids is None or torch.equal(ref_ids,
                                                                     res["generated_ids"])),
                **r}
-        steps = res.get("split_steps")
-        if steps:  # split run: per-side GPU time from CUDA events, Eq. latency
-            df = pd.DataFrame(steps)
+        df = pd.DataFrame(res["split_steps"])
+        if config == "cloud_only":  # all layers + sampler on the cloud GPU (CUDA events)
+            cloud_s = df[["edge_ms", "encode_ms", "cloud_ms", "sample_ms"]].to_numpy().sum() / 1e3
+            row.update(n_steps=len(df), up_mb=0.0, edge_s=0.0, cloud_s=cloud_s,
+                       cloud_only_latency_s=cloud_s + RTT_MS / 1e3)
+        else:      # split: per-side GPU time from CUDA events, Eq. latency
             row.update(n_steps=len(df), up_mb=df["up_bytes"].sum() / 1e6,
                        edge_s=(df["edge_ms"].sum() + df["encode_ms"].sum()) / 1e3,
                        cloud_s=(df["cloud_ms"].sum() + df["sample_ms"].sum()) / 1e3)
@@ -260,10 +269,6 @@ def main():
             for b in MBPS:
                 row[f"latency_{b:g}mbps_s"] = float(
                     emu.latency_s(terms, b, RTT_MS, EDGE_SLOWDOWN).iloc[0])
-        else:      # cloud-only: the cloud GPU is busy for the whole generation
-            row.update(n_steps=res.get("n_steps"), up_mb=0.0, edge_s=0.0,
-                       cloud_s=res["ms"] / 1e3)
-            row["cloud_only_latency_s"] = res["ms"] / 1e3 + RTT_MS / 1e3
         return row
 
     def save(rows):
@@ -272,19 +277,23 @@ def main():
         runs = [r for r in runs if (r["config"], r["case_id"]) not in keys] + rows
         pd.DataFrame(runs).to_csv(OUT / "runs.csv", index=False)
 
-    # 1) cloud-only: whole model on the cloud GPU (references for answers and cost)
+    # 1) cloud-only: whole model on the cloud GPU (references for answers and cost);
+    #    hooks with edge = cloud give the same CUDA-event timing as the split runs
     ref_ids = {}
     cv = {"name": "cloud_only", "encoding": "bf16", "rows": "all"}
-    run(cv, cases[0], None)  # warm-up
+    place_split(model, SPLITS[0], CLOUD, CLOUD)
+    link = LinkCls(model, SPLITS[0], cloud, cloud)
+    run(cv, cases[0], link)  # warm-up
     print(f"\n=== cloud-only ({time.strftime('%F %T')})", flush=True)
     for case in cases:
-        res, r = run(cv, case, None)
+        res, r = run(cv, case, link)
         ref_ids[case["case_id"]] = res["generated_ids"]
         if ("cloud_only", case["case_id"]) not in have:
             row = record("cloud_only", 0, None, case, res, r, None)
             save([row])
             print(f"  {case['case_id']} ok={row['ok']!s:<5} cloud={row['cloud_s']:6.1f} s "
                   f"energy={row.get('cloud_active_j', float('nan')):7.0f} J", flush=True)
+    link.remove()
     # cloud-only latency for every split row (same case)
     co_lat = {r["case_id"]: r["cloud_only_latency_s"] for r in runs if r["config"] == "cloud_only"}
 
@@ -324,8 +333,8 @@ def main():
         "latency_model": {"rtt_ms": RTT_MS, "bandwidths_mbps": MBPS,
                           "edge_slowdown": EDGE_SLOWDOWN},
         "idle_power_w": idle_w, "anchor_interval": ANCHOR, "seed": SEED,
-        "notes": "cloud-only cloud_s = generation time with the whole model on the cloud GPU; "
-                 "split cloud_s = cloud layers + sampler (CUDA events); no network in this run",
+        "notes": "cloud-only cloud_s = all layers + sampler on the cloud GPU, split cloud_s = "
+                 "cloud layers + sampler; both from the same CUDA events; no network in this run",
         "edge_gpu": torch.cuda.get_device_name(edge), "cloud_gpu": torch.cuda.get_device_name(cloud),
         "torch": torch.__version__, "transformers": transformers.__version__,
         "python": platform.python_version(),

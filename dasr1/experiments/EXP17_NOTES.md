@@ -11,7 +11,8 @@ on the split layer k. Only the work divides differently between the two sides.
 ## Set-up
 - Dream, 10 GSM8K problems, 256 tokens. Two GPUs, no network (as in Exp11 / Exp13).
 - **Cloud-only reference:** the whole model on the cloud GPU, with the same cache and
-  decoding. Its cloud GPU time is the generation time.
+  decoding. The split hooks stay attached with edge = cloud, so it is timed with the
+  same CUDA events as the split runs: cloud GPU time = all layers + sampler.
 - **Split after layer k** = 2, 4, 8, 14, 20 (of 28):
   - cloud GPU time = cloud layers + sampler (CUDA events);
   - edge GPU time = edge layers + codec.
@@ -47,6 +48,10 @@ Outputs: `outputs/exp17_offloading_{dllm_cache,fastdllm}_dream_gsm8k_t256/`
   - `same_as_cloud` should equal `runs` for the bf16 variants at every k. This
     generalizes Exp13C to every split layer and to dLLM-Cache.
   - `acc` vs `cloud_only_acc`.
+
+- **Energy:** if the log warns that the idle power is above 150 W, another job was
+  using the GPU (the smoke test on 25 Nov measured 284 W on the cloud GPU), and the
+  energy and timing of that run are not valid.
 
 ## Limits
 - One cloud GPU serving one user at a time. Capacity with batching is not measured.
