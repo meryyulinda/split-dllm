@@ -1,0 +1,58 @@
+link,case_id,variant,paper_name,encoding,bandwidth_mbps,rtt_ms,trace,edge_slowdown,ping_ms,prompt_tokens,n_steps,up_mb,down_kb,edge_ms,encode_ms,cloud_ms,sample_ms,measured_s,text,extracted,ok,same_as_local,predicted_s,predicted_local_s,wire_up_mb,bytes_match,up_wire_ms,down_wire_ms,edge_sleep_ms,wire_overhead_ms_per_step,final_down_ms,final_down_bytes,edge_has_answer,down_mismatch_steps
+local,gsm8k_0000,S0_split_full,Static split (bf16),bf16,,0.0,,1.0,,99,64,74.7776,0.876,331.0534071922302,0.1052799999015405,1900.23180770874,219.0173109769821,2.470517839305103,"Janet eats 3 eggs for breakfast and bakes 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day selling",18.0,True,True,,,,,,,,,,,,
+local,gsm8k_0000,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,,0.0,,1.0,,99,64,31.927296,0.876,334.96838331222534,0.1010240000905469,1824.7911338806152,211.8864966630936,2.409098654985428,"Janet eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day.",18.0,True,True,,,,,,,,,,,,
+local,gsm8k_0000,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,,0.0,,1.0,,99,64,17.724666,0.876,347.34726333618164,3.7461760379374023,1872.264793395996,213.1828476190567,2.473365874029696,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day selling eggs.",18.0,True,True,,,,,,,,,,,,
+local,gsm8k_0001,S0_split_full,Static split (bf16),bf16,,0.0,,1.0,,60,64,56.886272,0.876,309.8759665489197,0.1029439996927976,1641.2973461151123,215.23683059215543,2.1874093133956194,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,True,,,,,,,,,,,,
+local,gsm8k_0001,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,,0.0,,1.0,,60,64,31.08864,0.876,324.4398727416992,0.1048959997715428,1752.9246406555176,208.19046366214752,2.3226844063028693,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,True,,,,,,,,,,,,
+local,gsm8k_0001,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,,0.0,,1.0,,60,64,16.88601,0.876,334.2303695678711,3.870368033181876,1787.6903972625732,210.0760962963104,2.37240329105407,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,True,,,,,,,,,,,,
+1000mbps_rtt20,gsm8k_0000,S0_split_full,Static split (bf16),bf16,1000.0,20.0,,1.0,20.509454421699047,99,64,74.7776,0.876,376.7292470932007,0.10412799951154739,1905.5230083465576,231.4339201450348,4.582230766303837,"Janet eats 3 eggs for breakfast and bakes 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day selling",18.0,True,True,4.392018111584305,4.3267632348027,74.7776,True,1321.4099165052176,697.9186739772558,0.0,2.204699726288645,10.982625186443329,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0000,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,1000.0,20.0,,1.0,20.509454421699047,99,64,31.927296,0.876,407.8433585166931,0.09702399966772646,2054.914628982544,218.7463674545288,4.397353603504598,"Janet eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day.",18.0,True,True,4.217026754953434,4.201844963147655,31.927296,True,952.5795271620154,700.4197482019663,0.0,1.8370921775622158,10.803828947246075,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0000,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,1000.0,20.0,,1.0,20.509454421699047,99,64,17.724666,0.876,389.99113512039185,5.289887987077236,2071.555486679077,230.86383986473083,4.294131730683148,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day selling eggs.",18.0,True,True,4.119504685651277,4.064998703922843,17.724666,True,844.4323819130659,691.513117402792,0.0,1.7834556768102807,10.837001726031303,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0001,S0_split_full,Static split (bf16),bf16,1000.0,20.0,,1.0,20.509454421699047,60,64,56.886272,0.876,347.12515354156494,0.10204799973871559,1690.8694744110107,225.95040035247803,4.165192918851972,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,True,3.9991442603047926,3.9503295307778044,56.886272,True,1165.1371559128165,693.3031287044287,0.0,1.9272359471444567,10.81832405179739,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0001,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,1000.0,20.0,,1.0,20.509454421699047,60,64,31.08864,0.876,368.4078063964844,0.10339199984446168,1872.70845413208,211.94617462158203,4.147616161033511,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,True,3.981881955149991,4.125210947764747,31.08864,True,942.825885489583,694.5283822715282,0.0,1.697470933767363,10.679235681891441,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0001,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,1000.0,20.0,,1.0,20.509454421699047,60,64,16.88601,0.876,375.0280303955078,4.107840033713728,1945.4057521820068,226.45580911636353,4.136222316883504,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,True,3.966092519727592,3.753529200964198,16.88601,True,834.7091404721141,693.5119489207864,0.0,1.7675937717640693,10.954347439110279,20.0,True,0.0
+100mbps_rtt20,gsm8k_0000,S0_split_full,Static split (bf16),bf16,100.0,20.0,,1.0,20.47635242342949,99,64,74.7776,0.876,379.35484981536865,0.10230399982538074,1918.43363571167,244.06480014324188,10.14705488923937,"Janet eats 3 eggs for breakfast and bakes 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day selling",18.0,True,True,9.804233669670106,9.710813506802701,74.7776,True,6855.39954341948,700.5405444651842,0.0,4.588468873197883,10.625512339174747,20.0,True,0.0
+100mbps_rtt20,gsm8k_0000,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,100.0,20.0,,1.0,20.47635242342949,99,64,31.927296,0.876,380.3168978691101,0.09507200005464256,1975.0944385528564,217.28262317180634,6.658150998875499,"Janet eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day.",18.0,True,True,6.4070427915938275,6.5006733471476545,31.927296,True,3320.705051533878,697.310034185648,0.0,2.87127071436759,10.750208050012589,20.0,True,0.0
+100mbps_rtt20,gsm8k_0000,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,100.0,20.0,,1.0,20.47635242342949,99,64,17.724666,0.876,388.34483337402344,4.339424028992653,2006.9933738708496,221.20566308498383,5.531744902022183,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day selling eggs.",18.0,True,True,5.318926654358849,5.3412377279228425,17.724666,True,2158.157634548843,694.2783324047923,0.0,2.4123844836505555,10.766832157969475,20.0,True,0.0

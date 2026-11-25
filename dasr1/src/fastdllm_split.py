@@ -22,6 +22,11 @@ rows that predict the current block; the cloud reuses its stored copy of every
 other row (approximate, like DualCache itself). refresh_every=m sends all rows at
 every m-th block start.
 
+Exp16 (real link): with `link.wire = src.net_wire.Wire(...)` the boundary rows and
+the committed tokens travel as bytes through a relay process (src/net_wire.py); the
+cloud layers read only the rows decoded from the received bytes. Row reuse is not
+supported on the real link.
+
 This module provides
   load_fastdllm_model(arch, name, repo)   Fast-dLLM's modified Dream / LLaDA model
   KVBlockLink                              split link for variable-length forwards
@@ -127,6 +132,7 @@ class KVBlockLink:
             self.handles.append(layer.register_forward_pre_hook(self._on_cloud_layer,
                                                                 with_kwargs=True))
         self.active = False
+        self.wire = None          # Exp16: src.net_wire.Wire for a real link
 
     def remove(self):
         for h in self.handles:
@@ -144,6 +150,11 @@ class KVBlockLink:
             raise ValueError(f"reuse_scope={reuse_scope!r}")
         self.reuse_scope = reuse_scope   # "prompt": reuse prompt rows only, send every answer row
         self.n_prompt = None if n_prompt is None else int(n_prompt)
+        if self.wire is not None:
+            if self.reuse:
+                raise ValueError("row reuse is not supported on the real link (Exp16)")
+            self.wire.reset()
+        self.cloud_ref = None    # Exp16: the cloud's copy of the INT8 reference
         self.ref = None          # (1, n_total, d) on the edge; the cloud holds the same values
         self.valid = None        # (n_total,) rows the cloud holds (reuse only)
         self.sent_tok = None     # (n_total,) token of each row when the cloud last got it
@@ -198,7 +209,11 @@ class KVBlockLink:
         self.memo = {}
         self.stats.append({"step": self.step, "kind": self.kind, "block": self.block,
                            "offset": self.offset, "n_commits": 0})
-        ids_edge = args[0].to(self.edge)
+        if self.wire is not None:  # Exp16: committed tokens over the real link
+            ids_edge, info = self.wire.downlink(args[0], self.offset, self.step)
+            self.stats[-1].update(info)
+        else:
+            ids_edge = args[0].to(self.edge)
         self.ids = ids_edge
         ev["edge_start"] = self._event(self.edge)
         self.ev.append(ev)
@@ -248,6 +263,7 @@ class KVBlockLink:
             q = torch.clamp(torch.round(delta / scale), -127, 127)
             enc = (ref + q * scale.half().float()).to(h.dtype)
             payload = r * (d + 2)
+            wire_q, wire_scale = q, scale.half().float()
         if sel is not None:
             payload += (m + 7) // 8          # bitmap of the rows that were sent
         if keep_ref:
@@ -270,7 +286,19 @@ class KVBlockLink:
             "up_bytes": UP_HEADER_B + int(payload),
             "full_bytes": self.n_total * row_b,   # static split without cache, for reference
         })
-        hidden = new.to(self.cloud)
+        if self.wire is not None:  # Exp16: real bytes; the cloud decodes what it received
+            if self.cloud_ref is None and self.encoding != "bf16":
+                self.cloud_ref = torch.zeros(1, self.n_total, d, dtype=h.dtype, device=self.cloud)
+            if anchor:
+                hidden, info = self.wire.uplink(self.step, lo, ev, raw=rows)
+            else:
+                hidden, info = self.wire.uplink(self.step, lo, ev, q=wire_q, scale=wire_scale,
+                                                base=self.cloud_ref[:, lo:hi])
+            if self.cloud_ref is not None:
+                self.cloud_ref[:, lo:hi] = hidden
+            self.stats[-1].update(info)
+        else:
+            hidden = new.to(self.cloud)
         kwargs = _move(kwargs, self.cloud, self.memo)
         rest = _move(tuple(args[1:]), self.cloud, self.memo)
         ev["cloud_start"] = self._event(self.cloud)

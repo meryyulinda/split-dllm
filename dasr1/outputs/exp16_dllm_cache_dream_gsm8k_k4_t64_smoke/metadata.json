@@ -1,0 +1,73 @@
+{
+  "experiment": "Exp16 split over a real shaped link vs the latency model",
+  "backend": "dllm_cache",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "dataset": "gsm8k",
+  "new_tokens": 64,
+  "steps": 64,
+  "split_layer_1based": 4,
+  "variants": [
+    {
+      "paper": "Static split (bf16)",
+      "policy": null,
+      "rows": "all",
+      "encoding": "bf16",
+      "name": "S0_split_full"
+    },
+    {
+      "paper": "DASR + dLLM-Cache (bf16)",
+      "policy": [
+        "fixed",
+        25,
+        2,
+        0.25
+      ],
+      "rows": "cache_aware",
+      "encoding": "bf16",
+      "name": "C2_cache_aware"
+    },
+    {
+      "paper": "DASR + dLLM-Cache (INT8)",
+      "policy": [
+        "fixed",
+        25,
+        2,
+        0.25
+      ],
+      "rows": "cache_aware",
+      "encoding": "int8_delta",
+      "name": "C4_cache_aware_int8"
+    }
+  ],
+  "links": [
+    {
+      "mbps": 1000.0,
+      "rtt_ms": 20.0,
+      "n": 2,
+      "trace": null,
+      "mbps_pred": 1000.0,
+      "label": "1000mbps_rtt20"
+    },
+    {
+      "mbps": 100.0,
+      "rtt_ms": 20.0,
+      "n": 1,
+      "trace": null,
+      "mbps_pred": 100.0,
+      "label": "100mbps_rtt20"
+    }
+  ],
+  "edge_slowdown": 1.0,
+  "tcpip_header_bytes_per_1460B": 40,
+  "anchor_interval": 32,
+  "seed": 42,
+  "dream_temperature": 0.1,
+  "block_length": null,
+  "threshold": null,
+  "relay": "src/net_relay.py: one process per direction, fixed rate + delay, FIFO, no loss; halves in one process, messages over TCP through the relays",
+  "edge_gpu": "NVIDIA RTX A6000",
+  "cloud_gpu": "NVIDIA RTX A6000",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22"
+}

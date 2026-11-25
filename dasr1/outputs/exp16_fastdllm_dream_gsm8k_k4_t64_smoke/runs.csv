@@ -1,0 +1,45 @@
+link,case_id,variant,paper_name,encoding,bandwidth_mbps,rtt_ms,trace,edge_slowdown,ping_ms,prompt_tokens,n_steps,up_mb,down_kb,edge_ms,encode_ms,cloud_ms,sample_ms,measured_s,text,extracted,ok,same_as_local,predicted_s,predicted_local_s,wire_up_mb,bytes_match,up_wire_ms,down_wire_ms,edge_sleep_ms,wire_overhead_ms_per_step,final_down_ms,final_down_bytes,edge_has_answer,down_mismatch_steps
+local,gsm8k_0000,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),bf16,,0.0,,1.0,,99,52,13.8064,0.8,283.8286738395691,0.07740799989551306,1602.321922302246,29.501696050167084,1.9256889205425978,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9*$2 = $9 per day.
+#### 9
+The answer is: 9",9.0,False,True,,,,,,,,,,,,
+local,gsm8k_0000,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),int8_delta,,0.0,,1.0,,99,49,7.261654,0.776,274.688542842865,2.71091201948002,1547.9782066345215,29.107200145721436,1.8643830204382539,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs at the farmers market per day.
+#### 9
+The answer is: 9",9.0,False,True,,,,,,,,,,,,
+local,gsm8k_0001,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),bf16,,0.0,,1.0,,60,23,6.594928,0.568,130.96137619018555,0.037887999904341996,704.6358127593994,13.38128000497818,0.8542800778523088,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3.",3.0,True,True,,,,,,,,,,,,
+local,gsm8k_0001,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),int8_delta,,0.0,,1.0,,60,27,4.202728,0.6,145.9496307373047,1.4957440113648772,820.0956420898438,15.182976007461548,0.9878610474988818,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+Therefore, the robe takes a total of 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,True,,,,,,,,,,,,
+1000mbps_rtt20,gsm8k_0000,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),bf16,1000.0,20.0,,1.0,20.454018376767635,99,52,13.8064,0.8,324.29804944992065,0.08057599980384111,1678.520185470581,30.381056010723114,3.294789556413889,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9*$2 = $9 per day.
+#### 9
+The answer is: 9",9.0,False,True,3.1837374669310283,3.0661873001918774,13.8064,True,668.4095179662108,568.7075555324554,0.0,1.666528336512814,10.74200589209795,14.0,True,0.0
+1000mbps_rtt20,gsm8k_0000,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),int8_delta,1000.0,20.0,,1.0,20.454018376767635,99,49,7.261654,0.776,314.03302335739136,2.718752026092261,1582.134620666504,29.47318398952484,3.0798058165237308,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs at the farmers market per day.
+#### 9
+The answer is: 9",9.0,False,True,2.9664590200395122,2.892584301642588,7.261654,True,591.5648275986314,534.6079925075173,0.0,1.7974159205336482,10.804207995533943,14.0,True,0.0
+1000mbps_rtt20,gsm8k_0001,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),bf16,1000.0,20.0,,1.0,20.454018376767635,60,23,6.594928,0.568,148.51875114440918,0.0358399999095127,755.9885730743408,14.339648127555847,1.4870050428435206,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3.",3.0,True,True,1.4316467803462154,1.3617803249544675,6.594928,True,300.25825276970863,254.59343381226063,0.0,1.829900807911708,11.018399149179459,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0001,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),int8_delta,1000.0,20.0,,1.0,20.454018376767635,60,27,4.202728,0.6,186.00112104415894,3.8802559478208423,985.565788269043,17.471584022045135,1.8366496413946152,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+Therefore, the robe takes a total of 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,True,1.7665453732830678,1.5563506168459749,4.202728,True,329.47304751724005,297.27148450911045,0.0,1.9673299269018705,11.15844864398241,14.0,True,0.0
+100mbps_rtt20,gsm8k_0000,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),bf16,100.0,20.0,,1.0,20.480540581047535,99,52,13.8064,0.8,322.1161913871765,0.0726719998056069,1800.8757934570312,33.53273582458496,4.451636666432023,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9*$2 = $9 per day.
+#### 9
+The answer is: 9",9.0,False,True,4.301173392668598,4.060305700191877,13.8064,True,1695.6902872771025,567.7454136312008,0.0,2.2857634790058317,11.079867370426655,14.0,True,0.0
+100mbps_rtt20,gsm8k_0000,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),int8_delta,100.0,20.0,,1.0,20.480540581047535,99,49,7.261654,0.776,334.2622084617615,2.7180480184033513,1695.585105895996,31.97078448534012,3.765253013931215,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs at the farmers market per day.
+#### 9
+The answer is: 9",9.0,False,True,3.625530546861501,3.415479261642588,7.261654,True,1131.9876555353403,539.1311245039105,0.0,2.2474363273316493,10.703114792704582,14.0,True,0.0

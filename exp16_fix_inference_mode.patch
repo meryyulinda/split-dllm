@@ -1,0 +1,20 @@
+--- a/dasr1/src/net_wire.py
++++ b/dasr1/src/net_wire.py
+@@ -246,10 +246,15 @@
+         return ids_edge, {"down_wire_ms": ms, "wire_down_bytes": sent}
+ 
+     def final(self, full_ids):
+-        """Send the last step's commits so the edge holds the answer; returns info."""
++        """Send the last step's commits so the edge holds the answer; returns info.
++
++        Runs in inference mode: Dream's sampler creates the token records inside
++        torch.inference_mode(), and such tensors cannot be updated outside it."""
++        import torch
+         _sync(full_ids.device)
+         t0 = time.perf_counter()
+-        sent = self._send_commits(full_ids, 0, 0)
++        with torch.inference_mode():
++            sent = self._send_commits(full_ids, 0, 0)
+         ms = (time.perf_counter() - t0) * 1e3
+         ok = bool((self.edge_view == full_ids.cpu()).all())
+         return {"final_down_ms": ms, "final_down_bytes": sent, "edge_has_answer": ok,

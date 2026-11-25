@@ -46,6 +46,10 @@ Simulation notes (state these in the paper):
   * Compute time per side is measured with CUDA events on each GPU: edge_ms (embed
     -> layer k-1), encode_ms (codec on the edge), cloud_ms (layer k -> lm_head),
     sample_ms (sampler on the cloud, between lm_head and the next step).
+  * Exp16 (real link): with `link.wire = src.net_wire.Wire(...)` both directions go
+    as bytes through a relay process instead (see src/net_wire.py); the cloud then
+    reads only the rows decoded from the received bytes. exact_delta is not supported
+    on the real link.
 """
 from __future__ import annotations
 
@@ -162,6 +166,7 @@ class SplitLink:
             self.handles.append(layer.register_forward_pre_hook(self._on_cloud_layer,
                                                                 with_kwargs=True))
         self.active = False
+        self.wire = None          # Exp16: src.net_wire.Wire for a real link
 
     def remove(self):
         for h in self.handles:
@@ -171,6 +176,10 @@ class SplitLink:
     # ------------------------------------------------------------------ setup
     def begin(self, *, prompt_len, rows="all", encoding="bf16", controller=None,
               prompt_tail_rows=0, mask_id=None, anchor_interval=32):
+        if self.wire is not None:
+            if encoding == "exact_delta":
+                raise ValueError("the real link (Exp16) supports bf16 and int8_delta only")
+            self.wire.reset()
         if rows not in {"all", "cache_aware"}:
             raise ValueError(f"rows={rows!r}")
         if encoding not in {"bf16", "exact_delta", "int8_delta"}:
@@ -237,7 +246,11 @@ class SplitLink:
         self.step += 1
         self.memo = {}
         self.stats.append({"step": self.step, "n_commits": n_commits})
-        ids_edge = ids.to(self.edge)
+        if self.wire is not None:  # Exp16: committed tokens over the real link
+            ids_edge, info = self.wire.downlink(ids, 0, self.step)
+            self.stats[-1].update(info)
+        else:
+            ids_edge = ids.to(self.edge)
         ev["edge_start"] = self._event(self.edge)
         self.ev.append(ev)
         return (ids_edge,) + tuple(args[1:])
@@ -285,6 +298,7 @@ class SplitLink:
             scale16 = scale.half().float()
             new = (self.ref_edge[:, lo:].float() + q * scale16).to(h.dtype)
             n_rows, payload = n - lo, (n - lo) * (d + 2)
+            wire_q, wire_scale = q, scale16
         if self.encoding != "bf16":  # delta codecs need the synchronized reference
             self.ref_edge[:, lo:] = new
         if anchor:
@@ -292,7 +306,18 @@ class SplitLink:
         ev["encode_end"] = self._event(self.edge)
 
         # "transmit": the cloud keeps its own buffer; rows outside [lo, n) stay stale
-        if self.buf_cloud is None:
+        if self.wire is not None:  # Exp16: real bytes; the cloud decodes what it received
+            if anchor or self.encoding == "bf16":
+                got, info = self.wire.uplink(self.step, lo, ev, raw=sel)
+            else:
+                got, info = self.wire.uplink(self.step, lo, ev, q=wire_q, scale=wire_scale,
+                                             base=self.buf_cloud[:, lo:])
+            self.stats[-1].update(info)
+            if self.buf_cloud is None:  # first step: every row (lo = 0)
+                self.buf_cloud = got.clone()
+            else:
+                self.buf_cloud[:, lo:] = got
+        elif self.buf_cloud is None:
             self.buf_cloud = self.ref_edge.to(self.cloud)
         else:
             self.buf_cloud[:, lo:] = new.to(self.cloud)
