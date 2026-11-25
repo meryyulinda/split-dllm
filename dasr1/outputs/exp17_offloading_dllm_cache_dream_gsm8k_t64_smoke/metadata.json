@@ -1,0 +1,57 @@
+{
+  "experiment": "Exp17 offloading: cloud GPU time and energy per answer vs split layer",
+  "backend": "dllm_cache",
+  "dataset": "gsm8k",
+  "n_cases": 2,
+  "new_tokens": 64,
+  "steps": 64,
+  "split_layers_1based": [
+    4,
+    14
+  ],
+  "n_layers": 28,
+  "variants": [
+    {
+      "paper": "DASR + dLLM-Cache (bf16)",
+      "rows": "cache_aware",
+      "encoding": "bf16",
+      "name": "C2_cache_aware"
+    },
+    {
+      "paper": "DASR + dLLM-Cache (INT8)",
+      "rows": "cache_aware",
+      "encoding": "int8_delta",
+      "name": "C4_cache_aware_int8"
+    }
+  ],
+  "cache_policy": [
+    "fixed",
+    25,
+    2,
+    0.25
+  ],
+  "dream_temperature": 0.1,
+  "block_length": null,
+  "threshold": null,
+  "latency_model": {
+    "rtt_ms": 20.0,
+    "bandwidths_mbps": [
+      10.0,
+      100.0,
+      1000.0
+    ],
+    "edge_slowdown": 3.0
+  },
+  "idle_power_w": {
+    "edge": 59.5800132651718,
+    "cloud": 284.0006331710544
+  },
+  "anchor_interval": 32,
+  "seed": 42,
+  "notes": "cloud-only cloud_s = generation time with the whole model on the cloud GPU; split cloud_s = cloud layers + sampler (CUDA events); no network in this run",
+  "edge_gpu": "NVIDIA RTX A6000",
+  "cloud_gpu": "NVIDIA RTX A6000",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22"
+}
