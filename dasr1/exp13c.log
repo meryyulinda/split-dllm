@@ -1,42 +1,0 @@
-The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
-Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.83it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.35it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.85it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  9.25it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.82it/s]
-/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
-  warnings.warn(
-/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
-  warnings.warn(
-Exp13C | dream | gsm8k n=30 | variants ['K2']
-single-GPU runs done
-  gsm8k_0000 K2: identical
-  gsm8k_0001 K2: identical
-  gsm8k_0002 K2: identical
-  gsm8k_0003 K2: identical
-  gsm8k_0004 K2: identical
-  gsm8k_0005 K2: identical
-  gsm8k_0006 K2: identical
-  gsm8k_0007 K2: identical
-  gsm8k_0008 K2: identical
-  gsm8k_0009 K2: identical
-  gsm8k_0010 K2: identical
-  gsm8k_0011 K2: identical
-  gsm8k_0012 K2: identical
-  gsm8k_0013 K2: identical
-  gsm8k_0014 K2: identical
-  gsm8k_0015 K2: identical
-  gsm8k_0016 K2: identical
-  gsm8k_0017 K2: identical
-  gsm8k_0018 K2: identical
-  gsm8k_0019 K2: identical
-  gsm8k_0020 K2: identical
-  gsm8k_0021 K2: identical
-  gsm8k_0022 K2: identical
-  gsm8k_0023 K2: identical
-  gsm8k_0024 K2: identical
-  gsm8k_0025 K2: identical
-  gsm8k_0026 K2: identical
-  gsm8k_0027 K2: identical
-  gsm8k_0028 K2: identical
-  gsm8k_0029 K2: identical
-
-variant  identical  prompts
-     K2         30       30
-Exp13C completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13c_exactness_dream_gsm8k_k4_t256

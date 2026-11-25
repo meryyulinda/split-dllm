@@ -1,74 +1,0 @@
-cloud = GPU 1, edge = GPU 2
-
-=== 1/2 dLLM-Cache backend  (2026-11-25 18:02:52)
-{'EXP16_BACKEND': 'dllm_cache', 'EXP16_NEW_TOKENS': 64, 'EXP16_LINKS': [(1000, 20, 2), (100, 20, 1)], 'EXP16_VARIANT_NAMES': ['S0_split_full', 'C2_cache_aware', 'C4_cache_aware_int8'], 'EXP16_OUTPUT_TAG': '_smoke'}
-resume: 6 finished runs kept
-Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.01it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.02it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  6.66it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.00it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.94it/s]
-/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
-  warnings.warn(
-/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
-  warnings.warn(
-Exp16 | dllm_cache | gsm8k | split after layer 4 | 64 tokens | variants ['S0_split_full', 'C2_cache_aware', 'C4_cache_aware_int8'] | links ['1000mbps_rtt20', '100mbps_rtt20'] | edge slowdown 1
-warmup done
-
-=== link 1000mbps_rtt20 (2 questions)  (2026-11-25 18:03:10)
-real RTT through the relay: 20.51 ms (set 20 ms)
-  gsm8k_0000 S0_split_full            ok=True  same=True  steps=  64 up=  74.78 MB measured=   4.6 s predicted=   4.4 s (local    4.3)
-  gsm8k_0000 C2_cache_aware           ok=True  same=True  steps=  64 up=  31.93 MB measured=   4.4 s predicted=   4.2 s (local    4.2)
-  gsm8k_0000 C4_cache_aware_int8      ok=True  same=True  steps=  64 up=  17.72 MB measured=   4.3 s predicted=   4.1 s (local    4.1)
-  gsm8k_0001 S0_split_full            ok=True  same=True  steps=  64 up=  56.89 MB measured=   4.2 s predicted=   4.0 s (local    4.0)
-  gsm8k_0001 C2_cache_aware           ok=True  same=True  steps=  64 up=  31.09 MB measured=   4.1 s predicted=   4.0 s (local    4.1)
-  gsm8k_0001 C4_cache_aware_int8      ok=True  same=True  steps=  64 up=  16.89 MB measured=   4.1 s predicted=   4.0 s (local    3.8)
-
-=== link 100mbps_rtt20 (1 questions)  (2026-11-25 18:03:51)
-real RTT through the relay: 20.48 ms (set 20 ms)
-  gsm8k_0000 S0_split_full            ok=True  same=True  steps=  64 up=  74.78 MB measured=  10.1 s predicted=   9.8 s (local    9.7)
-  gsm8k_0000 C2_cache_aware           ok=True  same=True  steps=  64 up=  31.93 MB measured=   6.7 s predicted=   6.4 s (local    6.5)
-  gsm8k_0000 C4_cache_aware_int8      ok=True  same=True  steps=  64 up=  17.72 MB measured=   5.5 s predicted=   5.3 s (local    5.3)
-
-Exp16 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp16_dllm_cache_dream_gsm8k_k4_t64_smoke
-          link             variant  runs  same_as_local  edge_has_answer  bytes_match  ping_ms  measured_s  predicted_s  predicted_local_s  ratio_measured_predicted  mean_abs_err  wire_overhead_ms_per_step
-1000mbps_rtt20       S0_split_full     2              2                2            2   20.509       4.374        4.196              4.139                     1.042         0.042                      2.066
-1000mbps_rtt20      C2_cache_aware     2              2                2            2   20.509       4.272        4.099              4.164                     1.042         0.042                      1.767
-1000mbps_rtt20 C4_cache_aware_int8     2              2                2            2   20.509       4.215        4.043              3.909                     1.043         0.043                      1.776
- 100mbps_rtt20       S0_split_full     1              1                1            1   20.476      10.147        9.804              9.711                     1.035         0.035                      4.588
- 100mbps_rtt20      C2_cache_aware     1              1                1            1   20.476       6.658        6.407              6.501                     1.039         0.039                      2.871
- 100mbps_rtt20 C4_cache_aware_int8     1              1                1            1   20.476       5.532        5.319              5.341                     1.040         0.040                      2.412
-
-=== 2/2 Fast-dLLM backend  (2026-11-25 18:04:15)
-{'EXP16_BACKEND': 'fastdllm', 'EXP16_NEW_TOKENS': 64, 'EXP16_LINKS': [(1000, 20, 2), (100, 20, 1)], 'EXP16_VARIANT_NAMES': ['K2_dual_thr0.9', 'K3_dual_thr0.9_int8'], 'EXP16_OUTPUT_TAG': '_smoke'}
-The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
-Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  5.39it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  6.86it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  6.88it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.72it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.22it/s]
-/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
-  warnings.warn(
-/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
-  warnings.warn(
-Exp16 | fastdllm | gsm8k | split after layer 4 | 64 tokens | variants ['K2_dual_thr0.9', 'K3_dual_thr0.9_int8'] | links ['1000mbps_rtt20', '100mbps_rtt20'] | edge slowdown 1
-warmup done
-
-=== link local (2 questions)  (2026-11-25 18:04:28)
-  gsm8k_0000 K2_dual_thr0.9           ok=False same=True  steps=  52 up=  13.81 MB measured=   1.9 s
-  gsm8k_0000 K3_dual_thr0.9_int8      ok=False same=True  steps=  49 up=   7.26 MB measured=   1.9 s
-  gsm8k_0001 K2_dual_thr0.9           ok=True  same=True  steps=  23 up=   6.59 MB measured=   0.9 s
-  gsm8k_0001 K3_dual_thr0.9_int8      ok=True  same=True  steps=  27 up=   4.20 MB measured=   1.0 s
-
-=== link 1000mbps_rtt20 (2 questions)  (2026-11-25 18:04:33)
-real RTT through the relay: 20.45 ms (set 20 ms)
-  gsm8k_0000 K2_dual_thr0.9           ok=False same=True  steps=  52 up=  13.81 MB measured=   3.3 s predicted=   3.2 s (local    3.1)
-  gsm8k_0000 K3_dual_thr0.9_int8      ok=False same=True  steps=  49 up=   7.26 MB measured=   3.1 s predicted=   3.0 s (local    2.9)
-  gsm8k_0001 K2_dual_thr0.9           ok=True  same=True  steps=  23 up=   6.59 MB measured=   1.5 s predicted=   1.4 s (local    1.4)
-  gsm8k_0001 K3_dual_thr0.9_int8      ok=True  same=True  steps=  27 up=   4.20 MB measured=   1.8 s predicted=   1.8 s (local    1.6)
-
-=== link 100mbps_rtt20 (1 questions)  (2026-11-25 18:04:43)
-real RTT through the relay: 20.48 ms (set 20 ms)
-  gsm8k_0000 K2_dual_thr0.9           ok=False same=True  steps=  52 up=  13.81 MB measured=   4.5 s predicted=   4.3 s (local    4.1)
-  gsm8k_0000 K3_dual_thr0.9_int8      ok=False same=True  steps=  49 up=   7.26 MB measured=   3.8 s predicted=   3.6 s (local    3.4)
-
-Exp16 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp16_fastdllm_dream_gsm8k_k4_t64_smoke
-          link             variant  runs  same_as_local  edge_has_answer  bytes_match  ping_ms  measured_s  predicted_s  predicted_local_s  ratio_measured_predicted  mean_abs_err  wire_overhead_ms_per_step
-1000mbps_rtt20      K2_dual_thr0.9     2              2                2            2   20.454       2.391        2.308              2.214                     1.036         0.037                      1.748
-1000mbps_rtt20 K3_dual_thr0.9_int8     2              2                2            2   20.454       2.458        2.367              2.224                     1.039         0.039                      1.882
- 100mbps_rtt20      K2_dual_thr0.9     1              1                1            1   20.481       4.452        4.301              4.060                     1.035         0.035                      2.286
- 100mbps_rtt20 K3_dual_thr0.9_int8     1              1                1            1   20.481       3.765        3.626              3.415                     1.039         0.039                      2.247
-
-Done (2026-11-25 18:04:53).

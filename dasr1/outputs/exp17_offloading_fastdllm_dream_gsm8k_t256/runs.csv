@@ -1,0 +1,614 @@
+config,split_layer,case_id,variant,paper_name,edge_layer_share,text,extracted,ok,same_as_cloud,wall_s,prompt_tokens,edge_peak_gib,cloud_peak_gib,edge_energy_j,edge_active_j,cloud_energy_j,cloud_active_j,n_steps,up_mb,edge_s,cloud_s,cloud_only_latency_s,latency_10mbps_s,latency_100mbps_s,latency_1000mbps_s
+cloud_only,0,gsm8k_0000,cloud_only,Cloud-only + Fast-dLLM,0.0,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,2.5477894078940153,99,0.0,14.483222007751465,179.74100005626678,-1.2405274835160185,619.8079999685287,439.11297971976546,63,0.0,0.0,2.5442879356696504,2.5642879356696504,,,
+cloud_only,0,gsm8k_0001,cloud_only,Cloud-only + Fast-dLLM,0.0,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3.",3.0,True,True,2.0451165614649653,60,0.0,14.45696210861206,145.6840000152588,0.40970138443790916,473.6010000705719,328.5566815173936,50,0.0,0.0,2.0421032154693965,2.0621032154693966,,,
+cloud_only,0,gsm8k_0002,cloud_only,Cloud-only + Fast-dLLM,0.0,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The increased value of the house is $130,000 * 150% = $195,000.
+The profit is $195,000 - $130,000 = $65,000.
+#### 65000
+The answer is: 65000",65000.0,False,True,2.0695697041228414,91,0.0,14.477835655212402,137.0569999217987,-9.954321045977707,493.70699989795685,346.9284088440686,50,0.0,0.0,2.0667221822809663,2.0867221822809663,,,
+cloud_only,0,gsm8k_0003,cloud_only,Cloud-only + Fast-dLLM,0.0,"James runs 3 sprints 3 times a week, so he runs 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,1.7255126032978296,69,0.0,14.46302318572998,117.51199996471405,-5.05931843640991,444.83200001716614,322.45472117836204,42,0.0,0.0,1.7229092143297895,1.7429092143297895,,,
+cloud_only,0,gsm8k_0004,cloud_only,Cloud-only + Fast-dLLM,0.0,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed.
+In the afternoon, she gives her chickens 25 cups of feed.
+So far, she has given her chickens 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,3.1429786505177617,145,0.0,14.514194965362549,71.65299999713898,-151.6076334889752,731.1290000677109,508.22180485875646,72,0.0,0.0,3.1396202123367694,3.1596202123367694,,,
+cloud_only,0,gsm8k_0005,cloud_only,Cloud-only + Fast-dLLM,0.0,"First, let's calculate the cost of the first 8 glasses, which are sold at the regular price of $5 each. So, the cost of the first 8 glasses is 8 * $5 = $40.
+Next, let's calculate the cost of the remaining 8 glasses, which are sold at a discount of 60% of the regular price. So, the cost of each of the remaining 8 glasses is 60% of $5, which is 0.6 * $5 = $3. Therefore, the cost of the remaining 8 glasses is 8 * $3 = $24.
+Finally, let's add the cost of the first 8 glasses and the cost of the remaining 8 glasses to find the total cost. So, the total cost is $40 + $24 = $64.
+Therefore, Kylar needs to pay $64 for the 16 glasses.
+The answer is: 64",64.0,True,True,4.42222204990685,90,0.0,14.47716236114502,69.47800004482269,-244.6533403369583,1039.023999929428,725.389952948695,112,0.0,0.0,4.417067403210677,4.437067403210676,,,
+cloud_only,0,gsm8k_0006,cloud_only,Cloud-only + Fast-dLLM,0.0,"If Seattle has 20 sheep, and Charleston has 4 times as many sheep as Seattle, then Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Therefore, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep together.
+The answer is: 260",260.0,True,True,2.0075353514403105,76,0.0,14.46773624420166,38.61699998378754,-103.98772761577709,496.62400007247925,354.24502641999715,49,0.0,0.0,2.004342313527246,2.024342313527246,,,
+cloud_only,0,gsm8k_0007,cloud_only,Cloud-only + Fast-dLLM,0.0,"Carla can download 2 GB/minute, so she can download 200 GB / 2 GB/minute = 100 minutes.
+40% of the way through the download is 40% * 100 minutes = 40 minutes.
+So Carla downloads 40 minutes * 2 GB/minute = 80 GB before the restart.
+She still has 200 GB - 80 GB = 120 GB left to download.
+So it takes her 120 GB / 2 GB/minute = 60 minutes to download the remaining 120 GB.
+Then it takes her 20 minutes to restart the download.
+So it takes her 60 minutes + 20 minutes = 80 minutes to download the remaining 120 GB.
+Therefore, it takes her 80 minutes + 40 minutes = 120 minutes to download the file.
+The answer is: 120",120.0,False,True,5.550576210953295,104,0.0,14.486588478088379,87.5,-306.7836712766862,1265.4099999666214,871.7505092241937,142,0.0,0.0,5.545141148055904,5.565141148055903,,,
+cloud_only,0,gsm8k_0008,cloud_only,Cloud-only + Fast-dLLM,0.0,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+During the first 2 hours in standstill traffic, he covers no distance.
+During the next half-hour, he drives at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+During the remaining 1.5 hours, he drives at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+In total, he covers a distance of 0 + 15 + 120 = 135 miles.
+Therefore, at the end of the 4 hours, he is 180 - 135 = 45 miles from home.
+The answer is: 45",45.0,True,True,3.906633999198675,138,0.0,14.50948190689087,67.47200000286102,-210.03468344718584,938.3309999704361,661.2636303508993,95,0.0,0.0,3.9016343984800623,3.9216343984800623,,,
+cloud_only,0,gsm8k_0009,cloud_only,Cloud-only + Fast-dLLM,0.0,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours is $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is 1.2 x $10 = $12 per hour.
+Her earnings for the overtime hours is $12 x 5 = $60.
+Therefore, Eliza's total earnings for this week is $400 + $60 = $460.
+The answer is: 460",460.0,True,True,3.3836102169007063,94,0.0,14.47985553741455,50.912999987602234,-189.440831359898,806.5490000247955,566.5756667648163,85,0.0,0.0,3.379494712590822,3.399494712590822,,,
+k2:K2_dual_thr0.9,2,gsm8k_0000,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.07142857142857142,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,2.582423240877688,99,1.9446420669555664,12.593921661376953,196.38199996948242,12.940267524803687,597.7720000743866,414.62066960905406,63,32.973808,0.21433139208005741,2.3547048696875574,2.5642879356696504,30.63837744592773,6.8957668859277295,4.5215058299277295
+k2:K3_dual_thr0.9_int8,2,gsm8k_0000,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.07142857142857142,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,False,2.5289185410365462,99,1.9470152854919434,12.593921661376953,193.71399998664856,14.072959340830693,565.5719999074936,386.215344461707,62,17.768074,0.22963353680539877,2.2856961762309074,2.5642879356696504,18.430681586647104,5.636205266647104,4.356757634647103
+k2:K2_dual_thr0.9,2,gsm8k_0001,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.07142857142857142,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3.",3.0,True,True,2.112797200679779,60,1.939600944519043,12.567939758300781,157.99199998378754,7.910025556837638,485.2979999780655,335.4536165390382,50,27.755296,0.17839260839298368,1.923197958946228,2.0621032154693966,25.66416138412518,5.678954344125179,3.680433640125179
+k2:K3_dual_thr0.9_int8,2,gsm8k_0001,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.07142857142857142,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3.",3.0,True,True,2.0404393915086985,60,1.9412670135498047,12.567939758300781,157.31400001049042,12.371942875228626,471.7739999294281,327.06139690867803,50,15.132328,0.17125903977034612,1.8581350370049476,2.0621032154693966,15.479323356315987,4.582653276315986,3.4929862683159865
+k2:K2_dual_thr0.9,2,gsm8k_0002,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.07142857142857142,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The increased value of the house is $130,000 * 150% = $195,000.
+The profit is $195,000 - $130,000 = $65,000.
+#### 65000
+The answer is: 65000",65000.0,False,True,2.0977032370865345,91,1.9435310363769531,12.588592529296875,157.2150000333786,8.205221204413107,495.972000002861,347.198114796013,50,29.53296,0.17108723126829137,1.915371710896492,2.0867221822809663,27.056550204701367,5.791425084701366,3.664912572701366
+k2:K3_dual_thr0.9_int8,2,gsm8k_0002,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.07142857142857142,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house is $130,000 * 150% = $195,000.
+The profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,False,2.1686872234568,91,1.9458365440368652,12.588592529296875,164.4409999847412,10.38889299303608,497.3289999961853,343.52076900912016,53,16.477002,0.18211401523044332,1.9749076790809632,2.0867221822809663,16.764419324772295,4.899566684772293,3.7130814207722933
+k2:K2_dual_thr0.9,2,gsm8k_0003,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.07142857142857142,"James runs 3 sprints 3 times a week, so he runs 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,1.759018980897963,69,1.9405508041381836,12.57393741607666,136.77499997615814,11.823565156617406,409.11500000953674,284.3613726545798,42,26.436256,0.14519254423805977,1.603888332247734,1.7429092143297895,24.029968364961913,4.994516204961914,3.0909709889619132
+k2:K3_dual_thr0.9_int8,2,gsm8k_0003,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.07142857142857142,"James runs 3 sprints 3 times a week, so he runs 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,1.7603138154372573,69,1.9425950050354004,12.57393741607666,125.52300000190735,0.4795869630888774,409.05599999427795,284.2105400284421,41,14.389846,0.14799977543903514,1.6023502574563027,1.7429092143297895,14.379717583773408,4.017686383773408,2.981483263773408
+k2:K2_dual_thr0.9,2,gsm8k_0004,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.07142857142857142,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed.
+In the afternoon, she gives her chickens 25 cups of feed.
+So far, she has given her chickens 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,3.08135715033859,145,1.9511137008666992,12.624566078186035,224.3400000333786,5.456633050204289,727.069000005722,508.5321417595225,72,37.67616,0.250905313058407,2.8151913209557535,3.1596202123367694,35.15052486013097,8.022169020130974,5.3093334361309745
+k2:K3_dual_thr0.9_int8,2,gsm8k_0004,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.07142857142857142,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed.
+In the afternoon, she gives her chickens 25 cups of feed.
+So far, she has given her chickens 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,3.1350211333483458,145,1.9551887512207031,12.624566078186035,230.97100007534027,8.275626656750802,749.777999997139,527.435170006755,73,20.629566,0.26038873628014697,2.858421825349331,3.1596202123367694,21.604936834189772,6.750122914189772,5.2646415221897715
+k2:K2_dual_thr0.9,2,gsm8k_0005,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.07142857142857142,"First, let's calculate the cost of the first 8 glasses, which are sold at the regular price of $5 each. So, the cost of the first 8 glasses is 8 * $5 = $40.
+Next, let's calculate the cost of the remaining 8 glasses, which are sold at a discount of 60% of the regular price. So, the cost of each of the remaining 8 glasses is 60% of $5, which is 0.6 * $5 = $3. Therefore, the cost of the remaining 8 glasses is 8 * $3 = $24.
+Finally, let's add the cost of the first 8 glasses and the cost of the remaining 8 glasses to find the total cost. So, the total cost is $40 + $24 = $64.
+Therefore, Kylar needs to pay $64 for the 16 glasses.
+The answer is: 64",64.0,True,True,4.416024059988558,90,1.9434232711791992,12.587925910949707,323.0180000066757,9.326932152762595,1000.8339999914169,687.6395285542187,112,43.69792,0.36796444837155284,4.024990631461144,4.437067403210676,42.329165576575804,10.864912136575802,7.718486792575803
+k2:K3_dual_thr0.9_int8,2,gsm8k_0005,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.07142857142857142,"First, let's calculate the cost of the first 8 glasses, which are sold at the regular price of $5 each. So, the cost of the first 8 glasses is 8 * $5 = $40.
+Next, let's calculate the cost of the remaining 8 glasses, which are sold at a discount of 60% of the regular price. So, the cost of each of these glasses is 60% of $5, which is 0.6 * $5 = $3. Therefore, the cost of the remaining 8 glasses is 8 * $3 = $24.
+Finally, let's add the cost of the first 8 glasses and the cost of the remaining 8 glasses to find the total cost. So, the total cost is $40 + $24 = $64.
+Therefore, Kylar needs to pay $64 for the 16 glasses.
+The answer is: 64",64.0,True,False,4.307505406439304,90,1.9456887245178223,12.587925910949707,317.02300000190735,11.04052518360885,970.7999999523163,665.3019182715459,109,23.100988,0.3662760328487493,3.9180275844931605,4.437067403210676,25.679572483039408,9.045127363039407,7.381682851039408
+k2:K2_dual_thr0.9,2,gsm8k_0006,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.07142857142857142,"If Seattle has 20 sheep, and Charleston has 4 times as many sheep as Seattle, then Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Therefore, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep together.
+The answer is: 260",260.0,True,True,2.0138875292614102,76,1.9419212341308594,12.57859992980957,150.60199999809265,7.546047174926372,475.50300002098083,332.67351546816644,49,28.443408,0.16513471999031026,1.8373820855021477,2.024342313527246,26.069055045473082,5.588413125473078,3.540348933473078
+k2:K3_dual_thr0.9_int8,2,gsm8k_0006,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.07142857142857142,"If Seattle has 20 sheep, and Charleston has 4 times as many sheep as Seattle, then Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Therefore, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep together.
+The answer is: 260",260.0,True,True,2.02220671903342,76,1.9436259269714355,12.57859992980957,157.17200005054474,13.52509584491068,467.0329999923706,323.6134995773154,49,15.53388,0.1708985913055949,1.8397664930820465,2.024342313527246,15.761108666998831,4.575326906998831,3.456748730998831
+k2:K2_dual_thr0.9,2,gsm8k_0007,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.07142857142857142,"Carla can download 2 GB/minute, so she can download 200 GB / 2 GB/minute = 100 minutes.
+40% of the way through the download is 40% * 100 minutes = 40 minutes.
+So Carla downloads 40 minutes * 2 GB/minute = 80 GB before the restart.
+She still has 200 GB - 80 GB = 120 GB left to download.
+So it takes her 120 GB / 2 GB/minute = 60 minutes to download the remaining 120 GB.
+Then it takes her 20 minutes to restart the download.
+So it takes her 60 minutes + 20 minutes = 80 minutes to download the remaining 120 GB.
+Therefore, it takes her 80 minutes + 40 minutes = 120 minutes to download the file.
+The answer is: 120",120.0,False,True,5.5121424701064825,104,1.948251724243164,12.597251892089844,402.7300000190735,11.176459068689951,1268.0979999303818,877.1643175138042,142,51.382496,0.45736441654723603,5.026864170730114,5.565141148055903,50.34709182037182,13.349770860371821,9.650038764371823
+k2:K3_dual_thr0.9_int8,2,gsm8k_0007,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.07142857142857142,"Carla can download 2 GB/minute, so she can download 200 GB / 2 GB/minute = 100 minutes.
+40% of the way through the download is 40% * 100 minutes = 40 minutes.
+So Carla downloads 40 minutes * 2 GB/minute = 80 GB before the restart.
+She still has 200 GB - 80 GB = 120 GB left to download.
+So it takes her 120 GB / 2 GB/minute = 60 minutes to download the remaining 120 GB.
+Then it takes her 20 minutes to restart the download.
+So in total, it takes her 40 minutes + 60 minutes + 20 minutes = 120 minutes to download the file.
+The answer is: 120",120.0,False,False,5.090123815461993,104,1.9506583213806152,12.597251892089844,373.6769999265671,12.101439311291756,1146.9650000333786,785.9618405674303,129,25.962752,0.4286090557910502,4.634511722147464,5.565141148055903,29.272594889520615,10.577564489520615,8.708061449520615
+k2:K2_dual_thr0.9,2,gsm8k_0008,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.07142857142857142,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+During the first 2 hours in standstill traffic, he covers no distance.
+During the next half-hour, he drives at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+During the remaining 1.5 hours, he drives at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+In total, he covers a distance of 0 + 15 + 120 = 135 miles.
+Therefore, at the end of the 4 hours, he is 180 - 135 = 45 miles from home.
+The answer is: 45",45.0,True,True,3.99203974660486,138,1.9501285552978516,12.619902610778809,292.2720000743866,8.698542589422686,909.1200000047684,625.995460507256,95,42.550768,0.32900019160599914,3.643038328886032,3.9216343984800623,40.572490103704034,9.934284023704029,6.870463415704029
+k2:K3_dual_thr0.9_int8,2,gsm8k_0008,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.07142857142857142,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+During the first 2 hours in standstill traffic, he covers no distance.
+During the next half-hour, he drives at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+During the remaining 1.5 hours, he drives at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+In total, he covers a distance of 0 + 15 + 120 = 135 miles.
+Therefore, at the end of those 4 hours, he is 180 - 135 = 45 miles from home.
+The answer is: 45",45.0,True,False,3.972920765168965,138,1.9533615112304688,12.619902610778809,288.40399992465973,6.188654085247094,914.3980000019073,632.6294221576582,95,22.928572,0.332331936459057,3.6204462977051737,3.9216343984800623,24.862136507082344,8.351911547082345,6.700889051082345
+k2:K2_dual_thr0.9,2,gsm8k_0009,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.07142857142857142,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours is $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is 1.2 x $10 = $12 per hour.
+Her earnings for the overtime hours is $12 x 5 = $60.
+Therefore, Eliza's total earnings for this week is $400 + $60 = $460.
+The answer is: 460",460.0,True,True,3.363976656459272,94,1.9439382553100586,12.590590476989746,248.6780000925064,9.718833370240105,781.4229999780655,542.8421234849322,85,37.733712,0.2804933113849256,3.065272225856781,3.399494712590822,35.79549456001156,8.625626400011559,5.908639584011558
+k2:K3_dual_thr0.9_int8,2,gsm8k_0009,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.07142857142857142,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is 1.2 x $10 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+The answer is: 460",460.0,True,False,3.094953374005854,94,1.9462780952453613,12.590590476989746,225.63300001621246,5.783828983280358,707.6180000305176,488.11686667458923,77,19.442868,0.2612716161166318,2.8169401525855062,3.399494712590822,20.696771000935403,6.696356600935402,5.296315160935402
+k4:K2_dual_thr0.9,4,gsm8k_0000,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.14285714285714285,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,2.58801737613976,99,2.819263458251953,11.720074653625488,213.62099993228912,29.78188961098641,577.7430000305176,394.19492076745377,63,32.973808,0.3846689924936509,2.1895072565078735,2.5642879356696504,30.984192633988826,7.241582073988826,4.867321017988827
+k4:K3_dual_thr0.9_int8,4,gsm8k_0000,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.14285714285714285,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,2.6721544293686748,99,2.82163667678833,11.720074653625488,210.72500002384186,20.90923701339412,588.1059999465942,398.5907294824975,65,18.227002,0.40349990452174095,2.253327140688896,2.5642879356696504,19.34707325425412,6.222151494254119,4.9096593182541195
+k4:K2_dual_thr0.9,4,gsm8k_0001,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.14285714285714285,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3.",3.0,True,True,2.065383299253881,60,2.812704086303711,11.694390296936035,162.0569999217987,15.343059085102539,461.6180000305176,315.1363183327254,50,27.755296,0.3086899191251723,1.7454968694448472,2.0621032154693966,25.877352226820364,5.892145186820364,3.893624482820364
+k4:K3_dual_thr0.9_int8,4,gsm8k_0001,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.14285714285714285,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3.",3.0,True,True,2.0642347866669297,60,2.814816474914551,11.694390296936035,173.4670000076294,26.834643450128794,466.4670000076294,320.0667734350184,50,15.132328,0.30913324632076544,1.7435271709561349,2.0621032154693966,15.778338109918431,4.881668029918431,3.7920010219184315
+k4:K2_dual_thr0.9,4,gsm8k_0002,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.14285714285714285,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The increased value of the house is $130,000 * 150% = $195,000.
+The profit is $195,000 - $130,000 = $65,000.
+#### 65000
+The answer is: 65000",65000.0,False,True,2.0649531297385693,91,2.817302703857422,11.71480655670166,177.9170000553131,31.233616193122344,474.3289999961853,327.877826898923,50,29.53296,0.3038832949120551,1.7500480040311814,2.0867221822809663,27.289614688767347,6.024489568767347,3.897977056767347
+k4:K3_dual_thr0.9_int8,4,gsm8k_0002,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.14285714285714285,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house is $130,000 * 150% = $195,000.
+The profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,False,2.0840880032628775,91,2.81962251663208,11.71480655670166,175.71799993515015,27.67537553723065,483.14099991321564,335.33273805963006,50,16.132698,0.31212624108744785,1.76005402302742,2.0867221822809663,16.604139946289763,4.987203466289764,3.8255098182897638
+k4:K2_dual_thr0.9,4,gsm8k_0003,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.14285714285714285,"James runs 3 sprints 3 times a week, so he runs 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,2.070305989123881,69,2.814040184020996,11.700319290161133,163.83200001716614,16.768377244625214,417.04900002479553,270.2181899638106,42,26.436256,0.31285673574788964,1.7460774117112159,1.7429092143297895,24.675150018954888,5.639697858954885,3.736152642954885
+k4:K3_dual_thr0.9_int8,4,gsm8k_0003,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.14285714285714285,"James runs 3 sprints 3 times a week, so he runs 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,1.7082936586812139,69,2.8162131309509277,11.700319290161133,144.93800008296967,23.589824728787704,374.4910000562668,253.33492793750062,41,14.389846,0.2553236160906963,1.4435359675884247,1.7429092143297895,14.542874815860515,4.180843615860514,3.1446404958605134
+k4:K2_dual_thr0.9,4,gsm8k_0004,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.14285714285714285,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed.
+In the afternoon, she gives her chickens 25 cups of feed.
+So far, she has given her chickens 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,3.1115616783499718,145,2.826104164123535,11.750368118286133,259.10000002384186,38.071062609618224,723.5249999761581,502.84596789733706,72,37.67616,0.4617008318145527,2.6345907489657403,3.1596202123367694,35.602310844409395,8.473955004409397,5.761119420409398
+k4:K3_dual_thr0.9_int8,4,gsm8k_0004,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.14285714285714285,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed.
+In the afternoon, she gives her chickens 25 cups of feed.
+So far, she has given her chickens 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,3.0957768596708775,145,2.828812599182129,11.750368118286133,256.09800004959106,36.1903329364487,695.0160000324249,475.45646319995535,71,20.40003,0.465315968236886,2.614345181405544,3.1596202123367694,21.752000286116203,7.062463806116202,5.593510158116201
+k4:K2_dual_thr0.9,4,gsm8k_0005,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.14285714285714285,"First, let's calculate the cost of the first 8 glasses, which are sold at the regular price of $5 each. So, the cost of the first 8 glasses is 8 * $5 = $40.
+Next, let's calculate the cost of the remaining 8 glasses, which are sold at a discount of 60% of the regular price. So, the cost of each of the remaining 8 glasses is 60% of $5, which is 0.6 * $5 = $3. Therefore, the cost of the remaining 8 glasses is 8 * $3 = $24.
+Finally, let's add the cost of the first 8 glasses and the cost of the remaining 8 glasses to find the total cost. So, the total cost is $40 + $24 = $64.
+Therefore, Kylar needs to pay $64 for the 16 glasses.
+The answer is: 64",64.0,True,True,4.406956126913428,90,2.8171539306640625,11.714147567749023,358.45500004291534,45.408070348333865,956.6000000238419,644.0486470271035,112,43.69792,0.6598377922814107,3.7243265325427055,4.437067403210676,42.90412150938694,11.439868069386938,8.293442725386939
+k4:K3_dual_thr0.9_int8,4,gsm8k_0005,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.14285714285714285,"First, let's calculate the cost of the first 8 glasses, which are priced at $5 each. The cost of the first 8 glasses is 8 * $5 = $40.
+Next, let's calculate the cost of the remaining 8 glasses, which are priced at 60% of the original price. The cost of the remaining 8 glasses is 8 * 0.6 * $5 = $24.
+Finally, let's add the cost of the first 8 glasses and the cost of the remaining 8 glasses to find the total cost. The total cost is $40 + $24 = $64.
+Therefore, Kylar needs to pay $64 for the glasses.
+The answer is: 64",64.0,True,False,3.604021823965013,90,2.819467067718506,11.714147567749023,299.9190000295639,43.90829013064143,789.5309998989105,533.9255740970018,90,20.805772,0.5416187214525416,3.043090974986553,4.437067403210676,23.114369539344178,8.132589379344179,6.634411363344179
+k4:K2_dual_thr0.9,4,gsm8k_0006,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.14285714285714285,"If Seattle has 20 sheep, and Charleston has 4 times as many sheep as Seattle, then Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Therefore, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep together.
+The answer is: 260",260.0,True,True,2.191401794552803,76,2.815077781677246,11.704928398132324,178.0789999961853,22.413369625495847,475.5110000371933,320.0917999993042,49,28.443408,0.3278884466711897,1.8510895012021065,2.024342313527246,26.571023641215678,6.0903817212156754,4.042317529215675
+k4:K3_dual_thr0.9_int8,4,gsm8k_0006,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.14285714285714285,"If Seattle has 20 sheep, and Charleston has 4 times as many sheep as Seattle, then Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Therefore, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep together.
+The answer is: 260",260.0,True,True,2.521540374495089,76,2.8172974586486816,11.704928398132324,196.48399996757507,17.367065375019905,499.8569999933243,321.0236209017279,49,15.53388,0.3862115220646374,2.116646480500698,2.024342313527246,16.683927446694607,5.49814568669461,4.37956751069461
+k4:K2_dual_thr0.9,4,gsm8k_0007,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.14285714285714285,"Carla can download 2 GB/minute, so she can download 200 GB / 2 GB/minute = 100 minutes.
+40% of the way through the download is 40% * 100 minutes = 40 minutes.
+So Carla downloads 40 minutes * 2 GB/minute = 80 GB before the restart.
+She still has 200 GB - 80 GB = 120 GB left to download.
+So it takes her 120 GB / 2 GB/minute = 60 minutes to download the remaining 120 GB.
+Then it takes her 20 minutes to restart the download.
+So it takes her 60 minutes + 20 minutes = 80 minutes to download the remaining 120 GB.
+Therefore, it takes her 80 minutes + 40 minutes = 120 minutes to download the file.
+The answer is: 120",120.0,False,True,7.133838242851198,104,2.8218088150024414,11.723366737365723,532.6759999990463,25.9257409656131,1340.4370000362396,834.4889645551918,142,51.382496,1.090476928306045,6.00913822543621,5.565141148055903,53.22870341035435,16.231382450354346,12.531650354354346
+k4:K3_dual_thr0.9_int8,4,gsm8k_0007,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.14285714285714285,"Carla can download 2 GB/minute, so she can download 200 GB / 2 GB/minute = 100 minutes.
+40% of the way through the download is 40% * 100 minutes = 40 minutes.
+So Carla downloads 40 minutes * 2 GB/minute = 80 GB before the restart.
+She still has 200 GB - 80 GB = 120 GB to download.
+It takes her 120 GB / 2 GB/minute = 60 minutes to download the remaining data.
+So the total time is 40 minutes + 20 minutes + 60 minutes = 120 minutes.
+The answer is: 120",120.0,False,False,5.3545806389302015,104,2.8235745429992676,11.723366737365723,429.7429999113083,49.38182077854441,1068.0019999742508,688.2429610296249,114,25.301504,0.816090884078294,4.501989897429943,5.565141148055903,29.473424149664826,11.254578709664825,9.432694165664826
+k4:K2_dual_thr0.9,4,gsm8k_0008,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.14285714285714285,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+During the first 2 hours in standstill traffic, he covers no distance.
+During the next half-hour, he drives at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+During the remaining 1.5 hours, he drives at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+In total, he covers a distance of 0 + 15 + 120 = 135 miles.
+Therefore, at the end of the 4 hours, he is 180 - 135 = 45 miles from home.
+The answer is: 45",45.0,True,True,4.933556471951306,138,2.825392723083496,11.745758056640625,392.2740000486374,41.8201580901769,964.1169999837875,614.217952662392,95,42.550768,0.7496405758007895,4.159308219313622,3.9216343984800623,42.35068114671599,11.71247506671599,8.64865445871599
+k4:K3_dual_thr0.9_int8,4,gsm8k_0008,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.14285714285714285,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+For the first 2 hours in standstill traffic, he covers no distance.
+For the next half-hour, he drives at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+For the remaining 1.5 hours, he drives at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+In total, he covers a distance of 0 + 15 + 120 = 135 miles.
+Therefore, at the end of the 4 hours, he is 180 - 135 = 45 miles from home.
+The answer is: 45",45.0,True,False,4.975978437811136,138,2.828394889831543,11.745758056640625,392.84500002861023,39.37772526492472,966.2960000038147,613.3882903666547,95,22.928572,0.7582886717384681,4.18187489682436,3.9216343984800623,26.701435312039763,10.191210352039764,8.540187856039763
+k4:K2_dual_thr0.9,4,gsm8k_0009,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.14285714285714285,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours is $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is 1.2 x $10 = $12 per hour.
+Her earnings for the overtime hours is $12 x 5 = $60.
+Therefore, Eliza's total earnings for this week is $400 + $60 = $460.
+The answer is: 460",460.0,True,True,4.259279377758503,94,2.818655014038086,11.716781616210938,343.82799994945526,41.27124796004756,825.5390000343323,523.4612180070557,85,37.733712,0.6506662736990256,3.5862584752440454,3.399494712590822,37.42699969634113,10.257131536341124,7.5401447203411225
+k4:K3_dual_thr0.9_int8,4,gsm8k_0009,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.14285714285714285,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours is $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is 1.2 x $10 = $12 per hour.
+Her earnings for the overtime hours is $12 x 5 = $60.
+Therefore, Eliza's total earnings for this week is $400 + $60 = $460.
+The answer is: 460",460.0,True,True,4.2924482598900795,94,2.8209948539733887,11.716781616210938,346.2059999704361,41.29310546141505,844.9189999103546,540.488805313254,85,20.361012,0.6579056944074109,3.6020691094994546,3.399494712590822,23.566368592721687,8.904844432721687,7.438692016721687
+k8:K2_dual_thr0.9,8,gsm8k_0000,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.2857142857142857,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,3.1868118215352297,99,4.567028999328613,9.972380638122559,285.4100000858307,59.03568921999491,552.9060000181198,326.8900566135617,63,32.973808,0.9130031027706573,2.256749152600765,2.5642879356696504,32.63643686091274,8.893826300912737,6.519565244912737
+k8:K3_dual_thr0.9_int8,8,gsm8k_0000,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.2857142857142857,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,False,3.2149089789018035,99,4.56940221786499,9.972380638122559,319.12199997901917,90.7518151826408,603.8439999818802,375.8353422644533,63,17.882842,0.9195608935086057,2.270519196152687,2.5642879356696504,20.597107476678502,7.7199924366785035,6.432280932678505
+k8:K2_dual_thr0.9,8,gsm8k_0001,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.2857142857142857,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3.",3.0,True,True,2.5289883762598038,60,4.560361862182617,9.947291374206543,247.01699995994568,67.37099858804032,437.5329999923706,258.1713916736968,50,27.755296,0.7237281917054206,1.7911583025455475,2.0621032154693966,27.16812847766181,7.182921437661809,5.184400733661809
+k8:K3_dual_thr0.9_int8,8,gsm8k_0001,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.2857142857142857,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3.",3.0,True,True,2.5559752536937594,60,4.562474250793457,9.947291374206543,250.80000007152557,69.23699320207268,450.19400000572205,268.91842095254776,50,15.132328,0.7313546872576698,1.8047752541303634,2.0621032154693966,17.106250515903376,6.209580435903373,5.119913427903374
+k8:K2_dual_thr0.9,8,gsm8k_0002,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.2857142857142857,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The increased value of the house is $130,000 * 150% = $195,000.
+The profit is $195,000 - $130,000 = $65,000.
+#### 65000
+The answer is: 65000",65000.0,False,True,2.545019583776593,91,4.565019607543945,9.96723461151123,247.62000000476837,66.83522616771879,464.97300004959106,284.47442202773726,50,29.53296,0.7269218555146363,1.8041130338311195,2.0867221822809663,28.612795400375028,7.347670280375029,5.221157768375028
+k8:K3_dual_thr0.9_int8,8,gsm8k_0002,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.2857142857142857,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house is $130,000 * 150% = $195,000.
+The profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,False,2.6173341060057282,91,4.5673394203186035,9.96723461151123,249.760999917984,63.83938366539249,471.14999997615814,285.5227115444145,51,16.247466,0.7479016022547148,1.8490684983730317,2.0867221822809663,18.112301305137173,6.4127261051371764,5.242768585137176
+k8:K2_dual_thr0.9,8,gsm8k_0003,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.2857142857142857,"James runs 3 sprints 3 times a week, so he runs 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,2.1406670473515987,69,4.561715126037598,9.953083038330078,202.4980000257492,50.4362986216255,362.4010000228882,210.5800236625264,42,26.436256,0.6102098880073754,1.5182771422863006,1.7429092143297895,25.339409206308428,6.303957046308428,4.4004118303084265
+k8:K3_dual_thr0.9_int8,8,gsm8k_0003,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.2857142857142857,"James runs 3 sprints 3 times a week, so he runs 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,2.1042721457779408,69,4.5636162757873535,9.953083038330078,217.43700003623962,67.96060056525539,412.33899998664856,263.0992328331497,41,14.389846,0.5999229134763591,1.4878037482500077,1.7429092143297895,15.620940488679086,5.258909288679085,4.2227061686790845
+k8:K2_dual_thr0.9,8,gsm8k_0004,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.2857142857142857,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed.
+In the afternoon, she gives her chickens 25 cups of feed.
+So far, she has given her chickens 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,3.8111966932192445,145,4.57402229309082,10.001972198486328,369.4889999628067,98.76167958214171,697.2749999761581,426.9762611873365,72,37.67616,1.0884793610298076,2.703644097328186,3.1596202123367694,37.55169978041761,10.423343940417608,7.710508356417608
+k8:K3_dual_thr0.9_int8,8,gsm8k_0004,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.2857142857142857,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed.
+In the afternoon, she gives her chickens 25 cups of feed.
+So far, she has given her chickens 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,3.3957994878292084,145,4.576388359069824,10.001972198486328,342.1100000143051,100.89030712212565,661.4069999456406,420.56917586455234,73,20.629566,0.9631961592352017,2.4117305891513823,3.1596202123367694,23.266667866856988,8.411853946856986,6.926372554856988
+k8:K2_dual_thr0.9,8,gsm8k_0005,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.2857142857142857,"First, let's calculate the cost of the first 8 glasses, which are sold at the regular price of $5 each. So, the cost of the first 8 glasses is 8 * $5 = $40.
+Next, let's calculate the cost of the remaining 8 glasses, which are sold at a discount of 60% of the regular price. So, the cost of each of the remaining 8 glasses is 60% of $5, which is 0.6 * $5 = $3. Therefore, the cost of the remaining 8 glasses is 8 * $3 = $24.
+Finally, let's add the cost of the first 8 glasses and the cost of the remaining 8 glasses to find the total cost. So, the total cost is $40 + $24 = $64.
+Therefore, Kylar needs to pay $64 for the 16 glasses.
+The answer is: 64",64.0,True,True,4.46042687445879,90,4.564868927001953,9.966590881347656,448.85199999809265,132.00679029674535,860.613000035286,544.2693799930495,112,43.69792,1.2570213796815368,3.180860925972462,4.437067403210676,44.152206665017076,12.687953225017072,9.541527881017071
+k8:K3_dual_thr0.9_int8,8,gsm8k_0005,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.2857142857142857,"First, let's calculate the cost of the first 8 glasses, which are sold at the regular price of $5 each. So, the cost of the first 8 glasses is 8 * $5 = $40.
+Next, let's calculate the cost of the remaining 8 glasses, which are sold at a discount of 60% of the regular price. So, the cost of each of these glasses is 60% of $5, which is 0.6 * $5 = $3. Therefore, the cost of the remaining 8 glasses is 8 * $3 = $24.
+Finally, let's add the cost of the first 8 glasses and the cost of the remaining 8 glasses to find the total cost. So, the total cost is $40 + $24 = $64.
+Therefore, Kylar needs to pay $64 for the 16 glasses.
+The answer is: 64",64.0,True,False,4.274441781453788,90,4.5671820640563965,9.966590881347656,426.95500004291534,123.32119083149189,822.9340000152588,519.780865828086,108,24.110968,1.2093650868334807,3.042287810087204,4.437067403210676,28.121077470587647,10.759452510587646,9.023290014587646
+k8:K2_dual_thr0.9,8,gsm8k_0006,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.2857142857142857,"If Seattle has 20 sheep, and Charleston has 4 times as many sheep as Seattle, then Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Therefore, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep together.
+The answer is: 260",260.0,True,True,1.997023788280785,76,4.562766075134277,9.957585334777832,214.48599994182587,72.6279583719415,427.654000043869,286.0205303612486,49,28.443408,0.5600087012314471,1.4258021454811096,2.024342313527246,26.842097049175454,6.36145512917545,4.313390937175451
+k8:K3_dual_thr0.9_int8,8,gsm8k_0006,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.2857142857142857,"If Seattle has 20 sheep, and Charleston has 4 times as many sheep as Seattle, then Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Therefore, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep together.
+The answer is: 260",260.0,True,True,2.0161641454324126,76,4.564985752105713,9.957585334777832,201.35899996757507,58.14132833398702,399.98800003528595,256.99705268501924,49,15.53388,0.5696569293658249,1.4351768594384193,2.024342313527246,16.55279404753589,5.367012287535894,4.248434111535894
+k8:K2_dual_thr0.9,8,gsm8k_0007,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.2857142857142857,"Carla can download 2 GB/minute, so she can download 200 GB / 2 GB/minute = 100 minutes.
+40% of the way through the download is 40% * 100 minutes = 40 minutes.
+So Carla downloads 40 minutes * 2 GB/minute = 80 GB before the restart.
+She still has 200 GB - 80 GB = 120 GB left to download.
+So it takes her 120 GB / 2 GB/minute = 60 minutes to download the remaining 120 GB.
+Then it takes her 20 minutes to restart the download.
+So it takes her 60 minutes + 20 minutes = 80 minutes to download the remaining 120 GB.
+Therefore, it takes her 80 minutes + 40 minutes = 120 minutes to download the file.
+The answer is: 120",120.0,False,True,5.575272721238434,104,4.570586204528809,9.97559642791748,550.1750000715256,154.13701890468207,1091.3479999303818,695.9369765015317,142,51.382496,1.580982811749447,3.965992683172226,5.565141148055903,52.65707551842057,15.659754558420568,11.960022462420568
+k8:K3_dual_thr0.9_int8,8,gsm8k_0007,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.2857142857142857,"Carla can download 2 GB/minute, so she can download 200 GB / 2 GB/minute = 100 minutes.
+40% of the way through the download is 40% * 100 minutes = 40 minutes.
+So Carla downloads 40 minutes * 2 GB/minute = 80 GB before the restart.
+She still has 200 GB - 80 GB = 120 GB to download.
+So it takes her 120 GB / 2 GB/minute = 60 minutes to download the remaining file.
+The restart takes 20 minutes, so in total it takes her 40 minutes + 60 minutes + 20 minutes = 120 minutes to download the file.
+The answer is: 120",120.0,False,False,4.9189232205972075,104,4.572023868560791,9.97559642791748,496.50099992752075,147.0866269984599,953.1440000534058,604.2827762042099,125,25.389056,1.3958872624016367,3.4964101296663284,5.565141148055903,30.49734551687124,12.215399276871238,10.387204652871239
+k8:K2_dual_thr0.9,8,gsm8k_0008,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.2857142857142857,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+During the first 2 hours in standstill traffic, he covers no distance.
+During the next half-hour, he drives at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+During the remaining 1.5 hours, he drives at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+In total, he covers a distance of 0 + 15 + 120 = 135 miles.
+Therefore, at the end of the 4 hours, he is 180 - 135 = 45 miles from home.
+The answer is: 45",45.0,True,True,3.959751001559198,138,4.573451042175293,9.997468948364258,407.39600002765656,126.11616476382306,791.4739999771118,510.6394517252478,95,42.550768,1.108080544586992,2.8311672613620757,3.9216343984800623,42.09786009512305,11.459654015123052,8.395833407123051
+k8:K3_dual_thr0.9_int8,8,gsm8k_0008,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.2857142857142857,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+For the first 2 hours in standstill traffic, he covers no distance.
+For the next half-hour, he drives at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+For the remaining 1.5 hours, he drives at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+In total, he covers a distance of 0 + 15 + 120 = 135 miles.
+Therefore, at the end of the 4 hours, he is 180 - 135 = 45 miles from home.
+The answer is: 45",45.0,True,False,3.8717498928308487,138,4.575196266174316,9.997468948364258,385.36100006103516,110.33229961764823,780.289999961853,505.69669051658514,93,22.699036,1.0872884199353867,2.764615227162838,3.9216343984800623,26.047533286969,9.702585766968998,8.068091014968997
+k8:K2_dual_thr0.9,8,gsm8k_0009,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.2857142857142857,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours is $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is 1.2 x $10 = $12 per hour.
+Her earnings for the overtime hours is $12 x 5 = $60.
+Therefore, Eliza's total earnings for this week is $400 + $60 = $460.
+The answer is: 460",460.0,True,True,3.427415858954191,94,4.565469741821289,9.96916389465332,345.3820000886917,101.91644687393799,698.9660000801086,455.8858710412714,85,37.733712,0.9634931532380869,2.4455963180065154,3.399494712590822,37.22481817772078,10.054950017720778,7.337963201720777
+k8:K3_dual_thr0.9_int8,8,gsm8k_0009,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.2857142857142857,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours is $10 x 40 = $400.
+She worked a total of 45 hours, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is 1.2 x $10 = $12 per hour.
+Her earnings for the overtime hours is $12 x 5 = $60.
+Her total earnings for the week is $400 + $60 = $460.
+The answer is: 460",460.0,True,False,3.107646773569286,94,4.5687174797058105,9.96916389465332,306.32099997997284,85.57015676191239,602.3209999799728,381.9196218534079,77,19.442868,0.8793572153588757,2.211279007434845,3.399494712590822,21.94536665351147,7.944952253511472,6.544910813511472
+k14:K2_dual_thr0.9,14,gsm8k_0000,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.5,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,2.895534391514957,99,7.188570022583008,7.350839614868164,366.34100008010864,160.65750222244282,462.8489999771118,257.49111447657265,63,32.973808,1.3868331816371064,1.4938726387023926,2.5642879356696504,33.295050583613715,9.55244002361371,7.178178967613713
+k14:K3_dual_thr0.9_int8,14,gsm8k_0000,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.5,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+#### 18
+The answer is: 18",18.0,True,False,2.429567896761,99,7.190943241119385,7.350839614868164,330.3329999446869,157.74930528960874,407.5460000038147,235.2355182423502,59,17.42377,1.1618840656438842,1.254138364970684,2.5642879356696504,19.860412961902338,7.313852801902337,6.059196785902337
+k14:K2_dual_thr0.9,14,gsm8k_0001,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.5,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3.",3.0,True,True,2.522757375612855,60,7.1810102462768555,7.326642990112305,300.94200003147125,121.73861609556437,369.0049999952316,190.08530841605835,50,27.755296,1.2230736653620844,1.2864029449224472,2.0621032154693966,28.161409541008698,8.1762025010087,6.1776817970087
+k14:K3_dual_thr0.9_int8,14,gsm8k_0001,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.5,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3.",3.0,True,True,2.5370012624189258,60,7.183122634887695,7.326642990112305,334.66600000858307,154.45080544803068,400.3140000104904,220.38409957854876,50,15.132328,1.2275186223266645,1.2901920937895774,2.0621032154693966,18.080159160769572,7.183489080769571,6.093822072769572
+k14:K2_dual_thr0.9,14,gsm8k_0002,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.5,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The increased value of the house is $130,000 * 150% = $195,000.
+The profit is $195,000 - $130,000 = $65,000.
+#### 65000
+The answer is: 65000",65000.0,False,True,2.05004043225199,91,7.18637752532959,7.345876693725586,293.2350000143051,147.61093556151985,350.1729999780655,204.7794693083728,50,29.53296,0.9785398670233554,1.0602652142047881,2.0867221822809663,28.623801615274854,7.358676495274855,5.232163983274854
+k14:K3_dual_thr0.9_int8,14,gsm8k_0002,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.5,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The increased value of the house is $130,000 * 150% = $195,000.
+The profit is $195,000 - $130,000 = $65,000.
+#### 65000
+The answer is: 65000",65000.0,False,True,1.9939882969483733,91,7.188697338104248,7.345876693725586,281.00099992752075,139.35858365871957,337.6799999475479,196.26181421503563,47,15.788394,0.9493236505659297,1.0328399026989936,2.0867221822809663,17.453055654396785,6.084035334396782,4.947133302396782
+k14:K2_dual_thr0.9,14,gsm8k_0003,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.5,"James runs 3 sprints 3 times a week, so he runs 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,1.9113919483497739,69,7.18256950378418,7.332228660583496,287.17900002002716,151.4037929060592,336.41299998760223,200.85273517910954,42,26.436256,0.9168344939975068,0.9836897589564323,1.7429092143297895,25.724695640948955,6.689243480948953,4.785698264948953
+k14:K3_dual_thr0.9_int8,14,gsm8k_0003,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.5,"James runs 3 sprints 3 times a week, so he runs 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,2.08290533721447,69,7.1844706535339355,7.332228660583496,266.34600007534027,118.38738603846048,308.970999956131,161.2466154689017,41,14.389846,1.0052585287098772,1.0618124231100083,1.7429092143297895,16.41095600923964,6.04892480923964,5.01272168923964
+k14:K2_dual_thr0.9,14,gsm8k_0004,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.5,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed.
+In the afternoon, she gives her chickens 25 cups of feed.
+So far, she has given her chickens 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,3.0821582982316613,145,7.196616172790527,7.379378318786621,417.32299995422363,198.38272364839335,530.5780000686646,311.9843225915222,72,37.67616,1.4776709473531227,1.5886513243317604,3.1596202123367694,37.604281766391125,10.475925926391128,7.763090342391129
+k14:K3_dual_thr0.9_int8,14,gsm8k_0004,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.5,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed.
+In the afternoon, she gives her chickens 25 cups of feed.
+So far, she has given her chickens 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,3.1517175072804093,145,7.198982238769531,7.379378318786621,452.53200006484985,228.6506042657458,552.7469999790192,329.22002517023395,72,21.836556,1.5049575094436296,1.6301380798220635,3.1596202123367694,25.05594500815295,9.332104048152953,7.759719952152952
+k14:K2_dual_thr0.9,14,gsm8k_0005,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.5,"First, let's calculate the cost of the first 8 glasses, which are sold at the regular price of $5 each. So, the cost of the first 8 glasses is 8 * $5 = $40.
+Next, let's calculate the cost of the remaining 8 glasses, which are sold at a discount of 60% of the regular price. So, the cost of each of the remaining 8 glasses is 60% of $5, which is 0.6 * $5 = $3. Therefore, the cost of the remaining 8 glasses is 8 * $3 = $24.
+Finally, let's add the cost of the first 8 glasses and the cost of the remaining 8 glasses to find the total cost. So, the total cost is $40 + $24 = $64.
+Therefore, Kylar needs to pay $64 for the 16 glasses.
+The answer is: 64",64.0,True,True,4.438737138174474,90,7.186203956604004,7.3452558517456055,584.5019999742508,269.1975147898153,732.3029999732971,417.4976653658543,112,43.69792,2.1291330212878528,2.286771319627762,4.437067403210676,45.87445198349132,14.41019854349132,11.26377319949132
+k14:K3_dual_thr0.9_int8,14,gsm8k_0005,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.5,"First, let's calculate the cost of the first 8 glasses, which are sold at the regular price of $5 each.
+The cost of the first 8 glasses is 8 * $5 = $40.
+Next, let's calculate the cost of the remaining 8 glasses, which are sold at a discount of 60% of the regular price.
+The cost of the remaining 8 glasses is 8 * (60% of $5) = 8 * $3 = $24.
+Finally, let's calculate the total cost of all 16 glasses.
+The total cost is $40 + $24 = $64.
+Therefore, Kylar needs to pay $64 for the glasses.
+The answer is: 64",64.0,True,False,4.842972875572741,90,7.188517093658447,7.3452558517456055,571.3389999866486,227.31973915637906,667.1010000705719,323.6263474542946,97,21.723772,2.3389591326792725,2.4686628845334053,4.437067403210676,28.806407482571224,13.163627002571221,11.599348954571221
+k14:K2_dual_thr0.9,14,gsm8k_0006,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.5,"If Seattle has 20 sheep, and Charleston has 4 times as many sheep as Seattle, then Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Therefore, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep together.
+The answer is: 260",260.0,True,True,2.5166221829131246,76,7.183780670166016,7.336570739746094,327.83000004291534,149.062427851538,391.66999995708466,213.1854301998614,49,28.443408,1.2190370299216593,1.2828360263705254,2.024342313527246,28.676215916135504,8.195573996135503,6.147509804135503
+k14:K3_dual_thr0.9_int8,14,gsm8k_0006,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.5,"If Seattle has 20 sheep, and Charleston has 4 times as many sheep as Seattle, then Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Therefore, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep together.
+The answer is: 260",260.0,True,True,2.5959921227768064,76,7.186000347137451,7.336570739746094,318.2409999370575,133.8354056576837,368.2319999933243,184.11833355865394,50,15.648648,1.2538089539255015,1.3219385931491852,2.024342313527246,18.60383265492569,7.33541217492569,6.208570126925689
+k14:K2_dual_thr0.9,14,gsm8k_0007,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.5,"Carla can download 2 GB/minute, so she can download 200 GB / 2 GB/minute = 100 minutes.
+40% of the way through the download is 40% * 100 minutes = 40 minutes.
+So Carla downloads 40 minutes * 2 GB/minute = 80 GB before the restart.
+She still has 200 GB - 80 GB = 120 GB left to download.
+So it takes her 120 GB / 2 GB/minute = 60 minutes to download the remaining 120 GB.
+Then it takes her 20 minutes to restart the download.
+So it takes her 60 minutes + 20 minutes = 80 minutes to download the remaining 120 GB.
+Therefore, it takes her 80 minutes + 40 minutes = 120 minutes to download the file.
+The answer is: 120",120.0,False,True,7.203259049914777,104,7.192241668701172,7.353940963745117,810.972000002861,299.29045282352234,944.5140000581741,433.64248302909374,142,51.382496,3.5066774156213505,3.661700568139553,5.565141148055903,58.12986721500361,21.132546255003604,17.432814159003602
+k14:K3_dual_thr0.9_int8,14,gsm8k_0007,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.5,"Carla can download 2 GB/minute, so she can download 200 GB / 2 GB/minute = 100 minutes.
+40% of the way through the download is 40% * 100 minutes = 40 minutes.
+So Carla downloads 40 minutes * 2 GB/minute = 80 GB before the restart.
+She still has 200 GB - 80 GB = 120 GB left to download.
+So it takes her 120 GB / 2 GB/minute = 60 minutes to download the remaining 120 GB.
+Then it takes her 20 minutes to restart the download.
+So it takes her 60 minutes + 20 minutes = 80 minutes to download the remaining 120 GB.
+Therefore, it takes her 40 minutes + 80 minutes = 120 minutes to download the file.
+The answer is: 120",120.0,False,False,7.309138651005924,104,7.193679332733154,7.353940963745117,835.0640000104904,315.8613241690234,956.0040000677109,437.623260885568,144,27.684272,3.5421082623004914,3.7121004835963247,5.565141148055903,39.3679932704978,19.4333820704978,17.4399209504978
+k14:K2_dual_thr0.9,14,gsm8k_0008,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.5,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+During the first 2 hours in standstill traffic, he covers no distance.
+During the next half-hour, he drives at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+During the remaining 1.5 hours, he drives at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+In total, he covers a distance of 0 + 15 + 120 = 135 miles.
+Therefore, at the end of the 4 hours, he is 180 - 135 = 45 miles from home.
+The answer is: 45",45.0,True,True,5.00734369456768,138,7.195884704589844,7.375035285949707,586.7699999809265,231.07470273552065,661.2419999837875,306.1097949910966,95,42.550768,2.4304309055203337,2.551640343785286,3.9216343984800623,45.78538426034629,15.147178180346287,12.083357572346287
+k14:K3_dual_thr0.9_int8,14,gsm8k_0008,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.5,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+For the first 2 hours in standstill traffic, he covers no distance.
+For the next half-hour, he drives at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+For the remaining 1.5 hours, he drives at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+In total, he covers a distance of 0 + 15 + 120 = 135 miles.
+Therefore, at the end of the 4 hours, he is 180 - 135 = 45 miles from home.
+The answer is: 45",45.0,True,False,5.0767808221280575,138,7.197629928588867,7.375035285949707,587.3260000944138,226.69825538105198,673.0869998931885,313.03015586570797,96,23.04334,2.4556732734539546,2.5837982397079466,3.9216343984800623,30.30733326006981,13.71446958006981,12.05518321206981
+k14:K2_dual_thr0.9,14,gsm8k_0009,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.5,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours is $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is 1.2 x $10 = $12 per hour.
+Her earnings for the overtime hours is $12 x 5 = $60.
+Therefore, Eliza's total earnings for this week is $400 + $60 = $460.
+The answer is: 460",460.0,True,True,4.325242661871016,94,7.186896324157715,7.3477373123168945,491.9079999923706,184.6655640593707,586.0,279.24395181718666,85,37.733712,2.101973762025591,2.2005769627690315,3.399494712590822,40.39524064884581,13.225372488845805,10.508385672845804
+k14:K3_dual_thr0.9_int8,14,gsm8k_0009,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.5,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours is $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is 1.2 x $10 = $12 per hour.
+Her earnings for the overtime hours is $12 x 5 = $60.
+Therefore, Eliza's total earnings for this week is $400 + $60 = $460.
+The answer is: 460",460.0,True,True,4.380190754309297,94,7.190144062042236,7.3477373123168945,515.1729999780655,204.02734124569878,600.9060000181198,290.2529081294952,85,20.361012,2.1209938844023273,2.225929601311684,3.399494712590822,26.579493654518664,11.917969494518665,10.451817078518667
+k20:K2_dual_thr0.9,20,gsm8k_0000,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.7142857142857143,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,3.2570979055017233,99,9.810111045837402,4.7292985916137695,520.4779999256134,289.1109362044464,373.9950000047684,142.99420764598293,63,32.973808,2.2196314258474157,1.0201472989916802,2.5642879356696504,35.31971997653393,11.577109416533927,9.202848360533928
+k20:K3_dual_thr0.9_int8,20,gsm8k_0000,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.7142857142857143,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+#### 18
+The answer is: 18",18.0,True,False,2.40906192176044,99,9.81248426437378,4.7292985916137695,430.59600007534027,259.4689417763892,298.18299996852875,127.32684859891938,58,17.309002,1.6222198342881164,0.7727714226841926,2.5642879356696504,20.64823252554854,8.184311085548542,6.937918941548543
+k20:K2_dual_thr0.9,20,gsm8k_0001,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.7142857142857143,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3.",3.0,True,True,2.069378588348627,60,9.801658630371094,4.705994606018066,375.470999956131,228.47325484538854,271.6879999637604,124.92296327530926,50,27.755296,1.391783016179339,0.6662760301828384,2.0621032154693966,28.047410678720855,8.062203638720856,6.063682934720856
+k20:K3_dual_thr0.9_int8,20,gsm8k_0001,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.7142857142857143,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3.",3.0,True,True,2.0414292505010962,60,9.803771018981934,4.705994606018066,362.03400003910065,217.02162853957546,260.0260000228882,115.24319395077109,49,15.01756,1.3702211494930088,0.659719457924366,2.0621032154693966,17.765973306403392,6.951941946403393,5.870538810403393
+k20:K2_dual_thr0.9,20,gsm8k_0002,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.7142857142857143,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The increased value of the house is $130,000 * 150% = $195,000.
+The profit is $195,000 - $130,000 = $65,000.
+#### 65000
+The answer is: 65000",65000.0,False,True,2.07239091116935,91,9.807735443115234,4.724518775939941,378.7409999370575,231.52927529415737,254.40700006484985,107.42832258984083,50,29.53296,1.3904353913500673,0.6703080954551697,2.0867221822809663,29.469531069505372,8.204405949505372,6.077893437505371
+k20:K3_dual_thr0.9_int8,20,gsm8k_0002,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.7142857142857143,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The new value of the house is $130,000 * 150% = $195,000.
+The profit is $195,000 - $130,000 = $65,000.
+#### 65000
+The answer is: 65000",65000.0,False,False,1.964522823691368,91,9.810055255889893,4.724518775939941,374.3569999933243,234.80765560213302,255.5549999475479,116.2265726033535,47,15.788394,1.3193977609439753,0.6341821757555008,2.0867221822809663,18.164620258587426,6.795599938587427,5.6586979065874266
+k20:K2_dual_thr0.9,20,gsm8k_0003,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.7142857142857143,"James runs 3 sprints 3 times a week, so he runs 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,1.757147361524403,69,9.803423881530762,4.711374282836914,346.42400002479553,221.6055151783375,209.40299999713898,84.782112145516,42,26.436256,1.1822303084244485,0.5651124792695046,1.7429092143297895,26.10230580454285,7.066853644542851,5.163308428542851
+k20:K3_dual_thr0.9_int8,20,gsm8k_0003,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.7142857142857143,"James runs 3 sprints 3 times a week, so he runs 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,1.7546191308647394,69,9.805325031280518,4.711374282836914,353.13100004196167,228.49210737268325,218.62900006771088,94.187420085422,42,15.55414,1.1751034583952278,0.5695752009153366,1.7429092143297895,17.37969517610102,6.1793665361010195,5.05933367210102
+k20:K2_dual_thr0.9,20,gsm8k_0004,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.7142857142857143,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed.
+In the afternoon, she gives her chickens 25 cups of feed.
+So far, she has given her chickens 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,3.116369138471782,145,9.819210052490234,4.756784439086914,580.8009999990463,359.43056596279575,396.2150000333786,175.1950119472187,72,37.67616,2.100269852863043,1.0006380152106285,3.1596202123367694,38.884065173799755,11.755709333799755,9.042873749799757
+k20:K3_dual_thr0.9_int8,20,gsm8k_0004,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.7142857142857143,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed.
+In the afternoon, she gives her chickens 25 cups of feed.
+So far, she has given her chickens 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,3.799034926109016,145,9.821576118469238,4.756784439086914,628.9069999456406,359.0435873834054,432.5749999284744,163.13880132740712,72,21.836556,2.5801157811698503,1.193073571383953,3.1596202123367694,27.8443553148935,12.120514354893505,10.548130258893503
+k20:K2_dual_thr0.9,20,gsm8k_0005,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.7142857142857143,"First, let's calculate the cost of the first 8 glasses, which are sold at the regular price of $5 each. So, the cost of the first 8 glasses is 8 * $5 = $40.
+Next, let's calculate the cost of the remaining 8 glasses, which are sold at a discount of 60% of the regular price. So, the cost of each of the remaining 8 glasses is 60% of $5, which is 0.6 * $5 = $3. Therefore, the cost of the remaining 8 glasses is 8 * $3 = $24.
+Finally, let's add the cost of the first 8 glasses and the cost of the remaining 8 glasses to find the total cost. So, the total cost is $40 + $24 = $64.
+Therefore, Kylar needs to pay $64 for the 16 glasses.
+The answer is: 64",64.0,True,True,4.618183775804937,90,9.807538986206055,4.723920822143555,820.1729999780655,492.12157170264516,534.62600004673,207.09390171237015,112,43.69792,3.1233729178593492,1.471038880109787,4.437067403210676,48.04143923368784,16.577185793687836,13.430760449687837
+k20:K3_dual_thr0.9_int8,20,gsm8k_0005,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.7142857142857143,"First, let's calculate the cost of the first 8 glasses, which are priced at $5 each. The cost of the first 8 glasses is 8 * $5 = $40.
+Next, let's calculate the cost of the remaining 8 glasses, which are priced at 60% of the original price. The cost of the remaining 8 glasses is 8 * 0.6 * $5 = $24.
+Finally, let's add the cost of the first 8 glasses and the cost of the remaining 8 glasses to find the total cost. The total cost is $40 + $24 = $64.
+Therefore, Kylar needs to pay $64 for the glasses.
+The answer is: 64",64.0,True,False,3.7440947825089097,90,9.809852123260498,4.723920822143555,654.7580000162125,388.7972456097866,438.5940001010895,173.054281456149,90,20.805772,2.5214421476898714,1.2010355174541474,4.437067403210676,27.21178436052376,12.23000420052376,10.731826184523761
+k20:K2_dual_thr0.9,20,gsm8k_0006,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.7142857142857143,"If Seattle has 20 sheep, and Charleston has 4 times as many sheep as Seattle, then Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Therefore, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep together.
+The answer is: 260",260.0,True,True,2.041733520105481,76,9.804795265197754,4.7155561447143555,375.26900005340576,230.23501484530053,260.73099994659424,115.92661438201398,49,28.443408,1.3727209859908325,0.6575531201958656,2.024342313527246,28.511984878168366,8.031342958168363,5.983278766168363
+k20:K3_dual_thr0.9_int8,20,gsm8k_0006,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.7142857142857143,"If Seattle has 20 sheep, and Charleston has 4 times as many sheep as Seattle, then Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Therefore, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep together.
+The answer is: 260",260.0,True,True,2.086027290672064,76,9.80701494216919,4.7155561447143555,372.52300000190735,224.3426188504015,245.94400000572205,97.99819947779184,49,15.53388,1.3996538586053067,0.6741001923680305,2.024342313527246,18.281708168183947,7.09592640818395,5.97734823218395
+k20:K2_dual_thr0.9,20,gsm8k_0007,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.7142857142857143,"Carla can download 2 GB/minute, so she can download 200 GB / 2 GB/minute = 100 minutes.
+40% of the way through the download is 40% * 100 minutes = 40 minutes.
+So Carla downloads 40 minutes * 2 GB/minute = 80 GB before the restart.
+She still has 200 GB - 80 GB = 120 GB left to download.
+So it takes her 120 GB / 2 GB/minute = 60 minutes to download the remaining 120 GB.
+Then it takes her 20 minutes to restart the download.
+So it takes her 60 minutes + 20 minutes = 80 minutes to download the remaining 120 GB.
+Therefore, it takes her 80 minutes + 40 minutes = 120 minutes to download the file.
+The answer is: 120",120.0,False,True,5.656212009489536,104,9.813897132873535,4.732285499572754,1012.3400000333786,610.5525185427325,668.8220000267029,267.6705781629828,142,51.382496,3.8201998974719316,1.8079083877801896,5.565141148055903,57.216642480195986,20.219321520195983,16.519589424195985
+k20:K3_dual_thr0.9_int8,20,gsm8k_0007,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.7142857142857143,"Carla can download 2 GB/minute, so she can download 200 GB / 2 GB/minute = 100 minutes.
+40% of the way through the download is 40% * 100 minutes = 40 minutes.
+So Carla downloads 40 minutes * 2 GB/minute = 80 GB before the restart.
+She still has 200 GB - 80 GB = 120 GB left to download.
+So it takes her 120 GB / 2 GB/minute = 60 minutes to download the remaining 120 GB.
+Then it takes her 20 minutes to restart the download.
+So it takes her 60 minutes + 20 minutes = 80 minutes to download the remaining 120 GB.
+Therefore, it takes her 80 minutes + 40 minutes = 120 minutes to download the file.
+The answer is: 120",120.0,False,True,5.654138213954866,104,9.815334796905518,4.732285499572754,1001.8559999465942,600.2158299576395,643.0599999427795,242.05565637562825,143,28.7444,3.8079263449530116,1.816414749443531,5.565141148055903,39.09785778430257,18.399960184302568,16.330170424302565
+k20:K2_dual_thr0.9,20,gsm8k_0008,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.7142857142857143,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+During the first 2 hours in standstill traffic, he covers no distance.
+During the next half-hour, he drives at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+During the remaining 1.5 hours, he drives at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+In total, he covers a distance of 0 + 15 + 120 = 135 miles.
+Therefore, at the end of the 4 hours, he is 180 - 135 = 45 miles from home.
+The answer is: 45",45.0,True,True,4.0239537646993995,138,9.818318367004395,4.752601623535156,721.2439999580383,435.4035388789837,473.8679999113083,188.48004565591015,95,42.550768,2.7102956760618837,1.2930624334216119,3.9216343984800623,45.366400661607265,14.728194581607262,11.664373973607262
+k20:K3_dual_thr0.9_int8,20,gsm8k_0008,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.7142857142857143,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+For the first 2 hours in standstill traffic, he covers no distance.
+For the next half-hour, he drives at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+For the remaining 1.5 hours, he drives at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+In total, he covers a distance of 0 + 15 + 120 = 135 miles.
+Therefore, at the end of the 4 hours, he is 180 - 135 = 45 miles from home.
+The answer is: 45",45.0,True,False,3.9364720601588488,138,9.820063591003418,4.752601623535156,733.4700000286102,453.8437780348102,489.7239999771118,210.5404472018256,93,22.699036,2.6571250137155875,1.2588893765211104,3.9216343984800623,29.251317217667875,12.906369697667873,11.271874945667875
+k20:K2_dual_thr0.9,20,gsm8k_0009,K2_dual_thr0.9,DASR + Fast-dLLM (bf16),0.7142857142857143,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours is $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is 1.2 x $10 = $12 per hour.
+Her earnings for the overtime hours is $12 x 5 = $60.
+Therefore, Eliza's total earnings for this week is $400 + $60 = $460.
+The answer is: 460",460.0,True,True,3.5122280344367027,94,9.80832290649414,4.726310729980469,608.6970000267029,359.2068369971667,396.75300002098083,147.65779857518916,85,37.733712,2.354801629630034,1.1384223987460136,3.399494712590822,40.09156968763612,12.921701527636117,10.204714711636116
+k20:K3_dual_thr0.9_int8,20,gsm8k_0009,K3_dual_thr0.9_int8,DASR + Fast-dLLM (INT8),0.7142857142857143,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours is $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is 1.2 x $10 = $12 per hour.
+Her earnings for the overtime hours is $12 x 5 = $60.
+Therefore, Eliza's total earnings for this week is $400 + $60 = $460.
+The answer is: 460",460.0,True,True,3.428236559033394,94,9.811570644378662,4.726310729980469,649.488000035286,405.96414861365304,409.26900005340576,166.13066509811003,85,20.361012,2.309991613354068,1.0997339503765107,3.399494712590822,26.020291190438716,11.358767030438715,9.892614614438717

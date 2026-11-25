@@ -1,165 +1,0 @@
-
-=== 1/3 Dream, GSM8K  (2026-11-24 21:44:25)
-{'EXP13_MODEL': 'dream', 'EXP13_DATASET': 'gsm8k', 'EXP13_N_QUESTIONS': 2, 'EXP13_NEW_TOKENS': 64, 'EXP13_OUTPUT_TAG': '_reuse_smoke', 'EXP13_VARIANT_NAMES': ['F0_nocache_fixed', 'K2_dual_thr0.9', 'K3_dual_thr0.9_int8', 'R1_dual_thr0.9_reuse', 'R2_dual_thr0.9_reuse_r4', 'R3_dual_thr0.9_reuse_int8']}
-The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
-Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  5.01it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  5.63it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  5.64it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.16it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  5.90it/s]
-/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
-  warnings.warn(
-/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
-  warnings.warn(
-idle power: edge=61.7 W, cloud=77.7 W
-Exp13 | dream | gsm8k n=2 | split after layer 4 | 64 tokens, blocks of 32 | thresholds [0.9] | T=0.0 top_p=None
-warmup done
-
-gsm8k_0000 | prompt tokens=99
-  F0_nocache_fixed         ok=False steps=  64 up=  74.78 MB edge=   339 ms cloud=  1934 ms "gs at the farmers' market.\n#### 9\nThe answer is: 9"
-  K2_dual_thr0.9           ok=False steps=  52 up=  13.81 MB edge=   310 ms cloud=  1686 ms '6 - 7 = 9*$2 = $9 per day.\n#### 9\nThe answer is: 9'
-  K3_dual_thr0.9_int8      ok=False steps=  49 up=   7.26 MB edge=   289 ms cloud=  1601 ms 'he farmers market per day.\n#### 9\nThe answer is: 9'
-  R1_dual_thr0.9_reuse     ok=False steps=  52 up=  12.88 MB edge=   304 ms cloud=  1659 ms =K2 '6 - 7 = 9*$2 = $9 per day.\n#### 9\nThe answer is: 9'
-  R2_dual_thr0.9_reuse_r4  ok=False steps=  52 up=  12.88 MB edge=   308 ms cloud=  1745 ms =K2 '6 - 7 = 9*$2 = $9 per day.\n#### 9\nThe answer is: 9'
-  R3_dual_thr0.9_reuse_int8 ok=False steps=  49 up=   6.80 MB edge=   292 ms cloud=  1584 ms ' = 9 eggs for $18 per day.\n#### 9\nThe answer is: 9'
-
-gsm8k_0001 | prompt tokens=60
-  F0_nocache_fixed         ok=True  steps=  64 up=  56.89 MB edge=   315 ms cloud=  1642 ms ' 2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3'
-  K2_dual_thr0.9           ok=True  steps=  23 up=   6.59 MB edge=   154 ms cloud=   833 ms '2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3.'
-  K3_dual_thr0.9_int8      ok=True  steps=  27 up=   4.20 MB edge=   190 ms cloud=   983 ms ' 2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3'
-  R1_dual_thr0.9_reuse     ok=True  steps=  29 up=   7.36 MB edge=   165 ms cloud=   916 ms ' 2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3'
-  R2_dual_thr0.9_reuse_r4  ok=True  steps=  29 up=   7.36 MB edge=   170 ms cloud=   937 ms ' 2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3'
-  R3_dual_thr0.9_reuse_int8 ok=True  steps=  28 up=   3.99 MB edge=   168 ms cloud=   929 ms '2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3.'
-
-Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_dream_gsm8k_k4_t64_b32_reuse_smoke
-                  variant  runs  acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms  mean_block_start_mb  same_as_cache_ref  regressions_vs_cache_ref  improvements_vs_cache_ref  mcnemar_p_vs_cache_ref
-         F0_nocache_fixed     2  0.5            0             0        1.0        64.0   65.831936             0.000000    326.744241    1787.980878            65.831936                  0                         0                          0                     1.0
-           K2_dual_thr0.9     2  0.5            0             0        1.0        37.5   10.200664             0.849718    231.964767    1259.792848             2.057248                  2                         0                          0                     1.0
-      K3_dual_thr0.9_int8     2  0.5            0             0        1.0        38.0    5.732191             0.914505    239.709745    1292.322015             1.543231                  0                         0                          0                     1.0
-     R1_dual_thr0.9_reuse     2  0.5            0             0        1.0        40.5   10.121901             0.849158    234.346767    1287.843691             1.290309                  1                         0                          0                     1.0
-  R2_dual_thr0.9_reuse_r4     2  0.5            0             0        1.0        40.5   10.121882             0.849158    238.909792    1341.398048             1.290291                  1                         0                          0                     1.0
-R3_dual_thr0.9_reuse_int8     2  0.5            0             0        1.0        38.5    5.396945             0.919426    229.956688    1256.419319             1.150601                  0                         0                          0                     1.0
-
-Emulated split latency (s), RTT 20 ms, edge 3x slower:
-bandwidth_mbps              1      5     10    25    50    100   1000
-variant                                                              
-F0_nocache_fixed           530.8  109.4  56.8  25.2  14.6   9.4   4.6
-K2_dual_thr0.9              84.3   19.1  10.9   6.0   4.4   3.5   2.8
-K3_dual_thr0.9_int8         48.7   12.0   7.4   4.7   3.7   3.3   2.9
-R1_dual_thr0.9_reuse        83.8   19.0  10.9   6.1   4.5   3.7   2.9
-R2_dual_thr0.9_reuse_r4     83.9   19.1  11.0   6.1   4.5   3.7   3.0
-R3_dual_thr0.9_reuse_int8   45.9   11.4   7.1   4.5   3.6   3.2   2.8
-
-Cloud-only with the same cache and decoding (s):
-variant
-F0_nocache_fixed             2.19
-K2_dual_thr0.9               1.54
-K3_dual_thr0.9_int8          1.58
-R1_dual_thr0.9_reuse         1.57
-R2_dual_thr0.9_reuse_r4      1.63
-R3_dual_thr0.9_reuse_int8    1.53
-
-=== 2/3 Dream, long prompts  (2026-11-24 21:45:08)
-{'EXP13_MODEL': 'dream', 'EXP13_DATASET': 'authored', 'EXP13_N_QUESTIONS': 2, 'EXP13_NEW_TOKENS': 64, 'EXP13_OUTPUT_TAG': '_reuse_smoke', 'EXP13_VARIANT_NAMES': ['F0_nocache_fixed', 'K2_dual_thr0.9', 'K3_dual_thr0.9_int8', 'R1_dual_thr0.9_reuse', 'R2_dual_thr0.9_reuse_r4', 'R3_dual_thr0.9_reuse_int8']}
-The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
-Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  5.01it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  6.03it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  6.55it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.97it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.57it/s]
-/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
-  warnings.warn(
-/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
-  warnings.warn(
-idle power: edge=61.7 W, cloud=80.0 W
-Exp13 | dream | authored n=2 | split after layer 4 | 64 tokens, blocks of 32 | thresholds [0.9] | T=0.0 top_p=None
-warmup done
-
-library_factual | prompt tokens=849
-  F0_nocache_fixed         ok=True  steps=  64 up= 418.84 MB edge=  1275 ms cloud=  8437 ms 'Mara Chen'
-  K2_dual_thr0.9           ok=True  steps=   4 up=  13.55 MB edge=    53 ms cloud=   330 ms 'Mara Chen'
-  K3_dual_thr0.9_int8      ok=True  steps=   4 up=  10.05 MB edge=    53 ms cloud=   333 ms 'Mara Chen'
-  R1_dual_thr0.9_reuse     ok=True  steps=   4 up=   7.46 MB edge=    53 ms cloud=   331 ms =K2 'Mara Chen'
-  R2_dual_thr0.9_reuse_r4  ok=True  steps=   4 up=   7.45 MB edge=    53 ms cloud=   330 ms =K2 'Mara Chen'
-  R3_dual_thr0.9_reuse_int8 ok=True  steps=   4 up=   7.00 MB edge=    53 ms cloud=   332 ms =K2 'Mara Chen'
-
-library_math | prompt tokens=864
-  F0_nocache_fixed         ok=True  steps=  64 up= 425.72 MB edge=  1281 ms cloud=  8514 ms 'cords. The remainder is 1,320 - 840 = 480 records.'
-  K2_dual_thr0.9           ok=False steps=  51 up=  24.54 MB edge=   344 ms cloud=  1914 ms 'cords/tech * 4 technicians * 6 days = 840 records.'
-  K3_dual_thr0.9_int8      ok=False steps=  51 up=  15.72 MB edge=   345 ms cloud=  1919 ms 'cords/tech * 4 technicians * 6 days = 840 records.'
-  R1_dual_thr0.9_reuse     ok=False steps=  51 up=  18.13 MB edge=   346 ms cloud=  1927 ms =K2 'cords/tech * 4 technicians * 6 days = 840 records.'
-  R2_dual_thr0.9_reuse_r4  ok=False steps=  51 up=  18.13 MB edge=   348 ms cloud=  1917 ms =K2 'cords/tech * 4 technicians * 6 days = 840 records.'
-  R3_dual_thr0.9_reuse_int8 ok=False steps=  51 up=  12.51 MB edge=   337 ms cloud=  1902 ms =K2 'cords/tech * 4 technicians * 6 days = 840 records.'
-
-Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_dream_authored_k4_t64_b32_reuse_smoke
-                  variant  runs  acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms  mean_block_start_mb  same_as_cache_ref  regressions_vs_cache_ref  improvements_vs_cache_ref  mcnemar_p_vs_cache_ref
-         F0_nocache_fixed     2  1.0            0             0        1.0        64.0  422.282240             0.000000   1278.056991    8475.590019           422.282240                  0                         0                          1                     1.0
-           K2_dual_thr0.9     2  0.5            1             0        1.0        27.5   19.045816             0.955001    198.409344    1121.804106            13.196320                  2                         0                          0                     1.0
-      K3_dual_thr0.9_int8     2  0.5            1             0        1.0        27.5   12.882985             0.969545    199.139824    1126.043190             9.899089                  2                         0                          0                     1.0
-     R1_dual_thr0.9_reuse     2  0.5            1             0        1.0        27.5   12.791967             0.969809    199.492096    1128.716536             6.942471                  2                         0                          0                     1.0
-  R2_dual_thr0.9_reuse_r4     2  0.5            1             0        1.0        27.5   12.791851             0.969809    200.159776    1123.481617             6.942355                  2                         0                          0                     1.0
-R3_dual_thr0.9_reuse_int8     2  0.5            1             0        1.0        27.5    9.754431             0.976952    194.789408    1116.872222             6.770535                  2                         0                          0                     1.0
-
-Emulated split latency (s), RTT 20 ms, edge 3x slower:
-bandwidth_mbps               1      5      10     25    50    100   1000
-variant                                                                 
-F0_nocache_fixed           3392.0  689.4  351.6  148.9  81.3  47.5  17.1
-K2_dual_thr0.9              154.7   32.8   17.5    8.4   5.3   3.8   2.4
-K3_dual_thr0.9_int8         105.4   22.9   12.6    6.5   4.4   3.4   2.4
-R1_dual_thr0.9_reuse        104.6   22.8   12.5    6.4   4.4   3.3   2.4
-R2_dual_thr0.9_reuse_r4     104.6   22.8   12.5    6.4   4.3   3.3   2.4
-R3_dual_thr0.9_reuse_int8    80.3   17.9   10.1    5.4   3.8   3.1   2.4
-
-Cloud-only with the same cache and decoding (s):
-variant
-F0_nocache_fixed             9.91
-K2_dual_thr0.9               1.36
-K3_dual_thr0.9_int8          1.37
-R1_dual_thr0.9_reuse         1.37
-R2_dual_thr0.9_reuse_r4      1.36
-R3_dual_thr0.9_reuse_int8    1.35
-
-=== 3/3 LLaDA, GSM8K  (2026-11-24 21:46:10)
-{'EXP13_MODEL': 'llada', 'EXP13_DATASET': 'gsm8k', 'EXP13_N_QUESTIONS': 2, 'EXP13_NEW_TOKENS': 64, 'EXP13_OUTPUT_TAG': '_reuse_smoke', 'EXP13_VARIANT_NAMES': ['F0_nocache_fixed', 'K2_dual_thr0.9', 'K3_dual_thr0.9_int8', 'R1_dual_thr0.9_reuse', 'R2_dual_thr0.9_reuse_r4', 'R3_dual_thr0.9_reuse_int8']}
-Loading checkpoint shards:   0%|          | 0/6 [00:00<?, ?it/s]Loading checkpoint shards:  17%|█▋        | 1/6 [00:00<00:01,  4.99it/s]Loading checkpoint shards:  33%|███▎      | 2/6 [00:00<00:00,  5.14it/s]Loading checkpoint shards:  50%|█████     | 3/6 [00:00<00:00,  5.30it/s]Loading checkpoint shards:  67%|██████▋   | 4/6 [00:00<00:00,  5.45it/s]Loading checkpoint shards:  83%|████████▎ | 5/6 [00:00<00:00,  5.59it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:01<00:00,  5.68it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:01<00:00,  5.50it/s]
-idle power: edge=64.7 W, cloud=82.9 W
-Exp13 | llada | gsm8k n=2 | split after layer 4 | 64 tokens, blocks of 32 | thresholds [0.9] | T=0.0 top_p=None
-warmup done
-
-gsm8k_0000 | prompt tokens=92
-  F0_nocache_fixed         ok=True  steps=  64 up=  81.79 MB edge=   332 ms cloud=  2256 ms 'erefore, she makes 9 * $2 = $18 every day.\n#### 18'
-  K2_dual_thr0.9           ok=True  steps=  52 up=  15.66 MB edge=   348 ms cloud=  2302 ms '2 per egg, she makes 9 * $2 = $18 per day.\n#### 18'
-  K3_dual_thr0.9_int8      ok=True  steps=  53 up=   9.24 MB edge=   350 ms cloud=  2320 ms '2 per egg, she makes 9 * $2 = $18 per day.\n#### 18'
-  R1_dual_thr0.9_reuse     ok=True  steps=  51 up=  14.39 MB edge=   342 ms cloud=  2270 ms =K2 '2 per egg, she makes 9 * $2 = $18 per day.\n#### 18'
-  R2_dual_thr0.9_reuse_r4  ok=True  steps=  51 up=  14.39 MB edge=   328 ms cloud=  2184 ms =K2 '2 per egg, she makes 9 * $2 = $18 per day.\n#### 18'
-  R3_dual_thr0.9_reuse_int8 ok=True  steps=  51 up=   7.97 MB edge=   340 ms cloud=  2263 ms =K2 '2 per egg, she makes 9 * $2 = $18 per day.\n#### 18'
-
-gsm8k_0001 | prompt tokens=55
-  F0_nocache_fixed         ok=True  steps=  64 up=  62.39 MB edge=   419 ms cloud=  1929 ms 'number of bolts needed is 2 + 1 = 3 bolts.\n\n#### 3'
-  K2_dual_thr0.9           ok=True  steps=  28 up=   8.77 MB edge=   187 ms cloud=  1226 ms ' number of bolts is 2 + 1 = 3 bolts.\n\n#### 3 bolts'
-  K3_dual_thr0.9_int8      ok=True  steps=  34 up=   5.79 MB edge=   227 ms cloud=  1484 ms 'ng these together, we get 2 + 1 = 3 bolts.\n\n#### 3'
-  R1_dual_thr0.9_reuse     ok=True  steps=  34 up=   9.65 MB edge=   226 ms cloud=  1480 ms 'ng these together, we get 2 + 1 = 3 bolts.\n\n#### 3'
-  R2_dual_thr0.9_reuse_r4  ok=True  steps=  34 up=   9.65 MB edge=   221 ms cloud=  1460 ms 'ng these together, we get 2 + 1 = 3 bolts.\n\n#### 3'
-  R3_dual_thr0.9_reuse_int8 ok=True  steps=  34 up=   5.45 MB edge=   294 ms cloud=  1894 ms 'ng these together, we get 2 + 1 = 3 bolts.\n\n#### 3'
-
-Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_llada_gsm8k_k4_t64_b32_reuse_smoke
-                  variant  runs  acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms  mean_block_start_mb  same_as_cache_ref  regressions_vs_cache_ref  improvements_vs_cache_ref  mcnemar_p_vs_cache_ref
-         F0_nocache_fixed     2  1.0            0             0        1.0        64.0   72.090624             0.000000    375.242483    2092.797968            72.090624                  0                         0                          0                     1.0
-           K2_dual_thr0.9     2  1.0            0             0        1.0        40.0   12.214912             0.833994    267.186544    1764.127838             2.252832                  2                         0                          0                     1.0
-      K3_dual_thr0.9_int8     2  1.0            0             0        1.0        43.5    7.517551             0.897081    288.420496    1902.286726             2.009239                  1                         0                          0                     1.0
-     R1_dual_thr0.9_reuse     2  1.0            0             0        1.0        42.5   12.022475             0.834665    283.635073    1875.320043             1.404995                  1                         0                          0                     1.0
-  R2_dual_thr0.9_reuse_r4     2  1.0            0             0        1.0        42.5   12.022457             0.834665    274.573266    1822.425865             1.404977                  1                         0                          0                     1.0
-R3_dual_thr0.9_reuse_int8     2  1.0            0             0        1.0        42.5    6.710510             0.907603    316.963312    2078.260476             1.333350                  1                         0                          0                     1.0
-
-Emulated split latency (s), RTT 20 ms, edge 3x slower:
-bandwidth_mbps              1      5     10    25    50    100   1000
-variant                                                              
-F0_nocache_fixed           581.4  120.0  62.3  27.7  16.2  10.4   5.2
-K2_dual_thr0.9             101.2   23.0  13.2   7.4   5.4   4.4   3.6
-K3_dual_thr0.9_int8         63.9   15.8   9.8   6.2   5.0   4.4   3.8
-R1_dual_thr0.9_reuse        99.9   22.9  13.3   7.5   5.6   4.6   3.8
-R2_dual_thr0.9_reuse_r4     99.8   22.8  13.2   7.4   5.5   4.6   3.7
-R3_dual_thr0.9_reuse_int8   57.7   14.7   9.4   6.1   5.1   4.5   4.1
-
-Cloud-only with the same cache and decoding (s):
-variant
-F0_nocache_fixed             2.64
-K2_dual_thr0.9               2.14
-K3_dual_thr0.9_int8          2.30
-R1_dual_thr0.9_reuse         2.27
-R2_dual_thr0.9_reuse_r4      2.21
-R3_dual_thr0.9_reuse_int8    2.51
-
-Done (2026-11-24 21:47:08).

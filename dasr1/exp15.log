@@ -1,30 +1,0 @@
-nohup: ignoring input
-Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  8.11it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.06it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.95it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.27it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.18it/s]
-/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
-  warnings.warn(
-/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
-  warnings.warn(
-Exp15 | dream | 28 layers | boundaries after layers [1, 2, 4, 8, 12, 16, 20, 24] | d=3584
-[exp15] GSM8K train split unavailable (ModuleNotFoundError("No module named 'datasets'")); using local test 100..199
-  layer 1: lambda=0.1 (val top1 0.947)
-  layer 2: lambda=0.001 (val top1 0.947)
-  layer 4: lambda=0.01 (val top1 0.911)
-  layer 8: lambda=0.001 (val top1 0.827)
-  layer 12: lambda=0.1 (val top1 0.784)
-  layer 16: lambda=0.01 (val top1 0.755)
-  layer 20: lambda=0.01 (val top1 0.771)
-  layer 24: lambda=0.01 (val top1 0.778)
-  gsm8k_test: 5723 content tokens evaluated
-  authored_docs: 8334 content tokens evaluated
-
-Top-1 token recovery (content tokens):
-layer                      1      2      4      8      12     16     20     24
-test_set      attack                                                          
-authored_docs embed_nn  0.973  0.898  0.775  0.455  0.232  0.130  0.080  0.066
-              lm_lens   0.018  0.018  0.024  0.068  0.068  0.066  0.078  0.274
-              ridge     0.822  0.772  0.659  0.448  0.410  0.386  0.393  0.412
-gsm8k_test    embed_nn  0.938  0.911  0.799  0.441  0.207  0.116  0.076  0.050
-              lm_lens   0.039  0.039  0.053  0.119  0.116  0.123  0.188  0.544
-              ridge     0.954  0.936  0.893  0.812  0.774  0.768  0.772  0.770
-
-Exp15 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp15_leakage_dream
