@@ -1,0 +1,15 @@
+{
+  "experiment": "Exp13C split exactness of Fast-dLLM",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "dataset": "gsm8k",
+  "n_cases": 30,
+  "split_layer_1based": 4,
+  "new_tokens": 256,
+  "block_length": 32,
+  "variants": [
+    "K2"
+  ],
+  "temperature": 0.0,
+  "top_p": null,
+  "encoding": "bf16"
+}

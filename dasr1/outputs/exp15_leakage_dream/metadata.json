@@ -1,0 +1,35 @@
+{
+  "experiment": "Exp15 boundary leakage",
+  "model": "dream",
+  "layers": [
+    1,
+    2,
+    4,
+    8,
+    12,
+    16,
+    20,
+    24
+  ],
+  "train_source": "local gsm8k test 100..199 (fallback)",
+  "n_fit_prompts": 90,
+  "n_val_prompts": 10,
+  "ridge_lambda": {
+    "1": 0.1,
+    "2": 0.001,
+    "4": 0.01,
+    "8": 0.001,
+    "12": 0.1,
+    "16": 0.01,
+    "20": 0.01,
+    "24": 0.01
+  },
+  "gen_masks": 64,
+  "logit_shift_checked": true,
+  "private_text_not_found": 0,
+  "seconds": 28.7,
+  "gpu": "NVIDIA RTX A6000",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22"
+}

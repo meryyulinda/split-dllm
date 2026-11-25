@@ -3,9 +3,13 @@
 ## Now
 - [x] **Exp13: Fast-dLLM on the split** (DualCache + parallel decoding): full run done (`outputs/exp13_*_b32/`). Split ~10x faster than the static split, ~2x cloud-only, accuracy unchanged.
 - [x] **Exp14: block-start row reuse** (`EXP14_NOTES.md`, `EXP14B_NOTES.md`): full run done (`outputs/exp13_*_reuse/`); bytes -40-51% vs K2, long prompts lose 3/12 (answers stop early); long-prompt/LLaDA timings disturbed.
-- [ ] **Exp14b**: clean rerun on GPUs 1,2 + prompt-only reuse (R4, R5), `experiments/run_exp14b.sh`.
+- [x] **Exp14b**: clean rerun on GPUs 1,2 + prompt-only reuse (R4, R5), outputs `outputs/exp13_*_reuse2/` (named exp13_* because the variants run through the Exp13 script). Prompt-only reuse also truncates long answers (2/12 lost) -> block-start reuse is a negative result; final Fast-dLLM tier = K3 (DualCache + gamma 0.9 + INT8).
+- [ ] **Exp13C: split exactness of Fast-dLLM** (`EXP15_NOTES.md`): K2 on one GPU vs split; identical outputs would make the Fast-dLLM tier's transmission exact, like C2 vs C1.
+- [ ] **Exp15: boundary leakage** (`EXP15_NOTES.md`): token recovery from the boundary rows vs split layer (3 attacks); decides the split layer.
 - [x] Paper draft v4 (25 Nov): five RQs with Fast-dLLM in RQ2-RQ4, "block" defined, preliminary experiments removed, no appendix, architecture figure without equations, why dLLM-Cache + Fast-dLLM.
-- [ ] Paper: fill the Exp14b placeholders (`\hl{--}` in the Fast-dLLM table: R1/R3 latency, all R4 numbers; R4 sentence in RQ3).
+- [x] Paper: Exp14b results in RQ2/RQ3 (reuse rows removed from the Fast-dLLM table; truncation from stale rows at block starts in general).
+- [ ] Paper: confirm terms with Mery before using them (term list of 25 Nov): backend names vs "exact/approximate tier", block-start step, in-block step, block-start reuse, tier selector, step schedule, row selector, configuration codes F0-K3 and R1-R4.
+- [ ] Architecture figure (teammate redraw): pipeline is final except the split layer (Exp15) and the confirmed terms.
 - [ ] Paper: **verify the claims about other caches** in the new related-work paragraph ("why dLLM-Cache and Fast-dLLM") against the papers: that Sparse-dLLM, d²Cache and Elastic-Cache select the tokens to update per layer from attention or drift statistics (so the choice is made inside the cloud's layers), that dKV-Cache belongs to the key/value-caching family, and that FlashDLM needs an auxiliary autoregressive model. These come from Claude's reading, not from checking the papers.
 - [ ] **Leakage check for the privacy argument**: how much of the prompt can be recovered from the layer-4 boundary states (train a small inverter), and at deeper splits.
 

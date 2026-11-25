@@ -1,0 +1,319 @@
+case_id,variant,identical,first_diff_position,text_single,text_split
+gsm8k_0000,K2,True,,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18","Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18"
+gsm8k_0001,K2,True,,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3.","The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3."
+gsm8k_0002,K2,True,,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The increased value of the house is $130,000 * 150% = $195,000.
+The profit is $195,000 - $130,000 = $65,000.
+#### 65000
+The answer is: 65000","The total cost of the house is $80,000 + $50,000 = $130,000.
+The increased value of the house is $130,000 * 150% = $195,000.
+The profit is $195,000 - $130,000 = $65,000.
+#### 65000
+The answer is: 65000"
+gsm8k_0003,K2,True,,"James runs 3 sprints 3 times a week, so he runs 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540","James runs 3 sprints 3 times a week, so he runs 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540"
+gsm8k_0004,K2,True,,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed.
+In the afternoon, she gives her chickens 25 cups of feed.
+So far, she has given her chickens 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20","Wendi feeds each of her chickens 3 cups of feed per day, so she needs a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed.
+In the afternoon, she gives her chickens 25 cups of feed.
+So far, she has given her chickens 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her chickens 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20"
+gsm8k_0005,K2,True,,"First, let's calculate the cost of the first 8 glasses, which are sold at the regular price of $5 each. So, the cost of the first 8 glasses is 8 * $5 = $40.
+Next, let's calculate the cost of the remaining 8 glasses, which are sold at a discount of 60% of the regular price. So, the cost of each of the remaining 8 glasses is 60% of $5, which is 0.6 * $5 = $3. Therefore, the cost of the remaining 8 glasses is 8 * $3 = $24.
+Finally, let's add the cost of the first 8 glasses and the cost of the remaining 8 glasses to find the total cost. So, the total cost is $40 + $24 = $64.
+Therefore, Kylar needs to pay $64 for the 16 glasses.
+The answer is: 64","First, let's calculate the cost of the first 8 glasses, which are sold at the regular price of $5 each. So, the cost of the first 8 glasses is 8 * $5 = $40.
+Next, let's calculate the cost of the remaining 8 glasses, which are sold at a discount of 60% of the regular price. So, the cost of each of the remaining 8 glasses is 60% of $5, which is 0.6 * $5 = $3. Therefore, the cost of the remaining 8 glasses is 8 * $3 = $24.
+Finally, let's add the cost of the first 8 glasses and the cost of the remaining 8 glasses to find the total cost. So, the total cost is $40 + $24 = $64.
+Therefore, Kylar needs to pay $64 for the 16 glasses.
+The answer is: 64"
+gsm8k_0006,K2,True,,"If Seattle has 20 sheep, and Charleston has 4 times as many sheep as Seattle, then Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Therefore, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep together.
+The answer is: 260","If Seattle has 20 sheep, and Charleston has 4 times as many sheep as Seattle, then Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Therefore, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep together.
+The answer is: 260"
+gsm8k_0007,K2,True,,"Carla can download 2 GB/minute, so she can download 200 GB / 2 GB/minute = 100 minutes.
+40% of the way through the download is 40% * 100 minutes = 40 minutes.
+So Carla downloads 40 minutes * 2 GB/minute = 80 GB before the restart.
+She still has 200 GB - 80 GB = 120 GB left to download.
+So it takes her 120 GB / 2 GB/minute = 60 minutes to download the remaining 120 GB.
+Then it takes her 20 minutes to restart the download.
+So it takes her 60 minutes + 20 minutes = 80 minutes to download the remaining 120 GB.
+Therefore, it takes her 80 minutes + 40 minutes = 120 minutes to download the file.
+The answer is: 120","Carla can download 2 GB/minute, so she can download 200 GB / 2 GB/minute = 100 minutes.
+40% of the way through the download is 40% * 100 minutes = 40 minutes.
+So Carla downloads 40 minutes * 2 GB/minute = 80 GB before the restart.
+She still has 200 GB - 80 GB = 120 GB left to download.
+So it takes her 120 GB / 2 GB/minute = 60 minutes to download the remaining 120 GB.
+Then it takes her 20 minutes to restart the download.
+So it takes her 60 minutes + 20 minutes = 80 minutes to download the remaining 120 GB.
+Therefore, it takes her 80 minutes + 40 minutes = 120 minutes to download the file.
+The answer is: 120"
+gsm8k_0008,K2,True,,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+During the first 2 hours in standstill traffic, he covers no distance.
+During the next half-hour, he drives at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+During the remaining 1.5 hours, he drives at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+In total, he covers a distance of 0 + 15 + 120 = 135 miles.
+Therefore, at the end of the 4 hours, he is 180 - 135 = 45 miles from home.
+The answer is: 45","John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+During the first 2 hours in standstill traffic, he covers no distance.
+During the next half-hour, he drives at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+During the remaining 1.5 hours, he drives at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+In total, he covers a distance of 0 + 15 + 120 = 135 miles.
+Therefore, at the end of the 4 hours, he is 180 - 135 = 45 miles from home.
+The answer is: 45"
+gsm8k_0009,K2,True,,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours is $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is 1.2 x $10 = $12 per hour.
+Her earnings for the overtime hours is $12 x 5 = $60.
+Therefore, Eliza's total earnings for this week is $400 + $60 = $460.
+The answer is: 460","Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours is $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is 1.2 x $10 = $12 per hour.
+Her earnings for the overtime hours is $12 x 5 = $60.
+Therefore, Eliza's total earnings for this week is $400 + $60 = $460.
+The answer is: 460"
+gsm8k_0010,K2,True,,"In the second month, the number of downloads was three times as many as the first month, so it was 60 * 3 = 180 downloads.
+In the third month, the number of downloads reduced by 30%, so it was 180 - (180 * 30/100) = 180 - 54 = 126 downloads.
+The total number of downloads over the three months is 60 + 180 + 126 = 366 downloads.
+The answer is: 366.","In the second month, the number of downloads was three times as many as the first month, so it was 60 * 3 = 180 downloads.
+In the third month, the number of downloads reduced by 30%, so it was 180 - (180 * 30/100) = 180 - 54 = 126 downloads.
+The total number of downloads over the three months is 60 + 180 + 126 = 366 downloads.
+The answer is: 366."
+gsm8k_0011,K2,True,,"The cost of 3 dozen donuts is 3 * $68 = $204.
+The cost of 2 dozen mini cupcakes is 2 * $80 = $160.
+The cost of 6 dozen mini cheesecakes is 6 * $55 = $330.
+The total cost is $204 + $160 + $330 = $694.
+The answer is: 694","The cost of 3 dozen donuts is 3 * $68 = $204.
+The cost of 2 dozen mini cupcakes is 2 * $80 = $160.
+The cost of 6 dozen mini cheesecakes is 6 * $55 = $330.
+The total cost is $204 + $160 + $330 = $694.
+The answer is: 694"
+gsm8k_0012,K2,True,,"Each year, Carlos can sell 7 lemons for $1.5 each, so he earns 7 * $1.5 = $10.50 per year.
+It costs $3 per year to water and feed the tree, so his net earnings per year is $10.50 - $3 = $7.50.
+To break even, Carlos needs to earn at least $90, the cost of planting the tree.
+It will take him $90 / $7.50 = 12 years to earn enough money to break even.
+Therefore, it will take him 12 years to start earning money on the lemon tree.
+The answer is: 12","Each year, Carlos can sell 7 lemons for $1.5 each, so he earns 7 * $1.5 = $10.50 per year.
+It costs $3 per year to water and feed the tree, so his net earnings per year is $10.50 - $3 = $7.50.
+To break even, Carlos needs to earn at least $90, the cost of planting the tree.
+It will take him $90 / $7.50 = 12 years to earn enough money to break even.
+Therefore, it will take him 12 years to start earning money on the lemon tree.
+The answer is: 12"
+gsm8k_0013,K2,True,,"Let's call the number of vacuum cleaners Melanie started with x.
+Melanie sold a third of her vacuum cleaners at the green house, so she sold x/3.
+She then sold 2 more to the red house, so she sold a total of x/3 + 2.
+After selling to the green and red houses, Melanie had x - (x/3 + 2) = 2x/3 - 2 left.
+She then sold half of what was left at the orange house, so she sold (2x/3 - 2)/2 = x/3 - 1.
+After selling to the orange house, Melanie had (2x/3 - 2) - (x/3 - 1) = x/3 - 1 left.
+We know that Melanie has 5 vacuum cleaners left, so we can set up the equation x/3 - 1 = 5.
+Solving for x, we get x/3 = 6, so x = 18.
+Melanie started with 18 vacuum cleaners.
+The answer is: 18","Let's call the number of vacuum cleaners Melanie started with x.
+Melanie sold a third of her vacuum cleaners at the green house, so she sold x/3.
+She then sold 2 more to the red house, so she sold a total of x/3 + 2.
+After selling to the green and red houses, Melanie had x - (x/3 + 2) = 2x/3 - 2 left.
+She then sold half of what was left at the orange house, so she sold (2x/3 - 2)/2 = x/3 - 1.
+After selling to the orange house, Melanie had (2x/3 - 2) - (x/3 - 1) = x/3 - 1 left.
+We know that Melanie has 5 vacuum cleaners left, so we can set up the equation x/3 - 1 = 5.
+Solving for x, we get x/3 = 6, so x = 18.
+Melanie started with 18 vacuum cleaners.
+The answer is: 18"
+gsm8k_0014,K2,True,,"First, let's find the number of students who enrolled in contemporary dance. 20% of 20 students is 0.2 * 20 = 4 students.
+Next, let's find the number of students who enrolled in jazz dance. There are 20 - 4 = 16 students remaining. 25% of 16 students is 0.25 * 16 = 4 students.
+Now, let's find the number of students who enrolled in hip-hop dance. There are 20 - 4 - 4 = 12 students remaining.
+To find the percentage of students who enrolled in hip-hop dance, we divide the number of students who enrolled in hip-hop dance by the total number of students and multiply by 100: (12 / 20) * 100 = 60%.
+Therefore, 60% of the entire students enrolled in hip-hop dance.
+The answer is: 60","First, let's find the number of students who enrolled in contemporary dance. 20% of 20 students is 0.2 * 20 = 4 students.
+Next, let's find the number of students who enrolled in jazz dance. There are 20 - 4 = 16 students remaining. 25% of 16 students is 0.25 * 16 = 4 students.
+Now, let's find the number of students who enrolled in hip-hop dance. There are 20 - 4 - 4 = 12 students remaining.
+To find the percentage of students who enrolled in hip-hop dance, we divide the number of students who enrolled in hip-hop dance by the total number of students and multiply by 100: (12 / 20) * 100 = 60%.
+Therefore, 60% of the entire students enrolled in hip-hop dance.
+The answer is: 60"
+gsm8k_0015,K2,True,,"First, let's calculate the future value of the jewelry purchase plan. The jewelry market will go up 2.5%, so the future value of the jewelry will be $5,000 * (1 + 0.025) = $5,125.
+Next, let's calculate the future value of the electronic gadgets purchase plan. The electronic gadgets market will rise 1.2%, so the future value of the electronic gadgets will be $8,000 * (1 + 0.012) = $8,096.
+To maximize profit, the merchant should choose the purchase plan with the higher future value. In this case, the electronic gadgets purchase plan has a higher future value, so the merchant should choose to purchase the electronic gadgets.
+The profit will be the difference between the future value of the electronic gadgets and the initial cost of the purchase plan. So, the profit will be $8,096 - $8,000 = $96.
+Therefore, the merchant will make a profit of $96 by choosing to purchase the electronic gadgets.
+The answer is: 96","First, let's calculate the future value of the jewelry purchase plan. The jewelry market will go up 2.5%, so the future value of the jewelry will be $5,000 * (1 + 0.025) = $5,125.
+Next, let's calculate the future value of the electronic gadgets purchase plan. The electronic gadgets market will rise 1.2%, so the future value of the electronic gadgets will be $8,000 * (1 + 0.012) = $8,096.
+To maximize profit, the merchant should choose the purchase plan with the higher future value. In this case, the electronic gadgets purchase plan has a higher future value, so the merchant should choose to purchase the electronic gadgets.
+The profit will be the difference between the future value of the electronic gadgets and the initial cost of the purchase plan. So, the profit will be $8,096 - $8,000 = $96.
+Therefore, the merchant will make a profit of $96 by choosing to purchase the electronic gadgets.
+The answer is: 96"
+gsm8k_0016,K2,True,,"The trains travel westward for 80 miles each, so the distance covered by each train on the first day is 80 miles.
+On the second day, they travel northwards for 150 miles each, so the distance covered by each train on the second day is 150 miles.
+Therefore, the total distance covered by each train in the two days is 80 + 150 = 230 miles.
+The final answer: 230","The trains travel westward for 80 miles each, so the distance covered by each train on the first day is 80 miles.
+On the second day, they travel northwards for 150 miles each, so the distance covered by each train on the second day is 150 miles.
+Therefore, the total distance covered by each train in the two days is 80 + 150 = 230 miles.
+The final answer: 230"
+gsm8k_0017,K2,True,,"Jill earns $20 per hour as a teacher, so her weekly earnings as a teacher are $20 * 35 = $700.
+Jill earns $30 per hour as a cheerleading coach, so her weekly earnings as a coach are $30 * 15 = $450.
+Jill's weekly earnings are $700 + $450 = $1150.
+Jill works 50 weeks a year, so her annual salary is $1150 * 50 = $57,500.
+The answer is: 57500","Jill earns $20 per hour as a teacher, so her weekly earnings as a teacher are $20 * 35 = $700.
+Jill earns $30 per hour as a cheerleading coach, so her weekly earnings as a coach are $30 * 15 = $450.
+Jill's weekly earnings are $700 + $450 = $1150.
+Jill works 50 weeks a year, so her annual salary is $1150 * 50 = $57,500.
+The answer is: 57500"
+gsm8k_0018,K2,True,,"Claire makes a 3 egg omelet every morning, so she eats 3 eggs per day.
+There are 7 days in a week, so in one week, she eats 3 * 7 = 21 eggs.
+In 4 weeks, she will eat 21 * 4 = 84 eggs.
+Since 1 dozen is equal to 12 eggs, she will eat 84 / 12 = 7 dozens of eggs.
+The answer is: 7","Claire makes a 3 egg omelet every morning, so she eats 3 eggs per day.
+There are 7 days in a week, so in one week, she eats 3 * 7 = 21 eggs.
+In 4 weeks, she will eat 21 * 4 = 84 eggs.
+Since 1 dozen is equal to 12 eggs, she will eat 84 / 12 = 7 dozens of eggs.
+The answer is: 7"
+gsm8k_0019,K2,True,,"Marissa has walked a total of 4 + 2 = 6 miles so far.
+She has 12 - 6 = 6 miles left to walk.
+She wants her average speed to be 4 miles per hour, so she needs to walk the remaining 6 miles in 12 / 4 = 3 hours.
+She has already walked for 2 hours, so she needs to walk the remaining 6 miles in 3 - 2 = 1 hour.
+Therefore, she needs to walk the remaining 6 miles at a speed of 6 / 1 = 6 miles per hour.
+The final answer: 6.","Marissa has walked a total of 4 + 2 = 6 miles so far.
+She has 12 - 6 = 6 miles left to walk.
+She wants her average speed to be 4 miles per hour, so she needs to walk the remaining 6 miles in 12 / 4 = 3 hours.
+She has already walked for 2 hours, so she needs to walk the remaining 6 miles in 3 - 2 = 1 hour.
+Therefore, she needs to walk the remaining 6 miles at a speed of 6 / 1 = 6 miles per hour.
+The final answer: 6."
+gsm8k_0020,K2,True,,"The orange drink is two-thirds water, so it contains 2/3 * 10 = 6.67 liters of water.
+The pineapple drink is three-fifths water, so it contains 3/5 * 15 = 9 liters of water.
+If I spill one liter of orange drink, then the remaining orange drink is 10 - 1 = 9 liters.
+The total amount of water in the remaining orange drink is 6.67 - 1 = 5.67 liters.
+The total amount of water in the pineapple drink is 9 liters.
+The total amount of water in the remaining mixture is 5.67 + 9 = 14.67 liters.
+Therefore, the amount of water in the remaining 24 liters is 14.67 liters.
+The answer is: 14.67","The orange drink is two-thirds water, so it contains 2/3 * 10 = 6.67 liters of water.
+The pineapple drink is three-fifths water, so it contains 3/5 * 15 = 9 liters of water.
+If I spill one liter of orange drink, then the remaining orange drink is 10 - 1 = 9 liters.
+The total amount of water in the remaining orange drink is 6.67 - 1 = 5.67 liters.
+The total amount of water in the pineapple drink is 9 liters.
+The total amount of water in the remaining mixture is 5.67 + 9 = 14.67 liters.
+Therefore, the amount of water in the remaining 24 liters is 14.67 liters.
+The answer is: 14.67"
+gsm8k_0021,K2,True,,"Raymond was born 6 years before Samantha, so if Samantha is now 31, Raymond is now 31 - 6 = 25 years old.
+Raymond had a son at the age of 23, so Raymond's son was born 25 - 23 = 2 years ago.
+The answer is: 2","Raymond was born 6 years before Samantha, so if Samantha is now 31, Raymond is now 31 - 6 = 25 years old.
+Raymond had a son at the age of 23, so Raymond's son was born 25 - 23 = 2 years ago.
+The answer is: 2"
+gsm8k_0022,K2,True,,"Billy's first 3 customers buy one DVD each, so he sells 3 * 1 = 3 DVDs to these customers.
+His next 2 customers buy 2 DVDs each, so he sells 2 * 2 = 4 DVDs to these customers.
+His last 3 customers don't buy any DVDs, so he sells 0 DVDs to these customers.
+In total, Billy sells 3 + 4 + 0 = 7 DVDs on Tuesday.
+#### 7
+The answer is: 7","Billy's first 3 customers buy one DVD each, so he sells 3 * 1 = 3 DVDs to these customers.
+His next 2 customers buy 2 DVDs each, so he sells 2 * 2 = 4 DVDs to these customers.
+His last 3 customers don't buy any DVDs, so he sells 0 DVDs to these customers.
+In total, Billy sells 3 + 4 + 0 = 7 DVDs on Tuesday.
+#### 7
+The answer is: 7"
+gsm8k_0023,K2,True,,"The candle burns from 1:00 PM to 5:00 PM, which is a total of 4 hours.
+Since the candle melts by 2 centimeters every hour, it will melt by 2 * 4 = 8 centimeters in total.
+Therefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.
+The answer is: 8","The candle burns from 1:00 PM to 5:00 PM, which is a total of 4 hours.
+Since the candle melts by 2 centimeters every hour, it will melt by 2 * 4 = 8 centimeters in total.
+Therefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.
+The answer is: 8"
+gsm8k_0024,K2,True,,"Let's assume the original price of the book is $x.
+The discount is 25% of the original price, so the discount amount is 0.25x.
+The sale price of the book is the original price minus the discount, so $19.50 = x - 0.25x.
+Simplifying the equation, we get $19.50 = 0.75x.
+Dividing both sides by 0.75, we get x = $19.50 / 0.75.
+Therefore, the original price of the book is $26.
+The answer is: 26","Let's assume the original price of the book is $x.
+The discount is 25% of the original price, so the discount amount is 0.25x.
+The sale price of the book is the original price minus the discount, so $19.50 = x - 0.25x.
+Simplifying the equation, we get $19.50 = 0.75x.
+Dividing both sides by 0.75, we get x = $19.50 / 0.75.
+Therefore, the original price of the book is $26.
+The answer is: 26"
+gsm8k_0025,K2,True,,"First, let's calculate the total cost of the chicken meal, milk, and apples.
+The chicken meal costs $12.
+The cost of 5 packs of milk is 5 * $3 = $15.
+The cost of 4 apples is 4 * $1.50 = $6.
+So the total cost of the chicken meal, milk, and apples is $12 + $15 + $6 = $33.
+Marie paid a total of $50, so the cost of the pizza is $50 - $33 = $17.
+Each box of pizza costs $8.50, so the number of boxes of pizza Marie ordered is $17 / $8.50 = 2.
+Therefore, Marie ordered 2 boxes of pizza.
+The answer is: 2","First, let's calculate the total cost of the chicken meal, milk, and apples.
+The chicken meal costs $12.
+The cost of 5 packs of milk is 5 * $3 = $15.
+The cost of 4 apples is 4 * $1.50 = $6.
+So the total cost of the chicken meal, milk, and apples is $12 + $15 + $6 = $33.
+Marie paid a total of $50, so the cost of the pizza is $50 - $33 = $17.
+Each box of pizza costs $8.50, so the number of boxes of pizza Marie ordered is $17 / $8.50 = 2.
+Therefore, Marie ordered 2 boxes of pizza.
+The answer is: 2"
+gsm8k_0026,K2,True,,"Mishka bought 3 pairs of shorts, so the total cost of shorts is 3 * $16.50 = $49.50.
+Mishka bought 3 pairs of pants, so the total cost of pants is 3 * $22.50 = $67.50.
+Mishka bought 3 pairs of shoes, so the total cost of shoes is 3 * $42 = $126.
+The total cost of all the clothing items is $49.50 + $67.50 + $126 = $243.
+So Mishka spent $243 on all the clothing items.
+The answer is: 243","Mishka bought 3 pairs of shorts, so the total cost of shorts is 3 * $16.50 = $49.50.
+Mishka bought 3 pairs of pants, so the total cost of pants is 3 * $22.50 = $67.50.
+Mishka bought 3 pairs of shoes, so the total cost of shoes is 3 * $42 = $126.
+The total cost of all the clothing items is $49.50 + $67.50 + $126 = $243.
+So Mishka spent $243 on all the clothing items.
+The answer is: 243"
+gsm8k_0027,K2,True,,"Cynthia eats one serving of ice cream every night, so she eats 60 servings of ice cream in 60 days.
+Each carton of ice cream has 15 servings, so she needs to buy 60/15 = 4 cartons of ice cream.
+Each carton costs $4.00, so she will spend 4 * $4.00 = $16.00 on ice cream.
+The answer is: 16","Cynthia eats one serving of ice cream every night, so she eats 60 servings of ice cream in 60 days.
+Each carton of ice cream has 15 servings, so she needs to buy 60/15 = 4 cartons of ice cream.
+Each carton costs $4.00, so she will spend 4 * $4.00 = $16.00 on ice cream.
+The answer is: 16"
+gsm8k_0028,K2,True,,"Henry stopped after 20 miles, so he traveled 20 miles before his first stop.
+His second stop was 15 miles before the end of the trip, so he traveled 60 - 15 = 45 miles before his second stop.
+To find the distance between his first and second stops, we subtract the distance he traveled before his first stop from the distance he traveled before his second stop: 45 - 20 = 25 miles.
+Therefore, Henry traveled 25 miles between his first and second stops.
+The answer is: 25","Henry stopped after 20 miles, so he traveled 20 miles before his first stop.
+His second stop was 15 miles before the end of the trip, so he traveled 60 - 15 = 45 miles before his second stop.
+To find the distance between his first and second stops, we subtract the distance he traveled before his first stop from the distance he traveled before his second stop: 45 - 20 = 25 miles.
+Therefore, Henry traveled 25 miles between his first and second stops.
+The answer is: 25"
+gsm8k_0029,K2,True,,"Let's denote the price of the boots as B.
+The price of the first pair of heels is $33.
+The price of the second pair of heels is twice as much as the first pair, so it is 2 * $33 = $66.
+The total cost of the two pairs of heels is $33 + $66 = $99.
+According to the problem, the total cost of the two pairs of heels is five dollars less than the price of the boots.
+So we can write the equation: $99 = B - $5.
+Solving for B, we get: B = $99 + $5 = $104.
+Therefore, the boots cost $104.
+The answer is: 104","Let's denote the price of the boots as B.
+The price of the first pair of heels is $33.
+The price of the second pair of heels is twice as much as the first pair, so it is 2 * $33 = $66.
+The total cost of the two pairs of heels is $33 + $66 = $99.
+According to the problem, the total cost of the two pairs of heels is five dollars less than the price of the boots.
+So we can write the equation: $99 = B - $5.
+Solving for B, we get: B = $99 + $5 = $104.
+Therefore, the boots cost $104.
+The answer is: 104"
