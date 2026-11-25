@@ -1,0 +1,550 @@
+link,case_id,variant,paper_name,encoding,bandwidth_mbps,rtt_ms,trace,edge_slowdown,ping_ms,prompt_tokens,n_steps,up_mb,down_kb,edge_ms,encode_ms,cloud_ms,sample_ms,measured_s,text,extracted,ok,same_as_local,predicted_s,predicted_local_s,wire_up_mb,bytes_match,up_wire_ms,down_wire_ms,edge_sleep_ms,wire_overhead_ms_per_step,final_down_ms,final_down_bytes,edge_has_answer,down_mismatch_steps
+local,gsm8k_0000,S0_split_full,Static split (bf16),bf16,,0.0,,1.0,,99,256,651.431936,3.564,2072.418303966522,0.3959359989967197,13202.684413909912,2041.3892183303833,17.413749533705413,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast every morning, so she has 16 - 3 = 13 eggs left.
+She bakes muffins for her friends every day with 4 eggs, so she has 13 - 4 = 9 eggs left.
+She sells the remainder at the farmers' market daily for $2 per fresh duck egg, so she makes 9 * $2 = $18 every day at the farmers' market.
+The final answer: 18",18.0,True,True,,,,,,,,,,,,
+local,gsm8k_0000,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,,0.0,,1.0,,99,256,479.328256,3.564,1836.8987579345703,0.5749759986065328,10730.997486114502,2008.4762561321259,14.723238143138587,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,,,,,,,,,,,,
+local,gsm8k_0000,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,,0.0,,1.0,,99,256,253.787626,3.564,1815.7632989883423,32.18262413702905,10353.816522598267,1964.7400968074799,14.295177762396634,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,,,,,,,,,,,,
+local,gsm8k_0001,S0_split_full,Static split (bf16),bf16,,0.0,,1.0,,60,256,579.866624,3.564,2008.0772805213928,0.39894399931654334,12754.169395446777,2030.8692729473114,16.88736410625279,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,,,,,,,,,,,,
+local,gsm8k_0001,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,,0.0,,1.0,,60,256,476.253184,3.564,1788.677252292633,0.39343999919947237,10292.223453521729,1948.1932837963104,14.165395981632173,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,,,,,,,,,,,,
+local,gsm8k_0001,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,,0.0,,1.0,,60,256,250.712554,3.564,1798.5956196784973,32.21289591351524,10323.391035079956,1953.9040310382843,14.244067953899503,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+So, in total, the robe takes 2 + 1 = 3 bolts of fiber.
+The final answer: 3.",3.0,True,True,,,,,,,,,,,,
+local,gsm8k_0002,S0_split_full,Static split (bf16),bf16,,0.0,,1.0,,91,256,636.751872,3.564,2060.5691204071045,0.39798399910796434,13255.577091217041,2064.5757446289062,17.478438090533018,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,,,,,,,,,,,,
+local,gsm8k_0002,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,,0.0,,1.0,,91,256,478.697472,3.564,1896.1404452323914,0.8936959929997101,10992.68906211853,2035.2682185173035,15.07714742794633,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,,,,,,,,,,,,
+local,gsm8k_0002,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,,0.0,,1.0,,91,256,253.156842,3.564,1884.0639357566833,36.0552320452407,10873.843496322632,2014.4215693473816,14.941399583593011,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,,,,,,,,,,,,
+local,gsm8k_0003,S0_split_full,Static split (bf16),bf16,,0.0,,1.0,,69,256,596.381696,3.564,2016.719871520996,0.3882239991798997,13011.217849731445,2037.7817964553833,17.15966139547527,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,,,,,,,,,,,,
+local,gsm8k_0003,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,,0.0,,1.0,,69,256,476.962816,3.564,1797.7744026184082,0.4029119990300387,10376.85458946228,1956.1216667890549,14.268251964822412,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,,,,,,,,,,,,
+local,gsm8k_0003,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,,0.0,,1.0,,69,256,251.422186,3.564,1846.5044989585876,33.93235205486417,10737.545766830444,1993.5406427383423,14.754339419305325,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,,,,,,,,,,,,
+local,gsm8k_0004,S0_split_full,Static split (bf16),bf16,,0.0,,1.0,,145,256,735.842304,3.564,2847.6019258499146,0.40617599920369685,18572.338760375977,2051.828291654587,23.57610077317804,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs to give a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her flock 15 cups of feed.
+In the afternoon, she gives her flock another 25 cups of feed.
+So far, she has given her flock 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her flock 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,,,,,,,,,,,,
+local,gsm8k_0004,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,,0.0,,1.0,,145,256,482.955264,3.564,2002.4423360824585,0.41247999866027385,10822.59492301941,1988.9020502567291,14.96380730252713,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, and in the afternoon, she gives them another 25 cups of feed.
+So far, she has given her chickens 15 cups + 25 cups = 40 cups of feed.
+She needs to give her chickens a total of 60 cups of feed per day, so she needs to give them 60 cups - 40 cups = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,,,,,,,,,,,,
+local,gsm8k_0004,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,,0.0,,1.0,,145,256,257.414634,3.564,2048.039839744568,41.10387213714421,11127.838068008423,2023.7190408706665,15.37226952984929,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, so she still needs to feed 60 cups - 15 cups = 45 cups of feed.
+In the afternoon, she gives her chickens another 25 cups of feed, so she still needs to feed 45 cups - 25 cups = 20 cups of feed.
+Therefore, Wendi needs to give her chickens 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,,,,,,,,,,,,
+local,gsm8k_0005,S0_split_full,Static split (bf16),bf16,,0.0,,1.0,,90,256,634.916864,3.564,2075.9989109039307,0.40131199918687344,13313.536361694336,2064.7797820568085,17.552308276295662,"Kylar wants to buy 16 glasses, so he will need to buy 8 pairs of glasses.
+For each pair of glasses, the first glass costs $5, and the second glass costs 60% of the price, which is $5 * 0.6 = $3.
+So, for each pair of glasses, Kylar will need to pay $5 + $3 = $8.
+Since Kylar wants to buy 8 pairs of glasses, he will need to pay 8 * $8 = $64.
+Therefore, Kylar needs to pay $64 for the glasses.
+The final answer: 64",64.0,True,True,,,,,,,,,,,,
+local,gsm8k_0005,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,,0.0,,1.0,,90,256,478.618624,3.564,1805.4140901565552,0.3961279991781339,10428.292896270752,1980.1888227462769,14.357794867828488,"Kylar wants to buy 16 glasses, so he will need to pay for 16 glasses.
+The first glass costs $5.
+The second glass costs 60% of the price, which is $5 * 60/100 = $3.
+The third glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fourth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fifth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The sixth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The seventh glass costs 60% of the price, which is $5 * 60/100 = $3.
+The eighth glass costs 60% of the price, which is $5 * 60/100 = $3.
+Kylar needs to pay $5 + 7 * $3 = $26 for the glasses.
+The answer is: 26",26.0,False,True,,,,,,,,,,,,
+local,gsm8k_0005,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,,0.0,,1.0,,90,256,253.077994,3.564,1819.8643889427185,35.64790399093181,10452.534505844116,1978.2545639276505,14.417206992395222,"Kylar wants to buy 16 glasses, so he will need to pay for 16 glasses.
+The first glass costs $5.
+The second glass costs 60% of the price, which is $5 * 60/100 = $3.
+The third glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fourth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fifth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The sixth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The seventh glass costs 60% of the price, which is $5 * 60/100 = $3.
+The eighth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The total cost is $5 + 7 * $3 = $26.
+#### 26
+The answer is: 26",26.0,False,True,,,,,,,,,,,,
+local,gsm8k_0006,S0_split_full,Static split (bf16),bf16,,0.0,,1.0,,76,256,609.226752,3.564,2032.4567394256592,0.3871039991499856,13095.850017547607,2046.092574596405,17.26884477958083,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+The total number of sheep is 20 + 80 + 160 = 260 sheep.
+#### 260
+The answer is: 260",260.0,True,True,,,,,,,,,,,,
+local,gsm8k_0006,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,,0.0,,1.0,,76,256,477.514752,3.564,1812.2755217552185,0.3980159993516281,10510.08173751831,1966.5871353149414,14.425929023884237,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Together, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep.
+The final answer: 260",260.0,True,True,,,,,,,,,,,,
+local,gsm8k_0006,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,,0.0,,1.0,,76,256,251.974122,3.564,1866.1200346946716,41.47587189730257,10725.153276443481,1991.3283207416534,14.769512073136866,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+The total number of sheep is 20 + 80 + 160 = 260 sheep.
+#### 260
+The answer is: 260",260.0,True,True,,,,,,,,,,,,
+local,gsm8k_0007,S0_split_full,Static split (bf16),bf16,,0.0,,1.0,,104,256,660.606976,3.564,2119.0328998565674,0.4138879991369322,13517.020881652832,2089.7666261196136,17.830259797163308,"Carla downloads 2 GB/minute, so it takes her 200/2 = 100 minutes to download the file.
+40% of the way through the download, Carla has downloaded 200 * 40 / 100 = 80 GB.
+She has 200 - 80 = 120 GB left to download.
+She downloads 2 GB/minute, so it takes her 120/2 = 60 minutes to download the remaining 120 GB.
+She has to restart the download from the beginning, so it takes her 100 minutes to download the file again.
+In total, it takes Carla 100 + 60 + 20 + 100 = 280 minutes to download the file.
+The answer is: 280",280.0,False,True,,,,,,,,,,,,
+local,gsm8k_0007,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,,0.0,,1.0,,104,256,479.722496,3.564,1803.1764798164368,0.4003519994439557,10394.014129638672,1972.385856628418,14.311999243684113,"Carla can download 2 GB/minute, so it takes her 200/2 = 100 minutes to download the file.
+40% of the way through the download is 40/100 * 100 = 40 minutes.
+So Carla downloads 2 GB/minute for 40 minutes, which is 2 * 40 = 80 GB.
+After the restart, Carla has to download 200 - 80 = 120 GB.
+It takes Carla 120/2 = 60 minutes to download the remaining 120 GB.
+So it takes Carla 40 + 20 + 60 = 120 minutes to download the file.
+The answer is: 120",120.0,False,True,,,,,,,,,,,,
+local,gsm8k_0007,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,,0.0,,1.0,,104,256,254.181866,3.564,1837.1257004737854,35.88579195458442,10559.883995056152,1976.5859591960907,14.53984122723341,"Carla can download 2 GB/minute, so it takes 200/2 = 100 minutes to download the file. 40% of the way through the download is 40/100 * 100 = 40 minutes. So it takes 40 minutes to download 40% of the file. The remaining 60% of the file is 100 - 40 = 60 minutes. So it takes 60 minutes to download the remaining 60% of the file. It takes 20 minutes to restart the download. So it takes 40 + 60 + 20 = 120 minutes to download the file. The answer is: 120.",120.0,False,True,,,,,,,,,,,,
+local,gsm8k_0008,S0_split_full,Static split (bf16),bf16,,0.0,,1.0,,138,256,722.997248,3.564,2845.3332195281982,0.39987199869938195,18478.0810546875,2051.746461868286,23.476125386543572,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he covers a distance of 2 * 0 = 0 miles.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers in the 4 hours is 0 + 15 + 120 = 135 miles.
+Since he started 180 miles away from home and covered 135 miles, he is 180 - 135 = 45 miles from home at the end of those 4 hours.
+#### 45
+The answer is: 45",45.0,True,True,,,,,,,,,,,,
+local,gsm8k_0008,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,,0.0,,1.0,,138,256,482.403328,3.564,2000.4928569793701,0.5561600044602528,10928.710035324097,2002.2531151771545,15.07421051338315,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he doesn't cover any distance during that time.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers during the 4 hours is 15 + 120 = 135 miles.
+Since he drove 180 miles away from home initially, he is now 180 - 135 = 45 miles away from home.
+Therefore, at the end of those 4 hours, John is 45 miles away from home.
+#### 45
+The answer is: 45",45.0,True,True,,,,,,,,,,,,
+local,gsm8k_0008,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,,0.0,,1.0,,138,256,256.862698,3.564,2020.8047995567322,37.948640081100166,11109.004508972168,2026.1718406677246,15.324017379432917,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he covers a distance of 2 * 0 = 0 miles.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers in the 4 hours is 0 + 15 + 120 = 135 miles.
+Since he started 180 miles away from home and covered 135 miles, he is 180 - 135 = 45 miles from home at the end of the 4 hours.
+#### 45
+The answer is: 45",45.0,True,True,,,,,,,,,,,,
+local,gsm8k_0009,S0_split_full,Static split (bf16),bf16,,0.0,,1.0,,94,256,642.256896,3.564,2088.8101449012756,0.39427199901547283,13359.052249908447,2066.620061635971,17.62240236531943,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,True,,,,,,,,,,,,
+local,gsm8k_0009,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,,0.0,,1.0,,94,256,478.934016,3.564,1794.9690594673157,0.38921599939931184,10398.480379104614,1963.43026804924,14.299589087255299,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,True,,,,,,,,,,,,
+local,gsm8k_0009,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,,0.0,,1.0,,94,256,253.393386,3.564,1804.8116102218628,34.381759744137526,10509.940315246582,1969.1853461265564,14.453804472461343,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked a total of 45 hours, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,True,,,,,,,,,,,,
+1000mbps_rtt20,gsm8k_0000,S0_split_full,Static split (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,99,256,651.431936,3.564,2242.0080919265747,0.40627199970185757,13157.480751037598,2094.6791961193085,28.78578894212842,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast every morning, so she has 16 - 3 = 13 eggs left.
+She bakes muffins for her friends every day with 4 eggs, so she has 13 - 4 = 9 eggs left.
+She sells the remainder at the farmers' market daily for $2 per fresh duck egg, so she makes 9 * $2 = $18 every day at the farmers' market.
+The final answer: 18",18.0,True,True,27.826058311083184,27.648371872205814,651.431936,True,8274.450235068798,2809.1200264170766,0.0,2.9378369589291964,10.763922706246376,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0000,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,99,256,479.328256,3.564,2048.8911933898926,0.3892799991881475,11167.311183929443,1995.7665963172913,25.073639719747007,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,24.167012813635814,23.531602036179805,479.328256,True,6807.810296304524,2807.2490049526095,0.0,2.5797060205356814,10.823327116668224,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0000,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,1000.0,20.0,,1.0,20.50719503313303,99,256,253.787626,3.564,2039.3636116981506,33.26441602688283,11009.207990646362,1987.336772441864,23.039752013981342,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,22.219502310813258,21.316832062531116,253.787626,True,4951.0531686246395,2801.3279512524605,0.0,2.351764062019921,10.814474895596504,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0001,S0_split_full,Static split (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,60,256,579.866624,3.564,2185.1934700012207,0.39830399898346514,12572.162845611572,2100.6676201820374,27.503379717469215,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,26.617383743793813,26.5524763969148,579.866624,True,7651.296160183847,2801.0193752124906,0.0,2.7084141851419474,10.818472132086754,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0001,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,60,256,476.253184,3.564,1964.9800381660461,0.3918719992507249,10762.362419128418,1966.5664947032928,24.472636855207384,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,23.624354807997005,22.95954141360987,476.253184,True,6755.502823740244,2789.5396556705236,0.0,2.4022988101983103,11.007212102413177,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0001,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,1000.0,20.0,,1.0,20.50719503313303,60,256,250.712554,3.564,2009.1422758102417,32.15215998282656,10978.880521774292,1967.3195532560349,22.92063565645367,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+So, in total, the robe takes 2 + 1 = 3 bolts of fiber.
+The final answer: 3.",3.0,True,True,22.113223454823398,21.233832525710255,250.712554,True,4916.921113617718,2795.346192084253,0.0,2.291165475398323,10.633180849254131,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0002,S0_split_full,Static split (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,91,256,636.751872,3.564,2239.0140447616577,0.40431999892462045,12908.917404174805,2096.410208940506,28.373521943576634,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,27.458789465875892,27.59516342825216,636.751872,True,8131.105558946729,2805.0365075469017,0.0,2.8206975722407464,10.923684574663639,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0002,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,91,256,478.697472,3.564,2033.5751070976257,0.38633599935565144,10923.957038879395,1990.9658179283142,24.777165374718606,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,23.89849258790469,23.874599709861226,478.697472,True,6786.54755000025,2797.216578386724,0.0,2.4771712515116207,10.995762422680855,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0002,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,1000.0,20.0,,1.0,20.50719503313303,91,256,253.156842,3.564,2088.294596672058,32.23766410211101,11181.036033630371,1991.4896318912506,23.282758163288236,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,22.43834117429579,21.953667481471935,253.156842,True,4951.554364524782,2812.510699033737,0.0,2.4171164670254655,10.810640640556812,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0003,S0_split_full,Static split (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,69,256,596.381696,3.564,2231.621153354645,0.3991999988211319,12595.469623565674,2112.2566018104553,27.75783862452954,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,26.830828658729594,26.957189821707004,596.381696,True,7791.892744600773,2821.2339486926794,0.0,2.8204867706775474,10.985088534653187,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0003,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,69,256,476.962816,3.564,2053.682652950287,0.6307520034024492,10947.42674446106,1968.5745890140533,24.765519581735134,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,23.9060457784288,23.066884610868772,476.962816,True,6770.649970509112,2790.3819074854255,0.0,2.4425813984161593,10.986951179802418,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0003,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,1000.0,20.0,,1.0,20.50719503313303,69,256,251.422186,3.564,2071.159424304962,34.063360025174916,11223.31332397461,1977.108419418335,23.309086591936648,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,22.43705052772308,21.742929260582237,251.422186,True,4947.348764166236,2808.0521877855062,0.0,2.437480281061493,10.757244192063808,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0004,S0_split_full,Static split (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,145,256,735.842304,3.564,3057.966262817383,0.4004159993492067,18144.662300109863,2101.437374830246,35.34075466636568,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs to give a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her flock 15 cups of feed.
+In the afternoon, she gives her flock another 25 cups of feed.
+So far, she has given her flock 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her flock 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,34.31123329775684,34.47894209787968,735.842304,True,9006.07937015593,2812.7993755042553,0.0,3.1723117252351045,10.846440680325031,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0004,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,145,256,482.955264,3.564,2223.501955509186,0.4114239987684414,11465.716386795044,2001.8502476215363,25.594833811745048,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, and in the afternoon, she gives them another 25 cups of feed.
+So far, she has given her chickens 15 cups + 25 cups = 40 cups of feed.
+She needs to give her chickens a total of 60 cups of feed per day, so she needs to give them 60 cups - 40 cups = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,24.67515063792453,23.798022413357256,482.955264,True,6838.238414376974,2811.361500993371,0.0,2.6012862944154094,10.818593204021454,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0004,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,1000.0,20.0,,1.0,20.50719503313303,145,256,257.414634,3.564,2254.1768641471863,35.59238421916962,11483.484342575073,2016.1472582817078,23.816485995426774,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, so she still needs to feed 60 cups - 15 cups = 45 cups of feed.
+In the afternoon, she gives her chickens another 25 cups of feed, so she still needs to feed 45 cups - 25 cups = 20 cups of feed.
+Therefore, Wendi needs to give her chickens 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,22.96874643322314,22.420046404760804,257.414634,True,4995.645854622126,2807.741672731936,0.0,2.437663841226801,11.014834977686405,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0005,S0_split_full,Static split (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,90,256,634.916864,3.564,2229.4035172462463,0.38937599933706224,12880.57468032837,2089.51709318161,28.33253502380103,"Kylar wants to buy 16 glasses, so he will need to buy 8 pairs of glasses.
+For each pair of glasses, the first glass costs $5, and the second glass costs 60% of the price, which is $5 * 0.6 = $3.
+So, for each pair of glasses, Kylar will need to pay $5 + $3 = $8.
+Since Kylar wants to buy 8 pairs of glasses, he will need to pay 8 * $8 = $64.
+Therefore, Kylar needs to pay $64 for the glasses.
+The final answer: 64",64.0,True,True,27.399248090755563,27.65407979065426,634.916864,True,8125.3969529643655,2808.558214455843,0.0,2.8694989977351923,11.157636530697346,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0005,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,90,256,478.618624,3.564,2035.7117371559143,0.390783998882398,10997.484210968018,1978.996345758438,24.852585883811116,"Kylar wants to buy 16 glasses, so he will need to pay for 16 glasses.
+The first glass costs $5.
+The second glass costs 60% of the price, which is $5 * 60/100 = $3.
+The third glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fourth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fifth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The sixth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The seventh glass costs 60% of the price, which is $5 * 60/100 = $3.
+The eighth glass costs 60% of the price, which is $5 * 60/100 = $3.
+Kylar needs to pay $5 + 7 * $3 = $26 for the glasses.
+The answer is: 26",26.0,False,True,23.961560581881255,23.163269441172766,478.618624,True,6796.081254258752,2800.5762649700046,0.0,2.530000059487328,10.701697319746017,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0005,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,1000.0,20.0,,1.0,20.50719503313303,90,256,253.077994,3.564,2065.670018672943,34.420224111527205,11096.869485855103,1990.1134054660797,23.156562769785523,"Kylar wants to buy 16 glasses, so he will need to pay for 16 glasses.
+The first glass costs $5.
+The second glass costs 60% of the price, which is $5 * 60/100 = $3.
+The third glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fourth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fifth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The sixth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The seventh glass costs 60% of the price, which is $5 * 60/100 = $3.
+The eighth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The total cost is $5 + 7 * $3 = $26.
+#### 26
+The answer is: 26",26.0,False,True,22.331725598105653,21.430953826705416,253.077994,True,4946.534119546413,2799.894160591066,0.0,2.3506867817870294,10.687369853258133,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0006,S0_split_full,Static split (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,76,256,609.226752,3.564,2266.300829410553,0.3966079988749698,12691.1294631958,2066.0982372760773,27.944659775123,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+The total number of sheep is 20 + 80 + 160 = 260 sheep.
+#### 260
+The answer is: 260",260.0,True,True,27.01776766588131,27.16862896356882,609.226752,True,7898.354908451438,2825.301888398826,0.0,2.85083698769634,10.786034166812897,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0006,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,76,256,477.514752,3.564,2057.31644487381,0.40163199917878956,11262.014083862305,2001.5803241729736,25.177599024027586,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Together, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep.
+The final answer: 260",260.0,True,True,24.26145901290827,23.229488938587824,477.514752,True,6788.392759859562,2811.7868257686496,0.0,2.5782541313601968,10.820940136909485,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0006,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,1000.0,20.0,,1.0,20.50719503313303,76,256,251.974122,3.564,2064.0698866844177,32.1637439946644,11047.81358909607,1990.2777609825134,23.129621799103916,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+The total number of sheep is 20 + 80 + 160 = 260 sheep.
+#### 260
+The answer is: 260",260.0,True,True,22.270146468757666,21.75989899177711,251.974122,True,4947.642284445465,2810.4607723653316,0.0,2.4307873781671745,10.830126702785492,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0007,S0_split_full,Static split (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,104,256,660.606976,3.564,2289.3651447296143,0.3971839991863817,13110.95654296875,2087.3531217575073,28.86063381843269,"Carla downloads 2 GB/minute, so it takes her 200/2 = 100 minutes to download the file.
+40% of the way through the download, Carla has downloaded 200 * 40 / 100 = 80 GB.
+She has 200 - 80 = 120 GB left to download.
+She downloads 2 GB/minute, so it takes her 120/2 = 60 minutes to download the remaining 120 GB.
+She has to restart the download from the beginning, so it takes her 100 minutes to download the file again.
+In total, it takes Carla 100 + 60 + 20 + 100 = 280 minutes to download the file.
+The answer is: 280",280.0,False,True,27.89295631345506,28.13111861562815,660.606976,True,8343.523366376758,2815.1685409247875,0.0,2.9445608878966567,11.241120286285877,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0007,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,104,256,479.722496,3.564,2044.1925811767578,0.47385599836707115,11061.607402801514,2009.489152431488,24.973138388246298,"Carla can download 2 GB/minute, so it takes her 200/2 = 100 minutes to download the file.
+40% of the way through the download is 40/100 * 100 = 40 minutes.
+So Carla downloads 2 GB/minute for 40 minutes, which is 2 * 40 = 80 GB.
+After the restart, Carla has to download 200 - 80 = 120 GB.
+It takes Carla 120/2 = 60 minutes to download the remaining 120 GB.
+So it takes Carla 40 + 20 + 60 = 120 minutes to download the file.
+The answer is: 120",120.0,False,True,24.073571472408126,23.12778529808297,479.722496,True,6802.614494226873,2801.523922011256,0.0,2.524726313430193,10.80300472676754,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0007,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,1000.0,20.0,,1.0,20.50719503313303,104,256,254.181866,3.564,2018.0741834640503,41.166271943598986,10995.181999206543,1988.1496670246124,23.02329996880144,"Carla can download 2 GB/minute, so it takes 200/2 = 100 minutes to download the file. 40% of the way through the download is 40/100 * 100 = 40 minutes. So it takes 40 minutes to download 40% of the file. The remaining 60% of the file is 100 - 40 = 60 minutes. So it takes 60 minutes to download the remaining 60% of the file. It takes 20 minutes to restart the download. So it takes 40 + 60 + 20 = 120 minutes to download the file. The answer is: 120.",120.0,False,True,22.196055561638804,21.562964886680614,254.181866,True,4959.504188969731,2801.052884198725,0.0,2.3713813795642835,10.865909047424793,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0008,S0_split_full,Static split (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,138,256,722.997248,3.564,2996.8301401138306,0.39423999923747033,18108.146743774414,2105.689635038376,35.09991581365466,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he covers a distance of 2 * 0 = 0 miles.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers in the 4 hours is 0 + 15 + 120 = 135 miles.
+Since he started 180 miles away from home and covered 135 miles, he is 180 - 135 = 45 miles from home at the end of those 4 hours.
+#### 45
+The answer is: 45",45.0,True,True,34.11506725492586,34.27956710408269,722.997248,True,8867.665062658489,2813.492060638964,0.0,3.0357446378806756,11.936365626752377,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0008,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,138,256,482.403328,3.564,2168.239133834839,0.46377599984407425,11228.626844406128,1999.8273923397064,25.261953118257225,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he doesn't cover any distance during that time.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers during the 4 hours is 15 + 120 = 135 miles.
+Since he drove 180 miles away from home initially, he is now 180 - 135 = 45 miles away from home.
+Therefore, at the end of those 4 hours, John is 45 miles away from home.
+#### 45
+The answer is: 45",45.0,True,True,24.376412282580517,23.911267303485083,482.403328,True,6821.231856010854,2801.72897875309,0.0,2.5144753857966577,11.200549080967903,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0008,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,1000.0,20.0,,1.0,20.50719503313303,138,256,256.862698,3.564,2137.9396119117737,32.108256163075566,10956.237745285034,1983.329694032669,23.064975055865943,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he covers a distance of 2 * 0 = 0 miles.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers in the 4 hours is 0 + 15 + 120 = 135 miles.
+Since he started 180 miles away from home and covered 135 miles, he is 180 - 135 = 45 miles from home at the end of the 4 hours.
+#### 45
+The answer is: 45",45.0,True,True,22.284545403392553,22.368859885277725,256.862698,True,4961.990333162248,2787.459798157215,0.0,2.244218887966653,10.82374807447195,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0009,S0_split_full,Static split (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,94,256,642.256896,3.564,2222.4205775260925,0.4071039989357814,13021.279090881348,2066.4870665073395,28.482393725775182,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,True,27.568677518913717,27.77296040844471,642.256896,True,8174.405253492296,2802.2460313513875,0.0,2.8069047064206387,11.16039790213108,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0009,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,1000.0,20.0,,1.0,20.50719503313303,94,256,478.934016,3.564,1987.9002537727356,0.7390720008406788,10765.27261543274,1981.517241716385,24.548101029358804,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,True,23.6869298229227,23.10876956262057,478.934016,True,6788.640440441668,2791.431048884988,0.0,2.4553548801822487,10.933390818536282,20.0,True,0.0
+1000mbps_rtt20,gsm8k_0009,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,1000.0,20.0,,1.0,20.50719503313303,94,256,253.393386,3.564,2083.830377101898,34.21030402649194,11212.391845703125,2007.8670105934143,23.337129754014313,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked a total of 45 hours, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,True,22.48547513742493,21.46549463133914,253.393386,True,4958.92000105232,2806.5844662487507,0.0,2.4153471378948055,11.049102060496807,20.0,True,0.0
+100mbps_rtt20,gsm8k_0000,S0_split_full,Static split (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,99,256,651.431936,3.564,2279.229923248291,0.3742079990915954,12976.142486572266,2107.1593692302704,76.89636822417378,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast every morning, so she has 16 - 3 = 13 eggs left.
+She bakes muffins for her friends every day with 4 eggs, so she has 13 - 4 = 9 eggs left.
+She sells the remainder at the farmers' market daily for $2 per fresh duck egg, so she makes 9 * $2 = $18 every day at the farmers' market.
+The final answer: 18",18.0,True,True,74.59774598704992,74.55172787220582,651.431936,True,56498.20870440453,2797.9281218722463,0.0,8.051940727643682,10.921713896095753,20.0,True,0.0
+100mbps_rtt20,gsm8k_0000,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,99,256,479.328256,3.564,2116.211169719696,0.3863359991228208,11454.065032958984,2013.6613473892212,60.944968479685485,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,59.05086948606702,58.0434930761798,479.328256,True,42296.49296589196,2793.9025294035673,0.0,6.343163653498152,10.712016373872757,20.0,True,0.0
+100mbps_rtt20,gsm8k_0000,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,100.0,20.0,,1.0,20.513500086963177,99,256,253.787626,3.564,2085.7904920578003,33.98563206475228,11382.501735687256,2005.2310440540314,42.33826266974211,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,40.93080410386384,39.58979774253112,253.787626,True,23770.56734636426,2812.4337634071708,0.0,4.5301012100446485,10.939337313175201,20.0,True,0.0
+100mbps_rtt20,gsm8k_0001,S0_split_full,Static split (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,60,256,579.866624,3.564,2224.6378512382507,0.3959679991239682,12517.033348083496,2077.3806097507477,70.4384560547769,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,68.32906281707162,68.3031299329148,579.866624,True,50601.82365961373,2797.541121020913,0.0,7.381834924354081,10.780835524201393,20.0,True,0.0
+100mbps_rtt20,gsm8k_0001,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,60,256,476.253184,3.564,2060.3423075675964,0.8110720099648461,11278.238721847534,2002.8869442939758,60.425385748036206,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,58.56281888571907,57.250027269609866,476.253184,True,42038.98006211966,2785.087385214865,0.0,6.263779716150509,10.725080966949463,20.0,True,0.0
+100mbps_rtt20,gsm8k_0001,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,100.0,20.0,,1.0,20.513500086963177,60,256,250.712554,3.564,2057.8416261672974,34.05516806896776,11206.139743804932,1982.1070041656494,41.86777866072953,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+So, in total, the robe takes 2 + 1 = 3 bolts of fiber.
+The final answer: 3.",3.0,True,True,40.457432982206846,39.285393021710256,250.712554,True,23525.96774790436,2807.3872020468116,0.0,4.515880898246763,10.684281587600708,20.0,True,0.0
+100mbps_rtt20,gsm8k_0002,S0_split_full,Static split (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,91,256,636.751872,3.564,2241.633602142334,0.39916799892671406,12886.878768920898,2077.9581429958344,75.48508535232395,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,73.267304562058,73.44155482025216,636.751872,True,55277.43968833238,2787.622582167387,0.0,7.830575744139708,10.803570039570332,20.0,True,0.0
+100mbps_rtt20,gsm8k_0002,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,91,256,478.697472,3.564,2005.4253129959106,0.37913599936291575,11135.5557346344,1972.4783964157104,60.37693552393466,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,58.52992146004539,58.34107430186123,478.697472,True,42228.13275177032,2774.4440650567412,0.0,6.197241940730692,10.765482671558857,20.0,True,0.0
+100mbps_rtt20,gsm8k_0002,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,100.0,20.0,,1.0,20.513500086963177,91,256,253.156842,3.564,2072.3785586357117,33.67932811006904,11266.87442779541,1988.151005744934,42.120383876375854,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,40.73391580028612,40.18121671347193,253.156842,True,23715.019188821316,2802.84159258008,0.0,4.472766802349199,10.908238589763641,20.0,True,0.0
+100mbps_rtt20,gsm8k_0003,S0_split_full,Static split (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,69,256,596.381696,3.564,2169.774917602539,0.4012479990487918,12589.780261993408,2042.1572568416595,71.7014894625172,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,69.63293448443666,69.89692854170701,596.381696,True,51929.46618515998,2776.075285859406,0.0,7.323127621169476,10.909569449722767,20.0,True,0.0
+100mbps_rtt20,gsm8k_0003,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,69,256,476.962816,3.564,2028.8970551490784,0.3919679990503937,11093.95128250122,1982.1960022449493,60.215629058890045,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,58.3827467078943,57.40846397086877,476.962816,True,42085.63721459359,2776.262179017067,0.0,6.189800756291618,10.803001932799816,20.0,True,0.0
+100mbps_rtt20,gsm8k_0003,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,100.0,20.0,,1.0,20.513500086963177,69,256,251.422186,3.564,2015.300899028778,33.372703961096704,10777.716901779175,1948.3413095474243,41.3698790743947,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,40.008791814316474,39.84558326058224,251.422186,True,23556.184766814113,2801.7160519957542,0.0,4.3900031984760375,10.675285942852497,20.0,True,0.0
+100mbps_rtt20,gsm8k_0004,S0_split_full,Static split (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,145,256,735.842304,3.564,3006.3617553710938,0.4016319992952049,18069.60807800293,2080.9744663238525,89.58210331387818,"Wendi feeds each of her chickens 3 cups of feed per day, so she needs to give a total of 3 * 20 = 60 cups of feed per day.
+In the morning, she gives her flock 15 cups of feed.
+In the afternoon, she gives her flock another 25 cups of feed.
+So far, she has given her flock 15 + 25 = 40 cups of feed.
+Therefore, she needs to give her flock 60 - 40 = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,87.14501537169717,87.45984459387968,735.842304,True,63429.5799061656,2789.325867779553,0.0,8.715766929473261,10.983217507600784,20.0,True,0.0
+100mbps_rtt20,gsm8k_0004,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,145,256,482.955264,3.564,2234.9626541137695,0.5483519980916753,11799.771404266357,2010.2592623233795,61.681767771951854,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, and in the afternoon, she gives them another 25 cups of feed.
+So far, she has given her chickens 15 cups + 25 cups = 40 cups of feed.
+She needs to give her chickens a total of 60 cups of feed per day, so she needs to give them 60 cups - 40 cups = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,59.802247912701596,58.57105802935725,482.955264,True,42585.30050236732,2782.20038022846,0.0,6.292166572639758,11.033719405531883,20.0,True,0.0
+100mbps_rtt20,gsm8k_0004,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,100.0,20.0,,1.0,20.513500086963177,145,256,257.414634,3.564,2225.0780844688416,33.96243208833039,11678.462783813477,2013.5806086063385,43.058533567003906,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, so she still needs to feed 60 cups - 15 cups = 45 cups of feed.
+In the afternoon, she gives her chickens another 25 cups of feed, so she still needs to feed 45 cups - 25 cups = 20 cups of feed.
+Therefore, Wendi needs to give her chickens 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,41.664539748976985,40.954156660760795,257.414634,True,24065.90941362083,2801.280182786286,0.0,4.5067724859653,10.729053989052773,20.0,True,0.0
+100mbps_rtt20,gsm8k_0005,S0_split_full,Static split (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,90,256,634.916864,3.564,2240.793960571289,0.40483199898153543,12836.214736938477,2083.5400009155273,75.2964840400964,"Kylar wants to buy 16 glasses, so he will need to buy 8 pairs of glasses.
+For each pair of glasses, the first glass costs $5, and the second glass costs 60% of the price, which is $5 * 0.6 = $3.
+So, for each pair of glasses, Kylar will need to pay $5 + $3 = $8.
+Since Kylar wants to buy 8 pairs of glasses, he will need to pay 8 * $8 = $64.
+Therefore, Kylar needs to pay $64 for the glasses.
+The final answer: 64",64.0,True,True,73.07458777042427,73.36835060665426,634.916864,True,55119.607110507786,2797.9919342324138,0.0,7.827987518516409,10.655492544174194,20.0,True,0.0
+100mbps_rtt20,gsm8k_0005,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,90,256,478.618624,3.564,2067.9475560188293,0.3851839991984889,11077.953454971313,2002.555900812149,60.40200932323933,"Kylar wants to buy 16 glasses, so he will need to pay for 16 glasses.
+The first glass costs $5.
+The second glass costs 60% of the price, which is $5 * 60/100 = $3.
+The third glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fourth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fifth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The sixth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The seventh glass costs 60% of the price, which is $5 * 60/100 = $3.
+The eighth glass costs 60% of the price, which is $5 * 60/100 = $3.
+Kylar needs to pay $5 + 7 * $3 = $26 for the glasses.
+The answer is: 26",26.0,False,True,58.55861713580149,57.62406697717276,478.618624,True,42216.29182994366,2782.9201528802514,0.0,6.20873805790589,10.74698194861412,20.0,True,0.0
+100mbps_rtt20,gsm8k_0005,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,100.0,20.0,,1.0,20.513500086963177,90,256,253.077994,3.564,2035.0947260856628,32.144608076661825,11020.795900344849,1983.821694612503,41.81020033173263,"Kylar wants to buy 16 glasses, so he will need to pay for 16 glasses.
+The first glass costs $5.
+The second glass costs 60% of the price, which is $5 * 60/100 = $3.
+The third glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fourth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The fifth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The sixth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The seventh glass costs 60% of the price, which is $5 * 60/100 = $3.
+The eighth glass costs 60% of the price, which is $5 * 60/100 = $3.
+The total cost is $5 + 7 * $3 = $26.
+#### 26
+The answer is: 26",26.0,False,True,40.43838156911968,39.65282600270542,253.077994,True,23704.577869735658,2799.201683141291,0.0,4.442402003425585,10.711290873587132,20.0,True,0.0
+100mbps_rtt20,gsm8k_0006,S0_split_full,Static split (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,76,256,609.226752,3.564,2204.8065600395203,0.390047999098897,12651.930675506592,2054.7984602451324,72.8829787503928,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+The total number of sheep is 20 + 80 + 160 = 260 sheep.
+#### 260
+The answer is: 260",260.0,True,True,70.77035102379034,71.03321171556881,609.226752,True,52993.120172061026,2776.0609965771437,0.0,7.4638901899928385,10.987549088895321,20.0,True,0.0
+100mbps_rtt20,gsm8k_0006,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,76,256,477.514752,3.564,2071.064446926117,0.39715199905913323,11143.854051589966,1978.4288291931152,60.372681581415236,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+Together, Toulouse, Charleston, and Seattle have 20 + 80 + 160 = 260 sheep.
+The final answer: 260",260.0,True,True,58.515209759708256,57.61080769058782,477.514752,True,42141.407010145485,2783.3681628108025,0.0,6.262929269360512,11.24604046344757,20.0,True,0.0
+100mbps_rtt20,gsm8k_0006,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,100.0,20.0,,1.0,20.513500086963177,76,256,251.974122,3.564,2065.373818397522,33.28409599419683,11149.811485290527,1975.9306874275208,41.90087710786611,"If Seattle has 20 sheep, then Charleston has 4 times as many sheep as Seattle, so Charleston has 4 * 20 = 80 sheep.
+Toulouse has twice as many sheep as Charleston, so Toulouse has 2 * 80 = 160 sheep.
+The total number of sheep is 20 + 80 + 160 = 260 sheep.
+#### 260
+The answer is: 260",260.0,True,True,40.502614967109764,39.90229238377711,251.974122,True,23624.67382196337,2799.8117627575994,0.0,4.477619940316288,10.752474889159203,20.0,True,0.0
+100mbps_rtt20,gsm8k_0007,S0_split_full,Static split (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,104,256,660.606976,3.564,2252.7219791412354,0.39500799926463515,13156.396518707275,2072.939842224121,77.70062380563468,"Carla downloads 2 GB/minute, so it takes her 200/2 = 100 minutes to download the file.
+40% of the way through the download, Carla has downloaded 200 * 40 / 100 = 80 GB.
+She has 200 - 80 = 120 GB left to download.
+She downloads 2 GB/minute, so it takes her 120/2 = 60 minutes to download the remaining 120 GB.
+She has to restart the download from the beginning, so it takes her 100 minutes to download the file again.
+In total, it takes Carla 100 + 60 + 20 + 100 = 280 minutes to download the file.
+The answer is: 280",280.0,False,True,75.4512965480719,75.69507749562815,660.606976,True,57227.256098762155,2779.69225961715,0.0,7.961348274919146,10.701065883040428,20.0,True,0.0
+100mbps_rtt20,gsm8k_0007,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,104,256,479.722496,3.564,2118.3703322410583,0.5616000001318753,11308.32811164856,2011.6789433956146,60.81096672452986,"Carla can download 2 GB/minute, so it takes her 200/2 = 100 minutes to download the file.
+40% of the way through the download is 40/100 * 100 = 40 minutes.
+So Carla downloads 2 GB/minute for 40 minutes, which is 2 * 40 = 80 GB.
+After the restart, Carla has to download 200 - 80 = 120 GB.
+It takes Carla 120/2 = 60 minutes to download the remaining 120 GB.
+So it takes Carla 40 + 20 + 60 = 120 minutes to download the file.
+The answer is: 120",120.0,False,True,58.93702378728536,57.668061618082966,479.722496,True,42321.145851165056,2788.98233640939,0.0,6.297044482712693,10.669068433344364,20.0,True,0.0
+100mbps_rtt20,gsm8k_0007,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,100.0,20.0,,1.0,20.513500086963177,104,256,254.181866,3.564,2027.4520325660706,32.49811199773103,11013.798524856567,1991.3167033195496,41.902576685883105,"Carla can download 2 GB/minute, so it takes 200/2 = 100 minutes to download the file. 40% of the way through the download is 40/100 * 100 = 40 minutes. So it takes 40 minutes to download 40% of the file. The remaining 60% of the file is 100 - 40 = 60 minutes. So it takes 60 minutes to download the remaining 60% of the file. It takes 20 minutes to restart the download. So it takes 40 + 60 + 20 = 120 minutes to download the file. The answer is: 120.",120.0,False,True,40.51989977273992,39.86431584668061,254.181866,True,23799.7162649408,2798.076565377414,0.0,4.464681368430519,10.887041687965393,20.0,True,0.0
+100mbps_rtt20,gsm8k_0008,S0_split_full,Static split (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,138,256,722.997248,3.564,3009.5870113372803,0.4121279986575246,17997.76708984375,2086.09011054039,88.48793040029705,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he covers a distance of 2 * 0 = 0 miles.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers in the 4 hours is 0 + 15 + 120 = 135 miles.
+Since he started 180 miles away from home and covered 135 miles, he is 180 - 135 = 45 miles from home at the end of those 4 hours.
+#### 45
+The answer is: 45",45.0,True,True,86.05392129972009,86.33562556808269,722.997248,True,62387.820806354284,2788.668377324939,0.0,8.657907123746952,10.712566785514355,20.0,True,0.0
+100mbps_rtt20,gsm8k_0008,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,138,256,482.403328,3.564,2277.8000349998474,0.448160000378266,11798.13897895813,2018.8912632465363,61.701654540374875,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he doesn't cover any distance during that time.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers during the 4 hours is 15 + 120 = 135 miles.
+Since he drove 180 miles away from home initially, he is now 180 - 135 = 45 miles away from home.
+Therefore, at the end of those 4 hours, John is 45 miles away from home.
+#### 45
+The answer is: 45",45.0,True,True,59.80782979720489,58.644563527485076,482.403328,True,42546.07195965946,2792.0396514236927,0.0,6.3498447307935635,10.952256619930267,20.0,True,0.0
+100mbps_rtt20,gsm8k_0008,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,100.0,20.0,,1.0,20.513500086963177,138,256,256.862698,3.564,2300.487386703491,41.82048013061285,11916.564567565918,2040.7315464019775,43.40156879462302,"John drives for 3 hours at a speed of 60 mph, so he covers a distance of 3 * 60 = 180 miles.
+He then turns around and tries to get home in 4 hours.
+He spends the first 2 hours in standstill traffic, so he covers a distance of 2 * 0 = 0 miles.
+He spends the next half-hour driving at a speed of 30 mph, so he covers a distance of 0.5 * 30 = 15 miles.
+He spends the remaining 1.5 hours driving at a speed of 80 mph, so he covers a distance of 1.5 * 80 = 120 miles.
+The total distance he covers in the 4 hours is 0 + 15 + 120 = 135 miles.
+Since he started 180 miles away from home and covered 135 miles, he is 180 - 135 = 45 miles from home at the end of the 4 hours.
+#### 45
+The answer is: 45",45.0,True,True,41.968904940802,40.863230749277726,256.862698,True,24032.271152362227,2810.721093788743,0.0,4.5847315865272265,11.267277412116528,20.0,True,0.0
+100mbps_rtt20,gsm8k_0009,S0_split_full,Static split (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,94,256,642.256896,3.564,2241.8331532478333,0.40966399922035635,12875.566276550293,2088.976226568222,75.9212394002825,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,True,73.70762212036556,74.0157135284447,642.256896,True,55718.459961004555,2782.1507789194584,0.0,7.811616952828189,10.751022025942802,20.0,True,0.0
+100mbps_rtt20,gsm8k_0009,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,100.0,20.0,,1.0,20.513500086963177,94,256,478.934016,3.564,2071.920578956604,2.168543982785195,11418.294898986816,1996.0554614067078,60.78635795414448,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked for 45 hours this week, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,True,58.92344588333291,57.592275322620566,478.934016,True,42253.2398160547,2781.0693001374602,0.0,6.247276235125639,11.222443543374538,20.0,True,0.0
+100mbps_rtt20,gsm8k_0009,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,100.0,20.0,,1.0,20.513500086963177,94,256,253.393386,3.564,2137.3712582588196,33.66422403976321,11424.19264793396,2023.9616396427155,42.43540094513446,"Eliza's rate per hour for the first 40 hours is $10, so her earnings for the first 40 hours are $10 x 40 = $400.
+She worked a total of 45 hours, so she worked 45 - 40 = 5 hours of overtime.
+Her overtime pay is 1.2 times her regular hourly rate, which is $10 x 1.2 = $12 per hour.
+Her earnings for the overtime hours are $12 x 5 = $60.
+Her total earnings for the week are $400 + $60 = $460.
+#### 460
+The answer is: 460",460.0,True,True,41.010945769875256,39.71007503133914,253.393386,True,23741.07133410871,2816.6370103135705,0.0,4.5545013453995296,11.010721325874329,20.0,True,0.0
+10mbps_rtt20,gsm8k_0000,S0_split_full,Static split (bf16),bf16,10.0,20.0,,1.0,20.661290735006332,99,256,651.431936,3.564,2213.805278778076,0.4053119992604479,13150.087432861328,2099.535526752472,558.896611568518,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast every morning, so she has 16 - 3 = 13 eggs left.
+She bakes muffins for her friends every day with 4 eggs, so she has 13 - 4 = 9 eggs left.
+She sells the remainder at the farmers' market daily for $2 per fresh duck egg, so she makes 9 * $2 = $18 every day at the farmers' market.
+The final answer: 18",18.0,True,True,543.7322335503911,543.5852878722059,651.431936,True,538429.4457761571,2799.514106474817,0.0,58.43968704153076,11.479354463517666,20.0,True,0.0
+10mbps_rtt20,gsm8k_0000,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,10.0,20.0,,1.0,20.661290735006332,99,256,479.328256,3.564,2038.6311683654785,0.38873599958606064,11308.63136100769,2012.0201904773712,415.3001806596294,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,403.9451274558501,403.1624034761798,479.328256,True,396897.7869749069,2800.497586838901,0.0,43.4094865693196,10.920591652393341,20.0,True,0.0
+10mbps_rtt20,gsm8k_0000,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,10.0,20.0,,1.0,20.661290735006332,99,256,253.787626,3.564,2032.5940766334534,34.01344003807753,11516.93867301941,2018.5721292495728,230.13135252334177,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,223.7550703189405,222.3194545425311,253.787626,True,211511.33762672544,2785.6885073706508,0.0,24.000289586312874,11.070523411035538,20.0,True,0.0
+10mbps_rtt20,gsm8k_0001,S0_split_full,Static split (bf16),bf16,10.0,20.0,,1.0,20.661290735006332,60,256,579.866624,3.564,2111.5286717414856,0.3790399986319244,12548.436374664307,2077.6989102363586,499.31654893793166,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,485.75419339664074,485.80966529291476,579.866624,True,479589.23472557217,2793.723104521632,0.0,52.21409152380397,10.805952362716198,20.0,True,0.0
+10mbps_rtt20,gsm8k_0001,C2_cache_aware,DASR + dLLM-Cache (bf16),bf16,10.0,20.0,,1.0,20.661290735006332,60,256,476.253184,3.564,2008.6169271469116,0.7363199935061857,11183.67831993103,1983.4366743564606,412.5831067599356,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,401.3018666414279,400.1548858296099,476.253184,True,394368.7453176826,2789.52007740736,0.0,43.09713669957023,10.72159968316555,20.0,True,0.0
+10mbps_rtt20,gsm8k_0001,C4_cache_aware_int8,DASR + dLLM-Cache (INT8),int8_delta,10.0,20.0,,1.0,20.661290735006332,60,256,250.712554,3.564,2003.5714635849,32.20022381050512,11067.978107452393,1994.7603521347046,227.096040927805,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+So, in total, the robe takes 2 + 1 = 3 bolts of fiber.
+The final answer: 3.",3.0,True,True,220.7914045469825,219.80099798171025,250.712554,True,208971.12120967358,2795.659765601158,0.0,23.726119434666998,11.112858541309834,20.0,True,0.0
