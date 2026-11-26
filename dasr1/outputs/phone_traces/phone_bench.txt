@@ -1,0 +1,8 @@
+aarch64 | 8 cores | numpy 2.4.4
+  Fast-dLLM in-block step (32 rows, 360 context)      6856.3 ms per step (4 layers)
+  128 rows                                           21663.4 ms per step (4 layers)
+  dLLM-Cache answer rows (~256)                      41790.3 ms per step (4 layers)
+  full boundary, GSM8K (~360 rows)                   58280.3 ms per step (4 layers)
+
+edge slowdown vs the A6000 at ~360 rows (8 ms): about 7285x (the paper assumes 3x)
+JSON {"machine": "aarch64", "cores": 8, "ms_per_step": {"32": 6856.284000095911, "128": 21663.357540033758, "256": 41790.26707995217, "360": 58280.25753994007}, "slowdown_vs_a6000_360rows": 7285.032192492508}

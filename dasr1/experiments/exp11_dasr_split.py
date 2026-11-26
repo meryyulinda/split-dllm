@@ -19,6 +19,9 @@ all variants of a question; prompt-tail fix whenever the cache is on):
   A1_adaptive_cache_aware  C2 with the rule-based adaptive refresh
   S2_split_int8            no cache, full boundary as INT8 deltas  (approximate;
                            "compressed static split", not in the default set)
+Exp19 baselines (not in the default set; plain quantization of the rows, no delta):
+  S3_split_int8abs / S4_split_int4          static split, per-row INT8 / group-wise INT4
+  C5_cache_aware_int8abs / C6_cache_aware_int4   the rows the cloud needs, same codecs
 
 Add-on run (S2 + peak memory + energy) WITHOUT touching the finished folders:
   EXP11_OUTPUT_TAG = "_addon"
@@ -129,6 +132,11 @@ DEFAULT_VARIANTS = [
 ]
 ALL_VARIANTS = {v["name"]: v for v in DEFAULT_VARIANTS + [
     V("S2_split_int8", None, "all", "int8_delta"),
+    # Exp19 baselines: plain quantization of the rows (no delta, no anchors)
+    V("S3_split_int8abs", None, "all", "int8_abs"),
+    V("S4_split_int4", None, "all", "int4_group"),
+    V("C5_cache_aware_int8abs", POLICY, "cache_aware", "int8_abs"),
+    V("C6_cache_aware_int4", POLICY, "cache_aware", "int4_group"),
 ]}
 REFERENCE = "S0_split_full"
 GIB = 2 ** 30

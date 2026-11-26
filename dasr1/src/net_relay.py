@@ -23,11 +23,14 @@ Usage (started by src.net_wire.start_relay; can also be run by hand):
 The chosen listen port is printed as "PORT <n>" on stdout.
 
 Trace file (--trace): CSV with a header line and columns time_s,mbps; the rate is
-piecewise constant and the trace loops. A chunk uses the rate at its start time.
+piecewise constant, the last row's time is the period, and the trace loops. A chunk's
+transmission is integrated over the trace segments it spans (zero-rate segments are
+outages). --trace-offset starts the trace clock at that position (s) at the first byte.
 """
 from __future__ import annotations
 
 import argparse
+import bisect
 import collections
 import csv
 import math
@@ -40,33 +43,61 @@ CHUNK = 64 * 1024
 
 
 class Rate:
-    """Constant rate or a looping piecewise-constant trace (bits per second)."""
+    """Constant rate, or a looping piecewise-constant bandwidth trace.
 
-    def __init__(self, mbps=None, trace=None):
+    Trace CSV: time_s,mbps (sorted); the value of a row holds until the next row,
+    and the last row's time is the period after which the trace repeats. The
+    trace clock starts at the first byte (start()) plus `offset_s`, so every run
+    of an experiment can replay the same part of the trace.
+    """
+
+    def __init__(self, mbps=None, trace=None, offset_s=0.0):
         self.points = None
         if trace:
             with open(trace, newline="") as f:
                 rows = [(float(r["time_s"]), float(r["mbps"])) for r in csv.DictReader(f)]
-            if not rows:
-                raise ValueError(f"empty trace {trace}")
+            if len(rows) < 2:
+                raise ValueError(f"trace {trace} needs at least two rows")
             rows.sort()
-            self.points = rows
-            self.period = rows[-1][0] if rows[-1][0] > 0 else 1.0
+            self.times = [t for t, _ in rows]
+            self.points = [max(m, 0.0) * 1e6 for _, m in rows]     # bits/s per segment
+            self.period = self.times[-1]
+            if self.period <= 0 or not any(self.points[:-1]):
+                raise ValueError(f"trace {trace}: empty period or zero bandwidth throughout")
         elif mbps is None or mbps <= 0:
             raise ValueError("give --mbps > 0 or --trace")
         self.mbps = mbps
-        self.t0 = time.perf_counter()
+        self.offset = float(offset_s)
+        self.t0 = None
 
-    def bps(self, t):
+    def start(self, now):
+        if self.t0 is None:
+            self.t0 = now
+
+    def finish(self, start, bits):
+        """Time at which `bits` sent from `start` (perf_counter s) have left the link."""
         if self.points is None:
-            return self.mbps * 1e6
-        rel = (t - self.t0) % self.period
-        value = self.points[0][1]
-        for ts, mbps in self.points:
-            if ts > rel:
-                break
-            value = mbps
-        return max(value, 1e-3) * 1e6
+            return start + bits / (self.mbps * 1e6)
+        rel = (start - self.t0 + self.offset) % self.period
+        t = start
+        i = min(max(0, bisect.bisect_right(self.times, rel) - 1), len(self.times) - 2)
+        guard = 0
+        while bits > 0:
+            seg_end = self.times[i + 1] if i + 1 < len(self.times) else self.period
+            span = seg_end - rel
+            cap = self.points[i] * span
+            if cap >= bits:
+                return t + bits / self.points[i]
+            bits -= cap
+            t += span
+            rel = seg_end
+            i += 1
+            if i >= len(self.times) - 1:     # wrap around
+                i, rel = 0, 0.0
+            guard += 1
+            if guard > 10_000_000:
+                raise RuntimeError("trace has no capacity")
+        return t
 
 
 def wire_bytes(n, header_bytes, mss):
@@ -97,9 +128,9 @@ def serve(listen, target, rate, delay_s, header_bytes=40, mss=1460, log=None):
                 if not data:
                     break
                 now = time.perf_counter()
+                rate.start(now)
                 start = max(now, state["free"])
-                tx = wire_bytes(len(data), header_bytes, mss) * 8 / rate.bps(start)
-                state["free"] = start + tx
+                state["free"] = rate.finish(start, wire_bytes(len(data), header_bytes, mss) * 8)
                 with cond:
                     queue.append((state["free"] + delay_s, data))
                     cond.notify()
@@ -149,11 +180,12 @@ def main(argv=None):
     ap.add_argument("--mbps", type=float, default=None)
     ap.add_argument("--trace", default=None)
     ap.add_argument("--delay-ms", type=float, default=0.0)
+    ap.add_argument("--trace-offset", type=float, default=0.0, help="start position in the trace (s)")
     ap.add_argument("--header-bytes", type=int, default=40)
     ap.add_argument("--mss", type=int, default=1460)
     ap.add_argument("--verbose", action="store_true")
     a = ap.parse_args(argv)
-    serve(a.listen, a.target, Rate(a.mbps, a.trace), a.delay_ms / 1000.0,
+    serve(a.listen, a.target, Rate(a.mbps, a.trace, a.trace_offset), a.delay_ms / 1000.0,
           a.header_bytes, a.mss, log=sys.stderr if a.verbose else None)
 
 

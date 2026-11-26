@@ -46,7 +46,8 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from src.split_runtime import DOWN_HEADER_B, DOWN_PER_TOKEN_B, UP_HEADER_B, _move, model_parts
+from src.split_runtime import (ABS_CODECS, DOWN_HEADER_B, DOWN_PER_TOKEN_B, UP_HEADER_B, _move,
+                               model_parts, quantize_abs)
 from src.utils import set_seed
 
 DREAM_MODEL_NAME = "Dream-org/Dream-v0-Instruct-7B"
@@ -133,6 +134,7 @@ class KVBlockLink:
                                                                 with_kwargs=True))
         self.active = False
         self.wire = None          # Exp16: src.net_wire.Wire for a real link
+        self.codec_ctl = None     # Exp18: src.net_controller.CodecController (encoding="adaptive")
 
     def remove(self):
         for h in self.handles:
@@ -141,8 +143,16 @@ class KVBlockLink:
 
     def begin(self, *, n_total, encoding="bf16", anchor_interval=32, reuse=False,
               refresh_every=0, reuse_scope="all", n_prompt=None):
-        if encoding not in {"bf16", "int8_delta"}:
+        if encoding not in {"bf16", "int8_delta", "adaptive"} | ABS_CODECS:
             raise ValueError(f"encoding={encoding!r}")
+        if encoding in ABS_CODECS and (reuse or self.wire is not None):
+            raise ValueError(f"{encoding} (Exp19 baseline) supports neither row reuse nor the real link")
+        if encoding == "adaptive":  # Exp18: bf16 or INT8 delta per step, chosen by codec_ctl
+            if self.codec_ctl is None:
+                raise ValueError("encoding='adaptive' needs link.codec_ctl")
+            if reuse:
+                raise ValueError("encoding='adaptive' does not support row reuse")
+            self.codec_ctl.reset()
         self.n_total, self.encoding = int(n_total), encoding
         self.anchor_interval = int(anchor_interval)
         self.reuse, self.refresh_every = bool(reuse), int(refresh_every or 0)
@@ -212,6 +222,8 @@ class KVBlockLink:
         if self.wire is not None:  # Exp16: committed tokens over the real link
             ids_edge, info = self.wire.downlink(args[0], self.offset, self.step)
             self.stats[-1].update(info)
+            if self.codec_ctl is not None:
+                self.codec_ctl.observe_down(info)
         else:
             ids_edge = args[0].to(self.edge)
         self.ids = ids_edge
@@ -228,7 +240,7 @@ class KVBlockLink:
         m, d = h.shape[1], h.shape[2]
         lo, hi = self.offset, self.offset + m
         row_b = d * h.element_size()
-        keep_ref = self.encoding != "bf16" or self.reuse
+        keep_ref = self.encoding not in {"bf16"} | ABS_CODECS or self.reuse
         if keep_ref and self.ref is None:
             self.ref = torch.zeros(1, self.n_total, d, dtype=h.dtype, device=h.device)
             self.valid = torch.zeros(self.n_total, dtype=torch.bool, device=h.device)
@@ -248,9 +260,15 @@ class KVBlockLink:
                     sel[a:] = True
         rows = h if sel is None else h[:, sel]
         r = int(rows.shape[1])
-        anchor = (self.step == 1 or self.encoding == "bf16"
-                  or self.step - self.last_anchor >= self.anchor_interval)
-        if anchor:
+        codec = self.encoding
+        if codec == "adaptive":  # Exp18: the controller picks this step's codec
+            codec = "bf16" if self.step == 1 else self.codec_ctl.choose(self.step, r, d)
+        anchor = codec not in ABS_CODECS and (
+            self.step == 1 or codec == "bf16"
+            or self.step - self.last_anchor >= self.anchor_interval)
+        if codec in ABS_CODECS:  # Exp19 baselines: quantize the rows themselves
+            enc, payload = quantize_abs(rows, codec)
+        elif anchor:
             enc = rows
             payload = r * row_b
             if self.encoding != "bf16":
@@ -283,6 +301,7 @@ class KVBlockLink:
         ev["encode_end"] = self._event(self.edge)
         self.stats[-1].update({
             "rows_sent": r, "rows_reused": int(m - r), "anchor": bool(anchor),
+            "codec": "bf16" if anchor else codec,
             "up_bytes": UP_HEADER_B + int(payload),
             "full_bytes": self.n_total * row_b,   # static split without cache, for reference
         })
@@ -297,6 +316,8 @@ class KVBlockLink:
             if self.cloud_ref is not None:
                 self.cloud_ref[:, lo:hi] = hidden
             self.stats[-1].update(info)
+            if self.codec_ctl is not None:
+                self.codec_ctl.observe_up(info, d)
         else:
             hidden = new.to(self.cloud)
         kwargs = _move(kwargs, self.cloud, self.memo)
@@ -384,6 +405,8 @@ def kv_generate(model, arch, tokenizer, ids, gen_length, block_length, seed, *,
     cache   "dual" (Fast-dLLM DualCache) or "none" (full forward every step)
     decode  "threshold" (parallel decoding, gamma = threshold) or "fixed"
             (steps_per_block steps per block; default block_length = 1 token/step)
+    threshold  a number, or a function () -> gamma evaluated at every step (Exp18:
+            the link's controller lowers gamma when the link is slow)
     Dream's logit shift: as in Fast-dLLM, the first token of a block is committed
     from the block-start full forward; inside the block the logits are shifted
     within the chunk, so position s+j is read from row s+j-1.
@@ -405,6 +428,12 @@ def kv_generate(model, arch, tokenizer, ids, gen_length, block_length, seed, *,
     commits = []
 
     shift = 1 if arch == "dream" else 0   # Dream predicts position i from row i-1
+    gammas = []
+
+    def _gamma():
+        g = float(threshold()) if callable(threshold) else threshold
+        gammas.append(g)
+        return g
 
     def forward(lo, hi, kind, block, pkv=None, rp=None, use_cache=False, span=None):
         if link is not None:
@@ -454,7 +483,7 @@ def kv_generate(model, arch, tokenizer, ids, gen_length, block_length, seed, *,
                         pick = select(conf, mask_b, quota=1)
                 else:
                     pick = select(conf, mask_b, quota=quota[0] if decode == "fixed" else None,
-                                  threshold=threshold if decode == "threshold" else None)
+                                  threshold=_gamma() if decode == "threshold" else None)
                 apply(s, e, x0, pick)
                 i = 1
                 rp = torch.zeros((1, n), dtype=torch.bool, device=edge)
@@ -465,7 +494,7 @@ def kv_generate(model, arch, tokenizer, ids, gen_length, block_length, seed, *,
                     mask_b = x[:, s:e] == mask_id
                     q = quota[i] if i < len(quota) else 1
                     pick = select(conf, mask_b, quota=q if decode == "fixed" else None,
-                                  threshold=threshold if decode == "threshold" else None)
+                                  threshold=_gamma() if decode == "threshold" else None)
                     apply(s, e, x0, pick)
                     i += 1
             else:
@@ -475,7 +504,7 @@ def kv_generate(model, arch, tokenizer, ids, gen_length, block_length, seed, *,
                     mask_b = x[:, s:e] == mask_id
                     q = quota[i] if i < len(quota) else 1
                     pick = select(conf, mask_b, quota=q if decode == "fixed" else None,
-                                  threshold=threshold if decode == "threshold" else None)
+                                  threshold=_gamma() if decode == "threshold" else None)
                     apply(s, e, x0, pick)
                     i += 1
     except BaseException:
@@ -486,4 +515,5 @@ def kv_generate(model, arch, tokenizer, ids, gen_length, block_length, seed, *,
     elapsed_ms = (time.perf_counter() - start) * 1000.0
     split_steps = link.end() if link is not None else None
     return {"ms": elapsed_ms, "generated_ids": x[0, lp:].detach().cpu().long().clone(),
-            "n_steps": len(commits), "commits": commits, "split_steps": split_steps}
+            "n_steps": len(commits), "commits": commits, "split_steps": split_steps,
+            "gammas": gammas}

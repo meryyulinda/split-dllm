@@ -52,12 +52,14 @@ TIMEOUT_S = 900.0
 
 
 # --------------------------------------------------------------------------- transport
-def start_relay(target_port, mbps=None, delay_ms=0.0, trace=None, header_bytes=40, mss=1460):
+def start_relay(target_port, mbps=None, delay_ms=0.0, trace=None, header_bytes=40, mss=1460,
+                trace_offset=0.0):
     """Start src.net_relay as a separate process; return (process, listen port)."""
     cmd = [sys.executable, "-m", "src.net_relay", "--listen", "127.0.0.1:0",
            "--target", f"127.0.0.1:{target_port}", "--delay-ms", str(delay_ms),
            "--header-bytes", str(header_bytes), "--mss", str(mss)]
-    cmd += ["--trace", str(Path(trace).resolve())] if trace else ["--mbps", str(mbps)]
+    cmd += (["--trace", str(Path(trace).resolve()), "--trace-offset", str(trace_offset)]
+            if trace else ["--mbps", str(mbps)])
     proc = subprocess.Popen(cmd, cwd=str(DASR_ROOT), stdout=subprocess.PIPE, text=True)
     line = proc.stdout.readline().strip()
     if not line.startswith("PORT "):
@@ -86,14 +88,14 @@ class Channel:
     """
 
     def __init__(self, hdr_fmt, body_len, *, mbps=None, delay_ms=0.0, trace=None,
-                 header_bytes=40, mss=1460):
+                 header_bytes=40, mss=1460, trace_offset=0.0):
         self.fmt, self.hdr, self.body_len = hdr_fmt, struct.calcsize(hdr_fmt), body_len
         listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         listener.bind(("127.0.0.1", 0))
         listener.listen(1)
         listener.settimeout(60)
         self.relay, port = start_relay(listener.getsockname()[1], mbps, delay_ms, trace,
-                                       header_bytes, mss)
+                                       header_bytes, mss, trace_offset)
         self.tx = socket.create_connection(("127.0.0.1", port), timeout=60)
         self.rx, _ = listener.accept()
         listener.close()
@@ -160,11 +162,13 @@ def down_body_len(head):
 class Link:
     """The two directions of an edge-cloud link (both through their own relay)."""
 
-    def __init__(self, mbps=None, rtt_ms=0.0, trace=None, header_bytes=40, mss=1460):
-        kw = dict(mbps=mbps, delay_ms=rtt_ms / 2.0, trace=trace, header_bytes=header_bytes,
-                  mss=mss)
-        self.up = Channel(UP_FMT, up_body_len, **kw)
-        self.down = Channel(DOWN_FMT, down_body_len, **kw)
+    def __init__(self, mbps=None, rtt_ms=0.0, trace=None, header_bytes=40, mss=1460,
+                 trace_offset=0.0, down_trace=None):
+        """down_trace: bandwidth trace of the downlink (default: the uplink's trace)."""
+        kw = dict(mbps=mbps, delay_ms=rtt_ms / 2.0, header_bytes=header_bytes, mss=mss,
+                  trace_offset=trace_offset)
+        self.up = Channel(UP_FMT, up_body_len, trace=trace, **kw)
+        self.down = Channel(DOWN_FMT, down_body_len, trace=down_trace or trace, **kw)
 
     def ping(self, n=5):
         """Real round-trip times (ms) of empty frames: up, then down."""

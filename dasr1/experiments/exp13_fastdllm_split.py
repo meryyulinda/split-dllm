@@ -15,6 +15,8 @@ Variants (all on the same split, same prompts and seeds; blocks of EXP13_BLOCK_L
   K1_dual_fixed          DualCache, 1 token per step
   K2_dual_thr<g>         DualCache + parallel decoding, one variant per threshold
   K3_dual_thr<g>_int8    K2 (first threshold) with the INT8 delta codec
+  K4_dual_thr<g>_int8abs / K5_dual_thr<g>_int4   Exp19 baselines: K2 with plain per-row
+                         INT8 / group-wise INT4 quantization of the rows (no delta)
 Exp14, block-start row reuse (same script, run_exp14.sh selects these):
   R1_dual_thr<g>_reuse       K2 + row reuse at every block start
   R2_dual_thr<g>_reuse_r<m>  R1 with all rows sent at every m-th block start
@@ -112,6 +114,9 @@ ALL_VARIANTS = [
     V("K1_dual_fixed", "dual", "fixed"),
     *[V(f"K2_dual_thr{gname(g)}", "dual", "threshold", g) for g in THRESHOLDS],
     V(f"K3_dual_thr{gname(g0)}_int8", "dual", "threshold", g0, "int8_delta"),
+    # Exp19 baselines: plain quantization of the rows (no delta, no anchors)
+    V(f"K4_dual_thr{gname(g0)}_int8abs", "dual", "threshold", g0, "int8_abs"),
+    V(f"K5_dual_thr{gname(g0)}_int4", "dual", "threshold", g0, "int4_group"),
     V(f"R1_dual_thr{gname(g0)}_reuse", "dual", "threshold", g0, reuse=True),
     V(f"R2_dual_thr{gname(g0)}_reuse_r{REUSE_REFRESH}", "dual", "threshold", g0, reuse=True,
       refresh_every=REUSE_REFRESH),

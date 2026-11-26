@@ -62,6 +62,32 @@ DOWN_HEADER_B = 8
 DOWN_PER_TOKEN_B = 6  # uint16 position + uint32 token id
 
 
+# Exp19 baseline codecs: plain activation quantization of the rows themselves (no delta
+# against a reference, no anchors), as split-inference systems commonly use.
+#   int8_abs    per-row absmax INT8, fp16 scale per row          rows x (d + 2) bytes
+#   int4_group  absmax INT4 in groups of 128 values, fp16 scales rows x (d/2 + 2 d/128) bytes
+ABS_CODECS = {"int8_abs", "int4_group"}
+INT4_GROUP = 128
+
+
+def quantize_abs(x, codec):
+    """Dequantized rows (same dtype as x) and the payload bytes of codec for x (1, r, d)."""
+    r, d = int(x.shape[1]), int(x.shape[2])
+    xf = x.float()
+    if codec == "int8_abs":
+        scale = (xf.abs().amax(dim=-1, keepdim=True).clamp_min(1e-12) / 127.0).half().float()
+        q = torch.clamp(torch.round(xf / scale), -127, 127)
+        return (q * scale).to(x.dtype), r * (d + 2)
+    if codec == "int4_group":
+        if d % INT4_GROUP:
+            raise ValueError(f"int4_group needs d divisible by {INT4_GROUP}")
+        g = xf.view(1, r, d // INT4_GROUP, INT4_GROUP)
+        scale = (g.abs().amax(dim=-1, keepdim=True).clamp_min(1e-12) / 7.0).half().float()
+        q = torch.clamp(torch.round(g / scale), -8, 7)
+        return (q * scale).view(1, r, d).to(x.dtype), r * (d // 2 + 2 * (d // INT4_GROUP))
+    raise ValueError(f"not a plain codec: {codec!r}")
+
+
 def _move(obj, device, memo):
     if isinstance(obj, torch.Tensor):
         if obj.device == device:
@@ -167,6 +193,7 @@ class SplitLink:
                                                                 with_kwargs=True))
         self.active = False
         self.wire = None          # Exp16: src.net_wire.Wire for a real link
+        self.codec_ctl = None     # Exp18: src.net_controller.CodecController (encoding="adaptive")
 
     def remove(self):
         for h in self.handles:
@@ -177,13 +204,17 @@ class SplitLink:
     def begin(self, *, prompt_len, rows="all", encoding="bf16", controller=None,
               prompt_tail_rows=0, mask_id=None, anchor_interval=32):
         if self.wire is not None:
-            if encoding == "exact_delta":
-                raise ValueError("the real link (Exp16) supports bf16 and int8_delta only")
+            if encoding == "exact_delta" or encoding in ABS_CODECS:
+                raise ValueError("the real link (Exp16) supports bf16, int8_delta and adaptive")
             self.wire.reset()
         if rows not in {"all", "cache_aware"}:
             raise ValueError(f"rows={rows!r}")
-        if encoding not in {"bf16", "exact_delta", "int8_delta"}:
+        if encoding not in {"bf16", "exact_delta", "int8_delta", "adaptive"} | ABS_CODECS:
             raise ValueError(f"encoding={encoding!r}")
+        if encoding == "adaptive":  # Exp18: bf16 or INT8 delta per step, chosen by codec_ctl
+            if self.codec_ctl is None:
+                raise ValueError("encoding='adaptive' needs link.codec_ctl")
+            self.codec_ctl.reset()
         if rows == "cache_aware":
             if controller is None:
                 raise ValueError("rows='cache_aware' needs the feature cache (a policy)")
@@ -249,6 +280,8 @@ class SplitLink:
         if self.wire is not None:  # Exp16: committed tokens over the real link
             ids_edge, info = self.wire.downlink(ids, 0, self.step)
             self.stats[-1].update(info)
+            if self.codec_ctl is not None:
+                self.codec_ctl.observe_down(info)
         else:
             ids_edge = ids.to(self.edge)
         ev["edge_start"] = self._event(self.edge)
@@ -276,16 +309,23 @@ class SplitLink:
         first = self.ref_edge is None
         prompt_now = self.rows == "all" or first or self._prompt_refresh_now()
         lo = 0 if prompt_now else self.split          # rows to send: [lo, n)
-        anchor = first or (self.rows == "cache_aware" and prompt_now) or (
-            self.encoding == "int8_delta"
-            and self.step - self.last_anchor >= self.anchor_interval)
+        enc = self.encoding
+        if enc == "adaptive":  # Exp18: the controller picks this step's codec
+            enc = "bf16" if first else self.codec_ctl.choose(self.step, n - lo, d)
+        anchor = enc not in ABS_CODECS and (first or (self.rows == "cache_aware" and prompt_now) or (
+            enc == "int8_delta"
+            and self.step - self.last_anchor >= self.anchor_interval))
         if first:
             self.ref_edge = h.detach().clone()
         sel = h[:, lo:]
-        if anchor or self.encoding == "bf16":
+        raw = anchor or enc == "bf16"
+        if raw:
             n_rows, payload = n - lo, (n - lo) * row_b
             new = sel
-        elif self.encoding == "exact_delta":
+        elif enc in ABS_CODECS:  # Exp19 baselines: quantize the rows themselves
+            new, payload = quantize_abs(sel, enc)
+            n_rows = n - lo
+        elif enc == "exact_delta":
             changed = (sel != self.ref_edge[:, lo:]).any(dim=-1)
             n_rows_t = changed.sum()
             n_rows = n_rows_t  # tensor; resolved below
@@ -301,18 +341,20 @@ class SplitLink:
             wire_q, wire_scale = q, scale16
         if self.encoding != "bf16":  # delta codecs need the synchronized reference
             self.ref_edge[:, lo:] = new
-        if anchor:
+        if anchor or (raw and self.encoding == "adaptive"):  # exact rows reset the INT8 drift
             self.last_anchor = self.step
         ev["encode_end"] = self._event(self.edge)
 
         # "transmit": the cloud keeps its own buffer; rows outside [lo, n) stay stale
         if self.wire is not None:  # Exp16: real bytes; the cloud decodes what it received
-            if anchor or self.encoding == "bf16":
+            if raw:
                 got, info = self.wire.uplink(self.step, lo, ev, raw=sel)
             else:
                 got, info = self.wire.uplink(self.step, lo, ev, q=wire_q, scale=wire_scale,
                                              base=self.buf_cloud[:, lo:])
             self.stats[-1].update(info)
+            if self.codec_ctl is not None:
+                self.codec_ctl.observe_up(info, d)
             if self.buf_cloud is None:  # first step: every row (lo = 0)
                 self.buf_cloud = got.clone()
             else:
@@ -321,11 +363,12 @@ class SplitLink:
             self.buf_cloud = self.ref_edge.to(self.cloud)
         else:
             self.buf_cloud[:, lo:] = new.to(self.cloud)
-        if self.encoding == "exact_delta" and payload is None:
+        if enc == "exact_delta" and payload is None:
             n_rows = int(n_rows.item())
             payload = n_rows * (row_b + 4)
         self.stats[-1].update({
             "rows_sent": int(n_rows), "prompt_sent": bool(lo == 0), "anchor": bool(anchor),
+            "codec": "bf16" if raw else enc,
             "up_bytes": UP_HEADER_B + int(payload), "full_bytes": n * row_b,
         })
         if self.controller is not None:
