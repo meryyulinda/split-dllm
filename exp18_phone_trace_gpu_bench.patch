@@ -1,0 +1,154 @@
+diff --git a/dasr1/experiments/exp18_live_controller.py b/dasr1/experiments/exp18_live_controller.py
+index 31e6865..2a8741d 100644
+--- a/dasr1/experiments/exp18_live_controller.py
++++ b/dasr1/experiments/exp18_live_controller.py
+@@ -11,6 +11,8 @@ Set-up: as Exp16 (real TCP link through the network emulator, src/net_relay.py),
+ but the emulator replays a bandwidth trace; the edge is slowed down s times
+ (EXP18_EDGE_SLOWDOWN, default 3, as in the paper). Traces (EXP18_TRACES):
+   step      synthetic square wave, 100 Mbit/s for 10 s, then 10 Mbit/s for 10 s
++  phone     uplink trace recorded from our own phone to the lab server
++            (tools/phone_uplink_sink.py), replayed with its measured RTT ("rtt_ms")
+   LTE       Mahimahi cellular uplink traces (T-Mobile and Verizon LTE, "short"),
+             converted to 100-ms bins (src/net_traces.py); the downlink replays the
+             matching .down trace
+@@ -238,12 +240,13 @@ def main():
+ 
+     def run(p, case, trace, offset):
+         ids, mask = prepare(tokenizer, case["prompt"], cloud)
+-        wl = Link(rtt_ms=RTT_MS, trace=trace["csv"], trace_offset=offset,
++        rtt = float(trace.get("rtt_ms", RTT_MS))     # a trace may carry its measured RTT
++        wl = Link(rtt_ms=rtt, trace=trace["csv"], trace_offset=offset,
+                   header_bytes=HEADER_BYTES, down_trace=trace.get("down_csv"))
+         wire = Wire(wl, edge, cloud, edge_slowdown=EDGE_SLOWDOWN)
+         ctl = None
+         if p["encoding"] == "adaptive":
+-            ctl = CodecController(mode=p["mode"], rtt_ms=RTT_MS, lam=LAMBDA,
++            ctl = CodecController(mode=p["mode"], rtt_ms=rtt, lam=LAMBDA,
+                                   hysteresis=HYSTERESIS, adapt_gamma=p.get("adapt_gamma", False),
+                                   gamma_high=GAMMA_HIGH, gamma_low=GAMMA_LOW,
+                                   net_share=NET_SHARE)
+@@ -293,7 +296,7 @@ def main():
+                 row = {
+                     "trace": trace["name"], "case_id": case["case_id"], "policy": name,
+                     "trace_offset_s": offset, "trace_mean_mbps": trace["mean_mbps"],
+-                    "rtt_ms": RTT_MS, "edge_slowdown": EDGE_SLOWDOWN,
++                    "rtt_ms": float(trace.get("rtt_ms", RTT_MS)), "edge_slowdown": EDGE_SLOWDOWN,
+                     "measured_s": measured, "n_steps": len(df),
+                     "up_mb": df["up_bytes"].sum() / 1e6,
+                     "int8_step_share": float((df["codec"] == "int8_delta").mean())
+diff --git a/dasr1/experiments/run_exp18.sh b/dasr1/experiments/run_exp18.sh
+index 1b641dd..031e8e1 100755
+--- a/dasr1/experiments/run_exp18.sh
++++ b/dasr1/experiments/run_exp18.sh
+@@ -2,12 +2,12 @@
+ # Exp18: choosing the codec (and Fast-dLLM's gamma) while the bandwidth changes, over a real
+ # TCP link through the network emulator replaying bandwidth traces. Dream, GSM8K, split
+ # after layer 4, RTT 20 ms, edge 3x slower.
+-#   1. Fast-dLLM backend:  step trace (100 <-> 10 Mbit/s), T-Mobile and Verizon LTE uplink
+-#                          traces (Mahimahi), 10 questions each, 5 policies
+-#   2. dLLM-Cache backend: step trace, 5 questions, 4 policies (LTE is too slow for it:
+-#                          one answer would take 5-10 minutes)
++#   1. Fast-dLLM backend:  step trace (100 <-> 10 Mbit/s), our phone's uplink trace (RTT 9.5 ms),
++#                          T-Mobile and Verizon LTE uplink traces (Mahimahi), 10 questions each, 5 policies
++#   2. dLLM-Cache backend: step trace and phone trace, 5 questions, 4 policies (the Mahimahi
++#                          LTE traces are too slow for it: one answer would take 5-10 minutes)
+ # Starts by itself once both GPUs are idle (checks every 5 min), so start it and log out:
+-#   nohup bash experiments/run_exp18.sh > exp18.log 2>&1 &                            # ~2 h after start
++#   nohup bash experiments/run_exp18.sh > exp18.log 2>&1 &                            # ~3 h after start
+ #   SMOKE=1 SKIP_IDLE_CHECK=1 bash experiments/run_exp18.sh > exp18_smoke.log 2>&1    # ~10 min
+ #   GPUS=0,1 ...   other GPUs (first = cloud, second = edge)
+ # Needs the Mahimahi traces: cloned to ../../mahimahi (next to split-dllm) if missing.
+@@ -90,9 +90,11 @@ else
+ EXP18_STEPS = 256
+ EXP18_OUTPUT_TAG = ""'
+   TR_F='EXP18_TRACES = [{"name": "step_100_10", "step": (100, 10, 20), "n": 10},
++                {"name": "phone_lte_lab", "csv": "outputs/phone_traces/lte_lab.csv", "rtt_ms": 9.5, "n": 10},
+                 {"name": "tmobile_lte_up", "mahimahi": "TMobile-LTE-short.up", "n": 10},
+                 {"name": "verizon_lte_up", "mahimahi": "Verizon-LTE-short.up", "n": 10}]'
+-  TR_C='EXP18_TRACES = [{"name": "step_100_10", "step": (100, 10, 20), "n": 5}]'
++  TR_C='EXP18_TRACES = [{"name": "step_100_10", "step": (100, 10, 20), "n": 5},
++                {"name": "phone_lte_lab", "csv": "outputs/phone_traces/lte_lab.csv", "rtt_ms": 9.5, "n": 5}]'
+ fi
+ 
+ run "1/2 Fast-dLLM backend" "$COMMON
+diff --git a/dasr1/tools/edge_gpu_bench.py b/dasr1/tools/edge_gpu_bench.py
+new file mode 100644
+index 0000000..2d87b4e
+--- /dev/null
++++ b/dasr1/tools/edge_gpu_bench.py
+@@ -0,0 +1,75 @@
++"""Measure how fast a GPU runs DASR's edge part (embedding + Dream's first k layers).
++
++Builds Dream-v0-Instruct-7B's architecture with only k layers and RANDOM weights (timing
++does not depend on the weight values), so it needs only the model's config and code from
++the Hugging Face hub, about 3 GB of GPU memory and no 15-GB download. Times one denoising
++step of the edge for m rows (CUDA events, median of --reps).
++
++Run the same command on the lab's A6000 and on the rented GPU; the ratio of the two is the
++measured edge slowdown s (the paper assumes 3).
++  pip install "transformers==4.46.2"          # same version as the lab server
++  python edge_gpu_bench.py                     # prints a table and one JSON line
++
++Rows: 32 = Fast-dLLM in-block step (attention among the 32 rows only; the 360 cached
++keys would add < 1% of the work), 256 = dLLM-Cache answer rows, 360 = full boundary on
++GSM8K, 865 = full boundary on the long prompts.
++"""
++import argparse
++import json
++import platform
++
++import torch
++from transformers import AutoConfig, AutoModel
++
++
++def main():
++    ap = argparse.ArgumentParser()
++    ap.add_argument("--model", default="Dream-org/Dream-v0-Instruct-7B")
++    ap.add_argument("--layers", type=int, default=4)
++    ap.add_argument("--rows", type=int, nargs="+", default=[32, 256, 360, 865])
++    ap.add_argument("--reps", type=int, default=20)
++    ap.add_argument("--dtype", choices=["bf16", "fp16"], default="bf16")
++    a = ap.parse_args()
++    dtype = torch.bfloat16 if a.dtype == "bf16" else torch.float16
++    dev = torch.device("cuda")
++    cfg = AutoConfig.from_pretrained(a.model, trust_remote_code=True)
++    cfg.num_hidden_layers = a.layers
++    torch.manual_seed(0)
++    with dev:
++        model = AutoModel.from_config(cfg, trust_remote_code=True, torch_dtype=dtype)
++    model.eval()
++    base = model.model          # embed_tokens, layers[0:k], norm (as in src/split_runtime.py)
++
++    def step(ids):
++        try:
++            return base(input_ids=ids, attention_mask="full")
++        except (TypeError, ValueError, AttributeError):
++            return base(input_ids=ids)
++
++    res = {}
++    name = torch.cuda.get_device_name(dev)
++    print(f"{name} | {a.dtype} | {a.layers} layers of {a.model} (random weights) | "
++          f"torch {torch.__version__}")
++    with torch.inference_mode():
++        for m in a.rows:
++            ids = torch.randint(0, cfg.vocab_size, (1, m), device=dev)
++            for _ in range(3):
++                step(ids)                      # warm-up
++            times = []
++            for _ in range(a.reps):
++                s, e = torch.cuda.Event(enable_timing=True), torch.cuda.Event(enable_timing=True)
++                s.record()
++                step(ids)
++                e.record()
++                torch.cuda.synchronize()
++                times.append(s.elapsed_time(e))
++            times.sort()
++            res[m] = times[len(times) // 2]
++            print(f"  {m:4d} rows: {res[m]:8.2f} ms per step")
++    print("JSON " + json.dumps({"gpu": name, "dtype": a.dtype, "layers": a.layers,
++                                "ms_per_step": res, "torch": torch.__version__,
++                                "python": platform.python_version()}))
++
++
++if __name__ == "__main__":
++    main()

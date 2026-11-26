@@ -2,12 +2,12 @@
 # Exp18: choosing the codec (and Fast-dLLM's gamma) while the bandwidth changes, over a real
 # TCP link through the network emulator replaying bandwidth traces. Dream, GSM8K, split
 # after layer 4, RTT 20 ms, edge 3x slower.
-#   1. Fast-dLLM backend:  step trace (100 <-> 10 Mbit/s), T-Mobile and Verizon LTE uplink
-#                          traces (Mahimahi), 10 questions each, 5 policies
-#   2. dLLM-Cache backend: step trace, 5 questions, 4 policies (LTE is too slow for it:
-#                          one answer would take 5-10 minutes)
+#   1. Fast-dLLM backend:  step trace (100 <-> 10 Mbit/s), our phone's uplink trace (RTT 9.5 ms),
+#                          T-Mobile and Verizon LTE uplink traces (Mahimahi), 10 questions each, 5 policies
+#   2. dLLM-Cache backend: step trace and phone trace, 5 questions, 4 policies (the Mahimahi
+#                          LTE traces are too slow for it: one answer would take 5-10 minutes)
 # Starts by itself once both GPUs are idle (checks every 5 min), so start it and log out:
-#   nohup bash experiments/run_exp18.sh > exp18.log 2>&1 &                            # ~2 h after start
+#   nohup bash experiments/run_exp18.sh > exp18.log 2>&1 &                            # ~3 h after start
 #   SMOKE=1 SKIP_IDLE_CHECK=1 bash experiments/run_exp18.sh > exp18_smoke.log 2>&1    # ~10 min
 #   GPUS=0,1 ...   other GPUs (first = cloud, second = edge)
 # Needs the Mahimahi traces: cloned to ../../mahimahi (next to split-dllm) if missing.
@@ -90,9 +90,11 @@ else
 EXP18_STEPS = 256
 EXP18_OUTPUT_TAG = ""'
   TR_F='EXP18_TRACES = [{"name": "step_100_10", "step": (100, 10, 20), "n": 10},
+                {"name": "phone_lte_lab", "csv": "outputs/phone_traces/lte_lab.csv", "rtt_ms": 9.5, "n": 10},
                 {"name": "tmobile_lte_up", "mahimahi": "TMobile-LTE-short.up", "n": 10},
                 {"name": "verizon_lte_up", "mahimahi": "Verizon-LTE-short.up", "n": 10}]'
-  TR_C='EXP18_TRACES = [{"name": "step_100_10", "step": (100, 10, 20), "n": 5}]'
+  TR_C='EXP18_TRACES = [{"name": "step_100_10", "step": (100, 10, 20), "n": 5},
+                {"name": "phone_lte_lab", "csv": "outputs/phone_traces/lte_lab.csv", "rtt_ms": 9.5, "n": 5}]'
 fi
 
 run "1/2 Fast-dLLM backend" "$COMMON

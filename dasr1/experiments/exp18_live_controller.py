@@ -11,6 +11,8 @@ Set-up: as Exp16 (real TCP link through the network emulator, src/net_relay.py),
 but the emulator replays a bandwidth trace; the edge is slowed down s times
 (EXP18_EDGE_SLOWDOWN, default 3, as in the paper). Traces (EXP18_TRACES):
   step      synthetic square wave, 100 Mbit/s for 10 s, then 10 Mbit/s for 10 s
+  phone     uplink trace recorded from our own phone to the lab server
+            (tools/phone_uplink_sink.py), replayed with its measured RTT ("rtt_ms")
   LTE       Mahimahi cellular uplink traces (T-Mobile and Verizon LTE, "short"),
             converted to 100-ms bins (src/net_traces.py); the downlink replays the
             matching .down trace
@@ -238,12 +240,13 @@ def main():
 
     def run(p, case, trace, offset):
         ids, mask = prepare(tokenizer, case["prompt"], cloud)
-        wl = Link(rtt_ms=RTT_MS, trace=trace["csv"], trace_offset=offset,
+        rtt = float(trace.get("rtt_ms", RTT_MS))     # a trace may carry its measured RTT
+        wl = Link(rtt_ms=rtt, trace=trace["csv"], trace_offset=offset,
                   header_bytes=HEADER_BYTES, down_trace=trace.get("down_csv"))
         wire = Wire(wl, edge, cloud, edge_slowdown=EDGE_SLOWDOWN)
         ctl = None
         if p["encoding"] == "adaptive":
-            ctl = CodecController(mode=p["mode"], rtt_ms=RTT_MS, lam=LAMBDA,
+            ctl = CodecController(mode=p["mode"], rtt_ms=rtt, lam=LAMBDA,
                                   hysteresis=HYSTERESIS, adapt_gamma=p.get("adapt_gamma", False),
                                   gamma_high=GAMMA_HIGH, gamma_low=GAMMA_LOW,
                                   net_share=NET_SHARE)
@@ -293,7 +296,7 @@ def main():
                 row = {
                     "trace": trace["name"], "case_id": case["case_id"], "policy": name,
                     "trace_offset_s": offset, "trace_mean_mbps": trace["mean_mbps"],
-                    "rtt_ms": RTT_MS, "edge_slowdown": EDGE_SLOWDOWN,
+                    "rtt_ms": float(trace.get("rtt_ms", RTT_MS)), "edge_slowdown": EDGE_SLOWDOWN,
                     "measured_s": measured, "n_steps": len(df),
                     "up_mb": df["up_bytes"].sum() / 1e6,
                     "int8_step_share": float((df["codec"] == "int8_delta").mean())
