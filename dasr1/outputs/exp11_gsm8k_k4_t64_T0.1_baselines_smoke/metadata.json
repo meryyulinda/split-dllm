@@ -1,0 +1,95 @@
+{
+  "experiment": "Exp11 DASR two-GPU split prototype (closed loop)",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "official_repo": "/mnt/mydisk/mery-splitdllm/dLLM-cache-official",
+  "dataset": "gsm8k",
+  "n_cases": 2,
+  "split_layer_1based": 4,
+  "edge": "cuda:1",
+  "cloud": "cuda:0",
+  "edge_gpu": "NVIDIA RTX A6000",
+  "cloud_gpu": "NVIDIA RTX A6000",
+  "new_tokens": 64,
+  "steps": 64,
+  "alg": "entropy",
+  "block_length": null,
+  "temperature": 0.1,
+  "top_p": 0.9,
+  "prompt_tail_rows": 1,
+  "seed": 42,
+  "cache_policy": [
+    "fixed",
+    25,
+    2,
+    0.25
+  ],
+  "adaptive_policy": [
+    "adaptive",
+    {
+      "gen_content_commits": 2,
+      "gen_max_age": 4,
+      "prompt_content_commits": 16,
+      "prompt_max_age": 32,
+      "eos_frontier_window": 8,
+      "transfer_ratio": 0.25
+    }
+  ],
+  "anchor_interval": 32,
+  "variants": [
+    {
+      "name": "S0_split_full",
+      "policy": null,
+      "rows": "all",
+      "encoding": "bf16",
+      "same_as": null
+    },
+    {
+      "name": "S3_split_int8abs",
+      "policy": null,
+      "rows": "all",
+      "encoding": "int8_abs",
+      "same_as": null
+    },
+    {
+      "name": "S4_split_int4",
+      "policy": null,
+      "rows": "all",
+      "encoding": "int4_group",
+      "same_as": null
+    },
+    {
+      "name": "C5_cache_aware_int8abs",
+      "policy": [
+        "fixed",
+        25,
+        2,
+        0.25
+      ],
+      "rows": "cache_aware",
+      "encoding": "int8_abs",
+      "same_as": null
+    },
+    {
+      "name": "C6_cache_aware_int4",
+      "policy": [
+        "fixed",
+        25,
+        2,
+        0.25
+      ],
+      "rows": "cache_aware",
+      "encoding": "int4_group",
+      "same_as": null
+    }
+  ],
+  "output_tag": "_baselines_smoke",
+  "idle_power_w": {
+    "edge": 64.00987956311471,
+    "cloud": 71.19946737142465
+  },
+  "energy_source": "NVML nvmlDeviceGetTotalEnergyConsumption",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22",
+  "notes": "Bytes from the wire format in src/split_runtime.py; compute from CUDA events per GPU; network latency added by exp11b (emulation)."
+}

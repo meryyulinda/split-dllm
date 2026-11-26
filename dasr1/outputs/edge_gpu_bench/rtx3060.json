@@ -1,0 +1,1 @@
+{"gpu": "NVIDIA GeForce RTX 3060", "dtype": "bf16", "layers": 4, "ms_per_step": {"32": 9.753600120544434, "256": 32.140289306640625, "360": 43.23430252075195, "865": 96.74034881591797}, "torch": "2.14.1+cu132", "python": "3.12.16", "host": "vast.ai, Quebec CA, AMD EPYC 7551"}

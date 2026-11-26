@@ -1,0 +1,197 @@
+task,seed,case_id,config,paper_name,ok,extracted,same_as_ref,n_steps,text
+humaneval,42,HumanEval_0,uncached,No cache (reference),True,,True,128,"Here is the complete function:
+
+```python
+from typing import List
+
+def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    """""" Check if in given list of numbers there are any two numbers closer to each other than given threshold.
+    """"""
+    for i in range(len(numbers)):
+        for j in range(i + 1, len(numbers)):
+            if abs(numbers[i] - numbers[j]) < threshold:
+                return True
+    return False
+```"
+humaneval,42,HumanEval_0,dllm_cache,DASR + dLLM-Cache (bf16),True,,True,128,"Here is the complete function:
+
+```python
+from typing import List
+
+def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    """""" Check if in given list of numbers there are any two numbers closer to each other than given threshold.
+    """"""
+    for i in range(len(numbers)):
+        for j in range(i + 1, len(numbers)):
+            if abs(numbers[i] - numbers[j]) < threshold:
+                return True
+    return False
+```"
+humaneval,42,HumanEval_0,dllm_cache_int8,DASR + dLLM-Cache (INT8),True,,True,128,"Here is the complete function:
+
+```python
+from typing import List
+
+def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    """""" Check if in given list of numbers there are any two numbers closer to each other than given threshold.
+    """"""
+    for i in range(len(numbers)):
+        for j in range(i + 1, len(numbers)):
+            if abs(numbers[i] - numbers[j]) < threshold:
+                return True
+    return False
+```"
+humaneval,42,HumanEval_0,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",True,,False,128,"Here is the complete function:
+
+```python
+from typing import List
+
+def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    """""" Check if in given list of numbers there are any two numbers closer to each other than
+    given threshold.
+    """"""
+    for i in range(len(numbers)):
+        for j in range(i + 1, len(numbers)):
+            if abs(numbers[i] - numbers[j]) < threshold:
+                return True
+    return False
+```"
+humaneval,42,HumanEval_1,uncached,No cache (reference),False,,True,128,"```python
+from typing import List
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    stack = []
+    groups = []
+    current_group = ''
+
+    for char in paren_string:
+        if char == '(':
+            stack.append(char)
+            current_group += char
+        elif char == ')':
+            stack.pop()
+            current_group += char
+        elif not stack:
+            groups.append(current_group)
+            current_group = ''
+    return groups
+```"
+humaneval,42,HumanEval_1,dllm_cache,DASR + dLLM-Cache (bf16),False,,False,128,"```python
+from typing import List
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    stack = []
+    groups = []
+    current_group = ''
+
+    for char in paren_string:
+        if char == '(':
+            stack.append(char)
+            current_group += char
+        elif char == ')':
+            stack.pop()
+            current_group += char
+        elif not stack:
+            groups.append(current_group)
+            current_group = ''
+
+    return groups
+```"
+humaneval,42,HumanEval_1,dllm_cache_int8,DASR + dLLM-Cache (INT8),False,,False,128,"```python
+from typing import List
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    stack = []
+    groups = []
+    current_group = ''
+
+    for char in paren_string:
+        if char == '(':
+            stack.append(char)
+            current_group += char
+        elif char == ')':
+            stack.pop()
+            current_group += char
+        elif not stack:
+            groups.append(current_group)
+            current_group = ''
+
+    return groups
+```"
+humaneval,42,HumanEval_1,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",False,,False,128,"```python
+from typing import List
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    stack = []
+    result = []
+    current_group = ''
+
+    for char in paren_string:
+        if char == '(':
+            stack.append(char)
+        elif char == ')':
+            stack.pop()
+            if not stack:
+                result.append(current_group)
+                current_group = ''
+        else:
+            current_group += char
+
+    return result
+```"
+humaneval,42,HumanEval_2,uncached,No cache (reference),True,,True,128,"```python
+def truncate_number(number: float) -> float:
+    """""" Given a positive floating point number, it can be decomposed into
+    and integer part (largest integer smaller than given number) and decimals
+    (leftover part always smaller than 1).
+
+    Return the decimal part of the number.
+    >>> truncate_number(3.5)
+    0.5
+    """"""
+    integer_part = int(number)
+    decimal_part = number - integer_part
+    return decimal_part
+```"
+humaneval,42,HumanEval_2,dllm_cache,DASR + dLLM-Cache (bf16),True,,True,128,"```python
+def truncate_number(number: float) -> float:
+    """""" Given a positive floating point number, it can be decomposed into
+    and integer part (largest integer smaller than given number) and decimals
+    (leftover part always smaller than 1).
+
+    Return the decimal part of the number.
+    >>> truncate_number(3.5)
+    0.5
+    """"""
+    integer_part = int(number)
+    decimal_part = number - integer_part
+    return decimal_part
+```"
+humaneval,42,HumanEval_2,dllm_cache_int8,DASR + dLLM-Cache (INT8),True,,True,128,"```python
+def truncate_number(number: float) -> float:
+    """""" Given a positive floating point number, it can be decomposed into
+    and integer part (largest integer smaller than given number) and decimals
+    (leftover part always smaller than 1).
+
+    Return the decimal part of the number.
+    >>> truncate_number(3.5)
+    0.5
+    """"""
+    integer_part = int(number)
+    decimal_part = number - integer_part
+    return decimal_part
+```"
+humaneval,42,HumanEval_2,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",True,,True,128,"```python
+def truncate_number(number: float) -> float:
+    """""" Given a positive floating point number, it can be decomposed into
+    and integer part (largest integer smaller than given number) and decimals
+    (leftover part always smaller than 1).
+
+    Return the decimal part of the number.
+    >>> truncate_number(3.5)
+    0.5
+    """"""
+    integer_part = int(number)
+    decimal_part = number - integer_part
+    return decimal_part
+```"

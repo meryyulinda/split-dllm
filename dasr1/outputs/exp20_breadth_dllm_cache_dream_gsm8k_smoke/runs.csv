@@ -1,0 +1,39 @@
+task,seed,case_id,config,paper_name,ok,extracted,same_as_ref,n_steps,text
+gsm8k,42,gsm8k_0000,uncached,No cache (reference),True,18.0,True,64,"Janet eats 3 eggs for breakfast and bakes 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day selling"
+gsm8k,42,gsm8k_0000,dllm_cache,DASR + dLLM-Cache (bf16),True,18.0,False,64,"Janet eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day."
+gsm8k,42,gsm8k_0000,dllm_cache_int8,DASR + dLLM-Cache (INT8),True,18.0,False,64,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day selling eggs."
+gsm8k,42,gsm8k_0000,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",True,18.0,False,64,"Janet eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day."
+gsm8k,42,gsm8k_0001,uncached,No cache (reference),True,3.0,True,64,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3"
+gsm8k,42,gsm8k_0001,dllm_cache,DASR + dLLM-Cache (bf16),True,3.0,True,64,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3"
+gsm8k,42,gsm8k_0001,dllm_cache_int8,DASR + dLLM-Cache (INT8),True,3.0,True,64,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3"
+gsm8k,42,gsm8k_0001,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",True,3.0,False,64,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The final answer is: 3"
+gsm8k,42,gsm8k_0002,uncached,No cache (reference),False,65.0,True,64,"The house increased in value by 150% so it is now worth 150% * $130,000 = $195,000. His profit is $195,000 - $130,000 = $65"
+gsm8k,42,gsm8k_0002,dllm_cache,DASR + dLLM-Cache (bf16),False,130000.0,False,64,"The house increased in value by 150% so it is now worth 150% * $130,000 = $195,000. He made a profit of $195,000 - $130,000 = $"
+gsm8k,42,gsm8k_0002,dllm_cache_int8,DASR + dLLM-Cache (INT8),False,130000.0,False,64,"The house increased in value by 150% so it is now worth 150% * $130,000 = $195,000. He made a profit of $195,000 - $130,000 = $"
+gsm8k,42,gsm8k_0002,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",False,195000.0,False,64,"The house increased in value by 150% so it is now worth 150 / 100 * $130,000 = $195,000.
+#### 195000
+The answer is: 95000"

@@ -1,0 +1,306 @@
+cloud = GPU 1, edge = GPU 2
+
+=== 1/6 dLLM-Cache, Dream GSM8K  (2026-11-27 00:36:23)
+{'EXP11_DATASET': 'gsm8k', 'EXP11_N_QUESTIONS': 2, 'EXP11_NEW_TOKENS': 64, 'EXP11_STEPS': 64, 'EXP11_MODEL': 'dream', 'EXP11_OUTPUT_TAG': '_baselines_smoke', 'EXP11_VARIANT_NAMES': ['S0_split_full', 'S3_split_int8abs', 'S4_split_int4', 'C5_cache_aware_int8abs', 'C6_cache_aware_int4']}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  8.00it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.28it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.42it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.77it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.58it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=64.0 W, cloud=71.2 W
+Exp11 | dream | gsm8k n=2 | split after layer 4 | edge=cuda:1 cloud=cuda:0 | 64 tok / 64 steps | cache ('fixed', 25, 2, 0.25)
+warmup done
+
+gsm8k_0000 | prompt tokens=99
+  S0_split_full              ok=True  up=  74.78 MB edge=    326 ms cloud=   1913 ms mem=2.81/12.01 GiB E=243+682 J 'gs per day.\nShe makes 9 * $2 = $18 per day selling'
+  S3_split_int8abs           ok=True  up=  37.41 MB edge=    326 ms cloud=   1918 ms mem=2.81/12.01 GiB E=243+679 J 'gs per day.\nShe makes $2 * 9 = $18 per day selling'
+  S4_split_int4              ok=True  up=  19.28 MB edge=    322 ms cloud=   1909 ms mem=2.81/12.01 GiB E=246+705 J 'gs per day.\nShe makes $2 * 9 = $18 per day selling'
+  C5_cache_aware_int8abs     ok=True  up=  15.97 MB edge=    321 ms cloud=   2051 ms mem=2.81/12.00 GiB E=218+597 J ' = 9 eggs per day.\nShe makes 9 * $2 = $18 per day.'
+  C6_cache_aware_int4        ok=False up=   8.23 MB edge=    323 ms cloud=   1974 ms mem=2.81/12.00 GiB E=220+610 J "remaining 16 - 7 = 9 eggs at the farmers' market.\n"
+
+gsm8k_0001 | prompt tokens=60
+  S0_split_full              ok=True  up=  56.89 MB edge=    301 ms cloud=   1649 ms mem=2.80/12.00 GiB E=193+602 J ' 2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3'
+  S3_split_int8abs           ok=True  up=  28.46 MB edge=    296 ms cloud=   1641 ms mem=2.80/12.00 GiB E=186+594 J ' 2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3'
+  S4_split_int4              ok=True  up=  14.67 MB edge=    298 ms cloud=   1642 ms mem=2.80/12.00 GiB E=201+627 J ' bolts of fiber.\nTherefore, the final answer is 3.'
+  C5_cache_aware_int8abs     ok=True  up=  15.55 MB edge=    313 ms cloud=   1734 ms mem=2.79/11.96 GiB E=193+563 J ' 2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3'
+  C6_cache_aware_int4        ok=True  up=   8.02 MB edge=    318 ms cloud=   1748 ms mem=2.79/11.96 GiB E=194+563 J ' bolts of fiber.\nTherefore, the final answer is 3.'
+
+Exp11 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp11_gsm8k_k4_t64_T0.1_baselines_smoke
+               variant  runs  acc  regressions  exact_vs_ref  mean_up_mb  up_reduction_vs_S0  mean_edge_ms  mean_cloud_ms  mean_edge_peak_gib  mean_cloud_peak_gib  mean_edge_energy_j  mean_cloud_energy_j
+         S0_split_full     2  1.0            0             0   65.831936            0.000000    313.515424    1781.148676            2.802771            12.001849            218.0760             641.8485
+      S3_split_int8abs     2  1.0            0             0   32.934848            0.499713    311.182688    1779.683185            2.802771            12.001849            214.7190             636.3570
+         S4_split_int4     2  1.0            0             0   16.973056            0.742176    310.173009    1775.556974            2.802771            12.001849            223.1785             666.0650
+C5_cache_aware_int8abs     2  1.0            0             0   15.763287            0.756489    317.046608    1892.595548            2.799388            11.979630            205.0485             579.7200
+   C6_cache_aware_int4     2  0.5            1             0    8.123908            0.874502    320.517679    1860.786194            2.799388            11.979630            207.0605             586.4110
+
+=== 2/6 dLLM-Cache, Dream long prompts  (2026-11-27 00:37:08)
+{'EXP11_DATASET': 'authored', 'EXP11_N_QUESTIONS': 2, 'EXP11_NEW_TOKENS': 64, 'EXP11_STEPS': 64, 'EXP11_MODEL': 'dream', 'EXP11_OUTPUT_TAG': '_baselines_smoke', 'EXP11_VARIANT_NAMES': ['S0_split_full', 'S3_split_int8abs', 'S4_split_int4', 'C5_cache_aware_int8abs', 'C6_cache_aware_int4']}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  8.01it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.00it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.24it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.29it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.22it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=64.2 W, cloud=74.1 W
+Exp11 | dream | authored n=12 | split after layer 4 | edge=cuda:1 cloud=cuda:0 | 64 tok / 64 steps | cache ('fixed', 25, 2, 0.25)
+warmup done
+
+library_factual | prompt tokens=849
+  S0_split_full              ok=True  up= 418.84 MB edge=   1279 ms cloud=   8441 ms mem=2.96/12.48 GiB E=1074+2831 J 'Mara Chen'
+  S3_split_int8abs           ok=True  up= 209.54 MB edge=   1261 ms cloud=   8475 ms mem=2.96/12.48 GiB E=1030+2849 J 'Mara Chen'
+  S4_split_int4              ok=True  up= 107.98 MB edge=   1260 ms cloud=   8493 ms mem=2.96/12.48 GiB E=1028+2862 J 'Mara Chen'
+  C5_cache_aware_int8abs     ok=True  up=  24.04 MB edge=    595 ms cloud=   2611 ms mem=2.97/12.48 GiB E=379+985 J 'Mara Chen'
+  C6_cache_aware_int4        ok=True  up=  12.39 MB edge=    599 ms cloud=   2622 ms mem=2.97/12.48 GiB E=346+897 J 'Mara Chen'
+
+library_math | prompt tokens=864
+  S0_split_full              ok=True  up= 425.72 MB edge=   1270 ms cloud=   8559 ms mem=2.96/12.49 GiB E=1042+2872 J 'backlog gives 1,320 - 840 = 480 records remaining.'
+  S3_split_int8abs           ok=True  up= 212.98 MB edge=   1266 ms cloud=   8573 ms mem=2.96/12.49 GiB E=1041+2863 J 'remaining number of records in the backlog is 480.'
+  S4_split_int4              ok=True  up= 109.76 MB edge=   1267 ms cloud=   8577 ms mem=2.96/12.49 GiB E=1043+2869 J 'days, 1,320 - (140 * 6) = 480 records will remain.'
+  C5_cache_aware_int8abs     ok=True  up=  24.20 MB edge=    599 ms cloud=   2624 ms mem=2.98/12.49 GiB E=383+983 J 'remaining number of records in the backlog is 480.'
+  C6_cache_aware_int4        ok=True  up=  12.47 MB edge=    597 ms cloud=   2628 ms mem=2.98/12.49 GiB E=385+916 J '0 records. The remaining number of records is 480.'
+
+library_instruction | prompt tokens=862
+  S0_split_full              ok=True  up= 424.81 MB edge=   1265 ms cloud=   8579 ms mem=2.96/12.49 GiB E=1034+2873 J ' and route uncertain cases to the records officer.'
+  S3_split_int8abs           ok=True  up= 212.52 MB edge=   1264 ms cloud=   8583 ms mem=2.96/12.49 GiB E=1039+2894 J 'e records officer for privacy or rights decisions.'
+  S4_split_int4              ok=True  up= 109.52 MB edge=   1265 ms cloud=   8597 ms mem=2.96/12.49 GiB E=1054+2921 J ' and route uncertain cases to the records officer.'
+  C5_cache_aware_int8abs     ok=True  up=  24.18 MB edge=    600 ms cloud=   2620 ms mem=2.98/12.48 GiB E=389+884 J 'y and report personal data to the records officer.'
+  C6_cache_aware_int4        ok=True  up=  12.46 MB edge=    595 ms cloud=   2615 ms mem=2.98/12.48 GiB E=371+916 J 'fficer for specialist privacy or rights decisions.'
+
+sensors_factual | prompt tokens=726
+  S0_split_full              ok=True  up= 362.42 MB edge=   1116 ms cloud=   7548 ms mem=2.94/12.45 GiB E=918+2520 J 'duled field inspection is performed every 14 days.'
+  S3_split_int8abs           ok=True  up= 181.31 MB edge=   1117 ms cloud=   7529 ms mem=2.94/12.45 GiB E=916+2545 J 'duled field inspection is performed every 14 days.'
+  S4_split_int4              ok=True  up=  93.44 MB edge=   1115 ms cloud=   7544 ms mem=2.94/12.45 GiB E=916+2557 J 'duled field inspection is performed every 14 days.'
+  C5_cache_aware_int8abs     ok=True  up=  22.72 MB edge=    552 ms cloud=   2477 ms mem=2.94/12.40 GiB E=341+900 J 'duled field inspection is performed every 14 days.'
+  C6_cache_aware_int4        ok=True  up=  11.71 MB edge=    730 ms cloud=   2456 ms mem=2.94/12.40 GiB E=358+886 J 'duled field inspection is performed every 14 days.'
+
+sensors_math | prompt tokens=731
+  S0_split_full              ok=True  up= 364.71 MB edge=   1117 ms cloud=   7560 ms mem=2.93/12.40 GiB E=920+2548 J 'dings is 40 sensors x 30 readings = 1200 readings.'
+  S3_split_int8abs           ok=True  up= 182.46 MB edge=   1118 ms cloud=   7545 ms mem=2.93/12.40 GiB E=926+2601 J 'dings is 40 sensors x 30 readings = 1200 readings.'
+  S4_split_int4              ok=True  up=  94.03 MB edge=   1117 ms cloud=   7561 ms mem=2.93/12.40 GiB E=920+2571 J ' number of readings is 40 * 6 * 5 = 1200 readings.'
+  C5_cache_aware_int8abs     ok=True  up=  22.77 MB edge=    550 ms cloud=   2470 ms mem=2.94/12.40 GiB E=358+902 J ' be 40 sensors * 6 readings/hour * 5 hours = 1200.'
+  C6_cache_aware_int4        ok=True  up=  11.74 MB edge=    572 ms cloud=   2577 ms mem=2.94/12.40 GiB E=364+879 J 'readings/hour * 5 hours = 1,200 original readings.'
+
+sensors_instruction | prompt tokens=736
+  S0_split_full              ok=True  up= 367.00 MB edge=   1119 ms cloud=   7560 ms mem=2.94/12.41 GiB E=921+2576 J 'pid rises according to the existing incident plan.'
+  S3_split_int8abs           ok=True  up= 183.60 MB edge=   1120 ms cloud=   7573 ms mem=2.94/12.41 GiB E=923+2554 J 'pid rises according to the existing incident plan.'
+  S4_split_int4              ok=True  up=  94.62 MB edge=   1116 ms cloud=   7563 ms mem=2.94/12.41 GiB E=925+2568 J 'pid rises according to the existing incident plan.'
+  C5_cache_aware_int8abs     ok=True  up=  22.83 MB edge=    550 ms cloud=   2471 ms mem=2.95/12.40 GiB E=354+900 J "vel when safe to collect, and the reporter's name."
+  C6_cache_aware_int4        ok=True  up=  11.76 MB edge=    550 ms cloud=   2469 ms mem=2.95/12.40 GiB E=344+865 J "vel when safe to collect, and the reporter's name."
+
+clinic_factual | prompt tokens=666
+  S0_split_full              ok=True  up= 334.89 MB edge=    931 ms cloud=   6300 ms mem=2.93/12.39 GiB E=774+2179 J '140'
+  S3_split_int8abs           ok=True  up= 167.54 MB edge=    931 ms cloud=   6300 ms mem=2.93/12.39 GiB E=778+2148 J '140'
+  S4_split_int4              ok=True  up=  86.34 MB edge=    932 ms cloud=   6297 ms mem=2.93/12.39 GiB E=776+2188 J '140'
+  C5_cache_aware_int8abs     ok=True  up=  22.07 MB edge=    499 ms cloud=   2363 ms mem=2.93/12.36 GiB E=329+843 J '140'
+  C6_cache_aware_int4        ok=True  up=  11.38 MB edge=    496 ms cloud=   2352 ms mem=2.93/12.36 GiB E=327+822 J '140'
+
+clinic_math | prompt tokens=673
+  S0_split_full              ok=True  up= 338.10 MB edge=    935 ms cloud=   6316 ms mem=2.92/12.36 GiB E=776+2155 J 's - 40 doses = 320 doses for patient appointments.'
+  S3_split_int8abs           ok=True  up= 169.15 MB edge=    934 ms cloud=   6315 ms mem=2.92/12.36 GiB E=783+2188 J 'for patient appointments are 360 - 40 = 320 doses.'
+  S4_split_int4              ok=True  up=  87.17 MB edge=    934 ms cloud=   6315 ms mem=2.92/12.36 GiB E=787+2200 J 's - 40 doses = 320 doses for patient appointments.'
+  C5_cache_aware_int8abs     ok=True  up=  22.15 MB edge=    495 ms cloud=   2341 ms mem=2.93/12.36 GiB E=312+831 J 'for patient appointments are 360 - 40 = 320 doses.'
+  C6_cache_aware_int4        ok=True  up=  11.41 MB edge=    498 ms cloud=   2352 ms mem=2.93/12.36 GiB E=332+852 J 'for patient appointments are 360 - 40 = 320 doses.'
+
+clinic_instruction | prompt tokens=671
+  S0_split_full              ok=True  up= 337.18 MB edge=    935 ms cloud=   6308 ms mem=2.92/12.37 GiB E=779+2148 J ' expiry date and document any discrepancies found.'
+  S3_split_int8abs           ok=True  up= 168.69 MB edge=    933 ms cloud=   6310 ms mem=2.92/12.37 GiB E=779+2182 J ' expiry date and document any discrepancies found.'
+  S4_split_int4              ok=True  up=  86.93 MB edge=    934 ms cloud=   6317 ms mem=2.92/12.37 GiB E=783+2172 J 'date and ensure that the product is still in date.'
+  C5_cache_aware_int8abs     ok=True  up=  22.13 MB edge=    498 ms cloud=   2350 ms mem=2.93/12.36 GiB E=328+855 J 'us by checking the expiration date of the product.'
+  C6_cache_aware_int4        ok=True  up=  11.40 MB edge=    495 ms cloud=   2345 ms mem=2.93/12.36 GiB E=326+845 J 'e within the valid date range for use and storage.'
+
+transit_factual | prompt tokens=678
+  S0_split_full              ok=True  up= 340.40 MB edge=    935 ms cloud=   6328 ms mem=2.92/12.37 GiB E=781+2179 J 'The rider feedback deadline is 23 November 2026.'
+  S3_split_int8abs           ok=True  up= 170.29 MB edge=    936 ms cloud=   6339 ms mem=2.92/12.37 GiB E=786+2164 J 'The rider feedback deadline is 23 November 2026.'
+  S4_split_int4              ok=True  up=  87.76 MB edge=    936 ms cloud=   6345 ms mem=2.92/12.37 GiB E=786+2156 J 'The rider feedback deadline is 23 November 2026.'
+  C5_cache_aware_int8abs     ok=True  up=  22.20 MB edge=    502 ms cloud=   2371 ms mem=2.93/12.36 GiB E=325+846 J 'The rider feedback deadline is 23 November 2026.'
+  C6_cache_aware_int4        ok=True  up=  11.44 MB edge=    494 ms cloud=   2341 ms mem=2.93/12.36 GiB E=332+846 J 'The rider feedback deadline is 23 November 2026.'
+
+transit_math | prompt tokens=687
+  S0_split_full              ok=True  up= 344.52 MB edge=    937 ms cloud=   6350 ms mem=2.93/12.37 GiB E=783+2170 J 's, the total distance operated is 7 * 90 = 630 km.'
+  S3_split_int8abs           ok=True  up= 172.36 MB edge=    939 ms cloud=   6347 ms mem=2.93/12.37 GiB E=785+2171 J 's, the total distance operated is 7 * 90 = 630 km.'
+  S4_split_int4              ok=True  up=  88.82 MB edge=    937 ms cloud=   6349 ms mem=2.93/12.37 GiB E=785+2172 J 's, the total distance operated is 7 * 90 = 630 km.'
+  C5_cache_aware_int8abs     ok=True  up=  22.30 MB edge=    498 ms cloud=   2369 ms mem=2.94/12.37 GiB E=324+846 J 's, the total distance operated is 7 * 90 = 630 km.'
+  C6_cache_aware_int4        ok=True  up=  11.49 MB edge=    513 ms cloud=   2434 ms mem=2.93/12.37 GiB E=329+866 J 's, the total distance operated is 7 * 90 = 630 km.'
+
+transit_instruction | prompt tokens=695
+  S0_split_full              ok=True  up= 348.19 MB edge=    945 ms cloud=   6475 ms mem=2.93/12.38 GiB E=796+2177 J 'service desk for the latest boarding arrangements.'
+  S3_split_int8abs           ok=True  up= 174.19 MB edge=    940 ms cloud=   6372 ms mem=2.93/12.38 GiB E=788+2169 J 'service desk for the latest boarding arrangements.'
+  S4_split_int4              ok=True  up=  89.77 MB edge=    940 ms cloud=   6366 ms mem=2.93/12.38 GiB E=781+2173 J 'service desk for the latest boarding arrangements.'
+  C5_cache_aware_int8abs     ok=True  up=  22.38 MB edge=    521 ms cloud=   2487 ms mem=2.94/12.37 GiB E=335+917 J 'questions about service changes and accessibility.'
+  C6_cache_aware_int4        ok=True  up=  11.54 MB edge=    499 ms cloud=   2358 ms mem=2.94/12.37 GiB E=314+832 J 'bout delays, accessible boarding, or other issues.'
+
+Exp11 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp11_authored_k4_t64_T0.1_baselines_smoke
+               variant  runs  acc  regressions  exact_vs_ref  mean_up_mb  up_reduction_vs_S0  mean_edge_ms  mean_cloud_ms  mean_edge_peak_gib  mean_cloud_peak_gib  mean_edge_energy_j  mean_cloud_energy_j
+         S0_split_full    12  1.0            0             0  367.232000            0.000000   1065.304531    7193.706795            2.937365            12.413535          883.175667          2435.836917
+      S3_split_int8abs    12  1.0            0             0  183.718976            0.499720   1063.105071    7188.336293            2.937365            12.413476          881.252750          2443.955667
+         S4_split_int4    12  1.0            0             0   94.677760            0.742185   1062.770547    7193.574200            2.937365            12.413476          881.921250          2450.755083
+C5_cache_aware_int8abs    12  1.0            0             0   22.831293            0.937519    538.098904    2462.787114            2.946949            12.402883          346.421917           891.009500
+   C6_cache_aware_int4    12  1.0            0             0   11.766316            0.967800    553.241731    2462.397615            2.946589            12.402963          344.034833           868.591500
+
+=== 3/6 dLLM-Cache, LLaDA GSM8K  (2026-11-27 00:44:09)
+{'EXP11_DATASET': 'gsm8k', 'EXP11_N_QUESTIONS': 2, 'EXP11_NEW_TOKENS': 64, 'EXP11_STEPS': 64, 'EXP11_MODEL': 'llada', 'EXP11_OUTPUT_TAG': '_baselines_smoke', 'EXP11_VARIANT_NAMES': ['S0_split_full', 'S3_split_int8abs', 'S4_split_int4', 'C5_cache_aware_int8abs', 'C6_cache_aware_int4']}
+Loading checkpoint shards:   0%|          | 0/6 [00:00<?, ?it/s]Loading checkpoint shards:  17%|█▋        | 1/6 [00:00<00:00,  6.99it/s]Loading checkpoint shards:  33%|███▎      | 2/6 [00:00<00:00,  7.90it/s]Loading checkpoint shards:  50%|█████     | 3/6 [00:00<00:00,  7.95it/s]Loading checkpoint shards:  67%|██████▋   | 4/6 [00:00<00:00,  8.17it/s]Loading checkpoint shards:  83%|████████▎ | 5/6 [00:00<00:00,  8.42it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:00<00:00,  8.46it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:00<00:00,  8.22it/s]
+idle power: edge=65.1 W, cloud=81.7 W
+Exp11 | llada | gsm8k n=2 | split after layer 4 | edge=cuda:1 cloud=cuda:0 | 64 tok / 64 steps | cache ('fixed', 50, 7, 0.25)
+warmup done
+
+gsm8k_0000 | prompt tokens=92
+  S0_split_full              ok=True  up=  81.79 MB edge=    302 ms cloud=   2255 ms mem=2.64/12.58 GiB E=248+750 J ' sells each egg for $2, so she makes 9 * $2 = $18.'
+  S3_split_int8abs           ok=True  up=  40.92 MB edge=    302 ms cloud=   2258 ms mem=2.64/12.58 GiB E=256+780 J ' sells each egg for $2, so she makes 9 * $2 = $18.'
+  S4_split_int4              ok=True  up=  21.09 MB edge=    304 ms cloud=   2260 ms mem=2.64/12.58 GiB E=248+752 J ' sells each egg for $2, so she makes 9 * $2 = $18.'
+  C5_cache_aware_int8abs     ok=True  up=  17.54 MB edge=    282 ms cloud=   1931 ms mem=2.65/12.64 GiB E=198+575 J 'gg for $2, so she makes 9 * $2 = $18 per day. ####'
+  C6_cache_aware_int4        ok=True  up=   9.04 MB edge=    278 ms cloud=   1894 ms mem=2.65/12.64 GiB E=198+558 J 'gg for $2, so she makes 9 * $2 = $18 per day. ####'
+
+gsm8k_0001 | prompt tokens=55
+  S0_split_full              ok=True  up=  62.39 MB edge=    266 ms cloud=   1843 ms mem=2.64/12.57 GiB E=194+607 J 'of bolts is 2 + 1 = 3 bolts.\n\n#### Final answer: 3'
+  S3_split_int8abs           ok=True  up=  31.21 MB edge=    262 ms cloud=   1837 ms mem=2.64/12.57 GiB E=193+632 J 'kes 2 blue bolts + 1 white bolt = 3 bolts.\n\n#### 3'
+  S4_split_int4              ok=True  up=  16.09 MB edge=    265 ms cloud=   1843 ms mem=2.64/12.57 GiB E=200+632 J 'bolts is 2 blue + 1 white = 3 bolts.\n\n#### 3 bolts'
+  C5_cache_aware_int8abs     ok=True  up=  17.24 MB edge=    304 ms cloud=   1993 ms mem=2.64/12.58 GiB E=195+569 J 'total number of bolts is 2 + 1 = 3.\n\n#### 3 bolts.'
+  C6_cache_aware_int4        ok=True  up=   8.88 MB edge=    311 ms cloud=   2091 ms mem=2.64/12.58 GiB E=205+579 J 'mber of bolts is 2 + 1 = 3.\n\n#### 3 bolts in total'
+
+Exp11 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp11_llada_gsm8k_k4_t64_T0_baselines_smoke
+               variant  runs  acc  regressions  exact_vs_ref  mean_up_mb  up_reduction_vs_S0  mean_edge_ms  mean_cloud_ms  mean_edge_peak_gib  mean_cloud_peak_gib  mean_edge_energy_j  mean_cloud_energy_j
+         S0_split_full     2  1.0            0             0   72.090624            0.000000    284.012496    2049.097031            2.639702            12.575236            221.1505             678.5120
+      S3_split_int8abs     2  1.0            0             0   36.063424            0.499749    282.392544    2047.619699            2.639702            12.575236            224.7790             705.9495
+         S4_split_int4     2  1.0            0             0   18.586624            0.742177    284.384401    2051.567061            2.639702            12.575236            224.3240             692.0520
+C5_cache_aware_int8abs     2  1.0            0             0   17.388838            0.754633    292.765183    1961.872497            2.641757            12.608904            196.8745             571.8145
+   C6_cache_aware_int4     2  1.0            0             0    8.962240            0.873538    294.432241    1992.756714            2.641757            12.608904            201.4815             568.6945
+
+=== 4/6 Fast-dLLM, Dream GSM8K  (2026-11-27 00:44:56)
+{'EXP11_DATASET': 'gsm8k', 'EXP11_N_QUESTIONS': 30, 'EXP11_NEW_TOKENS': 256, 'EXP11_STEPS': 256, 'EXP11_MODEL': 'llada', 'EXP11_OUTPUT_TAG': '', 'EXP11_VARIANT_NAMES': ['S0_split_full', 'S1_split_exact_delta', 'S2_split_int8', 'C1_cache_full', 'C2_cache_aware', 'C3_cache_aware_exact', 'C4_cache_aware_int8', 'A1_adaptive_cache_aware'], 'EXP13_OUTPUT_TAG': '_baselines_smoke', 'EXP13_VARIANT_NAMES': ['F0_nocache_fixed', 'K2_dual_thr0.9', 'K4_dual_thr0.9_int8abs', 'K5_dual_thr0.9_int4'], 'EXP13_MODEL': 'dream', 'EXP13_DATASET': 'gsm8k', 'EXP13_N_QUESTIONS': 2, 'EXP13_NEW_TOKENS': 64}
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  8.37it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  9.05it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.94it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.54it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.48it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=64.9 W, cloud=80.1 W
+Exp13 | dream | gsm8k n=2 | split after layer 4 | 64 tokens, blocks of 32 | thresholds [0.9] | T=0.0 top_p=None
+warmup done
+
+gsm8k_0000 | prompt tokens=99
+  F0_nocache_fixed         ok=False steps=  64 up=  74.78 MB edge=   323 ms cloud=  1937 ms "gs at the farmers' market.\n#### 9\nThe answer is: 9"
+  K2_dual_thr0.9           ok=False steps=  52 up=  13.81 MB edge=   283 ms cloud=  1592 ms '6 - 7 = 9*$2 = $9 per day.\n#### 9\nThe answer is: 9'
+  K4_dual_thr0.9_int8abs   ok=False steps=  40 up=   5.53 MB edge=   215 ms cloud=  1210 ms 'f 16 - 7 = 9 eggs per day.\n#### 9\nThe answer is: 9'
+  K5_dual_thr0.9_int4      ok=False steps=  49 up=   3.38 MB edge=   262 ms cloud=  1492 ms '6 -7 * $2 = $12 per day.\n#### 12\nThe answer is: 12'
+
+gsm8k_0001 | prompt tokens=60
+  F0_nocache_fixed         ok=True  steps=  64 up=  56.89 MB edge=   302 ms cloud=  1650 ms ' 2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3'
+  K2_dual_thr0.9           ok=True  steps=  23 up=   6.59 MB edge=   120 ms cloud=   684 ms '2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  29 up=   3.99 MB edge=   151 ms cloud=   867 ms ' 2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3'
+  K5_dual_thr0.9_int4      ok=True  steps=  29 up=   2.06 MB edge=   151 ms cloud=   864 ms '2 + 1 = 3 bolts of fiber.\n#### 3\nThe answer is: 3.'
+
+Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_dream_gsm8k_k4_t64_b32_baselines_smoke
+               variant  runs  acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms
+      F0_nocache_fixed     2  0.5            0             0        1.0        64.0   65.831936             0.000000    312.373390    1793.715007
+        K2_dual_thr0.9     2  0.5            0             0        1.0        37.5   10.200664             0.849718    201.503344    1137.723905
+K4_dual_thr0.9_int8abs     2  0.5            0             0        1.0        34.5    4.759174             0.927969    182.799600    1038.298544
+   K5_dual_thr0.9_int4     2  0.5            0             0        1.0        39.0    2.719032             0.959316    206.237729    1177.943392
+
+Emulated split latency (s), RTT 20 ms, edge 3x slower:
+bandwidth_mbps           1      5     10    25    50    100   1000
+variant                                                           
+F0_nocache_fixed        530.7  109.4  56.7  25.1  14.6   9.3   4.6
+K2_dual_thr0.9           84.1   18.8  10.7   5.8   4.1   3.3   2.6
+K4_dual_thr0.9_int8abs   40.4    9.9   6.1   3.8   3.1   2.7   2.4
+K5_dual_thr0.9_int4      24.4    7.0   4.8   3.5   3.0   2.8   2.6
+
+Cloud-only with the same cache and decoding (s):
+variant
+F0_nocache_fixed          2.17
+K2_dual_thr0.9            1.38
+K4_dual_thr0.9_int8abs    1.26
+K5_dual_thr0.9_int4       1.42
+
+=== 5/6 Fast-dLLM, Dream long prompts  (2026-11-27 00:45:30)
+{'EXP11_DATASET': 'gsm8k', 'EXP11_N_QUESTIONS': 30, 'EXP11_NEW_TOKENS': 256, 'EXP11_STEPS': 256, 'EXP11_MODEL': 'llada', 'EXP11_OUTPUT_TAG': '', 'EXP11_VARIANT_NAMES': ['S0_split_full', 'S1_split_exact_delta', 'S2_split_int8', 'C1_cache_full', 'C2_cache_aware', 'C3_cache_aware_exact', 'C4_cache_aware_int8', 'A1_adaptive_cache_aware'], 'EXP13_OUTPUT_TAG': '_baselines_smoke', 'EXP13_VARIANT_NAMES': ['F0_nocache_fixed', 'K2_dual_thr0.9', 'K4_dual_thr0.9_int8abs', 'K5_dual_thr0.9_int4'], 'EXP13_MODEL': 'dream', 'EXP13_DATASET': 'authored', 'EXP13_N_QUESTIONS': 2, 'EXP13_NEW_TOKENS': 64}
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  5.02it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  6.23it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  6.42it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.58it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.36it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=64.3 W, cloud=77.9 W
+Exp13 | dream | authored n=2 | split after layer 4 | 64 tokens, blocks of 32 | thresholds [0.9] | T=0.0 top_p=None
+warmup done
+
+library_factual | prompt tokens=849
+  F0_nocache_fixed         ok=True  steps=  64 up= 418.84 MB edge=  1261 ms cloud=  8487 ms 'Mara Chen'
+  K2_dual_thr0.9           ok=True  steps=   4 up=  13.55 MB edge=    51 ms cloud=   326 ms 'Mara Chen'
+  K4_dual_thr0.9_int8abs   ok=True  steps=   4 up=   6.78 MB edge=    51 ms cloud=   328 ms 'Mara Chen'
+  K5_dual_thr0.9_int4      ok=True  steps=   4 up=   3.49 MB edge=    51 ms cloud=   327 ms 'Mara Chen'
+
+library_math | prompt tokens=864
+  F0_nocache_fixed         ok=True  steps=  64 up= 425.72 MB edge=  1266 ms cloud=  8557 ms 'cords. The remainder is 1,320 - 840 = 480 records.'
+  K2_dual_thr0.9           ok=False steps=  51 up=  24.54 MB edge=   308 ms cloud=  1780 ms 'cords/tech * 4 technicians * 6 days = 840 records.'
+  K4_dual_thr0.9_int8abs   ok=False steps=  51 up=  12.28 MB edge=   305 ms cloud=  1769 ms 'cords/tech * 4 technicians * 6 days = 840 records.'
+  K5_dual_thr0.9_int4      ok=True  steps=  50 up=   6.27 MB edge=   305 ms cloud=  1752 ms 's. After the technicians work, 480 records remain.'
+
+Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_dream_authored_k4_t64_b32_baselines_smoke
+               variant  runs  acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms
+      F0_nocache_fixed     2  1.0            0             0        1.0        64.0  422.282240             0.000000   1263.876245    8521.982529
+        K2_dual_thr0.9     2  0.5            1             0        1.0        27.5   19.045816             0.955001    179.543728    1052.842625
+K4_dual_thr0.9_int8abs     2  0.5            1             0        1.0        27.5    9.528442             0.977487    177.676031    1048.507395
+   K5_dual_thr0.9_int4     2  1.0            0             0        1.0        27.0    4.881000             0.988467    178.285840    1039.791649
+
+Emulated split latency (s), RTT 20 ms, edge 3x slower:
+bandwidth_mbps            1      5      10     25    50    100   1000
+variant                                                              
+F0_nocache_fixed        3392.0  689.4  351.5  148.8  81.3  47.5  17.1
+K2_dual_thr0.9           154.5   32.6   17.4    8.3   5.2   3.7   2.3
+K4_dual_thr0.9_int8abs    78.4   17.4    9.8    5.2   3.7   2.9   2.3
+K5_dual_thr0.9_int4       41.2    9.9    6.0    3.7   2.9   2.5   2.2
+
+Cloud-only with the same cache and decoding (s):
+variant
+F0_nocache_fixed          9.92
+K2_dual_thr0.9            1.27
+K4_dual_thr0.9_int8abs    1.26
+K5_dual_thr0.9_int4       1.26
+
+=== 6/6 Fast-dLLM, LLaDA GSM8K  (2026-11-27 00:46:25)
+{'EXP11_DATASET': 'gsm8k', 'EXP11_N_QUESTIONS': 30, 'EXP11_NEW_TOKENS': 256, 'EXP11_STEPS': 256, 'EXP11_MODEL': 'llada', 'EXP11_OUTPUT_TAG': '', 'EXP11_VARIANT_NAMES': ['S0_split_full', 'S1_split_exact_delta', 'S2_split_int8', 'C1_cache_full', 'C2_cache_aware', 'C3_cache_aware_exact', 'C4_cache_aware_int8', 'A1_adaptive_cache_aware'], 'EXP13_OUTPUT_TAG': '_baselines_smoke', 'EXP13_VARIANT_NAMES': ['F0_nocache_fixed', 'K2_dual_thr0.9', 'K4_dual_thr0.9_int8abs', 'K5_dual_thr0.9_int4'], 'EXP13_MODEL': 'llada', 'EXP13_DATASET': 'gsm8k', 'EXP13_N_QUESTIONS': 2, 'EXP13_NEW_TOKENS': 64}
+Loading checkpoint shards:   0%|          | 0/6 [00:00<?, ?it/s]Loading checkpoint shards:  17%|█▋        | 1/6 [00:00<00:01,  4.56it/s]Loading checkpoint shards:  33%|███▎      | 2/6 [00:00<00:00,  4.73it/s]Loading checkpoint shards:  50%|█████     | 3/6 [00:00<00:00,  4.69it/s]Loading checkpoint shards:  67%|██████▋   | 4/6 [00:00<00:00,  4.59it/s]Loading checkpoint shards:  83%|████████▎ | 5/6 [00:01<00:00,  4.45it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:01<00:00,  4.71it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:01<00:00,  4.65it/s]
+idle power: edge=64.5 W, cloud=78.7 W
+Exp13 | llada | gsm8k n=2 | split after layer 4 | 64 tokens, blocks of 32 | thresholds [0.9] | T=0.0 top_p=None
+warmup done
+
+gsm8k_0000 | prompt tokens=92
+  F0_nocache_fixed         ok=True  steps=  64 up=  81.79 MB edge=   316 ms cloud=  2255 ms 'erefore, she makes 9 * $2 = $18 every day.\n#### 18'
+  K2_dual_thr0.9           ok=True  steps=  52 up=  15.66 MB edge=   308 ms cloud=  2091 ms '2 per egg, she makes 9 * $2 = $18 per day.\n#### 18'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  48 up=   7.31 MB edge=   285 ms cloud=  1959 ms '2 per egg, she makes 9 * $2 = $18 per day.\n#### 18'
+  K5_dual_thr0.9_int4      ok=True  steps=  52 up=   4.04 MB edge=   305 ms cloud=  2085 ms '2 per egg, she makes 9 * $2 = $18 per day.\n#### 18'
+
+gsm8k_0001 | prompt tokens=55
+  F0_nocache_fixed         ok=True  steps=  64 up=  62.39 MB edge=   368 ms cloud=  1916 ms 'number of bolts needed is 2 + 1 = 3 bolts.\n\n#### 3'
+  K2_dual_thr0.9           ok=True  steps=  28 up=   8.77 MB edge=   162 ms cloud=  1107 ms ' number of bolts is 2 + 1 = 3 bolts.\n\n#### 3 bolts'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  30 up=   4.65 MB edge=   173 ms cloud=  1185 ms ' number of bolts is 2 + 1 = 3 bolts.\n\n#### 3 bolts'
+  K5_dual_thr0.9_int4      ok=True  steps=  34 up=   2.67 MB edge=   202 ms cloud=  1377 ms 'ng these together, we get 2 + 1 = 3 bolts.\n\n#### 3'
+
+Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_llada_gsm8k_k4_t64_b32_baselines_smoke
+               variant  runs  acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms
+      F0_nocache_fixed     2  1.0            0             0        1.0        64.0   72.090624             0.000000    341.674432    2085.188714
+        K2_dual_thr0.9     2  1.0            0             0        1.0        40.0   12.214912             0.833994    235.423968    1598.574558
+K4_dual_thr0.9_int8abs     2  1.0            0             0        1.0        39.0    5.979606             0.918057    229.333136    1571.899106
+   K5_dual_thr0.9_int4     2  1.0            0             0        1.0        43.0    3.352432             0.953945    253.497984    1730.744242
+
+Emulated split latency (s), RTT 20 ms, edge 3x slower:
+bandwidth_mbps           1      5     10    25    50    100   1000
+variant                                                           
+F0_nocache_fixed        581.3  119.9  62.2  27.6  16.1  10.3   5.1
+K2_dual_thr0.9          100.9   22.7  13.0   7.1   5.1   4.2   3.3
+K4_dual_thr0.9_int8abs   51.0   12.7   7.9   5.1   4.1   3.6   3.2
+K5_dual_thr0.9_int4      30.3    8.8   6.1   4.5   4.0   3.7   3.5
+
+Cloud-only with the same cache and decoding (s):
+variant
+F0_nocache_fixed          2.59
+K2_dual_thr0.9            1.94
+K4_dual_thr0.9_int8abs    1.90
+K5_dual_thr0.9_int4       2.09
+
+=== emulated latency for the Exp11 folders  (2026-11-27 00:47:08)
+  outputs/exp11_authored_k4_t64_T0.1_baselines_smoke
+  outputs/exp11_gsm8k_k4_t64_T0.1_baselines_smoke
+  outputs/exp11_llada_gsm8k_k4_t64_T0_baselines_smoke
+
+Done (2026-11-27 00:47:11).

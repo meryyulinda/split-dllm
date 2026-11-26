@@ -1,0 +1,45 @@
+task,seed,case_id,config,paper_name,ok,extracted,same_as_ref,n_steps,text
+gsm8k,42,gsm8k_0000,one_token_per_step,"No cache, one token per step (reference)",False,9.0,True,64,"Janet eats 3 eggs for breakfast and bakes 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs at the farmers' market.
+#### 9
+The answer is: 9"
+gsm8k,42,gsm8k_0000,fastdllm,DASR + Fast-dLLM (bf16),False,9.0,False,52,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9*$2 = $9 per day.
+#### 9
+The answer is: 9"
+gsm8k,42,gsm8k_0000,fastdllm_int8,DASR + Fast-dLLM (INT8),False,9.0,False,49,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs at the farmers market per day.
+#### 9
+The answer is: 9"
+gsm8k,42,gsm8k_0000,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,9.0,False,42,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = $2/egg = $9 per day.
+#### 9
+The answer is: 9"
+gsm8k,42,gsm8k_0001,one_token_per_step,"No cache, one token per step (reference)",True,3.0,True,64,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2 / 2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3"
+gsm8k,42,gsm8k_0001,fastdllm,DASR + Fast-dLLM (bf16),True,3.0,False,23,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3."
+gsm8k,42,gsm8k_0001,fastdllm_int8,DASR + Fast-dLLM (INT8),True,3.0,False,27,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+Therefore, the robe takes a total of 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3"
+gsm8k,42,gsm8k_0001,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,33.0,False,17,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 33
+The answer is 3."
+gsm8k,42,gsm8k_0002,one_token_per_step,"No cache, one token per step (reference)",False,140000.0,True,64,"The total cost of the house is $80,000 + $50,000 = $130,000
+So his profit was $270,000 - $130,000 = $140,000."
+gsm8k,42,gsm8k_0002,fastdllm,DASR + Fast-dLLM (bf16),False,195000.0,False,33,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The new value of the house is $130,000 * 150% = $195,000."
+gsm8k,42,gsm8k_0002,fastdllm_int8,DASR + Fast-dLLM (INT8),False,195000.0,False,34,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The new value of the house is $130,000 * 150% = $195,000."
+gsm8k,42,gsm8k_0002,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,195000.0,False,19,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The new value of the house is $130,000 * 1.5% = $195,000."

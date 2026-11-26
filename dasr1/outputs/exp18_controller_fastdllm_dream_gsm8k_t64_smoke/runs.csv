@@ -1,0 +1,66 @@
+trace,case_id,policy,trace_offset_s,trace_mean_mbps,rtt_ms,edge_slowdown,measured_s,n_steps,up_mb,int8_step_share,mean_gamma,text,extracted,ok,same_as_bf16,final_down_ms,final_down_bytes,edge_has_answer,down_mismatch_steps,ctl_switches,ctl_final_codec,ctl_bw_mbps_last,ctl_comp_ms_last
+step_100_10,gsm8k_0000,bf16,0.0,55.0,20.0,3.0,5.422887950204313,52,13.8064,0.0,0.9,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9*$2 = $9 per day.
+#### 9
+The answer is: 9",9.0,False,True,10.806621052324772,14,True,0,0,,,
+step_100_10,gsm8k_0000,int8,0.0,55.0,20.0,3.0,4.684113745577633,49,7.261654,0.9591836734693877,0.8999999999999998,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs at the farmers market per day.
+#### 9
+The answer is: 9",9.0,False,False,10.781286284327507,14,True,0,0,,,
+step_100_10,gsm8k_0000,codec_per_request,0.0,55.0,20.0,3.0,4.627261308953166,49,7.376278,0.9387755102040817,0.8999999999999998,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs at the farmers market per day.
+#### 9
+The answer is: 9",9.0,False,False,10.907496325671673,14,True,0,1,int8_delta,92.13909547510454,60.99525494425724
+step_100_10,gsm8k_0000,codec_per_step,0.0,55.0,20.0,3.0,5.363943760283291,54,12.30583,0.24074074074074073,0.8999999999999999,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 9 eggs, which is 9 * $2 = $9 per day.
+#### 9
+The answer is: 9",9.0,False,False,10.775567032396793,14,True,0,3,int8_delta,97.17291113247313,49.64038350101239
+step_100_10,gsm8k_0000,codec_gamma_per_step,0.0,55.0,20.0,3.0,5.497337793000042,54,13.108198,0.1111111111111111,0.8884615384615384,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 9 eggs, which is 9 * $2 = $9 per day.
+#### 9
+The answer is: 9",9.0,False,False,11.16242352873087,14,True,0,4,bf16,96.47657259681806,63.032059543975535
+step_100_10,gsm8k_0001,bf16,13.0,55.0,20.0,3.0,7.1325205294415355,23,6.594928,0.0,0.8999999999999998,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3.",3.0,True,True,10.932783596217632,20,True,0,0,,,
+step_100_10,gsm8k_0001,int8,13.0,55.0,20.0,3.0,5.6130279349163175,27,4.202728,0.9629629629629629,0.9,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+Therefore, the robe takes a total of 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,False,11.080245487391949,14,True,0,0,,,
+step_100_10,gsm8k_0001,codec_per_request,13.0,55.0,20.0,3.0,6.090193440206349,29,4.546888,0.9310344827586207,0.8999999999999999,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+Therefore, it takes a total of 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,False,11.141226626932621,32,True,0,1,int8_delta,9.690895804284517,57.72831748127857
+step_100_10,gsm8k_0001,codec_per_step,13.0,55.0,20.0,3.0,6.212615908123553,29,4.546888,0.9310344827586207,0.8999999999999999,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+Therefore, it takes a total of 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,False,11.080713011324406,32,True,0,1,int8_delta,9.654828710463924,60.48628717688287
+step_100_10,gsm8k_0001,codec_gamma_per_step,13.0,55.0,20.0,3.0,4.873870737850666,22,3.743512,0.9090909090909091,0.7099999999999997,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+Therefore, the total number of bolts it takes is 2 + 1 = 3 bolts.
+#### 3
+The answer is 3.",3.0,True,False,11.2204784527421,74,True,0,1,int8_delta,9.658379608593913,59.29723732666001
+tmobile_lte_up,gsm8k_0000,bf16,0.0,13.308865096359744,20.0,3.0,32.96876163035631,52,13.8064,0.0,0.9,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9*$2 = $9 per day.
+#### 9
+The answer is: 9",9.0,False,True,11.031542904675007,14,True,0,0,,,
+tmobile_lte_up,gsm8k_0000,int8,0.0,13.308865096359744,20.0,3.0,17.537371741607785,49,7.261654,0.9591836734693877,0.8999999999999998,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs at the farmers market per day.
+#### 9
+The answer is: 9",9.0,False,False,10.789413005113602,14,True,0,0,,,
+tmobile_lte_up,gsm8k_0000,codec_per_request,0.0,13.308865096359744,20.0,3.0,17.875502467155457,49,7.376278,0.9387755102040817,0.8999999999999998,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs at the farmers market per day.
+#### 9
+The answer is: 9",9.0,False,False,10.831284336745739,14,True,0,1,int8_delta,4.9692453213568495,62.171460556286114
+tmobile_lte_up,gsm8k_0000,codec_per_step,0.0,13.308865096359744,20.0,3.0,17.897885598242283,49,7.376278,0.9387755102040817,0.8999999999999998,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs at the farmers market per day.
+#### 9
+The answer is: 9",9.0,False,False,10.869522579014301,14,True,0,1,int8_delta,5.051446536084046,64.20823345568617
+tmobile_lte_up,gsm8k_0000,codec_gamma_per_step,0.0,13.308865096359744,20.0,3.0,15.86762126814574,42,6.572902,0.9285714285714286,0.705,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = $2/egg = $9 per day.
+#### 9
+The answer is: 9",9.0,False,False,10.879941284656525,14,True,0,1,int8_delta,2.3038594990245804,64.03222485632051

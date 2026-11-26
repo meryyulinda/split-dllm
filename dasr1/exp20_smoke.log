@@ -1,0 +1,88 @@
+GPU 1 | backends: dllm_cache fastdllm | tasks: gsm8k humaneval
+cloning HumanEval to ../../human-eval
+Cloning into '../../human-eval'...
+2026-11-27 00:47:12 GPU 1: 37761 MiB free, starting.
+
+=== dllm_cache, gsm8k  (2026-11-27 00:47:12)
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.94it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.14it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.31it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.48it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.36it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Exp20 | dllm_cache | one GPU (cuda:0) | tasks ['gsm8k'] | configs ['uncached', 'dllm_cache', 'dllm_cache_int8', 'adaptive']
+
+=== gsm8k, seed 42: 3 of 3 problems to run  (2026-11-27 00:47:22)
+  gsm8k_0000     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0001     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0002     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+
+Exp20 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp20_breadth_dllm_cache_dream_gsm8k_smoke
+ task          config  runs  seeds   acc  lost  gained  identical  acc_seed_min  acc_seed_max  mcnemar_p
+gsm8k        uncached     3      1 0.667     0       0          3         0.667         0.667        1.0
+gsm8k      dllm_cache     3      1 0.667     0       0          1         0.667         0.667        1.0
+gsm8k dllm_cache_int8     3      1 0.667     0       0          1         0.667         0.667        1.0
+gsm8k        adaptive     3      1 0.667     0       0          0         0.667         0.667        1.0
+
+=== dllm_cache, humaneval  (2026-11-27 00:47:52)
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  8.84it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.85it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  9.15it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  9.44it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Exp20 | dllm_cache | one GPU (cuda:0) | tasks ['humaneval'] | configs ['uncached', 'dllm_cache', 'dllm_cache_int8', 'adaptive']
+
+=== humaneval, seed 42: 3 of 3 problems to run  (2026-11-27 00:48:01)
+  HumanEval_0    uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_1    uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_2    uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+
+Exp20 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp20_breadth_dllm_cache_dream_humaneval_smoke
+     task          config  runs  seeds   acc  lost  gained  identical  acc_seed_min  acc_seed_max  mcnemar_p
+humaneval        uncached     3      1 0.667     0       0          3         0.667         0.667        1.0
+humaneval      dllm_cache     3      1 0.667     0       0          2         0.667         0.667        1.0
+humaneval dllm_cache_int8     3      1 0.667     0       0          2         0.667         0.667        1.0
+humaneval        adaptive     3      1 0.667     0       0          1         0.667         0.667        1.0
+
+=== fastdllm, gsm8k  (2026-11-27 00:49:16)
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.65it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.51it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.64it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.97it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.74it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Exp20 | fastdllm | one GPU (cuda:0) | tasks ['gsm8k'] | configs ['one_token_per_step', 'fastdllm', 'fastdllm_int8', 'fastdllm_gamma0.7']
+
+=== gsm8k, seed 42: 3 of 3 problems to run  (2026-11-27 00:49:26)
+  gsm8k_0000     one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  gsm8k_0001     one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=-
+  gsm8k_0002     one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+
+Exp20 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp20_breadth_fastdllm_dream_gsm8k_smoke
+ task             config  runs  seeds   acc  lost  gained  identical  acc_seed_min  acc_seed_max  mcnemar_p
+gsm8k one_token_per_step     3      1 0.333     0       0          3         0.333         0.333        1.0
+gsm8k           fastdllm     3      1 0.333     0       0          0         0.333         0.333        1.0
+gsm8k      fastdllm_int8     3      1 0.333     0       0          0         0.333         0.333        1.0
+gsm8k  fastdllm_gamma0.7     3      1 0.000     1       0          0         0.000         0.000        1.0
+
+=== fastdllm, humaneval  (2026-11-27 00:49:45)
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.33it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.36it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.91it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.14it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Exp20 | fastdllm | one GPU (cuda:0) | tasks ['humaneval'] | configs ['one_token_per_step', 'fastdllm', 'fastdllm_int8', 'fastdllm_gamma0.7']
+
+=== humaneval, seed 42: 3 of 3 problems to run  (2026-11-27 00:49:55)
+  HumanEval_0    one_token_per_step=- fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_1    one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_2    one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+
+Exp20 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp20_breadth_fastdllm_dream_humaneval_smoke
+     task             config  runs  seeds   acc  lost  gained  identical  acc_seed_min  acc_seed_max  mcnemar_p
+humaneval one_token_per_step     3      1 0.333     0       0          3         0.333         0.333        1.0
+humaneval           fastdllm     3      1 0.667     0       1          0         0.667         0.667        1.0
+humaneval      fastdllm_int8     3      1 0.667     0       1          0         0.667         0.667        1.0
+humaneval  fastdllm_gamma0.7     3      1 0.667     0       1          0         0.667         0.667        1.0
+
+Done (2026-11-27 00:50:31).

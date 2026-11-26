@@ -1,0 +1,13 @@
+trace,case_id,policy,trace_offset_s,trace_mean_mbps,rtt_ms,edge_slowdown,measured_s,n_steps,up_mb,int8_step_share,mean_gamma,text,extracted,ok,same_as_bf16,final_down_ms,final_down_bytes,edge_has_answer,down_mismatch_steps,ctl_switches,ctl_final_codec,ctl_bw_mbps_last,ctl_comp_ms_last
+step_100_10,gsm8k_0000,bf16,0.0,55.0,20.0,3.0,7.900820258073509,64,31.927296,0.0,,"Janet eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day.",18.0,True,True,11.010946705937386,20,True,0,0,,,
+step_100_10,gsm8k_0000,int8,0.0,55.0,20.0,3.0,6.467794382944703,64,17.724666,0.953125,,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day selling eggs.",18.0,True,False,10.90383343398571,20,True,0,0,,,
+step_100_10,gsm8k_0000,codec_per_request,0.0,55.0,20.0,3.0,7.841963746584952,64,31.927296,0.0,,"Janet eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day.",18.0,True,True,10.643532499670982,20,True,0,0,bf16,97.21086592423441,52.80160030686028
+step_100_10,gsm8k_0000,codec_per_step,0.0,55.0,20.0,3.0,6.304443962872028,64,17.957496,0.9375,,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day selling eggs.",18.0,True,False,10.861631482839584,20,True,0,1,int8_delta,96.7249359816907,53.059050756429784

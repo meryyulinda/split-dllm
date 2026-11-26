@@ -1,0 +1,190 @@
+task,seed,case_id,config,paper_name,ok,extracted,same_as_ref,n_steps,text
+humaneval,42,HumanEval_0,one_token_per_step,"No cache, one token per step (reference)",False,,True,128,"```python
+from typing import List
+
+
+def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    """""" Check if in given list of numbers, are any two numbers closer to each other than
+    given threshold.
+    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)
+    False
+    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)
+    True
+    """"""
+    # Implementation here
+```"
+humaneval,42,HumanEval_0,fastdllm,DASR + Fast-dLLM (bf16),True,,False,53,"Here is the completed function:
+
+```python
+from typing import List
+
+
+def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    """""" Check if in given list of numbers there are any two numbers closer to each other than
+    given threshold.
+    """"""
+    for i in range(len(numbers) - 1):
+        for j in range(i + 1, len(numbers)):
+            if abs(numbers[i] - numbers[j]) < threshold:
+                return True
+    return False
+```
+
+This function iterates through all possible pairs of numbers and checks if their absolute difference is less than the given threshold."
+humaneval,42,HumanEval_0,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,56,"Here is the completed function:
+
+```python
+from typing import List
+
+
+def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    """""" Check if in given list of numbers there are any two numbers closer to each other than
+    given threshold.
+    """"""
+    for i in range(len(numbers) - 1):
+        for j in range(i + 1, len(numbers)):
+            if abs(numbers[i] - numbers[j]) < threshold:
+                return True
+    return False
+```
+
+This function iterates through all possible pairs of numbers and checks if their absolute difference is less than the given threshold."
+humaneval,42,HumanEval_0,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,24,"Here is the completed function:
+
+```python
+from typing import List
+
+
+def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    """""" Check if in given list of numbers there are any two numbers closer to each other than
+    given threshold.
+    """"""
+    for i in range(len(numbers) - 1):
+        for j in range(i + 1, len(numbers)):
+            if abs(numbers[i] - numbers[j]) < threshold:
+                return True
+    return False
+```"
+humaneval,42,HumanEval_1,one_token_per_step,"No cache, one token per step (reference)",False,,True,128,"```python
+from typing import List
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    stack = []
+    result = []
+    current_group = ''
+    for char in paren_string:
+        if char == '(':
+            stack.append(char)
+        elif char == ')':
+            stack.pop()
+            if not stack:
+                result.append(current_group)
+                current_group = ''
+        else:
+            current_group += char
+    return result
+```"
+humaneval,42,HumanEval_1,fastdllm,DASR + Fast-dLLM (bf16),False,,False,52,"Here is the completed function:
+
+```python
+from typing import List
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    stack = []
+    groups = []
+    group = ''
+
+    for char in paren_string:
+        if char == '(':
+            stack.append(char)
+        elif char == ')':
+            stack.pop()
+            if not stack:
+                groups.append(group)
+                group = ''
+        else:
+            group += char
+
+    if group:
+        groups.append(group)
+
+    return groups
+```"
+humaneval,42,HumanEval_1,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,51,"Here is the completed function:
+
+```python
+from typing import List
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    stack = []
+    groups = []
+    group = ''
+
+    for char in paren_string:
+        if char == '(':
+            stack.append(char)
+        elif char == ')':
+            stack.pop()
+            if not stack:
+                groups.append(group)
+                group = ''
+        else:
+            group += char
+
+    if group:
+        groups.append(group)
+
+    return groups
+```"
+humaneval,42,HumanEval_1,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,32,"Here is the completed function:
+
+```python
+from typing import List
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    stack = []
+    groups = []
+    group = ''
+
+    for char in paren_string:
+        if char == '(':
+            stack.append(char)
+        elif char == ')':
+            stack.pop()
+            if not stack:
+                groups.append(group)
+                group = ''
+        else:
+            group += char
+
+    if group:
+        groups.append(group)
+
+    return groups
+```"
+humaneval,42,HumanEval_2,one_token_per_step,"No cache, one token per step (reference)",True,,True,128,"```python
+def truncate_number(number: float) -> float:
+    """""" Given a positive floating point number, it can be decomposed into
+    and integer part (largest integer smaller than given number) and decimals
+    (leftover part always smaller than 1).
+
+    Return the decimal part of the number.
+    >>> truncate_number(3.5)
+    0.5
+    """"""
+    integer_part = int(number)
+    decimal_part = number - integer_part
+    return decimal_part
+```"
+humaneval,42,HumanEval_2,fastdllm,DASR + Fast-dLLM (bf16),True,,False,20,"```python
+def truncate_number(number: float) -> float:
+    return number - int(number)
+```"
+humaneval,42,HumanEval_2,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,20,"```python
+def truncate_number(number: float) -> float:
+    return number - int(number)
+```"
+humaneval,42,HumanEval_2,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,13,"```python
+def truncate_number(number: float) -> float:
+    return number - int(number)
+```"

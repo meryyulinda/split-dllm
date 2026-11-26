@@ -1,0 +1,62 @@
+{
+  "experiment": "Exp20 breadth: quality on GSM8K (more problems, seeds) and HumanEval",
+  "backend": "fastdllm",
+  "device": "cuda:0",
+  "tasks": [
+    "humaneval"
+  ],
+  "n_gsm8k": 3,
+  "n_humaneval": 3,
+  "seeds": {
+    "gsm8k": [
+      42
+    ],
+    "humaneval": [
+      42
+    ]
+  },
+  "new_tokens": {
+    "gsm8k": 64,
+    "humaneval": 128
+  },
+  "configs": {
+    "one_token_per_step": {
+      "paper": "No cache, one token per step (reference)",
+      "cache": "none",
+      "decode": "fixed",
+      "threshold": null,
+      "encoding": "bf16"
+    },
+    "fastdllm": {
+      "paper": "DASR + Fast-dLLM (bf16)",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "bf16"
+    },
+    "fastdllm_int8": {
+      "paper": "DASR + Fast-dLLM (INT8)",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "int8_delta"
+    },
+    "fastdllm_gamma0.7": {
+      "paper": "DASR + Fast-dLLM (bf16), gamma = 0.7",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.7,
+      "encoding": "bf16"
+    }
+  },
+  "reference": "one_token_per_step",
+  "split_layer_1based": 4,
+  "single_gpu": "edge = cloud (hooks only)",
+  "dream_temperature": 0.0,
+  "block_length": 32,
+  "hours": 0.00988742232322693,
+  "gpu": "NVIDIA RTX A6000",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22"
+}

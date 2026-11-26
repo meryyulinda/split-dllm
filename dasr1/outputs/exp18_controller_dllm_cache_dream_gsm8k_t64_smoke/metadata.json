@@ -1,0 +1,60 @@
+{
+  "experiment": "Exp18 codec / gamma controller on bandwidth traces over a real link",
+  "backend": "dllm_cache",
+  "dataset": "gsm8k",
+  "new_tokens": 64,
+  "steps": 64,
+  "split_layer_1based": 4,
+  "policies": {
+    "bf16": {
+      "encoding": "bf16"
+    },
+    "int8": {
+      "encoding": "int8_delta"
+    },
+    "codec_per_request": {
+      "encoding": "adaptive",
+      "mode": "per_request"
+    },
+    "codec_per_step": {
+      "encoding": "adaptive",
+      "mode": "per_step"
+    }
+  },
+  "traces": [
+    {
+      "name": "step_100_10",
+      "step": [
+        100,
+        10,
+        20
+      ],
+      "n": 1,
+      "csv": "/mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp18_controller_dllm_cache_dream_gsm8k_t64_smoke/traces/step_100_10.csv",
+      "period_s": 20.0,
+      "mean_mbps": 55.0,
+      "p10_mbps": 19.0,
+      "p90_mbps": 91.0
+    }
+  ],
+  "rtt_ms": 20.0,
+  "edge_slowdown": 3.0,
+  "controller": {
+    "lambda": 0.1,
+    "hysteresis": 1.0,
+    "net_share": 0.5,
+    "gamma_high": 0.9,
+    "gamma_low": 0.7
+  },
+  "trace_offset_step_s": 13.0,
+  "tcpip_header_bytes_per_1460B": 40,
+  "anchor_interval": 32,
+  "seed": 42,
+  "dream_temperature": 0.1,
+  "block_length": null,
+  "edge_gpu": "NVIDIA RTX A6000",
+  "cloud_gpu": "NVIDIA RTX A6000",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22"
+}

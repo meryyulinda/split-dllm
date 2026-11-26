@@ -1,0 +1,74 @@
+cloud = GPU 1, edge = GPU 2
+cloning the Mahimahi traces to ../../mahimahi
+Cloning into '../../mahimahi'...
+
+=== 1/2 Fast-dLLM backend  (2026-11-27 00:32:43)
+{'EXP18_BACKEND': 'fastdllm', 'EXP18_NEW_TOKENS': 64, 'EXP18_TRACES': [{'name': 'step_100_10', 'step': (100, 10, 20), 'n': 2}, {'name': 'tmobile_lte_up', 'mahimahi': 'TMobile-LTE-short.up', 'n': 1}], 'EXP18_POLICY_NAMES': ['bf16', 'int8', 'codec_per_request', 'codec_per_step', 'codec_gamma_per_step'], 'EXP18_OUTPUT_TAG': '_smoke'}
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.74it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.29it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.76it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.23it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.27it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Exp18 | fastdllm | gsm8k | split after layer 4 | 64 tokens | RTT 20 ms | edge slowdown 3 | policies ['bf16', 'int8', 'codec_per_request', 'codec_per_step', 'codec_gamma_per_step']
+  trace step_100_10: mean 55.0 Mbit/s (p10 19.0, p90 91.0), period 20 s, 2 questions
+  trace tmobile_lte_up: mean 13.3 Mbit/s (p10 3.2, p90 26.4), period 140 s, 1 questions
+warmup done
+
+=== trace step_100_10 (2 questions)  (2026-11-27 00:32:58)
+  gsm8k_0000 bf16                   ok=False same=True  steps=  52 up=   13.8 MB int8=0.00 switches=  0 time=    5.4 s
+  gsm8k_0000 int8                   ok=False same=False steps=  49 up=    7.3 MB int8=0.96 switches=  0 time=    4.7 s
+  gsm8k_0000 codec_per_request      ok=False same=False steps=  49 up=    7.4 MB int8=0.94 switches=  1 time=    4.6 s
+  gsm8k_0000 codec_per_step         ok=False same=False steps=  54 up=   12.3 MB int8=0.24 switches=  3 time=    5.4 s
+  gsm8k_0000 codec_gamma_per_step   ok=False same=False steps=  54 up=   13.1 MB int8=0.11 switches=  4 time=    5.5 s
+  gsm8k_0001 bf16                   ok=True  same=True  steps=  23 up=    6.6 MB int8=0.00 switches=  0 time=    7.1 s
+  gsm8k_0001 int8                   ok=True  same=False steps=  27 up=    4.2 MB int8=0.96 switches=  0 time=    5.6 s
+  gsm8k_0001 codec_per_request      ok=True  same=False steps=  29 up=    4.5 MB int8=0.93 switches=  1 time=    6.1 s
+  gsm8k_0001 codec_per_step         ok=True  same=False steps=  29 up=    4.5 MB int8=0.93 switches=  1 time=    6.2 s
+  gsm8k_0001 codec_gamma_per_step   ok=True  same=False steps=  22 up=    3.7 MB int8=0.91 switches=  1 time=    4.9 s
+
+=== trace tmobile_lte_up (1 questions)  (2026-11-27 00:33:55)
+  gsm8k_0000 bf16                   ok=False same=True  steps=  52 up=   13.8 MB int8=0.00 switches=  0 time=   33.0 s
+  gsm8k_0000 int8                   ok=False same=False steps=  49 up=    7.3 MB int8=0.96 switches=  0 time=   17.5 s
+  gsm8k_0000 codec_per_request      ok=False same=False steps=  49 up=    7.4 MB int8=0.94 switches=  1 time=   17.9 s
+  gsm8k_0000 codec_per_step         ok=False same=False steps=  49 up=    7.4 MB int8=0.94 switches=  1 time=   17.9 s
+  gsm8k_0000 codec_gamma_per_step   ok=False same=False steps=  42 up=    6.6 MB int8=0.93 switches=  1 time=   15.9 s
+
+Exp18 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp18_controller_fastdllm_dream_gsm8k_t64_smoke
+         trace               policy  runs  acc  same_as_bf16  edge_has_answer  measured_s  speedup_vs_bf16  time_vs_int8  int8_step_share  mean_gamma  mean_steps  up_mb  switches  trace_mean_mbps
+   step_100_10                 bf16     2  0.5             2                2       6.278            1.000         1.214            0.000       0.900        37.5 10.201       0.0           55.000
+   step_100_10                 int8     2  0.5             0                2       5.149            1.214         1.000            0.961       0.900        38.0  5.732       0.0           55.000
+   step_100_10    codec_per_request     2  0.5             0                2       5.359            1.172         1.036            0.935       0.900        39.0  5.962       1.0           55.000
+   step_100_10       codec_per_step     2  0.5             0                2       5.788            1.080         1.126            0.586       0.900        41.5  8.426       2.0           55.000
+   step_100_10 codec_gamma_per_step     2  0.5             0                2       5.186            1.225         1.021            0.510       0.799        38.0  8.426       2.5           55.000
+tmobile_lte_up                 bf16     1  0.0             1                1      32.969            1.000         1.880            0.000       0.900        52.0 13.806       0.0           13.309
+tmobile_lte_up                 int8     1  0.0             0                1      17.537            1.880         1.000            0.959       0.900        49.0  7.262       0.0           13.309
+tmobile_lte_up    codec_per_request     1  0.0             0                1      17.876            1.844         1.019            0.939       0.900        49.0  7.376       1.0           13.309
+tmobile_lte_up       codec_per_step     1  0.0             0                1      17.898            1.842         1.021            0.939       0.900        49.0  7.376       1.0           13.309
+tmobile_lte_up codec_gamma_per_step     1  0.0             0                1      15.868            2.078         0.905            0.929       0.705        42.0  6.573       1.0           13.309
+
+=== 2/2 dLLM-Cache backend  (2026-11-27 00:35:38)
+{'EXP18_BACKEND': 'dllm_cache', 'EXP18_NEW_TOKENS': 64, 'EXP18_TRACES': [{'name': 'step_100_10', 'step': (100, 10, 20), 'n': 1}], 'EXP18_POLICY_NAMES': ['bf16', 'int8', 'codec_per_request', 'codec_per_step'], 'EXP18_OUTPUT_TAG': '_smoke'}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.26it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.16it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.58it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.22it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.78it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Exp18 | dllm_cache | gsm8k | split after layer 4 | 64 tokens | RTT 20 ms | edge slowdown 3 | policies ['bf16', 'int8', 'codec_per_request', 'codec_per_step']
+  trace step_100_10: mean 55.0 Mbit/s (p10 19.0, p90 91.0), period 20 s, 1 questions
+warmup done
+
+=== trace step_100_10 (1 questions)  (2026-11-27 00:35:53)
+  gsm8k_0000 bf16                   ok=True  same=True  steps=  64 up=   31.9 MB int8=0.00 switches=  0 time=    7.9 s
+  gsm8k_0000 int8                   ok=True  same=False steps=  64 up=   17.7 MB int8=0.95 switches=  0 time=    6.5 s
+  gsm8k_0000 codec_per_request      ok=True  same=True  steps=  64 up=   31.9 MB int8=0.00 switches=  0 time=    7.8 s
+  gsm8k_0000 codec_per_step         ok=True  same=False steps=  64 up=   18.0 MB int8=0.94 switches=  1 time=    6.3 s
+
+Exp18 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp18_controller_dllm_cache_dream_gsm8k_t64_smoke
+      trace            policy  runs  acc  same_as_bf16  edge_has_answer  measured_s  speedup_vs_bf16  time_vs_int8  int8_step_share  mean_gamma  mean_steps  up_mb  switches  trace_mean_mbps
+step_100_10              bf16     1  1.0             1                1       7.901            1.000         1.222            0.000         NaN        64.0 31.927       0.0             55.0
+step_100_10              int8     1  1.0             0                1       6.468            1.222         1.000            0.953         NaN        64.0 17.725       0.0             55.0
+step_100_10 codec_per_request     1  1.0             1                1       7.842            1.008         1.212            0.000         NaN        64.0 31.927       0.0             55.0
+step_100_10    codec_per_step     1  1.0             0                1       6.304            1.253         0.975            0.938         NaN        64.0 17.957       1.0             55.0
+
+Done (2026-11-27 00:36:23).

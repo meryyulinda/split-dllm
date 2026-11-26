@@ -1,0 +1,40 @@
+variant,case_id,task,prompt_tokens,policy,rows,encoding,gold_answer,text,extracted,cache_ok,exact_vs_ref,exact_vs_S0,steps,edge_ms,encode_ms,cloud_ms,sample_ms,up_mb,full_mb,down_kb,mean_rows_sent,prompt_sent_steps,anchor_steps,wall_s,edge_peak_gib,cloud_peak_gib,edge_reserved_gib,cloud_reserved_gib,edge_energy_j,edge_active_j,cloud_energy_j,cloud_active_j,refresh_reasons,ref_ok
+S0_split_full,gsm8k_0000,math,99,none,all,bf16,18,"Janet eats 3 eggs for breakfast and bakes 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day selling",18.0,True,,True,64,325.5795211791992,0.10335999995004386,1912.8066596984863,214.69497549533844,74.7776,74.776576,0.876,163.0,64,1,2.4733023531734943,2.8061485290527344,12.007867336273193,2.8359375,12.119140625,242.83899998664856,84.52321423684498,681.614000082016,505.51618988757195,,True
+S3_split_int8abs,gsm8k_0000,math,99,none,all,int8_abs,18,"Janet eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs per day.
+She makes $2 * 9 = $18 per day selling",18.0,True,,False,64,326.47737741470337,3.5470080077648163,1917.965663909912,214.5332155227661,37.410176,74.776576,0.876,163.0,64,0,2.4831739673390985,2.8061485290527344,12.007867336273193,2.8359375,12.119140625,243.1469999551773,84.19933337153986,678.5529999732971,501.7523361081659,,True
+S4_split_int4,gsm8k_0000,math,99,none,all,int4_group,18,"Janet eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs per day.
+She makes $2 * 9 = $18 per day selling",18.0,True,,False,64,322.10921716690063,3.468287982046604,1908.7608280181885,211.34643185138702,19.27936,74.776576,0.876,163.0,64,0,2.466023842804134,2.8061485290527344,12.007867336273193,2.8359375,12.119140625,245.55400002002716,87.70411084236522,705.222000002861,529.6424158699729,,True
+C5_cache_aware_int8abs,gsm8k_0000,math,99,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_abs,18,"Janet eats 3 eggs for breakfast and uses 4 eggs for muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs per day.
+She makes 9 * $2 = $18 per day.",18.0,True,,False,64,321.16300773620605,2.792063992470503,2051.1795406341553,203.0032970905304,15.973068,74.776576,0.876,69.59375,3,0,2.617193133570254,2.805069923400879,12.001584529876709,2.8359375,12.119140625,217.5700000524521,50.04378277920935,596.9229999780655,410.58024285971356,"{""init"": 1, ""gen_interval"": 31, ""prompt_interval"": 2}",True
+C6_cache_aware_int4,gsm8k_0000,math,99,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int4_group,18,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and uses 4 eggs to bake muffins, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining 16 - 7 = 9 eggs at the farmers' market.
+",9.0,False,,False,64,323.03676748275757,2.6965119503438473,1973.8542041778564,204.8687368631363,8.232016,74.776576,0.876,69.59375,3,0,2.5404656156897545,2.805069923400879,12.001584529876709,2.8359375,12.119140625,220.22299993038177,57.608101835846526,609.8560000658035,428.97620135327463,"{""init"": 1, ""gen_interval"": 31, ""prompt_interval"": 2}",True
+S0_split_full,gsm8k_0001,math,60,none,all,bf16,3,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,,True,64,301.4513258934021,0.10089599981438369,1649.4906921386719,206.9014391899109,56.886272,56.885248,0.876,124.0,64,1,2.1771249854937196,2.7993931770324707,11.995831489562988,2.8359375,12.1171875,193.31300008296967,53.95549196766882,602.0829999446869,447.07286057651345,,True
+S3_split_int8abs,gsm8k_0001,math,60,none,all,int8_abs,3,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,,True,64,295.88799953460693,3.0869120731949806,1641.4007053375244,204.83392107486725,28.45952,56.885248,0.876,124.0,64,0,2.1638972852379084,2.7993931770324707,11.995831489562988,2.8359375,12.1171875,186.29099988937378,47.78019527434438,594.1610000133514,440.0926658579406,,True
+S4_split_int4,gsm8k_0001,math,60,none,all,int4_group,3,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2 / 2 = 1 bolt of white fiber.
+So, in total, the robe takes 2 + 1 = 3 bolts of fiber.
+Therefore, the final answer is 3.",3.0,True,,False,64,298.2368006706238,2.9358400367200375,1642.353120803833,205.33740723133087,14.666752,56.885248,0.876,124.0,64,0,2.1680059414356947,2.7993931770324707,11.995831489562988,2.8359375,12.1171875,200.8030000925064,62.029200889090475,626.9079999923706,472.5471317040651,,True
+C5_cache_aware_int8abs,gsm8k_0001,math,60,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int8_abs,3,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+#### 3
+The answer is: 3",3.0,True,,True,64,312.9302091598511,2.764479983597994,1734.0115547180176,202.13062453269958,15.553506,56.885248,0.876,67.765625,3,0,2.2871959563344717,2.7937064170837402,11.957674980163574,2.8359375,12.123046875,192.52699995040894,46.123862248196446,562.5169999599457,399.6698660948551,"{""init"": 1, ""gen_interval"": 31, ""prompt_interval"": 2}",True
+C6_cache_aware_int4,gsm8k_0001,math,60,"fixed(Kp=25,Kr=2,rho=0.25)",cache_aware,int4_group,3,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2 / 2 = 1 bolt of white fiber.
+So, in total, the robe takes 2 + 1 = 3 bolts of fiber.
+Therefore, the final answer is 3.",3.0,True,,False,64,317.99859046936035,2.8834239430725574,1747.718183517456,202.67711877822876,8.0158,56.885248,0.876,67.765625,3,0,2.305594813078642,2.7937064170837402,11.957674980163574,2.82421875,12.123046875,193.89800000190735,46.317153695401515,562.9660000801086,398.80887741459,"{""init"": 1, ""gen_interval"": 31, ""prompt_interval"": 2}",True
