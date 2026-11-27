@@ -22,6 +22,13 @@ Usage (started by src.net_wire.start_relay; can also be run by hand):
       --mbps 100 --delay-ms 10
 The chosen listen port is printed as "PORT <n>" on stdout.
 
+Several users (Exp22, --duplex): the relay accepts any number of connections and gives
+each its own two-way link: edge -> cloud at --mbps, cloud -> edge at --down-mbps
+(default: the same), each direction with its own bottleneck and --delay-ms. Every
+user has an access link of their own; the cloud's side is not a bottleneck.
+  python -m src.net_relay --duplex --listen 127.0.0.1:6211 --target 127.0.0.1:6200 \
+      --mbps 100 --delay-ms 10
+
 Trace file (--trace): CSV with a header line and columns time_s,mbps; the rate is
 piecewise constant, the last row's time is the period, and the trace loops. A chunk's
 transmission is integrated over the trace segments it spans (zero-rate segments are
@@ -106,20 +113,12 @@ def wire_bytes(n, header_bytes, mss):
     return n + header_bytes * math.ceil(n / mss)
 
 
-def serve(listen, target, rate, delay_s, header_bytes=40, mss=1460, log=None):
-    host, port = listen
-    srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind((host, port))
-    srv.listen(1)
-    print(f"PORT {srv.getsockname()[1]}", flush=True)
-    src, _ = srv.accept()
-    dst = socket.create_connection(target)
-    for s in (src, dst):
-        s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+def _pump(src, dst, rate, delay_s, header_bytes, mss, state):
+    """Forward src -> dst through one link direction; returns the two threads
+    (reader: bottleneck and delay; writer: releases each chunk when it is due)."""
     queue = collections.deque()
     cond = threading.Condition()
-    state = {"free": 0.0, "closed": False, "bytes": 0, "chunks": 0}
+    state.update({"free": 0.0, "closed": False, "bytes": 0, "chunks": 0})
 
     def reader():
         try:
@@ -136,27 +135,47 @@ def serve(listen, target, rate, delay_s, header_bytes=40, mss=1460, log=None):
                     cond.notify()
                 state["bytes"] += len(data)
                 state["chunks"] += 1
+        except OSError:
+            pass
         finally:
             with cond:
                 state["closed"] = True
                 cond.notify()
 
     def writer():
-        while True:
-            with cond:
-                while not queue and not state["closed"]:
-                    cond.wait()
-                if not queue and state["closed"]:
-                    break
-                due, data = queue.popleft()
-            wait = due - time.perf_counter()
-            if wait > 0:
-                time.sleep(wait)
-            dst.sendall(data)
-        dst.shutdown(socket.SHUT_WR)
+        try:
+            while True:
+                with cond:
+                    while not queue and not state["closed"]:
+                        cond.wait()
+                    if not queue and state["closed"]:
+                        break
+                    due, data = queue.popleft()
+                wait = due - time.perf_counter()
+                if wait > 0:
+                    time.sleep(wait)
+                dst.sendall(data)
+            dst.shutdown(socket.SHUT_WR)
+        except OSError:
+            pass
 
-    threads = [threading.Thread(target=reader, daemon=True),
-               threading.Thread(target=writer, daemon=True)]
+    return [threading.Thread(target=reader, daemon=True),
+            threading.Thread(target=writer, daemon=True)]
+
+
+def serve(listen, target, rate, delay_s, header_bytes=40, mss=1460, log=None):
+    host, port = listen
+    srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    srv.bind((host, port))
+    srv.listen(1)
+    print(f"PORT {srv.getsockname()[1]}", flush=True)
+    src, _ = srv.accept()
+    dst = socket.create_connection(target)
+    for s in (src, dst):
+        s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+    state = {}
+    threads = _pump(src, dst, rate, delay_s, header_bytes, mss, state)
     for t in threads:
         t.start()
     for t in threads:
@@ -166,6 +185,45 @@ def serve(listen, target, rate, delay_s, header_bytes=40, mss=1460, log=None):
     if log:
         print(f"relay done: {state['bytes']} bytes in {state['chunks']} chunks", file=log,
               flush=True)
+
+
+def serve_duplex(listen, target, make_up, make_down, delay_s, header_bytes=40, mss=1460,
+                 log=None):
+    """Accept connections forever; each gets its own two-way link (Exp22: one per user).
+    make_up / make_down return a fresh Rate for each connection."""
+    host, port = listen
+    srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    srv.bind((host, port))
+    srv.listen(64)
+    print(f"PORT {srv.getsockname()[1]}", flush=True)
+
+    def handle(src, peer):
+        try:
+            dst = socket.create_connection(target)
+        except OSError as exc:
+            if log:
+                print(f"relay: cannot reach {target}: {exc!r}", file=log, flush=True)
+            src.close()
+            return
+        for s in (src, dst):
+            s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+        up, down = {}, {}
+        threads = (_pump(src, dst, make_up(), delay_s, header_bytes, mss, up)
+                   + _pump(dst, src, make_down(), delay_s, header_bytes, mss, down))
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
+        for s in (src, dst):
+            s.close()
+        if log:
+            print(f"relay {peer}: up {up['bytes']} B, down {down['bytes']} B", file=log,
+                  flush=True)
+
+    while True:
+        src, peer = srv.accept()
+        threading.Thread(target=handle, args=(src, peer), daemon=True).start()
 
 
 def _addr(text):
@@ -184,7 +242,17 @@ def main(argv=None):
     ap.add_argument("--header-bytes", type=int, default=40)
     ap.add_argument("--mss", type=int, default=1460)
     ap.add_argument("--verbose", action="store_true")
+    ap.add_argument("--duplex", action="store_true",
+                    help="many connections, each with its own two-way link (Exp22)")
+    ap.add_argument("--down-mbps", type=float, default=None,
+                    help="with --duplex: cloud -> edge rate (default: --mbps)")
     a = ap.parse_args(argv)
+    if a.duplex:
+        down = a.down_mbps or a.mbps
+        serve_duplex(a.listen, a.target, lambda: Rate(a.mbps, a.trace, a.trace_offset),
+                     lambda: Rate(down), a.delay_ms / 1000.0, a.header_bytes, a.mss,
+                     log=sys.stderr if a.verbose else None)
+        return
     serve(a.listen, a.target, Rate(a.mbps, a.trace, a.trace_offset), a.delay_ms / 1000.0,
           a.header_bytes, a.mss, log=sys.stderr if a.verbose else None)
 

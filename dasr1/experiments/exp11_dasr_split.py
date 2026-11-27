@@ -79,12 +79,12 @@ MODEL = str(getattr(cfg, "EXP11_MODEL", "dream")).lower()  # "dream" or "llada"
 if MODEL not in {"dream", "llada"}:
     raise ValueError(f"EXP11_MODEL must be 'dream' or 'llada', not {MODEL!r}")
 LLADA = MODEL == "llada"
-DATASET = getattr(cfg, "EXP11_DATASET", "gsm8k")  # "gsm8k" or "authored"
+DATASET = getattr(cfg, "EXP11_DATASET", "gsm8k")  # "gsm8k", "authored" or "hotpotqa"
 N = int(getattr(cfg, "EXP11_N_QUESTIONS", 20))
 SPLIT = int(getattr(cfg, "EXP11_SPLIT_LAYER", 4))
 EDGE = getattr(cfg, "EXP11_EDGE_DEVICE", getattr(cfg, "EDGE_DEVICE", "cuda:1"))
 CLOUD = getattr(cfg, "EXP11_CLOUD_DEVICE", getattr(cfg, "CLOUD_DEVICE", "cuda:0"))
-DEFAULT_LEN = {"gsm8k": 256, "authored": 128}[DATASET]
+DEFAULT_LEN = {"gsm8k": 256, "authored": 128, "hotpotqa": 128}[DATASET]
 NEW_TOKENS = int(getattr(cfg, "EXP11_NEW_TOKENS", DEFAULT_LEN))
 STEPS = int(getattr(cfg, "EXP11_STEPS", DEFAULT_LEN))
 if LLADA:  # official dLLM-Cache LLaDA GSM8K setting (Kp=50, Kr=7)
@@ -220,7 +220,11 @@ def load():
         return load_cases(n=N, start=0), gsm8k_score
     if DATASET == "authored":
         return make_cases(), default_score
-    raise ValueError(f"EXP11_DATASET must be 'gsm8k' or 'authored', not {DATASET!r}")
+    if DATASET == "hotpotqa":
+        from src.hotpotqa import hotpot_score, load_hotpotqa
+        path = Path(getattr(cfg, "HOTPOTQA_DATA", ROOT / "data" / "hotpotqa" / "dev_distractor_first100.jsonl"))
+        return load_hotpotqa(path, n=N), hotpot_score
+    raise ValueError(f"EXP11_DATASET must be 'gsm8k', 'authored' or 'hotpotqa', not {DATASET!r}")
 
 
 def run_summary(steps):

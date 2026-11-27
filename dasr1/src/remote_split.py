@@ -40,6 +40,11 @@ Wire format (little endian):
   ROWS   <fBII3x> edge_ms, raw, rows, d (16 B) + bf16 rows | INT8 deltas + fp16 scales
   DONE   JSON (last commits and the cloud's per-answer statistics)  cloud -> edge
   BYE    empty                                                     edge  -> cloud
+
+Several edges at once (Exp22): one cloud model serves every connection in its own thread
+and CUDA stream. ThreadLinks routes the model's embedding and LM-head hook to the calling
+thread's RemoteLink (created with hook=False), and all waits are per stream, so one
+user's step never waits for another user's kernels.
 """
 from __future__ import annotations
 
@@ -47,6 +52,7 @@ import json
 import socket
 import struct
 import sys
+import threading
 import time
 from contextlib import contextmanager
 from dataclasses import asdict
@@ -150,9 +156,10 @@ def import_dllm_cache(repo):
 
 
 def _sync(dev):
+    """Wait for this thread's CUDA stream (with one thread, the same as a device sync)."""
     import torch
     if torch.device(dev).type == "cuda":
-        torch.cuda.synchronize(dev)
+        torch.cuda.current_stream(dev).synchronize()
 
 
 # --------------------------------------------------------------------------- cloud
@@ -172,6 +179,28 @@ class RemoteEmbedding:
                 return self._link[0].remote_step(input_ids)
 
         return _RemoteEmbedding()
+
+
+class ThreadLinks:
+    """For a cloud program that serves several edges at once (Exp22): every serving
+    thread sets its own RemoteLink (made with hook=False); the model's embedding
+    (strip_edge(model, k, router)) and its LM-head hook use the calling thread's link."""
+
+    def __init__(self, model):
+        self._local = threading.local()
+        model.lm_head.register_forward_hook(self._on_head)
+
+    def set(self, link):
+        self._local.link = link
+
+    def remote_step(self, input_ids):
+        return self._local.link.remote_step(input_ids)
+
+    def _on_head(self, module, args, output):
+        link = getattr(self._local, "link", None)
+        if link is not None:
+            link._on_head(module, args, output)
+        return None
 
 
 def strip_edge(model, k, link):
@@ -196,14 +225,14 @@ class RemoteLink:
     set_chunk(offset, kind, block, span) before every model call.
     """
 
-    def __init__(self, model, device, d):
+    def __init__(self, model, device, d, hook=True):
         self.device, self.d = device, int(d)
         self.edge = device          # kv_generate builds replace_position on link.edge
         self.sock = None
         self.active = False
         self.cloud_end = None
-        head = model.lm_head
-        head.register_forward_hook(self._on_head)
+        if hook:                    # hook=False: ThreadLinks calls _on_head instead
+            model.lm_head.register_forward_hook(self._on_head)
 
     # -------------------------------------------------------------- session
     def begin(self, **kw):
@@ -244,7 +273,7 @@ class RemoteLink:
         torch = self.torch
         tail = torch.cuda.Event(enable_timing=True)
         tail.record(torch.cuda.current_stream(self.device))
-        torch.cuda.synchronize(self.device)
+        tail.synchronize()
         out = []
         for t, (ev, st) in enumerate(zip(self.ev, self.stats)):
             nxt = self.ev[t + 1]["sample_end"] if t + 1 < len(self.ev) else tail

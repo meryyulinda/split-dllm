@@ -67,7 +67,7 @@ if MODEL not in {"dream", "llada"}:
     raise ValueError(f"EXP13_MODEL must be 'dream' or 'llada', not {MODEL!r}")
 DATASET = setting("EXP13_DATASET", "gsm8k")
 N = int(setting("EXP13_N_QUESTIONS", 30))
-NEW_TOKENS = int(setting("EXP13_NEW_TOKENS", {"gsm8k": 256, "authored": 128}[DATASET]))
+NEW_TOKENS = int(setting("EXP13_NEW_TOKENS", {"gsm8k": 256, "authored": 128, "hotpotqa": 128}[DATASET]))
 BLOCK = int(setting("EXP13_BLOCK_LENGTH", 32))
 THRESHOLDS = [float(g) for g in setting("EXP13_THRESHOLDS", [0.9])]
 SPLIT = int(setting("EXP13_SPLIT_LAYER", 4))
@@ -136,7 +136,11 @@ def load_cases():
     if DATASET == "authored":
         from exp10a_official_feature_cache_quality import make_cases
         return make_cases()[:N], default_score
-    raise ValueError(f"EXP13_DATASET must be 'gsm8k' or 'authored', not {DATASET!r}")
+    if DATASET == "hotpotqa":
+        from src.hotpotqa import hotpot_score, load_hotpotqa
+        path = Path(getattr(cfg, "HOTPOTQA_DATA", ROOT / "data" / "hotpotqa" / "dev_distractor_first100.jsonl"))
+        return load_hotpotqa(path, n=N), hotpot_score
+    raise ValueError(f"EXP13_DATASET must be 'gsm8k', 'authored' or 'hotpotqa', not {DATASET!r}")
 
 
 def prepare(tokenizer, prompt, device):
