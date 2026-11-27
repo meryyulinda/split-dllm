@@ -1,0 +1,317 @@
+cloud = GPU 1, edge = GPU 2
+2026-11-27 01:04:24 GPUs 1,2 idle, starting.
+
+=== 1/2 Fast-dLLM backend  (2026-11-27 01:04:24)
+{'EXP18_BACKEND': 'fastdllm', 'EXP18_NEW_TOKENS': 256, 'EXP18_TRACES': [{'name': 'step_100_10', 'step': (100, 10, 20), 'n': 10}, {'name': 'phone_lte_lab', 'csv': 'outputs/phone_traces/lte_lab.csv', 'rtt_ms': 9.5, 'n': 10}, {'name': 'tmobile_lte_up', 'mahimahi': 'TMobile-LTE-short.up', 'n': 10}, {'name': 'verizon_lte_up', 'mahimahi': 'Verizon-LTE-short.up', 'n': 10}], 'EXP18_POLICY_NAMES': ['bf16', 'int8', 'codec_per_request', 'codec_per_step', 'codec_gamma_per_step'], 'EXP18_OUTPUT_TAG': ''}
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  8.02it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.74it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.81it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.02it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.22it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Exp18 | fastdllm | gsm8k | split after layer 4 | 256 tokens | RTT 20 ms | edge slowdown 3 | policies ['bf16', 'int8', 'codec_per_request', 'codec_per_step', 'codec_gamma_per_step']
+  trace step_100_10: mean 55.0 Mbit/s (p10 19.0, p90 91.0), period 20 s, 10 questions
+  trace phone_lte_lab: mean 45.1 Mbit/s (p10 34.1, p90 52.4), period 120 s, 10 questions
+  trace tmobile_lte_up: mean 13.3 Mbit/s (p10 3.2, p90 26.4), period 140 s, 10 questions
+  trace verizon_lte_up: mean 5.9 Mbit/s (p10 1.3, p90 10.8), period 140 s, 10 questions
+warmup done
+
+=== trace step_100_10 (10 questions)  (2026-11-27 01:04:38)
+  gsm8k_0000 bf16                   ok=True  same=True  steps=  63 up=   33.0 MB int8=0.00 switches=  0 time=    8.0 s
+  gsm8k_0000 int8                   ok=True  same=True  steps=  65 up=   18.2 MB int8=0.95 switches=  0 time=    7.0 s
+  gsm8k_0000 codec_per_request      ok=True  same=True  steps=  63 up=   33.0 MB int8=0.00 switches=  0 time=    8.0 s
+  gsm8k_0000 codec_per_step         ok=True  same=True  steps=  63 up=   23.3 MB int8=0.22 switches= 16 time=    7.1 s
+  gsm8k_0000 codec_gamma_per_step   ok=True  same=True  steps=  56 up=   22.5 MB int8=0.12 switches= 14 time=    6.6 s
+  gsm8k_0001 bf16                   ok=True  same=True  steps=  50 up=   27.8 MB int8=0.00 switches=  0 time=   11.4 s
+  gsm8k_0001 int8                   ok=True  same=True  steps=  50 up=   15.1 MB int8=0.96 switches=  0 time=    9.9 s
+  gsm8k_0001 codec_per_request      ok=True  same=True  steps=  50 up=   15.2 MB int8=0.94 switches=  1 time=   10.0 s
+  gsm8k_0001 codec_per_step         ok=True  same=True  steps=  50 up=   16.4 MB int8=0.74 switches= 14 time=   10.1 s
+  gsm8k_0001 codec_gamma_per_step   ok=True  same=True  steps=  36 up=   13.9 MB int8=0.86 switches=  6 time=    8.7 s
+  gsm8k_0002 bf16                   ok=False same=True  steps=  50 up=   29.5 MB int8=0.00 switches=  0 time=   14.7 s
+  gsm8k_0002 int8                   ok=False same=False steps=  50 up=   16.1 MB int8=0.96 switches=  0 time=   10.6 s
+  gsm8k_0002 codec_per_request      ok=False same=True  steps=  50 up=   29.5 MB int8=0.00 switches=  0 time=   14.7 s
+  gsm8k_0002 codec_per_step         ok=False same=False steps=  49 up=   19.8 MB int8=0.29 switches=  5 time=   11.2 s
+  gsm8k_0002 codec_gamma_per_step   ok=False same=False steps=  44 up=   19.0 MB int8=0.25 switches=  7 time=    9.5 s
+  gsm8k_0003 bf16                   ok=True  same=True  steps=  42 up=   26.4 MB int8=0.00 switches=  0 time=    6.6 s
+  gsm8k_0003 int8                   ok=True  same=True  steps=  41 up=   14.4 MB int8=0.95 switches=  0 time=    5.6 s
+  gsm8k_0003 codec_per_request      ok=True  same=True  steps=  42 up=   14.6 MB int8=0.93 switches=  1 time=    5.7 s
+  gsm8k_0003 codec_per_step         ok=True  same=True  steps=  42 up=   17.5 MB int8=0.33 switches= 16 time=    5.9 s
+  gsm8k_0003 codec_gamma_per_step   ok=True  same=False steps=  26 up=   13.9 MB int8=0.50 switches= 14 time=    4.3 s
+  gsm8k_0004 bf16                   ok=True  same=True  steps=  72 up=   37.7 MB int8=0.00 switches=  0 time=   15.0 s
+  gsm8k_0004 int8                   ok=True  same=True  steps=  71 up=   20.4 MB int8=0.96 switches=  0 time=   13.0 s
+  gsm8k_0004 codec_per_request      ok=True  same=True  steps=  72 up=   20.6 MB int8=0.94 switches=  1 time=   13.1 s
+  gsm8k_0004 codec_per_step         ok=True  same=True  steps=  72 up=   24.1 MB int8=0.53 switches= 16 time=   13.5 s
+  gsm8k_0004 codec_gamma_per_step   ok=True  same=True  steps=  62 up=   22.0 MB int8=0.58 switches= 12 time=   12.6 s
+  gsm8k_0005 bf16                   ok=True  same=True  steps= 112 up=   43.7 MB int8=0.00 switches=  0 time=   19.5 s
+  gsm8k_0005 int8                   ok=True  same=False steps=  90 up=   20.8 MB int8=0.97 switches=  0 time=   15.5 s
+  gsm8k_0005 codec_per_request      ok=True  same=True  steps= 112 up=   43.7 MB int8=0.00 switches=  0 time=   19.6 s
+  gsm8k_0005 codec_per_step         ok=True  same=True  steps= 112 up=   29.4 MB int8=0.50 switches= 10 time=   17.4 s
+  gsm8k_0005 codec_gamma_per_step   ok=True  same=False steps= 105 up=   28.7 MB int8=0.46 switches=  8 time=   17.1 s
+  gsm8k_0006 bf16                   ok=True  same=True  steps=  49 up=   28.4 MB int8=0.00 switches=  0 time=    8.2 s
+  gsm8k_0006 int8                   ok=True  same=True  steps=  49 up=   15.5 MB int8=0.96 switches=  0 time=    7.2 s
+  gsm8k_0006 codec_per_request      ok=True  same=True  steps=  49 up=   15.6 MB int8=0.94 switches=  1 time=    7.1 s
+  gsm8k_0006 codec_per_step         ok=True  same=True  steps=  49 up=   18.1 MB int8=0.51 switches= 14 time=    7.2 s
+  gsm8k_0006 codec_gamma_per_step   ok=True  same=False steps=  44 up=   18.1 MB int8=0.34 switches= 16 time=    7.0 s
+  gsm8k_0007 bf16                   ok=False same=True  steps= 142 up=   51.4 MB int8=0.00 switches=  0 time=   29.3 s
+  gsm8k_0007 int8                   ok=False same=False steps= 114 up=   25.3 MB int8=0.96 switches=  0 time=   17.2 s
+  gsm8k_0007 codec_per_request      ok=False same=False steps= 128 up=   25.8 MB int8=0.96 switches=  1 time=   18.4 s
+  gsm8k_0007 codec_per_step         ok=False same=False steps= 118 up=   32.0 MB int8=0.42 switches= 14 time=   18.1 s
+  gsm8k_0007 codec_gamma_per_step   ok=False same=False steps= 113 up=   31.7 MB int8=0.37 switches= 12 time=   17.7 s
+  gsm8k_0008 bf16                   ok=True  same=True  steps=  95 up=   42.6 MB int8=0.00 switches=  0 time=   19.2 s
+  gsm8k_0008 int8                   ok=True  same=False steps=  95 up=   22.9 MB int8=0.97 switches=  0 time=   16.3 s
+  gsm8k_0008 codec_per_request      ok=True  same=True  steps=  95 up=   42.6 MB int8=0.00 switches=  0 time=   19.1 s
+  gsm8k_0008 codec_per_step         ok=True  same=True  steps=  95 up=   28.5 MB int8=0.45 switches=  7 time=   16.6 s
+  gsm8k_0008 codec_gamma_per_step   ok=True  same=False steps=  82 up=   26.5 MB int8=0.43 switches=  7 time=   15.4 s
+  gsm8k_0009 bf16                   ok=True  same=True  steps=  85 up=   37.7 MB int8=0.00 switches=  0 time=   12.3 s
+  gsm8k_0009 int8                   ok=True  same=True  steps=  85 up=   20.4 MB int8=0.96 switches=  0 time=   11.0 s
+  gsm8k_0009 codec_per_request      ok=True  same=True  steps=  85 up=   20.5 MB int8=0.95 switches=  1 time=   11.1 s
+  gsm8k_0009 codec_per_step         ok=True  same=False steps=  77 up=   25.4 MB int8=0.29 switches= 16 time=   10.8 s
+  gsm8k_0009 codec_gamma_per_step   ok=True  same=True  steps=  78 up=   26.0 MB int8=0.24 switches= 14 time=   11.0 s
+
+=== trace phone_lte_lab (10 questions)  (2026-11-27 01:14:56)
+  gsm8k_0000 bf16                   ok=True  same=True  steps=  63 up=   33.0 MB int8=0.00 switches=  0 time=   10.6 s
+  gsm8k_0000 int8                   ok=True  same=True  steps=  65 up=   18.2 MB int8=0.95 switches=  0 time=    7.8 s
+  gsm8k_0000 codec_per_request      ok=True  same=True  steps=  65 up=   18.2 MB int8=0.95 switches=  1 time=    7.8 s
+  gsm8k_0000 codec_per_step         ok=True  same=True  steps=  65 up=   18.2 MB int8=0.95 switches=  1 time=    7.8 s
+  gsm8k_0000 codec_gamma_per_step   ok=True  same=True  steps=  55 up=   17.1 MB int8=0.95 switches=  1 time=    7.0 s
+  gsm8k_0001 bf16                   ok=True  same=True  steps=  50 up=   27.8 MB int8=0.00 switches=  0 time=   10.7 s
+  gsm8k_0001 int8                   ok=True  same=True  steps=  50 up=   15.1 MB int8=0.96 switches=  0 time=    7.8 s
+  gsm8k_0001 codec_per_request      ok=True  same=True  steps=  50 up=   15.2 MB int8=0.94 switches=  1 time=    7.6 s
+  gsm8k_0001 codec_per_step         ok=True  same=True  steps=  50 up=   15.2 MB int8=0.94 switches=  1 time=    7.8 s
+  gsm8k_0001 codec_gamma_per_step   ok=True  same=True  steps=  43 up=   15.5 MB int8=0.93 switches=  1 time=    7.1 s
+  gsm8k_0002 bf16                   ok=False same=True  steps=  50 up=   29.5 MB int8=0.00 switches=  0 time=    9.0 s
+  gsm8k_0002 int8                   ok=False same=False steps=  50 up=   16.1 MB int8=0.96 switches=  0 time=    6.7 s
+  gsm8k_0002 codec_per_request      ok=False same=False steps=  45 up=   15.7 MB int8=0.93 switches=  1 time=    6.2 s
+  gsm8k_0002 codec_per_step         ok=False same=False steps=  45 up=   15.7 MB int8=0.93 switches=  1 time=    6.2 s
+  gsm8k_0002 codec_gamma_per_step   ok=False same=False steps=  44 up=   15.6 MB int8=0.93 switches=  1 time=    6.1 s
+  gsm8k_0003 bf16                   ok=True  same=True  steps=  42 up=   26.4 MB int8=0.00 switches=  0 time=    8.0 s
+  gsm8k_0003 int8                   ok=True  same=True  steps=  41 up=   14.4 MB int8=0.95 switches=  0 time=    5.7 s
+  gsm8k_0003 codec_per_request      ok=True  same=True  steps=  42 up=   14.6 MB int8=0.93 switches=  1 time=    5.9 s
+  gsm8k_0003 codec_per_step         ok=True  same=True  steps=  42 up=   14.6 MB int8=0.93 switches=  1 time=    5.9 s
+  gsm8k_0003 codec_gamma_per_step   ok=True  same=False steps=  25 up=   12.6 MB int8=0.92 switches=  1 time=    4.3 s
+  gsm8k_0004 bf16                   ok=True  same=True  steps=  72 up=   37.7 MB int8=0.00 switches=  0 time=   12.0 s
+  gsm8k_0004 int8                   ok=True  same=True  steps=  71 up=   20.4 MB int8=0.96 switches=  0 time=    9.0 s
+  gsm8k_0004 codec_per_request      ok=True  same=True  steps=  72 up=   20.6 MB int8=0.94 switches=  1 time=    9.2 s
+  gsm8k_0004 codec_per_step         ok=True  same=True  steps=  72 up=   20.6 MB int8=0.94 switches=  1 time=    9.1 s
+  gsm8k_0004 codec_gamma_per_step   ok=True  same=True  steps=  67 up=   21.4 MB int8=0.94 switches=  1 time=    8.6 s
+  gsm8k_0005 bf16                   ok=True  same=True  steps= 112 up=   43.7 MB int8=0.00 switches=  0 time=   15.7 s
+  gsm8k_0005 int8                   ok=True  same=False steps=  90 up=   20.8 MB int8=0.97 switches=  0 time=   10.1 s
+  gsm8k_0005 codec_per_request      ok=True  same=False steps=  96 up=   21.6 MB int8=0.96 switches=  1 time=   10.7 s
+  gsm8k_0005 codec_per_step         ok=True  same=False steps=  96 up=   21.6 MB int8=0.96 switches=  1 time=   10.7 s
+  gsm8k_0005 codec_gamma_per_step   ok=True  same=False steps=  89 up=   20.8 MB int8=0.96 switches=  1 time=   10.0 s
+  gsm8k_0006 bf16                   ok=True  same=True  steps=  49 up=   28.4 MB int8=0.00 switches=  0 time=    8.5 s
+  gsm8k_0006 int8                   ok=True  same=True  steps=  49 up=   15.5 MB int8=0.96 switches=  0 time=    6.4 s
+  gsm8k_0006 codec_per_request      ok=True  same=True  steps=  49 up=   15.6 MB int8=0.94 switches=  1 time=    6.3 s
+  gsm8k_0006 codec_per_step         ok=True  same=True  steps=  49 up=   15.6 MB int8=0.94 switches=  1 time=    6.4 s
+  gsm8k_0006 codec_gamma_per_step   ok=True  same=False steps=  39 up=   15.6 MB int8=0.92 switches=  1 time=    5.7 s
+  gsm8k_0007 bf16                   ok=False same=True  steps= 142 up=   51.4 MB int8=0.00 switches=  0 time=   19.0 s
+  gsm8k_0007 int8                   ok=False same=False steps= 114 up=   25.3 MB int8=0.96 switches=  0 time=   12.5 s
+  gsm8k_0007 codec_per_request      ok=False same=False steps= 128 up=   25.8 MB int8=0.96 switches=  1 time=   13.5 s
+  gsm8k_0007 codec_per_step         ok=False same=False steps= 128 up=   25.8 MB int8=0.96 switches=  1 time=   13.7 s
+  gsm8k_0007 codec_gamma_per_step   ok=False same=True  steps= 132 up=   26.4 MB int8=0.95 switches=  1 time=   14.1 s
+  gsm8k_0008 bf16                   ok=True  same=True  steps=  95 up=   42.6 MB int8=0.00 switches=  0 time=   14.0 s
+  gsm8k_0008 int8                   ok=True  same=False steps=  95 up=   22.9 MB int8=0.97 switches=  0 time=   11.0 s
+  gsm8k_0008 codec_per_request      ok=True  same=True  steps=  95 up=   23.0 MB int8=0.96 switches=  1 time=   11.0 s
+  gsm8k_0008 codec_per_step         ok=True  same=True  steps=  95 up=   23.0 MB int8=0.96 switches=  1 time=   11.1 s
+  gsm8k_0008 codec_gamma_per_step   ok=True  same=False steps=  85 up=   21.9 MB int8=0.95 switches=  1 time=   10.2 s
+  gsm8k_0009 bf16                   ok=True  same=True  steps=  85 up=   37.7 MB int8=0.00 switches=  0 time=   12.8 s
+  gsm8k_0009 int8                   ok=True  same=True  steps=  85 up=   20.4 MB int8=0.96 switches=  0 time=    9.6 s
+  gsm8k_0009 codec_per_request      ok=True  same=True  steps=  85 up=   20.5 MB int8=0.95 switches=  1 time=    9.6 s
+  gsm8k_0009 codec_per_step         ok=True  same=True  steps=  85 up=   20.5 MB int8=0.95 switches=  1 time=    9.4 s
+  gsm8k_0009 codec_gamma_per_step   ok=True  same=True  steps=  75 up=   20.5 MB int8=0.95 switches=  1 time=    8.9 s
+
+=== trace tmobile_lte_up (10 questions)  (2026-11-27 01:22:47)
+  gsm8k_0000 bf16                   ok=True  same=True  steps=  63 up=   33.0 MB int8=0.00 switches=  0 time=   52.9 s
+  gsm8k_0000 int8                   ok=True  same=True  steps=  65 up=   18.2 MB int8=0.95 switches=  0 time=   39.2 s
+  gsm8k_0000 codec_per_request      ok=True  same=True  steps=  65 up=   18.2 MB int8=0.95 switches=  1 time=   45.4 s
+  gsm8k_0000 codec_per_step         ok=True  same=True  steps=  65 up=   18.2 MB int8=0.95 switches=  1 time=   45.4 s
+  gsm8k_0000 codec_gamma_per_step   ok=True  same=True  steps=  48 up=   16.3 MB int8=0.94 switches=  1 time=   38.9 s
+  gsm8k_0001 bf16                   ok=True  same=True  steps=  50 up=   27.8 MB int8=0.00 switches=  0 time=   41.0 s
+  gsm8k_0001 int8                   ok=True  same=True  steps=  50 up=   15.1 MB int8=0.96 switches=  0 time=   30.1 s
+  gsm8k_0001 codec_per_request      ok=True  same=True  steps=  50 up=   15.2 MB int8=0.94 switches=  1 time=   30.3 s
+  gsm8k_0001 codec_per_step         ok=True  same=True  steps=  50 up=   15.2 MB int8=0.94 switches=  1 time=   30.3 s
+  gsm8k_0001 codec_gamma_per_step   ok=True  same=True  steps=  36 up=   13.6 MB int8=0.92 switches=  1 time=   27.6 s
+  gsm8k_0002 bf16                   ok=False same=True  steps=  50 up=   29.5 MB int8=0.00 switches=  0 time=   34.2 s
+  gsm8k_0002 int8                   ok=False same=False steps=  50 up=   16.1 MB int8=0.96 switches=  0 time=   23.2 s
+  gsm8k_0002 codec_per_request      ok=False same=False steps=  45 up=   15.7 MB int8=0.93 switches=  1 time=   22.6 s
+  gsm8k_0002 codec_per_step         ok=False same=False steps=  45 up=   15.7 MB int8=0.93 switches=  1 time=   22.5 s
+  gsm8k_0002 codec_gamma_per_step   ok=False same=False steps=  34 up=   14.4 MB int8=0.91 switches=  1 time=   19.9 s
+  gsm8k_0003 bf16                   ok=True  same=True  steps=  42 up=   26.4 MB int8=0.00 switches=  0 time=   26.3 s
+  gsm8k_0003 int8                   ok=True  same=True  steps=  41 up=   14.4 MB int8=0.95 switches=  0 time=   16.3 s
+  gsm8k_0003 codec_per_request      ok=True  same=True  steps=  42 up=   14.6 MB int8=0.93 switches=  1 time=   16.7 s
+  gsm8k_0003 codec_per_step         ok=True  same=True  steps=  42 up=   14.6 MB int8=0.93 switches=  1 time=   16.7 s
+  gsm8k_0003 codec_gamma_per_step   ok=True  same=False steps=  25 up=   12.6 MB int8=0.92 switches=  1 time=   14.1 s
+  gsm8k_0004 bf16                   ok=True  same=True  steps=  72 up=   37.7 MB int8=0.00 switches=  0 time=   33.5 s
+  gsm8k_0004 int8                   ok=True  same=True  steps=  71 up=   20.4 MB int8=0.96 switches=  0 time=   21.1 s
+  gsm8k_0004 codec_per_request      ok=True  same=True  steps=  72 up=   20.6 MB int8=0.94 switches=  1 time=   21.2 s
+  gsm8k_0004 codec_per_step         ok=True  same=True  steps=  72 up=   20.6 MB int8=0.94 switches=  1 time=   21.2 s
+  gsm8k_0004 codec_gamma_per_step   ok=True  same=False steps=  54 up=   18.4 MB int8=0.94 switches=  1 time=   18.3 s
+  gsm8k_0005 bf16                   ok=True  same=True  steps= 112 up=   43.7 MB int8=0.00 switches=  0 time=   36.3 s
+  gsm8k_0005 int8                   ok=True  same=False steps=  90 up=   20.8 MB int8=0.97 switches=  0 time=   21.5 s
+  gsm8k_0005 codec_per_request      ok=True  same=False steps=  96 up=   21.6 MB int8=0.96 switches=  1 time=   22.6 s
+  gsm8k_0005 codec_per_step         ok=True  same=False steps=  96 up=   21.6 MB int8=0.96 switches=  1 time=   22.4 s
+  gsm8k_0005 codec_gamma_per_step   ok=True  same=False steps=  67 up=   19.4 MB int8=0.94 switches=  1 time=   19.1 s
+  gsm8k_0006 bf16                   ok=True  same=True  steps=  49 up=   28.4 MB int8=0.00 switches=  0 time=   21.1 s
+  gsm8k_0006 int8                   ok=True  same=True  steps=  49 up=   15.5 MB int8=0.96 switches=  0 time=   14.2 s
+  gsm8k_0006 codec_per_request      ok=True  same=True  steps=  49 up=   15.6 MB int8=0.94 switches=  1 time=   14.2 s
+  gsm8k_0006 codec_per_step         ok=True  same=True  steps=  49 up=   15.6 MB int8=0.94 switches=  1 time=   14.2 s
+  gsm8k_0006 codec_gamma_per_step   ok=True  same=False steps=  35 up=   15.1 MB int8=0.91 switches=  1 time=   13.4 s
+  gsm8k_0007 bf16                   ok=False same=True  steps= 142 up=   51.4 MB int8=0.00 switches=  0 time=   34.3 s
+  gsm8k_0007 int8                   ok=False same=False steps= 114 up=   25.3 MB int8=0.96 switches=  0 time=   20.1 s
+  gsm8k_0007 codec_per_request      ok=False same=False steps= 128 up=   25.8 MB int8=0.96 switches=  1 time=   21.9 s
+  gsm8k_0007 codec_per_step         ok=False same=False steps= 128 up=   25.8 MB int8=0.96 switches=  1 time=   21.9 s
+  gsm8k_0007 codec_gamma_per_step   ok=False same=False steps=  98 up=   22.4 MB int8=0.95 switches=  1 time=   19.4 s
+  gsm8k_0008 bf16                   ok=True  same=True  steps=  95 up=   42.6 MB int8=0.00 switches=  0 time=   25.9 s
+  gsm8k_0008 int8                   ok=True  same=False steps=  95 up=   22.9 MB int8=0.97 switches=  0 time=   18.2 s
+  gsm8k_0008 codec_per_request      ok=True  same=True  steps=  95 up=   23.0 MB int8=0.96 switches=  1 time=   18.2 s
+  gsm8k_0008 codec_per_step         ok=True  same=True  steps=  95 up=   23.0 MB int8=0.96 switches=  1 time=   18.2 s
+  gsm8k_0008 codec_gamma_per_step   ok=True  same=False steps=  69 up=   20.1 MB int8=0.94 switches=  1 time=   14.2 s
+  gsm8k_0009 bf16                   ok=True  same=True  steps=  85 up=   37.7 MB int8=0.00 switches=  0 time=   21.7 s
+  gsm8k_0009 int8                   ok=True  same=True  steps=  85 up=   20.4 MB int8=0.96 switches=  0 time=   15.5 s
+  gsm8k_0009 codec_per_request      ok=True  same=True  steps=  85 up=   20.5 MB int8=0.95 switches=  1 time=   15.2 s
+  gsm8k_0009 codec_per_step         ok=True  same=True  steps=  85 up=   20.5 MB int8=0.95 switches=  1 time=   15.7 s
+  gsm8k_0009 codec_gamma_per_step   ok=True  same=False steps=  62 up=   17.7 MB int8=0.95 switches=  1 time=   12.4 s
+
+=== trace verizon_lte_up (10 questions)  (2026-11-27 01:42:53)
+  gsm8k_0000 bf16                   ok=True  same=True  steps=  63 up=   33.0 MB int8=0.00 switches=  0 time=   51.0 s
+  gsm8k_0000 int8                   ok=True  same=True  steps=  65 up=   18.2 MB int8=0.95 switches=  0 time=   26.1 s
+  gsm8k_0000 codec_per_request      ok=True  same=True  steps=  65 up=   18.2 MB int8=0.95 switches=  1 time=   26.4 s
+  gsm8k_0000 codec_per_step         ok=True  same=True  steps=  65 up=   18.2 MB int8=0.95 switches=  1 time=   26.4 s
+  gsm8k_0000 codec_gamma_per_step   ok=True  same=True  steps=  48 up=   16.3 MB int8=0.94 switches=  1 time=   23.5 s
+  gsm8k_0001 bf16                   ok=True  same=True  steps=  50 up=   27.8 MB int8=0.00 switches=  0 time=   49.4 s
+  gsm8k_0001 int8                   ok=True  same=True  steps=  50 up=   15.1 MB int8=0.96 switches=  0 time=   21.6 s
+  gsm8k_0001 codec_per_request      ok=True  same=True  steps=  50 up=   15.2 MB int8=0.94 switches=  1 time=   21.7 s
+  gsm8k_0001 codec_per_step         ok=True  same=True  steps=  50 up=   15.2 MB int8=0.94 switches=  1 time=   21.7 s
+  gsm8k_0001 codec_gamma_per_step   ok=True  same=True  steps=  36 up=   13.6 MB int8=0.92 switches=  1 time=   17.9 s
+  gsm8k_0002 bf16                   ok=False same=True  steps=  50 up=   29.5 MB int8=0.00 switches=  0 time=   62.4 s
+  gsm8k_0002 int8                   ok=False same=False steps=  50 up=   16.1 MB int8=0.96 switches=  0 time=   35.8 s
+  gsm8k_0002 codec_per_request      ok=False same=False steps=  45 up=   15.7 MB int8=0.93 switches=  1 time=   33.4 s
+  gsm8k_0002 codec_per_step         ok=False same=False steps=  45 up=   15.7 MB int8=0.93 switches=  1 time=   34.1 s
+  gsm8k_0002 codec_gamma_per_step   ok=False same=False steps=  34 up=   14.4 MB int8=0.91 switches=  1 time=   28.5 s
+  gsm8k_0003 bf16                   ok=True  same=True  steps=  42 up=   26.4 MB int8=0.00 switches=  0 time=   60.8 s
+  gsm8k_0003 int8                   ok=True  same=True  steps=  41 up=   14.4 MB int8=0.95 switches=  0 time=   42.1 s
+  gsm8k_0003 codec_per_request      ok=True  same=True  steps=  42 up=   14.6 MB int8=0.93 switches=  1 time=   45.0 s
+  gsm8k_0003 codec_per_step         ok=True  same=True  steps=  42 up=   14.6 MB int8=0.93 switches=  1 time=   45.4 s
+  gsm8k_0003 codec_gamma_per_step   ok=True  same=False steps=  25 up=   12.6 MB int8=0.92 switches=  1 time=   37.4 s
+  gsm8k_0004 bf16                   ok=True  same=True  steps=  72 up=   37.7 MB int8=0.00 switches=  0 time=   64.3 s
+  gsm8k_0004 int8                   ok=True  same=True  steps=  71 up=   20.4 MB int8=0.96 switches=  0 time=   47.1 s
+  gsm8k_0004 codec_per_request      ok=True  same=True  steps=  72 up=   20.6 MB int8=0.94 switches=  1 time=   47.7 s
+  gsm8k_0004 codec_per_step         ok=True  same=True  steps=  72 up=   20.6 MB int8=0.94 switches=  1 time=   47.7 s
+  gsm8k_0004 codec_gamma_per_step   ok=True  same=False steps=  54 up=   18.4 MB int8=0.94 switches=  1 time=   44.2 s
+  gsm8k_0005 bf16                   ok=True  same=True  steps= 112 up=   43.7 MB int8=0.00 switches=  0 time=   70.6 s
+  gsm8k_0005 int8                   ok=True  same=False steps=  90 up=   20.8 MB int8=0.97 switches=  0 time=   43.8 s
+  gsm8k_0005 codec_per_request      ok=True  same=False steps=  96 up=   21.6 MB int8=0.96 switches=  1 time=   44.3 s
+  gsm8k_0005 codec_per_step         ok=True  same=False steps=  96 up=   21.6 MB int8=0.96 switches=  1 time=   44.4 s
+  gsm8k_0005 codec_gamma_per_step   ok=True  same=False steps=  67 up=   19.4 MB int8=0.94 switches=  1 time=   40.2 s
+  gsm8k_0006 bf16                   ok=True  same=True  steps=  49 up=   28.4 MB int8=0.00 switches=  0 time=   38.8 s
+  gsm8k_0006 int8                   ok=True  same=True  steps=  49 up=   15.5 MB int8=0.96 switches=  0 time=   27.5 s
+  gsm8k_0006 codec_per_request      ok=True  same=True  steps=  49 up=   15.6 MB int8=0.94 switches=  1 time=   27.7 s
+  gsm8k_0006 codec_per_step         ok=True  same=True  steps=  49 up=   15.6 MB int8=0.94 switches=  1 time=   27.8 s
+  gsm8k_0006 codec_gamma_per_step   ok=True  same=False steps=  35 up=   15.1 MB int8=0.91 switches=  1 time=   25.7 s
+  gsm8k_0007 bf16                   ok=False same=True  steps= 142 up=   51.4 MB int8=0.00 switches=  0 time=   72.3 s
+  gsm8k_0007 int8                   ok=False same=False steps= 114 up=   25.3 MB int8=0.96 switches=  0 time=   38.8 s
+  gsm8k_0007 codec_per_request      ok=False same=False steps= 128 up=   25.8 MB int8=0.96 switches=  1 time=   41.3 s
+  gsm8k_0007 codec_per_step         ok=False same=False steps= 128 up=   25.8 MB int8=0.96 switches=  1 time=   41.3 s
+  gsm8k_0007 codec_gamma_per_step   ok=False same=False steps=  96 up=   22.1 MB int8=0.96 switches=  1 time=   32.2 s
+  gsm8k_0008 bf16                   ok=True  same=True  steps=  95 up=   42.6 MB int8=0.00 switches=  0 time=   58.5 s
+  gsm8k_0008 int8                   ok=True  same=False steps=  95 up=   22.9 MB int8=0.97 switches=  0 time=   34.8 s
+  gsm8k_0008 codec_per_request      ok=True  same=True  steps=  95 up=   23.0 MB int8=0.96 switches=  1 time=   35.2 s
+  gsm8k_0008 codec_per_step         ok=True  same=True  steps=  95 up=   23.0 MB int8=0.96 switches=  1 time=   35.2 s
+  gsm8k_0008 codec_gamma_per_step   ok=True  same=False steps=  69 up=   20.1 MB int8=0.94 switches=  1 time=   29.0 s
+  gsm8k_0009 bf16                   ok=True  same=True  steps=  85 up=   37.7 MB int8=0.00 switches=  0 time=   52.1 s
+  gsm8k_0009 int8                   ok=True  same=True  steps=  85 up=   20.4 MB int8=0.96 switches=  0 time=   32.6 s
+  gsm8k_0009 codec_per_request      ok=True  same=True  steps=  85 up=   20.5 MB int8=0.95 switches=  1 time=   32.8 s
+  gsm8k_0009 codec_per_step         ok=True  same=True  steps=  85 up=   20.5 MB int8=0.95 switches=  1 time=   32.8 s
+  gsm8k_0009 codec_gamma_per_step   ok=True  same=False steps=  62 up=   17.7 MB int8=0.95 switches=  1 time=   28.1 s
+
+Exp18 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp18_controller_fastdllm_dream_gsm8k_t256
+         trace               policy  runs  acc  same_as_bf16  edge_has_answer  measured_s  speedup_vs_bf16  time_vs_int8  int8_step_share  mean_gamma  mean_steps  up_mb  switches  trace_mean_mbps
+   step_100_10                 bf16    10  0.8            10               10      14.428            1.000         1.241            0.000       0.900        76.0 35.818       0.0           55.000
+   step_100_10                 int8    10  0.8             6               10      11.338            1.241         1.000            0.961       0.900        71.0 18.921       0.0           55.000
+   step_100_10    codec_per_request    10  0.8             9               10      12.694            1.129         1.107            0.567       0.900        74.6 26.122       0.6           55.000
+   step_100_10       codec_per_step    10  0.8             7               10      11.797            1.197         1.036            0.427       0.900        72.7 23.446      12.8           55.000
+   step_100_10 codec_gamma_per_step    10  0.8             4               10      10.989            1.314         0.950            0.416       0.810        64.6 22.219      11.0           55.000
+ phone_lte_lab                 bf16    10  0.8            10               10      12.023            1.000         1.379            0.000       0.900        76.0 35.818       0.0           45.095
+ phone_lte_lab                 int8    10  0.8             6               10       8.678            1.379         1.000            0.961       0.900        71.0 18.921       0.0           45.095
+ phone_lte_lab    codec_per_request    10  0.8             7               10       8.781            1.371         1.006            0.947       0.900        72.7 19.102       1.0           45.095
+ phone_lte_lab       codec_per_step    10  0.8             7               10       8.809            1.366         1.010            0.947       0.900        72.7 19.102       1.0           45.095
+ phone_lte_lab codec_gamma_per_step    10  0.8             5               10       8.200            1.496         0.927            0.940       0.819        65.4 18.720       1.0           45.095
+tmobile_lte_up                 bf16    10  0.8            10               10      32.705            1.000         1.508            0.000       0.900        76.0 35.818       0.0           13.309
+tmobile_lte_up                 int8    10  0.8             6               10      21.941            1.508         1.000            0.961       0.900        71.0 18.921       0.0           13.309
+tmobile_lte_up    codec_per_request    10  0.8             7               10      22.828            1.469         1.029            0.947       0.900        72.7 19.102       1.0           13.309
+tmobile_lte_up       codec_per_step    10  0.8             7               10      22.849            1.466         1.030            0.947       0.900        72.7 19.102       1.0           13.309
+tmobile_lte_up codec_gamma_per_step    10  0.8             2               10      19.744            1.705         0.888            0.933       0.709        52.8 17.004       1.0           13.309
+verizon_lte_up                 bf16    10  0.8            10               10      58.030            1.000         1.697            0.000       0.900        76.0 35.818       0.0            5.941
+verizon_lte_up                 int8    10  0.8             6               10      35.005            1.697         1.000            0.961       0.900        71.0 18.921       0.0            5.941
+verizon_lte_up    codec_per_request    10  0.8             7               10      35.551            1.677         1.013            0.947       0.900        72.7 19.102       1.0            5.941
+verizon_lte_up       codec_per_step    10  0.8             7               10      35.656            1.673         1.016            0.947       0.900        72.7 19.102       1.0            5.941
+verizon_lte_up codec_gamma_per_step    10  0.8             2               10      30.662            1.959         0.873            0.934       0.706        52.6 16.969       1.0            5.941
+
+=== 2/2 dLLM-Cache backend  (2026-11-27 02:15:29)
+{'EXP18_BACKEND': 'dllm_cache', 'EXP18_NEW_TOKENS': 256, 'EXP18_TRACES': [{'name': 'step_100_10', 'step': (100, 10, 20), 'n': 5}, {'name': 'phone_lte_lab', 'csv': 'outputs/phone_traces/lte_lab.csv', 'rtt_ms': 9.5, 'n': 5}], 'EXP18_POLICY_NAMES': ['bf16', 'int8', 'codec_per_request', 'codec_per_step'], 'EXP18_OUTPUT_TAG': ''}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.47it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.63it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.21it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.54it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.48it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Exp18 | dllm_cache | gsm8k | split after layer 4 | 256 tokens | RTT 20 ms | edge slowdown 3 | policies ['bf16', 'int8', 'codec_per_request', 'codec_per_step']
+  trace step_100_10: mean 55.0 Mbit/s (p10 19.0, p90 91.0), period 20 s, 5 questions
+  trace phone_lte_lab: mean 45.1 Mbit/s (p10 34.1, p90 52.4), period 120 s, 5 questions
+warmup done
+
+=== trace step_100_10 (5 questions)  (2026-11-27 02:16:02)
+  gsm8k_0000 bf16                   ok=True  same=True  steps= 256 up=  479.3 MB int8=0.00 switches=  0 time=  107.7 s
+  gsm8k_0000 int8                   ok=True  same=True  steps= 256 up=  253.8 MB int8=0.96 switches=  0 time=   75.9 s
+  gsm8k_0000 codec_per_request      ok=True  same=True  steps= 256 up=  254.7 MB int8=0.95 switches=  1 time=   72.6 s
+  gsm8k_0000 codec_per_step         ok=True  same=True  steps= 256 up=  254.7 MB int8=0.95 switches=  1 time=   75.0 s
+  gsm8k_0001 bf16                   ok=True  same=True  steps= 256 up=  476.3 MB int8=0.00 switches=  0 time=  113.9 s
+  gsm8k_0001 int8                   ok=True  same=False steps= 256 up=  250.7 MB int8=0.96 switches=  0 time=   76.2 s
+  gsm8k_0001 codec_per_request      ok=True  same=True  steps= 256 up=  251.6 MB int8=0.95 switches=  1 time=   76.5 s
+  gsm8k_0001 codec_per_step         ok=True  same=True  steps= 256 up=  251.6 MB int8=0.95 switches=  1 time=   76.4 s
+  gsm8k_0002 bf16                   ok=False same=True  steps= 256 up=  478.7 MB int8=0.00 switches=  0 time=  115.9 s
+  gsm8k_0002 int8                   ok=False same=True  steps= 256 up=  253.2 MB int8=0.96 switches=  0 time=   79.3 s
+  gsm8k_0002 codec_per_request      ok=False same=True  steps= 256 up=  254.1 MB int8=0.95 switches=  1 time=   78.6 s
+  gsm8k_0002 codec_per_step         ok=False same=True  steps= 256 up=  254.1 MB int8=0.95 switches=  1 time=   79.2 s
+  gsm8k_0003 bf16                   ok=True  same=True  steps= 256 up=  477.0 MB int8=0.00 switches=  0 time=  108.1 s
+  gsm8k_0003 int8                   ok=True  same=True  steps= 256 up=  251.4 MB int8=0.96 switches=  0 time=   73.7 s
+  gsm8k_0003 codec_per_request      ok=True  same=True  steps= 256 up=  252.3 MB int8=0.95 switches=  1 time=   79.8 s
+  gsm8k_0003 codec_per_step         ok=True  same=True  steps= 256 up=  252.3 MB int8=0.95 switches=  1 time=   74.5 s
+  gsm8k_0004 bf16                   ok=True  same=True  steps= 256 up=  483.0 MB int8=0.00 switches=  0 time=  115.2 s
+  gsm8k_0004 int8                   ok=True  same=False steps= 256 up=  257.4 MB int8=0.96 switches=  0 time=   79.0 s
+  gsm8k_0004 codec_per_request      ok=True  same=False steps= 256 up=  258.3 MB int8=0.95 switches=  1 time=   81.7 s
+  gsm8k_0004 codec_per_step         ok=True  same=False steps= 256 up=  258.3 MB int8=0.95 switches=  1 time=   79.0 s
+
+=== trace phone_lte_lab (5 questions)  (2026-11-27 02:44:42)
+  gsm8k_0000 bf16                   ok=True  same=True  steps= 256 up=  479.3 MB int8=0.00 switches=  0 time=  111.7 s
+  gsm8k_0000 int8                   ok=True  same=True  steps= 256 up=  253.8 MB int8=0.96 switches=  0 time=   71.5 s
+  gsm8k_0000 codec_per_request      ok=True  same=True  steps= 256 up=  254.7 MB int8=0.95 switches=  1 time=   71.9 s
+  gsm8k_0000 codec_per_step         ok=True  same=True  steps= 256 up=  254.7 MB int8=0.95 switches=  1 time=   71.9 s
+  gsm8k_0001 bf16                   ok=True  same=True  steps= 256 up=  476.3 MB int8=0.00 switches=  0 time=  109.3 s
+  gsm8k_0001 int8                   ok=True  same=False steps= 256 up=  250.7 MB int8=0.96 switches=  0 time=   70.5 s
+  gsm8k_0001 codec_per_request      ok=True  same=True  steps= 256 up=  251.6 MB int8=0.95 switches=  1 time=   70.5 s
+  gsm8k_0001 codec_per_step         ok=True  same=True  steps= 256 up=  251.6 MB int8=0.95 switches=  1 time=   71.3 s
+  gsm8k_0002 bf16                   ok=False same=True  steps= 256 up=  478.7 MB int8=0.00 switches=  0 time=  108.3 s
+  gsm8k_0002 int8                   ok=False same=True  steps= 256 up=  253.2 MB int8=0.96 switches=  0 time=   68.9 s
+  gsm8k_0002 codec_per_request      ok=False same=True  steps= 256 up=  254.1 MB int8=0.95 switches=  1 time=   68.7 s
+  gsm8k_0002 codec_per_step         ok=False same=True  steps= 256 up=  254.1 MB int8=0.95 switches=  1 time=   68.7 s
+  gsm8k_0003 bf16                   ok=True  same=True  steps= 256 up=  477.0 MB int8=0.00 switches=  0 time=  110.5 s
+  gsm8k_0003 int8                   ok=True  same=True  steps= 256 up=  251.4 MB int8=0.96 switches=  0 time=   67.5 s
+  gsm8k_0003 codec_per_request      ok=True  same=True  steps= 256 up=  252.3 MB int8=0.95 switches=  1 time=   67.7 s
+  gsm8k_0003 codec_per_step         ok=True  same=True  steps= 256 up=  252.3 MB int8=0.95 switches=  1 time=   67.6 s
+  gsm8k_0004 bf16                   ok=True  same=True  steps= 256 up=  483.0 MB int8=0.00 switches=  0 time=  112.4 s
+  gsm8k_0004 int8                   ok=True  same=False steps= 256 up=  257.4 MB int8=0.96 switches=  0 time=   68.8 s
+  gsm8k_0004 codec_per_request      ok=True  same=False steps= 256 up=  258.3 MB int8=0.95 switches=  1 time=   68.7 s
+  gsm8k_0004 codec_per_step         ok=True  same=False steps= 256 up=  258.3 MB int8=0.95 switches=  1 time=   68.9 s
+
+Exp18 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp18_controller_dllm_cache_dream_gsm8k_t256
+        trace            policy  runs  acc  same_as_bf16  edge_has_answer  measured_s  speedup_vs_bf16  time_vs_int8  int8_step_share  mean_gamma  mean_steps   up_mb  switches  trace_mean_mbps
+  step_100_10              bf16     5  0.8             5                5     112.159            1.000         1.460            0.000         NaN       256.0 478.839       0.0           55.000
+  step_100_10              int8     5  0.8             3                5      76.812            1.460         1.000            0.957         NaN       256.0 253.299       0.0           55.000
+  step_100_10 codec_per_request     5  0.8             4                5      77.841            1.442         1.014            0.953         NaN       256.0 254.219       1.0           55.000
+  step_100_10    codec_per_step     5  0.8             4                5      76.811            1.460         1.000            0.953         NaN       256.0 254.219       1.0           55.000
+phone_lte_lab              bf16     5  0.8             5                5     110.457            1.000         1.591            0.000         NaN       256.0 478.839       0.0           45.095
+phone_lte_lab              int8     5  0.8             3                5      69.446            1.591         1.000            0.957         NaN       256.0 253.299       0.0           45.095
+phone_lte_lab codec_per_request     5  0.8             4                5      69.502            1.590         1.001            0.953         NaN       256.0 254.219       1.0           45.095
+phone_lte_lab    codec_per_step     5  0.8             4                5      69.668            1.586         1.003            0.953         NaN       256.0 254.219       1.0           45.095
+
+Done (2026-11-27 03:11:21).

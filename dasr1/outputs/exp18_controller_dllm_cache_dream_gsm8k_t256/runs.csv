@@ -1,0 +1,177 @@
+trace,case_id,policy,trace_offset_s,trace_mean_mbps,rtt_ms,edge_slowdown,measured_s,n_steps,up_mb,int8_step_share,mean_gamma,text,extracted,ok,same_as_bf16,final_down_ms,final_down_bytes,edge_has_answer,down_mismatch_steps,ctl_switches,ctl_final_codec,ctl_bw_mbps_last,ctl_comp_ms_last
+step_100_10,gsm8k_0000,bf16,0.0,55.0,20.0,3.0,107.68855241313577,256,479.328256,0.0,,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,10.72060689330101,20,True,0,0,,,
+step_100_10,gsm8k_0000,int8,0.0,55.0,20.0,3.0,75.8767251111567,256,253.787626,0.95703125,,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,11.043015867471695,20,True,0,0,,,
+step_100_10,gsm8k_0000,codec_per_request,0.0,55.0,20.0,3.0,72.62255888152868,256,254.7082,0.953125,,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,10.807129554450512,20,True,0,1,int8_delta,39.43172224506006,71.20147598625074
+step_100_10,gsm8k_0000,codec_per_step,0.0,55.0,20.0,3.0,74.9836374251172,256,254.7082,0.953125,,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,10.83481963723898,20,True,0,1,int8_delta,20.881427619593232,74.96285880441911
+step_100_10,gsm8k_0001,bf16,13.0,55.0,20.0,3.0,113.90671357605606,256,476.253184,0.0,,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,10.763322003185749,20,True,0,0,,,
+step_100_10,gsm8k_0001,int8,13.0,55.0,20.0,3.0,76.23461296409369,256,250.712554,0.95703125,,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+So, in total, the robe takes 2 + 1 = 3 bolts of fiber.
+The final answer: 3.",3.0,True,False,10.943049564957619,20,True,0,0,,,
+step_100_10,gsm8k_0001,codec_per_request,13.0,55.0,20.0,3.0,76.52140048518777,256,251.633128,0.953125,,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,11.04119885712862,20,True,0,1,int8_delta,96.60013789431021,71.18982961640916
+step_100_10,gsm8k_0001,codec_per_step,13.0,55.0,20.0,3.0,76.3641377510503,256,251.633128,0.953125,,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,10.952094569802284,20,True,0,1,int8_delta,96.37381514511993,72.47658544825343
+step_100_10,gsm8k_0002,bf16,6.0,55.0,20.0,3.0,115.90385010279715,256,478.697472,0.0,,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,10.724872350692749,20,True,0,0,,,
+step_100_10,gsm8k_0002,int8,6.0,55.0,20.0,3.0,79.27935144584626,256,253.156842,0.95703125,,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,10.746946558356285,20,True,0,0,,,
+step_100_10,gsm8k_0002,codec_per_request,6.0,55.0,20.0,3.0,78.60156399570405,256,254.077416,0.953125,,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,10.706714354455471,20,True,0,1,int8_delta,96.26320619117969,73.19494743715518
+step_100_10,gsm8k_0002,codec_per_step,6.0,55.0,20.0,3.0,79.17426857445389,256,254.077416,0.953125,,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,10.877406224608421,20,True,0,1,int8_delta,96.25290055040645,71.81808367579238
+step_100_10,gsm8k_0003,bf16,19.0,55.0,20.0,3.0,108.11764966510236,256,476.962816,0.0,,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,10.952502489089966,20,True,0,0,,,
+step_100_10,gsm8k_0003,int8,19.0,55.0,20.0,3.0,73.6832498749718,256,251.422186,0.95703125,,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,11.012149043381214,20,True,0,0,,,
+step_100_10,gsm8k_0003,codec_per_request,19.0,55.0,20.0,3.0,79.80193541944027,256,252.34276,0.953125,,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,10.690480470657349,20,True,0,1,int8_delta,13.231304989085812,77.55406404736857
+step_100_10,gsm8k_0003,codec_per_step,19.0,55.0,20.0,3.0,74.53388780262321,256,252.34276,0.953125,,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,11.091823689639568,20,True,0,1,int8_delta,30.5681502615064,71.21062890027511
+step_100_10,gsm8k_0004,bf16,12.0,55.0,20.0,3.0,115.1793366977945,256,482.955264,0.0,,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, and in the afternoon, she gives them another 25 cups of feed.
+So far, she has given her chickens 15 cups + 25 cups = 40 cups of feed.
+She needs to give her chickens a total of 60 cups of feed per day, so she needs to give them 60 cups - 40 cups = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,10.909791104495525,20,True,0,0,,,
+step_100_10,gsm8k_0004,int8,12.0,55.0,20.0,3.0,78.98567008040845,256,257.414634,0.95703125,,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, so she still needs to feed 60 cups - 15 cups = 45 cups of feed.
+In the afternoon, she gives her chickens another 25 cups of feed, so she still needs to feed 45 cups - 25 cups = 20 cups of feed.
+Therefore, Wendi needs to give her chickens 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,False,11.0351936891675,20,True,0,0,,,
+step_100_10,gsm8k_0004,codec_per_request,12.0,55.0,20.0,3.0,81.65655621141195,256,258.335208,0.953125,,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, so she still needs to feed 60 cups - 15 cups = 45 cups of feed.
+In the afternoon, she gives her chickens another 25 cups of feed, so she still needs to feed 45 cups - 25 cups = 20 cups of feed.
+Therefore, Wendi needs to give her chickens 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,False,10.798591189086437,20,True,0,1,int8_delta,30.56404470946054,77.8159500229485
+step_100_10,gsm8k_0004,codec_per_step,12.0,55.0,20.0,3.0,79.00079202651978,256,258.335208,0.953125,,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, so she still needs to feed 60 cups - 15 cups = 45 cups of feed.
+In the afternoon, she gives her chickens another 25 cups of feed, so she still needs to feed 45 cups - 25 cups = 20 cups of feed.
+Therefore, Wendi needs to give her chickens 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,False,10.943193919956684,20,True,0,1,int8_delta,70.28767361139884,79.02551077381379
+phone_lte_lab,gsm8k_0000,bf16,0.0,45.095050083333334,9.5,3.0,111.73738698661327,256,479.328256,0.0,,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,5.588690750300884,20,True,0,0,,,
+phone_lte_lab,gsm8k_0000,int8,0.0,45.095050083333334,9.5,3.0,71.52050833776593,256,253.787626,0.95703125,,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,5.562072619795799,20,True,0,0,,,
+phone_lte_lab,gsm8k_0000,codec_per_request,0.0,45.095050083333334,9.5,3.0,71.89182847738266,256,254.7082,0.953125,,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,5.7870810851454735,20,True,0,1,int8_delta,46.31966752069977,76.9387560761744
+phone_lte_lab,gsm8k_0000,codec_per_step,0.0,45.095050083333334,9.5,3.0,71.89679540786892,256,254.7082,0.953125,,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",18.0,True,True,6.858999840915203,20,True,0,1,int8_delta,46.79499980378963,75.6812959818624
+phone_lte_lab,gsm8k_0001,bf16,13.0,45.095050083333334,9.5,3.0,109.31952139828354,256,476.253184,0.0,,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,5.725650116801262,20,True,0,0,,,
+phone_lte_lab,gsm8k_0001,int8,13.0,45.095050083333334,9.5,3.0,70.49278060998768,256,250.712554,0.95703125,,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+So, in total, the robe takes 2 + 1 = 3 bolts of fiber.
+The final answer: 3.",3.0,True,False,5.487704649567604,20,True,0,0,,,
+phone_lte_lab,gsm8k_0001,codec_per_request,13.0,45.095050083333334,9.5,3.0,70.5121921338141,256,251.633128,0.953125,,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,6.455299444496632,20,True,0,1,int8_delta,45.677113452231296,68.72495081608169
+phone_lte_lab,gsm8k_0001,codec_per_step,13.0,45.095050083333334,9.5,3.0,71.308185338974,256,251.633128,0.953125,,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",3.0,True,True,5.669345147907734,20,True,0,1,int8_delta,45.404394330640294,73.82547524690797
+phone_lte_lab,gsm8k_0002,bf16,26.0,45.095050083333334,9.5,3.0,108.32025973219424,256,478.697472,0.0,,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,5.645198747515678,20,True,0,0,,,
+phone_lte_lab,gsm8k_0002,int8,26.0,45.095050083333334,9.5,3.0,68.93276227917522,256,253.156842,0.95703125,,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,5.67331537604332,20,True,0,0,,,
+phone_lte_lab,gsm8k_0002,codec_per_request,26.0,45.095050083333334,9.5,3.0,68.7061977153644,256,254.077416,0.953125,,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,5.529868416488171,20,True,0,1,int8_delta,44.213659514682405,72.20659051669946
+phone_lte_lab,gsm8k_0002,codec_per_step,26.0,45.095050083333334,9.5,3.0,68.69701526872814,256,254.077416,0.953125,,"The total cost of the house is $80,000 + $50,000 = $130,000.
+The value of the house increased by 150%, so the new value is $130,000 * 1.5 = $195,000.
+The profit is the difference between the new value and the total cost, so the profit is $195,000 - $130,000 = $65,000.
+The answer is: 65000",65000.0,False,True,5.549721419811249,20,True,0,1,int8_delta,44.445600692250636,74.10721619385313
+phone_lte_lab,gsm8k_0003,bf16,39.0,45.095050083333334,9.5,3.0,110.51450961548835,256,476.962816,0.0,,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,5.506602115929127,20,True,0,0,,,
+phone_lte_lab,gsm8k_0003,int8,39.0,45.095050083333334,9.5,3.0,67.5127641260624,256,251.422186,0.95703125,,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,5.605803802609444,20,True,0,0,,,
+phone_lte_lab,gsm8k_0003,codec_per_request,39.0,45.095050083333334,9.5,3.0,67.67798333056271,256,252.34276,0.953125,,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,5.4048802703619,20,True,0,1,int8_delta,48.933588525638996,69.74176045389262
+phone_lte_lab,gsm8k_0003,codec_per_step,39.0,45.095050083333334,9.5,3.0,67.55714979022741,256,252.34276,0.953125,,"James runs 3 sprints 3 times a week, so he runs a total of 3 * 3 = 9 sprints per week.
+Each sprint is 60 meters, so he runs a total of 9 * 60 = 540 meters per week.
+#### 540
+The answer is: 540",540.0,True,True,5.7211145758628845,20,True,0,1,int8_delta,47.494105512980354,76.26765777139401
+phone_lte_lab,gsm8k_0004,bf16,52.0,45.095050083333334,9.5,3.0,112.39112798217684,256,482.955264,0.0,,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, and in the afternoon, she gives them another 25 cups of feed.
+So far, she has given her chickens 15 cups + 25 cups = 40 cups of feed.
+She needs to give her chickens a total of 60 cups of feed per day, so she needs to give them 60 cups - 40 cups = 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,True,5.5121323093771935,20,True,0,0,,,
+phone_lte_lab,gsm8k_0004,int8,52.0,45.095050083333334,9.5,3.0,68.7691033994779,256,257.414634,0.95703125,,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, so she still needs to feed 60 cups - 15 cups = 45 cups of feed.
+In the afternoon, she gives her chickens another 25 cups of feed, so she still needs to feed 45 cups - 25 cups = 20 cups of feed.
+Therefore, Wendi needs to give her chickens 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,False,5.531442351639271,20,True,0,0,,,
+phone_lte_lab,gsm8k_0004,codec_per_request,52.0,45.095050083333334,9.5,3.0,68.72076565679163,256,258.335208,0.953125,,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, so she still needs to feed 60 cups - 15 cups = 45 cups of feed.
+In the afternoon, she gives her chickens another 25 cups of feed, so she still needs to feed 45 cups - 25 cups = 20 cups of feed.
+Therefore, Wendi needs to give her chickens 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,False,5.551902577280998,20,True,0,1,int8_delta,50.38737777926041,76.26844460288675
+phone_lte_lab,gsm8k_0004,codec_per_step,52.0,45.095050083333334,9.5,3.0,68.87865462899208,256,258.335208,0.953125,,"Wendi feeds each chicken 3 cups of feed per day, so she needs to feed 20 chickens x 3 cups/chicken = 60 cups of feed per day.
+In the morning, she gives her chickens 15 cups of feed, so she still needs to feed 60 cups - 15 cups = 45 cups of feed.
+In the afternoon, she gives her chickens another 25 cups of feed, so she still needs to feed 45 cups - 25 cups = 20 cups of feed.
+Therefore, Wendi needs to give her chickens 20 cups of feed in the final meal of the day.
+The answer is: 20",20.0,True,False,5.502479150891304,20,True,0,1,int8_delta,49.01170897543435,78.17726343697089

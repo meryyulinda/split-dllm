@@ -1,0 +1,2347 @@
+variant,case_id,task,prompt_tokens,cache,decode,threshold,encoding,gold_answer,text,extracted,ok,same_as_ref,same_as_cache_ref,n_steps,tokens_per_step,block_start_steps,edge_ms,encode_ms,cloud_ms,sample_ms,up_mb,full_mb,down_kb,mean_rows_sent,block_start_mb,rows_reused,wall_s,edge_peak_gib,cloud_peak_gib,edge_energy_j,cloud_energy_j,ref_ok,cache_ref_ok
+F0_nocache_fixed,gsm8k_0000,math,92,none,fixed,,bf16,18,"To determine how much Janet makes every day at the farmers' market, we need to follow these steps:
+
+1. **Calculate the total number of eggs laid per day:**
+   Janet's ducks lay 16 eggs per day.
+
+2. **Calculate the number of eggs used for breakfast and baking:**
+   - She eats 3 eggs for breakfast.
+   - She bakes 4 eggs for her friends.
+   - Total eggs used for breakfast and baking: \( 3 + 4 = 7 \) eggs.
+
+3. **Calculate the number of eggs sold:**
+   - Total eggs laid per day: 16
+   - Eggs used for breakfast and baking: 7
+   - Eggs sold: \( 16 - 7 = 9 \) eggs.
+
+4. **Calculate the revenue from selling the eggs:**
+   - She sells each egg for $2.
+   - Total eggs sold: 9
+   - Revenue from selling eggs: \( 9 \times 2 = 18 \) dollars.
+
+Therefore, Janet makes $18 every day at the farmers' market.
+
+#### Janet makes $18 daily at the farmers' market.",18.0,True,True,False,256,1.0,256,2391.6430740356445,0.39827199873980135,17626.265197753906,604.076352596283,729.812992,729.808896,3.584,348.0,729.812992,0,20.677710845135152,2.6457438468933105,12.518844604492188,1898.0230000019073,5897.766000032425,True,True
+K2_dual_thr0.9,gsm8k_0000,math,92,dual,threshold,0.9,bf16,18,"To determine how much Janet makes every day at the farmers' market, we need to follow these steps:
+
+1. **Calculate the total number of eggs laid by the ducks per day:**
+   Janet's ducks lay 16 eggs per day.
+
+2. **Determine how many eggs Janet uses for breakfast and baking:**
+   - She eats 3 eggs for breakfast.
+   - She bakes 4 eggs for her friends.
+   - Total eggs used for breakfast and baking = 3 + 4 = 7 eggs.
+
+3. **Calculate the number of eggs remaining to be sold:**
+   - Total eggs laid per day = 16 eggs.
+   - Eggs used for breakfast and baking = 7 eggs.
+   - Eggs remaining to be sold = 16 - 7 = 9 eggs.
+
+4. **Calculate the revenue from selling the remaining eggs:**
+   - Janet sells each egg for $2.
+   - Eggs remaining to be sold = 9 eggs.
+   - Revenue from selling eggs = 9 eggs * $2/egg = $18.
+
+Therefore, Janet makes **$18** every day at the farmers' market.",18.0,True,False,True,102,2.5098039215686274,8,632.8693742752075,0.16038399969693273,4373.464645385742,214.6031677722931,47.449696,290.783232,2.352,56.78431372549019,22.806656,0,5.238624831661582,2.6848068237304688,12.747940063476562,420.4170000553131,1191.4459999799728,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0000,math,92,dual,threshold,0.9,int8_abs,18,"To determine how much Janet makes every day at the farmers' market, we need to follow these steps:
+
+1. **Calculate the total number of eggs laid by the ducks per day:**
+   Janet's ducks lay 16 eggs per day.
+
+2. **Determine how many eggs Janet uses for breakfast and baking:**
+   - She eats 3 eggs for breakfast.
+   - She bakes 4 eggs for her friends.
+   - Total eggs used for breakfast and baking = 3 + 4 = 7 eggs.
+
+3. **Calculate the number of eggs remaining to be sold:**
+   - Total eggs laid per day = 16 eggs.
+   - Eggs used for breakfast and baking = 7 eggs.
+   - Eggs remaining to be sold = 16 - 7 = 9 eggs.
+
+4. **Calculate the revenue from selling the remaining eggs:**
+   - Janet sells each egg for $2.
+   - Eggs remaining to be sold = 9 eggs.
+   - Revenue from selling eggs = 9 eggs * $2/egg = $18.
+
+Therefore, Janet makes **$18** every day at the farmers' market.",18.0,True,False,True,103,2.4854368932038833,8,648.9467535018921,21.59097658470273,4461.144081115723,219.41875219345093,23.8684,293.634048,2.36,56.54368932038835,11.40896,0,5.368296987377107,2.6848068237304688,12.747940063476562,423.71599996089935,1170.402999997139,True,True
+K5_dual_thr0.9_int4,gsm8k_0000,math,92,dual,threshold,0.9,int4_group,18,"To determine how much Janet makes every day at the farmers' market, we need to follow these steps:
+
+1. **Calculate the total number of eggs laid by the ducks per day:**
+   Janet's ducks lay 16 eggs per day.
+
+2. **Determine how many eggs Janet uses for breakfast and baking:**
+   - She eats 3 eggs for breakfast.
+   - She bakes 4 eggs for her friends.
+   - Total eggs used for breakfast and baking: \(3 + 4 = 7\) eggs.
+
+3. **Calculate the number of eggs remaining for sale:**
+   - Total eggs laid per day: 16 eggs.
+   - Eggs used for breakfast and baking: 7 eggs.
+   - Eggs remaining for sale: \(16 - 7 = 9\) eggs.
+
+4. **Calculate the revenue from selling the remaining eggs:**
+   - Janet sells each egg for $2.
+   - Eggs remaining for sale: 9 eggs.
+   - Revenue from selling eggs: \(9 \times 2 = 18\) dollars.
+
+Therefore, Janet makes **$18** dollars every day at the farmers' market.",18.0,True,False,False,96,2.6666666666666665,8,595.3175058364868,4.552928101271391,4129.277946472168,201.1424639225006,11.828736,273.678336,2.304,58.333333333333336,5.879936,0,4.946260899305344,2.6848068237304688,12.747940063476562,396.8840000629425,1100.166000008583,True,True
+F0_nocache_fixed,gsm8k_0001,math,55,none,fixed,,bf16,3,"To determine the total number of bolts required for the robe, we need to consider both the blue fiber and the white fiber.
+
+1. The robe takes 2 bolts of blue fiber.
+2. The robe takes half as much white fiber as blue fiber. Since it takes 2 bolts of blue fiber, half of that is:
+   \[
+   \frac{2}{2} = 1 \text{ bolt of white fiber}
+   \]
+
+Now, we add the bolts of blue fiber and the bolts of white fiber to find the total number of bolts:
+\[
+2 \text{ bolts of blue fiber} + 1 \text{ bolt of white fiber} = 3 \text{ bolts}
+\]
+
+Therefore, the total number of bolts required for the robe is 3.
+
+####",3.0,True,True,False,256,1.0,256,2404.632661819458,0.4077119989087805,17123.53727722168,598.6595213413239,652.218368,652.214272,3.584,311.0,652.218368,0,20.17865974083543,2.6407995223999023,12.501015186309814,1837.49899995327,5733.599999904633,True,True
+K2_dual_thr0.9,gsm8k_0001,math,55,dual,threshold,0.9,bf16,3,"To determine the total number of bolts needed for the robe, we need to consider both the blue fiber and the white fiber.
+
+1. The blue fiber is 2 bolts.
+2. The white fiber is half as much as the blue fiber. Since the blue fiber is 2 bolts, half of that is \( \frac{2}{2} = 1 \) bolt.
+
+Now, we add the amount of blue fiber and the amount of white fiber to find the total number of bolts:
+
+\[ 2 \text{ bolts of blue fiber} + 1 \text{ bolt of white fiber} = 3 \text{ bolts} \]
+
+So, the total number of bolts needed for the robe is 3.
+
+####",3.0,True,False,True,81,3.1604938271604937,8,526.5722851753235,0.1558079996611923,3550.230670928955,173.44876861572266,39.519504,206.364672,2.184,59.55555555555556,20.381824,0,4.2656575459986925,2.674567699432373,12.77240800857544,359.98099994659424,956.6710000038147,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0001,math,55,dual,threshold,0.9,int8_abs,3,"To determine the total number of bolts needed for the robe, we need to consider both the blue fiber and the white fiber.
+
+1. The blue fiber is 2 bolts.
+2. The white fiber is half as much as the blue fiber. Since the blue fiber is 2 bolts, half of that is \( \frac{2}{2} = 1 \) bolt.
+
+Now, we add the amount of blue fiber and the amount of white fiber to find the total number of bolts:
+
+\[ 2 \text{ bolts of blue fiber} + 1 \text{ bolt of white fiber} = 3 \text{ bolts} \]
+
+So, the total number of bolts needed for the robe is 3.
+
+####",3.0,True,False,True,83,3.0843373493975905,8,521.4304308891296,3.958175901323557,3621.0469360351562,176.46547174453735,20.032352,211.460096,2.2,58.89156626506024,10.195952,0,4.337471568956971,2.674567699432373,12.77240800857544,351.99000000953674,948.1780000925064,True,True
+K5_dual_thr0.9_int4,gsm8k_0001,math,55,dual,threshold,0.9,int4_group,3,"To determine the total number of bolts needed for the robe, we need to consider both the blue fiber and the white fiber.
+
+1. The robe takes 2 bolts of blue fiber.
+2. The robe takes half as much white fiber as blue fiber. Since it takes 2 bolts of blue fiber, half of that is:
+   \[
+   \frac{2}{2} = 1 \text{ bolt of white fiber}
+   \]
+
+Now, we add the bolts of blue fiber and the bolts of white fiber to find the total number of bolts:
+\[
+2 \text{ bolts of blue fiber} + 1 \text{ bolt of white fiber} = 3 \text{ bolts}
+\]
+
+Therefore, the total number of bolts needed for the robe is 3.
+
+####",3.0,True,False,False,79,3.240506329113924,8,507.27516889572144,3.558016110211611,3470.160259246826,170.51055908203125,10.054384,201.269248,2.168,60.25316455696203,5.254784,0,4.165833277627826,2.674567699432373,12.77198839187622,331.9690001010895,941.4259999990463,True,True
+F0_nocache_fixed,gsm8k_0002,math,86,none,fixed,,bf16,70000,"To determine Josh's profit from flipping the house, we need to follow these steps:
+
+1. **Calculate the new value of the house after repairs:**
+   - The original value of the house is $80,000.
+   - The repairs increased the value by 150%.
+   - 150% of $80,000 is \(1.50 \times 80,000 = 120,000\).
+   - Therefore, the new value of the house is \(80,000 + 120,000 = 200,000\).
+
+2. **Determine the profit:**
+   - Profit is the difference between the new value of the house and the original purchase price.
+   - The original purchase price is $80,000.
+   - The new value is $200,000.
+   - Profit is \(200,000 - 80,000 = 120,000\).
+
+#### Josh's profit is $120,000.",120000.0,False,True,False,256,1.0,256,2379.548225402832,0.4201919990591705,17609.237617492676,604.8847370147705,717.23008,717.225984,3.584,342.0,717.23008,0,20.648405232466757,2.6440348625183105,12.515857696533203,1896.1789999008179,5930.630999922752,False,False
+K2_dual_thr0.9,gsm8k_0002,math,86,dual,threshold,0.9,bf16,70000,"To determine Josh's profit from flipping the house, we need to follow these steps:
+
+1. **Calculate the new value of the house after repairs:**
+   - The original value of the house is $80,000.
+   - The repairs increased the value by 150%.
+   - 150% of $80,000 is \(1.50 \times 80,000 = 120,000\).
+   - Therefore, the new value of the house is \(120,000 + 50,000 = 170,000\).
+
+2. **Determine the total cost of the house:**
+   - Josh bought the house for $80,000.
+
+3. **Calculate the profit:**
+   - Profit is the difference between the new value of the house and the original cost.
+   - Profit = \(170,000 - 80,000 = 90,000\).
+
+So, Josh's profit from flipping the house is \(90,000\).",90000.0,False,False,True,92,2.782608695652174,8,584.1616973876953,0.17065599968191236,4013.051601409912,196.68140745162964,44.43488,257.753088,2.272,58.95652173913044,22.41344,0,4.811480774544179,2.6805648803710938,12.736017227172852,383.66299998760223,1075.4530000686646,False,False
+K4_dual_thr0.9_int8abs,gsm8k_0002,math,86,dual,threshold,0.9,int8_abs,70000,"To determine Josh's profit from flipping the house, we need to follow these steps:
+
+1. **Calculate the new value of the house after repairs:**
+   - The original value of the house is $80,000.
+   - The repairs increased the value by 150%.
+   - 150% of $80,000 is \(1.50 \times 80,000 = 120,000\).
+   - Therefore, the new value of the house is \(80,000 + 120,000 = 200,000\).
+
+2. **Determine the profit:**
+   - The profit is the difference between the new value of the house and the original purchase price.
+   - The original purchase price is $80,000.
+   - Therefore, the profit is \(200,000 - 80,000 = 120,000\).
+
+So, Josh's profit is $120,000.
+
+#### 120,000",120000.0,False,False,False,86,2.9767441860465116,8,544.0524482727051,4.248607899993658,3741.2877807617188,182.90275168418884,21.442112,240.943104,2.224,60.83720930232558,11.212256,0,4.48774379119277,2.6805648803710938,12.736017227172852,361.904000043869,1004.8240000009537,False,False
+K5_dual_thr0.9_int4,gsm8k_0002,math,86,dual,threshold,0.9,int4_group,70000,"To determine Josh's profit from flipping the house, we need to follow these steps:
+
+1. **Calculate the new value of the house after repairs:**
+   - The original value of the house is $80,000.
+   - The repairs increased the value by 150%.
+   - 150% of $80,000 is calculated as \( 1.5 \times 80,000 = 120,000 \).
+   - Therefore, the new value of the house is \( 80,000 + 120,000 = 200,000 \).
+
+2. **Calculate the profit:**
+   - Profit is the difference between the new value of the house and the original purchase price.
+   - The original purchase price is $80,000.
+   - Therefore, the profit is \( 200,000 - 80,000 = 120,000 \).
+
+So, Josh's profit is:
+
+\[
+\boxed{120000}
+\]",120000.0,False,False,False,88,2.909090909090909,8,565.3388800621033,4.252832073718309,3857.2464904785156,188.6734082698822,11.18656,246.546432,2.24,60.18181818181818,5.77856,0,4.631496532820165,2.6805648803710938,12.735788345336914,366.12800002098083,1045.6849999427795,False,False
+F0_nocache_fixed,gsm8k_0003,math,64,none,fixed,,bf16,540,"To determine the total distance James runs in a week, we need to break down the problem into smaller steps.
+
+1. **Calculate the distance James runs in one day:**
+   - James runs 3 sprints each day.
+   - Each sprint is 60 meters.
+   - Therefore, the distance he runs in one day is:
+     \[
+     3 \text{ sprints} \times 60 \text{ meters/sprint} = 180 \text{ meters/day}
+     \]
+
+2. **Calculate the distance James runs in one week:**
+   - James runs 3 days a week.
+   - Therefore, the distance he runs in one week is:
+     \[
+     180 \text{ meters/day} \times 3 \text{ days/week} = 540 \text{ meters/week}
+     \]
+
+So, James runs a total of 540 meters a week.",540.0,True,True,False,256,1.0,256,2346.6698265075684,0.419135999167338,17243.371726989746,607.7506227493286,671.092736,671.08864,3.584,320.0,671.092736,0,20.25245023239404,2.6423254013061523,12.505323886871338,1845.9910000562668,5800.24899995327,True,True
+K2_dual_thr0.9,gsm8k_0003,math,64,dual,threshold,0.9,bf16,540,"To determine the total distance James runs in a week, we need to break down the problem into smaller steps.
+
+1. **Calculate the distance James runs in one day:**
+   - James runs 3 sprints each day.
+   - Each sprint is 60 meters.
+   - Therefore, the distance he runs in one day is:
+     \[
+     3 \text{ sprints} \times 60 \text{ meters/sprint} = 180 \text{ meters/day}
+     \]
+
+2. **Calculate the distance James runs in one week:**
+   - James runs 3 times a week.
+   - Therefore, the distance he runs in one week is:
+     \[
+     180 \text{ meters/day} \times 3 \text{ days/week} = 540 \text{ meters/week}
+     \]
+
+So, James runs a total of 540 meters a week.",540.0,True,False,True,71,3.6056338028169015,8,456.5151038169861,0.13427199982106686,3124.100688934326,152.43673610687256,37.487728,186.12224,2.104,64.45070422535211,20.971648,0,3.7480177944526076,2.6765055656433105,12.779402256011963,303.89600002765656,840.9539999961853,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0003,math,64,dual,threshold,0.9,int8_abs,540,"To determine the total distance James runs in a week, we need to break down the problem into smaller steps.
+
+1. **Calculate the distance James runs in one day:**
+   - James runs 3 sprints each day.
+   - Each sprint is 60 meters.
+   - Therefore, the distance he runs in one day is:
+     \[
+     3 \text{ sprints} \times 60 \text{ meters/sprint} = 180 \text{ meters/day}
+     \]
+
+2. **Calculate the distance James runs in one week:**
+   - James runs 3 times a week.
+   - Therefore, the distance he runs in one week is:
+     \[
+     180 \text{ meters/day} \times 3 \text{ days/week} = 540 \text{ meters/week}
+     \]
+
+So, James runs a total of 540 meters a week.",540.0,True,False,True,70,3.657142857142857,8,445.6273274421692,3.5027839355170727,3069.551540374756,150.3860478401184,18.622432,183.5008,2.096,64.91428571428571,10.491008,0,3.681927870027721,2.6765055656433105,12.711561679840088,297.3860000371933,833.9910000562668,True,True
+K5_dual_thr0.9_int4,gsm8k_0003,math,64,dual,threshold,0.9,int4_group,540,"To determine the total distance James runs in a week, we need to break down the problem into smaller steps.
+
+1. **Calculate the distance James runs in one day:**
+   - James runs 3 sprints each day.
+   - Each sprint is 60 meters.
+   - Therefore, the distance he runs in one day is:
+     \[
+     3 \text{ sprints} \times 60 \text{ meters/sprint} = 180 \text{ meters/day}
+     \]
+
+2. **Calculate the distance James runs in one week:**
+   - James runs 3 times a week.
+   - Therefore, the distance he runs in one week is:
+     \[
+     180 \text{ meters/day} \times 3 \text{ days/week} = 540 \text{ meters/week}
+     \]
+
+So, James runs a total of 540 meters in a week.",540.0,True,False,False,70,3.657142857142857,8,442.2155833244324,3.278784066438675,3072.8445358276367,147.8774392604828,9.598048,183.5008,2.096,64.91428571428571,5.406848,0,3.6784774009138346,2.6765055656433105,12.711775302886963,286.1689999103546,828.3140000104904,True,True
+F0_nocache_fixed,gsm8k_0004,math,139,none,fixed,,bf16,20,"To determine how many cups of feed Wendi needs to give her chickens in the final meal of the day, we can follow these steps:
+
+1. **Calculate the total amount of feed needed for the day:**
+   - Each chicken needs 3 cups of feed per day.
+   - Wendi has 20 chickens.
+   - Total feed needed for the day = 20 chickens * 3 cups/chicken = 60 cups.
+
+2. **Calculate the total amount of feed given in the first two meals:**
+   - Morning feed: 15 cups
+   - Afternoon feed: 25 cups
+   - Total feed given in the first two meals = 15 cups + 25 cups = 40 cups.
+
+3. **Calculate the amount of feed needed for the final meal:**
+   - Total feed needed for the day: 60 cups
+   - Feed given in the first two meals: 40 cups
+   - Feed needed for the final meal = 60 cups - 40 cups = 20 cups.
+
+Therefore, Wendi needs to give **20 cups** of feed in the final meal of the day.",20.0,True,True,False,256,1.0,256,2646.6262006759644,0.3952319991076365,20394.69525909424,638.7677438259125,828.379136,828.37504,3.584,395.0,828.379136,0,23.74041990097612,2.6505050659179688,12.54264211654663,2250.072000026703,6767.96799993515,True,True
+K2_dual_thr0.9,gsm8k_0004,math,139,dual,threshold,0.9,bf16,20,"To determine how many cups of feed Wendi needs to give her chickens in the final meal of the day, we can follow these steps:
+
+1. **Calculate the total amount of feed needed for the day:**
+   - Each chicken needs 3 cups of feed per day.
+   - Wendi has 20 chickens.
+   - Total feed needed for the day = 20 chickens * 3 cups/chicken = 60 cups.
+
+2. **Calculate the total amount of feed given in the morning and afternoon meals:**
+   - Morning meal: 15 cups
+   - Afternoon meal: 25 cups
+   - Total feed given in morning and afternoon = 15 cups + 25 cups = 40 cups.
+
+3. **Calculate the amount of feed needed for the final meal:**
+   - Total feed needed for the day = 60 cups
+   - Total feed given in morning and afternoon = 40 cups
+   - Feed needed for the final meal = 60 cups - 40 cups = 20 cups.
+
+Therefore, Wendi needs to give **20 cups** of feed in the final meal of the day.",20.0,True,False,True,85,3.011764705882353,8,532.845281124115,0.13583999953698367,3734.7551040649414,179.20265698432922,46.073168,275.0464,2.216,66.16470588235295,25.886848,0,4.46245298627764,2.693394184112549,12.795289516448975,367.5740000009537,1047.0480000972748,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0004,math,139,dual,threshold,0.9,int8_abs,20,"To determine how many cups of feed Wendi needs to give her chickens in the final meal of the day, we can follow these steps:
+
+1. **Calculate the total amount of feed needed for the day:**
+   - Each chicken needs 3 cups of feed per day.
+   - Wendi has 20 chickens.
+   - Total feed needed per day = 20 chickens * 3 cups/chicken = 60 cups.
+
+2. **Calculate the total amount of feed given in the morning and afternoon meals:**
+   - Morning meal: 15 cups
+   - Afternoon meal: 25 cups
+   - Total feed given in morning and afternoon = 15 cups + 25 cups = 40 cups.
+
+3. **Calculate the amount of feed needed for the final meal:**
+   - Total feed needed per day = 60 cups
+   - Total feed given in morning and afternoon = 40 cups
+   - Feed needed for the final meal = 60 cups - 40 cups = 20 cups.
+
+Therefore, Wendi needs to give her chickens **20 cups** of feed in the final meal of the day.",20.0,True,False,False,81,3.1604938271604937,8,526.0699858665466,4.257311902940273,3655.972667694092,175.87951970100403,22.523904,262.10304,2.184,67.85185185185185,12.949808,0,4.376960496418178,2.693394184112549,12.795716762542725,360.95099997520447,997.9239999055862,True,True
+K5_dual_thr0.9_int4,gsm8k_0004,math,139,dual,threshold,0.9,int4_group,20,"To determine how many cups of feed Wendi needs to give her chickens in the final meal of the day, we can follow these steps:
+
+1. **Calculate the total amount of feed needed for the day:**
+   - Each chicken needs 3 cups of feed per day.
+   - Wendi has 20 chickens.
+   - Total feed needed per day = 20 chickens * 3 cups/chicken = 60 cups.
+
+2. **Calculate the total amount of feed given in the morning and afternoon meals:**
+   - Morning meal: 15 cups
+   - Afternoon meal: 25 cups
+   - Total feed given in morning and afternoon = 15 cups + 25 cups = 40 cups.
+
+3. **Calculate the amount of feed needed for the final meal:**
+   - Total feed needed per day = 60 cups
+   - Total feed given in morning and afternoon = 40 cups
+   - Feed needed for the final meal = 60 cups - 40 cups = 20 cups.
+
+Therefore, Wendi needs to give her chickens **20 cups** of feed in the final meal of the day.",20.0,True,False,False,81,3.1604938271604937,8,521.2519388198853,4.128800064325333,3649.5612144470215,175.0387842655182,11.608848,262.10304,2.184,67.85185185185185,6.674048,0,4.364520254544914,2.693394184112549,12.795716762542725,361.3880000114441,995.5920000076294,True,True
+F0_nocache_fixed,gsm8k_0005,math,85,none,fixed,,bf16,64,"To determine how much Kylar needs to pay for 16 glasses, we need to consider the cost of each glass and the discount on every second glass.
+
+1. **Cost of the first glass:**
+   - The first glass costs $5.
+
+2. **Cost of every second glass:**
+   - Every second glass costs 60% of the price of the first glass.
+   - Therefore, the cost of every second glass is \( 0.6 \times 5 = 3 \) dollars.
+
+3. **Total cost for 16 glasses:**
+   - The first 8 glasses are priced at $5 each.
+   - The next 8 glasses are priced at $3 each.
+
+   - The cost for the first 8 glasses is \( 8 \times 5 = 40 \) dollars.
+   - The cost for the next 8 glasses is \( 8 \times 3 = 24 \) dollars.
+
+   - Adding these together, the total cost is \( 40 + 24 = 64 \) dollars.
+
+Therefore, Kylar needs to pay $64 for the 16 glasses.",16.0,False,True,False,256,1.0,256,2390.755621910095,0.3898239992558956,17604.3978805542,619.3830387592316,715.132928,715.128832,3.584,341.0,715.132928,0,20.67126762587577,2.644069194793701,12.515378952026367,1894.972000002861,5929.317000031471,False,True
+K2_dual_thr0.9,gsm8k_0005,math,85,dual,threshold,0.9,bf16,64,"To determine how much Kylar needs to pay for 16 glasses, we can break down the problem into smaller steps:
+
+1. **Cost of the first glass:**
+   - The first glass costs $5.
+
+2. **Cost of every second glass:**
+   - Every second glass costs 60% of the price of the first glass.
+   - Therefore, the cost of every second glass is \(0.6 \times 5 = 3\) dollars.
+
+3. **Total cost for 16 glasses:**
+   - There are 8 pairs of glasses in 16 glasses.
+   - Each pair consists of a first glass and a second glass.
+   - The cost for each pair is \(5 + 3 = 8\) dollars.
+   - Therefore, the total cost for 8 pairs is \(8 \times 8 = 64\) dollars.
+
+#### 64",64.0,True,False,True,118,2.169491525423729,8,782.7019481658936,0.2254719998454675,5341.063941955566,254.4028491973877,51.185504,329.629696,2.48,52.94915254237288,22.347904,0,6.400926183909178,2.680492401123047,12.73505687713623,508.6780000925064,1383.4539999961853,False,True
+K4_dual_thr0.9_int8abs,gsm8k_0005,math,85,dual,threshold,0.9,int8_abs,64,"To determine how much Kylar needs to pay for 16 glasses, we can break down the problem into steps:
+
+1. **Cost of the first glass:**
+   - The first glass costs $5.
+
+2. **Cost of every second glass:**
+   - Every second glass costs 60% of the price of the first glass.
+   - Therefore, the cost of every second glass is \(0.6 \times 5 = 3\) dollars.
+
+3. **Total cost for 16 glasses:**
+   - There are 8 pairs of glasses in 16 glasses.
+   - Each pair consists of a first glass and a second glass.
+   - The cost for each pair is \(5 + 3 = 8\) dollars.
+   - Therefore, the total cost for 8 pairs is \(8 \times 8 = 64\) dollars.
+
+#### 64",64.0,True,False,False,111,2.3063063063063063,8,742.4472646713257,5.568671885877848,5066.837375640869,238.48051166534424,24.688128,310.075392,2.424,54.270270270270274,11.179472,0,6.073869088664651,2.680492401123047,12.734789848327637,473.4269999265671,1268.957999944687,False,True
+K5_dual_thr0.9_int4,gsm8k_0005,math,85,dual,threshold,0.9,int4_group,64,"To determine how much Kylar needs to pay for 16 glasses, we need to consider the cost of the first glass and the discounted price for every second glass.
+
+1. **Cost of the first glass:**
+   - The first glass costs $5.
+
+2. **Cost of every second glass:**
+   - Every second glass costs 60% of the price of a regular glass.
+   - Therefore, the cost of every second glass is \(0.60 \times 5 = 3\) dollars.
+
+3. **Total cost calculation:**
+   - Kylar wants to buy 16 glasses.
+   - The first glass costs $5.
+   - The remaining 15 glasses are all $3 each.
+
+   Let's calculate the total cost:
+   - Cost of the first glass: $5
+   - Cost of the remaining 15 glasses: \(15 \times 3 = 45\) dollars
+
+   Adding these together:
+   - Total cost = \(5 + 45 = 50\) dollars
+
+Therefore, Kylar needs to pay \boxed{50} for 16 glasses.",16.0,False,False,False,124,2.064516129032258,8,781.8230710029602,5.393280107527971,5383.428569793701,265.16822361946106,13.603264,346.390528,2.528,51.935483870967744,5.761664,0,6.458147446624935,2.680492401123047,12.734789848327637,518.182000041008,1400.8980000019073,False,True
+F0_nocache_fixed,gsm8k_0006,math,72,none,fixed,,bf16,260,"To determine the total number of sheep that Toulouse, Charleston, and Seattle have together, we will follow these steps:
+
+1. **Determine the number of sheep Charleston has:**
+   - Seattle has 20 sheep.
+   - Charleston has 4 times as many sheep as Seattle.
+   - Therefore, Charleston has \(4 \times 20 = 80\) sheep.
+
+2. **Determine the number of sheep Toulouse has:**
+   - Toulouse has twice as many sheep as Charleston.
+   - Therefore, Toulouse has \(2 \times 80 = 160\) sheep.
+
+3. **Calculate the total number of sheep:**
+   - Seattle has 20 sheep.
+   - Charleston has 80 sheep.
+   - Toulouse has 160 sheep.
+   - The total number of sheep is \(20 + 80 + 160 = 260\).
+
+Thus, the total number of sheep that Toulouse, Charleston, and Seattle have together is 260.",260.0,True,True,False,256,1.0,256,2379.9747495651245,0.42329599894583225,17401.187995910645,614.5064964294434,687.869952,687.865856,3.584,328.0,687.869952,0,20.45232561416924,2.6430773735046387,12.5091552734375,1930.5019999742508,5778.307999968529,True,True
+K2_dual_thr0.9,gsm8k_0006,math,72,dual,threshold,0.9,bf16,260,"To determine the total number of sheep that Toulouse, Charleston, and Seattle have together, we will follow these steps:
+
+1. **Determine the number of sheep in Charleston:**
+   - Seattle has 20 sheep.
+   - Charleston has 4 times as many sheep as Seattle.
+   - Therefore, the number of sheep in Charleston is \( 4 \times 20 = 80 \).
+
+2. **Determine the number of sheep in Toulouse:**
+   - Toulouse has twice as many sheep as Charleston.
+   - Therefore, the number of sheep in Toulouse is \( 2 \times 80 = 160 \).
+
+3. **Calculate the total number of sheep:**
+   - Seattle has 20 sheep.
+   - Charleston has 80 sheep.
+   - Toulouse has 160 sheep.
+   - The total number of sheep is \( 20 + 80 + 160 = 260 \).
+
+Thus, the total number of sheep that Toulouse, Charleston, and Seattle have together is \( 260 \).
+
+####
+\boxed{260}\)",260.0,True,False,True,61,4.19672131147541,8,400.63174533843994,0.11948799970559776,2789.1267433166504,130.86355233192444,35.390416,163.905536,2.024,70.81967213114754,21.495936,0,3.3335650600492954,2.678112030029297,12.720191955566406,262.5260000228882,744.2719999551773,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0006,math,72,dual,threshold,0.9,int8_abs,260,"To determine the total number of sheep that Toulouse, Charleston, and Seattle have together, we need to follow these steps:
+
+1. **Identify the number of sheep in each city:**
+   - Seattle has 20 sheep.
+   - Charleston has 4 times as many sheep as Seattle.
+   - Toulouse has twice as many sheep as Charleston.
+
+2. **Calculate the number of sheep in each city:**
+   - Charleston has 4 times as many sheep as Seattle:
+     \[
+     \text{Number of sheep in Charleston} = 4 \times 20 = 80
+     \]
+   - Toulouse has twice as many sheep as Charleston:
+     \[
+     \text{Number of sheep in Toulouse} = 2 \times 80 = 160
+     \]
+
+3. **Sum the number of sheep in all three cities:**
+   \[
+   \text{Total number of sheep} = 20 + 80 + 160 = 260
+   \]
+
+Therefore, the total number of sheep that Toulouse, Charleston, and Seattle have together is 260.",260.0,True,False,False,55,4.654545454545454,8,353.89260816574097,2.9324479661881924,2457.362648010254,117.09936022758484,16.917424,147.78368,1.976,75.05454545454545,10.75328,0,2.9412258490920067,2.678112030029297,12.720191955566406,237.6599999666214,670.2739999294281,True,True
+K5_dual_thr0.9_int4,gsm8k_0006,math,72,dual,threshold,0.9,int4_group,260,"To determine the total number of sheep that Toulouse, Charleston, and Seattle have together, we will follow these steps:
+
+1. **Determine the number of sheep in Charleston:**
+   - Seattle has 20 sheep.
+   - Charleston has 4 times as many sheep as Seattle.
+   - Therefore, the number of sheep in Charleston is \( 4 \times 20 = 80 \).
+
+2. **Determine the number of sheep in Toulouse:**
+   - Toulouse has twice as many sheep as Charleston.
+   - Therefore, the number of sheep in Toulouse is \( 2 \times 80 = 160 \).
+
+3. **Calculate the total number of sheep:**
+   - Seattle has 20 sheep.
+   - Charleston has 80 sheep.
+   - Toulouse has 160 sheep.
+   - The total number of sheep is \( 20 + 80 + 160 = 260 \).
+
+Thus, the total number of sheep that Toulouse, Charleston, and Seattle have together is \(\boxed{260}\).",260.0,True,False,False,60,4.266666666666667,8,380.94479990005493,2.949504107236862,2663.704879760742,127.2945601940155,9.057216,161.21856,2.016,71.46666666666667,5.542016,0,3.1855341093614697,2.678112030029297,12.720191955566406,254.0349999666214,737.0780000686646,True,True
+F0_nocache_fixed,gsm8k_0007,math,99,none,fixed,,bf16,160,"1. Carla is downloading a 200 GB file.
+2. Normally, she can download 2 GB per minute.
+3. 40% of the way through the download, she needs to restart, which takes 20 minutes.
+4. Calculate 40% of the total download time:
+   - 40% of 200 GB = 80 GB
+   - Time to download 80 GB at 2 GB/minute = 80 GB / 2 GB/minute = 40 minutes
+5. After the restart, she needs to download the remaining 60% of the file:
+   - 60% of 200 GB = 120 GB
+   - Time to download 120 GB at 2 GB/minute = 120 GB / 2 GB/minute = 60 minutes
+6. Add the restart time to the total download time:
+   - Total time = 40 minutes (first part) + 60 minutes (second part) + 20 minutes (restart) = 120 minutes
+
+#### The final answer is 120 minutes.",120.0,False,True,False,256,1.0,256,2406.790913581848,0.39759999909438193,17865.050064086914,610.2362866401672,744.493056,744.48896,3.584,355.0,744.493056,0,20.93830033391714,2.6465258598327637,12.52208137512207,1913.141000032425,5983.182999968529,False,False
+K2_dual_thr0.9,gsm8k_0007,math,99,dual,threshold,0.9,bf16,160,"1. **Calculate the time to download the first 40% of the file:**
+   - Download speed: 2 GB/minute
+   - Amount to be downloaded: 200 GB * 40% = 80 GB
+   - Time to download 80 GB: 80 GB / 2 GB/minute = 40 minutes
+
+2. **Calculate the time to download the remaining 60% of the file:**
+   - Download speed: 2 GB/minute
+   - Amount to be downloaded: 200 GB * 60% = 120 GB
+   - Time to download 120 GB: 120 GB / 2 GB/minute = 60 minutes
+
+3. **Add the time for the restart:**
+   - Time for restart: 20 minutes
+
+4. **Calculate the total download time:**
+   - Total time = Time for first part + Time for second part + Time for restart
+   - Total time = 40 minutes + 60 minutes + 20 minutes = 120 minutes
+
+#### The total download time is 120 minutes.",120.0,False,False,True,84,3.0476190476190474,8,529.2954216003418,0.15209599980153143,3683.2073822021484,179.10799980163574,43.189568,244.28544,2.208,62.76190476190476,23.265408,0,4.407792354002595,2.685588836669922,12.754796028137207,353.0920000076294,991.5469999313354,False,False
+K4_dual_thr0.9_int8abs,gsm8k_0007,math,99,dual,threshold,0.9,int8_abs,160,"1. **Calculate the time to download the first 40% of the file:**
+   - Carla can download 2 GB per minute.
+   - 40% of 200 GB is 80 GB.
+   - Time to download 80 GB = 80 GB / 2 GB/minute = 40 minutes.
+
+2. **Calculate the time to download the remaining 60% of the file:**
+   - Carla can download 2 GB per minute.
+   - 60% of 200 GB is 120 GB.
+   - Time to download 120 GB = 120 GB / 2 GB/minute = 60 minutes.
+
+3. **Add the time for the restart:**
+   - The restart takes 20 minutes.
+
+4. **Calculate the total time:**
+   - Total time = Time to download the first 40% + Time to download the remaining 60% + Time for the restart
+   - Total time = 40 minutes + 60 minutes + 20 minutes = 120 minutes
+
+#### 120 minutes",120.0,False,False,False,85,3.011764705882353,8,545.1768307685852,4.328575920313597,3738.637969970703,182.75465774536133,21.737152,247.1936,2.216,62.4,11.638448,0,4.486638298258185,2.685588836669922,12.828897476196289,355.6669999361038,1006.2570000886917,False,False
+K5_dual_thr0.9_int4,gsm8k_0007,math,99,dual,threshold,0.9,int4_group,160,"1. **Calculate the time to download the first 40% of the file:**
+   - Download rate: 2 GB/minute
+   - 40% of 200 GB: \( 0.4 \times 200 = 80 \) GB
+   - Time to download 80 GB: \( \frac{80}{2} = 40 \) minutes
+
+2. **Calculate the time to download the remaining 60% of the file:**
+   - Download rate: 2 GB/minute
+   - 60% of 200 GB: \( 0.6 \times 200 = 120 \) GB
+   - Time to download 120 GB: \( \frac{120}{2} = 60 \) minutes
+
+3. **Add the time for the restart:**
+   - Time for restart: 20 minutes
+
+4. **Calculate the total download time:**
+   - Total time: \( 40 + 60 + 20 = 120 \) minutes
+
+#### Therefore, it takes Carla 120 minutes to download the file.",120.0,False,False,False,88,2.909090909090909,8,549.1696939468384,4.096512094140053,3799.8792572021484,184.86223983764648,11.406208,255.91808,2.24,61.36363636363637,5.998208,0,4.553284169174731,2.685588836669922,12.829675674438477,359.3949999809265,1015.2730000019073,False,False
+F0_nocache_fixed,gsm8k_0008,math,133,none,fixed,,bf16,45,"To determine how far John is from home at the end of the 4 hours, we need to calculate the distance he covers during each segment of his trip and then sum these distances.
+
+1. **First Segment:**
+   - John drives for 3 hours at a speed of 60 mph.
+   - Distance = Speed × Time = 60 mph × 3 hours = 180 miles.
+
+2. **Second Segment:**
+   - John drives for 0.5 hours at a speed of 30 mph.
+   - Distance = Speed × Time = 30 mph × 0.5 hours = 15 miles.
+
+3. **Third Segment:**
+   - John drives for 1 hour at a speed of 80 mph.
+   - Distance = Speed × Time = 80 mph × 1 hour = 80 miles.
+
+Now, we sum the distances from each segment:
+- Total Distance = 180 miles + 15 miles + 80 miles = 275 miles.
+
+Therefore, at the end of the 4 hours, John is \boxed{275} miles from home.",275.0,False,True,False,256,1.0,256,2631.2954206466675,0.3940479989396408,20294.21967315674,630.8934395313263,815.796224,815.792128,3.584,389.0,815.796224,0,23.61561780795455,2.649913787841797,12.538360118865967,2238.7490000724792,6761.968000054359,False,False
+K2_dual_thr0.9,gsm8k_0008,math,133,dual,threshold,0.9,bf16,45,"To determine how far John is from home at the end of the 4 hours, we need to calculate the distance he covers in each segment of his journey and then sum these distances.
+
+1. **First Segment:**
+   - John drives for 3 hours at a speed of 60 mph.
+   - Distance = Speed × Time = 60 mph × 3 hours = 180 miles.
+
+2. **Second Segment:**
+   - John drives for half an hour at a speed of 30 mph.
+   - Distance = Speed × Time = 30 mph × 0.5 hours = 15 miles.
+
+3. **Third Segment:**
+   - John drives for 1 hour at a speed of 80 mph.
+   - Distance = Speed × Time = 80 mph × 1 hour = 80 miles.
+
+Now, we sum the distances from all segments:
+- Total Distance = 180 miles + 15 miles + 80 miles = 275 miles.
+
+Therefore, John is 275 miles from home at the end of the 4 hours.
+
+####275",275.0,False,False,True,76,3.3684210526315788,8,491.3733744621277,0.14892799977678806,3423.6384620666504,162.32537508010864,43.320512,242.188288,2.144,69.57894736842105,25.493632,0,4.092664365656674,2.6922497749328613,12.787601947784424,335.40399992465973,938.0230000019073,False,False
+K4_dual_thr0.9_int8abs,gsm8k_0008,math,133,dual,threshold,0.9,int8_abs,45,"To determine how far John is from home at the end of the 4 hours, we need to calculate the distance he covers during each segment of his journey and then sum these distances.
+
+1. **First Segment:**
+   - John drives for 3 hours at a speed of 60 mph.
+   - Distance = Speed × Time = 60 mph × 3 hours = 180 miles.
+
+2. **Second Segment:**
+   - John drives for half an hour at a speed of 30 mph.
+   - Distance = Speed × Time = 30 mph × 0.5 hours = 15 miles.
+
+3. **Third Segment:**
+   - John drives for 1 hour at a speed of 80 mph.
+   - Distance = Speed × Time = 80 mph × 1 hour = 80 miles.
+
+Now, we sum the distances from all segments:
+- Total Distance = 180 miles + 15 miles + 80 miles = 275 miles.
+
+Therefore, John is 275 miles from home at the end of the 4 hours.
+
+####275",275.0,False,False,False,74,3.4594594594594597,8,472.6167049407959,3.951999917626381,3321.4808082580566,159.13507175445557,21.409136,235.814912,2.128,70.5945945945946,12.753104,0,3.971487426199019,2.6922497749328613,12.78721284866333,324.94000005722046,924.8500000238419,False,False
+K5_dual_thr0.9_int4,gsm8k_0008,math,133,dual,threshold,0.9,int4_group,45,"To determine how far John is from home at the end of the 4 hours, we need to calculate the distance he covers during each segment of his journey and then sum these distances.
+
+1. **First Segment:**
+   - John drives for 3 hours at a speed of 60 mph.
+   - Distance = Speed × Time = 60 mph × 3 hours = 180 miles.
+
+2. **Second Segment:**
+   - John drives for half an hour at a speed of 30 mph.
+   - Distance = Speed × Time = 30 mph × 0.5 hours = 15 miles.
+
+3. **Third Segment:**
+   - John drives for 1 hour at a speed of 80 mph.
+   - Distance = Speed × Time = 80 mph × 1 hour = 80 miles.
+
+Now, we sum the distances from all segments:
+- Total distance = 180 miles + 15 miles + 80 miles = 275 miles.
+
+Therefore, John is 275 miles from home at the end of the 4 hours.
+
+####
+
+####",4.0,False,False,False,72,3.5555555555555554,8,463.58473682403564,3.63312004506588,3230.3416595458984,154.58223938941956,10.899072,229.441536,2.112,71.66666666666667,6.572672,0,3.8657906679436564,2.6922497749328613,12.787327289581299,310.5640000104904,865.9589999914169,False,False
+F0_nocache_fixed,gsm8k_0009,math,88,none,fixed,,bf16,460,"To determine Eliza's earnings for the week, we need to break down her earnings into regular hours and overtime hours.
+
+1. **Regular Hours:**
+   - Eliza works the first 40 hours at her regular rate of $10 per hour.
+   - Earnings from regular hours = 40 hours * $10/hour = $400.
+
+2. **Overtime Hours:**
+   - Eliza worked a total of 45 hours this week.
+   - Overtime hours = 45 hours - 40 hours = 5 hours.
+   - Her overtime rate is 1.2 times her regular hourly rate.
+   - Overtime rate = 1.2 * $10/hour = $12/hour.
+   - Earnings from overtime hours = 5 hours * $12/hour = $60.
+
+3. **Total Earnings:**
+   - Total earnings = Earnings from regular hours + Earnings from overtime hours
+   - Total earnings = $400 + $60 = $460
+
+Therefore, Eliza's earnings for this week are $460.
+
+#### Final Answer: **$460**",460.0,True,True,False,256,1.0,256,2383.6195611953735,0.41113599902018905,17653.124069213867,610.970593214035,721.424384,721.420288,3.584,344.0,721.424384,0,20.703154562972486,2.6444201469421387,12.516815185546875,1897.983999967575,5931.483000040054,True,True
+K2_dual_thr0.9,gsm8k_0009,math,88,dual,threshold,0.9,bf16,460,"To calculate Eliza's earnings for the week, we need to break down her regular hours and overtime hours.
+
+1. **Regular hours:**
+   - Eliza works the first 40 hours at a rate of $10 per hour.
+   - Earnings from regular hours = 40 hours * $10/hour = $400.
+
+2. **Overtime hours:**
+   - Eliza worked 45 hours in total, so the number of overtime hours is 45 hours - 40 hours = 5 hours.
+   - Her overtime rate is 1.2 times her regular hourly rate, which is 1.2 * $10/hour = $12/hour.
+   - Earnings from overtime hours = 5 hours * $12/hour = $60.
+
+3. **Total earnings:**
+   - Total earnings = Earnings from regular hours + Earnings from overtime hours
+   - Total earnings = $400 + $60 = $460
+
+Therefore, Eliza's earnings for this week are $460.",460.0,True,False,True,99,2.585858585858586,8,622.7552328109741,0.1931519997306168,4299.429862976074,210.34063959121704,46.401072,278.986752,2.328,57.21212121212121,22.544512,0,5.151125865057111,2.681163787841797,12.739402770996094,405.97500002384186,1134.25,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0009,math,88,dual,threshold,0.9,int8_abs,460,"To calculate Eliza's earnings for the week, we need to break down her earnings into regular hours and overtime hours.
+
+1. **Regular hours:**
+   - Eliza works 40 hours at her regular rate of $10 per hour.
+   - Earnings from regular hours = 40 hours * $10/hour = $400.
+
+2. **Overtime hours:**
+   - Eliza works 45 hours in total, and she works 40 hours at her regular rate.
+   - Overtime hours = 45 hours - 40 hours = 5 hours.
+   - Overtime rate is 1.2 times her regular rate, so 1.2 * $10/hour = $12/hour for overtime.
+   - Earnings from overtime hours = 5 hours * $12/hour = $60.
+
+3. **Total earnings:**
+   - Total earnings = Earnings from regular hours + Earnings from overtime hours
+   - Total earnings = $400 + $60 = $460.
+
+Therefore, Eliza's earnings for this week are $460.
+
+#### Answer: $460",460.0,True,False,False,99,2.585858585858586,8,619.1090874671936,4.787487898021936,4257.35408782959,211.30979180335999,23.212656,278.986752,2.328,57.21212121212121,11.277824,0,5.110097516328096,2.681163787841797,12.739738464355469,406.7810000181198,1165.8359999656677,True,True
+K5_dual_thr0.9_int4,gsm8k_0009,math,88,dual,threshold,0.9,int4_group,460,"To calculate Eliza's earnings for the week, we need to break down her regular hours and overtime hours.
+
+1. **Regular Hours:**
+   - Eliza works 40 hours at her regular rate of $10 per hour.
+   - Earnings from regular hours = 40 hours * $10/hour = $400.
+
+2. **Overtime Hours:**
+   - Eliza worked 45 hours in total, so she worked 45 hours - 40 hours = 5 hours of overtime.
+   - Her overtime rate is 1.2 times her regular hourly rate.
+   - Overtime rate = 1.2 * $10/hour = $12/hour.
+   - Earnings from overtime hours = 5 hours * $12/hour = $60.
+
+3. **Total Earnings:**
+   - Total earnings = Earnings from regular hours + Earnings from overtime hours
+   - Total earnings = $400 + $60 = $460.
+
+Therefore, Eliza's total earnings for the week are $460.",460.0,True,False,False,99,2.585858585858586,8,619.3036479949951,4.4692800976336,4289.936008453369,209.77052927017212,11.963952,278.986752,2.328,57.21212121212121,5.812352,0,5.1405983697623014,2.681163787841797,12.739402770996094,416.20499992370605,1134.7799999713898,True,True
+F0_nocache_fixed,gsm8k_0010,math,89,none,fixed,,bf16,366,"To determine the total number of downloads over the three months, we need to calculate the number of downloads for each month and then sum them up.
+
+1. **First Month:**
+   - The program had 60 downloads.
+
+2. **Second Month:**
+   - The number of downloads in the second month was three times as many as the downloads in the first month.
+   - Therefore, the number of downloads in the second month is \(3 \times 60 = 180\).
+
+3. **Third Month:**
+   - The number of downloads in the third month reduced by 30% compared to the second month.
+   - To find the number of downloads in the third month, we calculate \(180 - (0.3 \times 180) = 180 - 54 = 126\).
+
+Now, we sum up the downloads from all three months:
+\[ 60 + 180 + 126 = 366 \]
+
+So, the total number of downloads over the three months is 366.
+
+#### Final Answer: 366 downloads.",366.0,True,True,False,256,1.0,256,2386.1657915115356,0.39980799914337695,17670.438674926758,607.0005128383636,723.521536,723.51744,3.584,345.0,723.521536,0,20.719211634248495,2.6445422172546387,12.518821716308594,1888.8130000829697,5923.858000040054,True,True
+K2_dual_thr0.9,gsm8k_0010,math,89,dual,threshold,0.9,bf16,366,"To determine the total number of downloads over the three months, we need to calculate the number of downloads for each month and then sum them up.
+
+1. **First Month:**
+   - The program had 60 downloads.
+
+2. **Second Month:**
+   - The number of downloads in the second month was three times as many as the downloads in the first month.
+   - Therefore, the number of downloads in the second month is \( 3 \times 60 = 180 \).
+
+3. **Third Month:**
+   - The number of downloads in the third month reduced by 30% compared to the second month.
+   - To find the number of downloads in the third month, we calculate \( 180 - (0.30 \times 180) = 180 - 54 = 126 \).
+
+4. **Total Downloads:**
+   - We sum the downloads from all three months: \( 60 + 180 + 126 = 366 \).
+
+Thus, the total number of downloads over the three months is \( 366 \) downloads. ####",366.0,True,False,True,80,3.2,8,507.4224648475647,0.15158399962820113,3494.6007194519043,170.48352122306824,41.485568,226.0992,2.176,63.3,22.610048,0,4.18790415674448,2.6813926696777344,12.740928649902344,337.6230000257492,933.595999956131,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0010,math,89,dual,threshold,0.9,int8_abs,366,"To determine the total number of downloads over the three months, we need to calculate the number of downloads for each month and then sum them up.
+
+1. **First Month:**
+   - The program had 60 downloads.
+
+2. **Second Month:**
+   - The number of downloads in the second month was three times as many as the downloads in the first month.
+   - Therefore, the number of downloads in the second month is \( 3 \times 60 = 180 \).
+
+3. **Third Month:**
+   - The number of downloads in the third month reduced by 30% compared to the second month.
+   - To find the number of downloads in the third month, we calculate \( 180 - (0.30 \times 180) = 180 - 54 = 126 \).
+
+Now, we sum up the downloads from all three months:
+\[ 60 + 180 + 126 = 366 \]
+
+Thus, the total number of downloads over the three months is 366.
+
+#### Answer: 366",366.0,True,False,False,85,3.011764705882353,8,595.3383688926697,4.5644478760659695,4025.42191696167,184.88831901550293,21.409312,240.2304,2.216,61.45882352941177,11.310608,0,4.826590744778514,2.6813926696777344,12.740928649902344,389.4849998950958,1044.897999882698,True,True
+K5_dual_thr0.9_int4,gsm8k_0010,math,89,dual,threshold,0.9,int4_group,366,"To determine the total number of downloads over the three months, we need to calculate the number of downloads for each month and then sum them up.
+
+1. **First Month:**
+   - The program had 60 downloads.
+
+2. **Second Month:**
+   - The number of downloads in the second month was three times as many as the downloads in the first month.
+   - Therefore, the number of downloads in the second month is \( 3 \times 60 = 180 \).
+
+3. **Third Month:**
+   - The number of downloads in the third month reduced by 30% compared to the second month.
+   - To find the number of downloads in the third month, we calculate \( 180 - (0.30 \times 180) = 180 - 54 = 126 \).
+
+4. **Total Downloads:**
+   - We sum the downloads from all three months: \( 60 + 180 + 126 = 366 \).
+
+Thus, the total number of downloads over the three months is \(\boxed{366}\). ####",366.0,True,False,False,78,3.282051282051282,8,492.1772198677063,3.693792074918747,3394.9657707214355,164.80598497390747,10.561248,220.44672,2.16,64.1025641025641,5.829248,0,4.0699733924120665,2.6813926696777344,12.74090576171875,330.8549998998642,919.8989999294281,True,True
+F0_nocache_fixed,gsm8k_0011,math,91,none,fixed,,bf16,694,"To determine the total cost of the pastries Toula bought, we need to calculate the cost of each type of pastry separately and then sum these costs.
+
+1. **Donuts:**
+   - Toula bought 3 dozen donuts.
+   - Cost per dozen is $68.
+   - Total cost for donuts: \( 3 \times 68 = 204 \).
+
+2. **Mini Cupcakes:**
+   - Toula bought 2 dozen mini cupcakes.
+   - Cost per dozen is $80.
+   - Total cost for mini cupcakes: \( 2 \times 80 = 160 \).
+
+3. **Mini Cheesecakes:**
+   - Toula bought 6 dozen mini cheesecakes.
+   - Cost per dozen is $55.
+   - Total cost for mini cheesecakes: \( 6 \times 55 = 330 \).
+
+Now, we sum the costs of all the pastries:
+\[ 204 + 160 + 330 = 694 \]
+
+Therefore, the total cost of the pastries is \( 694 \).",694.0,True,True,False,256,1.0,256,2389.817129135132,0.4029439988080412,17685.366470336914,606.7565762996674,727.71584,727.711744,3.584,347.0,727.71584,0,20.737056300975382,2.6447863578796387,12.518836975097656,1890.9860000610352,5910.847000002861,True,True
+K2_dual_thr0.9,gsm8k_0011,math,91,dual,threshold,0.9,bf16,694,"To determine the total cost of the pastries Toula bought, we need to calculate the cost of each type of pastry separately and then sum these costs.
+
+1. **Donuts:**
+   - Toula bought 3 dozen donuts.
+   - Cost per dozen is $68.
+   - Total cost for donuts: \( 3 \times 68 = 204 \) dollars.
+
+2. **Mini cupcakes:**
+   - Toula bought 2 dozen mini cupcakes.
+   - Cost per dozen is $80.
+   - Total cost for mini cupcakes: \( 2 \times 80 = 160 \) dollars.
+
+3. **Mini cheesecakes:**
+   - Toula bought 6 dozen mini cheesecakes.
+   - Cost per dozen is $55.
+   - Total cost for mini cheesecakes: \( 6 \times 55 = 330 \) dollars.
+
+Now, we sum the costs of all the pastries:
+\[ 204 + 160 + 330 = 694 \]
+
+Therefore, the total cost of the pastries is $694.",694.0,True,False,True,52,4.923076923076923,8,369.5406699180603,0.09487999975681305,2544.681495666504,115.0087673664093,34.27616,147.816448,1.952,80.46153846153847,22.74112,0,3.04090466350317,2.6818504333496094,12.815930366516113,247.28199994564056,687.9530000686646,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0011,math,91,dual,threshold,0.9,int8_abs,694,"To determine the total cost of the pastries Toula bought, we need to calculate the cost of each type of pastry separately and then sum these costs.
+
+1. **Donuts:**
+   - Toula bought 3 dozen donuts.
+   - Cost per dozen is $68.
+   - Total cost for donuts: \( 3 \times 68 = 204 \) dollars.
+
+2. **Mini cupcakes:**
+   - Toula bought 2 dozen mini cupcakes.
+   - Cost per dozen is $80.
+   - Total cost for mini cupcakes: \( 2 \times 80 = 160 \) dollars.
+
+3. **Mini cheesecakes:**
+   - Toula bought 6 dozen mini cheesecakes.
+   - Cost per dozen is $55.
+   - Total cost for mini cheesecakes: \( 6 \times 55 = 330 \) dollars.
+
+Now, we sum the costs of all the pastries:
+\[ 204 + 160 + 330 = 694 \]
+
+Therefore, the total cost of the pastries is $694.",694.0,True,False,True,54,4.7407407407407405,8,347.82275199890137,2.9824319407343864,2412.8706588745117,115.23081493377686,17.409168,153.501696,1.968,78.66666666666667,11.376176,0,2.889165686443448,2.6818504333496094,12.815930366516113,232.6010000705719,673.1209999322891,True,True
+K5_dual_thr0.9_int4,gsm8k_0011,math,91,dual,threshold,0.9,int4_group,694,"To determine the total cost of the pastries Toula bought, we need to calculate the cost of each type of pastry separately and then sum these costs.
+
+1. **Donuts:**
+   - Toula bought 3 dozen donuts.
+   - Cost per dozen is $68.
+   - Total cost for donuts: \( 3 \times 68 = 204 \) dollars.
+
+2. **Mini cupcakes:**
+   - Toula bought 2 dozen mini cupcakes.
+   - Cost per dozen is $80.
+   - Total cost for mini cupcakes: \( 2 \times 80 = 160 \) dollars.
+
+3. **Mini cheesecakes:**
+   - Toula bought 6 dozen mini cheesecakes.
+   - Cost per dozen is $55.
+   - Total cost for mini cheesecakes: \( 6 \times 55 = 330 \) dollars.
+
+Now, we sum the costs of all the pastries:
+\[ 204 + 160 + 330 = 694 \]
+
+Therefore, the total cost of the pastries is $694.",694.0,True,False,True,54,4.7407407407407405,8,358.0677418708801,3.1391680501401424,2472.6368293762207,117.19679951667786,8.97264,153.501696,1.968,78.66666666666667,5.86304,0,2.9619373911991715,2.6818504333496094,12.8162202835083,242.75300002098083,670.5939999818802,True,True
+F0_nocache_fixed,gsm8k_0012,math,96,none,fixed,,bf16,13,"To determine how many years it will take for Carlos to start earning money on the lemon tree, we need to calculate the annual revenue and the annual expenses, and then find out when the net revenue will cover the initial planting cost.
+
+1. **Annual Revenue:**
+   - Each year, the tree grows 7 lemons.
+   - Each lemon sells for $1.5.
+   - Annual revenue = 7 lemons * $1.5{lemmon = $10.5.
+
+2. **Annual Expenses:**
+   - It costs $3 a year to water and feed the tree.
+
+3. **Net Annual Revenue:**
+   - Net annual revenue = Annual revenue - Annual expenses
+   - Net annual revenue = $10.5 - $3 = $7.5
+
+4. **Initial Planting Cost:**
+   - The initial planting cost is $90.
+
+5. **Years to Break Even:**
+   - Years to break even = Initial planting cost / Net annual revenue
+   - Years to break even = $90 / $7.5 = 12 years
+
+Therefore, Carlos will start earning money on the lemon tree after 12 years.",12.0,False,True,False,256,1.0,256,2395.804135322571,0.3936959990533069,17858.07738494873,608.4161593914032,738.2016,738.197504,3.584,352.0,738.2016,0,20.91772763710469,2.6462512016296387,12.520645141601562,1910.305999994278,5884.108000040054,False,False
+K2_dual_thr0.9,gsm8k_0012,math,96,dual,threshold,0.9,bf16,13,"To determine how many years it will take for Carlos to start earning money from the lemon tree, we need to calculate the net profit per year and then find when this profit will cover the initial cost of planting the tree.
+
+1. **Calculate the annual revenue from selling lemons:**
+   - Each lemon sells for $1.5.
+   - The tree grows 7 lemons each year.
+   - Annual revenue = 7 lemons * $1.5/lemon = $10.50.
+
+2. **Calculate the annual cost of watering and feeding the tree:**
+   - It costs $3 per year to water and feed the tree.
+
+3. **Calculate the annual net profit:**
+   - Annual net profit = Annual revenue - Annual cost
+   - Annual net profit = $10.50 - $3 = $7.50
+
+4. **Determine the number of years needed to cover the initial cost:**
+   - Initial cost = $90
+   - Number of years needed = Initial cost / Annual net profit
+   - Number of years needed = $90 / $7.50 = 12 years
+
+#### \boxed{12}",12.0,False,False,True,108,2.3703703703703702,8,672.3364815711975,0.20470399945043027,4638.527885437012,228.40588784217834,49.2848,311.427072,2.4,55.7037037037037,23.0688,0,5.558922216296196,2.685314178466797,12.751449584960938,450.00800001621246,1236.7009999752045,False,False
+K4_dual_thr0.9_int8abs,gsm8k_0012,math,96,dual,threshold,0.9,int8_abs,13,"To determine how many years it will take for Carlos to start earning money from the lemon tree, we need to calculate the net profit per year and then find the number of years required to cover the initial planting cost.
+
+1. **Calculate the annual revenue from selling lemons:**
+   - Each lemon sells for $1.5.
+   - The tree grows 7 lemons each year.
+   - Annual revenue = 7 lemons * $1.5{lemmon = $10.
+
+2. **Calculate the annual cost of watering and feeding the tree:**
+   - Annual cost = $3.
+
+3. **Calculate the net profit per year:**
+   - Net profit = Annual revenue - Annual cost
+   - Net profit = $10 - $3 = $7.
+
+4. **Determine the number of years required to cover the initial planting cost:**
+   - Initial planting cost = $90
+   - Net profit per year = $7
+   - Number of years = Initial planting cost / Net profit
+   - Number of years = $90 / $7 = 13
+
+Therefore, it will take Carlos 13 years to start earning money from the lemon tree.",13.0,True,False,False,102,2.5098039215686274,8,640.9344005584717,4.938527889549732,4415.625606536865,217.72243213653564,23.868384,294.125568,2.352,57.09803921568628,11.540096,0,5.297760688699782,2.685314178466797,12.750930786132812,420.3399999141693,1176.101000070572,False,False
+K5_dual_thr0.9_int4,gsm8k_0012,math,96,dual,threshold,0.9,int4_group,13,"To determine how many years it will take Carlos to start earning money on the lemon tree, we need to calculate the net profit per year and compare it to the initial cost of planting the tree.
+
+1. **Calculate the annual revenue from selling lemons:**
+   - Each year, the tree grows 7 lemons.
+   - Each lemon sells for $1.5.
+   - Annual revenue = 7 lemons * $1.5{lemmon = $10.
+
+2. **Calculate the annual cost of watering and feeding the tree:**
+   - The cost to water and feed the tree is $3 per year.
+
+3. **Calculate the net profit per year:**
+   - Net profit = Annual revenue - Annual cost
+   - Net profit = $10 - $3 = $7
+
+4. **Determine the number of years needed to cover the initial cost:**
+   - Initial cost = $90
+   - Net profit per year = $7
+   - Number of years = Initial cost / Net profit per year = $90 / $7 = 13 years
+
+Therefore, it will take Carlos \boxed{3} years to start earning money on the lemon tree.",3.0,False,False,False,116,2.206896551724138,8,721.287425994873,5.14876813441515,4969.474189758301,245.8210883140564,13.24832,334.495744,2.464,54.06896551724138,5.94752,0,5.961933229118586,2.685314178466797,12.751449584960938,474.91100001335144,1336.3669999837875,False,False
+F0_nocache_fixed,gsm8k_0013,math,87,none,fixed,,bf16,18,"Let's denote the total number of vacuum cleaners Melanie started with as \( x \).
+
+1. She sold a third of her vacuum cleaners at the green house, so she sold \( \frac{x}{3} \) vacuum cleaners.
+2. She sold 2 more to the red house, so she sold \( \frac{x}{3} + 2 \) vacuum cleaners.
+3. She sold half of what was left at the orange house, so she sold \( \frac{1}{2} \left( x - \frac{x}{3} - 2 \right) = \frac{1}{2} \left( \frac{2x}{3} - 2 \right) = \frac{x}{3} - 1 \) vacuum cleaners.
+
+According to the problem, after all these sales, she has 5 vacuum cleaners left. Therefore, we can set up the equation:
+\[ x - \frac{x}{3} - 1 = 5 \]
+\[ \frac{2x}{3} = 6 \]
+\[ x = 9 \]
+
+So, Melanie started with 9 vacuum cleaners.
+
+####Melanie started with 9 vacuum cleaners.",9.0,False,True,False,256,1.0,256,2383.562978744507,0.40556799911428243,17715.64080810547,612.5630085468292,719.327232,719.323136,3.584,343.0,719.327232,0,20.768140187487006,2.6442980766296387,12.516336441040039,1893.170000076294,5833.024999976158,False,False
+K2_dual_thr0.9,gsm8k_0013,math,87,dual,threshold,0.9,bf16,18,"Let's denote the total number of vacuum cleaners Melanie started with as \( x \).
+
+1. She sold a third of her vacuum cleaners at the green house, so she sold \( \frac{x}{3} \) vacuum cleaners.
+2. She sold 2 more at the red house, so she sold \( \frac{x}{3} + 2 \) vacuum cleaners.
+3. The remaining vacuum cleaners after selling at the green and red houses are \( x - \frac{x}{3} - 2 = \frac{2x}{3} - 2 \).
+4. She sold half of what was left at the orange house, so she sold \( \frac{1}{2} \left( \frac{2x}{3} - 2 \right) = \frac{x}{3} - 1 \) vacuum cleaners.
+5. The remaining vacuum cleaners after selling at the orange house are \( \frac{2x}{3} - 2 - \frac{x}{3} + 1 = x - 1 \).
+6. We know that she has 5 vacuum cleaners left, so \( x = 6 \).
+
+Therefore, Melanie started with 6 vacuum cleaners.",6.0,False,False,True,117,2.1880341880341883,8,816.7453460693359,0.2172479993896559,5518.293006896973,256.03750491142273,51.054416,328.753152,2.472,53.26495726495727,22.478976,0,6.614873659797013,2.6809349060058594,12.738953590393066,518.3990000486374,1399.4350000619888,False,False
+K4_dual_thr0.9_int8abs,gsm8k_0013,math,87,dual,threshold,0.9,int8_abs,18,"Let's denote the total number of vacuum cleaners Melanie started with as \( x \).
+
+1. She sold a third of her vacuum cleaners at the green house, so she sold \( \frac{x}{3} \) vacuum cleaners.
+2. She sold 2 more at the red house, so she sold \( \frac{x}{3} + 2 \) vacuum cleaners.
+3. After selling these vacuum cleaners, she has \( x - \frac{x}{3} - 2 = \frac{2x}{3} - 2 \) vacuum cleaners left.
+4. She sold half of what was left at the orange house, so she sold \( \frac{1}{2} \left( \frac{2x}{3} - 2 \right) = \frac{x}{3} - 1 \) vacuum cleaners.
+5. After selling these vacuum cleaners, she has \( \frac{x}{3} - 1 - \frac{x}{3} + 1 = 5 \) vacuum cleaners left.
+
+So, we have the equation:
+\[ 5 = 5 \]
+
+This equation is true, meaning Melanie started with \( \boxed{15} \) vacuum cleaners.",15.0,False,False,False,138,1.855072463768116,8,883.215169429779,6.355775840580463,6042.802780151367,293.2406394481659,28.2948,387.760128,2.64,50.028985507246375,11.24504,0,7.250481184571981,2.6809349060058594,12.738953590393066,570.9409999847412,1564.9439998865128,False,False
+K5_dual_thr0.9_int4,gsm8k_0013,math,87,dual,threshold,0.9,int4_group,18,"Let's denote the total number of vacuum cleaners Melanie started with as \( x \).
+
+1. She sold a third of her vacuum cleaners at the green house, so she sold \( \frac{x}{3} \) vacuum cleaners.
+2. She sold 2 more at the red house, so she sold \( \frac{x}{3} + 2 \) vacuum cleaners.
+3. She sold half of what was left at the orange house, so she sold \( \frac{x}{6} \) vacuum cleaners.
+4. After selling these vacuum cleaners, she has \( x - \frac{x}{3} - 2 - \frac{x}{6} = \frac{x}{6} - 2 \) vacuum cleaners left.
+
+We know that she has 5 vacuum cleaners left, so we can set up the equation:
+\[ \frac{x}{6} - 2 = 5 \]
+
+Solving for \( x \):
+\[ \frac{x}{6} = 7 \]
+\[ x = 7 \times 6 \]
+\[ x = 42 \]
+
+Therefore, Melanie started with 42 vacuum cleaners.
+
+####
+\boxed{42}",42.0,False,False,False,127,2.015748031496063,8,787.6346898078918,5.5079041197896,5434.20915222168,269.3294405937195,13.839856,356.851712,2.552,51.59055118110236,5.795456,0,6.518908403813839,2.6809349060058594,12.738640785217285,510.4560000896454,1431.211000084877,False,False
+F0_nocache_fixed,gsm8k_0014,math,81,none,fixed,,bf16,60,"To determine the percentage of students enrolled in hip-hop dance, we need to follow these steps:
+
+1. **Calculate the number of students enrolled in contemporary dance:**
+   - 20% of 20 students = 0.20 * 20 = 4 students
+
+2. **Calculate the number of students remaining after contemporary dance:**
+   - 20 students - 4 students = 16 students
+
+3. **Calculate the number of students enrolled in jazz dance:**
+   - 25% of 16 students = 0.25 * 16 = 4 students
+
+4. **Calculate the number of students enrolled in hip-hop dance:**
+   - The rest of the students are enrolled in hip-hop dance.
+   - 20 students - 4 students (contemporary) - 4 students (jazz) = 12 students
+
+5. **Calculate the percentage of students enrolled in hip-hop dance:**
+   - (12 students / 20 students) * 100% = 60%
+
+Therefore, the percentage of the entire students enrolled in hip-hop dance is 60%.
+
+####",60.0,True,True,False,256,1.0,256,2373.9897594451904,0.3934079990722239,17461.97454071045,604.0171535015106,706.74432,706.740224,3.584,337.0,706.74432,0,20.49474294949323,2.643764019012451,12.513463973999023,1868.8550000190735,5875.238000035286,True,True
+K2_dual_thr0.9,gsm8k_0014,math,81,dual,threshold,0.9,bf16,60,"To determine the percentage of students enrolled in hip-hop dance, we need to follow these steps:
+
+1. **Calculate the number of students enrolled in contemporary dance:**
+   - 20% of 20 students = 0.20 * 20 = 4 students
+
+2. **Calculate the number of remaining students after accounting for contemporary dance:**
+   - 20 students - 4 students = 16 students
+
+3. **Calculate the number of students enrolled in jazz dance:**
+   - 25% of 16 students = 0.25 * 16 = 4 students
+
+4. **Calculate the number of students enrolled in hip-hop dance:**
+   - The remaining students after accounting for contemporary and jazz dance are enrolled in hip-hop dance.
+   - 16 students - 4 students - 4 students = 12 students
+
+5. **Calculate the percentage of students enrolled in hip-hop dance:**
+   - (12 students / 20 students) * 100% = 60%
+
+Therefore, the percentage of the entire students enrolled in hip-hop dance is **60%**.
+
+####",60.0,True,False,True,84,3.0476190476190474,8,530.5199990272522,0.1605119997402653,3666.251178741455,178.44147205352783,42.00992,231.899136,2.208,61.04761904761905,22.08576,0,4.391603917814791,2.679759979248047,12.731772422790527,351.66100001335144,989.3949999809265,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0014,math,81,dual,threshold,0.9,int8_abs,60,"To determine the percentage of students enrolled in hip-hop dance, we need to follow these steps:
+
+1. **Calculate the number of students enrolled in contemporary dance:**
+   - 20% of 20 students = 0.20 * 20 = 4 students
+
+2. **Calculate the number of remaining students after accounting for contemporary dance:**
+   - 20 students - 4 students = 16 students
+
+3. **Calculate the number of students enrolled in jazz dance:**
+   - 25% of 16 students = 0.25 * 16 = 4 students
+
+4. **Calculate the number of students enrolled in hip-hop dance:**
+   - The remaining students are enrolled in hip-hop dance.
+   - 16 students - 4 students - 4 students = 12 students
+
+5. **Calculate the percentage of students enrolled in hip-hop dance:**
+   - (12 students / 20 students) * 100% = 0.6 * 100% = 60%
+
+Therefore, the percentage of the entire students enrolled in hip-hop dance is 60%.",60.0,True,False,False,82,3.1219512195121952,8,522.2915544509888,4.068831883370876,3579.505973815918,174.89577651023865,20.753584,226.377728,2.192,61.75609756097561,11.048336,0,4.295780937187374,2.679759979248047,12.731772422790527,340.96599996089935,969.7810000181198,True,True
+K5_dual_thr0.9_int4,gsm8k_0014,math,81,dual,threshold,0.9,int4_group,60,"To determine the percentage of students enrolled in hip-hop dance, we need to follow these steps:
+
+1. Calculate the number of students enrolled in contemporary dance.
+2. Calculate the number of students enrolled in jazz dance.
+3. Calculate the number of students enrolled in hip-hop dance.
+
+First, let's find the number of students enrolled in contemporary dance:
+\[ 20\% \text{ of } 20 = 0.20 \times 20 = 4 \]
+
+Next, we calculate the number of students enrolled in jazz dance:
+\[ 20 - 4 = 16 \]
+\[ 25\% \text{ of } 16 = 0.25 \times 16 = 4 \]
+
+Now, the number of students enrolled in hip-hop dance is:
+\[ 20 - 4 - 4 = 12 \]
+
+Finally, we calculate the percentage of students enrolled in hip-hop dance:
+\[ \left( \frac{12}{20} \right) \times 100\% = 60\% \]
+
+#### \boxed{60\%}",60.0,True,False,False,80,3.2,8,513.5926723480225,3.7329920530319214,3536.8218269348145,171.02787160873413,10.56128,220.85632,2.176,62.5,5.69408,0,4.240229361690581,2.679759979248047,12.731947898864746,340.38900005817413,951.2429999113083,True,True
+F0_nocache_fixed,gsm8k_0015,math,123,none,fixed,,bf16,125,"To determine the potential profit from each purchase plan, we need to calculate the new value of each item after the market increase and then find the difference between the new value and the original price.
+
+### Jewelry:
+- Original price: $5,000
+- Market increase: 2.5%
+- New value: \( 5000 \times 1.025 = 5125 \)
+- Profit: \( 5125 - 5000 = 125 \)
+
+### Electronic Gadgets:
+- Original price: $8,000
+- Market increase: 1.2%
+- New value: \( 8000 \times 1.012 = 8096 \)
+- Profit: \( 8096 - 8000 = 96 \)
+
+### Conclusion:
+- Profit from jewelry: $125
+- Profit from electronic gadgets: $96
+
+To maximize profit, the merchant should choose the jewelry purchase plan, as it yields a higher profit.
+
+#### Final Answer:
+The profit from choosing the jewelry purchase plan is $125.",125.0,True,True,False,256,1.0,256,2510.3460760116577,0.3966719990130514,18921.720123291016,627.8472955226898,794.824704,794.820608,3.584,379.0,794.824704,0,22.119484934955835,2.6487231254577637,12.533571243286133,2066.4499999284744,6288.123000025749,True,False
+K2_dual_thr0.9,gsm8k_0015,math,123,dual,threshold,0.9,bf16,125,"To determine the potential profit from each purchase option, we need to calculate the future value of each item after the expected market increase.
+
+1. **Initial Value of Jewelry:** $5,000
+2. **Market Increase for Jewelry:** 2.5%
+3. **Future Value of Jewelry:** $5,000 * (1 + 0.025) = $5,000 * 1.025 = $5,125
+
+4. **Initial Value of Electronic Gadgets:** $8,000
+5. **Market Increase for Electronic Gadgets:** 1.2%
+6. **Future Value of Electronic Gadgets:** $8,000 * (1 + 0.012) = $8,000 * 1.012 = $8,096
+
+Now, let's compare the future values:
+
+- Future Value of Jewelry: $5,125
+- Future Value of Electronic Gadgets: $8,096
+
+To maximize profit, the merchant should choose the electronic gadgets since they have a higher future value.
+
+**Profit:** $8,096",8096.0,False,False,True,104,2.4615384615384617,8,659.4016633033752,0.19695999938994646,4544.009792327881,221.99625706672668,50.005632,322.895872,2.368,58.69230769230769,24.838272,0,5.4455351531505585,2.6892051696777344,12.858041763305664,430.1200000047684,1219.513000011444,True,False
+K4_dual_thr0.9_int8abs,gsm8k_0015,math,123,dual,threshold,0.9,int8_abs,125,"To determine the profit from each purchase option, we need to calculate the expected value of each item after the market increase.
+
+1. **Jewelry Purchase:**
+   - Current value of jewelry: $5,000
+   - Market increase: 2.5%
+   - Expected value after increase: $5,000 + ($5,000 * 0.025) = $5,250
+   - Profit from jewelry: $5,250 - $5,000 = $250
+
+2. **Electronic Gadgets Purchase:**
+   - Current value of electronic gadgets: $8,000
+   - Market increase: 1.2%
+   - Expected value after increase: $8,000 + ($8,000 * 0.012) = $8,096
+   - Profit from electronic gadgets: $8,096 - $8,000 = $96
+
+To maximize profit, the merchant should choose the jewelry purchase as it yields a higher profit of $250 compared to the profit from electronic gadgets.
+
+#### $250",250.0,False,False,False,99,2.585858585858586,8,629.7102060317993,5.093375898897648,4337.665069580078,211.0494408607483,24.360096,307.372032,2.328,60.04040404040404,12.425264,0,5.201828901655972,2.6892051696777344,12.776883125305176,422.0239999294281,1162.277999997139,True,False
+K5_dual_thr0.9_int4,gsm8k_0015,math,123,dual,threshold,0.9,int4_group,125,"To determine the potential profit from each purchase option, we need to calculate the future value of each item after the expected market increase.
+
+1. **Calculate the future value of the jewelry:**
+   - Current value of jewelry: $5,000
+   - Market increase: 2.5%
+   - Future value of jewelry: \( 5000 \times 1.025 = 5125 \)
+
+2. **Calculate the future value of the electronic gadgets:**
+   - Current value of electronic gadgets: $8,000
+   - Market increase: 1.2%
+   - Future value of electronic gadgets: \( 8000 \times 1.012 = 8096 \)
+
+3. **Determine the potential profit for each option:**
+   - Profit from jewelry: Future value of jewelry - Current value of jewelry = $5125 - $5000 = $125
+   - Profit from electronic gadgets: Future value of electronic gadgets - Current value of electronic gadgets = $8096 - $8000 = $96
+
+#### Final Answer: $125",125.0,True,False,False,112,2.2857142857142856,8,695.4996500015259,5.0862081572413445,4831.572776794434,236.62320041656494,13.434112,347.734016,2.432,56.785714285714285,6.403712,0,5.788493239320815,2.6892051696777344,12.7763032913208,465.67000007629395,1295.108999967575,True,False
+F0_nocache_fixed,gsm8k_0016,math,82,none,fixed,,bf16,230,"To determine the total distance covered by each train in the two days, we need to break down the problem into two parts: the distance traveled westward on the first day and the distance traveled northward on the second day.
+
+1. **Distance traveled westward on the first day:**
+   - Each train travels 80 miles westward.
+
+2. **Distance traveled northward on the second day:**
+   - Each train travels 150 miles northward.
+
+To find the total distance covered by each train in the two days, we add these two distances together:
+
+\[ \text{Total distance} = \text{Distance westward} + \text{Distance northward} \]
+\[ \text{Total distance} = 80 \text{ miles} + 150 \text{ miles} \]
+\[ \text{Total distance} = 230 \text{ miles} \]
+
+Therefore, the distance covered by each train in the two days is 230 miles.
+
+####
+230 miles",230.0,True,True,False,256,1.0,256,2379.2188453674316,0.3881919989362359,17632.497817993164,616.204351902008,708.841472,708.837376,3.584,338.0,708.841472,0,20.683701872825623,2.6438403129577637,12.51394271850586,1885.6469999551773,5812.8669999837875,True,True
+K2_dual_thr0.9,gsm8k_0016,math,82,dual,threshold,0.9,bf16,230,"To determine the total distance covered by each train in the two days, we need to break down the problem into its components:
+
+1. **First Day:**
+   - Both trains travel westward for 80 miles.
+   - Therefore, the distance covered by each train on the first day is 80 miles.
+
+2. **Second Day:**
+   - Both trains travel northward for 150 miles.
+   - Therefore, the distance covered by each train on the second day is 150 miles.
+
+3. **Total Distance Covered by Each Train:**
+   - To find the total distance covered by each train over the two days, we add the distances covered on each day.
+   - Total distance = Distance covered on the first day + Distance covered on the second day
+   - Total distance = 80 miles + 150 miles
+   - Total distance = 230 miles
+
+Thus, the total distance covered by each train in the two days is 230 miles.
+
+####",230.0,True,False,True,88,2.909090909090909,8,556.1296973228455,0.17094399954658002,3850.453300476074,188.1157431602478,43.124096,243.662848,2.24,59.81818181818182,22.151296,0,4.611082090996206,2.679943084716797,12.732725143432617,377.67200005054474,1054.7480000257492,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0016,math,82,dual,threshold,0.9,int8_abs,230,"To determine the total distance covered by each train in the two days, we need to break down the problem into its components:
+
+1. **First Day:**
+   - Both trains travel westward for 80 miles.
+
+2. **Second Day:**
+   - Both trains travel northward for 150 miles.
+
+Now, let's calculate the total distance covered by each train over the two days:
+
+- **First Day Distance:** 80 miles
+- **Second Day Distance:** 150 miles
+
+- **Total Distance for Each Train:**
+  \[
+  80 \text{ miles} + 150 \text{ miles} = 230 \text{ miles}
+  \]
+
+Thus, each train covers a total of 230 miles in the two days.
+
+####",230.0,True,False,False,82,3.1219512195121952,8,518.920063495636,4.080607898533344,3583.547409057617,173.7176320552826,20.786368,227.049472,2.192,61.853658536585364,11.08112,0,4.2947713462635875,2.679943084716797,12.804210662841797,341.8589999675751,963.9140000343323,True,True
+K5_dual_thr0.9_int4,gsm8k_0016,math,82,dual,threshold,0.9,int4_group,230,"To determine the total distance covered by each train in the two days, we need to break down the problem into two parts: the westward journey and the northward journey.
+
+1. **Westward Journey:**
+   - Each train travels 80 miles westward.
+
+2. **Northward Journey:**
+   - Each train travels 150 miles northward.
+
+To find the total distance covered by each train in the two days, we add the distances covered in the westward journey and the northward journey:
+
+\[ \text{Total distance} = 80 \text{ miles} + 150 \text{ miles} = 230 \text{ miles} \]
+
+Therefore, each train covers a total of 230 miles in the two days.",230.0,True,False,False,89,2.8764044943820224,8,564.9584007263184,4.068512085825205,3882.700672149658,190.19884872436523,11.186576,246.431744,2.248,59.50561797752809,5.710976,0,4.657761693932116,2.679943084716797,12.804210662841797,361.6029999256134,1027.983999967575,True,True
+F0_nocache_fixed,gsm8k_0017,math,86,none,fixed,,bf16,57500,"To calculate Jill's annual salary, we need to break down her earnings from both her teaching and cheerleading coaching roles and then sum them up.
+
+1. **Calculate her weekly earnings from teaching:**
+   - Jill earns $20 per hour.
+   - She works 35 hours a week.
+   - Weekly earnings from teaching = $20/hour * 35 hours/week = $700/week.
+
+2. **Calculate her weekly earnings from cheerleading coaching:**
+   - Jill earns $30 per hour.
+   - She works 15 hours a week.
+   - Weekly earnings from cheerleading coaching = $30/hour * 15 hours/week = $450/week.
+
+3. **Calculate her total weekly earnings:**
+   - Total weekly earnings = $700/week + $450/week = $1150/week.
+
+4. **Calculate her annual salary:**
+   - Jill works 50 weeks a year.
+   - Annual salary = $1150/week * 50 weeks/year = $57,500/year.
+
+#### Final Answer: $57,500/year",57500.0,True,True,False,256,1.0,256,2385.1984672546387,0.4167999990750104,17707.233558654785,616.1618890762329,717.23008,717.225984,3.584,342.0,717.23008,0,20.764951371587813,2.6441760063171387,12.515857696533203,1893.8130000829697,5815.319000005722,True,True
+K2_dual_thr0.9,gsm8k_0017,math,86,dual,threshold,0.9,bf16,57500,"To calculate Jill's annual salary, we need to break down her earnings into her teaching and coaching components and then sum them up.
+
+1. **Teaching Earnings:**
+   - Jill earns $20 per hour.
+   - She works 35 hours a week.
+   - Weekly earnings from teaching: \( 20 \times 35 = \$700 \)
+
+2. **Coaching Earnings:**
+   - Jill earns $30 per hour.
+   - She works 15 hours a week.
+   - Weekly earnings from coaching: \( 30 \times 15 = \$450 \)
+
+3. **Total Weekly Earnings:**
+   - Total weekly earnings = Weekly earnings from teaching + Weekly earnings from coaching
+   - Total weekly earnings = \( \$700 + \$450 = \$1150 \)
+
+4. **Annual Earnings:**
+   - Jill works 50 weeks a year.
+   - Annual earnings = Total weekly earnings \(\times\) Number of weeks per year
+   - Annual earnings = \( \$1150 \times 50 = \$57500 \)
+
+####57500",57500.0,True,False,True,76,3.3684210526315788,8,476.46825408935547,0.14057599974330515,3308.2805366516113,161.36067152023315,40.24032,212.926464,2.144,64.63157894736842,22.41344,0,3.9609889537096024,2.680706024169922,12.736017227172852,330.55799996852875,927.7140001058578,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0017,math,86,dual,threshold,0.9,int8_abs,57500,"To calculate Jill's annual salary, we need to break down her earnings into two parts: her earnings as a teacher and her earnings as a cheerleading coach.
+
+1. **Calculate her weekly earnings as a teacher:**
+   - Jill gets paid $20 per hour.
+   - She works 35 hours a week as a teacher.
+   - Weekly earnings as a teacher = $20/hour * 35 hours/week = $700/week.
+
+2. **Calculate her weekly earnings as a cheerleading coach:**
+   - Jill gets paid $30 per hour.
+   - She works 15 hours a week as a cheerleading coach.
+   - Weekly earnings as a cheerleading coach = $30/hour * 15 hours/week = $450/week.
+
+3. **Calculate her annual salary:**
+   - Jill works 50 weeks a year.
+   - Annual salary = ($700/week + $450/week) * 50 weeks/year = $1150/week * 50 weeks/year = $57,500/year.
+
+#### Jill's annual salary is $57,500",57500.0,True,False,False,84,3.0476190476190474,8,534.0078711509705,4.169119890779257,3700.051513671875,177.41859078407288,21.179808,235.339776,2.208,61.523809523809526,11.212256,0,4.430631943047047,2.680706024169922,12.735727310180664,365.710000038147,998.6480000019073,True,True
+K5_dual_thr0.9_int4,gsm8k_0017,math,86,dual,threshold,0.9,int4_group,57500,"To calculate Jill's annual salary, we need to break down her earnings into two parts: her earnings as a teacher and her earnings as a cheerleading coach.
+
+1. **Calculate her weekly earnings as a teacher:**
+   - Jill gets paid $20 per hour.
+   - She works 35 hours a week as a teacher.
+   - Weekly earnings as a teacher = $20/hour * 35 hours/week = $700/week.
+
+2. **Calculate her weekly earnings as a cheerleading coach:**
+   - Jill gets paid $30 per hour.
+   - She works 15 hours a week as a cheerleading coach.
+   - Weekly earnings as a cheerleading coach = $30/hour * 15 hours/week = $450/week.
+
+3. **Calculate her annual earnings:**
+   - Jill works 50 weeks a year.
+   - Annual earnings = ($700/week + $450/week) * 50 weeks/year = $1150/week * 50 weeks/year = $57,500/year.
+
+#### Jill's annual salary is $57,500",57500.0,True,False,False,81,3.1604938271604937,8,513.9837441444397,3.7952640913426876,3552.878574371338,172.77644872665405,10.71336,226.934784,2.184,62.617283950617285,5.77856,0,4.258177771233022,2.680706024169922,12.735727310180664,334.4079999923706,942.9349999427795,True,True
+F0_nocache_fixed,gsm8k_0018,math,56,none,fixed,,bf16,7,"To determine how many dozens of eggs Claire will eat in 4 weeks, we need to follow these steps:
+
+1. Calculate the number of eggs Claire eats in one week.
+2. Calculate the number of eggs Claire eats in 4 weeks.
+3. Convert the total number of eggs into dozens.
+
+First, let's calculate the number of eggs Claire eats in one week:
+- Claire eats 3 eggs every morning.
+- There are 7 days in a week.
+- Therefore, in one week, Claire eats \(3 \times 7 = 21\) eggs.
+
+Next, let's calculate the number of eggs Claire eats in 4 weeks:
+- Claire eats 21 eggs per week.
+- Therefore, in 4 weeks, Claire eats \(21 \times 4 = 84\) eggs.
+
+Finally, let's convert the total number of eggs into dozens:
+- There are 12 eggs in a dozen.
+- Therefore, 84 eggs is equal to \(\frac{84}{12} = 7\) dozens.
+
+So, Claire will eat 7 dozens of eggs in 4 weeks.
+
+#### 7",7.0,True,True,False,256,1.0,256,2334.960199356079,0.42191999894566834,17105.363571166992,609.9612791538239,654.31552,654.311424,3.584,312.0,654.31552,0,20.1039225673303,2.6410017013549805,12.50149393081665,1824.1669999361038,5741.024999976158,True,False
+K2_dual_thr0.9,gsm8k_0018,math,56,dual,threshold,0.9,bf16,7,"To determine how many dozens of eggs Claire will eat in 4 weeks, we need to follow these steps:
+
+1. **Calculate the number of eggs Claire eats in one week:**
+   - Claire eats 3 eggs every morning.
+   - There are 7 days in a week.
+   - Therefore, in one week, she eats \(3 \times 7 = 21\) eggs.
+
+2. **Calculate the number of eggs Claire eats in 4 weeks:**
+   - Since she eats 21 eggs in one week, in 4 weeks she will eat \(21 \times 4 = 84\) eggs.
+
+3. **Convert the number of eggs to dozens:**
+   - There are 12 eggs in a dozen.
+   - To find out how many dozens 84 eggs are, we divide 84 by 12: \(84 \div 12 = 7\).
+
+So, Claire will eat 7 dozens of eggs in 4 weeks.
+
+####",4.0,False,False,True,77,3.324675324675325,8,501.30665588378906,0.14611199987120926,3413.208381652832,166.39462447166443,38.5364,196.804608,2.152,61.09090909090909,20.44736,0,4.096067160367966,2.6748156547546387,12.706717014312744,329.0509999990463,910.4930000305176,True,False
+K4_dual_thr0.9_int8abs,gsm8k_0018,math,56,dual,threshold,0.9,int8_abs,7,"To determine how many dozens of eggs Claire will eat in 4 weeks, we need to follow these steps:
+
+1. **Calculate the number of eggs Claire eats in one week:**
+   - Claire eats 3 eggs every morning.
+   - There are 7 days in a week.
+   - Therefore, in one week, she eats \(3 \times 7 = 21\) eggs.
+
+2. **Calculate the number of eggs Claire eats in 4 weeks:**
+   - Since she eats 21 eggs in one week, in 4 weeks she will eat \(21 \times 4 = 84\) eggs.
+
+3. **Convert the number of eggs to dozens:**
+   - There are 12 eggs in a dozen.
+   - To find out how many dozens are in 84 eggs, we divide 84 by 12: \(84 \div 12 = 7\).
+
+So, Claire will eat 7 dozens of eggs in 4 weeks.
+
+#### Final Answer: 7 dozens",7.0,True,False,False,85,3.011764705882353,8,546.1570239067078,4.108223915100098,3720.3299407958984,183.28275227546692,20.32744,217.25184,2.216,58.35294117647059,10.228736,0,4.469869417138398,2.6748156547546387,12.70711374282837,367.9280000925064,1008.9379999637604,True,False
+K5_dual_thr0.9_int4,gsm8k_0018,math,56,dual,threshold,0.9,int4_group,7,"To determine how many dozens of eggs Claire will eat in 4 weeks, we need to follow these steps:
+
+1. **Calculate the number of eggs Claire eats in one week:**
+   - Claire eats 3 eggs every morning.
+   - There are 7 days in a week.
+   - Therefore, in one week, she eats \(3 \times 7 = 21\) eggs.
+
+2. **Calculate the number of eggs Claire eats in 4 weeks:**
+   - Since she eats 21 eggs in one week, in 4 weeks she will eat \(21 \times 4 = 84\) eggs.
+
+3. **Convert the number of eggs from eggs to dozens:**
+   - There are 12 eggs in a dozen.
+   - Therefore, 84 eggs is equal to \(\frac{84}{12} = 7\) dozens.
+
+So, Claire will eat 7 dozens of eggs in 4 weeks.",4.0,False,False,False,71,3.6056338028169015,8,447.0651841163635,3.279296103864908,3102.419334411621,149.77728009223938,9.53048,181.469184,2.104,63.54929577464789,5.27168,0,3.715458090417087,2.6748156547546387,12.70711374282837,300.22000002861023,825.1370000839233,True,False
+F0_nocache_fixed,gsm8k_0019,math,94,none,fixed,,bf16,6,"To determine the speed Marissa needs to walk the remaining distance, we first need to calculate the total distance she has already walked and the total time she has spent walking.
+
+1. **Total distance walked:**
+   - First segment: 4 miles
+   - Second segment: 2 miles
+   - Total distance walked = 4 miles + 2 miles = 6 miles
+
+2. **Total time spent walking:**
+   - First segment: 1 hour
+   - Second segment: 1 hour
+   - Total time spent = 1 hour + 1 hour = 2 hours
+
+3. **Remaining distance:**
+   - Total trail distance: 12 miles
+   - Distance already walked: 6 miles
+   - Remaining distance = 12 miles - 6 miles = 6 miles
+
+4. **Required speed:**
+   - Remaining distance = 6 miles
+   - Remaining time = 2 hours
+   - Required speed = Remaining distance / Remaining time = 6 miles / 2 hours = 3 miles per hour
+
+Therefore, Marissa needs to walk the remaining distance at a speed of 3 miles per hour.
+
+#### 
+3 miles per hour",3.0,False,True,False,256,1.0,256,2403.5742931365967,0.38524799910373986,17735.17547607422,620.9336647987366,734.007296,734.0032,3.584,350.0,734.007296,0,20.817097638733685,2.6460680961608887,12.51968765258789,1911.4900000095367,5931.330999970436,False,False
+K2_dual_thr0.9,gsm8k_0019,math,94,dual,threshold,0.9,bf16,6,"To determine the speed Marissa needs to walk the remaining distance, we first need to calculate the total distance she has already walked and the total time she has spent walking.
+
+1. **Total distance walked so far:**
+   - First 4 miles in 1 hour
+   - Next 2 miles in 1 hour
+   - Total distance walked = 4 miles + 2 miles = 6 miles
+
+2. **Total time spent walking:**
+   - First 4 miles: 1 hour
+   - Next 2 miles: 1 hour
+   - Total time spent = 1 hour + 1 hour = 2 hours
+
+3. **Remaining distance:**
+   - Total trail distance = 12 miles
+   - Distance already walked = 6 miles
+   - Remaining distance = 12 miles - 6 miles = 6 miles
+
+4. **Required speed for the remaining distance:**
+   - Remaining distance = 6 miles
+   - Remaining time = 2 hours
+   - Required speed = 6 miles / 2 hours = 3 miles per hour
+
+Therefore, Marissa needs to walk the remaining distance at a speed of **3** miles per hour.",3.0,False,False,True,121,2.115702479338843,8,761.7995181083679,0.23574399948120117,5251.580741882324,256.3694398403168,52.561808,346.9312,2.504,53.02479338842975,22.937728,0,6.292193326167762,2.685131072998047,12.750185012817383,501.1269999742508,1395.0909999608994,False,False
+K4_dual_thr0.9_int8abs,gsm8k_0019,math,94,dual,threshold,0.9,int8_abs,6,"First, let's determine the total distance Marissa needs to hike and the total time she has spent hiking.
+
+1. Total distance: 12 miles
+2. Distance already walked: 4 miles + 2 miles = 6 miles
+3. Remaining distance: 12 miles - 6 miles = 6 miles
+4. Time spent walking the first 4 miles: 1 hour
+5. Time spent walking the next 2 miles: 1 hour
+6. Total time spent so far: 1 hour + 1 hour = 2 hours
+7. Remaining time: 2 hours - 2 hours = 0 hours
+
+Since the remaining time is 0 hours, Marissa does not need to hike any more time. Therefore, the speed she needs to walk the remaining distance is the same as her desired speed for the entire trail.
+
+Marissa wants her average speed to be 4 miles per hour. Since she has already completed the entire trail in 2 hours, the speed she needs to walk the remaining distance is:
+
+####
+Marissa needs to walk the remaining distance at a speed of 4 miles per hour to maintain her average speed of 4 miles per hour.",4.0,False,False,False,168,1.5238095238095237,8,1069.3581113815308,7.758559808135033,7323.603607177734,355.87948870658875,32.458848,481.6896,2.88,47.142857142857146,11.474528,0,8.786919781938195,2.685131072998047,12.749284744262695,695.3680000305176,1892.1890000104904,False,False
+K5_dual_thr0.9_int4,gsm8k_0019,math,94,dual,threshold,0.9,int4_group,6,"To determine the speed Marissa needs to walk the remaining distance, we first need to calculate the total distance she has already walked and the total time she has spent walking.
+
+1. **Total distance walked so far:**
+   - First 4 miles in 1 hour
+   - Next 2 miles in 1 hour
+   - Total distance walked = 4 miles + 2 miles = 6 miles
+
+2. **Total time spent walking:**
+   - First 4 miles: 1 hour
+   - Next 2 miles: 1 hour
+   - Total time spent = 1 hour + 1 hour = 2 hours
+
+3. **Remaining distance:**
+   - Total trail distance = 12 miles
+   - Distance already walked = 6 miles
+   - Remaining distance = 12 miles - 6 miles = 6 miles
+
+4. **Required speed for the remaining distance:**
+   - Remaining distance = 6 miles
+   - Remaining time = 2 hours
+   - Required speed = 6 miles / 2 hours = 3 miles per hour
+
+Therefore, Marissa needs to walk the remaining distance at a speed of **3** miles per hour.",3.0,False,False,True,121,2.115702479338843,8,783.2989749908447,5.312672149389982,5370.550861358643,260.55868697166443,13.552528,346.9312,2.504,53.02479338842975,5.913728,0,6.442454501986504,2.685131072998047,12.749757766723633,502.47499990463257,1395.2410000562668,False,False
+F0_nocache_fixed,gsm8k_0020,math,92,none,fixed,,bf16,15,"1. Calculate the amount of water in the orange drink:
+   - The orange drink is 10 liters and is two-thirds water.
+   - Amount of water in orange drink = 10 liters * (2/3) = 6.67 liters.
+
+2. Calculate the amount of water in the pineapple drink:
+   - The pineapple drink is 15 liters and is three-fifths water.
+   - Amount of water in pineapple drink = 15 liters * (3/5) = 9 liters.
+
+3. Calculate the total amount of water before the spill:
+   - Total water = 6.67 liters (orange drink) + 9 liters (pineapple drink) = 15.67 liters.
+
+4. Account for the spill:
+   - One liter of the orange drink is spilled, which contains 0.67 liters of water.
+   - Total water after the spill = 15.67 liters - 0.67 liters = 15 liters.
+
+#### Therefore, the amount of water in the remaining 24 liters, after accounting for the spill, is 15 liters.",15.0,True,True,False,256,1.0,256,2400.8984632492065,0.37827199907042086,17748.30800628662,617.1741108894348,729.812992,729.808896,3.584,348.0,729.812992,0,20.824038185179234,2.6458849906921387,12.518844604492188,1902.5720000267029,5835.501999974251,True,True
+K2_dual_thr0.9,gsm8k_0020,math,92,dual,threshold,0.9,bf16,15,"1. Calculate the amount of water in the orange drink:
+   - 10 liters of orange drink are two-thirds water.
+   - Water content in orange drink = 10 liters * (2/3) = 6 liters.
+
+2. Calculate the amount of water in the pineapple drink:
+   - 15 liters of pineapple drink are three-fifths water.
+   - Water content in pineapple drink = 15 liters * (3/5) = 9 liters.
+
+3. Calculate the total amount of water in the combined mixture:
+   - Total water content = Water content in orange drink + Water content in pineapple drink
+   - Total water content = 6 liters + 9 liters = 15 liters.
+
+4. Account for the spilled orange drink:
+   - One liter of orange drink is spilled.
+   - Spilled orange drink contains 0 liters of water.
+
+5. Calculate the final amount of water in the remaining mixture:
+   - Final water content = Total water content - Water in spilled orange drink
+   - Final water content = 15 liters - 0 liters = 15 liters.
+
+#### 15 liters",15.0,True,False,True,115,2.226086956521739,8,722.7406721115112,0.21862399962265044,4958.462245941162,244.69951963424683,50.857776,327.84384,2.456,53.982608695652175,22.806656,0,5.947409997694194,2.684947967529297,12.747695922851562,472.067999958992,1333.7340000867844,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0020,math,92,dual,threshold,0.9,int8_abs,15,"1. Calculate the amount of water in the orange drink:
+   - 10 liters of orange drink are two-thirds water.
+   - Water content in orange drink = 10 liters * (2/3) = 10 liters.
+
+2. Calculate the amount of water in the pineapple drink:
+   - 15 liters of pineapple drink are three-fifths water.
+   - Water content in pineapple drink = 15 liters * (3/5) = 9 liters.
+
+3. Calculate the total amount of water in the combined mixture:
+   - Total water content = Water content in orange drink + Water content in pineapple drink
+   - Total water content = 10 liters + 9 liters = 19 liters.
+
+4. Account for the spilled orange drink:
+   - One liter of orange drink is spilled.
+   - Spilled orange drink contains 1 liter * (2/3) = 2/3 liters of water.
+   - Total water content after spill = 19 liters - 2/3 liters = 18 liters.
+
+#### The amount of water in the remaining 24 liters is 18 liters.",18.0,False,False,False,123,2.0813008130081303,8,777.2495994567871,5.7695358619093895,5345.666515350342,262.35600066185,26.49144,350.650368,2.52,52.552845528455286,11.40896,0,6.413063460960984,2.684947967529297,12.821762084960938,507.9190000295639,1403.0359998941422,True,True
+K5_dual_thr0.9_int4,gsm8k_0020,math,92,dual,threshold,0.9,int4_group,15,"1. Calculate the amount of water in the orange drink:
+   - Orange drink: 10 liters
+   - Water content: two-thirds
+   - Water in orange drink: \( \frac{2}{3} \times 10 = 6 \) liters
+
+2. Calculate the amount of water in the pineapple drink:
+   - Pineapple drink: 15 liters
+   - Water content: three-fifths
+   - Water in pineapple drink: \( \frac{3}{5} \times 15 = 9 \) liters
+
+3. Calculate the total amount of water before spilling:
+   - Total water = Water in orange drink + Water in pineapple drink
+   - Total water = 6 liters + 9 liters = 15 liters
+
+4. Account for the spilled orange drink:
+   - Spilled orange drink: 1 liter
+   - Total water after spilling = Total water - Spilled orange drink
+   - Total water after spilling = 15 liters - 1 liter = 14 liters
+
+####",14.0,False,False,False,114,2.245614035087719,8,724.1009569168091,5.038496136665344,4976.050098419189,244.19142365455627,13.045536,324.993024,2.448,54.175438596491226,5.879936,0,5.9703046986833215,2.684947967529297,12.747695922851562,473.8420000076294,1323.2850000858307,True,True
+F0_nocache_fixed,gsm8k_0021,math,75,none,fixed,,bf16,14,"To determine how many years ago Raymond's son was born, we need to follow these steps:
+
+1. **Determine Samantha's current age:**
+   Samantha is currently 31 years old.
+
+2. **Determine Raymond's current age:**
+   Raymond was born 6 years before Samantha. Therefore, Raymond is currently:
+   \[
+   31 - 6 = 25 \text{ years old}
+   \]
+
+3. **Determine Raymond's son's current age:**
+   Raymond had a son at the age of 23. Therefore, Raymond's son is currently:
+   \[
+   25 + 23 = 48 \text{ years old}
+   \]
+
+4. **Determine how many years ago Raymond's son was born:**
+   To find out how many years ago Raymond's son was born, we need to subtract the current year from his current age. Assuming the current year is 2023, we calculate:
+   \[
+   2023 - 48 = 1975
+   \]
+
+Thus, Raymond's son was born \boxed{75} years ago.",75.0,False,True,False,256,1.0,256,2364.679298400879,0.3990399988833815,17478.212776184082,610.7167036533356,694.161408,694.157312,3.584,331.0,694.161408,0,20.508875641971827,2.643306255340576,12.510591506958008,1867.6409999132156,5789.524999976158,False,False
+K2_dual_thr0.9,gsm8k_0021,math,75,dual,threshold,0.9,bf16,14,"To determine how many years ago Raymond's son was born, we need to follow these steps:
+
+1. **Determine Samantha's current age:**
+   Samantha is currently 31 years old.
+
+2. **Determine Raymond's current age:**
+   Raymond was born 6 years before Samantha. Therefore, Raymond is currently:
+   \[
+   31 - 6 = 25 \text{ years old}
+   \]
+
+3. **Determine Raymond's son's age:**
+   Raymond had a son at the age of 23. Therefore, Raymond's son is currently:
+   \[
+   25 - 23 = 2 \text{ years old}
+   \]
+
+4. **Determine how many years ago Raymond's son was born:**
+   Since Raymond's son is currently 2 years old, we need to find out how many years ago he was born. This is done by subtracting his current age from the current year:
+   \[
+   2 - 2 = 0 \text{ years ago}
+   \]
+
+Thus, Raymond's son was born 0 years ago.
+
+####
+\boxed{0}",0.0,False,False,True,93,2.752688172043011,8,616.9875202178955,0.1795199995394796,4188.308174133301,201.61673593521118,43.976144,252.174336,2.28,57.72043010752688,21.692544,0,5.0258374232798815,2.678661346435547,12.727208137512207,387.70499992370605,1101.0180000066757,False,False
+K4_dual_thr0.9_int8abs,gsm8k_0021,math,75,dual,threshold,0.9,int8_abs,14,"To determine how many years ago Raymond's son was born, we need to follow these steps:
+
+1. **Determine Samantha's current age:**
+   Samantha is currently 31 years old.
+
+2. **Determine Raymond's current age:**
+   Raymond was born 6 years before Samantha. Therefore, Raymond is currently:
+   \[
+   31 - 6 = 25 \text{ years old}
+   \]
+
+3. **Determine Raymond's son's current age:**
+   Raymond had a son at the age of 23. Therefore, Raymond's son is currently:
+   \[
+   25 - 23 = 2 \text{ years old}
+   \]
+
+4. **Determine how many years ago Raymond's son was born:**
+   Since Raymond's son is currently 2 years old, we need to find out how many years ago he was born. This is done by subtracting the son's current age from the current year:
+   \[
+   2 - 2 = 0 \text{ years ago}
+   \]
+
+Thus, Raymond's son was born 0 years ago.
+
+#### 0 years",0.0,False,False,False,93,2.752688172043011,8,583.0601925849915,4.490719862282276,4016.2189598083496,197.33404684066772,21.999552,252.174336,2.28,57.72043010752688,10.851632,0,4.817626784555614,2.678661346435547,12.727208137512207,387.8009999990463,1068.707999944687,False,False
+K5_dual_thr0.9_int4,gsm8k_0021,math,75,dual,threshold,0.9,int4_group,14,"To determine how many years ago Raymond's son was born, we need to follow these steps:
+
+1. **Determine Samantha's current age:**
+   Samantha is currently 31 years old.
+
+2. **Determine Raymond's current age:**
+   Raymond was born 6 years before Samantha. Therefore, Raymond is currently:
+   \[
+   31 - 6 = 25 \text{ years old}
+   \]
+
+3. **Determine Raymond's son's age:**
+   Raymond had a son at the age of 23. Therefore, Raymond's son is currently:
+   \[
+   25 - 23 = 2 \text{ years old}
+   \]
+
+4. **Calculate the number of years ago Raymond's son was born:**
+   To find out how many years ago Raymond's son was born, we need to subtract his current age from the current year. Assuming the current year is 2023, we calculate:
+   \[
+   2023 - 2 = 2021
+   \]
+
+Thus, Raymond's son was born \boxed{2021} years ago.",2021.0,False,False,False,83,3.0843373493975905,8,525.2186889648438,4.016928132623434,3603.1406288146973,176.02995133399963,10.662704,225.058816,2.2,60.81927710843374,5.592704,0,4.323183818720281,2.678661346435547,12.727208137512207,344.28600001335144,984.7829999923706,False,False
+F0_nocache_fixed,gsm8k_0022,math,84,none,fixed,,bf16,7,"To determine the total number of DVDs Billy sold on Tuesday, we need to calculate the number of DVDs sold to each group of customers and then sum them up.
+
+1. **First 3 customers:**
+   - Each customer buys 1 DVD.
+   - Total DVDs sold to these customers: \( 3 \times 1 = 3 \) DVDs.
+
+2. **Next 2 customers:**
+   - Each customer buys 2 DVDs.
+   - Total DVDs sold to these customers: \( 2 \times 2 = 4 \) DVDs.
+
+3. **Last 3 customers:**
+   - None of these customers buy any DVDs.
+   - Total DVDs sold to these customers: \( 3 \times 0 = 0 \) DVDs.
+
+Now, we sum up the DVDs sold to all the groups:
+- DVDs sold to the first 3 customers: 3 DVDs
+- DVDs sold to the next 2 customers: 4 DVDs
+- DVDs sold to the last 3 customers: 0 DVDs
+
+Total DVDs sold: \( 3 + 4 + 0 = 7 \) DVDs
+
+Therefore, Billy sold a total of 7 DVDs on Tuesday.",7.0,True,True,False,256,1.0,256,2382.8514881134033,0.39663999900221825,17659.82431793213,616.6326406002045,713.035776,713.03168,3.584,340.0,713.035776,0,20.715392999351025,2.6439929008483887,12.514900207519531,1884.5820000171661,5804.456000089645,True,True
+K2_dual_thr0.9,gsm8k_0022,math,84,dual,threshold,0.9,bf16,7,"To determine the total number of DVDs Billy sold on Tuesday, we need to break down the sales into segments and calculate the total for each segment.
+
+1. **First 3 customers:**
+   - Each of these 3 customers buys 1 DVD.
+   - Total DVDs sold to these customers: \( 3 \times 1 = 3 \) DVDs.
+
+2. **Next 2 customers:**
+   - Each of these 2 customers buys 2 DVDs.
+   - Total DVDs sold to these customers: \( 2 \times 2 = 4 \) DVDs.
+
+3. **Last 3 customers:**
+   - Each of these 3 customers buys 0 DVDs.
+   - Total DVDs sold to these customers: \( 3 \times 0 = 0 \) DVDs.
+
+Now, we sum up the DVDs sold to all the customers:
+- First 3 customers: 3 DVDs
+- Next 2 customers: 4 DVDs
+- Last 3 customers: 0 DVDs
+
+Total DVDs sold on Tuesday:
+\[ 3 + 4 + 0 = 7 \]
+
+Therefore, Billy sold \( \boxed{7} DVDs on Tuesday.",7.0,True,False,True,78,3.282051282051282,8,509.9767665863037,0.14883199974428862,3474.128303527832,170.57212805747986,40.633568,217.25184,2.16,63.58974358974359,22.282368,0,4.170420415699482,2.680309295654297,12.806221008300781,332.8939999341965,940.2129999399185,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0022,math,84,dual,threshold,0.9,int8_abs,7,"To determine the total number of DVDs Billy sold on Tuesday, we need to break down the sales into segments and calculate the total for each segment.
+
+1. **First 3 customers:**
+   - Each customer buys 1 DVD.
+   - Total DVDs sold to these customers: \( 3 \times 1 = 3 \) DVDs.
+
+2. **Next 2 customers:**
+   - Each customer buys 2 DVDs.
+   - Total DVDs sold to these customers: \( 2 \times 2 = 4 \) DVDs.
+
+3. **Last 3 customers:**
+   - None of these customers buy any DVDs.
+   - Total DVDs sold to these customers: \( 3 \times 0 = 0 \) DVDs.
+
+Now, we sum up the DVDs sold to all the customers:
+- DVDs sold to the first 3 customers: 3 DVDs
+- DVDs sold to the next 2 customers: 4 DVDs
+- DVDs sold to the last 3 customers: 0 DVDs
+
+Total DVDs sold on Tuesday: \( 3 + 4 + 0 = 7 \) DVDs.
+
+Therefore, Billy sold a total of 7 DVDs on Tuesday.",7.0,True,False,False,76,3.3684210526315788,8,480.23359870910645,3.844287909567356,3345.384078979492,161.9863362312317,20.065024,211.68128,2.144,64.42105263157895,11.146688,0,4.005337011069059,2.680309295654297,12.806098937988281,319.00999999046326,898.220999956131,True,True
+K5_dual_thr0.9_int4,gsm8k_0022,math,84,dual,threshold,0.9,int4_group,7,"To determine the total number of DVDs Billy sold on Tuesday, we need to break down the sales into segments and calculate the total for each segment.
+
+1. **First 3 customers:**
+   - Each customer buys 1 DVD.
+   - Total DVDs sold to these customers: \( 3 \times 1 = 3 \) DVDs.
+
+2. **Next 2 customers:**
+   - Each customer buys 2 DVDs.
+   - Total DVDs sold to these customers: \( 2 \times 2 = 4 \) DVDs.
+
+3. **Last 3 customers:**
+   - Each customer does not buy any DVDs.
+   - Total DVDs sold to these customers: \( 3 \times 0 = 0 \) DVDs.
+
+Now, we sum up the DVDs sold to all the customers:
+- DVDs sold to the first 3 customers: 3 DVDs
+- DVDs sold to the next 2 customers: 4 DVDs
+- DVDs sold to the last 3 customers: 0 DVDs
+
+Total DVDs sold on Tuesday:
+\[ 3 + 4 + 0 = 7 \]
+
+Therefore, Billy sold a total of 7 DVDs on Tuesday.",7.0,True,False,False,74,3.4594594594594597,8,469.7058868408203,3.5251840464770794,3243.04931640625,157.88156819343567,10.206368,206.11072,2.128,65.29729729729729,5.744768,0,3.887675969861448,2.680309295654297,12.806098937988281,309.78200006484985,883.3510000705719,True,True
+F0_nocache_fixed,gsm8k_0023,math,67,none,fixed,,bf16,8,"To determine how many centimeters shorter a candle will be after burning from 1:00 PM to 5:00 PM, we need to follow these steps:
+
+1. **Identify the duration of the candle burning:**
+   - The candle burns from 1:00 PM to 5:00 PM.
+   - This is a duration of 4 hours.
+
+2. **Determine the rate at which the candle melts:**
+   - The candle melts by 2 centimeters every hour.
+
+3. **Calculate the total amount of candle melted:**
+   - Multiply the duration of the candle burning by the rate of melting.
+   - Total melting = rate × duration
+   - Total melting = 2 cm/hour × 4 hours
+   - Total melting = 8 cm
+
+Therefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.
+
+####",0.0,False,True,False,256,1.0,256,2371.724804878235,0.40172799897845834,17449.077354431152,613.8709759712219,677.384192,677.380096,3.584,323.0,677.384192,0,20.488812427036464,2.642695903778076,12.50676155090332,1930.4529999494553,5718.328999996185,False,False
+K2_dual_thr0.9,gsm8k_0023,math,67,dual,threshold,0.9,bf16,8,"To determine how many centimeters shorter a candle will be after burning from 1:00 PM to 5:00 PM, we need to follow these steps:
+
+1. **Identify the number of hours the candle is burning:**
+   - The candle starts burning at 1:00 PM and stops at 5:00 PM.
+   - The time difference between 1:00 PM and 5:00 PM is 4 hours.
+
+2. **Calculate the total amount of candle that melts:**
+   - The candle melts by 2 centimeters every hour.
+   - Over 4 hours, the total amount of candle that melts is:
+     \[
+     2 \text{ cm/hour} \times 4 \text{ hours} = 8 \text{ cm}
+     \]
+
+3. **Determine the final length of the candle:**
+   - If the candle melts by 8 centimeters, the final length of the candle will be:
+     \[
+     \text{Initial length} - 8 \text{ cm}
+     \]
+
+Therefore, the candle will be 8 centimeters shorter after burning for the 4-hour period.",4.0,False,False,True,111,2.3063063063063063,8,705.8849258422852,0.21411199949216098,4826.761962890625,238.43350386619568,48.170736,293.707776,2.424,52.972972972972975,21.168256,0,5.792277733795345,2.677196502685547,12.71593189239502,456.50800001621246,1289.1640000343323,False,False
+K4_dual_thr0.9_int8abs,gsm8k_0023,math,67,dual,threshold,0.9,int8_abs,8,"To determine how many centimeters shorter a candle will be after burning from 1:00 PM to 5:00 PM, we need to follow these steps:
+
+1. **Identify the number of hours the candle is burning:**
+   - From 1:00 PM to 5:00 PM is a period of 4 hours.
+
+2. **Determine the rate at which the candle melts:**
+   - The candle melts by 2 centimeters every hour.
+
+3. **Calculate the total amount of candle melted:**
+   - Multiply the number of hours by the rate of melting per hour.
+   - Total melting = 4 hours * 2 cm/hour = 8 centimeters.
+
+Therefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.
+
+#### 8",8.0,True,False,False,84,3.0476190476190474,8,524.1380496025085,4.091423932462931,3649.9459075927734,177.54374480247498,20.556912,222.265344,2.208,59.714285714285715,10.58936,0,4.370596583001316,2.677196502685547,12.784479141235352,350.6340000629425,980.3529999256134,False,False
+K5_dual_thr0.9_int4,gsm8k_0023,math,67,dual,threshold,0.9,int4_group,8,"To determine how many centimeters shorter a candle will be after burning from 1:00 PM to 5:00 PM, we need to follow these steps:
+
+1. **Calculate the number of hours the candle is burning:**
+   - From 1:00 PM to 5:00 PM is a period of 4 hours.
+
+2. **Determine the rate at which the candle melts:**
+   - The candle melts by 2 centimeters every hour.
+
+3. **Calculate the total amount of candle melted:**
+   - Multiply the number of hours by the rate of melting per hour.
+   - Total melting = 4 hours * 2 cm/hour = 8 centimeters.
+
+Therefore, the candle will be 8 centimeters shorter after burning from 1:00 PM to 5:00 PM.
+
+####",0.0,False,False,False,80,3.2,8,500.07103967666626,3.6623040810227394,3463.0134925842285,169.66595125198364,10.324736,211.68128,2.176,61.1,5.457536,0,4.150424870662391,2.677196502685547,12.784334182739258,335.3709999322891,946.8510000705719,False,False
+F0_nocache_fixed,gsm8k_0024,math,68,none,fixed,,bf16,26,"To determine the original price of the book, we need to follow these steps:
+
+1. **Understand the problem**: Kyle bought the book for $19.50 after a 25% discount. This means he paid 75% of the original price.
+
+2. **Set up the equation**: Let \( P \) be the original price of the book. The price Kyle paid is 75% of the original price, which can be written as:
+   \[
+   0.75P = 19.50
+   \]
+
+3. **Solve for \( P \)**: To find \( P \), we need to isolate it on one side of the equation. We do this by dividing both sides of the equation by 0.75:
+   \[
+   P = \frac{19.50}{0.75}
+   \]
+
+4. **Perform the division**: Calculate the division:
+   \[
+   P = \frac{19.50}{0.75} = 26
+   \]
+
+So, the original price of the book was $26.
+
+####.",26.0,True,True,False,256,1.0,256,2351.643264770508,0.40393599902745336,17457.279251098633,607.2999379634857,679.481344,679.477248,3.584,324.0,679.481344,0,20.469418240711093,2.6427721977233887,12.507240295410156,1867.558000087738,5726.051999926567,True,True
+K2_dual_thr0.9,gsm8k_0024,math,68,dual,threshold,0.9,bf16,26,"To determine the original price of the book, we need to follow these steps:
+
+1. **Understand the problem**: Kyle bought the book after a discount, which means he paid 75% of the original price.
+
+2. **Set up the equation**: Let \( P \) be the original price of the book. The price Kyle paid is 75% of the original price, which can be written as:
+   \[
+   0.75P = 19.50
+   \]
+
+3. **Solve for \( P \)**: To find the original price, we need to isolate \( P \) on one side of the equation. We do this by dividing both sides of the equation by 0.75:
+   \[
+   P = \frac{19.50}{0.75}
+   \]
+
+4. **Perform the division**: Calculate the value of \( P \):
+   \[
+   P = \frac{19.50}{0.75} = 26.00
+   \]
+
+Therefore, the original price of the book was \(\boxed{26.00}\).",26.0,True,False,True,79,3.240506329113924,8,500.8810577392578,0.15007999981753528,3477.703868865967,168.3094403743744,39.847152,209.682432,2.168,61.56962025316456,21.233792,0,4.162407015450299,2.677379608154297,12.786113739013672,329.77699995040894,921.0099999904633,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0024,math,68,dual,threshold,0.9,int8_abs,26,"To determine the original price of the book, we need to follow these steps:
+
+1. **Understand the discount**: The book was sold after a 25% discount. This means Kyle paid 75% of the original price.
+
+2. **Set up the equation**: Let \( P \) be the original price of the book. The price Kyle paid is 75% of the original price, which can be written as:
+   \[
+   0.75P = 19.50
+   \]
+
+3. **Solve for \( P \)**: To find \( P \), we need to isolate it on one side of the equation. We do this by dividing both sides by 0.75:
+   \[
+   P = \frac{19.50}{0.75}
+   \]
+
+4. **Perform the division**: Calculate the value of \( P \):
+   \[
+   P = \frac{19.50}{0.75} = 26.00
+   \]
+
+Therefore, the original price of the book was \(\boxed{26.00}\). ####",26.0,True,False,False,79,3.240506329113924,8,560.6671361923218,3.9272959269583225,3836.4905395507812,173.46268820762634,19.933936,209.682432,2.168,61.56962025316456,10.622144,0,4.590883490629494,2.677379608154297,12.785991668701172,359.33399999141693,976.7360000610352,True,True
+K5_dual_thr0.9_int4,gsm8k_0024,math,68,dual,threshold,0.9,int4_group,26,"To determine the original price of the book, we need to follow these steps:
+
+1. **Understand the problem**: Kyle bought the book after a discount, which means he paid 75% of the original price.
+
+2. **Set up the equation**: Let \( P \) be the original price of the book. The price Kyle paid is 75% of the original price, which can be written as:
+   \[
+   0.75P = 19.50
+   \]
+
+3. **Solve for \( P \)**: To find the original price, we need to isolate \( P \) on one side of the equation. We do this by dividing both sides of the equation by 0.75:
+   \[
+   P = \frac{19.50}{0.75}
+   \]
+
+4. **Perform the division**: Calculate the value of \( P \):
+   \[
+   P = \frac{19.50}{0.75} = 26.00
+   \]
+
+Therefore, the original price of the book was \(\boxed{26.00}\).",26.0,True,False,True,78,3.282051282051282,8,534.8097267150879,4.3840321116149426,3608.3776245117188,169.67654538154602,10.206432,207.028224,2.16,61.94871794871795,5.474432,0,4.332784892059863,2.677379608154297,12.786113739013672,350.289999961853,951.7890000343323,True,True
+F0_nocache_fixed,gsm8k_0025,math,96,none,fixed,,bf16,2,"To determine how many boxes of pizza Marie ordered, we need to follow these steps:
+
+1. Calculate the total cost of the chicken meal, milk, and apples.
+2. Subtract this total cost from the total amount Marie paid to find the cost of the pizzas.
+3. Divide the cost of the pizzas by the cost per box to find the number of boxes.
+
+First, let's calculate the total cost of the chicken meal, milk, and apples:
+- Chicken meal: $12
+- Milk: 5 packs * $3/pack = $15
+- Apples: 4 apples * $1.50/apple = $6
+
+Adding these together:
+$12 + $15 + $6 = $33
+
+Next, we subtract this total cost from the total amount Marie paid to find the cost of the pizzas:
+$50 - $33 = $17
+
+Finally, we divide the cost of the pizzas by the cost per box to find the number of boxes:
+$17 / $8.50/box = 2 boxes
+
+Therefore, Marie ordered 2 boxes of pizza.
+
+#### 2",2.0,True,True,False,256,1.0,256,2403.139328956604,0.3787839990109205,17848.55037689209,619.9302401542664,738.2016,738.197504,3.584,352.0,738.2016,0,20.93006662465632,2.6462512016296387,12.520645141601562,1915.8420000076294,5881.983999967575,True,True
+K2_dual_thr0.9,gsm8k_0025,math,96,dual,threshold,0.9,bf16,2,"To determine how many boxes of pizza Marie ordered, we need to follow these steps:
+
+1. Calculate the total cost of the chicken meal:
+   \[
+   \$12
+   \]
+
+2. Calculate the total cost of the milk:
+   \[
+   5 \times \$3 = \$15
+   \]
+
+3. Calculate the total cost of the apples:
+   \[
+   4 \times \$1.50 = \$6
+   \]
+
+4. Calculate the total cost of the chicken meal, milk, and apples:
+   \[
+   \$12 + \$15 + \$6 = \$33
+   \]
+
+5. Subtract the total cost of the chicken meal, milk, and apples from the total amount paid to find the cost of the pizzas:
+   \[
+   \$50 - \$33 = \$17
+   \]
+
+6. Determine the number of boxes of pizza by dividing the cost of the pizzas by the cost per box:
+   \[
+   \$17 \div \$8.50 = 2
+   \]
+
+Marie ordered 2 boxes of pizza.",2.0,True,False,True,75,3.4133333333333336,8,481.13024139404297,0.14028799964580685,3301.103286743164,161.80959963798523,40.63352,216.2688,2.136,66.13333333333334,23.0688,0,3.959442373365164,2.685314178466797,12.751449584960938,322.26200008392334,915.4539999961853,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0025,math,96,dual,threshold,0.9,int8_abs,2,"To determine how many boxes of pizza Marie ordered, we need to follow these steps:
+
+1. Calculate the total cost of the chicken meal:
+   \[
+   \$12
+   \]
+
+2. Calculate the total cost of the milk:
+   \[
+   5 \times \$3 = \$15
+   \]
+
+3. Calculate the total cost of the apples:
+   \[
+   4 \times \$1.50 = \$6
+   \]
+
+4. Calculate the total cost of the chicken meal, milk, and apples:
+   \[
+   \$12 + \$15 + \$6 = \$33
+   \]
+
+5. Subtract the total cost of the chicken meal, milk, and apples from the total amount paid to find the cost of the pizzas:
+   \[
+   \$50 - \$33 = \$17
+   \]
+
+6. Determine the number of boxes of pizza by dividing the cost of the pizzas by the cost per box:
+   \[
+   \$17 \div \$8.50 = 2
+   \]
+
+Marie ordered 2 boxes of pizza.",2.0,True,False,True,72,3.5555555555555554,8,463.75542402267456,3.7569919265806675,3194.876895904541,155.50940799713135,19.933824,207.618048,2.112,67.55555555555556,11.540096,0,3.8318360690027475,2.685314178466797,12.751541137695312,306.80399990081787,877.1640000343323,True,True
+K5_dual_thr0.9_int4,gsm8k_0025,math,96,dual,threshold,0.9,int4_group,2,"To determine how many boxes of pizza Marie ordered, we need to follow these steps:
+
+1. Calculate the total cost of the chicken meal:
+   \[
+   \$12
+   \]
+
+2. Calculate the total cost of the milk:
+   \[
+   5 \times \$3 = \$15
+   \]
+
+3. Calculate the total cost of the apples:
+   \[
+   4 \times \$1.50 = \$6
+   \]
+
+4. Calculate the total cost of the chicken meal, milk, and apples:
+   \[
+   \$12 + \$15 + \$6 = \$33
+   \]
+
+5. Subtract the total cost of the chicken meal, milk, and apples from the total amount paid to find the cost of the pizzas:
+   \[
+   \$50 - \$33 = \$17
+   \]
+
+6. Determine the number of boxes of pizza by dividing the total cost of the pizzas by the cost per box:
+   \[
+   \$17 \div \$8.50 = 2
+   \]
+
+#### 2 boxes of pizza.",2.0,True,False,False,78,3.282051282051282,8,500.64105558395386,3.7233920730650425,3467.8150634765625,166.18940806388855,10.67952,224.919552,2.16,64.82051282051282,5.94752,0,4.152704274281859,2.685314178466797,12.750930786132812,327.80599999427795,921.9639999866486,True,True
+F0_nocache_fixed,gsm8k_0026,math,98,none,fixed,,bf16,243,"To determine the total amount Mishka spent on all the clothing items, we need to calculate the cost of each type of clothing separately and then sum these amounts.
+
+1. **Cost of shorts:**
+   - Mishka bought 3 pairs of shorts.
+   - Each pair of shorts costs $16.50.
+   - Total cost for shorts = \(3 \times 16.50 = 49\).
+
+2. **Cost of pants:**
+   - Mishka bought 3 pairs of pants.
+   - Each pair of pants costs $22.50.
+   - Total cost for pants = \(3 \times 22.50 = 67\).
+
+3. **Cost of shoes:**
+   - Mishka bought 3 pairs of shoes.
+   - Each pair of shoes costs $42.
+   - Total cost for shoes = \(3 \times 42 = 126\).
+
+Now, we sum the costs of all the clothing items:
+\[
+49 + 67 + 126 = 242
+\]
+
+#### Mishka spent 242 dollars.",242.0,False,True,False,256,1.0,256,2408.331322669983,0.3962559988722205,17935.590530395508,618.6024954319,742.395904,742.391808,3.584,354.0,742.395904,0,21.02050171326846,2.6464343070983887,12.521602630615234,1933.2849999666214,5907.125999927521,False,False
+K2_dual_thr0.9,gsm8k_0026,math,98,dual,threshold,0.9,bf16,243,"To determine the total amount Mishka spent on all the clothing items, we need to calculate the cost of each type of clothing separately and then sum these amounts.
+
+1. **Cost of Shorts:**
+   - Mishka bought 3 pairs of shorts.
+   - Each pair of shorts costs $16.50.
+   - Total cost for shorts: \(3 \times 16.50 = 49\)
+
+2. **Cost of Pants:**
+   - Mishka bought 3 pairs of pants.
+   - Each pair of pants costs $22.50.
+   - Total cost for pants: \(3 \times 22.50 = 67\)
+
+3. **Cost of Shoes:**
+   - Mishka bought 3 pairs of shoes.
+   - Each pair of shoes costs $42.
+   - Total cost for shoes: \(3 \times 42 = 126\)
+
+Now, we sum the costs of all the items:
+\[
+49 + 67 + 126 = 242
+\]
+
+#### Mishka spent $242 on all the clothing items.",242.0,False,False,True,61,4.19672131147541,8,439.48582220077515,0.11196799972094595,2997.7353477478027,134.01727938652039,37.094352,176.898048,2.024,74.22950819672131,23.199872,0,3.5850067660212517,2.685497283935547,12.827861785888672,289.3700000047684,778.8020000457764,False,False
+K4_dual_thr0.9_int8abs,gsm8k_0026,math,98,dual,threshold,0.9,int8_abs,243,"To determine the total amount Mishka spent on all the clothing items, we need to calculate the cost of each type of clothing separately and then sum these amounts.
+
+1. **Cost of Shorts:**
+   - Mishka bought 3 pairs of shorts.
+   - Each pair of shorts costs $16.50.
+   - Total cost for shorts: \( 3 \times 16.50 = 49.50 \)
+
+2. **Cost of Pants:**
+   - Mishka bought 3 pairs of pants.
+   - Each pair of pants costs $22.50.
+   - Total cost for pants: \( 3 \times 22.50 = 67.50 \)
+
+3. **Cost of Shoes:**
+   - Mishka bought 3 pairs of shoes.
+   - Each pair of shoes costs $42.
+   - Total cost for shoes: \( 3 \times 42 = 126 \)
+
+Now, we sum the costs of all the items:
+\[ 49.50 + 67.50 + 126 = 243 \] ####",243.0,True,False,False,63,4.063492063492063,8,404.67667388916016,3.374271970242262,2808.1810264587402,135.14835286140442,18.819024,182.697984,2.04,72.88888888888889,11.605664,0,3.3633658066391945,2.685497283935547,12.827861785888672,272.41600000858307,786.6159999370575,False,False
+K5_dual_thr0.9_int4,gsm8k_0026,math,98,dual,threshold,0.9,int4_group,243,"To determine the total amount Mishka spent on all the clothing items, we need to calculate the cost of each type of clothing separately and then sum these amounts.
+
+1. **Cost of Shorts:**
+   - Mishka bought 3 pairs of shorts.
+   - Each pair of shorts costs $16.50.
+   - Total cost for shorts: \(3 \times 16.50 = 49\) dollars.
+
+2. **Cost of Pants:**
+   - Mishka bought 3 pairs of pants.
+   - Each pair of pants costs $22.50.
+   - Total cost for pants: \(3 \times 22.50 = 67\) dollars.
+
+3. **Cost of Shoes:**
+   - Mishka bought 3 pairs of shoes.
+   - Each pair of shoes costs $42.
+   - Total cost for shoes: \(3 \times 42 = 126\) dollars.
+
+Now, we sum the costs of all the clothing items:
+\[ 49 + 67 + 126 = 242 \]
+
+\boxed{244}",244.0,False,False,False,68,3.764705882352941,8,471.71804666519165,3.3529920801520348,3247.7542610168457,147.04172825813293,10.037312,197.197824,2.08,69.88235294117646,5.981312,0,3.8832741351798177,2.685497283935547,12.828426361083984,311.6290000677109,845.3020000457764,False,False
+F0_nocache_fixed,gsm8k_0027,math,88,none,fixed,,bf16,16,"To determine how much Cynthia will spend on ice cream after 60 days, we need to follow these steps:
+
+1. **Calculate the total number of servings Cynthia will eat in 60 days:**
+   - Cynthia eats 1 serving per night.
+   - Over 60 days, she will eat 60 servings.
+
+2. **Determine how many cartons of ice cream she will need:**
+   - Each carton contains 15 servings.
+   - To find out how many cartons are needed for 60 servings, we divide the total number of servings by the number of servings per carton:
+     \[
+     \frac{60}{15} = 4 \text{ cartons}
+     \]
+
+3. **Calculate the total cost of the cartons:**
+   - Each carton costs $4.00.
+   - To find the total cost for 4 cartons, we multiply the number of cartons by the cost per carton:
+     \[
+     4 \times 4 = 16
+     \]
+
+Therefore, Cynthia will spend $16 on ice cream after 60 days.",60.0,False,True,False,256,1.0,256,2385.5460777282715,0.40991999907419086,17737.292449951172,614.8895697593689,721.424384,721.420288,3.584,344.0,721.424384,0,20.794015782885253,2.6444201469421387,12.516815185546875,1901.9169999361038,5837.536000013351,False,False
+K2_dual_thr0.9,gsm8k_0027,math,88,dual,threshold,0.9,bf16,16,"To determine how much Cynthia will spend on ice cream after 60 days, we need to follow these steps:
+
+1. **Calculate the total number of servings Cynthia eats in 60 days:**
+   - Cynthia eats 1 serving per night.
+   - Over 60 days, she eats 60 servings.
+
+2. **Determine how many cartons of ice cream she needs:**
+   - Each carton contains 15 servings.
+   - To find out how many cartons are needed, we divide the total number of servings by the number of servings per carton:
+     \[
+     \frac{60}{15} = 4 \text{ cartons}
+     \]
+
+3. **Calculate the total cost of the cartons:**
+   - Each carton costs $4.00.
+   - To find the total cost for 4 cartons, we multiply the number of cartons by the cost per carton:
+     \[
+     4 \times 4 = 16 \text{ dollars}
+     \]
+
+Therefore, Cynthia will spend $16.00 on ice cream after 60 days.",60.0,False,False,True,61,4.19672131147541,8,396.48790216445923,0.11823999986518174,2733.7119369506836,132.50633549690247,36.438992,171.900928,2.024,72.91803278688525,22.544512,0,3.2755152322351933,2.681163787841797,12.739646911621094,268.29300010204315,750.164999961853,False,False
+K4_dual_thr0.9_int8abs,gsm8k_0027,math,88,dual,threshold,0.9,int8_abs,16,"To determine how much Cynthia will spend on ice cream after 60 days, we need to follow these steps:
+
+1. **Calculate the total number of servings Cynthia eats in 60 days:**
+   - Cynthia eats 1 serving per night.
+   - Over 60 days, she eats 60 servings.
+
+2. **Determine how many cartons of ice cream she needs:**
+   - Each carton contains 15 servings.
+   - To find the number of cartons needed, we divide the total number of servings by the number of servings per carton:
+     \[
+     \frac{60}{15} = 4 \text{ cartons}
+     \]
+
+3. **Calculate the total cost of the cartons:**
+   - Each carton costs $4.00.
+   - To find the total cost for 4 cartons, we multiply the number of cartons by the cost per carton:
+     \[
+     4 \times 4 = 16 \text{ dollars}
+     \]
+
+Therefore, Cynthia will spend **16.00** on ice cream after 60 days.",60.0,False,False,False,70,3.657142857142857,8,448.4557423591614,3.619007918983698,3091.544677734375,150.79107284545898,19.409248,197.26336,2.096,67.65714285714286,11.277824,0,3.7072648918256164,2.681163787841797,12.739402770996094,293.4229999780655,841.0110000371933,False,False
+K5_dual_thr0.9_int4,gsm8k_0027,math,88,dual,threshold,0.9,int4_group,16,"To determine how much Cynthia will spend on ice cream after 60 days, we need to follow these steps:
+
+1. **Calculate the total number of servings Cynthia eats in 60 days:**
+   - Cynthia eats 1 serving per night.
+   - Over 60 days, she eats \( 60 \) servings.
+
+2. **Determine how many cartons of ice cream she needs:**
+   - Each carton contains 15 servings.
+   - To find the number of cartons needed, we divide the total number of servings by the number of servings per carton:
+     \[
+     \frac{60}{15} = 4 \text{ cartons}
+     \]
+
+3. **Calculate the total cost of the cartons:**
+   - Each carton costs $4.00.
+   - To find the total cost for 4 cartons, we multiply the number of cartons by the cost per carton:
+     \[
+     4 \times 4 = 16 \text{ dollars}
+     \]
+
+Therefore, Cynthia will spend **$16** on ice cream after 60 days.",60.0,False,False,False,62,4.129032258064516,8,404.944128036499,3.2920320443809032,2793.2613067626953,133.89273643493652,9.462752,174.718976,2.032,72.25806451612904,5.812352,0,3.3472292302176356,2.681163787841797,12.739738464355469,269.4579999446869,764.0080000162125,False,False
+F0_nocache_fixed,gsm8k_0028,math,79,none,fixed,,bf16,25,"To determine how many miles Henry traveled between his first and second stops, we need to follow these steps:
+
+1. **Identify the position of the first stop:**
+   - Henry first stopped after 20 miles.
+
+2. **Identify the position of the second stop:**
+   - Henry's second stop was 15 miles before the end of the trip.
+   - The total distance of the trip is 60 miles.
+   - Therefore, the second stop is at 60 miles - 15 miles = 45 miles.
+
+3. **Calculate the distance between the first and second stops:**
+   - The first stop is at 20 miles.
+   - The second stop is at 45 miles.
+   - The distance between the first and second stops is the difference between these two positions.
+   - Distance = Position of second stop - Position of first stop
+   - Distance = 45 miles - 20 miles
+   - Distance = 25 miles
+
+Thus, Henry traveled 25 miles between his first and second stops.
+
+####",25.0,True,True,False,256,1.0,256,2370.571259498596,0.40505599917378277,17595.543884277344,614.1714894771576,702.550016,702.54592,3.584,335.0,702.550016,0,20.63505102880299,2.643611431121826,12.513070106506348,1878.7140001058578,5793.1050000190735,True,True
+K2_dual_thr0.9,gsm8k_0028,math,79,dual,threshold,0.9,bf16,25,"To determine how many miles Henry traveled between his first and second stops, we need to follow these steps:
+
+1. **Identify the position of the first stop:**
+   - Henry first stopped after 20 miles.
+
+2. **Determine the position of the second stop:**
+   - The second stop is 15 miles before the end of the trip.
+   - The total distance of the trip is 60 miles.
+   - Therefore, the second stop is at \( 60 - 15 = 45 \) miles.
+
+3. **Calculate the distance between the two stops:**
+   - The first stop is at 20 miles.
+   - The second stop is at 45 miles.
+   - The distance between the two stops is \( 45 - 20 = 25 \) miles.
+
+Thus, Henry traveled 25 miles between his first and second stops.
+
+#### 25",25.0,True,False,True,72,3.5555555555555554,8,458.3546566963196,0.13811199960764498,3179.2750511169434,154.50323176383972,38.732928,197.59104,2.112,65.66666666666667,21.954688,0,3.8063922189176083,2.679393768310547,12.730507850646973,305.0629999637604,854.3819999694824,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0028,math,79,dual,threshold,0.9,int8_abs,25,"To determine how many miles Henry traveled between his first and second stops, we need to follow these steps:
+
+1. **Identify the position of the first stop:**
+   - Henry first stopped after 20 miles.
+
+2. **Determine the position of the second stop:**
+   - The second stop is 15 miles before the end of the trip.
+   - Since the total trip is 60 miles, 15 miles before the end is:
+     \[
+     60 - 15 = 45 \text{ miles}
+     \]
+
+3. **Calculate the distance between the first and second stops:**
+   - The distance between the first stop (20 miles) and the second stop (45 miles) is:
+     \[
+     45 - 20 = 25 \text{ miles}
+     \]
+
+Therefore, Henry traveled 25 miles between his first and second stops.
+
+####",25.0,True,False,False,76,3.3684210526315788,8,484.12899017333984,4.0671039037406445,3326.490379333496,162.08956813812256,19.901104,208.56832,2.144,63.89473684210526,10.982768,0,3.9907219605520368,2.679393768310547,12.730507850646973,318.3989999294281,907.2050000429153,True,True
+K5_dual_thr0.9_int4,gsm8k_0028,math,79,dual,threshold,0.9,int4_group,25,"To determine how many miles Henry traveled between his first and second stops, we need to follow these steps:
+
+1. **Identify the position of the first stop:**
+   - Henry first stopped after 20 miles.
+
+2. **Determine the position of the second stop:**
+   - The second stop is 15 miles before the end of the trip.
+   - The total trip distance is 60 miles.
+   - Therefore, the second stop is at:
+     \[
+     60 \text{ miles} - 15 \text{ miles} = 45 \text{ miles}
+     \]
+
+3. **Calculate the distance between the first and second stops:**
+   - The distance between the first stop (20 miles) and the second stop (45 miles) is:
+     \[
+     45 \text{ miles} - 20 \text{ miles} = 25 \text{ miles}
+     \]
+
+Thus, Henry traveled 25 miles between his first and second stops.
+
+####",25.0,True,False,False,73,3.506849315068493,8,468.4109754562378,3.4628800861537457,3238.9619483947754,155.88169527053833,10.054288,200.33536,2.12,65.20547945205479,5.660288,0,3.8798616360872984,2.679393768310547,12.730507850646973,316.8490000963211,874.2249999046326,True,True
+F0_nocache_fixed,gsm8k_0029,math,98,none,fixed,,bf16,104,"To determine the cost of the boots, we need to follow these steps:
+
+1. **Identify the cost of each pair of heels:**
+   - One pair of heels costs $33.
+   - The other pair of heels costs twice as much as the first pair.
+   - Therefore, the cost of the second pair of heels is \(2 \times 33 = 66\) dollars.
+
+2. **Calculate the total cost of the two pairs of heels:**
+   - The total cost of the two pairs of heels is \(33 + 66 = 99\) dollars.
+
+3. **Determine the cost of the boots:**
+   - According to the problem, the total cost of the two pairs of heels is five dollars less than the cost of the boots.
+   - Let \(B\) be the cost of the boots.
+   - Therefore, \(99 = B - 5\).
+
+4. **Solve for \(B\):**
+   - Add 5 to both sides of the equation: \(99 + 5 = 104\).
+
+Thus, the cost of the boots is \(\boxed{104}\).",104.0,True,True,False,256,1.0,256,2405.4660778045654,0.37702399934642017,17950.976959228516,613.3578886985779,742.395904,742.391808,3.584,354.0,742.395904,0,21.026808460243046,2.6464343070983887,12.521602630615234,1933.4079999923706,5897.081000089645,True,True
+K2_dual_thr0.9,gsm8k_0029,math,98,dual,threshold,0.9,bf16,104,"To determine the cost of the boots, we need to follow these steps:
+
+1. **Identify the cost of each pair of heels:**
+   - One pair of heels costs $33.
+   - The other pair of heels costs twice as much as the first pair, so it costs \(2 \times 33 = 66\) dollars.
+
+2. **Calculate the total cost of the two pairs of heels:**
+   - Total cost = Cost of the first pair of heels + Cost of the second pair of heels
+   - Total cost = 33 + 66 = 99 dollars
+
+3. **Determine the relationship between the total cost of the heels and the boots:**
+   - The total cost of the heels is five dollars less than the boots.
+   - Let \(B\) be the cost of the boots.
+   - According to the problem, \(99 = B - 5\).
+
+4. **Solve for \(B\):**
+   - Add 5 to both sides of the equation: \(99 + 5 = B\)
+   - \(104 = B\)
+
+Therefore, the boots cost $104.",104.0,True,False,True,101,2.5346534653465347,8,654.4244184494019,0.1919679994462058,4510.280948638916,217.9587526321411,47.580752,292.896768,2.344,57.504950495049506,23.199872,0,5.402386964298785,2.685497283935547,12.752439498901367,427.60199999809265,1192.5189999341965,True,True
+K4_dual_thr0.9_int8abs,gsm8k_0029,math,98,dual,threshold,0.9,int8_abs,104,"To determine the cost of the boots, we need to follow these steps:
+
+1. **Identify the cost of each pair of heels:**
+   - One pair of heels costs $33.
+   - The other pair of heels costs twice as much as the first pair, so it costs \(2 \times 33 = 66\) dollars.
+
+2. **Calculate the total cost of the two pairs of heels:**
+   - Total cost of heels = Cost of the first pair + Cost of the second pair
+   - Total cost of heels = 33 + 66 = 99 dollars
+
+3. **Determine the relationship between the total cost of the heels and the boots:**
+   - According to the problem, the total cost of the heels is five dollars less than the boots.
+   - Therefore, the cost of the boots can be expressed as:
+     - Cost of boots = Total cost of heels + 5
+     - Cost of boots = 99 + 5 = 104 dollars
+
+Thus, the cost of the boots is $104.
+
+####
+The cost of the boots is \(\boxed{104}\) dollars.",104.0,True,False,False,114,2.245614035087719,8,779.9459204673767,5.4234878718853,5314.941150665283,247.57516765594482,25.507776,330.596352,2.448,54.59649122807018,11.605664,0,6.369320030324161,2.685497283935547,12.75300407409668,506.8569999933243,1357.8380000591278,True,True
+K5_dual_thr0.9_int4,gsm8k_0029,math,98,dual,threshold,0.9,int4_group,104,"To determine the cost of the boots, we need to follow these steps:
+
+1. **Identify the cost of each pair of heels:**
+   - One pair of heels costs $33.
+   - The other pair of heels costs twice as much as the first pair, so it costs \(2 \times 33 = 66\) dollars.
+
+2. **Calculate the total cost of the two pairs of heels:**
+   - Total cost = Cost of the first pair of heels + Cost of the second pair of heels
+   - Total cost = 33 + 66 = 99 dollars
+
+3. **Determine the relationship between the total cost of the heels and the boots:**
+   - The total cost of the heels is five dollars less than the boots.
+   - Let \(B\) be the cost of the boots.
+   - According to the problem, \(99 = B - 5\).
+
+4. **Solve for the cost of the boots:**
+   - Add 5 to both sides of the equation: \(99 + 5 = B\)
+   - \(B = 104\)
+
+The boots cost $104.",104.0,True,False,False,104,2.4615384615384617,8,646.8152327537537,4.693408131599426,4456.599067687988,220.04851126670837,12.470912,301.596672,2.368,56.76923076923077,5.981312,0,5.3466044729575515,2.685497283935547,12.75300407409668,426.9729999303818,1178.6979999542236,True,True

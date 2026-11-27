@@ -1,0 +1,5 @@
+task,config,paper_name,runs,seeds,acc,lost,gained,identical,acc_seed_min,acc_seed_max,mcnemar_p
+gsm8k,uncached,No cache (reference),300,3,0.86,0,0,300,0.86,0.86,1.0
+gsm8k,dllm_cache,DASR + dLLM-Cache (bf16),300,3,0.84,9,3,75,0.84,0.84,0.14599609375
+gsm8k,dllm_cache_int8,DASR + dLLM-Cache (INT8),300,3,0.82,15,3,60,0.82,0.82,0.007537841796875
+gsm8k,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",300,3,0.86,6,6,66,0.86,0.86,1.0

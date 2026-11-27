@@ -1,0 +1,80 @@
+{
+  "experiment": "Exp20 breadth: quality on GSM8K (more problems, seeds) and HumanEval",
+  "backend": "dllm_cache",
+  "device": "cuda:0",
+  "tasks": [
+    "gsm8k"
+  ],
+  "n_gsm8k": 100,
+  "n_humaneval": 164,
+  "seeds": {
+    "gsm8k": [
+      42,
+      43,
+      44
+    ],
+    "humaneval": [
+      42
+    ]
+  },
+  "new_tokens": {
+    "gsm8k": 256,
+    "humaneval": 256
+  },
+  "configs": {
+    "uncached": {
+      "paper": "No cache (reference)",
+      "policy": null,
+      "rows": "all",
+      "encoding": "bf16"
+    },
+    "dllm_cache": {
+      "paper": "DASR + dLLM-Cache (bf16)",
+      "policy": [
+        "fixed",
+        25,
+        2,
+        0.25
+      ],
+      "rows": "cache_aware",
+      "encoding": "bf16"
+    },
+    "dllm_cache_int8": {
+      "paper": "DASR + dLLM-Cache (INT8)",
+      "policy": [
+        "fixed",
+        25,
+        2,
+        0.25
+      ],
+      "rows": "cache_aware",
+      "encoding": "int8_delta"
+    },
+    "adaptive": {
+      "paper": "DASR + dLLM-Cache, adaptive refresh (bf16)",
+      "policy": [
+        "adaptive",
+        {
+          "gen_content_commits": 2,
+          "gen_max_age": 4,
+          "prompt_content_commits": 16,
+          "prompt_max_age": 32,
+          "eos_frontier_window": 8,
+          "transfer_ratio": 0.25
+        }
+      ],
+      "rows": "cache_aware",
+      "encoding": "bf16"
+    }
+  },
+  "reference": "uncached",
+  "split_layer_1based": 4,
+  "single_gpu": "edge = cloud (hooks only)",
+  "dream_temperature": 0.1,
+  "block_length": null,
+  "hours": 9.4579581874609,
+  "gpu": "NVIDIA RTX A6000",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22"
+}

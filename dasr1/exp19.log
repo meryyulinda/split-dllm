@@ -1,0 +1,1095 @@
+cloud = GPU 1, edge = GPU 2
+2026-11-27 03:11:32 GPUs 1,2 idle, starting.
+
+=== 1/6 dLLM-Cache, Dream GSM8K  (2026-11-27 03:11:32)
+{'EXP11_DATASET': 'gsm8k', 'EXP11_N_QUESTIONS': 30, 'EXP11_NEW_TOKENS': 256, 'EXP11_STEPS': 256, 'EXP11_MODEL': 'dream', 'EXP11_OUTPUT_TAG': '_baselines', 'EXP11_VARIANT_NAMES': ['S0_split_full', 'S3_split_int8abs', 'S4_split_int4', 'C5_cache_aware_int8abs', 'C6_cache_aware_int4']}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  8.99it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  9.09it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.87it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.89it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.92it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=61.4 W, cloud=70.6 W
+Exp11 | dream | gsm8k n=30 | split after layer 4 | edge=cuda:1 cloud=cuda:0 | 256 tok / 256 steps | cache ('fixed', 25, 2, 0.25)
+warmup done
+
+gsm8k_0000 | prompt tokens=99
+  S0_split_full              ok=True  up= 651.43 MB edge=   2034 ms cloud=  13254 ms mem=2.85/12.99 GiB E=1716+4809 J "y day at the farmers' market.\nThe final answer: 18"
+  S3_split_int8abs           ok=True  up= 325.90 MB edge=   2039 ms cloud=  13315 ms mem=2.85/12.99 GiB E=1732+4836 J "very day at the farmers' market.\nThe answer is: 18"
+  S4_split_int4              ok=True  up= 167.95 MB edge=   2030 ms cloud=  13273 ms mem=2.85/12.99 GiB E=1735+4948 J "very day at the farmers' market.\nThe answer is: 18"
+  C5_cache_aware_int8abs     ok=True  up= 239.80 MB edge=   1766 ms cloud=  10304 ms mem=2.85/12.99 GiB E=1348+3877 J " per day at the farmers' market.\nThe answer is: 18"
+  C6_cache_aware_int4        ok=True  up= 123.58 MB edge=   1774 ms cloud=  10291 ms mem=2.85/12.99 GiB E=1351+3933 J " at the farmers' market.\n#### 18\nThe answer is: 18"
+
+gsm8k_0001 | prompt tokens=60
+  S0_split_full              ok=True  up= 579.87 MB edge=   2010 ms cloud=  12851 ms mem=2.85/12.98 GiB E=1687+4803 J 'e takes 2 + 1 = 3 bolts of fiber.\nThe answer is: 3'
+  S3_split_int8abs           ok=True  up= 290.10 MB edge=   1974 ms cloud=  12868 ms mem=2.85/12.98 GiB E=1685+4805 J 'e takes 2 + 1 = 3 bolts of fiber.\nThe answer is: 3'
+  S4_split_int4              ok=True  up= 149.50 MB edge=   1986 ms cloud=  12885 ms mem=2.85/12.98 GiB E=1683+4776 J 'e takes 2 + 1 = 3 bolts of fiber.\nThe answer is: 3'
+  C5_cache_aware_int8abs     ok=True  up= 238.26 MB edge=   1824 ms cloud=  10613 ms mem=2.85/12.95 GiB E=1364+3926 J 'kes 2 + 1 = 3 bolts of fiber.\nThe final answer: 3.'
+  C6_cache_aware_int4        ok=True  up= 122.79 MB edge=   1956 ms cloud=  10293 ms mem=2.85/12.95 GiB E=1325+3875 J 'e takes 2 + 1 = 3 bolts of fiber.\nThe answer is: 3'
+
+gsm8k_0002 | prompt tokens=91
+  S0_split_full              ok=False up= 636.75 MB edge=   2032 ms cloud=  13324 ms mem=2.85/12.97 GiB E=1745+4945 J '195,000 - $130,000 = $65,000.\nThe answer is: 65000'
+  S3_split_int8abs           ok=False up= 318.56 MB edge=   2020 ms cloud=  13305 ms mem=2.85/12.97 GiB E=1741+4997 J '195,000 - $130,000 = $65,000.\nThe answer is: 65000'
+  S4_split_int4              ok=False up= 164.17 MB edge=   2042 ms cloud=  13310 ms mem=2.85/12.97 GiB E=1766+4995 J '195,000 - $130,000 = $65,000.\nThe answer is: 65000'
+  C5_cache_aware_int8abs     ok=False up= 239.48 MB edge=   1771 ms cloud=  10408 ms mem=2.85/12.98 GiB E=1365+3898 J 'rofit is $195,000 - $130,000 = $65,000.\n#### 65000'
+  C6_cache_aware_int4        ok=False up= 123.42 MB edge=   1810 ms cloud=  10541 ms mem=2.85/12.98 GiB E=1372+3961 J '195,000 - $130,000 = $65,000.\nThe answer is: 65000'
+
+gsm8k_0003 | prompt tokens=69
+  S0_split_full              ok=True  up= 596.38 MB edge=   1998 ms cloud=  13047 ms mem=2.85/12.98 GiB E=1702+4873 J '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  S3_split_int8abs           ok=True  up= 298.36 MB edge=   1999 ms cloud=  13047 ms mem=2.85/12.98 GiB E=1722+4872 J '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  S4_split_int4              ok=True  up= 153.76 MB edge=   1993 ms cloud=  13054 ms mem=2.85/12.98 GiB E=1683+4837 J '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  C5_cache_aware_int8abs     ok=True  up= 238.62 MB edge=   1776 ms cloud=  10628 ms mem=2.85/12.97 GiB E=1356+3918 J '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  C6_cache_aware_int4        ok=True  up= 122.97 MB edge=   1823 ms cloud=  10332 ms mem=2.85/12.97 GiB E=1349+3862 J '= 540 meters per week.\n#### 540\nThe answer is: 540'
+
+gsm8k_0004 | prompt tokens=145
+  S0_split_full              ok=True  up= 735.84 MB edge=   2841 ms cloud=  18576 ms mem=2.86/12.99 GiB E=2303+6610 J 'ed in the final meal of the day.\nThe answer is: 20'
+  S3_split_int8abs           ok=True  up= 368.13 MB edge=   2826 ms cloud=  18574 ms mem=2.86/12.99 GiB E=2288+6626 J ' cups of feed in the final meal.\nThe answer is: 20'
+  S4_split_int4              ok=True  up= 189.71 MB edge=   2830 ms cloud=  18575 ms mem=2.86/12.99 GiB E=2282+6633 J 'ed in the final meal of the day.\nThe answer is: 20'
+  C5_cache_aware_int8abs     ok=True  up= 241.61 MB edge=   1986 ms cloud=  10813 ms mem=2.86/13.03 GiB E=1444+4068 J 'in the final meal of the day.\nThe final answer: 20'
+  C6_cache_aware_int4        ok=True  up= 124.51 MB edge=   2013 ms cloud=  11003 ms mem=2.86/13.03 GiB E=1449+4136 J 'ed in the final meal of the day.\nThe answer is: 20'
+
+gsm8k_0005 | prompt tokens=90
+  S0_split_full              ok=True  up= 634.92 MB edge=   2029 ms cloud=  13318 ms mem=2.86/13.01 GiB E=1742+4929 J 's to pay $64 for the glasses.\nThe final answer: 64'
+  S3_split_int8abs           ok=True  up= 317.64 MB edge=   2030 ms cloud=  13323 ms mem=2.86/13.01 GiB E=1753+4938 J 's to pay $64 for the glasses.\nThe final answer: 64'
+  S4_split_int4              ok=True  up= 163.69 MB edge=   2040 ms cloud=  13323 ms mem=2.86/13.01 GiB E=1743+4967 J 'ay $64 for the 16 glasses.\nThe final answer is: 64'
+  C5_cache_aware_int8abs     ok=False up= 239.44 MB edge=   1779 ms cloud=  22481 ms mem=2.85/12.98 GiB E=2729+10194 J ' + 7 * $3 = $26 for the glasses.\nThe answer is: 26'
+  C6_cache_aware_int4        ok=True  up= 123.40 MB edge=   1670 ms cloud=  31852 ms mem=2.85/12.98 GiB E=3822+15456 J 's to pay $64 for the 16 glasses.\nThe answer is: 64'
+
+gsm8k_0006 | prompt tokens=76
+  S0_split_full              ok=True  up= 609.23 MB edge=   1889 ms cloud=  39874 ms mem=2.85/12.98 GiB E=4430+17584 J ' 80 + 160 = 260 sheep.\n#### 260\nThe answer is: 260'
+  S3_split_int8abs           ok=True  up= 304.79 MB edge=   1880 ms cloud=  40059 ms mem=2.85/12.98 GiB E=4439+17661 J ' 80 + 160 = 260 sheep.\n#### 260\nThe answer is: 260'
+  S4_split_int4              ok=True  up= 157.07 MB edge=   1879 ms cloud=  40481 ms mem=2.85/12.98 GiB E=4474+17902 J ' 80 + 160 = 260 sheep.\n#### 260\nThe answer is: 260'
+  C5_cache_aware_int8abs     ok=True  up= 238.89 MB edge=   1676 ms cloud=  32280 ms mem=2.85/12.97 GiB E=3816+15610 J ' 80 + 160 = 260 sheep.\n#### 260\nThe answer is: 260'
+  C6_cache_aware_int4        ok=True  up= 123.11 MB edge=   1903 ms cloud=  32235 ms mem=2.85/12.97 GiB E=3841+15723 J 'r is 20 + 80 + 160 = 260 sheep.\nThe answer is: 260'
+
+gsm8k_0007 | prompt tokens=104
+  S0_split_full              ok=False up= 660.61 MB edge=   1944 ms cloud=  40500 ms mem=2.85/12.99 GiB E=4506+17983 J '0 minutes to download the file.\nThe answer is: 280'
+  S3_split_int8abs           ok=False up= 330.49 MB edge=   1944 ms cloud=  40985 ms mem=2.85/12.99 GiB E=4574+18190 J '0 minutes to download the file.\nThe answer is: 280'
+  S4_split_int4              ok=False up= 170.32 MB edge=   1942 ms cloud=  40617 ms mem=2.85/12.99 GiB E=4519+18012 J ' + 60 + 60 + 60 = 300 minutes.\nThe answer is: 300.'
+  C5_cache_aware_int8abs     ok=False up= 240.00 MB edge=   1675 ms cloud=  32280 ms mem=2.86/12.99 GiB E=3840+15643 J '0 minutes to download the file.\nThe answer is: 120'
+  C6_cache_aware_int4        ok=False up= 123.68 MB edge=   1691 ms cloud=  32119 ms mem=2.86/12.99 GiB E=3829+15540 J '60 + 20 = 120 minutes.\n#### 120\nThe answer is: 120'
+
+gsm8k_0008 | prompt tokens=138
+  S0_split_full              ok=True  up= 723.00 MB edge=   2713 ms cloud=  57323 ms mem=2.86/13.01 GiB E=5768+23269 J 'he end of those 4 hours.\n#### 45\nThe answer is: 45'
+  S3_split_int8abs           ok=True  up= 361.70 MB edge=   2711 ms cloud=  57015 ms mem=2.86/13.01 GiB E=5770+23119 J 'he end of those 4 hours.\n#### 45\nThe answer is: 45'
+  S4_split_int4              ok=True  up= 186.40 MB edge=   2712 ms cloud=  57198 ms mem=2.86/13.01 GiB E=5784+23237 J 'ome at the end of those 4 hours.\nThe answer is: 45'
+  C5_cache_aware_int8abs     ok=True  up= 241.34 MB edge=   2173 ms cloud=  33463 ms mem=2.86/13.02 GiB E=4011+16147 J ' the end of the 4 hours.\n#### 45\nThe answer is: 45'
+  C6_cache_aware_int4        ok=True  up= 124.37 MB edge=   1895 ms cloud=  33398 ms mem=2.86/13.02 GiB E=3939+15984 J ' the end of the 4 hours.\n#### 45\nThe answer is: 45'
+
+gsm8k_0009 | prompt tokens=94
+  S0_split_full              ok=True  up= 642.26 MB edge=   1911 ms cloud=  40722 ms mem=2.86/13.02 GiB E=4482+17841 J 'are $400 + $60 = $460.\n#### 460\nThe answer is: 460'
+  S3_split_int8abs           ok=True  up= 321.31 MB edge=   1916 ms cloud=  40295 ms mem=2.86/13.02 GiB E=4468+17711 J 'are $400 + $60 = $460.\n#### 460\nThe answer is: 460'
+  S4_split_int4              ok=True  up= 165.58 MB edge=   1914 ms cloud=  40374 ms mem=2.86/13.02 GiB E=4475+17714 J 'are $400 + $60 = $460.\n#### 460\nThe answer is: 460'
+  C5_cache_aware_int8abs     ok=True  up= 239.60 MB edge=   1680 ms cloud=  32138 ms mem=2.85/12.98 GiB E=3849+15556 J 'are $400 + $60 = $460.\n#### 460\nThe answer is: 460'
+  C6_cache_aware_int4        ok=True  up= 123.48 MB edge=   1671 ms cloud=  32281 ms mem=2.85/12.98 GiB E=3832+15695 J 'are $400 + $60 = $460.\n#### 460\nThe answer is: 460'
+
+gsm8k_0010 | prompt tokens=94
+  S0_split_full              ok=True  up= 642.26 MB edge=   1911 ms cloud=  40623 ms mem=2.85/12.99 GiB E=4507+17816 J '60 + 180 + 126 = 366 downloads.\nThe answer is: 366'
+  S3_split_int8abs           ok=True  up= 321.31 MB edge=   1915 ms cloud=  40358 ms mem=2.85/12.99 GiB E=4462+17715 J '60 + 180 + 126 = 366 downloads.\nThe answer is: 366'
+  S4_split_int4              ok=True  up= 165.58 MB edge=   1909 ms cloud=  40725 ms mem=2.85/12.99 GiB E=4536+17856 J '60 + 180 + 126 = 366 downloads.\nThe answer is: 366'
+  C5_cache_aware_int8abs     ok=True  up= 239.60 MB edge=   1667 ms cloud=  31940 ms mem=2.85/12.98 GiB E=3775+15451 J '60 + 180 + 126 = 366 downloads.\nThe answer is: 366'
+  C6_cache_aware_int4        ok=True  up= 123.48 MB edge=   1943 ms cloud=  32479 ms mem=2.85/12.98 GiB E=3866+15886 J '60 + 180 + 126 = 366 downloads.\nThe answer is: 366'
+
+gsm8k_0011 | prompt tokens=99
+  S0_split_full              ok=True  up= 651.43 MB edge=   1925 ms cloud=  40061 ms mem=2.85/12.99 GiB E=4440+17676 J 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+  S3_split_int8abs           ok=True  up= 325.90 MB edge=   1925 ms cloud=  40963 ms mem=2.85/12.99 GiB E=4540+17975 J ' + $160 + $330 = $694.\n#### 694\nThe answer is: 694'
+  S4_split_int4              ok=True  up= 167.95 MB edge=   1924 ms cloud=  40412 ms mem=2.85/12.99 GiB E=4507+17756 J 'refore, the total cost is $694.\nThe answer is: 694'
+  C5_cache_aware_int8abs     ok=True  up= 239.80 MB edge=   1672 ms cloud=  32132 ms mem=2.85/12.99 GiB E=3811+15578 J 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+  C6_cache_aware_int4        ok=True  up= 123.58 MB edge=   1936 ms cloud=  32140 ms mem=2.85/12.99 GiB E=3843+15828 J 's $204 + $160 + $330 = $694.\nThe final answer: 694'
+
+gsm8k_0012 | prompt tokens=101
+  S0_split_full              ok=False up= 655.10 MB edge=   1931 ms cloud=  40387 ms mem=2.85/13.00 GiB E=4447+17974 J 'ng money on the lemon tree.\nThe final answer is: 9'
+  S3_split_int8abs           ok=False up= 327.74 MB edge=   1930 ms cloud=  40941 ms mem=2.85/13.00 GiB E=4545+18238 J 'earning money on the lemon tree.\nThe answer is: 12'
+  S4_split_int4              ok=False up= 168.90 MB edge=   1932 ms cloud=  40094 ms mem=2.85/13.00 GiB E=4471+17862 J 'earning money on the lemon tree.\nThe answer is: 12'
+  C5_cache_aware_int8abs     ok=False up= 239.88 MB edge=   1677 ms cloud=  32512 ms mem=2.85/12.99 GiB E=3827+15915 J 'earning money on the lemon tree.\nThe answer is: 12'
+  C6_cache_aware_int4        ok=False up= 123.62 MB edge=   1675 ms cloud=  31704 ms mem=2.85/12.99 GiB E=3783+15469 J 'earning money on the lemon tree.\nThe answer is: 12'
+
+gsm8k_0013 | prompt tokens=92
+  S0_split_full              ok=True  up= 638.59 MB edge=   1912 ms cloud=  40949 ms mem=2.85/12.99 GiB E=4521+18247 J 'ie started with 18 vacuum cleaners.\nThe answer: 18'
+  S3_split_int8abs           ok=True  up= 319.47 MB edge=   1914 ms cloud=  40184 ms mem=2.85/12.99 GiB E=4505+17867 J 'with 18 vacuum cleaners.\n#### 18\nThe answer is: 18'
+  S4_split_int4              ok=True  up= 164.64 MB edge=   1913 ms cloud=  40706 ms mem=2.85/12.99 GiB E=4528+18130 J 'rted with 18 vacuum cleaners.\nThe final answer: 18'
+  C5_cache_aware_int8abs     ok=True  up= 239.52 MB edge=   1674 ms cloud=  32014 ms mem=2.85/12.98 GiB E=3810+15670 J 'tarted with 18 vacuum cleaners.\nThe answer is: 18.'
+  C6_cache_aware_int4        ok=True  up= 123.44 MB edge=   1667 ms cloud=  32152 ms mem=2.85/12.98 GiB E=3831+15809 J 'started with 18 vacuum cleaners.\nThe answer is: 18'
+
+gsm8k_0014 | prompt tokens=86
+  S0_split_full              ok=True  up= 627.58 MB edge=   1902 ms cloud=  40498 ms mem=2.85/12.98 GiB E=4573+18053 J 'rolled in hip-hop dance.\n#### 60\nThe answer is: 60'
+  S3_split_int8abs           ok=True  up= 313.97 MB edge=   1898 ms cloud=  40043 ms mem=2.85/12.98 GiB E=4451+17832 J 'enrolled in hip-hop dance.\nThe final answer is: 60'
+  S4_split_int4              ok=True  up= 161.80 MB edge=   1896 ms cloud=  40809 ms mem=2.85/12.98 GiB E=4535+18163 J 'enrolled in hip-hop dance.\nThe final answer is: 60'
+  C5_cache_aware_int8abs     ok=True  up= 239.29 MB edge=   1745 ms cloud=  31684 ms mem=2.85/12.98 GiB E=3778+15524 J 'rolled in hip-hop dance.\n#### 60\nThe answer is: 60'
+  C6_cache_aware_int4        ok=True  up= 123.32 MB edge=   1665 ms cloud=  32788 ms mem=2.85/12.97 GiB E=3957+16026 J 'dents enrolled in hip-hop dance.\nThe answer is: 60'
+
+gsm8k_0015 | prompt tokens=128
+  S0_split_full              ok=True  up= 704.65 MB edge=   1996 ms cloud=  41621 ms mem=2.86/12.99 GiB E=4586+18259 J 'ry market, which is $125.\nThe final answer is: 125'
+  S3_split_int8abs           ok=False up= 352.52 MB edge=   1988 ms cloud=  42310 ms mem=2.86/12.99 GiB E=4662+18572 J 'ose the jewelry purchase plan.\nThe answer is: 4875'
+  S4_split_int4              ok=False up= 181.67 MB edge=   1990 ms cloud=  42043 ms mem=2.86/12.99 GiB E=4612+18487 J 'e jewelry purchase plan.\nThe final answer is: 4875'
+  C5_cache_aware_int8abs     ok=True  up= 240.94 MB edge=   1700 ms cloud=  32372 ms mem=2.86/13.02 GiB E=3841+15783 J 'fore, the profit would be $125.\nThe answer is: 125'
+  C6_cache_aware_int4        ok=True  up= 124.17 MB edge=   1698 ms cloud=  32432 ms mem=2.86/13.02 GiB E=3819+15754 J 'ncrease in value of $125.\nThe final answer is: 125'
+
+gsm8k_0016 | prompt tokens=87
+  S0_split_full              ok=True  up= 629.41 MB edge=   1905 ms cloud=  38879 ms mem=2.86/13.01 GiB E=4296+17242 J 'ain is 80 + 150 = 230 miles.\nThe final answer: 230'
+  S3_split_int8abs           ok=True  up= 314.88 MB edge=   1909 ms cloud=  38736 ms mem=2.86/13.01 GiB E=4302+17087 J 'ain is 80 + 150 = 230 miles.\nThe final answer: 230'
+  S4_split_int4              ok=True  up= 162.27 MB edge=   1902 ms cloud=  39070 ms mem=2.86/13.01 GiB E=4335+17422 J 'ain is 80 + 150 = 230 miles.\nThe final answer: 230'
+  C5_cache_aware_int8abs     ok=True  up= 239.33 MB edge=   1692 ms cloud=  28323 ms mem=2.85/12.97 GiB E=3333+13567 J 'n in the two days is 230 miles.\nThe answer is: 230'
+  C6_cache_aware_int4        ok=True  up= 123.34 MB edge=   1753 ms cloud=  31623 ms mem=2.85/12.97 GiB E=3749+15543 J 'n the two days is 230 miles.\nThe final answer: 230'
+
+gsm8k_0017 | prompt tokens=92
+  S0_split_full              ok=True  up= 638.59 MB edge=   1918 ms cloud=  39418 ms mem=2.85/12.98 GiB E=4383+17427 J "ll's annual salary is $57500.\nThe answer is: 57500"
+  S3_split_int8abs           ok=True  up= 319.47 MB edge=   1916 ms cloud=  39952 ms mem=2.85/12.98 GiB E=4443+17785 J "ll's annual salary is $57500.\nThe answer is: 57500"
+  S4_split_int4              ok=True  up= 164.64 MB edge=   1922 ms cloud=  39286 ms mem=2.85/12.98 GiB E=4356+17392 J "ll's annual salary is $57500.\nThe answer is: 57500"
+  C5_cache_aware_int8abs     ok=True  up= 239.52 MB edge=   1673 ms cloud=  31708 ms mem=2.85/12.98 GiB E=3756+15543 J "ll's annual salary is $57500.\nThe answer is: 57500"
+  C6_cache_aware_int4        ok=True  up= 123.44 MB edge=   1672 ms cloud=  31097 ms mem=2.85/12.98 GiB E=3719+15225 J 'salary is 1150 * 50 = $57500.\nThe answer is: 57500'
+
+gsm8k_0018 | prompt tokens=63
+  S0_split_full              ok=True  up= 585.37 MB edge=   1857 ms cloud=  38750 ms mem=2.85/12.98 GiB E=4341+17491 J 't 7 dozens of eggs in 4 weeks.\nThe final answer: 7'
+  S3_split_int8abs           ok=True  up= 292.85 MB edge=   1856 ms cloud=  37785 ms mem=2.85/12.98 GiB E=4265+17005 J ' eat 7 dozens of eggs in 4 weeks.\nThe answer is: 7'
+  S4_split_int4              ok=True  up= 150.92 MB edge=   1853 ms cloud=  38831 ms mem=2.85/12.98 GiB E=4377+17534 J ' eat 7 dozens of eggs in 4 weeks.\nThe answer is: 7'
+  C5_cache_aware_int8abs     ok=True  up= 238.38 MB edge=   1657 ms cloud=  30944 ms mem=2.85/12.96 GiB E=3651+14997 J 't 7 dozens of eggs in 4 weeks.\nThe final answer: 7'
+  C6_cache_aware_int4        ok=True  up= 122.85 MB edge=   2002 ms cloud=  32112 ms mem=2.85/12.96 GiB E=3820+15751 J ' eat 7 dozens of eggs in 4 weeks.\nThe answer is: 7'
+
+gsm8k_0019 | prompt tokens=99
+  S0_split_full              ok=True  up= 651.43 MB edge=   1926 ms cloud=  38819 ms mem=2.85/12.98 GiB E=4327+17183 J 'iles / 1 hour = 6 miles per hour.\nThe answer is: 6'
+  S3_split_int8abs           ok=True  up= 325.90 MB edge=   1923 ms cloud=  40853 ms mem=2.85/12.98 GiB E=4541+18175 J 'peed of 6 / 1 = 6 miles per hour.\nThe answer is: 6'
+  S4_split_int4              ok=False up= 167.95 MB edge=   1929 ms cloud=  38872 ms mem=2.85/12.98 GiB E=4334+17243 J 'les / 3 hours = 2 miles per hour.\nThe answer is: 2'
+  C5_cache_aware_int8abs     ok=True  up= 239.80 MB edge=   1674 ms cloud=  32507 ms mem=2.85/12.99 GiB E=3876+15936 J 'e at a speed of 6 miles per hour.\nThe answer is: 6'
+  C6_cache_aware_int4        ok=False up= 123.58 MB edge=   1689 ms cloud=  30374 ms mem=2.85/12.99 GiB E=3622+14678 J 's / 1.5 hours = 4 miles per hour.\nThe answer is: 4'
+
+gsm8k_0020 | prompt tokens=97
+  S0_split_full              ok=False up= 647.76 MB edge=   1920 ms cloud=  40983 ms mem=2.85/13.00 GiB E=4557+18092 J 'ng 24 liters is 14.67 liters.\nThe answer is: 14.67'
+  S3_split_int8abs           ok=False up= 324.06 MB edge=   1927 ms cloud=  38760 ms mem=2.85/13.00 GiB E=4356+17016 J 'iters = 0.61 liters.\n#### 0.61\nThe answer is: 0.61'
+  S4_split_int4              ok=False up= 167.00 MB edge=   1920 ms cloud=  40845 ms mem=2.85/13.00 GiB E=4556+17998 J 'liters = 0.61 liters.\n#### 0.61\nThe answer is: 0.6'
+  C5_cache_aware_int8abs     ok=False up= 239.72 MB edge=   1967 ms cloud=  30137 ms mem=2.85/12.98 GiB E=3637+14666 J 'iters = 0.61 liters.\n#### 0.61\nThe answer is: 0.61'
+  C6_cache_aware_int4        ok=False up= 123.54 MB edge=   1776 ms cloud=  32492 ms mem=2.85/12.98 GiB E=3894+15947 J 'iters = 0.61 liters.\n#### 0.61\nThe answer is: 0.61'
+
+gsm8k_0021 | prompt tokens=80
+  S0_split_full              ok=False up= 616.57 MB edge=   1901 ms cloud=  38580 ms mem=2.85/12.98 GiB E=4306+16891 J "nd's son was born 2 years ago.\nThe final answer: 2"
+  S3_split_int8abs           ok=False up= 308.46 MB edge=   1884 ms cloud=  40606 ms mem=2.85/12.98 GiB E=4527+17954 J "nd's son was born 2 years ago.\nThe final answer: 2"
+  S4_split_int4              ok=False up= 158.96 MB edge=   1887 ms cloud=  38835 ms mem=2.85/12.98 GiB E=4331+17108 J "d's son was born 2 years ago.\nThe final answer: 2."
+  C5_cache_aware_int8abs     ok=False up= 239.05 MB edge=   1669 ms cloud=  31948 ms mem=2.85/12.98 GiB E=3796+15516 J "nd's son was born 2 years ago.\nThe final answer: 2"
+  C6_cache_aware_int4        ok=False up= 123.19 MB edge=   1898 ms cloud=  31205 ms mem=2.85/12.98 GiB E=3720+15163 J "d's son was born 2 years ago.\nThe final answer: 2."
+
+gsm8k_0022 | prompt tokens=89
+  S0_split_full              ok=True  up= 633.08 MB edge=   1905 ms cloud=  40106 ms mem=2.85/12.98 GiB E=4440+17655 J 'ls 3 + 4 + 0 = 7 DVDs on Tuesday.\nThe answer is: 7'
+  S3_split_int8abs           ok=True  up= 316.72 MB edge=   1903 ms cloud=  39293 ms mem=2.85/12.98 GiB E=4360+17293 J 'ls 3 + 4 + 0 = 7 DVDs on Tuesday.\nThe answer is: 7'
+  S4_split_int4              ok=True  up= 163.22 MB edge=   1902 ms cloud=  39969 ms mem=2.85/12.98 GiB E=4449+17630 J '3 + 4 + 0 = 7 DVDs on Tuesday.\nThe final answer: 7'
+  C5_cache_aware_int8abs     ok=True  up= 239.41 MB edge=   1670 ms cloud=  31255 ms mem=2.85/12.98 GiB E=3715+15144 J '3 + 4 + 0 = 7 DVDs on Tuesday.\nThe final answer: 7'
+  C6_cache_aware_int4        ok=True  up= 123.38 MB edge=   1669 ms cloud=  31873 ms mem=2.85/12.98 GiB E=3754+15473 J 'ls 3 + 4 + 0 = 7 DVDs on Tuesday.\nThe answer is: 7'
+
+gsm8k_0023 | prompt tokens=74
+  S0_split_full              ok=True  up= 605.56 MB edge=   1879 ms cloud=  38889 ms mem=2.85/12.98 GiB E=4343+17299 J ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  S3_split_int8abs           ok=True  up= 302.95 MB edge=   1884 ms cloud=  39734 ms mem=2.85/12.98 GiB E=4497+17738 J ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  S4_split_int4              ok=True  up= 156.12 MB edge=   1886 ms cloud=  38803 ms mem=2.85/12.98 GiB E=4401+17150 J 'rning from 1:00 PM to 5:00 PM.\nThe final answer: 8'
+  C5_cache_aware_int8abs     ok=True  up= 238.81 MB edge=   1675 ms cloud=  32273 ms mem=2.85/12.97 GiB E=3827+15652 J ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  C6_cache_aware_int4        ok=True  up= 123.07 MB edge=   1732 ms cloud=  30879 ms mem=2.85/12.97 GiB E=3696+15005 J 'rning from 1:00 PM to 5:00 PM.\nThe final answer: 8'
+
+gsm8k_0024 | prompt tokens=73
+  S0_split_full              ok=True  up= 603.72 MB edge=   1873 ms cloud=  39948 ms mem=2.85/12.98 GiB E=4477+17733 J 'price of the book was $26.\nThe final answer is: 26'
+  S3_split_int8abs           ok=True  up= 302.03 MB edge=   1880 ms cloud=  38632 ms mem=2.85/12.98 GiB E=4328+17053 J 'iginal price of the book is $26.\nThe answer is: 26'
+  S4_split_int4              ok=True  up= 155.65 MB edge=   1873 ms cloud=  40137 ms mem=2.85/12.98 GiB E=4493+17818 J 'ginal price of the book was $26.\nThe answer is: 26'
+  C5_cache_aware_int8abs     ok=True  up= 238.77 MB edge=   1692 ms cloud=  30772 ms mem=2.85/12.97 GiB E=3672+14817 J 'ginal price of the book was $26.\nThe answer is: 26'
+  C6_cache_aware_int4        ok=True  up= 123.05 MB edge=   2128 ms cloud=  32323 ms mem=2.85/12.97 GiB E=3872+15863 J 'ginal price of the book was $26.\nThe answer is: 26'
+
+gsm8k_0025 | prompt tokens=102
+  S0_split_full              ok=True  up= 656.94 MB edge=   1944 ms cloud=  38812 ms mem=2.85/12.99 GiB E=4364+17141 J ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  S3_split_int8abs           ok=True  up= 328.65 MB edge=   1935 ms cloud=  41006 ms mem=2.85/12.99 GiB E=4590+18095 J 'd is $17 / $8.50 = 2 boxes.\nThe final answer is: 2'
+  S4_split_int4              ok=True  up= 169.37 MB edge=   1941 ms cloud=  38929 ms mem=2.85/12.99 GiB E=4361+17157 J ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  C5_cache_aware_int8abs     ok=True  up= 239.92 MB edge=   1676 ms cloud=  32430 ms mem=2.85/12.98 GiB E=3859+15796 J ' is $17 / $8.50 = 2 boxes.\n#### 2\nThe answer is: 2'
+  C6_cache_aware_int4        ok=True  up= 123.64 MB edge=   1684 ms cloud=  30497 ms mem=2.85/12.99 GiB E=3649+14746 J ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+
+gsm8k_0026 | prompt tokens=103
+  S0_split_full              ok=True  up= 658.77 MB edge=   1932 ms cloud=  41004 ms mem=2.85/12.99 GiB E=4575+18130 J '3 on all the clothing items.\nThe final answer: 243'
+  S3_split_int8abs           ok=True  up= 329.57 MB edge=   1945 ms cloud=  38545 ms mem=2.85/12.99 GiB E=4311+16922 J '3 on all the clothing items.\nThe final answer: 243'
+  S4_split_int4              ok=True  up= 169.84 MB edge=   1939 ms cloud=  40825 ms mem=2.85/12.99 GiB E=4596+18033 J '3 on all the clothing items.\nThe final answer: 243'
+  C5_cache_aware_int8abs     ok=True  up= 239.96 MB edge=   1683 ms cloud=  30562 ms mem=2.85/12.99 GiB E=3638+14694 J '3 on all the clothing items.\nThe final answer: 243'
+  C6_cache_aware_int4        ok=True  up= 123.66 MB edge=   1683 ms cloud=  32332 ms mem=2.85/12.99 GiB E=3828+15753 J '3 on all the clothing items.\nThe final answer: 243'
+
+gsm8k_0027 | prompt tokens=93
+  S0_split_full              ok=True  up= 640.42 MB edge=   1924 ms cloud=  38923 ms mem=2.85/12.99 GiB E=4345+17061 J '6.00 on ice cream after 60 days.\nThe answer is: 16'
+  S3_split_int8abs           ok=True  up= 320.39 MB edge=   1915 ms cloud=  40234 ms mem=2.85/12.99 GiB E=4465+17772 J '6.00 on ice cream after 60 days.\nThe answer is: 16'
+  S4_split_int4              ok=True  up= 165.11 MB edge=   1936 ms cloud=  34934 ms mem=2.85/12.99 GiB E=3899+15054 J '6.00 on ice cream after 60 days.\nThe answer is: 16'
+  C5_cache_aware_int8abs     ok=True  up= 239.56 MB edge=   1673 ms cloud=  32120 ms mem=2.85/12.98 GiB E=3815+15654 J '6.00 on ice cream after 60 days.\nThe answer is: 16'
+  C6_cache_aware_int4        ok=True  up= 123.46 MB edge=   1676 ms cloud=  29738 ms mem=2.85/12.98 GiB E=3530+14214 J '6.00 on ice cream after 60 days.\nThe answer is: 16'
+
+gsm8k_0028 | prompt tokens=84
+  S0_split_full              ok=True  up= 623.91 MB edge=   1896 ms cloud=  40530 ms mem=2.85/12.99 GiB E=4475+17918 J 'ween his first and second stops.\nThe answer is: 25'
+  S3_split_int8abs           ok=True  up= 312.13 MB edge=   1902 ms cloud=  37996 ms mem=2.85/12.99 GiB E=4216+16596 J 's is 45 - 20 = 25 miles.\n#### 25\nThe answer is: 25'
+  S4_split_int4              ok=False up= 160.85 MB edge=   1892 ms cloud=  40576 ms mem=2.85/12.99 GiB E=4501+17915 J 'ween his first and second stops.\nThe answer is: 15'
+  C5_cache_aware_int8abs     ok=True  up= 239.21 MB edge=   1778 ms cloud=  26354 ms mem=2.85/12.98 GiB E=3136+12448 J 's is 45 - 20 = 25 miles.\n#### 25\nThe answer is: 25'
+  C6_cache_aware_int4        ok=True  up= 123.27 MB edge=   1855 ms cloud=  32301 ms mem=2.85/12.98 GiB E=3851+15880 J 'ween his first and second stops.\nThe answer is: 25'
+
+gsm8k_0029 | prompt tokens=103
+  S0_split_full              ok=True  up= 658.77 MB edge=   1937 ms cloud=  39025 ms mem=2.85/12.99 GiB E=4345+17175 J ', the boots cost $104.\n#### 104\nThe answer is: 104'
+  S3_split_int8abs           ok=True  up= 329.57 MB edge=   1939 ms cloud=  40744 ms mem=2.85/12.99 GiB E=4618+18012 J ', the boots cost $104.\n#### 104\nThe answer is: 104'
+  S4_split_int4              ok=True  up= 169.84 MB edge=   1937 ms cloud=  39811 ms mem=2.85/12.99 GiB E=4411+17487 J ', the boots cost $104.\n#### 104\nThe answer is: 104'
+  C5_cache_aware_int8abs     ok=True  up= 239.96 MB edge=   1815 ms cloud=  31994 ms mem=2.85/12.99 GiB E=3819+15630 J ', the boots cost $104.\n#### 104\nThe answer is: 104'
+  C6_cache_aware_int4        ok=True  up= 123.66 MB edge=   1678 ms cloud=  31419 ms mem=2.85/12.99 GiB E=3723+15172 J ', the boots cost $104.\n#### 104\nThe answer is: 104'
+
+Exp11 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp11_gsm8k_k4_t256_T0.1_baselines
+               variant  runs      acc  regressions  exact_vs_ref  mean_up_mb  up_reduction_vs_S0  mean_edge_ms  mean_cloud_ms  mean_edge_peak_gib  mean_cloud_peak_gib  mean_edge_energy_j  mean_cloud_energy_j
+         S0_split_full    30 0.833333            0             0  641.339392            0.000000   1989.811531   35319.820612            2.853135            12.988801         3957.567300         15337.031833
+      S3_split_int8abs    30 0.800000            1             0  320.850688            0.499718   1987.603001   35348.707515            2.853135            12.988801         3971.826100         15348.568100
+         S4_split_int4    30 0.733333            3             0  165.348352            0.742183   1988.403358   35253.432012            2.853135            12.988801         3957.853867         15307.150567
+C5_cache_aware_int8abs    30 0.800000            1             0  239.582963            0.625457   1741.121665   27712.936244            2.852399            12.983053         3316.511100         13227.281600
+   C6_cache_aware_int4    30 0.800000            1             0  123.468052            0.806981   1789.442245   28276.972283            2.852595            12.983345         3387.848433         13578.410967
+
+=== 2/6 dLLM-Cache, Dream long prompts  (2026-11-27 05:15:50)
+{'EXP11_DATASET': 'authored', 'EXP11_N_QUESTIONS': 12, 'EXP11_NEW_TOKENS': 128, 'EXP11_STEPS': 128, 'EXP11_MODEL': 'dream', 'EXP11_OUTPUT_TAG': '_baselines', 'EXP11_VARIANT_NAMES': ['S0_split_full', 'S3_split_int8abs', 'S4_split_int4', 'C5_cache_aware_int8abs', 'C6_cache_aware_int4']}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.06it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.17it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.35it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.94it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.04it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=63.2 W, cloud=297.5 W
+Exp11 | dream | authored n=12 | split after layer 4 | edge=cuda:1 cloud=cuda:0 | 128 tok / 128 steps | cache ('fixed', 25, 2, 0.25)
+warmup done
+
+library_factual | prompt tokens=849
+  S0_split_full              ok=True  up= 896.40 MB edge=   2526 ms cloud=  52917 ms mem=2.97/12.90 GiB E=4800+19121 J 'Mara Chen'
+  S3_split_int8abs           ok=True  up= 448.45 MB edge=   2527 ms cloud=  54058 ms mem=2.97/12.90 GiB E=4901+19543 J 'Mara Chen'
+  S4_split_int4              ok=True  up= 231.11 MB edge=   2526 ms cloud=  52588 ms mem=2.97/12.90 GiB E=4821+18952 J 'Mara Chen'
+  C5_cache_aware_int8abs     ok=True  up=  77.46 MB edge=   1466 ms cloud=  19569 ms mem=2.99/12.92 GiB E=2206+8879 J 'Mara Chen'
+  C6_cache_aware_int4        ok=True  up=  39.92 MB edge=   1341 ms cloud=  19444 ms mem=2.99/12.92 GiB E=2167+8807 J 'Mara Chen'
+
+library_math | prompt tokens=864
+  S0_split_full              ok=True  up= 910.17 MB edge=   2561 ms cloud=  52979 ms mem=2.97/12.90 GiB E=4893+18983 J 'days is 1,320 records - 840 records = 480 records.'
+  S3_split_int8abs           ok=True  up= 455.34 MB edge=   2536 ms cloud=  54749 ms mem=2.97/12.90 GiB E=4975+19670 J 'ecords remaining in the ordinary scanning backlog.'
+  S4_split_int4              ok=True  up= 234.65 MB edge=   2539 ms cloud=  53305 ms mem=2.97/12.90 GiB E=4860+19120 J 'ecords remaining in the ordinary scanning backlog.'
+  C5_cache_aware_int8abs     ok=True  up=  77.78 MB edge=   1502 ms cloud=  19527 ms mem=2.99/12.93 GiB E=2222+8849 J 'days is 1,320 records - 840 records = 480 records.'
+  C6_cache_aware_int4        ok=True  up=  40.09 MB edge=   1218 ms cloud=  19640 ms mem=2.99/12.93 GiB E=2220+8848 J 'cklog after six days is 1,320 - 840 = 480 records.'
+
+library_instruction | prompt tokens=862
+  S0_split_full              ok=True  up= 908.33 MB edge=   2537 ms cloud=  52864 ms mem=2.97/12.91 GiB E=4835+18943 J 'ses to the records officer for a privacy decision.'
+  S3_split_int8abs           ok=True  up= 454.42 MB edge=   2535 ms cloud=  54898 ms mem=2.97/12.91 GiB E=5003+19730 J 'uncertain cases to the records officer for review.'
+  S4_split_int4              ok=True  up= 234.18 MB edge=   2537 ms cloud=  52987 ms mem=2.97/12.91 GiB E=4840+18980 J 'proper review and approval by the records officer.'
+  C5_cache_aware_int8abs     ok=True  up=  77.74 MB edge=   1382 ms cloud=  19602 ms mem=2.99/12.93 GiB E=2225+8849 J "ance with privacy laws and the library's policies."
+  C6_cache_aware_int4        ok=True  up=  40.06 MB edge=   1217 ms cloud=  18973 ms mem=2.99/12.93 GiB E=2151+8540 J 'ain cases are escalated appropriately as required.'
+
+sensors_factual | prompt tokens=726
+  S0_split_full              ok=True  up= 783.55 MB edge=   2274 ms cloud=  47775 ms mem=2.96/12.87 GiB E=4439+17404 J 'duled field inspection is performed every 14 days.'
+  S3_split_int8abs           ok=True  up= 391.99 MB edge=   2298 ms cloud=  48456 ms mem=2.96/12.87 GiB E=4601+17710 J 'duled field inspection is performed every 14 days.'
+  S4_split_int4              ok=True  up= 202.01 MB edge=   2273 ms cloud=  48004 ms mem=2.96/12.87 GiB E=4464+17498 J 'duled field inspection is performed every 14 days.'
+  C5_cache_aware_int8abs     ok=True  up=  74.81 MB edge=   1132 ms cloud=  18435 ms mem=2.96/12.84 GiB E=2108+8299 J 'duled field inspection is performed every 14 days.'
+  C6_cache_aware_int4        ok=True  up=  38.56 MB edge=   1135 ms cloud=  17639 ms mem=2.96/12.84 GiB E=2006+7870 J 'duled field inspection is performed every 14 days.'
+
+sensors_math | prompt tokens=731
+  S0_split_full              ok=True  up= 788.14 MB edge=   2300 ms cloud=  48550 ms mem=2.95/12.82 GiB E=4602+17670 J 'gs is 240 readings/hour * 5 hours = 1200 readings.'
+  S3_split_int8abs           ok=True  up= 394.29 MB edge=   2278 ms cloud=  47660 ms mem=2.95/12.82 GiB E=4429+17351 J 'ensors over five hours is 40 * 30 = 1200 readings.'
+  S4_split_int4              ok=True  up= 203.19 MB edge=   2276 ms cloud=  48658 ms mem=2.95/12.82 GiB E=4525+17796 J 'dings from all sensors is 40 * 30 = 1200 readings.'
+  C5_cache_aware_int8abs     ok=True  up=  74.92 MB edge=   1136 ms cloud=  18258 ms mem=2.96/12.85 GiB E=2065+8237 J 'e 40 sensors * 30 readings/sensor = 1200 readings.'
+  C6_cache_aware_int4        ok=True  up=  38.61 MB edge=   1128 ms cloud=  17402 ms mem=2.96/12.85 GiB E=1982+7807 J 'e 40 sensors * 30 readings/sensor = 1200 readings.'
+
+sensors_instruction | prompt tokens=736
+  S0_split_full              ok=True  up= 792.73 MB edge=   2291 ms cloud=  48828 ms mem=2.95/12.82 GiB E=4526+17824 J "es according to the city's existing incident plan."
+  S3_split_int8abs           ok=True  up= 396.58 MB edge=   2290 ms cloud=  47593 ms mem=2.95/12.82 GiB E=4429+17385 J "es according to the city's existing incident plan."
+  S4_split_int4              ok=True  up= 204.38 MB edge=   2289 ms cloud=  48675 ms mem=2.95/12.82 GiB E=4509+17766 J "vel when safe to collect, and the reporter's name."
+  C5_cache_aware_int8abs     ok=True  up=  75.03 MB edge=   1353 ms cloud=  18378 ms mem=2.96/12.85 GiB E=2093+8333 J "es according to the city's existing incident plan."
+  C6_cache_aware_int4        ok=True  up=  38.67 MB edge=   1131 ms cloud=  17559 ms mem=2.96/12.85 GiB E=1983+7860 J "vel when safe to collect, and the reporter's name."
+
+clinic_factual | prompt tokens=666
+  S0_split_full              ok=True  up= 728.50 MB edge=   2190 ms cloud=  47033 ms mem=2.94/12.80 GiB E=4309+17168 J ' threshold for appointment-available doses is 140.'
+  S3_split_int8abs           ok=True  up= 364.45 MB edge=   2191 ms cloud=  46757 ms mem=2.94/12.80 GiB E=4306+17061 J '140'
+  S4_split_int4              ok=True  up= 187.82 MB edge=   2192 ms cloud=  45849 ms mem=2.94/12.80 GiB E=4261+16740 J '140'
+  C5_cache_aware_int8abs     ok=True  up=  73.52 MB edge=   1104 ms cloud=  18536 ms mem=2.94/12.80 GiB E=2099+8390 J ' threshold for appointment-available doses is 140.'
+  C6_cache_aware_int4        ok=True  up=  37.89 MB edge=   1245 ms cloud=  18102 ms mem=2.94/12.80 GiB E=2069+8234 J '140'
+
+clinic_math | prompt tokens=673
+  S0_split_full              ok=True  up= 734.92 MB edge=   2197 ms cloud=  45927 ms mem=2.93/12.78 GiB E=4238+16709 J 'tient appointments after the training reservation.'
+  S3_split_int8abs           ok=True  up= 367.67 MB edge=   2196 ms cloud=  47320 ms mem=2.93/12.78 GiB E=4374+17309 J 'f doses remaining for patient appointments is 320.'
+  S4_split_int4              ok=True  up= 189.47 MB edge=   2197 ms cloud=  45676 ms mem=2.93/12.78 GiB E=4272+16642 J 'e training reservation from the received shipment.'
+  C5_cache_aware_int8abs     ok=True  up=  73.67 MB edge=   1101 ms cloud=  18523 ms mem=2.94/12.81 GiB E=2072+8327 J 'tient appointments after the training reservation.'
+  C6_cache_aware_int4        ok=True  up=  37.97 MB edge=   1107 ms cloud=  18334 ms mem=2.94/12.81 GiB E=2062+8241 J 'tient appointments after the training reservation.'
+
+clinic_instruction | prompt tokens=671
+  S0_split_full              ok=True  up= 733.09 MB edge=   2195 ms cloud=  45766 ms mem=2.93/12.78 GiB E=4260+16676 J 'ritize a particular lot following a safety notice.'
+  S3_split_int8abs           ok=True  up= 366.75 MB edge=   2193 ms cloud=  47211 ms mem=2.93/12.78 GiB E=4355+17279 J 'ancies and adjust the inventory count accordingly.'
+  S4_split_int4              ok=True  up= 189.00 MB edge=   2197 ms cloud=  45731 ms mem=2.93/12.78 GiB E=4247+16647 J 'ritize a particular lot following a safety notice.'
+  C5_cache_aware_int8abs     ok=True  up=  73.63 MB edge=   1269 ms cloud=  18666 ms mem=2.94/12.81 GiB E=2099+8393 J '. Ensure that the lot is not past its expiry date.'
+  C6_cache_aware_int4        ok=True  up=  37.95 MB edge=   1344 ms cloud=  18259 ms mem=2.94/12.81 GiB E=2074+8307 J "he clinic's procedures for handling expired stock."
+
+transit_factual | prompt tokens=678
+  S0_split_full              ok=True  up= 739.51 MB edge=   2200 ms cloud=  45822 ms mem=2.94/12.78 GiB E=4219+16713 J 'The rider feedback deadline is 23 November 2026.'
+  S3_split_int8abs           ok=True  up= 369.96 MB edge=   2200 ms cloud=  46931 ms mem=2.94/12.78 GiB E=4342+17190 J 'The rider feedback deadline is 23 November 2026.'
+  S4_split_int4              ok=True  up= 190.66 MB edge=   2201 ms cloud=  45960 ms mem=2.94/12.78 GiB E=4251+16769 J 'The rider feedback deadline is 23 November 2026.'
+  C5_cache_aware_int8abs     ok=True  up=  73.78 MB edge=   1118 ms cloud=  18423 ms mem=2.95/12.81 GiB E=2063+8259 J 'The rider feedback deadline is 23 November 2026.'
+  C6_cache_aware_int4        ok=True  up=  38.02 MB edge=   1107 ms cloud=  18308 ms mem=2.95/12.81 GiB E=2065+8179 J 'The rider feedback deadline is 23 November 2026.'
+
+transit_math | prompt tokens=687
+  S0_split_full              ok=True  up= 747.77 MB edge=   2207 ms cloud=  45722 ms mem=2.94/12.78 GiB E=4221+16739 J 'te a total of 630 kilometres on the specified day.'
+  S3_split_int8abs           ok=True  up= 374.09 MB edge=   2206 ms cloud=  47310 ms mem=2.94/12.78 GiB E=4394+17367 J ' operated by all buses is 7 * 90 = 630 kilometres.'
+  S4_split_int4              ok=True  up= 192.79 MB edge=   2207 ms cloud=  45718 ms mem=2.94/12.78 GiB E=4255+16797 J 'te a total of 630 kilometres on the specified day.'
+  C5_cache_aware_int8abs     ok=True  up=  73.97 MB edge=   1199 ms cloud=  18421 ms mem=2.95/12.82 GiB E=2076+8289 J ' operated by all buses is 7 * 90 = 630 kilometres.'
+  C6_cache_aware_int4        ok=True  up=  38.12 MB edge=   1358 ms cloud=  18503 ms mem=2.95/12.82 GiB E=2094+8386 J 'te a total of 630 kilometres on the specified day.'
+
+transit_instruction | prompt tokens=695
+  S0_split_full              ok=True  up= 755.11 MB edge=   2214 ms cloud=  41932 ms mem=2.94/12.80 GiB E=3972+15349 J 'rvice hours for assistance with your travel plans.'
+  S3_split_int8abs           ok=True  up= 377.77 MB edge=   2212 ms cloud=  44039 ms mem=2.94/12.80 GiB E=4136+16174 J 'ide you with the most current service information.'
+  S4_split_int4              ok=True  up= 194.68 MB edge=   2232 ms cloud=  46680 ms mem=2.94/12.80 GiB E=4431+17221 J 'ey can provide updated information and assist you.'
+  C5_cache_aware_int8abs     ok=True  up=  74.15 MB edge=   1120 ms cloud=  18254 ms mem=2.95/12.82 GiB E=2046+8155 J 'desk at [insert service desk contact information].'
+  C6_cache_aware_int4        ok=True  up=  38.21 MB edge=   1112 ms cloud=  18809 ms mem=2.95/12.82 GiB E=2122+8438 J 'e desk contact information] during business hours.'
+
+Exp11 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp11_authored_k4_t128_T0.1_baselines
+               variant  runs  acc  regressions  exact_vs_ref  mean_up_mb  up_reduction_vs_S0  mean_edge_ms  mean_cloud_ms  mean_edge_peak_gib  mean_cloud_peak_gib  mean_edge_energy_j  mean_cloud_energy_j
+         S0_split_full    12  1.0            0             0  793.184256            0.000000   2307.673233   48009.520874            2.950295            12.829466         4442.898250         17441.719417
+      S3_split_int8abs    12  1.0            0             0  396.814464            0.499720   2305.135400   48915.126851            2.950295            12.829466         4520.344417         17814.111500
+         S4_split_int4    12  1.0            0             0  204.494336            0.742186   2305.431243   48319.323416            2.950295            12.829466         4478.019583         17577.289167
+C5_cache_aware_int8abs    12  1.0            0             0   75.039098            0.904905   1240.097800   18716.050163            2.959706            12.849870         2114.369583          8438.277083
+   C6_cache_aware_int4    12  1.0            0             0   38.671448            0.950993   1203.616526   18414.165970            2.960166            12.849990         2082.823750          8293.220833
+
+=== 3/6 dLLM-Cache, LLaDA GSM8K  (2026-11-27 06:04:26)
+{'EXP11_DATASET': 'gsm8k', 'EXP11_N_QUESTIONS': 30, 'EXP11_NEW_TOKENS': 256, 'EXP11_STEPS': 256, 'EXP11_MODEL': 'llada', 'EXP11_OUTPUT_TAG': '_baselines', 'EXP11_VARIANT_NAMES': ['S0_split_full', 'S3_split_int8abs', 'S4_split_int4', 'C5_cache_aware_int8abs', 'C6_cache_aware_int4']}
+Loading checkpoint shards:   0%|          | 0/6 [00:00<?, ?it/s]Loading checkpoint shards:  17%|█▋        | 1/6 [00:00<00:00,  8.69it/s]Loading checkpoint shards:  33%|███▎      | 2/6 [00:00<00:00,  9.24it/s]Loading checkpoint shards:  50%|█████     | 3/6 [00:00<00:00,  9.30it/s]Loading checkpoint shards:  67%|██████▋   | 4/6 [00:00<00:00,  9.18it/s]Loading checkpoint shards:  83%|████████▎ | 5/6 [00:00<00:00,  9.22it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:00<00:00,  8.84it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:00<00:00,  9.00it/s]
+idle power: edge=64.3 W, cloud=294.9 W
+Exp11 | llada | gsm8k n=30 | split after layer 4 | edge=cuda:1 cloud=cuda:0 | 256 tok / 256 steps | cache ('fixed', 50, 7, 0.25)
+warmup done
+
+gsm8k_0000 | prompt tokens=92
+  S0_split_full              ok=True  up= 729.81 MB edge=   2345 ms cloud=  55413 ms mem=2.70/12.94 GiB E=4845+20082 J " day at the farmers' market.\n\n####\n\\boxed{18}\n####"
+  S3_split_int8abs           ok=True  up= 365.09 MB edge=   2344 ms cloud=  55554 ms mem=2.70/12.94 GiB E=4836+20029 J " day at the farmers' market.\n\n####\n\\boxed{18}\n####"
+  S4_split_int4              ok=True  up= 188.16 MB edge=   2344 ms cloud=  55389 ms mem=2.70/12.94 GiB E=4848+20027 J "ery day at the farmers' market.\n\n####\n\\boxed{18}\\)"
+  C5_cache_aware_int8abs     ok=True  up= 270.83 MB edge=   1647 ms cloud=  33150 ms mem=2.71/13.14 GiB E=3206+13200 J " day at the farmers' market.\n\n#### \\boxed{18} ####"
+  C6_cache_aware_int4        ok=True  up= 139.58 MB edge=   1648 ms cloud=  33042 ms mem=2.71/13.14 GiB E=3187+13128 J "every day at the farmers' market.\n\n#### \\boxed{18}"
+
+gsm8k_0001 | prompt tokens=55
+  S0_split_full              ok=True  up= 652.22 MB edge=   2274 ms cloud=  53912 ms mem=2.69/12.92 GiB E=4733+19613 J 'al number of bolts needed for the robe is 3.\n\n####'
+  S3_split_int8abs           ok=True  up= 326.27 MB edge=   2283 ms cloud=  53473 ms mem=2.69/12.92 GiB E=4773+19451 J 'r of bolts needed for the robe is 3.\n\n#### 3 bolts'
+  S4_split_int4              ok=True  up= 168.15 MB edge=   2275 ms cloud=  53700 ms mem=2.69/12.92 GiB E=4723+19505 J 'al number of bolts needed for the robe is 3.\n\n####'
+  C5_cache_aware_int8abs     ok=True  up= 269.92 MB edge=   1615 ms cloud=  33355 ms mem=2.71/13.09 GiB E=3146+12980 J 'al number of bolts needed for the robe is 3.\n\n####'
+  C6_cache_aware_int4        ok=True  up= 139.11 MB edge=   1720 ms cloud=  33125 ms mem=2.71/13.09 GiB E=3135+12943 J 'al number of bolts needed for the robe is 3.\n\n####'
+
+gsm8k_0002 | prompt tokens=86
+  S0_split_full              ok=False up= 717.23 MB edge=   2334 ms cloud=  55122 ms mem=2.69/12.89 GiB E=4833+19871 J ' profit from flipping the house is $120,000.\n\n####'
+  S3_split_int8abs           ok=False up= 358.79 MB edge=   2336 ms cloud=  55058 ms mem=2.69/12.89 GiB E=4838+19822 J ",000 = 120,000 \\).\n\nSo, Josh's profit is $120,000."
+  S4_split_int4              ok=False up= 184.91 MB edge=   2335 ms cloud=  55660 ms mem=2.69/12.89 GiB E=4905+20003 J "   \\]\n\nTherefore, Josh's profit is:\n\n#### $120,000"
+  C5_cache_aware_int8abs     ok=False up= 270.69 MB edge=   1891 ms cloud=  32683 ms mem=2.71/13.12 GiB E=3191+13073 J '0 - 80,000 = 120,000\n     \\]\n\n#### Profit: $120000'
+  C6_cache_aware_int4        ok=False up= 139.51 MB edge=   1642 ms cloud=  33613 ms mem=2.71/13.12 GiB E=3247+13386 J ",000\n     \\]\n\nTherefore, Josh's profit is $120,00."
+
+gsm8k_0003 | prompt tokens=64
+  S0_split_full              ok=True  up= 671.09 MB edge=   2292 ms cloud=  53874 ms mem=2.69/12.92 GiB E=4764+19702 J 'es runs a total of 540 meters in a week.\n\n#### 540'
+  S3_split_int8abs           ok=True  up= 335.71 MB edge=   2292 ms cloud=  54261 ms mem=2.69/12.92 GiB E=4799+19908 J 'es runs a total of 540 meters in a week.\n\n#### 540'
+  S4_split_int4              ok=True  up= 173.02 MB edge=   2300 ms cloud=  53922 ms mem=2.69/12.92 GiB E=4830+19672 J 'es runs a total of 540 meters in a week.\n\n#### 540'
+  C5_cache_aware_int8abs     ok=True  up= 270.14 MB edge=   1624 ms cloud=  33419 ms mem=2.71/13.09 GiB E=3160+13018 J 'So, James runs a total of 540 meters a week.\n\n####'
+  C6_cache_aware_int4        ok=True  up= 139.23 MB edge=   1695 ms cloud=  32714 ms mem=2.71/13.09 GiB E=3119+12807 J ' a total of 540 meters in a week.\n\n#### 540 meters'
+
+gsm8k_0004 | prompt tokens=139
+  S0_split_full              ok=True  up= 828.38 MB edge=   2601 ms cloud=  64061 ms mem=2.70/12.93 GiB E=5583+22614 J 'give 20 cups of feed in the final meal of the day.'
+  S3_split_int8abs           ok=True  up= 414.39 MB edge=   2601 ms cloud=  63680 ms mem=2.70/12.93 GiB E=5554+22460 J 'give 20 cups of feed in the final meal of the day.'
+  S4_split_int4              ok=True  up= 213.57 MB edge=   2603 ms cloud=  63200 ms mem=2.70/12.93 GiB E=5472+22246 J 'give 20 cups of feed in the final meal of the day.'
+  C5_cache_aware_int8abs     ok=True  up= 271.99 MB edge=   1744 ms cloud=  35936 ms mem=2.72/13.17 GiB E=3416+13892 J ' chickens 20 cups of feed in the final meal. ####.'
+  C6_cache_aware_int4        ok=True  up= 140.18 MB edge=   1749 ms cloud=  35001 ms mem=2.72/13.17 GiB E=3397+13489 J 'give 20 cups of feed in the final meal of the day.'
+
+gsm8k_0005 | prompt tokens=85
+  S0_split_full              ok=False up= 715.13 MB edge=   2333 ms cloud=  55820 ms mem=2.70/12.98 GiB E=4876+20078 J 'refore, Kylar needs to pay $64 for the 16 glasses.'
+  S3_split_int8abs           ok=False up= 357.74 MB edge=   2334 ms cloud=  54979 ms mem=2.70/12.98 GiB E=4815+19792 J '$50 for 16 glasses.\n\n#### Final Answer: \\boxed{50}'
+  S4_split_int4              ok=True  up= 184.37 MB edge=   2333 ms cloud=  55618 ms mem=2.70/12.98 GiB E=4879+19998 J '( 40 + 24 = 64 \\) dollars.\n\n#### Final answer: $64'
+  C5_cache_aware_int8abs     ok=True  up= 270.66 MB edge=   1647 ms cloud=  32905 ms mem=2.71/13.11 GiB E=3170+13070 J ' needs to pay $64 for 16 glasses.\n\n#### 64 dollars'
+  C6_cache_aware_int4        ok=False up= 139.49 MB edge=   1786 ms cloud=  33428 ms mem=2.71/13.11 GiB E=3215+13322 J 'refore, Kylar needs to pay $64 for the 16 glasses.'
+
+gsm8k_0006 | prompt tokens=72
+  S0_split_full              ok=True  up= 687.87 MB edge=   2310 ms cloud=  54949 ms mem=2.69/12.92 GiB E=4783+19765 J 'hat Toulouse, Charleston, and Seattle have is 260.'
+  S3_split_int8abs           ok=True  up= 344.10 MB edge=   2310 ms cloud=  54884 ms mem=2.69/12.92 GiB E=4791+19750 J 'ston, and Seattle have together is \\( 260 \\).\n\n260'
+  S4_split_int4              ok=True  up= 177.34 MB edge=   2309 ms cloud=  55476 ms mem=2.69/12.92 GiB E=4838+19964 J '\nToulouse, Charleston, and Seattle have 260 sheep.'
+  C5_cache_aware_int8abs     ok=True  up= 270.34 MB edge=   1631 ms cloud=  32742 ms mem=2.71/13.10 GiB E=3109+12861 J ', Charleston, and Seattle together have 260 sheep.'
+  C6_cache_aware_int4        ok=True  up= 139.33 MB edge=   1643 ms cloud=  33444 ms mem=2.71/13.10 GiB E=3262+13219 J 'ston, and Seattle have together is \\( 260 \\).\n\n260'
+
+gsm8k_0007 | prompt tokens=99
+  S0_split_full              ok=False up= 744.49 MB edge=   2361 ms cloud=  55532 ms mem=2.70/12.92 GiB E=4908+20105 J '# It takes Carla 120 minutes to download the file.'
+  S3_split_int8abs           ok=False up= 372.43 MB edge=   2361 ms cloud=  56562 ms mem=2.70/12.92 GiB E=4991+20478 J 'kes for Carla to download the file is 120 minutes.'
+  S4_split_int4              ok=False up= 191.94 MB edge=   2361 ms cloud=  55839 ms mem=2.70/12.92 GiB E=4937+20193 J '0 minutes to download the file.\n\n#### \n120 minutes'
+  C5_cache_aware_int8abs     ok=False up= 271.00 MB edge=   1655 ms cloud=  33364 ms mem=2.72/13.14 GiB E=3242+13292 J ' + 60 minutes + 20 minutes = 120 minutes\n\n#### 120'
+  C6_cache_aware_int4        ok=False up= 139.67 MB edge=   1656 ms cloud=  33191 ms mem=2.72/13.14 GiB E=3195+13129 J ' + 20 minutes = 120 minutes.\n\n####\n**120 minutes**'
+
+gsm8k_0008 | prompt tokens=133
+  S0_split_full              ok=False up= 815.80 MB edge=   2588 ms cloud=  63157 ms mem=2.71/12.97 GiB E=5727+22633 J '5 miles from home at the end of the 4 hours.\n\n####'
+  S3_split_int8abs           ok=False up= 408.10 MB edge=   2602 ms cloud=  62944 ms mem=2.71/12.97 GiB E=5740+22469 J '5 miles from home at the end of the 4 hours.\n\n####'
+  S4_split_int4              ok=False up= 210.33 MB edge=   2591 ms cloud=  62540 ms mem=2.71/12.97 GiB E=5441+22340 J '5 miles from home at the end of the 4 hours.\n\n####'
+  C5_cache_aware_int8abs     ok=False up= 271.84 MB edge=   1738 ms cloud=  35616 ms mem=2.72/13.16 GiB E=3369+13704 J ' hours, John is 275 miles from his starting point.'
+  C6_cache_aware_int4        ok=False up= 140.10 MB edge=   1740 ms cloud=  35455 ms mem=2.72/13.16 GiB E=3342+13648 J '5 miles from home at the end of the 4 hours.\n\n####'
+
+gsm8k_0009 | prompt tokens=88
+  S0_split_full              ok=True  up= 721.42 MB edge=   2341 ms cloud=  55614 ms mem=2.70/12.98 GiB E=4885+20053 J 's for this week are $460.\n\n#### Final Answer: $460'
+  S3_split_int8abs           ok=True  up= 360.89 MB edge=   2339 ms cloud=  55126 ms mem=2.70/12.98 GiB E=4864+19881 J "re, Eliza's earnings for this week are $460.\n\n####"
+  S4_split_int4              ok=True  up= 186.00 MB edge=   2343 ms cloud=  51443 ms mem=2.70/12.98 GiB E=4526+18394 J "iza's earnings for this week are $460.\n\n####\n$460."
+  C5_cache_aware_int8abs     ok=True  up= 270.73 MB edge=   1643 ms cloud=  33275 ms mem=2.71/13.12 GiB E=3202+13228 J "Eliza's earnings for this week are $460.\n\n#### 460"
+  C6_cache_aware_int4        ok=True  up= 139.53 MB edge=   1642 ms cloud=  33445 ms mem=2.71/13.12 GiB E=3229+13275 J 'arnings for this week are $460.\n\n####\n\n\\boxed{460}'
+
+gsm8k_0010 | prompt tokens=89
+  S0_split_full              ok=True  up= 723.52 MB edge=   2346 ms cloud=  50571 ms mem=2.70/12.94 GiB E=4470+18132 J 'f downloads over the three months is 366.\n\n####366'
+  S3_split_int8abs           ok=True  up= 361.94 MB edge=   2349 ms cloud=  54959 ms mem=2.70/12.94 GiB E=4839+19803 J ' number of downloads over the three months is 366.'
+  S4_split_int4              ok=True  up= 186.54 MB edge=   2341 ms cloud=  53896 ms mem=2.70/12.94 GiB E=4700+19378 J ' over the three months is 366.\n\n####\n\\boxed{366}\\)'
+  C5_cache_aware_int8abs     ok=True  up= 270.76 MB edge=   1647 ms cloud=  33010 ms mem=2.71/13.13 GiB E=3172+13076 J 'hs:\n\\[ 60 + 180 + 126 = 366 \\]\n\n#### 366 downloads'
+  C6_cache_aware_int4        ok=True  up= 139.54 MB edge=   1648 ms cloud=  31824 ms mem=2.71/13.13 GiB E=3057+12595 J ' is \\(60 + 180 + 126 = 366\\).\n\n#### 366 downloads.'
+
+gsm8k_0011 | prompt tokens=91
+  S0_split_full              ok=True  up= 727.72 MB edge=   2345 ms cloud=  54966 ms mem=2.70/12.94 GiB E=4808+19848 J 'tries:\n\\[ 204 + 160 + 330 = 694 \\]\n\n#### \\#### 694'
+  S3_split_int8abs           ok=True  up= 364.04 MB edge=   2344 ms cloud=  54076 ms mem=2.70/12.94 GiB E=4757+19479 J '94 \\]\n\n#### The total cost of the pastries is $694'
+  S4_split_int4              ok=True  up= 187.62 MB edge=   2345 ms cloud=  55362 ms mem=2.70/12.94 GiB E=4849+19999 J 'es:\n\n\\[ 204 + 160 + 330 = 694 \\]\n\n#### 694 dollars'
+  C5_cache_aware_int8abs     ok=True  up= 270.81 MB edge=   1647 ms cloud=  31744 ms mem=2.71/13.13 GiB E=3083+12608 J 'es:\n\n\\[ 204 + 160 + 330 = 694 \\]\n\n#### 694 dollars'
+  C6_cache_aware_int4        ok=True  up= 139.57 MB edge=   1646 ms cloud=  33302 ms mem=2.71/13.13 GiB E=3201+13219 J 'e total cost of the pastries Toula bought is $694.'
+
+gsm8k_0012 | prompt tokens=96
+  S0_split_full              ok=False up= 738.20 MB edge=   2353 ms cloud=  53972 ms mem=2.70/12.94 GiB E=4808+19632 J 't earning money on the lemon tree.\n\n####: 12 years'
+  S3_split_int8abs           ok=False up= 369.28 MB edge=   2351 ms cloud=  55652 ms mem=2.70/12.94 GiB E=4939+20242 J 'to start earning money on the lemon tree.\n\n#### 12'
+  S4_split_int4              ok=False up= 190.32 MB edge=   2350 ms cloud=  53407 ms mem=2.70/12.94 GiB E=4794+19423 J '12 years to start earning money on the lemon tree.'
+  C5_cache_aware_int8abs     ok=False up= 270.93 MB edge=   1649 ms cloud=  33474 ms mem=2.71/13.14 GiB E=3221+13326 J 'o start earning money from the lemon tree.\n#### 12'
+  C6_cache_aware_int4        ok=False up= 139.63 MB edge=   1650 ms cloud=  31728 ms mem=2.71/13.14 GiB E=3086+12589 J ' earning money from the lemon tree after 12 years.'
+
+gsm8k_0013 | prompt tokens=87
+  S0_split_full              ok=False up= 719.33 MB edge=   2338 ms cloud=  55324 ms mem=2.70/12.94 GiB E=4884+19948 J '\n\nSo, Melanie started with 42 vacuum cleaners.\n\n42'
+  S3_split_int8abs           ok=True  up= 359.84 MB edge=   2339 ms cloud=  53242 ms mem=2.70/12.94 GiB E=4659+19141 J ' = 18 \\]\n\nMelanie started with 18 vacuum cleaners.'
+  S4_split_int4              ok=True  up= 185.45 MB edge=   2336 ms cloud=  55864 ms mem=2.70/12.94 GiB E=4887+20107 J ' = 18 \\]\n\nMelanie started with 18 vacuum cleaners.'
+  C5_cache_aware_int8abs     ok=False up= 270.71 MB edge=   1650 ms cloud=  31089 ms mem=2.71/13.12 GiB E=2974+12254 J 'e, Melanie started with 9 vacuum cleaners.\n\n#### 9'
+  C6_cache_aware_int4        ok=True  up= 139.52 MB edge=   1644 ms cloud=  33684 ms mem=2.71/13.12 GiB E=3242+13455 J ' started with 18 vacuum cleaners.\n\n#### \\boxed{18}'
+
+gsm8k_0014 | prompt tokens=81
+  S0_split_full              ok=True  up= 706.74 MB edge=   2330 ms cloud=  52728 ms mem=2.70/12.94 GiB E=4587+18904 J 'e students enrolled in hip-hop dance is 60%.\n\n####'
+  S3_split_int8abs           ok=True  up= 353.55 MB edge=   2326 ms cloud=  56077 ms mem=2.70/12.94 GiB E=4889+20211 J 'e students enrolled in hip-hop dance is 60%.\n\n####'
+  S4_split_int4              ok=True  up= 182.21 MB edge=   2337 ms cloud=  52960 ms mem=2.70/12.94 GiB E=4707+18977 J 'e students enrolled in hip-hop dance is 60%.\n\n####'
+  C5_cache_aware_int8abs     ok=True  up= 270.56 MB edge=   1639 ms cloud=  33479 ms mem=2.71/13.11 GiB E=3240+13308 J '60% of the students are enrolled in hip-hop dance.'
+  C6_cache_aware_int4        ok=True  up= 139.44 MB edge=   1641 ms cloud=  30833 ms mem=2.71/13.11 GiB E=2973+12215 J 'dents enrolled in hip-hop dance is 60%.\n\n#### \n60%'
+
+gsm8k_0015 | prompt tokens=123
+  S0_split_full              ok=True  up= 794.82 MB edge=   2478 ms cloud=  59336 ms mem=2.70/12.94 GiB E=5247+21146 J 'hase plan. The maximum profit would be $125.\n\n####'
+  S3_split_int8abs           ok=True  up= 397.61 MB edge=   2471 ms cloud=  56835 ms mem=2.70/12.94 GiB E=5003+20236 J 'se in value for the jewelry purchase plan is $125.'
+  S4_split_int4              ok=False up= 204.92 MB edge=   2470 ms cloud=  58854 ms mem=2.70/12.94 GiB E=5149+20966 J 'elry purchase plan.\n\n#### Final Answer:\n\\boxed{29}'
+  C5_cache_aware_int8abs     ok=False up= 271.59 MB edge=   1977 ms cloud=  33000 ms mem=2.72/13.17 GiB E=3126+12734 J "ue.\n\n#### The merchant's maximum profit is $8,096."
+  C6_cache_aware_int4        ok=False up= 139.97 MB edge=   1817 ms cloud=  34594 ms mem=2.72/13.17 GiB E=3262+13393 J 'the electronic gadgets is:\n\n#### \\boxed{8096} ####'
+
+gsm8k_0016 | prompt tokens=82
+  S0_split_full              ok=True  up= 708.84 MB edge=   2329 ms cloud=  53513 ms mem=2.70/12.96 GiB E=4652+19166 J '\n####\nEach train covers 230 miles in the two days.'
+  S3_split_int8abs           ok=True  up= 354.60 MB edge=   2330 ms cloud=  55164 ms mem=2.70/12.96 GiB E=4838+19822 J 'ers a total distance of 230 miles in the two days.'
+  S4_split_int4              ok=True  up= 182.75 MB edge=   2332 ms cloud=  53917 ms mem=2.70/12.96 GiB E=4749+19340 J 'total distance of 230 miles in the two days.\n\n####'
+  C5_cache_aware_int8abs     ok=True  up= 270.59 MB edge=   1643 ms cloud=  32747 ms mem=2.71/13.11 GiB E=3152+13028 J 'overed by each train in the two days is 230 miles.'
+  C6_cache_aware_int4        ok=True  up= 139.46 MB edge=   1642 ms cloud=  31883 ms mem=2.71/13.11 GiB E=3068+12550 J 'overed by each train in the two days is 230 miles.'
+
+gsm8k_0017 | prompt tokens=86
+  S0_split_full              ok=True  up= 717.23 MB edge=   2345 ms cloud=  54891 ms mem=2.69/12.93 GiB E=4851+19737 J "7,500/year.\n\n####\nJill's annual salary is $57,500."
+  S3_split_int8abs           ok=True  up= 358.79 MB edge=   2336 ms cloud=  54105 ms mem=2.69/12.93 GiB E=4737+19436 J "ar = $57,500.\n\nSo, Jill's annual salary is $57500."
+  S4_split_int4              ok=True  up= 184.91 MB edge=   2335 ms cloud=  55164 ms mem=2.69/12.93 GiB E=4835+19910 J "year.\n\nTherefore, Jill's annual salary is $57,500."
+  C5_cache_aware_int8abs     ok=True  up= 270.69 MB edge=   1651 ms cloud=  31803 ms mem=2.71/13.12 GiB E=3133+12579 J '* 50 weeks/year = $57,500/year.\n\n#### $57,500/year'
+  C6_cache_aware_int4        ok=True  up= 139.51 MB edge=   1641 ms cloud=  33023 ms mem=2.71/13.12 GiB E=3189+13132 J '* 50 weeks/year = $57,500/year.\n\n#### $57,500/year'
+
+gsm8k_0018 | prompt tokens=56
+  S0_split_full              ok=False up= 654.32 MB edge=   2280 ms cloud=  52345 ms mem=2.69/12.92 GiB E=4622+19008 J ' Claire will eat 7 dozens of eggs in 4 weeks.\n####'
+  S3_split_int8abs           ok=True  up= 327.32 MB edge=   2278 ms cloud=  53623 ms mem=2.69/12.92 GiB E=4732+19473 J ' eggs/dozen} = 7 \\text{ dozens} \\]\n\n####\n\n7 dozens'
+  S4_split_int4              ok=False up= 168.69 MB edge=   2282 ms cloud=  52113 ms mem=2.69/12.92 GiB E=4592+18864 J '### \n\nClaire will eat 7 dozens of eggs in 4 weeks.'
+  C5_cache_aware_int8abs     ok=False up= 269.95 MB edge=   1660 ms cloud=  32688 ms mem=2.71/13.09 GiB E=3077+12728 J 'Claire will eat 7 dozens of eggs in 4 weeks.\n\n####'
+  C6_cache_aware_int4        ok=False up= 139.13 MB edge=   1838 ms cloud=  32926 ms mem=2.71/13.09 GiB E=3139+12925 J 'Claire will eat 7 dozens of eggs in 4 weeks.\n\n####'
+
+gsm8k_0019 | prompt tokens=94
+  S0_split_full              ok=False up= 734.01 MB edge=   2354 ms cloud=  54014 ms mem=2.69/12.90 GiB E=4768+19571 J 'speed of 3 miles per hour.\n\n#### \n3 miles per hour'
+  S3_split_int8abs           ok=False up= 367.18 MB edge=   2351 ms cloud=  53837 ms mem=2.69/12.90 GiB E=4788+19575 J ' 4 miles per hour.\n\n####\n\n\\boxed{4} miles per hour'
+  S4_split_int4              ok=True  up= 189.24 MB edge=   2350 ms cloud=  55783 ms mem=2.69/12.90 GiB E=4938+20311 J ' 1 hour = 6 miles per hour\n\n#### \n6 miles per hour'
+  C5_cache_aware_int8abs     ok=True  up= 270.88 MB edge=   1733 ms cloud=  31631 ms mem=2.71/13.14 GiB E=3070+12566 J 'ing distance at a speed of 6 miles per hour.\n\n####'
+  C6_cache_aware_int4        ok=False up= 139.61 MB edge=   1654 ms cloud=  33061 ms mem=2.71/13.14 GiB E=3208+13152 J 'hour for the entire trail.\n\n####\n\n3 miles per hour'
+
+gsm8k_0020 | prompt tokens=92
+  S0_split_full              ok=False up= 729.81 MB edge=   2352 ms cloud=  53711 ms mem=2.70/12.94 GiB E=4744+19433 J 'ters - 0.5 liters = 14.5 liters\n\n####\n\n14.5 liters'
+  S3_split_int8abs           ok=False up= 365.09 MB edge=   2346 ms cloud=  55411 ms mem=2.70/12.94 GiB E=4876+20060 J ' remaining 24 liters contain 14.7 liters of water.'
+  S4_split_int4              ok=False up= 188.16 MB edge=   2349 ms cloud=  52672 ms mem=2.70/12.94 GiB E=4652+18989 J ' water in the remaining 24 liters is 18.67 liters.'
+  C5_cache_aware_int8abs     ok=False up= 270.83 MB edge=   1894 ms cloud=  33516 ms mem=2.71/13.14 GiB E=3238+13447 J ' + 9 liters = 14 liters.\n\n#### 14 liters of water.'
+  C6_cache_aware_int4        ok=False up= 139.58 MB edge=   1648 ms cloud=  32582 ms mem=2.71/13.14 GiB E=3130+12935 J ' remaining 24 liters = 14 liters.\n\n#### 14 liters.'
+
+gsm8k_0021 | prompt tokens=75
+  S0_split_full              ok=False up= 694.16 MB edge=   2326 ms cloud=  47197 ms mem=2.70/12.93 GiB E=4153+16765 J "\\]\n\nThus, Raymond's son was born \\(\\boxed{1975}\\)."
+  S3_split_int8abs           ok=False up= 347.25 MB edge=   2320 ms cloud=  51460 ms mem=2.70/12.93 GiB E=4488+18402 J ".\n\nThus, Raymond's son was born 0 years ago.\n\n####"
+  S4_split_int4              ok=False up= 178.97 MB edge=   2317 ms cloud=  53147 ms mem=2.70/12.93 GiB E=4649+19069 J "s, Raymond's son was born \\(\\boxed{0}\\) years ago."
+  C5_cache_aware_int8abs     ok=False up= 270.41 MB edge=   1641 ms cloud=  30463 ms mem=2.71/13.10 GiB E=2909+11871 J "\n\nSo, Raymond's son was born 2 years ago.\n\n#### \n2"
+  C6_cache_aware_int4        ok=False up= 139.37 MB edge=   1638 ms cloud=  31830 ms mem=2.71/13.10 GiB E=3036+12474 J "1.\n\nTherefore, Raymond's son was born 2 years ago."
+
+gsm8k_0022 | prompt tokens=84
+  S0_split_full              ok=True  up= 713.04 MB edge=   2335 ms cloud=  52027 ms mem=2.69/12.92 GiB E=4554+18610 J 'ld on Tuesday:\n\\[ 3 + 4 + 0 = 7 \\]\n\n#### \\boxed{7}'
+  S3_split_int8abs           ok=True  up= 356.69 MB edge=   2348 ms cloud=  45943 ms mem=2.69/12.92 GiB E=4073+16270 J 'ld on Tuesday:\n\\[ 3 + 4 + 0 = 7 \\]\n\n#### \\boxed{7}'
+  S4_split_int4              ok=True  up= 183.83 MB edge=   2339 ms cloud=  50610 ms mem=2.69/12.92 GiB E=4475+18192 J 'herefore, Billy sold a total of 7 DVDs on Tuesday.'
+  C5_cache_aware_int8abs     ok=True  up= 270.64 MB edge=   1649 ms cloud=  30257 ms mem=2.71/13.12 GiB E=2940+11957 J 'ld on Tuesday:\n\\[ 3 + 4 + 0 = 7 \\]\n\n#### \\boxed{7}'
+  C6_cache_aware_int4        ok=True  up= 139.48 MB edge=   1883 ms cloud=  30311 ms mem=2.71/13.11 GiB E=2910+11951 J 'n Tuesday:\n\\[ 3 + 4 + 0 = 7 \\]\n\n#### \\text{7 DVDs}'
+
+gsm8k_0023 | prompt tokens=67
+  S0_split_full              ok=False up= 677.38 MB edge=   2304 ms cloud=  49772 ms mem=2.69/12.92 GiB E=4390+17910 J 'orter after burning from 1:00 PM to 5:00 PM.\n\n####'
+  S3_split_int8abs           ok=False up= 338.86 MB edge=   2307 ms cloud=  49920 ms mem=2.69/12.92 GiB E=4404+17955 J 'orter after burning from 1:00 PM to 5:00 PM.\n\n####'
+  S4_split_int4              ok=False up= 174.64 MB edge=   2317 ms cloud=  45511 ms mem=2.69/12.92 GiB E=4017+16133 J 'orter after burning from 1:00 PM to 5:00 PM.\n\n####'
+  C5_cache_aware_int8abs     ok=False up= 270.22 MB edge=   1635 ms cloud=  30557 ms mem=2.71/13.09 GiB E=2918+11923 J 'orter after burning from 1:00 PM to 5:00 PM.\n\n####'
+  C6_cache_aware_int4        ok=True  up= 139.27 MB edge=   1630 ms cloud=  31122 ms mem=2.71/13.09 GiB E=2958+12173 J ' after burning from 1:00 PM to 5:00 PM.\n\n#### 8 cm'
+
+gsm8k_0024 | prompt tokens=68
+  S0_split_full              ok=True  up= 679.48 MB edge=   2307 ms cloud=  51567 ms mem=2.69/12.90 GiB E=4501+18489 J ' the original price of the book was:\n\\[ \\$26.00 \\]'
+  S3_split_int8abs           ok=True  up= 339.91 MB edge=   2307 ms cloud=  51806 ms mem=2.69/12.90 GiB E=4533+18599 J '.\n\n####\nThe original price of the book was $26.00.'
+  S4_split_int4              ok=True  up= 175.18 MB edge=   2314 ms cloud=  49164 ms mem=2.69/12.90 GiB E=4286+17581 J '\n\n#### \nThe original price of the book was $26.00.'
+  C5_cache_aware_int8abs     ok=True  up= 270.24 MB edge=   1640 ms cloud=  30080 ms mem=2.71/13.09 GiB E=2885+11679 J 'he original price of the book was $26.00.\n\n#### 26'
+  C6_cache_aware_int4        ok=True  up= 139.28 MB edge=   1635 ms cloud=  31166 ms mem=2.71/13.09 GiB E=2964+12127 J 's $26.00.\n\n#### Original price of the book: $26.00'
+
+gsm8k_0025 | prompt tokens=96
+  S0_split_full              ok=True  up= 738.20 MB edge=   2355 ms cloud=  52734 ms mem=2.69/12.92 GiB E=4644+19026 J '\nTherefore, Marie ordered 2 boxes of pizza.\n#### 2'
+  S3_split_int8abs           ok=True  up= 369.28 MB edge=   2357 ms cloud=  52764 ms mem=2.69/12.92 GiB E=4630+18951 J ' boxes\n\nTherefore, Marie ordered 2 boxes of pizza.'
+  S4_split_int4              ok=True  up= 190.32 MB edge=   2356 ms cloud=  52830 ms mem=2.69/12.92 GiB E=4652+19015 J 'e, Marie ordered 2 boxes of pizza.\n\n#### \\boxed{2}'
+  C5_cache_aware_int8abs     ok=True  up= 270.93 MB edge=   1816 ms cloud=  31326 ms mem=2.71/13.14 GiB E=3018+12367 J 'e, Marie ordered 2 boxes of pizza.\n\n#### \\boxed{2}'
+  C6_cache_aware_int4        ok=True  up= 139.63 MB edge=   1752 ms cloud=  31241 ms mem=2.71/13.14 GiB E=3008+12305 J 'herefore, Marie ordered 2 boxes of pizza.\n\n####: 2'
+
+gsm8k_0026 | prompt tokens=98
+  S0_split_full              ok=False up= 742.40 MB edge=   2364 ms cloud=  52997 ms mem=2.70/12.95 GiB E=4656+19070 J ' 67 + 126 = 242\n\\]\n\n#### Mishka spent 242 dollars.'
+  S3_split_int8abs           ok=True  up= 371.38 MB edge=   2365 ms cloud=  52695 ms mem=2.70/12.95 GiB E=4646+18904 J 'g items:\n$49.50 + $67.50 + $126 = $243.\n\n####\n$243'
+  S4_split_int4              ok=True  up= 191.40 MB edge=   2365 ms cloud=  53047 ms mem=2.70/12.95 GiB E=4647+19047 J 'g items:\n$49.50 + $67.50 + $126 = $243.\n\n####\n$243'
+  C5_cache_aware_int8abs     ok=True  up= 270.98 MB edge=   1659 ms cloud=  31306 ms mem=2.72/13.15 GiB E=3005+12294 J 'lothing items:\n\\[49.50 + 67.50 + 126 = 243\\]\n\n####'
+  C6_cache_aware_int4        ok=True  up= 139.66 MB edge=   1710 ms cloud=  29622 ms mem=2.72/13.14 GiB E=2885+11584 J ' total costs:\n\\[ 49.50 + 67.50 + 126 = 243 \\]\n\n243'
+
+gsm8k_0027 | prompt tokens=88
+  S0_split_full              ok=True  up= 721.42 MB edge=   2345 ms cloud=  51800 ms mem=2.70/12.95 GiB E=4522+18572 J ']\n\nTherefore, Cynthia will spend $16 on ice cream.'
+  S3_split_int8abs           ok=False up= 360.89 MB edge=   2342 ms cloud=  53989 ms mem=2.70/12.95 GiB E=4709+19419 J 'ia will spend $16 on ice cream after 60 days. ####'
+  S4_split_int4              ok=False up= 186.00 MB edge=   2342 ms cloud=  53917 ms mem=2.70/12.95 GiB E=4741+19426 J 'will spend $16 dollars on ice cream after 60 days.'
+  C5_cache_aware_int8abs     ok=False up= 270.73 MB edge=   1645 ms cloud=  31921 ms mem=2.71/13.12 GiB E=3092+12679 J 'thia will spend $16.00 on ice cream after 60 days.'
+  C6_cache_aware_int4        ok=False up= 139.53 MB edge=   1843 ms cloud=  32426 ms mem=2.71/13.12 GiB E=3132+12912 J 'ill spend $16 in total on ice cream after 60 days.'
+
+gsm8k_0028 | prompt tokens=79
+  S0_split_full              ok=True  up= 702.55 MB edge=   2327 ms cloud=  53401 ms mem=2.70/12.93 GiB E=4676+19202 J 'ed{25}\\) miles between his first and second stops.'
+  S3_split_int8abs           ok=True  up= 351.45 MB edge=   2325 ms cloud=  53987 ms mem=2.70/12.93 GiB E=4740+19429 J '25 miles between his first and second stops.\n\n####'
+  S4_split_int4              ok=True  up= 181.13 MB edge=   2331 ms cloud=  53627 ms mem=2.70/12.93 GiB E=4715+19276 J '25 miles between his first and second stops.\n\n####'
+  C5_cache_aware_int8abs     ok=True  up= 270.51 MB edge=   1641 ms cloud=  31856 ms mem=2.71/13.11 GiB E=3059+12651 J ' between his first and second stops is \\boxed{25}.'
+  C6_cache_aware_int4        ok=True  up= 139.42 MB edge=   1650 ms cloud=  27163 ms mem=2.71/13.11 GiB E=2632+10540 J 'tween his first and second stops.\n\n#### \\boxed{25}'
+
+gsm8k_0029 | prompt tokens=98
+  S0_split_full              ok=True  up= 742.40 MB edge=   2377 ms cloud=  36763 ms mem=2.70/12.93 GiB E=3311+12843 J '.\n\nThus, the cost of the boots is \\(\\boxed{104}\\).'
+  S3_split_int8abs           ok=True  up= 371.38 MB edge=   2382 ms cloud=  36469 ms mem=2.70/12.93 GiB E=3282+12640 J 'oots is \\(\\boxed{104}\\) dollars.\n\n####\n\\boxed{104}'
+  S4_split_int4              ok=True  up= 191.40 MB edge=   2381 ms cloud=  36671 ms mem=2.70/12.93 GiB E=3324+12781 J ' 104 dollars\n\nThus, the cost of the boots is $104.'
+  C5_cache_aware_int8abs     ok=True  up= 270.98 MB edge=   1713 ms cloud=  21795 ms mem=2.72/13.14 GiB E=2134+8200 J ' the cost of the boots is \\(\\boxed{104}\\) dollars.'
+  C6_cache_aware_int4        ok=True  up= 139.66 MB edge=   1719 ms cloud=  22045 ms mem=2.72/13.14 GiB E=2145+8236 J '104}\\) dollars.\n\n#### The boots cost \\(\\boxed{104}'
+
+Exp11 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp11_llada_gsm8k_k4_t256_T0_baselines
+               variant  runs      acc  regressions  exact_vs_ref  mean_up_mb  up_reduction_vs_S0  mean_edge_ms  mean_cloud_ms  mean_edge_peak_gib  mean_cloud_peak_gib  mean_edge_energy_j  mean_cloud_energy_j
+         S0_split_full    30 0.600000            0             0  721.634099            0.000000   2355.709064   53702.863338            2.696685            12.932930         4726.145733         19317.665800
+      S3_split_int8abs    30 0.666667            1             0  360.995277            0.499753   2355.887996   53951.202060            2.696685            12.932930         4752.091833         19402.970667
+         S4_split_int4    30 0.666667            2             0  186.049331            0.742183   2356.124237   53710.011053            2.696685            12.932930         4725.272200         19304.242800
+C5_cache_aware_int8abs    30 0.633333            2             0  270.736827            0.623786   1688.760323   32139.580384            2.711157            13.123645         3088.634533         12653.029400
+   C6_cache_aware_int4    30 0.633333            2             0  139.532531            0.806107   1695.064823   32094.207952            2.711218            13.123258         3085.198433         12626.977200
+
+=== 4/6 Fast-dLLM, Dream GSM8K  (2026-11-27 08:26:52)
+{'EXP11_DATASET': 'gsm8k', 'EXP11_N_QUESTIONS': 30, 'EXP11_NEW_TOKENS': 256, 'EXP11_STEPS': 256, 'EXP11_MODEL': 'llada', 'EXP11_OUTPUT_TAG': '', 'EXP11_VARIANT_NAMES': ['S0_split_full', 'S1_split_exact_delta', 'S2_split_int8', 'C1_cache_full', 'C2_cache_aware', 'C3_cache_aware_exact', 'C4_cache_aware_int8', 'A1_adaptive_cache_aware'], 'EXP13_OUTPUT_TAG': '_baselines', 'EXP13_VARIANT_NAMES': ['F0_nocache_fixed', 'K2_dual_thr0.9', 'K4_dual_thr0.9_int8abs', 'K5_dual_thr0.9_int4'], 'EXP13_MODEL': 'dream', 'EXP13_DATASET': 'gsm8k', 'EXP13_N_QUESTIONS': 30, 'EXP13_NEW_TOKENS': 256}
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  5.77it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  5.50it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  6.13it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.60it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  6.29it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=64.1 W, cloud=285.2 W
+Exp13 | dream | gsm8k n=30 | split after layer 4 | 256 tokens, blocks of 32 | thresholds [0.9] | T=0.0 top_p=None
+warmup done
+
+gsm8k_0000 | prompt tokens=99
+  F0_nocache_fixed         ok=True  steps= 256 up= 651.43 MB edge=  2091 ms cloud= 27528 ms 'she makes 9 * $2 = $18 per day.\nThe answer is: 18.'
+  K2_dual_thr0.9           ok=True  steps=  63 up=  32.97 MB edge=   377 ms cloud=  9194 ms " per day at the farmers' market.\nThe answer is: 18"
+  K4_dual_thr0.9_int8abs   ok=True  steps=  66 up=  16.84 MB edge=   393 ms cloud=  9255 ms " per day at the farmers' market.\nThe answer is: 18"
+  K5_dual_thr0.9_int4      ok=True  steps=  79 up=   9.45 MB edge=   477 ms cloud= 11690 ms "very day at the farmers' market.\nThe answer is: 18"
+
+gsm8k_0001 | prompt tokens=60
+  F0_nocache_fixed         ok=True  steps= 256 up= 579.87 MB edge=  2022 ms cloud= 26759 ms ' the robe takes 2 + 1 = 3 bolts.\nThe answer is: 3.'
+  K2_dual_thr0.9           ok=True  steps=  50 up=  27.76 MB edge=   299 ms cloud=  6710 ms ' the robe takes 2 + 1 = 3 bolts.\nThe answer is: 3.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  46 up=  13.43 MB edge=   282 ms cloud=  6535 ms ' the robe takes 2 + 1 = 3 bolts.\nThe answer is: 3.'
+  K5_dual_thr0.9_int4      ok=True  steps=  44 up=   6.80 MB edge=   269 ms cloud=  6107 ms ' the robe takes 2 + 1 = 3 bolts.\nThe answer is: 3.'
+
+gsm8k_0002 | prompt tokens=91
+  F0_nocache_fixed         ok=False steps= 256 up= 636.75 MB edge=  2079 ms cloud= 27200 ms '95,000 - $130,000 = $65,000.\nThe answer is: 65000.'
+  K2_dual_thr0.9           ok=False steps=  50 up=  29.53 MB edge=   312 ms cloud=  6885 ms '130,000 = $65,000.\n#### 65000\nThe answer is: 65000'
+  K4_dual_thr0.9_int8abs   ok=False steps=  46 up=  14.32 MB edge=   277 ms cloud=  6700 ms '130,000 = $65,000.\n#### 65000\nThe answer is: 65000'
+  K5_dual_thr0.9_int4      ok=False steps=  51 up=   7.67 MB edge=   313 ms cloud=  7503 ms '130,000 = $65,000.\n#### 65000\nThe answer is: 65000'
+
+gsm8k_0003 | prompt tokens=69
+  F0_nocache_fixed         ok=True  steps= 256 up= 596.38 MB edge=  2037 ms cloud= 26752 ms '0 = 540 meters a week.\n#### 540\nThe answer is: 540'
+  K2_dual_thr0.9           ok=True  steps=  42 up=  26.44 MB edge=   256 ms cloud=  6517 ms '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  42 up=  13.23 MB edge=   277 ms cloud=  5731 ms '= 540 meters per week.\n#### 540\nThe answer is: 540'
+  K5_dual_thr0.9_int4      ok=True  steps=  42 up=   6.82 MB edge=   262 ms cloud=  5864 ms '= 540 meters per week.\n#### 540\nThe answer is: 540'
+
+gsm8k_0004 | prompt tokens=145
+  F0_nocache_fixed         ok=True  steps= 256 up= 735.84 MB edge=  2874 ms cloud= 38084 ms 'd in the final meal of the day.\nThe answer is: 20.'
+  K2_dual_thr0.9           ok=True  steps=  72 up=  37.68 MB edge=   448 ms cloud=  9990 ms 'ed in the final meal of the day.\nThe answer is: 20'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  70 up=  18.62 MB edge=   442 ms cloud= 10951 ms 'ed in the final meal of the day.\nThe answer is: 20'
+  K5_dual_thr0.9_int4      ok=True  steps=  96 up=  11.13 MB edge=   581 ms cloud=  9812 ms 'ed in the final meal of the day.\nThe answer is: 20'
+
+gsm8k_0005 | prompt tokens=90
+  F0_nocache_fixed         ok=False steps= 256 up= 634.92 MB edge=  2039 ms cloud= 13472 ms ' is 60% of $5, which is $5 * 0.6 = $3.\nThe cost of'
+  K2_dual_thr0.9           ok=True  steps= 112 up=  43.70 MB edge=   630 ms cloud=  3622 ms 's to pay $64 for the 16 glasses.\nThe answer is: 64'
+  K4_dual_thr0.9_int8abs   ok=True  steps= 109 up=  21.52 MB edge=   620 ms cloud=  3552 ms 's to pay $64 for the 16 glasses.\nThe answer is: 64'
+  K5_dual_thr0.9_int4      ok=True  steps=  91 up=  10.03 MB edge=   511 ms cloud=  2958 ms 'eeds to pay $64 for the glasses.\nThe answer is: 64'
+
+gsm8k_0006 | prompt tokens=76
+  F0_nocache_fixed         ok=True  steps= 256 up= 609.23 MB edge=  2013 ms cloud= 13240 ms 'have 20 + 80 + 160 = 260 sheep.\nThe answer is: 260'
+  K2_dual_thr0.9           ok=True  steps=  49 up=  28.44 MB edge=   324 ms cloud=  1819 ms ' 80 + 160 = 260 sheep together.\nThe answer is: 260'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  49 up=  14.23 MB edge=   286 ms cloud=  1664 ms ' 80 + 160 = 260 sheep together.\nThe answer is: 260'
+  K5_dual_thr0.9_int4      ok=True  steps=  51 up=   7.45 MB edge=   299 ms cloud=  1740 ms ' 80 + 160 = 260 sheep together.\nThe answer is: 260'
+
+gsm8k_0007 | prompt tokens=104
+  F0_nocache_fixed         ok=False steps= 256 up= 660.61 MB edge=  2072 ms cloud= 13637 ms ' minutes to download the file.\nThe answer is: 120.'
+  K2_dual_thr0.9           ok=False steps= 142 up=  51.38 MB edge=   911 ms cloud=  5087 ms '0 minutes to download the file.\nThe answer is: 120'
+  K4_dual_thr0.9_int8abs   ok=False steps= 124 up=  23.64 MB edge=   755 ms cloud=  4264 ms 'tes + 20 minutes = 120 minutes.\nThe answer is: 120'
+  K5_dual_thr0.9_int4      ok=False steps=  94 up=  10.41 MB edge=   541 ms cloud=  3103 ms 'is 40 + 20 + 40 = 100 minutes.\nThe answer is: 100.'
+
+gsm8k_0008 | prompt tokens=138
+  F0_nocache_fixed         ok=True  steps= 256 up= 723.00 MB edge=  2835 ms cloud= 18474 ms ' the end of the 4 hours.\n#### 45\nThe answer is: 45'
+  K2_dual_thr0.9           ok=True  steps=  95 up=  42.55 MB edge=   564 ms cloud=  3265 ms ' 180 - 135 = 45 miles from home.\nThe answer is: 45'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  93 up=  21.06 MB edge=   582 ms cloud=  3216 ms ' 180 - 135 = 45 miles from home.\nThe answer is: 45'
+  K5_dual_thr0.9_int4      ok=True  steps=  91 up=  10.73 MB edge=   539 ms cloud=  3142 ms ' 180 - 135 = 45 miles from home.\nThe answer is: 45'
+
+gsm8k_0009 | prompt tokens=94
+  F0_nocache_fixed         ok=True  steps= 256 up= 642.26 MB edge=  2032 ms cloud= 13449 ms 'this week is $400 + $60 = $460.\nThe answer is: 460'
+  K2_dual_thr0.9           ok=True  steps=  85 up=  37.73 MB edge=   480 ms cloud=  2779 ms 'this week is $400 + $60 = $460.\nThe answer is: 460'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  63 up=  16.35 MB edge=   368 ms cloud=  2101 ms ' the week is $400 + $60 = $460.\nThe answer is: 460'
+  K5_dual_thr0.9_int4      ok=True  steps=  82 up=   9.55 MB edge=   479 ms cloud=  2728 ms ' the week is $400 + $60 = $460.\nThe answer is: 460'
+
+gsm8k_0010 | prompt tokens=94
+  F0_nocache_fixed         ok=True  steps= 256 up= 642.26 MB edge=  2036 ms cloud= 13456 ms '0 + 180 + 126 = 366 downloads.\nThe answer is: 366.'
+  K2_dual_thr0.9           ok=True  steps=  59 up=  31.77 MB edge=   348 ms cloud=  2011 ms '0 + 180 + 126 = 366 downloads.\nThe answer is: 366.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  61 up=  16.12 MB edge=   358 ms cloud=  2067 ms '0 + 180 + 126 = 366 downloads.\nThe answer is: 366.'
+  K5_dual_thr0.9_int4      ok=True  steps=  62 up=   8.37 MB edge=   360 ms cloud=  2095 ms '0 + 180 + 126 = 366 downloads.\nThe answer is: 366.'
+
+gsm8k_0011 | prompt tokens=99
+  F0_nocache_fixed         ok=True  steps= 256 up= 651.43 MB edge=  2058 ms cloud= 13532 ms ' is $204 + $160 + $330 = $694.\nThe answer is: 694.'
+  K2_dual_thr0.9           ok=True  steps=  35 up=  26.55 MB edge=   219 ms cloud=  1263 ms 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  35 up=  13.28 MB edge=   212 ms cloud=  1249 ms 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+  K5_dual_thr0.9_int4      ok=True  steps=  35 up=   6.85 MB edge=   211 ms cloud=  1243 ms 't is $204 + $160 + $330 = $694.\nThe answer is: 694'
+
+gsm8k_0012 | prompt tokens=101
+  F0_nocache_fixed         ok=False steps= 256 up= 655.10 MB edge=  2052 ms cloud= 13583 ms 'earning money on the lemon tree.\nThe answer is: 12'
+  K2_dual_thr0.9           ok=False steps= 106 up=  42.95 MB edge=   601 ms cloud=  3482 ms 'earning money on the lemon tree.\nThe answer is: 12'
+  K4_dual_thr0.9_int8abs   ok=False steps= 109 up=  21.83 MB edge=   619 ms cloud=  3577 ms 'earning money on the lemon tree.\nThe answer is: 12'
+  K5_dual_thr0.9_int4      ok=False steps= 120 up=  11.90 MB edge=   669 ms cloud=  3878 ms 'earning money on the lemon tree.\nThe answer is: 12'
+
+gsm8k_0013 | prompt tokens=92
+  F0_nocache_fixed         ok=True  steps= 256 up= 638.59 MB edge=  2042 ms cloud= 13446 ms 'started with 18 vacuum cleaners.\nThe answer is: 18'
+  K2_dual_thr0.9           ok=True  steps= 106 up=  42.44 MB edge=   647 ms cloud=  3697 ms 'started with 18 vacuum cleaners.\nThe answer is: 18'
+  K4_dual_thr0.9_int8abs   ok=False steps= 111 up=  21.80 MB edge=   637 ms cloud=  3638 ms ' 3 = 21 vacuum cleaners.\n#### 21\nThe answer is: 21'
+  K5_dual_thr0.9_int4      ok=False steps= 120 up=  11.77 MB edge=   730 ms cloud=  4144 ms 'e started with 3 vacuum cleaners.\nThe answer is: 3'
+
+gsm8k_0014 | prompt tokens=86
+  F0_nocache_fixed         ok=True  steps= 256 up= 627.58 MB edge=  2024 ms cloud= 13336 ms 'dents enrolled in hip-hop dance.\nThe answer is: 60'
+  K2_dual_thr0.9           ok=True  steps= 106 up=  42.09 MB edge=   602 ms cloud=  3456 ms 'dents enrolled in hip-hop dance.\nThe answer is: 60'
+  K4_dual_thr0.9_int8abs   ok=True  steps= 107 up=  21.17 MB edge=   597 ms cloud=  3447 ms 'ut of 20 is (12/20) * 100 = 60%.\nThe answer is: 60'
+  K5_dual_thr0.9_int4      ok=True  steps=  98 up=  10.38 MB edge=   546 ms cloud=  3167 ms ' 20 is (12 / 20) * 100 = 60%.\nThe final answer: 60'
+
+gsm8k_0015 | prompt tokens=128
+  F0_nocache_fixed         ok=True  steps= 256 up= 704.65 MB edge=  2111 ms cloud= 13932 ms 'rket, the profit would be $125.\nThe answer is: 125'
+  K2_dual_thr0.9           ok=False steps= 129 up=  49.78 MB edge=   724 ms cloud=  4174 ms 'purchase the electronic gadgets.\nThe answer is: 96'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  87 up=  20.08 MB edge=   506 ms cloud=  2926 ms 'choose to purchase the jewelry.\nThe answer is: 125'
+  K5_dual_thr0.9_int4      ok=False steps= 144 up=  13.72 MB edge=   911 ms cloud=  5059 ms 'chant will make a profit of $96.\nThe answer is: 96'
+
+gsm8k_0016 | prompt tokens=87
+  F0_nocache_fixed         ok=False steps= 256 up= 629.41 MB edge=  2015 ms cloud= 13332 ms '160 + 300 = 460 miles.\n#### 460\nThe answer is: 460'
+  K2_dual_thr0.9           ok=True  steps=  52 up=  29.76 MB edge=   297 ms cloud=  1748 ms 'ays is 80 + 150 = 230 miles.\nThe final answer: 230'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  53 up=  15.00 MB edge=   309 ms cloud=  1807 ms 'ays is 80 + 150 = 230 miles.\nThe final answer: 230'
+  K5_dual_thr0.9_int4      ok=True  steps=  55 up=   7.85 MB edge=   317 ms cloud=  1842 ms 'n in the two days is 230 miles.\nThe answer is: 230'
+
+gsm8k_0017 | prompt tokens=92
+  F0_nocache_fixed         ok=True  steps= 256 up= 638.59 MB edge=  2042 ms cloud= 13473 ms '0 * 50 = $57500.\n#### 57,500\nThe answer is: 57,500'
+  K2_dual_thr0.9           ok=True  steps=  67 up=  33.49 MB edge=   381 ms cloud=  2230 ms 'lary is $1150 * 50 = $57,500.\nThe answer is: 57500'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  67 up=  16.75 MB edge=   380 ms cloud=  2234 ms 'lary is $1150 * 50 = $57,500.\nThe answer is: 57500'
+  K5_dual_thr0.9_int4      ok=True  steps=  67 up=   8.63 MB edge=   380 ms cloud=  2219 ms 'alary is $1150 * 50 = $57500.\nThe answer is: 57500'
+
+gsm8k_0018 | prompt tokens=63
+  F0_nocache_fixed         ok=True  steps= 256 up= 585.37 MB edge=  1978 ms cloud= 13065 ms 'l eat 84 / 12 = 7 dozens of eggs.\nThe answer is: 7'
+  K2_dual_thr0.9           ok=True  steps=  69 up=  32.29 MB edge=   387 ms cloud=  2255 ms 'l eat 84 / 12 = 7 dozens of eggs.\nThe answer is: 7'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  69 up=  16.15 MB edge=   391 ms cloud=  2278 ms 'l eat 84 / 12 = 7 dozens of eggs.\nThe answer is: 7'
+  K5_dual_thr0.9_int4      ok=True  steps=  69 up=   8.32 MB edge=   384 ms cloud=  2249 ms ' eat 84 / 12 = 7 dozens of eggs.\nThe answer is: 7.'
+
+gsm8k_0019 | prompt tokens=99
+  F0_nocache_fixed         ok=True  steps= 256 up= 651.43 MB edge=  2042 ms cloud= 13575 ms 'peed of 6 / 1 = 6 miles per hour.\nThe answer is: 6'
+  K2_dual_thr0.9           ok=True  steps=  77 up=  36.19 MB edge=   439 ms cloud=  2551 ms ' of 6 / 1 = 6 miles per hour.\nThe final answer: 6.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  75 up=  17.87 MB edge=   425 ms cloud=  2492 ms 'peed of 6 / 1 = 6 miles per hour.\nThe answer is: 6'
+  K5_dual_thr0.9_int4      ok=True  steps=  90 up=  10.10 MB edge=   504 ms cloud=  2950 ms 'peed of 6 / 1 = 6 miles per hour.\nThe answer is: 6'
+
+gsm8k_0020 | prompt tokens=97
+  F0_nocache_fixed         ok=True  steps= 256 up= 647.76 MB edge=  2053 ms cloud= 13555 ms 'emaining 24 liters is 15 liters.\nThe answer is: 15'
+  K2_dual_thr0.9           ok=False steps= 101 up=  41.58 MB edge=   562 ms cloud=  3266 ms 'ng 24 liters is 14.67 liters.\nThe answer is: 14.67'
+  K4_dual_thr0.9_int8abs   ok=False steps= 102 up=  20.92 MB edge=   572 ms cloud=  3324 ms 'ng 24 liters is 14.67 liters.\nThe answer is: 14.67'
+  K5_dual_thr0.9_int4      ok=False steps=  97 up=  10.48 MB edge=   591 ms cloud=  3369 ms 'ntains 14.67 liters of water.\nThe answer is: 14.67'
+
+gsm8k_0021 | prompt tokens=80
+  F0_nocache_fixed         ok=False steps= 256 up= 616.57 MB edge=  2009 ms cloud= 13278 ms ' was born 25 - 23 = 2 years ago.\nThe answer is: 2.'
+  K2_dual_thr0.9           ok=False steps=  52 up=  29.36 MB edge=   308 ms cloud=  1781 ms 'n was born 25 - 23 = 2 years ago.\nThe answer is: 2'
+  K4_dual_thr0.9_int8abs   ok=False steps=  52 up=  14.69 MB edge=   306 ms cloud=  1770 ms 'n was born 25 - 23 = 2 years ago.\nThe answer is: 2'
+  K5_dual_thr0.9_int4      ok=False steps=  49 up=   7.39 MB edge=   288 ms cloud=  1683 ms "ymond's son was born 2 years ago.\nThe answer is: 2"
+
+gsm8k_0022 | prompt tokens=89
+  F0_nocache_fixed         ok=True  steps= 256 up= 633.08 MB edge=  2035 ms cloud= 13423 ms 'lly sells 3 + 4 + 0 = 7 DVDs.\nThe final answer: 7.'
+  K2_dual_thr0.9           ok=True  steps=  47 up=  28.73 MB edge=   275 ms cloud=  1605 ms '4 + 0 = 7 DVDs on Tuesday.\n#### 7\nThe answer is: 7'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  48 up=  14.49 MB edge=   281 ms cloud=  1650 ms '4 + 0 = 7 DVDs on Tuesday.\n#### 7\nThe answer is: 7'
+  K5_dual_thr0.9_int4      ok=True  steps=  50 up=   7.58 MB edge=   286 ms cloud=  1686 ms 'ls 3 + 4 + 0 = 7 DVDs on Tuesday.\nThe answer is: 7'
+
+gsm8k_0023 | prompt tokens=74
+  F0_nocache_fixed         ok=True  steps= 256 up= 605.56 MB edge=  2003 ms cloud= 13228 ms ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  K2_dual_thr0.9           ok=True  steps=  51 up=  28.79 MB edge=   302 ms cloud=  1759 ms ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  50 up=  14.29 MB edge=   291 ms cloud=  1698 ms ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+  K5_dual_thr0.9_int4      ok=True  steps=  50 up=   7.36 MB edge=   293 ms cloud=  1705 ms ' burning from 1:00 PM to 5:00 PM.\nThe answer is: 8'
+
+gsm8k_0024 | prompt tokens=73
+  F0_nocache_fixed         ok=True  steps= 256 up= 603.72 MB edge=  2006 ms cloud= 13217 ms ' 0.75: x = 19.50 / 0.75.\nx = 26.\nThe answer is: 26'
+  K2_dual_thr0.9           ok=True  steps=  85 up=  36.53 MB edge=   481 ms cloud=  2796 ms 'iginal price of the book is $26.\nThe answer is: 26'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  85 up=  18.28 MB edge=   474 ms cloud=  2761 ms 'iginal price of the book is $26.\nThe answer is: 26'
+  K5_dual_thr0.9_int4      ok=True  steps=  76 up=   8.89 MB edge=   434 ms cloud=  2499 ms 'ginal price of the book was $26.\nThe answer is: 26'
+
+gsm8k_0025 | prompt tokens=102
+  F0_nocache_fixed         ok=True  steps= 256 up= 656.94 MB edge=  2060 ms cloud= 13619 ms ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  K2_dual_thr0.9           ok=True  steps=  70 up=  34.75 MB edge=   403 ms cloud=  2339 ms ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  71 up=  17.50 MB edge=   403 ms cloud=  2368 ms ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+  K5_dual_thr0.9_int4      ok=True  steps=  72 up=   9.08 MB edge=   404 ms cloud=  2365 ms ', Marie ordered 2 boxes of pizza.\nThe answer is: 2'
+
+gsm8k_0026 | prompt tokens=103
+  F0_nocache_fixed         ok=True  steps= 256 up= 658.77 MB edge=  2050 ms cloud= 13611 ms '$49.50 + $67.50 + $126 = $243.\nThe answer is: 243.'
+  K2_dual_thr0.9           ok=True  steps=  45 up=  29.07 MB edge=   271 ms cloud=  1586 ms '$243 on all the clothing items.\nThe answer is: 243'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  46 up=  14.66 MB edge=   272 ms cloud=  1585 ms '$243 on all the clothing items.\nThe answer is: 243'
+  K5_dual_thr0.9_int4      ok=True  steps=  47 up=   7.61 MB edge=   279 ms cloud=  1637 ms '$243 on all the clothing items.\nThe answer is: 243'
+
+gsm8k_0027 | prompt tokens=93
+  F0_nocache_fixed         ok=True  steps= 256 up= 640.42 MB edge=  2035 ms cloud= 13473 ms ' will spend $16.00 on ice cream.\nThe answer is: 16'
+  K2_dual_thr0.9           ok=True  steps=  58 up=  31.48 MB edge=   340 ms cloud=  1976 ms '4 * $4.00 = $16.00 on ice cream.\nThe answer is: 16'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  57 up=  15.64 MB edge=   331 ms cloud=  1924 ms '4 * $4.00 = $16.00 on ice cream.\nThe answer is: 16'
+  K5_dual_thr0.9_int4      ok=True  steps=  55 up=   7.94 MB edge=   321 ms cloud=  1868 ms '4 * $4.00 = $16.00 on ice cream.\nThe answer is: 16'
+
+gsm8k_0028 | prompt tokens=84
+  F0_nocache_fixed         ok=True  steps= 256 up= 623.91 MB edge=  2030 ms cloud= 13352 ms 'ond stops is 45 - 20 = 25 miles.\nThe answer is: 25'
+  K2_dual_thr0.9           ok=True  steps=  63 up=  32.11 MB edge=   359 ms cloud=  2094 ms 'ween his first and second stops.\nThe answer is: 25'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  60 up=  15.72 MB edge=   393 ms cloud=  2240 ms 'ween his first and second stops.\nThe answer is: 25'
+  K5_dual_thr0.9_int4      ok=True  steps=  60 up=   8.10 MB edge=   342 ms cloud=  1997 ms 'ween his first and second stops.\nThe answer is: 25'
+
+gsm8k_0029 | prompt tokens=103
+  F0_nocache_fixed         ok=True  steps= 256 up= 658.77 MB edge=  2042 ms cloud= 13608 ms ' of the boots is $104.\n#### 104\nThe answer is: 104'
+  K2_dual_thr0.9           ok=True  steps=  96 up=  40.77 MB edge=   547 ms cloud=  3146 ms 'Therefore, the boots cost $104.\nThe answer is: 104'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  93 up=  20.05 MB edge=   524 ms cloud=  3039 ms 'Therefore, the boots cost $104.\nThe answer is: 104'
+  K5_dual_thr0.9_int4      ok=True  steps=  96 up=  10.51 MB edge=   544 ms cloud=  3178 ms 'Therefore, the boots cost $104.\nThe answer is: 104'
+
+Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_dream_gsm8k_k4_t256_b32_baselines
+               variant  runs      acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms
+      F0_nocache_fixed    30 0.800000            0             0        1.0  256.000000  641.339392             0.000000   2093.973567   16256.266927
+        K2_dual_thr0.9    30 0.800000            2             2        1.0   74.466667   35.288778             0.945118    436.441744    3502.711519
+K4_dual_thr0.9_int8abs    30 0.800000            2             2        1.0   71.533333   17.318178             0.973043    418.743164    3401.372840
+   K5_dual_thr0.9_int4    30 0.766667            3             2        1.0   74.433333    9.096801             0.985868    435.511061    3515.979940
+
+Emulated split latency (s), RTT 20 ms, edge 3x slower:
+bandwidth_mbps            1       5      10     25     50    100   1000
+variant                                                                
+F0_nocache_fixed        5158.8  1054.2  541.2  233.3  130.7  79.4  33.2
+K2_dual_thr0.9           288.7    62.9   34.6   17.7   12.1   9.2   6.7
+K4_dual_thr0.9_int8abs   144.8    33.9   20.1   11.7    9.0   7.6   6.3
+K5_dual_thr0.9_int4       79.2    21.0   13.7    9.3    7.9   7.2   6.5
+
+Cloud-only with the same cache and decoding (s):
+variant
+F0_nocache_fixed          18.81
+K2_dual_thr0.9             4.06
+K4_dual_thr0.9_int8abs     3.94
+K5_dual_thr0.9_int4        4.08
+
+=== 5/6 Fast-dLLM, Dream long prompts  (2026-11-27 08:43:24)
+{'EXP11_DATASET': 'gsm8k', 'EXP11_N_QUESTIONS': 30, 'EXP11_NEW_TOKENS': 256, 'EXP11_STEPS': 256, 'EXP11_MODEL': 'llada', 'EXP11_OUTPUT_TAG': '', 'EXP11_VARIANT_NAMES': ['S0_split_full', 'S1_split_exact_delta', 'S2_split_int8', 'C1_cache_full', 'C2_cache_aware', 'C3_cache_aware_exact', 'C4_cache_aware_int8', 'A1_adaptive_cache_aware'], 'EXP13_OUTPUT_TAG': '_baselines', 'EXP13_VARIANT_NAMES': ['F0_nocache_fixed', 'K2_dual_thr0.9', 'K4_dual_thr0.9_int8abs', 'K5_dual_thr0.9_int4'], 'EXP13_MODEL': 'dream', 'EXP13_DATASET': 'authored', 'EXP13_N_QUESTIONS': 12, 'EXP13_NEW_TOKENS': 128}
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  8.19it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.58it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.82it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.85it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.95it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=64.8 W, cloud=81.3 W
+Exp13 | dream | authored n=12 | split after layer 4 | 128 tokens, blocks of 32 | thresholds [0.9] | T=0.0 top_p=None
+warmup done
+
+library_factual | prompt tokens=849
+  F0_nocache_fixed         ok=True  steps= 128 up= 896.40 MB edge=  2592 ms cloud= 17396 ms 'Mara Chen'
+  K2_dual_thr0.9           ok=True  steps=   8 up=  28.93 MB edge=   103 ms cloud=   664 ms 'Mara Chen'
+  K4_dual_thr0.9_int8abs   ok=True  steps=   8 up=  14.47 MB edge=   102 ms cloud=   663 ms 'Mara Chen'
+  K5_dual_thr0.9_int4      ok=True  steps=   8 up=   7.46 MB edge=   102 ms cloud=   666 ms 'Mara Chen'
+
+library_math | prompt tokens=864
+  F0_nocache_fixed         ok=True  steps= 128 up= 910.17 MB edge=  2578 ms cloud= 17556 ms 'klog after six days are 1,320 - 840 = 480 records.'
+  K2_dual_thr0.9           ok=True  steps=  72 up=  44.04 MB edge=   448 ms cloud=  2649 ms 'klog of 1,320 records gives 480 records remaining.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  58 up=  20.43 MB edge=   367 ms cloud=  2189 ms ' the remaining records: 1,320 - 840 = 480 records.'
+  K5_dual_thr0.9_int4      ok=True  steps=  77 up=  11.65 MB edge=   478 ms cloud=  2810 ms 'ecords remaining in the ordinary scanning backlog.'
+
+library_instruction | prompt tokens=862
+  F0_nocache_fixed         ok=True  steps= 128 up= 908.33 MB edge=  2575 ms cloud= 17586 ms 'ying document. Report any uncertain content found.'
+  K2_dual_thr0.9           ok=True  steps=  79 up=  45.59 MB edge=   490 ms cloud=  2861 ms " uncertain cases for the records officer's review."
+  K4_dual_thr0.9_int8abs   ok=True  steps=  71 up=  21.89 MB edge=   442 ms cloud=  2603 ms 'uncertain cases to the records officer for review.'
+  K5_dual_thr0.9_int4      ok=True  steps=  85 up=  12.11 MB edge=   516 ms cloud=  3027 ms 'd escalate uncertain cases to the records officer.'
+
+sensors_factual | prompt tokens=726
+  F0_nocache_fixed         ok=True  steps= 128 up= 783.55 MB edge=  2307 ms cloud= 15755 ms 'Every 14 days'
+  K2_dual_thr0.9           ok=True  steps=  10 up=  25.86 MB edge=   106 ms cloud=   675 ms 'duled field inspection is performed every 14 days.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  10 up=  12.94 MB edge=   105 ms cloud=   673 ms 'duled field inspection is performed every 14 days.'
+  K5_dual_thr0.9_int4      ok=True  steps=  10 up=   6.67 MB edge=   105 ms cloud=   675 ms 'duled field inspection is performed every 14 days.'
+
+sensors_math | prompt tokens=731
+  F0_nocache_fixed         ok=True  steps= 128 up= 788.14 MB edge=  2314 ms cloud= 15723 ms 'a total of 1200 original readings over five hours.'
+  K2_dual_thr0.9           ok=True  steps=  83 up=  42.75 MB edge=   496 ms cloud=  2920 ms 've sensors transmit 1200 readings over five hours.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  85 up=  21.62 MB edge=   540 ms cloud=  3006 ms 's:\n30 readings/sensor * 40 sensors = 1200 readings'
+  K5_dual_thr0.9_int4      ok=True  steps=  82 up=  10.96 MB edge=   496 ms cloud=  2902 ms '/active sensor * 40 active sensors = 1200 readings'
+
+sensors_instruction | prompt tokens=736
+  F0_nocache_fixed         ok=True  steps= 128 up= 792.73 MB edge=  2315 ms cloud= 15690 ms "vel when safe to collect, and the reporter's name."
+  K2_dual_thr0.9           ok=True  steps=  39 up=  32.80 MB edge=   265 ms cloud=  1579 ms "vel when safe to collect, and the reporter's name."
+  K4_dual_thr0.9_int8abs   ok=True  steps=  51 up=  17.79 MB edge=   331 ms cloud=  1952 ms "vel when safe to collect, and the reporter's name."
+  K5_dual_thr0.9_int4      ok=True  steps=  51 up=   9.17 MB edge=   325 ms cloud=  1931 ms "vel when safe to collect, and the reporter's name."
+
+clinic_factual | prompt tokens=666
+  F0_nocache_fixed         ok=True  steps= 128 up= 728.50 MB edge=  2230 ms cloud= 15176 ms '140'
+  K2_dual_thr0.9           ok=True  steps=   8 up=  23.68 MB edge=    92 ms cloud=   596 ms '140'
+  K4_dual_thr0.9_int8abs   ok=True  steps=   8 up=  11.85 MB edge=    93 ms cloud=   597 ms '140'
+  K5_dual_thr0.9_int4      ok=True  steps=   8 up=   6.11 MB edge=    94 ms cloud=   601 ms '140'
+
+clinic_math | prompt tokens=673
+  F0_nocache_fixed         ok=True  steps= 128 up= 734.92 MB edge=  2236 ms cloud= 15234 ms 'ing 360 - 40 = 320 doses for patient appointments.'
+  K2_dual_thr0.9           ok=True  steps=  43 up=  31.91 MB edge=   286 ms cloud=  1689 ms 'ing 360 - 40 = 320 doses for patient appointments.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  46 up=  16.31 MB edge=   294 ms cloud=  1754 ms 'ing 360 - 40 = 320 doses for patient appointments.'
+  K5_dual_thr0.9_int4      ok=True  steps=  50 up=   8.64 MB edge=   323 ms cloud=  1902 ms 'for patient appointments are 360 - 40 = 320 doses.'
+
+clinic_instruction | prompt tokens=671
+  F0_nocache_fixed         ok=True  steps= 128 up= 733.09 MB edge=  2237 ms cloud= 15215 ms 'ritize a particular lot following a safety notice.'
+  K2_dual_thr0.9           ok=True  steps=  60 up=  35.75 MB edge=   368 ms cloud=  2188 ms 'es to ensure they are within the acceptable range.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  61 up=  18.00 MB edge=   386 ms cloud=  2283 ms ' received supplies to ensure they are still valid.'
+  K5_dual_thr0.9_int4      ok=True  steps=  61 up=   9.28 MB edge=   379 ms cloud=  2244 ms ' received supplies to ensure they are still valid.'
+
+transit_factual | prompt tokens=678
+  F0_nocache_fixed         ok=True  steps= 128 up= 739.51 MB edge=  2238 ms cloud= 15257 ms '23 November 2026'
+  K2_dual_thr0.9           ok=True  steps=  11 up=  24.72 MB edge=   108 ms cloud=   690 ms 'The rider feedback deadline is 23 November 2026.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  11 up=  12.36 MB edge=   109 ms cloud=   692 ms 'The rider feedback deadline is 23 November 2026.'
+  K5_dual_thr0.9_int4      ok=True  steps=  11 up=   6.37 MB edge=   108 ms cloud=   689 ms 'The rider feedback deadline is 23 November 2026.'
+
+transit_math | prompt tokens=687
+  F0_nocache_fixed         ok=False steps= 128 up= 747.77 MB edge=  2245 ms cloud= 15332 ms 'erefore, each bus operates 5 * 18 = 90 kilometres.'
+  K2_dual_thr0.9           ok=True  steps=  51 up=  34.15 MB edge=   322 ms cloud=  1940 ms 'tance operated by all seven buses is 7 * 90 = 630.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  47 up=  16.63 MB edge=   298 ms cloud=  1784 ms 'tance operated by all seven buses is 7 * 90 = 630.'
+  K5_dual_thr0.9_int4      ok=False steps=  54 up=   8.98 MB edge=   341 ms cloud=  2002 ms 'erefore, each bus operates 5 * 18 = 90 kilometres.'
+
+transit_instruction | prompt tokens=695
+  F0_nocache_fixed         ok=True  steps= 128 up= 755.11 MB edge=  2250 ms cloud= 15404 ms 'rt contact information] during service-desk hours.'
+  K2_dual_thr0.9           ok=True  steps=  72 up=  39.20 MB edge=   491 ms cloud=  2818 ms 'he latest information about boarding arrangements.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  87 up=  21.33 MB edge=   523 ms cloud=  3036 ms 'have questions about your trip or need assistance.'
+  K5_dual_thr0.9_int4      ok=True  steps=  99 up=  11.70 MB edge=   594 ms cloud=  3468 ms 'e. Please call 555-1234 or visit the civic centre.'
+
+Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_dream_authored_k4_t128_b32_baselines
+               variant  runs      acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms
+      F0_nocache_fixed    12 0.916667            0             0        1.0  128.000000  793.184256             0.000000   2343.134150   15943.459730
+        K2_dual_thr0.9    12 1.000000            0             1        1.0   44.666667   34.115616             0.957068    297.898400    1772.401144
+K4_dual_thr0.9_int8abs    12 1.000000            0             1        1.0   45.250000   17.134632             0.978393    299.126544    1769.464432
+   K5_dual_thr0.9_int4    12 0.916667            0             0        1.0   49.666667    9.091723             0.988553    321.855474    1909.870118
+
+Emulated split latency (s), RTT 20 ms, edge 3x slower:
+bandwidth_mbps            1       5      10     25     50    100   1000
+variant                                                                
+F0_nocache_fixed        6371.2  1294.8  660.3  279.6  152.7  89.2  32.1
+K2_dual_thr0.9           276.5    58.2   30.9   14.5    9.0   6.3   3.9
+K4_dual_thr0.9_int8abs   140.7    31.0   17.3    9.1    6.4   5.0   3.7
+K5_dual_thr0.9_int4       76.7    18.5   11.2    6.8    5.4   4.6   4.0
+
+Cloud-only with the same cache and decoding (s):
+variant
+F0_nocache_fixed          18.52
+K2_dual_thr0.9             2.12
+K4_dual_thr0.9_int8abs     2.12
+K5_dual_thr0.9_int4        2.28
+
+=== 6/6 Fast-dLLM, LLaDA GSM8K  (2026-11-27 08:49:03)
+{'EXP11_DATASET': 'gsm8k', 'EXP11_N_QUESTIONS': 30, 'EXP11_NEW_TOKENS': 256, 'EXP11_STEPS': 256, 'EXP11_MODEL': 'llada', 'EXP11_OUTPUT_TAG': '', 'EXP11_VARIANT_NAMES': ['S0_split_full', 'S1_split_exact_delta', 'S2_split_int8', 'C1_cache_full', 'C2_cache_aware', 'C3_cache_aware_exact', 'C4_cache_aware_int8', 'A1_adaptive_cache_aware'], 'EXP13_OUTPUT_TAG': '_baselines', 'EXP13_VARIANT_NAMES': ['F0_nocache_fixed', 'K2_dual_thr0.9', 'K4_dual_thr0.9_int8abs', 'K5_dual_thr0.9_int4'], 'EXP13_MODEL': 'llada', 'EXP13_DATASET': 'gsm8k', 'EXP13_N_QUESTIONS': 30, 'EXP13_NEW_TOKENS': 256}
+Loading checkpoint shards:   0%|          | 0/6 [00:00<?, ?it/s]Loading checkpoint shards:  17%|█▋        | 1/6 [00:00<00:00,  6.33it/s]Loading checkpoint shards:  33%|███▎      | 2/6 [00:00<00:00,  6.03it/s]Loading checkpoint shards:  50%|█████     | 3/6 [00:00<00:00,  5.91it/s]Loading checkpoint shards:  67%|██████▋   | 4/6 [00:00<00:00,  6.08it/s]Loading checkpoint shards:  83%|████████▎ | 5/6 [00:00<00:00,  6.30it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:00<00:00,  6.48it/s]Loading checkpoint shards: 100%|██████████| 6/6 [00:00<00:00,  6.29it/s]
+idle power: edge=65.1 W, cloud=83.1 W
+Exp13 | llada | gsm8k n=30 | split after layer 4 | 256 tokens, blocks of 32 | thresholds [0.9] | T=0.0 top_p=None
+warmup done
+
+gsm8k_0000 | prompt tokens=92
+  F0_nocache_fixed         ok=True  steps= 256 up= 729.81 MB edge=  2392 ms cloud= 17626 ms "#### Janet makes $18 daily at the farmers' market."
+  K2_dual_thr0.9           ok=True  steps= 102 up=  47.45 MB edge=   633 ms cloud=  4373 ms "et makes **$18** every day at the farmers' market."
+  K4_dual_thr0.9_int8abs   ok=True  steps= 103 up=  23.87 MB edge=   649 ms cloud=  4461 ms "et makes **$18** every day at the farmers' market."
+  K5_dual_thr0.9_int4      ok=True  steps=  96 up=  11.83 MB edge=   595 ms cloud=  4129 ms " **$18** dollars every day at the farmers' market."
+
+gsm8k_0001 | prompt tokens=55
+  F0_nocache_fixed         ok=True  steps= 256 up= 652.22 MB edge=  2405 ms cloud= 17124 ms ' number of bolts required for the robe is 3.\n\n####'
+  K2_dual_thr0.9           ok=True  steps=  81 up=  39.52 MB edge=   527 ms cloud=  3550 ms 'al number of bolts needed for the robe is 3.\n\n####'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  83 up=  20.03 MB edge=   521 ms cloud=  3621 ms 'al number of bolts needed for the robe is 3.\n\n####'
+  K5_dual_thr0.9_int4      ok=True  steps=  79 up=  10.05 MB edge=   507 ms cloud=  3470 ms 'al number of bolts needed for the robe is 3.\n\n####'
+
+gsm8k_0002 | prompt tokens=86
+  F0_nocache_fixed         ok=False steps= 256 up= 717.23 MB edge=  2380 ms cloud= 17609 ms ",000 = 120,000\\).\n\n#### Josh's profit is $120,000."
+  K2_dual_thr0.9           ok=False steps=  92 up=  44.43 MB edge=   584 ms cloud=  4013 ms "sh's profit from flipping the house is \\(90,000\\)."
+  K4_dual_thr0.9_int8abs   ok=False steps=  86 up=  21.44 MB edge=   544 ms cloud=  3741 ms "0\\).\n\nSo, Josh's profit is $120,000.\n\n#### 120,000"
+  K5_dual_thr0.9_int4      ok=False steps=  88 up=  11.19 MB edge=   565 ms cloud=  3857 ms "0 \\).\n\nSo, Josh's profit is:\n\n\\[\n\\boxed{120000}\n\\]"
+
+gsm8k_0003 | prompt tokens=64
+  F0_nocache_fixed         ok=True  steps= 256 up= 671.09 MB edge=  2347 ms cloud= 17243 ms '  \\]\n\nSo, James runs a total of 540 meters a week.'
+  K2_dual_thr0.9           ok=True  steps=  71 up=  37.49 MB edge=   457 ms cloud=  3124 ms '  \\]\n\nSo, James runs a total of 540 meters a week.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  70 up=  18.62 MB edge=   446 ms cloud=  3070 ms '  \\]\n\nSo, James runs a total of 540 meters a week.'
+  K5_dual_thr0.9_int4      ok=True  steps=  70 up=   9.60 MB edge=   442 ms cloud=  3073 ms ']\n\nSo, James runs a total of 540 meters in a week.'
+
+gsm8k_0004 | prompt tokens=139
+  F0_nocache_fixed         ok=True  steps= 256 up= 828.38 MB edge=  2647 ms cloud= 20395 ms ' **20 cups** of feed in the final meal of the day.'
+  K2_dual_thr0.9           ok=True  steps=  85 up=  46.07 MB edge=   533 ms cloud=  3735 ms ' **20 cups** of feed in the final meal of the day.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  81 up=  22.52 MB edge=   526 ms cloud=  3656 ms ' **20 cups** of feed in the final meal of the day.'
+  K5_dual_thr0.9_int4      ok=True  steps=  81 up=  11.61 MB edge=   521 ms cloud=  3650 ms ' **20 cups** of feed in the final meal of the day.'
+
+gsm8k_0005 | prompt tokens=85
+  F0_nocache_fixed         ok=False steps= 256 up= 715.13 MB edge=  2391 ms cloud= 17604 ms 'refore, Kylar needs to pay $64 for the 16 glasses.'
+  K2_dual_thr0.9           ok=True  steps= 118 up=  51.19 MB edge=   783 ms cloud=  5341 ms 'r 8 pairs is \\(8 \\times 8 = 64\\) dollars.\n\n#### 64'
+  K4_dual_thr0.9_int8abs   ok=True  steps= 111 up=  24.69 MB edge=   742 ms cloud=  5067 ms 'r 8 pairs is \\(8 \\times 8 = 64\\) dollars.\n\n#### 64'
+  K5_dual_thr0.9_int4      ok=False steps= 124 up=  13.60 MB edge=   782 ms cloud=  5383 ms 'ore, Kylar needs to pay \\boxed{50} for 16 glasses.'
+
+gsm8k_0006 | prompt tokens=72
+  F0_nocache_fixed         ok=True  steps= 256 up= 687.87 MB edge=  2380 ms cloud= 17401 ms 'use, Charleston, and Seattle have together is 260.'
+  K2_dual_thr0.9           ok=True  steps=  61 up=  35.39 MB edge=   401 ms cloud=  2789 ms 'le have together is \\( 260 \\).\n\n####\n\\boxed{260}\\)'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  55 up=  16.92 MB edge=   354 ms cloud=  2457 ms 'use, Charleston, and Seattle have together is 260.'
+  K5_dual_thr0.9_int4      ok=True  steps=  60 up=   9.06 MB edge=   381 ms cloud=  2664 ms 'ton, and Seattle have together is \\(\\boxed{260}\\).'
+
+gsm8k_0007 | prompt tokens=99
+  F0_nocache_fixed         ok=False steps= 256 up= 744.49 MB edge=  2407 ms cloud= 17865 ms '120 minutes\n\n#### The final answer is 120 minutes.'
+  K2_dual_thr0.9           ok=False steps=  84 up=  43.19 MB edge=   529 ms cloud=  3683 ms 'utes\n\n#### The total download time is 120 minutes.'
+  K4_dual_thr0.9_int8abs   ok=False steps=  85 up=  21.74 MB edge=   545 ms cloud=  3739 ms 'nutes + 20 minutes = 120 minutes\n\n#### 120 minutes'
+  K5_dual_thr0.9_int4      ok=False steps=  88 up=  11.41 MB edge=   549 ms cloud=  3800 ms ', it takes Carla 120 minutes to download the file.'
+
+gsm8k_0008 | prompt tokens=133
+  F0_nocache_fixed         ok=False steps= 256 up= 815.80 MB edge=  2631 ms cloud= 20294 ms ' the 4 hours, John is \\boxed{275} miles from home.'
+  K2_dual_thr0.9           ok=False steps=  76 up=  43.32 MB edge=   491 ms cloud=  3424 ms 'iles from home at the end of the 4 hours.\n\n####275'
+  K4_dual_thr0.9_int8abs   ok=False steps=  74 up=  21.41 MB edge=   473 ms cloud=  3321 ms 'iles from home at the end of the 4 hours.\n\n####275'
+  K5_dual_thr0.9_int4      ok=False steps=  72 up=  10.90 MB edge=   464 ms cloud=  3230 ms 's from home at the end of the 4 hours.\n\n####\n\n####'
+
+gsm8k_0009 | prompt tokens=88
+  F0_nocache_fixed         ok=True  steps= 256 up= 721.42 MB edge=  2384 ms cloud= 17653 ms 'r this week are $460.\n\n#### Final Answer: **$460**'
+  K2_dual_thr0.9           ok=True  steps=  99 up=  46.40 MB edge=   623 ms cloud=  4299 ms "herefore, Eliza's earnings for this week are $460."
+  K4_dual_thr0.9_int8abs   ok=True  steps=  99 up=  23.21 MB edge=   619 ms cloud=  4257 ms 'arnings for this week are $460.\n\n#### Answer: $460'
+  K5_dual_thr0.9_int4      ok=True  steps=  99 up=  11.96 MB edge=   619 ms cloud=  4290 ms "ore, Eliza's total earnings for the week are $460."
+
+gsm8k_0010 | prompt tokens=89
+  F0_nocache_fixed         ok=True  steps= 256 up= 723.52 MB edge=  2386 ms cloud= 17670 ms ' months is 366.\n\n#### Final Answer: 366 downloads.'
+  K2_dual_thr0.9           ok=True  steps=  80 up=  41.49 MB edge=   507 ms cloud=  3495 ms 'over the three months is \\( 366 \\) downloads. ####'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  85 up=  21.41 MB edge=   595 ms cloud=  4025 ms 'ds over the three months is 366.\n\n#### Answer: 366'
+  K5_dual_thr0.9_int4      ok=True  steps=  78 up=  10.56 MB edge=   492 ms cloud=  3395 ms 'ads over the three months is \\(\\boxed{366}\\). ####'
+
+gsm8k_0011 | prompt tokens=91
+  F0_nocache_fixed         ok=True  steps= 256 up= 727.72 MB edge=  2390 ms cloud= 17685 ms 'fore, the total cost of the pastries is \\( 694 \\).'
+  K2_dual_thr0.9           ok=True  steps=  52 up=  34.28 MB edge=   370 ms cloud=  2545 ms 'Therefore, the total cost of the pastries is $694.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  54 up=  17.41 MB edge=   348 ms cloud=  2413 ms 'Therefore, the total cost of the pastries is $694.'
+  K5_dual_thr0.9_int4      ok=True  steps=  54 up=   8.97 MB edge=   358 ms cloud=  2473 ms 'Therefore, the total cost of the pastries is $694.'
+
+gsm8k_0012 | prompt tokens=96
+  F0_nocache_fixed         ok=False steps= 256 up= 738.20 MB edge=  2396 ms cloud= 17858 ms 'rt earning money on the lemon tree after 12 years.'
+  K2_dual_thr0.9           ok=False steps= 108 up=  49.28 MB edge=   672 ms cloud=  4639 ms 's needed = $90 / $7.50 = 12 years\n\n#### \\boxed{12}'
+  K4_dual_thr0.9_int8abs   ok=True  steps= 102 up=  23.87 MB edge=   641 ms cloud=  4416 ms ' years to start earning money from the lemon tree.'
+  K5_dual_thr0.9_int4      ok=False steps= 116 up=  13.25 MB edge=   721 ms cloud=  4969 ms '3} years to start earning money on the lemon tree.'
+
+gsm8k_0013 | prompt tokens=87
+  F0_nocache_fixed         ok=False steps= 256 up= 719.33 MB edge=  2384 ms cloud= 17716 ms 'ners.\n\n####Melanie started with 9 vacuum cleaners.'
+  K2_dual_thr0.9           ok=False steps= 117 up=  51.05 MB edge=   817 ms cloud=  5518 ms 'Therefore, Melanie started with 6 vacuum cleaners.'
+  K4_dual_thr0.9_int8abs   ok=False steps= 138 up=  28.29 MB edge=   883 ms cloud=  6043 ms 'nie started with \\( \\boxed{15} \\) vacuum cleaners.'
+  K5_dual_thr0.9_int4      ok=False steps= 127 up=  13.84 MB edge=   788 ms cloud=  5434 ms ' started with 42 vacuum cleaners.\n\n####\n\\boxed{42}'
+
+gsm8k_0014 | prompt tokens=81
+  F0_nocache_fixed         ok=True  steps= 256 up= 706.74 MB edge=  2374 ms cloud= 17462 ms 'e students enrolled in hip-hop dance is 60%.\n\n####'
+  K2_dual_thr0.9           ok=True  steps=  84 up=  42.01 MB edge=   531 ms cloud=  3666 ms 'udents enrolled in hip-hop dance is **60%**.\n\n####'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  82 up=  20.75 MB edge=   522 ms cloud=  3580 ms ' entire students enrolled in hip-hop dance is 60%.'
+  K5_dual_thr0.9_int4      ok=True  steps=  80 up=  10.56 MB edge=   514 ms cloud=  3537 ms ' \\right) \\times 100\\% = 60\\% \\]\n\n#### \\boxed{60\\%}'
+
+gsm8k_0015 | prompt tokens=123
+  F0_nocache_fixed         ok=True  steps= 256 up= 794.82 MB edge=  2510 ms cloud= 18922 ms 't from choosing the jewelry purchase plan is $125.'
+  K2_dual_thr0.9           ok=False steps= 104 up=  50.01 MB edge=   659 ms cloud=  4544 ms 'ey have a higher future value.\n\n**Profit:** $8,096'
+  K4_dual_thr0.9_int8abs   ok=False steps=  99 up=  24.36 MB edge=   630 ms cloud=  4338 ms ' to the profit from electronic gadgets.\n\n#### $250'
+  K5_dual_thr0.9_int4      ok=True  steps= 112 up=  13.43 MB edge=   695 ms cloud=  4832 ms 'ets = $8096 - $8000 = $96\n\n#### Final Answer: $125'
+
+gsm8k_0016 | prompt tokens=82
+  F0_nocache_fixed         ok=True  steps= 256 up= 708.84 MB edge=  2379 ms cloud= 17632 ms 'rain in the two days is 230 miles.\n\n####\n230 miles'
+  K2_dual_thr0.9           ok=True  steps=  88 up=  43.12 MB edge=   556 ms cloud=  3850 ms ' by each train in the two days is 230 miles.\n\n####'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  82 up=  20.79 MB edge=   519 ms cloud=  3584 ms 'covers a total of 230 miles in the two days.\n\n####'
+  K5_dual_thr0.9_int4      ok=True  steps=  89 up=  11.19 MB edge=   565 ms cloud=  3883 ms 'train covers a total of 230 miles in the two days.'
+
+gsm8k_0017 | prompt tokens=86
+  F0_nocache_fixed         ok=True  steps= 256 up= 717.23 MB edge=  2385 ms cloud= 17707 ms 'r = $57,500/year.\n\n#### Final Answer: $57,500/year'
+  K2_dual_thr0.9           ok=True  steps=  76 up=  40.24 MB edge=   476 ms cloud=  3308 ms 'ings = \\( \\$1150 \\times 50 = \\$57500 \\)\n\n####57500'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  84 up=  21.18 MB edge=   534 ms cloud=  3700 ms "57,500/year.\n\n#### Jill's annual salary is $57,500"
+  K5_dual_thr0.9_int4      ok=True  steps=  81 up=  10.71 MB edge=   514 ms cloud=  3553 ms "57,500/year.\n\n#### Jill's annual salary is $57,500"
+
+gsm8k_0018 | prompt tokens=56
+  F0_nocache_fixed         ok=True  steps= 256 up= 654.32 MB edge=  2335 ms cloud= 17105 ms 'aire will eat 7 dozens of eggs in 4 weeks.\n\n#### 7'
+  K2_dual_thr0.9           ok=False steps=  77 up=  38.54 MB edge=   501 ms cloud=  3413 ms 'Claire will eat 7 dozens of eggs in 4 weeks.\n\n####'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  85 up=  20.33 MB edge=   546 ms cloud=  3720 ms 's of eggs in 4 weeks.\n\n#### Final Answer: 7 dozens'
+  K5_dual_thr0.9_int4      ok=False steps=  71 up=   9.53 MB edge=   447 ms cloud=  3102 ms '\n\nSo, Claire will eat 7 dozens of eggs in 4 weeks.'
+
+gsm8k_0019 | prompt tokens=94
+  F0_nocache_fixed         ok=False steps= 256 up= 734.01 MB edge=  2404 ms cloud= 17735 ms 'speed of 3 miles per hour.\n\n#### \n3 miles per hour'
+  K2_dual_thr0.9           ok=False steps= 121 up=  52.56 MB edge=   762 ms cloud=  5252 ms 'ining distance at a speed of **3** miles per hour.'
+  K4_dual_thr0.9_int8abs   ok=False steps= 168 up=  32.46 MB edge=  1069 ms cloud=  7324 ms 'to maintain her average speed of 4 miles per hour.'
+  K5_dual_thr0.9_int4      ok=False steps= 121 up=  13.55 MB edge=   783 ms cloud=  5371 ms 'ining distance at a speed of **3** miles per hour.'
+
+gsm8k_0020 | prompt tokens=92
+  F0_nocache_fixed         ok=True  steps= 256 up= 729.81 MB edge=  2401 ms cloud= 17748 ms 'ers, after accounting for the spill, is 15 liters.'
+  K2_dual_thr0.9           ok=True  steps= 115 up=  50.86 MB edge=   723 ms cloud=  4958 ms ' 15 liters - 0 liters = 15 liters.\n\n#### 15 liters'
+  K4_dual_thr0.9_int8abs   ok=False steps= 123 up=  26.49 MB edge=   777 ms cloud=  5346 ms ' of water in the remaining 24 liters is 18 liters.'
+  K5_dual_thr0.9_int4      ok=False steps= 114 up=  13.05 MB edge=   724 ms cloud=  4976 ms 'r spilling = 15 liters - 1 liter = 14 liters\n\n####'
+
+gsm8k_0021 | prompt tokens=75
+  F0_nocache_fixed         ok=False steps= 256 up= 694.16 MB edge=  2365 ms cloud= 17478 ms "Thus, Raymond's son was born \\boxed{75} years ago."
+  K2_dual_thr0.9           ok=False steps=  93 up=  43.98 MB edge=   617 ms cloud=  4188 ms "aymond's son was born 0 years ago.\n\n####\n\\boxed{0}"
+  K4_dual_thr0.9_int8abs   ok=False steps=  93 up=  22.00 MB edge=   583 ms cloud=  4016 ms " Raymond's son was born 0 years ago.\n\n#### 0 years"
+  K5_dual_thr0.9_int4      ok=False steps=  83 up=  10.66 MB edge=   525 ms cloud=  3603 ms "us, Raymond's son was born \\boxed{2021} years ago."
+
+gsm8k_0022 | prompt tokens=84
+  F0_nocache_fixed         ok=True  steps= 256 up= 713.04 MB edge=  2383 ms cloud= 17660 ms 'herefore, Billy sold a total of 7 DVDs on Tuesday.'
+  K2_dual_thr0.9           ok=True  steps=  78 up=  40.63 MB edge=   510 ms cloud=  3474 ms 'herefore, Billy sold \\( \\boxed{7} DVDs on Tuesday.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  76 up=  20.07 MB edge=   480 ms cloud=  3345 ms 'herefore, Billy sold a total of 7 DVDs on Tuesday.'
+  K5_dual_thr0.9_int4      ok=True  steps=  74 up=  10.21 MB edge=   470 ms cloud=  3243 ms 'herefore, Billy sold a total of 7 DVDs on Tuesday.'
+
+gsm8k_0023 | prompt tokens=67
+  F0_nocache_fixed         ok=False steps= 256 up= 677.38 MB edge=  2372 ms cloud= 17449 ms 'orter after burning from 1:00 PM to 5:00 PM.\n\n####'
+  K2_dual_thr0.9           ok=False steps= 111 up=  48.17 MB edge=   706 ms cloud=  4827 ms 'eters shorter after burning for the 4-hour period.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  84 up=  20.56 MB edge=   524 ms cloud=  3650 ms 'ter after burning from 1:00 PM to 5:00 PM.\n\n#### 8'
+  K5_dual_thr0.9_int4      ok=False steps=  80 up=  10.32 MB edge=   500 ms cloud=  3463 ms 'orter after burning from 1:00 PM to 5:00 PM.\n\n####'
+
+gsm8k_0024 | prompt tokens=68
+  F0_nocache_fixed         ok=True  steps= 256 up= 679.48 MB edge=  2352 ms cloud= 17457 ms 'So, the original price of the book was $26.\n\n####.'
+  K2_dual_thr0.9           ok=True  steps=  79 up=  39.85 MB edge=   501 ms cloud=  3478 ms ' original price of the book was \\(\\boxed{26.00}\\).'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  79 up=  19.93 MB edge=   561 ms cloud=  3836 ms 'inal price of the book was \\(\\boxed{26.00}\\). ####'
+  K5_dual_thr0.9_int4      ok=True  steps=  78 up=  10.21 MB edge=   535 ms cloud=  3608 ms ' original price of the book was \\(\\boxed{26.00}\\).'
+
+gsm8k_0025 | prompt tokens=96
+  F0_nocache_fixed         ok=True  steps= 256 up= 738.20 MB edge=  2403 ms cloud= 17849 ms 'Therefore, Marie ordered 2 boxes of pizza.\n\n#### 2'
+  K2_dual_thr0.9           ok=True  steps=  75 up=  40.63 MB edge=   481 ms cloud=  3301 ms ' \\$8.50 = 2\n   \\]\n\nMarie ordered 2 boxes of pizza.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  72 up=  19.93 MB edge=   464 ms cloud=  3195 ms ' \\$8.50 = 2\n   \\]\n\nMarie ordered 2 boxes of pizza.'
+  K5_dual_thr0.9_int4      ok=True  steps=  78 up=  10.68 MB edge=   501 ms cloud=  3468 ms '\\$17 \\div \\$8.50 = 2\n   \\]\n\n#### 2 boxes of pizza.'
+
+gsm8k_0026 | prompt tokens=98
+  F0_nocache_fixed         ok=False steps= 256 up= 742.40 MB edge=  2408 ms cloud= 17936 ms ' 67 + 126 = 242\n\\]\n\n#### Mishka spent 242 dollars.'
+  K2_dual_thr0.9           ok=False steps=  61 up=  37.09 MB edge=   439 ms cloud=  2998 ms '\n#### Mishka spent $242 on all the clothing items.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  63 up=  18.82 MB edge=   405 ms cloud=  2808 ms 'll the items:\n\\[ 49.50 + 67.50 + 126 = 243 \\] ####'
+  K5_dual_thr0.9_int4      ok=False steps=  68 up=  10.04 MB edge=   472 ms cloud=  3248 ms 'hing items:\n\\[ 49 + 67 + 126 = 242 \\]\n\n\\boxed{244}'
+
+gsm8k_0027 | prompt tokens=88
+  F0_nocache_fixed         ok=False steps= 256 up= 721.42 MB edge=  2386 ms cloud= 17737 ms 'Cynthia will spend $16 on ice cream after 60 days.'
+  K2_dual_thr0.9           ok=False steps=  61 up=  36.44 MB edge=   396 ms cloud=  2734 ms 'thia will spend $16.00 on ice cream after 60 days.'
+  K4_dual_thr0.9_int8abs   ok=False steps=  70 up=  19.41 MB edge=   448 ms cloud=  3092 ms 'a will spend **16.00** on ice cream after 60 days.'
+  K5_dual_thr0.9_int4      ok=False steps=  62 up=   9.46 MB edge=   405 ms cloud=  2793 ms 'hia will spend **$16** on ice cream after 60 days.'
+
+gsm8k_0028 | prompt tokens=79
+  F0_nocache_fixed         ok=True  steps= 256 up= 702.55 MB edge=  2371 ms cloud= 17596 ms '25 miles between his first and second stops.\n\n####'
+  K2_dual_thr0.9           ok=True  steps=  72 up=  38.73 MB edge=   458 ms cloud=  3179 ms 'miles between his first and second stops.\n\n#### 25'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  76 up=  19.90 MB edge=   484 ms cloud=  3326 ms '25 miles between his first and second stops.\n\n####'
+  K5_dual_thr0.9_int4      ok=True  steps=  73 up=  10.05 MB edge=   468 ms cloud=  3239 ms '25 miles between his first and second stops.\n\n####'
+
+gsm8k_0029 | prompt tokens=98
+  F0_nocache_fixed         ok=True  steps= 256 up= 742.40 MB edge=  2405 ms cloud= 17951 ms '.\n\nThus, the cost of the boots is \\(\\boxed{104}\\).'
+  K2_dual_thr0.9           ok=True  steps= 101 up=  47.58 MB edge=   654 ms cloud=  4510 ms '\n   - \\(104 = B\\)\n\nTherefore, the boots cost $104.'
+  K4_dual_thr0.9_int8abs   ok=True  steps= 114 up=  25.51 MB edge=   780 ms cloud=  5315 ms '\nThe cost of the boots is \\(\\boxed{104}\\) dollars.'
+  K5_dual_thr0.9_int4      ok=True  steps= 104 up=  12.47 MB edge=   647 ms cloud=  4457 ms '9 + 5 = B\\)\n   - \\(B = 104\\)\n\nThe boots cost $104.'
+
+Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_llada_gsm8k_k4_t256_b32_baselines
+               variant  runs      acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms
+      F0_nocache_fixed    30 0.633333            0             0     1.0000  256.000000  721.634099             0.000000   2404.968177   17838.974370
+        K2_dual_thr0.9    30 0.600000            2             1     1.0000   87.400000   43.366570             0.939867    563.258207    3873.647576
+K4_dual_thr0.9_int8abs    30 0.700000            2             4     0.6875   89.200000   21.930645             0.969597    573.781210    3948.728017
+   K5_dual_thr0.9_int4    30 0.566667            2             0     0.5000   86.666667   11.131908             0.984576    551.674216    3806.421121
+
+Emulated split latency (s), RTT 20 ms, edge 3x slower:
+bandwidth_mbps            1       5      10     25     50    100   1000
+variant                                                                
+F0_nocache_fixed        5803.9  1185.4  608.1  261.7  146.3  88.5  36.6
+K2_dual_thr0.9           354.4    76.9   42.2   21.4   14.4  11.0   7.8
+K4_dual_thr0.9_int8abs   183.1    42.8   25.2   14.7   11.2   9.4   7.8
+K5_dual_thr0.9_int4       96.5    25.2   16.3   11.0    9.2   8.3   7.5
+
+Cloud-only with the same cache and decoding (s):
+variant
+F0_nocache_fixed          20.88
+K2_dual_thr0.9             4.64
+K4_dual_thr0.9_int8abs     4.73
+K5_dual_thr0.9_int4        4.56
+
+=== emulated latency for the Exp11 folders  (2026-11-27 09:07:17)
+  outputs/exp11_authored_k4_t128_T0.1_baselines
+  outputs/exp11_gsm8k_k4_t256_T0.1_baselines
+  outputs/exp11_llada_gsm8k_k4_t256_T0_baselines
+
+Done (2026-11-27 09:07:21).

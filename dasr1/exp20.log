@@ -1,0 +1,436 @@
+nohup: ignoring input
+GPU 0 | backends: dllm_cache fastdllm | tasks: gsm8k humaneval
+2026-11-27 01:04:14 GPU 0: 43538 MiB free, starting.
+
+=== dllm_cache, gsm8k  (2026-11-27 01:04:14)
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  8.08it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.53it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.39it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.71it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.58it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Exp20 | dllm_cache | one GPU (cuda:0) | tasks ['gsm8k'] | configs ['uncached', 'dllm_cache', 'dllm_cache_int8', 'adaptive']
+
+=== gsm8k, seed 42: 100 of 100 problems to run  (2026-11-27 01:04:24)
+  gsm8k_0000     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0001     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0002     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0003     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0004     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0005     uncached=Y dllm_cache=- dllm_cache_int8=- adaptive=Y
+  gsm8k_0006     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0007     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0008     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0009     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0010     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0011     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0012     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0013     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=-
+  gsm8k_0014     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0015     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0016     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0017     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0018     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0019     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0020     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0021     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0022     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0023     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0024     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0025     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0026     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0027     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0028     uncached=Y dllm_cache=Y dllm_cache_int8=- adaptive=Y
+  gsm8k_0029     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0030     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0031     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0032     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0033     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0034     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0035     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0036     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0037     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0038     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0039     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0040     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0041     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0042     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0043     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0044     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0045     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0046     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=Y
+  gsm8k_0047     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0048     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0049     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0050     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0051     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0052     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0053     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0054     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0055     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0056     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0057     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0058     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0059     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0060     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0061     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0062     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0063     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0064     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0065     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0066     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0067     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0068     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0069     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0070     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0071     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0072     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0073     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0074     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0075     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0076     uncached=Y dllm_cache=- dllm_cache_int8=- adaptive=Y
+  gsm8k_0077     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0078     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0079     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0080     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0081     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0082     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0083     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0084     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0085     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0086     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0087     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0088     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0089     uncached=Y dllm_cache=Y dllm_cache_int8=- adaptive=-
+  gsm8k_0090     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0091     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0092     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0093     uncached=Y dllm_cache=- dllm_cache_int8=- adaptive=Y
+  gsm8k_0094     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0095     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0096     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0097     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0098     uncached=- dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0099     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+
+=== gsm8k, seed 43: 100 of 100 problems to run  (2026-11-27 02:46:41)
+  gsm8k_0000     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0001     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0002     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0003     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0004     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0005     uncached=Y dllm_cache=- dllm_cache_int8=- adaptive=Y
+  gsm8k_0006     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0007     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0008     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0009     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0010     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0011     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0012     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0013     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=-
+  gsm8k_0014     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0015     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0016     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0017     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0018     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0019     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0020     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0021     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0022     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0023     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0024     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0025     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0026     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0027     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0028     uncached=Y dllm_cache=Y dllm_cache_int8=- adaptive=Y
+  gsm8k_0029     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0030     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0031     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0032     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0033     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0034     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0035     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0036     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0037     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0038     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0039     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0040     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0041     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0042     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0043     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0044     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0045     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0046     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=Y
+  gsm8k_0047     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0048     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0049     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0050     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0051     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0052     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0053     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0054     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0055     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0056     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0057     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0058     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0059     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0060     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0061     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0062     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0063     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0064     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0065     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0066     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0067     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0068     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0069     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0070     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0071     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0072     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0073     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0074     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0075     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0076     uncached=Y dllm_cache=- dllm_cache_int8=- adaptive=Y
+  gsm8k_0077     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0078     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0079     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0080     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0081     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0082     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0083     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0084     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0085     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0086     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0087     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0088     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0089     uncached=Y dllm_cache=Y dllm_cache_int8=- adaptive=-
+  gsm8k_0090     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0091     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0092     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0093     uncached=Y dllm_cache=- dllm_cache_int8=- adaptive=Y
+  gsm8k_0094     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0095     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0096     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0097     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0098     uncached=- dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0099     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+
+=== gsm8k, seed 44: 100 of 100 problems to run  (2026-11-27 08:31:48)
+  gsm8k_0000     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0001     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0002     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0003     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0004     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0005     uncached=Y dllm_cache=- dllm_cache_int8=- adaptive=Y
+  gsm8k_0006     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0007     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0008     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0009     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0010     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0011     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0012     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0013     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=-
+  gsm8k_0014     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0015     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0016     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0017     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0018     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0019     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0020     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0021     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0022     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0023     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0024     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0025     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0026     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0027     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0028     uncached=Y dllm_cache=Y dllm_cache_int8=- adaptive=Y
+  gsm8k_0029     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0030     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0031     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0032     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0033     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0034     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0035     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0036     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0037     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0038     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0039     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0040     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0041     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0042     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0043     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0044     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0045     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0046     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=Y
+  gsm8k_0047     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0048     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0049     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0050     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0051     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0052     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0053     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0054     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0055     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0056     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0057     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0058     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0059     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0060     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0061     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0062     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0063     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0064     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0065     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0066     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0067     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0068     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0069     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0070     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0071     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0072     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0073     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0074     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0075     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0076     uncached=Y dllm_cache=- dllm_cache_int8=- adaptive=Y
+  gsm8k_0077     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0078     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0079     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0080     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0081     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0082     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0083     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0084     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0085     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0086     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0087     uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  gsm8k_0088     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0089     uncached=Y dllm_cache=Y dllm_cache_int8=- adaptive=-
+  gsm8k_0090     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0091     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0092     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0093     uncached=Y dllm_cache=- dllm_cache_int8=- adaptive=Y
+  gsm8k_0094     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0095     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0096     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0097     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0098     uncached=- dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  gsm8k_0099     uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+
+Exp20 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp20_breadth_dllm_cache_dream_gsm8k
+ task          config  runs  seeds  acc  lost  gained  identical  acc_seed_min  acc_seed_max  mcnemar_p
+gsm8k        uncached   300      3 0.86     0       0        300          0.86          0.86      1.000
+gsm8k      dllm_cache   300      3 0.84     9       3         75          0.84          0.84      0.146
+gsm8k dllm_cache_int8   300      3 0.82    15       3         60          0.82          0.82      0.008
+gsm8k        adaptive   300      3 0.86     6       6         66          0.86          0.86      1.000
+
+=== dllm_cache, humaneval  (2026-11-27 10:31:54)
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  8.68it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.64it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.92it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.89it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.84it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Exp20 | dllm_cache | one GPU (cuda:0) | tasks ['humaneval'] | configs ['uncached', 'dllm_cache', 'dllm_cache_int8', 'adaptive']
+
+=== humaneval, seed 42: 164 of 164 problems to run  (2026-11-27 10:32:04)
+  HumanEval_0    uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_1    uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_2    uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_3    uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_4    uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_5    uncached=Y dllm_cache=- dllm_cache_int8=- adaptive=Y
+  HumanEval_6    uncached=- dllm_cache=Y dllm_cache_int8=- adaptive=Y
+  HumanEval_7    uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_8    uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_9    uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_10   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_11   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=-
+  HumanEval_12   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_13   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_14   uncached=Y dllm_cache=Y dllm_cache_int8=- adaptive=Y
+  HumanEval_15   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_16   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_17   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_18   uncached=- dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_19   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_20   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_21   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_22   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_23   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_24   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_25   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_26   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_27   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_28   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_29   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_30   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_31   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_32   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_33   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=Y
+  HumanEval_34   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_35   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_36   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_37   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_38   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_39   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_40   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_41   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=Y
+  HumanEval_42   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_43   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_44   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_45   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_46   uncached=- dllm_cache=Y dllm_cache_int8=- adaptive=-
+  HumanEval_47   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_48   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_49   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=Y
+  HumanEval_50   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_51   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_52   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_53   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_54   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_55   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_56   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_57   uncached=- dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_58   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_59   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_60   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_61   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_62   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_63   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_64   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_65   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_66   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_67   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_68   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_69   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_70   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_71   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_72   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_73   uncached=- dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_74   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_75   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_76   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_77   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_78   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_79   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_80   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_81   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_82   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_83   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_84   uncached=- dllm_cache=Y dllm_cache_int8=Y adaptive=-
+  HumanEval_85   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_86   uncached=Y dllm_cache=- dllm_cache_int8=- adaptive=Y
+  HumanEval_87   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_88   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_89   uncached=Y dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_90   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_91   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_92   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_93   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_94   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_95   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_96   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_97   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_98   uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_99   uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
+  HumanEval_100  uncached=Y dllm_cache=Y dllm_cache_int8=Y adaptive=Y
+  HumanEval_101  uncached=- dllm_cache=- dllm_cache_int8=- adaptive=-
