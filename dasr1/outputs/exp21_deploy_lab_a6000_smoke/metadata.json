@@ -1,0 +1,33 @@
+{
+  "experiment": "Exp21 DASR as two programs (edge and cloud) over a real network",
+  "tag": "lab_a6000_smoke",
+  "edge_gpu": "NVIDIA RTX A6000",
+  "servers": [
+    {
+      "name": "dllm_cache_split",
+      "backend": "dllm_cache",
+      "split": 4,
+      "addr": "127.0.0.1:6001"
+    },
+    {
+      "name": "fastdllm_split",
+      "backend": "fastdllm",
+      "split": 4,
+      "addr": "127.0.0.1:6003"
+    }
+  ],
+  "codecs": [
+    "bf16",
+    "int8_delta"
+  ],
+  "dataset": "gsm8k",
+  "n_cases": 2,
+  "new_tokens": 256,
+  "split_layer_1based": 4,
+  "edge_slowdown": 1.0,
+  "seed": 42,
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22",
+  "host": "asus-ESC4000-E11"
+}

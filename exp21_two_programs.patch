@@ -1,0 +1,1090 @@
+diff --git a/dasr1/experiments/EXP21_NOTES.md b/dasr1/experiments/EXP21_NOTES.md
+new file mode 100644
+index 0000000..8ada345
+--- /dev/null
++++ b/dasr1/experiments/EXP21_NOTES.md
+@@ -0,0 +1,81 @@
++# Exp21: DASR as two programs, on two real machines
++
++## What changes
++Until Exp20 the edge and cloud halves ran in one Python program on the lab server. Exp21
++splits DASR into:
++- an **edge program** (`exp21_edge.py`), with the tokenizer, the embedding, Dream's layers
++  1..4, their caches and the codec;
++- a **cloud program** (`exp21_cloud.py`), with layers 5..28, the LM head, the sampler and the
++  cloud caches.
++
++They talk over TCP (`src/remote_split.py`). Per denoising step there is one round trip: the
++cloud sends the committed tokens plus what to compute, and the edge returns the boundary
++rows.
++
++The cloud runs the unchanged samplers. Its embedding is replaced by one that returns the rows
++received from the edge, so the cloud's decisions (refresh, blocks, codec anchors) are made as
++before and sent along.
++
++The edge reproduces what layers 1..4 did:
++- **dLLM-Cache:** the official hook, with the cloud's refresh flags.
++- **Fast-dLLM:** its own key/value cache for its layers.
++
++The **cloud-only reference** is the same cloud program with `--split 0`: the edge sends only the
++prompt and receives the answer over the same network path.
++
++## Step 1: check on the lab server (both programs there; no rental)
++```
++nohup bash experiments/run_exp21_cloud.sh > exp21_cloud.log 2>&1 &                     # waits for idle GPUs 1,2
++TAG=lab_a6000 GPU=2 nohup bash experiments/run_exp21_edge.sh > exp21_edge_lab.log 2>&1 &
++```
++- The edge then runs on an A6000 like the earlier experiments, so every answer must equal the
++  single-process run of Exp16 (`same_as_single_process`, INT8 included).
++- Add `SMOKE=1` for a 2-question check first.
++- Stop the cloud programs with `pkill -f exp21_cloud.py` when done.
++
++## Step 2: real deployment (edge = rented RTX 3060 in Taiwan)
++1. **Rent** the RTX 3060 (SSH launch mode, about 40 GB disk). On it:
++   ```
++   curl -O https://raw.githubusercontent.com/meryyulinda/split-dllm/main/dasr1/experiments/setup_exp21_edge.sh
++   bash setup_exp21_edge.sh
++   ```
++2. **On the lab server,** with the cloud programs running (step 1's first command), open the
++   tunnel from the lab server to the rented machine. Port and address come from Vast's Connect
++   button.
++   ```
++   nohup ssh -i ~/.ssh/id_ed25519_meryvast -p <PORT> root@<ADDRESS> -N -o ServerAliveInterval=30 \
++     -o ExitOnForwardFailure=yes -R 6001:127.0.0.1:6001 -R 6002:127.0.0.1:6002 \
++     -R 6003:127.0.0.1:6003 -R 6004:127.0.0.1:6004 > exp21_tunnel.log 2>&1 &
++   ```
++   This makes the cloud programs reachable on the rented machine's own ports 6001–6004. The lab
++   server opens no port to the internet.
++3. **On the rented machine:**
++   ```
++   cd ~/work/split-dllm/dasr1
++   TAG=vast_3060_tw nohup bash experiments/run_exp21_edge.sh > exp21_edge.log 2>&1 &
++   ```
++   It downloads only the checkpoint files that hold the embedding and layers 1..4 (a few GB).
++   It needs about 4 GB of GPU memory.
++4. **When it is done,** copy `outputs/exp21_deploy_vast_3060_tw/` to the lab server and push:
++   ```
++   scp -i ~/.ssh/id_ed25519_meryvast -P <PORT> -r root@<ADDRESS>:~/work/split-dllm/dasr1/outputs/exp21_deploy_vast_3060_tw outputs/
++   ```
++   Then destroy the instance.
++
++## What it measures (summary.csv, per server and codec)
++- `latency_s`: the real time per answer at the edge, from sending the prompt until it holds the
++  answer.
++- Its parts: `edge_s` (edge GPU), `cloud_s` (cloud layers), `wire_s` (network and copies, seen
++  by the cloud).
++- `steps`, `up_mb`, and `acc`.
++- `same_as_single_process`: answers identical to Exp16's single-process runs. Expect all on the
++  lab check. On the 3060 some may differ, because a different GPU computes layers 1..4 with
++  slightly different rounding.
++
++The cloud programs also log every answer's per-step statistics to
++`outputs/exp21_cloud_logs/<backend>_k<split>.jsonl`.
++
++## Next (Exp22): many edge devices on one cloud GPU
++The cloud program serves one connection at a time for now. The multi-user run adds concurrent
++sessions on one cloud model, plus several edge processes, to measure answers per hour and
++latency against the number of users, for the split and for cloud-only inference.
+diff --git a/dasr1/experiments/exp21_cloud.py b/dasr1/experiments/exp21_cloud.py
+new file mode 100644
+index 0000000..f91506c
+--- /dev/null
++++ b/dasr1/experiments/exp21_cloud.py
+@@ -0,0 +1,144 @@
++"""Exp21 cloud program: serves edge devices over TCP (see src/remote_split.py).
++
++Run from dasr1/ on the lab server, one process per (backend, split layer):
++  CUDA_VISIBLE_DEVICES=1 python experiments/exp21_cloud.py --backend fastdllm --split 4 --port 6003
++--split 0 = cloud-only: the cloud runs every layer and the edge only sends the prompt and
++receives the answer (the cloud-only reference over the same network path).
++
++It listens on 127.0.0.1 only. An edge on another machine reaches it through an SSH
++tunnel (see run_exp21_cloud.sh). Each connection is served until the edge sends BYE;
++connections are served one after another (one answer at a time).
++Every answer's per-step statistics are appended to outputs/exp21_cloud_logs/<name>.jsonl.
++"""
++import argparse
++import json
++import socket
++import sys
++import time
++from pathlib import Path
++
++sys.path.insert(0, str(Path(__file__).resolve().parent))
++
++import torch  # noqa: E402
++
++from exp10_common import ROOT, cfg  # noqa: E402
++from src.remote_split import (F_BEGIN, F_BYE, F_DONE, RemoteLink, _tune, recv_frame,  # noqa: E402
++                              send_frame, strip_edge)
++
++
++def load(backend, device):
++    if backend == "fastdllm":
++        from src.fastdllm_split import DREAM_MODEL_NAME, load_fastdllm_model
++        model, tok = load_fastdllm_model("dream", getattr(cfg, "MODEL_NAME", DREAM_MODEL_NAME),
++                                         getattr(cfg, "FASTDLLM_REPO", "../../Fast-dLLM"),
++                                         device=device)
++        return model, tok, None
++    from exp9b_official_feature_cache_diagnostics import import_official
++    from src.model_loader import load_dream_model
++    _, api = import_official()
++    model, tok = load_dream_model(cfg.MODEL_NAME)
++    return model.to(device).eval(), tok, api
++
++
++def run_session(c, model, tok, api, link, device, backend, conn):
++    ids = torch.tensor([c["prompt_ids"]], dtype=torch.long, device=device)
++    plen, n_tok = int(ids.shape[1]), int(c["new_tokens"])
++    if link is not None:
++        link.sock = conn
++    t0 = time.perf_counter()
++    if backend == "fastdllm":
++        from src.fastdllm_split import kv_generate
++        res = kv_generate(model, "dream", tok, ids, n_tok, int(c["block_length"]), int(c["seed"]),
++                          cache=c["cache"], decode=c["decode"], threshold=c.get("threshold"),
++                          temperature=0.0, top_p=None, link=link,
++                          link_cfg={"encoding": c["encoding"], "anchor_interval": c["anchor_interval"],
++                                    "cache": c["cache"]} if link is not None else None,
++                          device=device)
++    else:
++        from src.feature_cache_ext import generate as dream_generate
++        policy = tuple(c["policy"]) if c.get("policy") else None
++        mask = torch.ones_like(ids)
++        res = dream_generate(model, tok, ids, mask, n_tok, int(c["steps"]), int(c["seed"]),
++                             alg=c["alg"], temperature=float(c["temperature"]),
++                             top_p=c.get("top_p"), cache_api=api if policy else None,
++                             policy=policy, prompt_tail_rows=int(c["prompt_tail_rows"]) if policy else 0,
++                             capture_trajectory=False, log_confidence=False, link=link,
++                             link_cfg={"rows": c["rows"], "encoding": c["encoding"],
++                                       "anchor_interval": c["anchor_interval"]}
++                             if link is not None else None)
++    gen_s = time.perf_counter() - t0
++    gen = res["generated_ids"].to(device)
++    with torch.inference_mode():
++        full = torch.cat([ids, gen.unsqueeze(0)], 1)
++        if link is not None and link.record is not None:
++            idx = torch.nonzero(full[0] != link.record[0]).squeeze(1)
++        else:                                   # cloud-only: the edge holds only the prompt
++            idx = torch.arange(plen, full.shape[1], device=device)
++        final_pos, final_tok = idx.tolist(), full[0, idx].tolist()
++    steps = res.get("split_steps") or []
++    info = {"final_pos": final_pos, "final_tok": final_tok, "cloud_gen_s": gen_s,
++            "n_steps": len(steps) or int(res.get("n_steps") or c.get("steps", 0)),
++            "cloud_ms": sum(s.get("cloud_ms", 0) for s in steps),
++            "sample_ms": sum(s.get("sample_ms", 0) for s in steps),
++            "wire_ms": sum(s.get("wire_ms", 0) for s in steps),
++            "edge_ms_reported": sum(s.get("edge_ms", 0) for s in steps),
++            "up_bytes": sum(s.get("up_bytes", 0) for s in steps),
++            "down_bytes": sum(s.get("down_bytes", 0) for s in steps)}
++    return info, steps
++
++
++def main():
++    ap = argparse.ArgumentParser()
++    ap.add_argument("--backend", choices=["dllm_cache", "fastdllm"], required=True)
++    ap.add_argument("--split", type=int, default=4)
++    ap.add_argument("--port", type=int, required=True)
++    ap.add_argument("--device", default="cuda:0")
++    ap.add_argument("--host", default="127.0.0.1")
++    a = ap.parse_args()
++    device = torch.device(a.device)
++    torch.cuda.set_device(device)
++    name = f"{a.backend}_k{a.split}"
++    model, tok, api = load(a.backend, device)
++    link = None
++    if a.split > 0:
++        link = RemoteLink(model, device, model.config.hidden_size)
++        strip_edge(model, a.split, link)
++    logdir = ROOT / "outputs" / "exp21_cloud_logs"
++    logdir.mkdir(parents=True, exist_ok=True)
++    srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
++    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
++    srv.bind((a.host, a.port))
++    srv.listen(4)
++    print(f"Exp21 cloud | {name} | {torch.cuda.get_device_name(device)} | listening on "
++          f"{a.host}:{a.port}", flush=True)
++    while True:
++        conn, peer = srv.accept()
++        _tune(conn)
++        print(f"{time.strftime('%F %T')} edge connected from {peer}", flush=True)
++        try:
++            while True:
++                ftype, body, _ = recv_frame(conn)
++                if ftype == F_BYE:
++                    break
++                if ftype != F_BEGIN:
++                    raise RuntimeError(f"cloud: unexpected frame type {ftype}")
++                c = json.loads(bytes(body).decode())
++                info, steps = run_session(c, model, tok, api, link, device, a.backend, conn)
++                send_frame(conn, F_DONE, json.dumps(info).encode())
++                with (logdir / f"{name}.jsonl").open("a") as f:
++                    f.write(json.dumps({"time": time.strftime("%F %T"), "case_id": c.get("case_id"),
++                                        "encoding": c.get("encoding"), "gpu": torch.cuda.get_device_name(device),
++                                        **{k: v for k, v in info.items() if not k.startswith("final")},
++                                        "steps": steps}) + "\n")
++                print(f"  {c.get('case_id')} {c.get('encoding')}: {info['n_steps']} steps, "
++                      f"cloud {info['cloud_gen_s']:.1f} s", flush=True)
++        except (EOFError, ConnectionError, OSError) as exc:
++            print(f"connection ended: {exc!r}", flush=True)
++        finally:
++            conn.close()
++            if link is not None:
++                link.active = False
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/dasr1/experiments/exp21_edge.py b/dasr1/experiments/exp21_edge.py
+new file mode 100644
+index 0000000..97144aa
+--- /dev/null
++++ b/dasr1/experiments/exp21_edge.py
+@@ -0,0 +1,184 @@
++"""Exp21 edge program: DASR's edge part on its own machine, talking to the cloud program.
++
++Run from dasr1/ on the edge machine (a rented RTX 3060, or one GPU of the lab server):
++  CUDA_VISIBLE_DEVICES=0 python experiments/exp21_edge.py          (settings: EXP21_*)
++
++For every cloud server in EXP21_SERVERS (backend, split layer, address) and every question,
++it sends the prompt, computes the edge part of every denoising step the cloud asks for,
++and measures the real time per answer from sending the prompt until it holds the answer.
++Split servers run each codec of EXP21_CODECS; split-0 servers are the cloud-only reference.
++
++Checks: answers vs the single-process runs of Exp16 ("local", same settings), which must be
++identical when the edge runs on the same GPU type (A6000) with bf16 rows; on another GPU
++the edge's arithmetic differs slightly, so some answers may change.
++
++Outputs: outputs/exp21_deploy_<EXP21_TAG>/ runs.csv, summary.csv, metadata.json
++"""
++import json
++import platform
++import sys
++import time
++from pathlib import Path
++
++sys.path.insert(0, str(Path(__file__).resolve().parent))
++
++import pandas as pd  # noqa: E402
++import torch  # noqa: E402
++import transformers  # noqa: E402
++
++from exp10_common import ROOT, cfg, describe  # noqa: E402
++from src.remote_split import (F_BYE, EdgeRunner, connect, import_dllm_cache,  # noqa: E402
++                              load_edge_model, send_frame)
++
++
++def setting(name, default):
++    return getattr(cfg, name, default)
++
++
++TAG = str(setting("EXP21_TAG", "lab"))
++DEVICE = setting("EXP21_EDGE_DEVICE", "cuda:0")
++SPLIT = int(setting("EXP21_SPLIT_LAYER", 4))
++SERVERS = list(setting("EXP21_SERVERS", [
++    {"name": "dllm_cache_split", "backend": "dllm_cache", "split": SPLIT, "addr": "127.0.0.1:6001"},
++    {"name": "dllm_cache_cloud_only", "backend": "dllm_cache", "split": 0, "addr": "127.0.0.1:6002"},
++    {"name": "fastdllm_split", "backend": "fastdllm", "split": SPLIT, "addr": "127.0.0.1:6003"},
++    {"name": "fastdllm_cloud_only", "backend": "fastdllm", "split": 0, "addr": "127.0.0.1:6004"},
++]))
++CODECS = list(setting("EXP21_CODECS", ["bf16", "int8_delta"]))
++DATASET = setting("EXP21_DATASET", "gsm8k")
++N = int(setting("EXP21_N_QUESTIONS", 10))
++NEW_TOKENS = int(setting("EXP21_NEW_TOKENS", 256))
++SLOWDOWN = float(setting("EXP21_EDGE_SLOWDOWN", 1.0))     # 1 on a real edge GPU
++SEED = int(setting("SEED", 42))
++POLICY = list(setting("EXP11_CACHE_POLICY", ("fixed", 25, 2, 0.25)))
++DLLM_REPO = setting("EXP21_DLLM_CACHE_REPO", setting("EXP9A_OFFICIAL_CACHE_REPO",
++                                                      "../../dLLM-cache-official"))
++FAST_REPO = setting("FASTDLLM_REPO", "../../Fast-dLLM")
++MODEL_NAME = setting("MODEL_NAME", "Dream-org/Dream-v0-Instruct-7B")
++REFERENCE = {   # single-process runs with the same settings (Exp16, link "local")
++    ("dllm_cache", "bf16"): ("outputs/exp16_dllm_cache_dream_gsm8k_k4_t256/runs.csv", "C2_cache_aware"),
++    ("dllm_cache", "int8_delta"): ("outputs/exp16_dllm_cache_dream_gsm8k_k4_t256/runs.csv", "C4_cache_aware_int8"),
++    ("fastdllm", "bf16"): ("outputs/exp16_fastdllm_dream_gsm8k_k4_t256/runs.csv", "K2_dual_thr0.9"),
++    ("fastdllm", "int8_delta"): ("outputs/exp16_fastdllm_dream_gsm8k_k4_t256/runs.csv", "K3_dual_thr0.9_int8"),
++}
++PAPER = {("dllm_cache", "bf16"): "DASR + dLLM-Cache (bf16)",
++         ("dllm_cache", "int8_delta"): "DASR + dLLM-Cache (INT8)",
++         ("fastdllm", "bf16"): "DASR + Fast-dLLM (bf16)",
++         ("fastdllm", "int8_delta"): "DASR + Fast-dLLM (INT8)",
++         ("dllm_cache", "cloud_only"): "Cloud-only + dLLM-Cache",
++         ("fastdllm", "cloud_only"): "Cloud-only + Fast-dLLM"}
++OUT = ROOT / "outputs" / f"exp21_deploy_{TAG}"
++
++
++def session_cfg(backend, split, encoding, case_id):
++    c = {"backend": backend, "split": split, "encoding": encoding, "anchor_interval": 32,
++         "new_tokens": NEW_TOKENS, "seed": SEED, "case_id": case_id}
++    if backend == "fastdllm":
++        c.update(cache="dual", decode="threshold", threshold=0.9, block_length=32)
++    else:
++        c.update(steps=NEW_TOKENS, alg="entropy", temperature=0.1, top_p=0.9, policy=POLICY,
++                 prompt_tail_rows=1, rows="cache_aware", transfer_ratio=float(POLICY[3]))
++    return c
++
++
++def load_reference():
++    ref = {}
++    for key, (path, variant) in REFERENCE.items():
++        p = ROOT / path
++        if p.is_file():
++            df = pd.read_csv(p)
++            df = df[(df["link"] == "local") & (df["variant"] == variant)]
++            ref[key] = dict(zip(df["case_id"], df["text"]))
++    return ref
++
++
++def main():
++    if DATASET == "gsm8k":
++        from exp10d_gsm8k_refresh import gsm8k_score, load_cases
++        cases, score_fn = load_cases(n=N, start=0), gsm8k_score
++    else:
++        from exp10_common import default_score
++        from exp10a_official_feature_cache_quality import make_cases
++        cases, score_fn = make_cases()[:N], default_score
++    from exp9b_official_feature_cache_diagnostics import prepare_input
++    tok = transformers.AutoTokenizer.from_pretrained(MODEL_NAME, trust_remote_code=True)
++    mask_id = int(tok.mask_token_id)
++    dev = torch.device(DEVICE)
++    need = {s["backend"] for s in SERVERS if int(s["split"]) > 0}
++    models, api = {}, None
++    if "dllm_cache" in need:
++        root = Path(DLLM_REPO)
++        api = import_dllm_cache(root if root.is_absolute() else (ROOT / root))
++        models["dllm_cache"] = load_edge_model("dllm_cache", MODEL_NAME, SPLIT, dev)
++    if "fastdllm" in need:
++        repo = Path(FAST_REPO)
++        models["fastdllm"] = load_edge_model("fastdllm", MODEL_NAME, SPLIT, dev,
++                                             repo if repo.is_absolute() else (ROOT / repo))
++    runner = EdgeRunner(models, dev, api=api, slowdown=SLOWDOWN)
++    ref = load_reference()
++    OUT.mkdir(parents=True, exist_ok=True)
++    print(f"Exp21 edge | {torch.cuda.get_device_name(dev)} | split after layer {SPLIT} | "
++          f"edge slowdown {SLOWDOWN:g} | servers {[s['name'] for s in SERVERS]}", flush=True)
++    runs = []
++    for srv in SERVERS:
++        backend, split = srv["backend"], int(srv["split"])
++        encodings = CODECS if split > 0 else ["cloud_only"]
++        print(f"\n=== {srv['name']} at {srv['addr']}  ({time.strftime('%F %T')})", flush=True)
++        sock = connect(srv["addr"])
++        try:
++            warm = prepare_input(tok, cases[0]["prompt"], "cpu")[0][0].tolist()
++            runner.session(sock, session_cfg(backend, split, encodings[0] if split else "bf16",
++                                             "warmup"), warm, mask_id)
++            for case in cases:
++                ids = prepare_input(tok, case["prompt"], "cpu")[0][0].tolist()
++                for enc in encodings:
++                    c = session_cfg(backend, split, enc if split else "bf16", case["case_id"])
++                    answer, info = runner.session(sock, c, ids, mask_id)
++                    text = describe(tok, answer)["text"]
++                    score = score_fn(case, text)
++                    r = ref.get((backend, enc if split else "bf16"), {})
++                    row = {"server": srv["name"], "backend": backend, "split": split,
++                           "codec": enc, "paper_name": PAPER[(backend, enc)],
++                           "case_id": case["case_id"], "prompt_tokens": len(ids),
++                           "latency_s": info["edge_wall_s"], "ok": bool(score["ok"]),
++                           "extracted": score.get("extracted"),
++                           "same_as_single_process": (text == r[case["case_id"]])
++                           if case["case_id"] in r else "", "text": text,
++                           **{k: v for k, v in info.items()}}
++                    runs.append(row)
++                    pd.DataFrame(runs).to_csv(OUT / "runs.csv", index=False)
++                    print(f"  {case['case_id']} {enc:<11s} ok={row['ok']!s:<5} "
++                          f"same={row['same_as_single_process']!s:<5} steps={info['n_steps']:4d} "
++                          f"time={info['edge_wall_s']:7.2f} s (edge {info['edge_compute_ms'] / 1e3:5.2f} s, "
++                          f"cloud {info['cloud_ms'] / 1e3:5.2f} s, wire {info['wire_ms'] / 1e3:5.2f} s)",
++                          flush=True)
++        finally:
++            try:
++                send_frame(sock, F_BYE)
++            finally:
++                sock.close()
++    df = pd.DataFrame(runs)
++    df["same"] = df["same_as_single_process"].map(lambda v: v is True)
++    summary = df.groupby(["server", "codec"], sort=False).agg(
++        paper_name=("paper_name", "first"), runs=("case_id", "size"), acc=("ok", "mean"),
++        same_as_single_process=("same", "sum"), latency_s=("latency_s", "mean"),
++        steps=("n_steps", "mean"), up_mb=("edge_up_bytes", lambda x: x.mean() / 1e6),
++        edge_s=("edge_compute_ms", lambda x: x.mean() / 1e3),
++        cloud_s=("cloud_ms", lambda x: x.mean() / 1e3),
++        cloud_gen_s=("cloud_gen_s", "mean"),
++        wire_s=("wire_ms", lambda x: x.mean() / 1e3)).reset_index()
++    summary.to_csv(OUT / "summary.csv", index=False)
++    (OUT / "metadata.json").write_text(json.dumps({
++        "experiment": "Exp21 DASR as two programs (edge and cloud) over a real network",
++        "tag": TAG, "edge_gpu": torch.cuda.get_device_name(dev), "servers": SERVERS,
++        "codecs": CODECS, "dataset": DATASET, "n_cases": len(cases), "new_tokens": NEW_TOKENS,
++        "split_layer_1based": SPLIT, "edge_slowdown": SLOWDOWN, "seed": SEED,
++        "torch": torch.__version__, "transformers": transformers.__version__,
++        "python": platform.python_version(), "host": platform.node(),
++    }, indent=2, default=str), encoding="utf-8")
++    print("\nExp21 edge completed. Output:", OUT)
++    print(summary.drop(columns=["paper_name"]).round(3).to_string(index=False))
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/dasr1/experiments/run_exp21_cloud.sh b/dasr1/experiments/run_exp21_cloud.sh
+new file mode 100755
+index 0000000..abab5fd
+--- /dev/null
++++ b/dasr1/experiments/run_exp21_cloud.sh
+@@ -0,0 +1,51 @@
++#!/usr/bin/env bash
++# Exp21 cloud side (lab server): starts the four cloud programs in the background, after
++# GPUs 1 and 2 are idle (checked every 5 min), and keeps them running until stopped:
++#   port 6001  dLLM-Cache backend, split after layer 4         (GPU 1)
++#   port 6002  dLLM-Cache backend, cloud-only (split 0)         (GPU 1)
++#   port 6003  Fast-dLLM backend, split after layer 4           (GPU 2)
++#   port 6004  Fast-dLLM backend, cloud-only (split 0)          (GPU 2)
++# They listen on 127.0.0.1 only. Run from dasr1/:
++#   nohup bash experiments/run_exp21_cloud.sh > exp21_cloud.log 2>&1 &
++#   GPU_A=1 GPU_B=2 ...       other GPUs
++# Stop them afterwards:  pkill -f exp21_cloud.py ; pkill -f "nvidia-smi pmon -s um -d 5 -o T"
++# A remote edge (vast.ai) reaches them through a reverse SSH tunnel opened FROM the lab server:
++#   ssh -i ~/.ssh/id_ed25519_meryvast -p <PORT> root@<ADDRESS> -N -o ServerAliveInterval=30 \
++#       -o ExitOnForwardFailure=yes -R 6001:127.0.0.1:6001 -R 6002:127.0.0.1:6002 \
++#       -R 6003:127.0.0.1:6003 -R 6004:127.0.0.1:6004
++set -euo pipefail
++export CUDA_DEVICE_ORDER=PCI_BUS_ID
++GPU_A="${GPU_A:-1}"; GPU_B="${GPU_B:-2}"
++WAIT_SECONDS="${WAIT_SECONDS:-300}"
++SKIP_IDLE_CHECK="${SKIP_IDLE_CHECK:-0}"
++
++if [ "$SKIP_IDLE_CHECK" != "1" ]; then
++  while true; do
++    busy=""
++    for gpu in $GPU_A $GPU_B; do
++      max_util=0
++      for _ in 1 2 3 4 5; do
++        u=$(nvidia-smi -i "$gpu" --query-gpu=utilization.gpu --format=csv,noheader,nounits | tr -d ' ')
++        [ "$u" -gt "$max_util" ] && max_util=$u
++        sleep 1
++      done
++      [ "$max_util" -gt 10 ] && busy="$busy GPU $gpu (${max_util}%)"
++    done
++    if [ -z "$busy" ]; then echo "$(date '+%F %T') GPUs $GPU_A,$GPU_B idle, starting."; break; fi
++    echo "$(date '+%F %T') busy:$busy; checking again in ${WAIT_SECONDS} s ..."
++    sleep "$WAIT_SECONDS"
++  done
++fi
++
++nvidia-smi pmon -s um -d 5 -o T > gpu_pmon_exp21.log 2>&1 &
++start() {  # $1 gpu, $2 backend, $3 split, $4 port
++  CUDA_VISIBLE_DEVICES=$1 nohup python experiments/exp21_cloud.py --backend "$2" --split "$3" \
++    --port "$4" > "exp21_cloud_$2_k$3.log" 2>&1 &
++  echo "started $2 split=$3 on GPU $1, port $4 (log exp21_cloud_$2_k$3.log)"
++}
++start "$GPU_A" dllm_cache 4 6001
++start "$GPU_A" dllm_cache 0 6002
++start "$GPU_B" fastdllm 4 6003
++start "$GPU_B" fastdllm 0 6004
++echo "$(date '+%F %T') all four cloud programs started; they print 'listening' once loaded."
++wait
+diff --git a/dasr1/experiments/run_exp21_edge.sh b/dasr1/experiments/run_exp21_edge.sh
+new file mode 100755
+index 0000000..4fb24c3
+--- /dev/null
++++ b/dasr1/experiments/run_exp21_edge.sh
+@@ -0,0 +1,25 @@
++#!/usr/bin/env bash
++# Exp21 edge side: runs the edge program against the four cloud programs (ports 6001-6004).
++#   On vast.ai (after setup_exp21_edge.sh and with the SSH tunnel open):
++#     cd split-dllm/dasr1 && TAG=vast_3060_tw nohup bash experiments/run_exp21_edge.sh > exp21_edge.log 2>&1 &
++#   On the lab server (check that the two programs give the single-process answers):
++#     TAG=lab_a6000 GPU=2 nohup bash experiments/run_exp21_edge.sh > exp21_edge_lab.log 2>&1 &
++#   SMOKE=1 ...   2 questions, to check that everything connects
++# Output: outputs/exp21_deploy_<TAG>[_smoke]/
++set -euo pipefail
++export CUDA_DEVICE_ORDER=PCI_BUS_ID
++export CUDA_VISIBLE_DEVICES="${GPU:-0}"
++TAG="${TAG:-vast}"
++N="${N:-10}"
++SLOWDOWN="${SLOWDOWN:-1}"
++if [ "${SMOKE:-0}" = "1" ]; then N=2; TAG="${TAG}_smoke"; fi
++python - <<PY
++import runpy, sys
++import configs.experiment_config as c
++c.EXP21_TAG = "$TAG"
++c.EXP21_N_QUESTIONS = $N
++c.EXP21_EDGE_SLOWDOWN = float("$SLOWDOWN")
++c.EXP21_EDGE_DEVICE = "cuda:0"
++sys.argv = ["experiments/exp21_edge.py"]
++runpy.run_path("experiments/exp21_edge.py", run_name="__main__")
++PY
+diff --git a/dasr1/experiments/setup_exp21_edge.sh b/dasr1/experiments/setup_exp21_edge.sh
+new file mode 100755
+index 0000000..aaae015
+--- /dev/null
++++ b/dasr1/experiments/setup_exp21_edge.sh
+@@ -0,0 +1,13 @@
++#!/usr/bin/env bash
++# One-time setup of a rented edge machine (vast.ai, PyTorch image) for Exp21.
++# Run in the home directory of the rented machine:
++#   curl -O https://raw.githubusercontent.com/meryyulinda/split-dllm/main/dasr1/experiments/setup_exp21_edge.sh
++#   bash setup_exp21_edge.sh
++set -euo pipefail
++mkdir -p ~/work && cd ~/work
++[ -d split-dllm ] || git clone --depth 1 https://github.com/meryyulinda/split-dllm.git
++[ -d dLLM-cache-official ] || git clone --depth 1 https://github.com/maomaocun/dLLM-cache.git dLLM-cache-official
++[ -d Fast-dLLM ] || git clone --depth 1 https://github.com/NVlabs/Fast-dLLM.git
++pip install -q "transformers==4.46.2" accelerate sentencepiece pandas safetensors huggingface_hub
++nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
++echo "setup done: cd ~/work/split-dllm/dasr1"
+diff --git a/dasr1/src/remote_split.py b/dasr1/src/remote_split.py
+new file mode 100644
+index 0000000..ab02e38
+--- /dev/null
++++ b/dasr1/src/remote_split.py
+@@ -0,0 +1,550 @@
++"""Exp21: DASR as two programs -- an edge program and a cloud program -- over TCP.
++
++Until Exp20 both halves ran in ONE Python process (two GPUs, or one GPU); here they
++are separate programs that can run on separate machines (e.g. a rented RTX 3060 as
++the edge and the lab server as the cloud).
++
++Roles (one TCP connection per edge device, opened by the edge, which has the prompt):
++
++  edge  (EdgeRunner)   tokenizer, embedding + Dream layers 1..k, its own caches for
++                       those layers, the codec; answers the cloud's step requests.
++  cloud (CloudSession) Dream layers k+1..L, LM head, sampler, the cloud caches and the
++                       refresh / block decisions; drives the generation.
++
++Per denoising step (one round trip):
++  cloud -> edge  STEP  the tokens committed since the last step + what to compute:
++                       which rows (chunk), cache mode (Fast-dLLM block start / in-block),
++                       dLLM-Cache refresh flags, which rows to send, bf16 or INT8.
++  edge  -> cloud ROWS  the boundary rows (bf16, or INT8 deltas) + the edge's compute time
++At the end the cloud sends DONE with the last commits, so the edge holds the answer.
++
++The cloud runs the UNCHANGED samplers (src/feature_cache_ext.generate for dLLM-Cache,
++src/fastdllm_split.kv_generate for Fast-dLLM). Its model keeps only layers k+1..L, and
++its embedding is replaced by RemoteEmbedding, which returns the boundary rows received
++from the edge. RemoteLink has the same interface as SplitLink / KVBlockLink (begin,
++set_chunk, end_step, end), so the samplers drive it exactly as before.
++
++The edge reproduces what layers 1..k did in the single-process runs:
++  * dLLM-Cache: the official hook on its k layers, with the refresh decisions of each
++    step taken from STEP (the cloud's controller decides, as before);
++  * Fast-dLLM: its own key/value cache for its k layers (block start = full forward that
++    stores it; in-block = forward over the block with replace_position).
++With bf16 rows the answers must equal the single-process runs on the same GPU type.
++
++Wire format (little endian):
++  frame  = <BI type, body length> + body
++  BEGIN  JSON (prompt ids and the generation settings)            edge  -> cloud
++  STEP   <IBBBIIIIIIBI> step, mode, refresh_gen, refresh_prompt, chunk_lo, chunk_hi,
++         send_from, send_to, rp_lo, rp_hi, raw, n_commits + positions (uint16) +
++         token ids (uint32)                                        cloud -> edge
++  ROWS   <fBII3x> edge_ms, raw, rows, d (16 B) + bf16 rows | INT8 deltas + fp16 scales
++  DONE   JSON (last commits and the cloud's per-answer statistics)  cloud -> edge
++  BYE    empty                                                     edge  -> cloud
++"""
++from __future__ import annotations
++
++import json
++import socket
++import struct
++import sys
++import time
++from contextlib import contextmanager
++from dataclasses import asdict
++from pathlib import Path
++
++import numpy as np
++
++F_BEGIN, F_STEP, F_ROWS, F_DONE, F_BYE = 1, 2, 3, 4, 5
++HDR = struct.Struct("<BI")
++STEP = struct.Struct("<IBBBIIIIIIBI")
++ROWS = struct.Struct("<fBII3x")    # 16 bytes: keeps the payload 2-byte aligned
++MODE_FULL, MODE_FULL_STORE, MODE_BLOCK = 0, 1, 2
++
++
++# --------------------------------------------------------------------------- framing
++def _recv_exact(sock, n):
++    buf = bytearray(n)
++    view, got = memoryview(buf), 0
++    while got < n:
++        k = sock.recv_into(view[got:], n - got)
++        if k == 0:
++            raise EOFError("connection closed")
++        got += k
++    return buf
++
++
++def _as_bytes(p):
++    if isinstance(p, np.ndarray):
++        p = np.ascontiguousarray(p).reshape(-1).view(np.uint8)
++    return memoryview(p).cast("B")
++
++
++def send_frame(sock, ftype, *parts):
++    """Send one frame; returns its size in bytes (header included)."""
++    views = [_as_bytes(p) for p in parts]
++    n = sum(v.nbytes for v in views)
++    sock.sendall(HDR.pack(ftype, n))
++    for v in views:
++        if v.nbytes:
++            sock.sendall(v)
++    return HDR.size + n
++
++
++def recv_frame(sock):
++    ftype, n = HDR.unpack(_recv_exact(sock, HDR.size))
++    return ftype, (_recv_exact(sock, n) if n else bytearray()), HDR.size + n
++
++
++def connect(addr, wait_s=900):
++    """Connect to a cloud program, retrying while it is still loading (up to wait_s)."""
++    host, port = addr.rsplit(":", 1)
++    deadline = time.time() + wait_s
++    while True:
++        try:
++            s = socket.create_connection((host, int(port)), timeout=30)
++            break
++        except OSError:
++            if time.time() > deadline:
++                raise
++            time.sleep(5)
++    s.settimeout(None)
++    _tune(s)
++    return s
++
++
++def _tune(s):
++    s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
++    for opt in (socket.SO_SNDBUF, socket.SO_RCVBUF):
++        s.setsockopt(socket.SOL_SOCKET, opt, 4 << 20)
++
++
++def pack_step(f, pos, tok):
++    pos = np.asarray(pos, dtype="<u2")
++    tok = np.asarray(tok, dtype="<u4")
++    head = STEP.pack(f["step"], f["mode"], f["g"], f["p"], f["chunk_lo"], f["chunk_hi"],
++                     f["send_from"], f["send_to"], f["rp_lo"], f["rp_hi"], f["raw"], len(pos))
++    return head, pos, tok
++
++
++def unpack_step(body):
++    v = STEP.unpack_from(body, 0)
++    keys = ("step", "mode", "g", "p", "chunk_lo", "chunk_hi", "send_from", "send_to",
++            "rp_lo", "rp_hi", "raw", "n")
++    f = dict(zip(keys, v))
++    n, off = f["n"], STEP.size
++    pos = np.frombuffer(body, dtype="<u2", count=n, offset=off).astype(np.int64)
++    tok = np.frombuffer(body, dtype="<u4", count=n, offset=off + 2 * n).astype(np.int64)
++    return f, pos, tok
++
++
++# --------------------------------------------------------------------------- shared
++def import_dllm_cache(repo):
++    """(dLLMCache, dLLMCacheConfig, register_cache_Dream, logout_cache_Dream) from the
++    official dLLM-Cache checkout at `repo` (as exp9b.import_official)."""
++    repo = str(Path(repo).expanduser().resolve())
++    if repo not in sys.path:
++        sys.path.insert(0, repo)
++    from dllm_cache.cache import dLLMCache, dLLMCacheConfig
++    from dllm_cache.hooks import logout_cache_Dream, register_cache_Dream
++    return dLLMCache, dLLMCacheConfig, register_cache_Dream, logout_cache_Dream
++
++
++def _sync(dev):
++    import torch
++    if torch.device(dev).type == "cuda":
++        torch.cuda.synchronize(dev)
++
++
++# --------------------------------------------------------------------------- cloud
++class RemoteEmbedding:
++    """Factory for the cloud model's embedding replacement (an nn.Module)."""
++
++    @staticmethod
++    def make(link):
++        import torch.nn as nn
++
++        class _RemoteEmbedding(nn.Module):
++            def __init__(self):
++                super().__init__()
++                self._link = [link]          # list: not registered as a submodule
++
++            def forward(self, input_ids):
++                return self._link[0].remote_step(input_ids)
++
++        return _RemoteEmbedding()
++
++
++def strip_edge(model, k, link):
++    """Cloud model: drop the embedding and layers 1..k, read the boundary from the edge."""
++    import torch
++    import torch.nn as nn
++    base = model.model
++    keep = list(base.layers)[k:]
++    base.layers = nn.ModuleList(keep)
++    base.embed_tokens = RemoteEmbedding.make(link)
++    torch.cuda.empty_cache()
++    return model
++
++
++class RemoteLink:
++    """Cloud side of the connection, with the interface of SplitLink / KVBlockLink.
++
++    sock     the edge's connection (set per session)
++    The dLLM-Cache sampler calls begin(prompt_len=..., controller=..., rows=..., encoding=...,
++    prompt_tail_rows=..., mask_id=..., anchor_interval=...); kv_generate calls
++    begin(n_total=..., n_prompt=..., encoding=..., anchor_interval=..., cache=...) and
++    set_chunk(offset, kind, block, span) before every model call.
++    """
++
++    def __init__(self, model, device, d):
++        self.device, self.d = device, int(d)
++        self.edge = device          # kv_generate builds replace_position on link.edge
++        self.sock = None
++        self.active = False
++        self.cloud_end = None
++        head = model.lm_head
++        head.register_forward_hook(self._on_head)
++
++    # -------------------------------------------------------------- session
++    def begin(self, **kw):
++        import torch
++        self.kv = "n_total" in kw
++        self.encoding = kw.get("encoding", "bf16")
++        if self.encoding not in {"bf16", "int8_delta"}:
++            raise ValueError(f"remote link supports bf16 and int8_delta, not {self.encoding}")
++        self.anchor_interval = int(kw.get("anchor_interval", 32))
++        if self.kv:
++            self.n_total = int(kw["n_total"])
++            self.cache = kw.get("cache", "dual")
++        else:
++            self.rows = kw.get("rows", "all")
++            self.controller = kw.get("controller")
++            self.split = int(kw["prompt_len"]) - int(kw.get("prompt_tail_rows", 0))
++            if self.rows == "cache_aware" and self.controller is None:
++                raise ValueError("rows='cache_aware' needs the feature cache")
++            self.n_total = None
++        self.mirror = None            # (1, n, d): the boundary rows the cloud holds
++        self.record = None            # (1, n): the tokens the edge holds
++        self.step, self.last_anchor = 0, 0
++        self.offset, self.kind = 0, "full"
++        self.stats, self.ev = [], []
++        self.active = True
++        self.torch = torch
++
++    def set_chunk(self, offset, kind, block, span=None):
++        self.offset, self.kind = int(offset), kind
++
++    def end_step(self, n_commits):
++        if self.active and self.stats:
++            self.stats[-1]["n_commits"] = int(n_commits)
++
++    def end(self):
++        if not self.active:
++            return []
++        torch = self.torch
++        tail = torch.cuda.Event(enable_timing=True)
++        tail.record(torch.cuda.current_stream(self.device))
++        torch.cuda.synchronize(self.device)
++        out = []
++        for t, (ev, st) in enumerate(zip(self.ev, self.stats)):
++            nxt = self.ev[t + 1]["sample_end"] if t + 1 < len(self.ev) else tail
++            row = dict(st)
++            row["cloud_ms"] = ev["cloud_start"].elapsed_time(ev["cloud_end"]) if "cloud_end" in ev else 0.0
++            row["sample_ms"] = ev["cloud_end"].elapsed_time(nxt) if "cloud_end" in ev else 0.0
++            row.setdefault("n_commits", 0)
++            out.append(row)
++        self.active = False
++        return out
++
++    def _on_head(self, module, args, output):
++        if self.active and self.ev:
++            e = self.torch.cuda.Event(enable_timing=True)
++            e.record(self.torch.cuda.current_stream(self.device))
++            self.ev[-1]["cloud_end"] = e
++        return None
++
++    def _event(self):
++        e = self.torch.cuda.Event(enable_timing=True)
++        e.record(self.torch.cuda.current_stream(self.device))
++        return e
++
++    def _cache_step(self):
++        """dLLM-Cache step about to run (counters of the cloud layers + 1)."""
++        from dllm_cache.cache import dLLMCache
++        inst = dLLMCache()
++        cnt = inst._dLLMCache__step_counter[inst.cache_type]
++        return (max(cnt.values()) if cnt else 0) + 1
++
++    # -------------------------------------------------------------- one step
++    def remote_step(self, input_ids):
++        torch = self.torch
++        if not self.active:
++            raise RuntimeError("RemoteLink used outside a session")
++        ev = {"sample_end": self._event()}
++        self.step += 1
++        ids = input_ids
++        m = int(ids.shape[1])
++        if self.kv:
++            lo = self.offset
++            mode = (MODE_BLOCK if self.kind == "block" else
++                    (MODE_FULL_STORE if self.cache == "dual" else MODE_FULL))
++            send_from, send_to = lo, lo + m
++            g = p = 0
++            raw = (self.step == 1 or self.encoding == "bf16"
++                   or self.step - self.last_anchor >= self.anchor_interval)
++            rp = (lo, lo + m) if mode == MODE_BLOCK else (0, 0)
++            n = self.n_total
++        else:
++            lo, mode, n = 0, MODE_FULL, m
++            first = self.mirror is None
++            if self.controller is not None:
++                g, p = self.controller.decide(self._cache_step())
++                g, p = int(bool(g)), int(bool(p))
++            else:
++                g = p = 1
++            prompt_now = self.rows == "all" or first or bool(p)
++            send_from, send_to = (0 if prompt_now else self.split), n
++            raw = (first or (self.rows == "cache_aware" and prompt_now) or self.encoding == "bf16"
++                   or self.step - self.last_anchor >= self.anchor_interval)
++            rp = (0, 0)
++        if raw and self.encoding != "bf16":
++            self.last_anchor = self.step
++        # tokens committed since the last step (the edge's copy of the sequence)
++        _sync(self.device)
++        t0 = time.perf_counter()
++        if self.record is None:  # first step: the edge built the same canvas itself
++            if lo != 0 or m != n:
++                raise RuntimeError("the first step must cover the whole sequence")
++            self.record = ids.detach().clone()
++        cur = self.record[:, lo:lo + m]
++        idx = torch.nonzero(ids[0] != cur[0]).squeeze(1)
++        vals = ids[0, idx]
++        self.record[:, lo:lo + m] = ids
++        f = {"step": self.step, "mode": mode, "g": g, "p": p, "chunk_lo": lo, "chunk_hi": lo + m,
++             "send_from": send_from, "send_to": send_to, "rp_lo": rp[0], "rp_hi": rp[1],
++             "raw": int(bool(raw))}
++        down = send_frame(self.sock, F_STEP, *pack_step(f, (idx + lo).cpu().numpy(),
++                                                        vals.cpu().numpy()))
++        ftype, body, up = recv_frame(self.sock)
++        if ftype != F_ROWS:
++            raise RuntimeError(f"expected ROWS, got frame type {ftype}")
++        edge_ms, raw_r, r, d = ROWS.unpack_from(body, 0)
++        rows = self._decode(body, ROWS.size, bool(raw_r), r, d, send_from, send_to)
++        if self.mirror is None:
++            if send_from != 0 or send_to != n:
++                raise RuntimeError("the first step must send every row")
++            self.mirror = rows.clone()
++        else:
++            self.mirror[:, send_from:send_to] = rows
++        hidden = self.mirror[:, lo:lo + m].clone()
++        _sync(self.device)
++        wire_ms = (time.perf_counter() - t0) * 1e3
++        ev["cloud_start"] = self._event()
++        self.ev.append(ev)
++        self.stats.append({"step": self.step, "kind": self.kind if self.kv else "full",
++                           "rows_sent": int(r), "raw": bool(raw), "refresh_gen": g,
++                           "refresh_prompt": p, "up_bytes": int(up), "down_bytes": int(down),
++                           "edge_ms": float(edge_ms), "wire_ms": wire_ms})
++        return hidden
++
++    def _decode(self, body, off, raw, r, d, lo, hi):
++        torch = self.torch
++        if raw:
++            rows = torch.frombuffer(body, dtype=torch.bfloat16, count=r * d, offset=off)
++            return rows.view(1, r, d).to(self.device)
++        q = torch.frombuffer(body, dtype=torch.int8, count=r * d, offset=off).view(1, r, d)
++        s = torch.frombuffer(body, dtype=torch.float16, count=r, offset=off + r * d).view(1, r, 1)
++        base = self.mirror[:, lo:hi]
++        return (base.float() + q.to(self.device).float() * s.to(self.device).float()).to(base.dtype)
++
++
++# --------------------------------------------------------------------------- edge
++@contextmanager
++def edge_cache_session(model, api, prompt_len, prompt_tail_rows, transfer_ratio, flags):
++    """Official dLLM-Cache hook on the edge's k layers; refresh decisions = flags[0:2],
++    which the edge sets from every STEP (the cloud's controller decides)."""
++    import torch
++    dLLMCache, dLLMCacheConfig, register, logout = api
++    split = int(prompt_len) - int(prompt_tail_rows)
++    inst = dLLMCache.new_instance(**asdict(dLLMCacheConfig(
++        prompt_interval_steps=1, gen_interval_steps=1, transfer_ratio=float(transfer_ratio))))
++    for attr in ("refresh_gen", "refresh_prompt"):
++        inst.__dict__.pop(attr, None)
++    inst.refresh_gen = lambda layer_id=0: bool(flags[0])
++    inst.refresh_prompt = lambda layer_id=0: bool(flags[1])
++    hook_mod = sys.modules["dllm_cache.hooks.cache_hook_Dream"]
++    original = hook_mod.refresh_index
++    if prompt_tail_rows > 0:   # as feature_cache_session(force_prompt_tail=True)
++        def refresh_index(new_features, cached_features=None, transfer_ratio=0.5, layer_id=0):
++            _, gen_len, _ = new_features.shape
++            kk = int(gen_len * transfer_ratio)
++            cos = torch.nn.functional.cosine_similarity(new_features, cached_features, dim=-1)
++            cos[:, :prompt_tail_rows] = -2.0
++            return torch.topk(cos, largest=False, k=kk).indices
++        hook_mod.refresh_index = refresh_index
++    registered = False
++    try:
++        register(model, "model.layers")
++        registered = True
++        inst.reset_cache(split)
++        yield inst
++    finally:
++        if registered:
++            logout(model, "model.layers")
++        hook_mod.refresh_index = original
++        for attr in ("refresh_gen", "refresh_prompt"):
++            inst.__dict__.pop(attr, None)
++
++
++def load_edge_model(backend, model_name, k, device, fastdllm_repo=None):
++    """Embedding + Dream's first k layers only (weights read from the checkpoint shards
++    that hold them); final norm and LM head replaced by identities, so the model's
++    output 'logits' are the boundary rows h_k."""
++    import torch
++    import torch.nn as nn
++    from huggingface_hub import hf_hub_download
++    from safetensors import safe_open
++    if backend == "fastdllm":
++        from src.fastdllm_split import import_fastdllm
++        pkg = import_fastdllm("dream", fastdllm_repo)
++        cfg = pkg.DreamConfig.from_pretrained(model_name)
++        build = lambda c: pkg.DreamModel(c)  # noqa: E731
++    else:
++        from transformers import AutoConfig, AutoModel
++        cfg = AutoConfig.from_pretrained(model_name, trust_remote_code=True)
++        build = lambda c: AutoModel.from_config(c, trust_remote_code=True)  # noqa: E731
++    cfg.num_hidden_layers = int(k)
++    prev = torch.get_default_dtype()
++    torch.set_default_dtype(torch.bfloat16)
++    try:
++        with torch.device(device):
++            model = build(cfg)
++    finally:
++        torch.set_default_dtype(prev)
++    model.lm_head = nn.Identity()
++    model.model.norm = nn.Identity()
++    index = json.loads(Path(hf_hub_download(model_name, "model.safetensors.index.json"))
++                       .read_text())["weight_map"]
++    wanted = [key for key in index if key.startswith("model.embed_tokens.")
++              or any(key.startswith(f"model.layers.{i}.") for i in range(int(k)))]
++    tensors = {}
++    for shard in sorted({index[key] for key in wanted}):
++        path = hf_hub_download(model_name, shard)
++        with safe_open(path, framework="pt", device=str(device)) as f:
++            for key in wanted:
++                if index[key] == shard:
++                    tensors[key] = f.get_tensor(key).to(torch.bfloat16)
++    missing, unexpected = model.load_state_dict(tensors, strict=False)
++    bad = [m for m in missing if m.startswith(("model.embed_tokens", "model.layers"))]
++    if bad or unexpected:
++        raise RuntimeError(f"edge weights incomplete: missing {bad[:5]}, unexpected {unexpected[:5]}")
++    torch.cuda.empty_cache()
++    return model.eval()
++
++
++class EdgeRunner:
++    """Edge side of one connection: runs sessions (one per answer) on request."""
++
++    def __init__(self, models, device, api=None, slowdown=1.0):
++        """models: {"dllm_cache": edge model (HF Dream), "fastdllm": edge model (Fast-dLLM)}"""
++        import torch
++        self.torch = torch
++        self.models, self.device, self.api = models, torch.device(device), api
++        if self.device.type == "cuda":
++            torch.cuda.set_device(self.device)
++        self.slow = float(slowdown)
++
++    def session(self, sock, cfg, prompt_ids, mask_id):
++        """Send BEGIN, answer STEP requests until DONE. Returns (answer ids, info)."""
++        torch = self.torch
++        backend = cfg["backend"]
++        plen = len(prompt_ids)
++        n = plen + int(cfg["new_tokens"])
++        canvas = torch.full((1, n), int(mask_id), dtype=torch.long)
++        canvas[0, :plen] = torch.tensor(prompt_ids, dtype=torch.long)
++        body = json.dumps({**cfg, "prompt_ids": list(map(int, prompt_ids))}).encode()
++        t0 = time.perf_counter()
++        sent = send_frame(sock, F_BEGIN, body)
++        model = self.models.get(backend) if cfg.get("split", 0) > 0 else None
++        flags = [1, 1]
++        state = {"ref": None, "pkv": None, "edge_ms": 0.0, "steps": 0, "up": 0,
++                 "down": 0, "sleep_ms": 0.0}
++        ctx = (edge_cache_session(model, self.api, plen, int(cfg.get("prompt_tail_rows", 0)),
++                                  float(cfg.get("transfer_ratio", 0.25)), flags)
++               if (model is not None and backend == "dllm_cache" and cfg.get("policy"))
++               else _null())
++        with ctx, torch.inference_mode():
++            while True:
++                ftype, body, size = recv_frame(sock)
++                state["down"] += size
++                if ftype == F_DONE:
++                    info = json.loads(bytes(body).decode())
++                    pos, tok = info.pop("final_pos"), info.pop("final_tok")
++                    canvas[0, pos] = torch.tensor(tok, dtype=torch.long)
++                    break
++                if ftype != F_STEP:
++                    raise RuntimeError(f"edge: unexpected frame type {ftype}")
++                f, pos, tok = unpack_step(body)
++                canvas[0, torch.from_numpy(pos)] = torch.from_numpy(tok)
++                flags[0], flags[1] = f["g"], f["p"]
++                state["up"] += self._step(sock, model, backend, canvas, f, state)
++                state["steps"] += 1
++        wall = time.perf_counter() - t0
++        info.update({"edge_wall_s": wall, "edge_steps": state["steps"],
++                     "edge_compute_ms": state["edge_ms"], "edge_sleep_ms": state["sleep_ms"],
++                     "edge_up_bytes": state["up"] + sent, "edge_down_bytes": state["down"]})
++        return canvas[0, plen:].clone(), info
++
++    def _step(self, sock, model, backend, canvas, f, state):
++        torch = self.torch
++        dev = self.device
++        lo, hi = f["chunk_lo"], f["chunk_hi"]
++        ids = canvas[:, lo:hi].to(dev)
++        _sync(dev)
++        e0, e1 = torch.cuda.Event(enable_timing=True), torch.cuda.Event(enable_timing=True)
++        e0.record()
++        if backend == "fastdllm":
++            if f["mode"] == MODE_BLOCK:
++                rp = torch.zeros((1, canvas.shape[1]), dtype=torch.bool, device=dev)
++                rp[:, f["rp_lo"]:f["rp_hi"]] = True
++                out = model(ids, "full", None, past_key_values=state["pkv"], use_cache=True,
++                            dual_cache=True, replace_position=rp)
++            else:
++                store = f["mode"] == MODE_FULL_STORE
++                out = model(ids, "full", None, use_cache=store)
++                if store:
++                    state["pkv"] = out.past_key_values
++        else:
++            out = model(ids, "full", None)
++        h = out.logits.to(torch.bfloat16)
++        rows = h[:, f["send_from"] - lo:f["send_to"] - lo]
++        r, d = int(rows.shape[1]), int(rows.shape[2])
++        a, b = f["send_from"], f["send_to"]
++        if state["ref"] is None:
++            state["ref"] = torch.zeros(1, canvas.shape[1], d, dtype=torch.bfloat16, device=dev)
++        if f["raw"]:
++            state["ref"][:, a:b] = rows
++            payload = [rows.contiguous().view(torch.int16).cpu().numpy()]
++        else:
++            ref = state["ref"][:, a:b].float()
++            delta = rows.float() - ref
++            scale = delta.abs().amax(dim=-1, keepdim=True).clamp_min(1e-12) / 127.0
++            q = torch.clamp(torch.round(delta / scale), -127, 127)
++            s16 = scale.half()
++            state["ref"][:, a:b] = (ref + q * s16.float()).to(torch.bfloat16)
++            payload = [q.to(torch.int8).contiguous().cpu().numpy(),
++                       s16.reshape(-1).contiguous().cpu().numpy()]
++        e1.record()
++        _sync(dev)
++        ms = e0.elapsed_time(e1)
++        state["edge_ms"] += ms
++        if self.slow > 1.0:
++            sl = (self.slow - 1.0) * ms
++            time.sleep(sl / 1e3)
++            state["sleep_ms"] += sl
++        return send_frame(sock, F_ROWS, ROWS.pack(float(ms), int(f["raw"]), r, d), *payload)
++
++
++@contextmanager
++def _null():
++    yield None

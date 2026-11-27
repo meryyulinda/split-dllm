@@ -1,0 +1,20 @@
+Exp21 edge | NVIDIA RTX A6000 | split after layer 4 | edge slowdown 1 | servers ['dllm_cache_split', 'fastdllm_split']
+
+=== dllm_cache_split at 127.0.0.1:6001  (2026-11-27 18:50:49)
+  gsm8k_0000 bf16        ok=True  same=True  steps= 256 time=  15.16 s (edge  2.00 s, cloud 10.54 s, wire  2.59 s)
+  gsm8k_0000 int8_delta  ok=True  same=True  steps= 256 time=  15.09 s (edge  2.03 s, cloud 10.50 s, wire  2.55 s)
+  gsm8k_0001 bf16        ok=True  same=True  steps= 256 time=  15.29 s (edge  2.04 s, cloud 10.58 s, wire  2.67 s)
+  gsm8k_0001 int8_delta  ok=True  same=True  steps= 256 time=  15.32 s (edge  2.04 s, cloud 10.57 s, wire  2.59 s)
+
+=== fastdllm_split at 127.0.0.1:6003  (2026-11-27 18:52:06)
+  gsm8k_0000 bf16        ok=True  same=True  steps=  63 time=   2.83 s (edge  0.43 s, cloud  2.23 s, wire  0.55 s)
+  gsm8k_0000 int8_delta  ok=True  same=True  steps=  65 time=   2.85 s (edge  0.42 s, cloud  2.27 s, wire  0.53 s)
+  gsm8k_0001 bf16        ok=True  same=True  steps=  50 time=   2.21 s (edge  0.32 s, cloud  1.77 s, wire  0.40 s)
+  gsm8k_0001 int8_delta  ok=True  same=True  steps=  50 time=   2.15 s (edge  0.32 s, cloud  1.71 s, wire  0.40 s)
+
+Exp21 edge completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp21_deploy_lab_a6000_smoke
+          server      codec  runs  acc  same_as_single_process  latency_s  steps   up_mb  edge_s  cloud_s  cloud_gen_s  wire_s
+dllm_cache_split       bf16     2  1.0                       2     15.226  256.0 477.793   2.019   10.559       15.224   2.631
+dllm_cache_split int8_delta     2  1.0                       2     15.204  256.0 252.252   2.037   10.537       15.203   2.568
+  fastdllm_split       bf16     2  1.0                       2      2.522   56.5  30.366   0.374    2.001        2.521   0.476
+  fastdllm_split int8_delta     2  1.0                       2      2.504   57.5  16.681   0.373    1.990        2.503   0.469

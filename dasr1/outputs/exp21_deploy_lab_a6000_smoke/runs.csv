@@ -1,0 +1,37 @@
+server,backend,split,codec,paper_name,case_id,prompt_tokens,latency_s,ok,extracted,same_as_single_process,text,cloud_gen_s,n_steps,cloud_ms,sample_ms,wire_ms,edge_ms_reported,up_bytes,down_bytes,edge_wall_s,edge_steps,edge_compute_ms,edge_sleep_ms,edge_up_bytes,edge_down_bytes
+dllm_cache_split,dllm_cache,4,bf16,DASR + dLLM-Cache (bf16),gsm8k_0000,99,15.163507350720465,True,18.0,True,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",15.162191031500697,256,10536.3047580719,1974.3309445381165,2589.8829009383917,2000.2742080688477,479329536,12020,15.163507350720465,256,2000.2742080688477,0.0,479330431,12310
+dllm_cache_split,dllm_cache,4,int8_delta,DASR + dLLM-Cache (INT8),gsm8k_0000,99,15.091023097746074,True,18.0,True,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses a total of 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, so she sells 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",15.089068604633212,256,10504.157276153564,1971.2308466434479,2550.6595261394978,2029.0724143981934,253788906,12020,15.091023097746074,256,2029.0724143981934,0.0,253789807,12312
+dllm_cache_split,dllm_cache,4,bf16,DASR + dLLM-Cache (bf16),gsm8k_0001,60,15.287611871026456,True,3.0,True,"The robe takes 2 bolts of blue fiber.
+It takes half that much white fiber, so it takes 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts of fiber.
+The answer is: 3",15.286145768128335,256,10580.856046676636,1970.7027819156647,2671.381547115743,2038.169466495514,476254464,12020,15.287611871026456,256,2038.169466495514,0.0,476255139,12310
+dllm_cache_split,dllm_cache,4,int8_delta,DASR + dLLM-Cache (INT8),gsm8k_0001,60,15.317945734597743,True,3.0,True,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+So, in total, the robe takes 2 + 1 = 3 bolts of fiber.
+The final answer: 3.",15.31646731402725,256,10569.90036392212,1965.3570501804352,2586.0751988366246,2044.4341025352478,250713834,12020,15.317945734597743,256,2044.4341025352478,0.0,250714515,12310
+fastdllm_split,fastdllm,4,bf16,DASR + Fast-dLLM (bf16),gsm8k_0000,99,2.829677148722112,True,18.0,True,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",2.828591021709144,63,2231.7885036468506,43.34380793571472,547.091937623918,426.62508726119995,32974123,3933,2.829677148722112,63,426.62508726119995,0.0,32974924,4595
+fastdllm_split,fastdllm,4,int8_delta,DASR + Fast-dLLM (INT8),gsm8k_0000,99,2.8530716514214873,True,18.0,True,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18",2.851654337719083,65,2268.5720710754395,42.72886398434639,534.0223023667932,422.7048010826111,18227327,4015,2.8530716514214873,65,422.7048010826111,0.0,18228134,4677
+fastdllm_split,fastdllm,4,bf16,DASR + Fast-dLLM (bf16),gsm8k_0001,60,2.2141193682327867,True,3.0,True,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3.",2.2131287222728133,50,1769.3760681152344,33.7438080906868,404.86796014010906,320.9234538078308,27755546,3400,2.2141193682327867,50,320.9234538078308,0.0,27756127,4063
+fastdllm_split,fastdllm,4,int8_delta,DASR + Fast-dLLM (INT8),gsm8k_0001,60,2.1549132764339447,True,3.0,True,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3.",2.1539271846413612,50,1712.0547885894775,32.59494388103485,404.53826263546944,322.71817684173584,15132578,3400,2.1549132764339447,50,322.71817684173584,0.0,15133165,4065

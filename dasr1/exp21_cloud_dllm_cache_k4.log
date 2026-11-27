@@ -1,0 +1,13 @@
+nohup: ignoring input
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.97it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.32it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.17it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.29it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.24it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Exp21 cloud | dllm_cache_k4 | NVIDIA RTX A6000 | listening on 127.0.0.1:6001
+2026-11-27 18:50:49 edge connected from ('127.0.0.1', 39442)
+  warmup bf16: 256 steps, cloud 16.6 s
+  gsm8k_0000 bf16: 256 steps, cloud 15.2 s
+  gsm8k_0000 int8_delta: 256 steps, cloud 15.1 s
+  gsm8k_0001 bf16: 256 steps, cloud 15.3 s
+  gsm8k_0001 int8_delta: 256 steps, cloud 15.3 s
