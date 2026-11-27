@@ -6602,3 +6602,3001 @@ def even_odd_palindrome(n):
                 odd_count += 1
     return even_count, odd_count
 ```"
+humaneval,42,HumanEval_108,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def count_nums(arr):
+    count = 0
+    for num in arr:
+        digit_sum = sum(int(digit) for digit in str(num))
+        if digit_sum > 0:
+            count += 1
+    return count
+```"
+humaneval,42,HumanEval_108,fastdllm,DASR + Fast-dLLM (bf16),False,,False,38,"Here is the completed Python function:
+
+```python
+def count_nums(arr):
+    count = 0
+    for num in arr:
+        digit_sum = sum(int(digit) for digit in str(abs(num)))
+        if digit_sum > 0:
+            count += 1
+    return count
+```"
+humaneval,42,HumanEval_108,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,38,"Here is the completed Python function:
+
+```python
+def count_nums(arr):
+    count = 0
+    for num in arr:
+        digit_sum = sum(int(digit) for digit in str(abs(num)))
+        if digit_sum > 0:
+            count += 1
+    return count
+```"
+humaneval,42,HumanEval_108,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,31,"Here is the completed Python function:
+
+```python
+def count_nums(arr):
+    count = 0
+    for num in arr:
+        digit_sum = sum(int(digit) for digit in str(abs(num)))
+        if digit_sum > 0:
+            count += 1
+    return count
+```"
+humaneval,42,HumanEval_109,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def move_one_ball(arr):
+    if not arr:
+        return True
+    sorted_arr = sorted(arr)
+    for i in range(len(arr)):
+        if arr[i] != sorted_arr[i]:
+            return False
+    return True
+```"
+humaneval,42,HumanEval_109,fastdllm,DASR + Fast-dLLM (bf16),False,,False,52,"Here is the completed Python function:
+
+```python
+def move_one_ball(arr):
+    if not arr:
+        return True
+    n = len(arr)
+    for i in range(n):
+        if arr[i] > arr[(i + 1) % n]:
+            return False
+    return True
+```"
+humaneval,42,HumanEval_109,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,105,"Here is the completed Python function:
+
+```python
+def move_one_ball(arr):
+    if not arr:
+        return True
+    sorted_arr = sorted(arr)
+    for i in range(len(arr)):
+        if arr[i] != sorted_arr[i]:
+            return False
+    return True
+```
+
+This function works by first checking if the input array is empty. If it is, the function returns True. Otherwise, it creates a sorted copy of the input array and compares each element in the original array with the corresponding element in the sorted array. If any element does not match, the function returns False. If all elements match, the function returns True."
+humaneval,42,HumanEval_109,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,39,"Here is the completed Python function:
+
+```python
+def move_one_ball(arr):
+    if not arr:
+        return True
+    n = len(arr)
+    for i in range(n):
+        if arr[i] > arr[(i + 1) % n]:
+            return False
+    return True
+```"
+humaneval,42,HumanEval_110,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def exchange(lst1, lst2):
+    odd1 = [x for x in lst1 if x % 2 != 0]
+    odd2 = [x for x in lst2 if x % 2 != 0]
+    if len(odd1) <= len(odd2):
+        return ""YES""
+    else:
+        return ""NO""
+```"
+humaneval,42,HumanEval_110,fastdllm,DASR + Fast-dLLM (bf16),False,,False,72,"```python
+def exchange(lst1, lst2):
+    lst1 = [x for x in lst1 if x % 2 != 0]
+    lst2 = [x for x in lst2 if x % 2 != 0]
+    if len(lst1) > len(lst2):
+        return ""NO""
+    if len(lst1) == 0:
+        return ""YES""
+    if len(lst2) == 0:
+        return ""NO""
+    return ""YES""
+```"
+humaneval,42,HumanEval_110,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,74,"```python
+def exchange(lst1, lst2):
+    lst1 = [x for x in lst1 if x % 2 != 0]
+    lst2 = [x for x in lst2 if x % 2 != 0]
+    if len(lst1) > len(lst2):
+        return ""NO""
+    if len(lst1) == 0:
+        return ""YES""
+    if len(lst2) == 0:
+        return ""NO""
+    return ""YES""
+```"
+humaneval,42,HumanEval_110,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,34,"```python
+def exchange(lst1, lst2):
+    lst1 = [x for x in lst1 if x % 2 == 0]
+    lst2 = [x for x in lst2 if x % 2 != 0]
+    if len(lst1) > len(lst2):
+        return ""NO""
+    elif len(lst1) <= len(lst2):
+        return ""YES""
+    else:
+        return ""NO""
+```"
+humaneval,42,HumanEval_111,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def histogram(test):
+    histogram = {}
+    letters = test.split()
+    for letter in letters:
+        if letter in histogram:
+            histogram[letter] += 1
+        else:
+            histogram[letter] = 1
+    max_count = max(histogram.values())
+    return {letter: count for letter, count in histogram.items() if count == max_count}
+```"
+humaneval,42,HumanEval_111,fastdllm,DASR + Fast-dLLM (bf16),False,,False,46,"```python
+def histogram(test):
+    counts = {}
+    letters = test.split()
+    for letter in letters:
+        if letter in counts:
+            counts[letter] += 1
+        else:
+            counts[letter] = 1
+    max_counts = max(counts.values())
+    return {letter: count for letter, count in counts.items() if count == max_counts}
+```"
+humaneval,42,HumanEval_111,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,46,"```python
+def histogram(test):
+    counts = {}
+    letters = test.split()
+    for letter in letters:
+        if letter in counts:
+            counts[letter] += 1
+        else:
+            counts[letter] = 1
+    max_counts = max(counts.values())
+    return {letter: count for letter, count in counts.items() if count == max_counts}
+```"
+humaneval,42,HumanEval_111,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,39,"```python
+def histogram(test):
+    counts = {}
+    letters = test.split()
+    for letter in letters:
+        if letter in counts:
+            counts[letter] += 1
+        else:
+            counts[letter] = 1
+    max_counts = max(counts.values())
+    return {letter: count for letter, count in counts.items() if count == max_counts}
+```"
+humaneval,42,HumanEval_112,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def reverse_delete(s, c):
+    result = """"
+    for char in s:
+        if char not in c:
+            result += char
+    return result, result[::-1] == result
+```"
+humaneval,42,HumanEval_112,fastdllm,DASR + Fast-dLLM (bf16),True,,False,39,"```python
+def reverse_delete(s, c):
+    result = """"
+    for char in s:
+        if char not in c:
+            result += char
+    if result == result[::-1]:
+        return result, True
+    else:
+        return result, False
+```"
+humaneval,42,HumanEval_112,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,39,"```python
+def reverse_delete(s, c):
+    result = """"
+    for char in s:
+        if char not in c:
+            result += char
+    if result == result[::-1]:
+        return result, True
+    else:
+        return result, False
+```"
+humaneval,42,HumanEval_112,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,30,"```python
+def reverse_delete(s, c):
+    result = """"
+    for char in s:
+        if char not in c:
+            result += char
+    return result == result[::-1]
+```"
+humaneval,42,HumanEval_113,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def odd_count(lst):
+    result = []
+    for string in lst:
+        odd_count = sum(int(char) % 2 != 0 for char in string)
+        result.append(""the number of odd elements {}n the str{}ng {} of the {}nput."".format(odd_count, odd_count, odd_count, odd_count))
+    return result
+```"
+humaneval,42,HumanEval_113,fastdllm,DASR + Fast-dLLM (bf16),False,,False,60,"Here is the completed Python function:
+
+```python
+def odd_count(lst):
+    result = []
+    for s in lst:
+        odd_count = sum(int(digit) % 2 != 0 for digit in s)
+        result.append(f""The number of odd elements {odd_count}n the str{odd_count}ng {odd_count} of the {odd_count}input."")
+    return result
+```"
+humaneval,42,HumanEval_113,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,59,"Here is the completed Python function:
+
+```python
+def odd_count(lst):
+    result = []
+    for string in lst:
+        odd_count = sum(int(digit) % 2 != 0 for digit in string)
+        result.append(f""The number of odd elements {odd_count}n the {odd_count}ng {odd_count} of the {odd_count}put."")
+    return result
+```"
+humaneval,42,HumanEval_113,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,44,"Here is the completed Python function:
+
+```python
+def odd_count(lst):
+    result = []
+    for s in lst:
+        odd_count = sum(int(digit) % 2 != 0 for digit in s)
+        result.append(""the number of odd elements {}n the string {} of the input."".format(odd_count, odd_count))
+    return result
+```"
+humaneval,42,HumanEval_114,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def minSubArraySum(nums):
+    min_sum = float('inf')
+    current_sum = 0
+    for num in nums:
+        current_sum = min(num, current_sum + num)
+        min_sum = min(min_sum, current_sum)
+    return min_sum
+```"
+humaneval,42,HumanEval_114,fastdllm,DASR + Fast-dLLM (bf16),True,,True,37,"```python
+def minSubArraySum(nums):
+    min_sum = float('inf')
+    current_sum = 0
+    for num in nums:
+        current_sum = min(num, current_sum + num)
+        min_sum = min(min_sum, current_sum)
+    return min_sum
+```"
+humaneval,42,HumanEval_114,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,42,"```python
+def minSubArraySum(nums):
+    min_sum = float('inf')
+    current_sum = 0
+    for num in nums:
+        current_sum += num
+        min_sum = min(min_sum, current_sum)
+        current_sum = min(current_sum, 0)
+    return min_sum
+```"
+humaneval,42,HumanEval_114,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,31,"```python
+def minSubArraySum(nums):
+    min_sum = float('inf')
+    current_sum = 0
+    for num in nums:
+        current_sum = num
+        min_sum = min(min_sum, current_sum)
+        current_sum = min(0, current_sum + num)
+    return min_sum
+```"
+humaneval,42,HumanEval_115,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def max_fill(grid, capacity):
+    import math
+    count = 0
+    for row in grid:
+        water_units = sum(row)
+        count += math.ceil(water_units / capacity)
+    return count
+```"
+humaneval,42,HumanEval_115,fastdllm,DASR + Fast-dLLM (bf16),True,,False,128,"Here is the completed Python function:
+
+```python
+def max_fill(grid, capacity):
+    import math
+    count = 0
+    for row in grid:
+        total = sum(row)
+        count += math.ceil(total / capacity)
+    return count
+```
+
+This function iterates over each row in the grid, calculates the total number of units of water in that row, and then calculates the number of times the bucket needs to be lowered to empty the well. The `math.ceil` function is used to round up the number of times the bucket needs to be lowered, because you can't lower the bucket a fraction of a time."
+humaneval,42,HumanEval_115,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,123,"Here is the completed Python function:
+
+```python
+def max_fill(grid, capacity):
+    import math
+    count = 0
+    for row in grid:
+        total_water = sum(row)
+        count += math.ceil(total_water / capacity)
+    return count
+```
+
+This function iterates over each row in the grid, calculates the total amount of water in that row, and then calculates the number of times the bucket needs to be lowered to empty the well. The `math.ceil` function is used to round up the number of times the bucket needs to be lowered, because you can't lower the bucket a fraction of a time."
+humaneval,42,HumanEval_115,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,92,"Here is the completed Python function:
+
+```python
+def max_fill(grid, capacity):
+    import math
+    count = 0
+    for row in grid:
+        total = sum(row)
+        count += math.ceil(total / capacity)
+    return count
+```
+
+This function iterates over each row in the grid, calculates the total number of units of water in that row, and then calculates the number of times the bucket needs to be lowered to empty the well. The `math.ceil` function is used to round up the number of times the bucket needs to be lowered, because you can't lower the bucket a fraction of a time."
+humaneval,42,HumanEval_116,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def sort_array(arr):
+    return sorted(arr, key=lambda x: (bin(x).count('1'), x))
+```"
+humaneval,42,HumanEval_116,fastdllm,DASR + Fast-dLLM (bf16),False,,False,40,"Here is the completed function:
+
+```python
+def sort_array(arr):
+    return sorted(arr, key=lambda x: (len(bin(x)[2:].count('1')), x))
+```"
+humaneval,42,HumanEval_116,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,41,"Here is the completed Python function:
+
+```python
+def sort_array(arr):
+    return sorted(arr, key=lambda x: (len(bin(x)[2:].count('1')), x))
+```"
+humaneval,42,HumanEval_116,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,36,"Here is the completed function:
+
+```python
+def sort_array(arr):
+    return sorted(arr, key=lambda x: (len(bin(x)[2:].count('1')), x))
+```"
+humaneval,42,HumanEval_117,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def select_words(s, n):
+    words = s.split()
+    result = []
+    vowels = 'aeiou'
+    for word in words:
+        consonants = sum(1 for c in word if c.isalpha() and c not in vowels)
+        if consonants == n:
+            result.append(word)
+    return result
+```"
+humaneval,42,HumanEval_117,fastdllm,DASR + Fast-dLLM (bf16),True,,False,65,"Here is the completed Python function:
+
+```python
+def select_words(s, n):
+    vowels = 'aeiou'
+    consonants = 'bcdfghjklmnpqrstvwxyzBCDFGHJKLMNNPQRSTVWXYZ'
+    words = s.split()
+    result = []
+    for word in words:
+        if sum(1 for c in word if c in consonants) == n:
+            result.append(word)
+    return result
+```"
+humaneval,42,HumanEval_117,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,64,"Here is the completed Python function:
+
+```python
+def select_words(s, n):
+    vowels = 'aeiou'
+    consonants = 'bcdfghjklmnpqrstvwxyzBCDFGHJKLMNNPQRSTVWXYZ'
+    words = s.split()
+    result = []
+    for word in words:
+        if sum(1 for c in word if c in consonants) == n:
+            result.append(word)
+    return result
+```"
+humaneval,42,HumanEval_117,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,51,"Here is the completed Python function:
+
+```python
+def select_words(s, n):
+    vowels = 'aeiou'
+    consonants = 'bcdfghjklmnpqrstvwxyzBCDFGHJKLMJKLMNPQRSTVWXYZ'
+    words = s.split()
+    result = []
+    for word in words:
+        if sum(1 for c in word if c in consonants) == n:
+            result.append(word)
+    return result
+```"
+humaneval,42,HumanEval_118,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def get_closest_vowel(word):
+    vowels = 'aeiouAEIOU'
+    i = len(word) - 1
+    while i > 0:
+        if word[i] in vowels and word[i-1] not in vowels and word[i+1] not in vowels:
+            return word[i]
+        i -= 1
+    return """"
+```"
+humaneval,42,HumanEval_118,fastdllm,DASR + Fast-dLLM (bf16),False,,False,71,"Here is the completed Python function:
+
+```python
+def get_closest_vowel(word):
+    vowels = 'aeiouAEIOU'
+    word = word[::-1]
+    for i in range(len(word)):
+        if word[i] in vowels:
+            if i > 0 and word[i-1] not in vowels and word[i+1] not in vowels:
+                return word[i]
+    return """"
+```"
+humaneval,42,HumanEval_118,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,72,"Here is the completed Python function:
+
+```python
+def get_closest_vowel(word):
+    vowels = 'aeiouAEIOU'
+    word = word[::-1]
+    for i in range(len(word)):
+        if word[i] in vowels:
+            if i > 0 and word[i-1] not in vowels and word[i+1] not in vowels:
+                return word[i]
+    return """"
+```"
+humaneval,42,HumanEval_118,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,56,"Here is the completed Python function:
+
+```python
+def get_closest_vowel(word):
+    vowels = 'aeiouAEIOU'
+    word = word[::-1]
+    for i in range(len(word)):
+        if word[i] in vowels:
+            if i > 0 and word[i-1] not in vowels and word[i+1] not in vowels:
+                return word[i]
+    return """"
+```"
+humaneval,42,HumanEval_119,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def match_parens(lst):
+    stack = []
+    for string in lst:
+        for char in string:
+            if char == '(':
+                stack.append(char)
+            elif char == ')':
+                if not stack:
+                    return 'No'
+                stack.pop()
+    return 'Yes' if not stack else 'No'
+```"
+humaneval,42,HumanEval_119,fastdllm,DASR + Fast-dLLM (bf16),False,,False,52,"Here is the completed Python function:
+
+```python
+def match_parens(lst):
+    stack = []
+    for string in lst:
+        for char in string:
+            if char == '(':
+                stack.append(char)
+            elif char == ')':
+                if not stack:
+                    return 'No'
+                stack.pop()
+    return 'Yes' if not stack else 'No'
+```"
+humaneval,42,HumanEval_119,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,52,"Here is the completed Python function:
+
+```python
+def match_parens(lst):
+    stack = []
+    for string in lst:
+        for char in string:
+            if char == '(':
+                stack.append(char)
+            elif char == ')':
+                if not stack:
+                    return 'No'
+                stack.pop()
+    return 'Yes' if not stack else 'No'
+```"
+humaneval,42,HumanEval_119,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,37,"Here is the completed Python function:
+
+```python
+def match_parens(lst):
+    stack = []
+    for string in lst:
+        for char in string:
+            if char == '(':
+                stack.append(char)
+            elif char == ')':
+                if not stack:
+                    return 'No'
+                stack.pop()
+    return 'Yes' if not stack else 'No'
+```"
+humaneval,42,HumanEval_120,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def maximum(arr, k):
+    """"""
+    Given an array arr of integers and a positive integer k, return a sorted list 
+    of length k with the maximum k numbers in arr.
+
+    Example 1:
+
+        Input: arr = [-3, -4, 5], k = 3
+        Output: [-4, -3, 5]
+
+    Example 2:
+
+        Input: arr = [4, -4, 4], k = 2
+        Output: [4, 4]
+
+    Example 3:
+
+        Input: arr = [-3, 2, 1, 2, -1, -2, 1], k = 1
+        Output: [2]
+
+    Note:
+        1. The length of the array will be in the range of [1, 1000].
+        2. The elements in the array will be in the range of [-1000, 1000].
+        3. 0 <= k <= len(arr)
+    """"""
+    arr.sort()
+    return arr[-k:]
+```"
+humaneval,42,HumanEval_120,fastdllm,DASR + Fast-dLLM (bf16),False,,False,43,"Here is the completed Python function:
+
+```python
+def maximum(arr, k):
+    if k > len(arr):
+        return []
+    arr.sort(reverse=True)
+    return arr[:k]
+```"
+humaneval,42,HumanEval_120,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,45,"Here is the completed Python function:
+
+```python
+def maximum(arr, k):
+    if k == 0:
+        return []
+    arr.sort(reverse=True)
+    return arr[:k]
+```"
+humaneval,42,HumanEval_120,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,34,"Here is the completed Python function:
+
+```python
+def maximum(arr, k):
+    if k > len(arr):
+        return []
+    arr.sort(reverse=True)
+    return arr[:k]
+```"
+humaneval,42,HumanEval_121,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def solution(lst):
+    """"""Given a non-empty list of integers, return the sum of all of the odd elements that are in even positions.""""""
+    total = 0
+    for i in range(len(lst)):
+        if i % 2 == 0 and lst[i] % 2 != 0:
+            total += lst[i]
+    return total
+```"
+humaneval,42,HumanEval_121,fastdllm,DASR + Fast-dLLM (bf16),True,,False,32,"```python
+def solution(lst):
+    total = 0
+    for i in range(len(lst)):
+        if i % 2 == 0 and lst[i] % 2 != 0:
+            total += lst[i]
+    return total
+```"
+humaneval,42,HumanEval_121,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,32,"```python
+def solution(lst):
+    total = 0
+    for i in range(len(lst)):
+        if i % 2 == 0 and lst[i] % 2 != 0:
+            total += lst[i]
+    return total
+```"
+humaneval,42,HumanEval_121,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,24,"```python
+def solution(lst):
+    total = 0
+    for i in range(len(lst)):
+        if i % 2 == 0 and lst[i] % 2 != 0:
+            total += lst[i]
+    return total
+```"
+humaneval,42,HumanEval_122,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def add_elements(arr, k):
+    """"""
+    Given a non-empty array of integers arr and an integer k, return
+    the sum of the elements with at most two digits from the first k elements of arr.
+
+    Example:
+
+        Input: arr = [111,21,3,4000,5,6,7,8,9], k = 4
+        Output: 24 # sum of 21 + 3
+
+    Constraints:
+        1. 1 <= len(arr) <= 100
+        2. 1 <= k <= len(arr)
+    """"""
+    total = 0
+    for i in range(k):
+        if len(str(arr[i])) <= 2:
+            total += arr[i]
+    return total
+```"
+humaneval,42,HumanEval_122,fastdllm,DASR + Fast-dLLM (bf16),True,,False,39,"Here is the completed Python function:
+
+```python
+def add_elements(arr, k):
+    total = 0
+    for i in range(k):
+        if len(str(arr[i])) <= 2:
+            total += arr[i]
+    return total
+```"
+humaneval,42,HumanEval_122,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,39,"Here is the completed Python function:
+
+```python
+def add_elements(arr, k):
+    total = 0
+    for i in range(k):
+        if len(str(arr[i])) <= 2:
+            total += arr[i]
+    return total
+```"
+humaneval,42,HumanEval_122,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,31,"Here is the completed Python function:
+
+```python
+def add_elements(arr, k):
+    total = 0
+    for i in range(k):
+        if len(str(arr[i])) <= 2:
+            total += arr[i]
+    return total
+```"
+humaneval,42,HumanEval_123,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def get_odd_collatz(n):
+    sequence = [n]
+    while n != 1:
+        if n % 2 == 0:
+            n = n // 2
+        else:
+            n = 3 * n + 1
+        sequence.append(n)
+    return sorted([num for num in sequence if num % 2 != 0])
+```"
+humaneval,42,HumanEval_123,fastdllm,DASR + Fast-dLLM (bf16),True,,False,50,"Here is the completed Python function:
+
+```python
+def get_odd_collatz(n):
+    sequence = [n]
+    while n != 1:
+        if n % 2 == 0:
+            n = n // 2
+        else:
+            n = 3 * n + 1
+        sequence.append(n)
+    return sorted([x for x in sequence if x % 2 != 0])
+```"
+humaneval,42,HumanEval_123,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,50,"Here is the completed Python function:
+
+```python
+def get_odd_collatz(n):
+    sequence = [n]
+    while n != 1:
+        if n % 2 == 0:
+            n = n // 2
+        else:
+            n = 3 * n + 1
+        sequence.append(n)
+    return sorted([x for x in sequence if x % 2 != 0])
+```"
+humaneval,42,HumanEval_123,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,39,"Here is the completed Python function:
+
+```python
+def get_odd_collatz(n):
+    sequence = [n]
+    while n != 1:
+        if n % 2 == 0:
+            n = n // 2
+        else:
+            n = 3 * n + 1
+        sequence.append(n)
+    return sorted([x for x in sequence if x % 2 != 0])
+```"
+humaneval,42,HumanEval_124,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def valid_date(date):
+    if not date:
+        return False
+    month, day, year = map(int, date.split('-'))
+    if month < 1 or month > 12:
+        return False
+    if day < 1 or day > 31:
+        return False
+    if month in [4, 6, 9, 11]:
+        if day < 1 or day > 30:
+            return False
+    elif month == 2:
+        if day < 1 or day > 29:
+            return False
+    elif month in [1, 3, 5, 7, 8, 10, 12]:
+        if day < 1 or day > 31:
+            return False
+    return True
+```"
+humaneval,42,HumanEval_124,fastdllm,DASR + Fast-dLLM (bf16),False,,False,131,"Here is the completed Python function:
+
+```python
+def valid_date(date):
+    if not date:
+        return False
+    month, day, year = map(int, date.split('-'))
+    if month < 1 or month > 12:
+        return False
+    if day < 1 or day > 31:
+        return False
+    if month == 2:
+        if day < 1 or day > 29:
+            return False
+    elif month in [4, 6, 9, 11]:
+        if day < 1 or day > 30:
+            return False
+    elif month in [1, 3, 5, 7, 8, 10, 12]:
+        if day < 1 or day > 31:
+            return False
+    return True
+```
+
+This function checks if the given date string is valid according to the specified rules. It splits the date string into month, day, and year, and then checks each of these values against the rules. If any of the rules are not satisfied, the function returns `False`. If all rules are satisfied, the function returns `True`."
+humaneval,42,HumanEval_124,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,131,"Here is the completed Python function:
+
+```python
+def valid_date(date):
+    if not date:
+        return False
+    month, day, year = map(int, date.split('-'))
+    if month < 1 or month > 12:
+        return False
+    if day < 1 or day > 31:
+        return False
+    if month == 2:
+        if day < 1 or day > 29:
+            return False
+    elif month in [4, 6, 9, 11]:
+        if day < 1 or day > 30:
+            return False
+    elif month in [1, 3, 5, 7, 8, 10, 12]:
+        if day < 1 or day > 31:
+            return False
+    return True
+```
+
+This function checks if the given date string is valid according to the specified rules. It splits the date string into month, day, and year, and then checks each of these values against the rules. If any of the rules are not satisfied, the function returns `False`. If all rules are satisfied, the function returns `True`."
+humaneval,42,HumanEval_124,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,54,"Here is the completed Python function:
+
+```python
+def valid_date(date):
+    if not date:
+        return False
+    month, day, year = map(int, date.split('-'))
+    if month < 1 or month > 12:
+        return False
+    if day < 1 or day > 31:
+        return False
+    if month == 2:
+        if day < 1 or day > 29:
+            return False
+    elif month in [4, 6, 9, 11]:
+        if day < 1 or day > 30:
+            return False
+    elif month in [1, 5, 7, 8, 10, 12]:
+        if day < 1 or day > 31:
+            return False
+    return True
+```"
+humaneval,42,HumanEval_125,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def split_words(txt):
+    if ' ' in txt:
+        words = txt.split()
+    elif ',' in txt:
+        words = txt.split(',')
+    else:
+        words = sum(1 for c in txt if c.islower() and ord(c) % 2 == 1)
+    return words
+```"
+humaneval,42,HumanEval_125,fastdllm,DASR + Fast-dLLM (bf16),False,,False,45,"```python
+def split_words(txt):
+    if ' ' in txt:
+        return txt.split()
+    elif ',' in txt:
+        return txt.split(',')
+    else:
+        return sum(1 for c in txt if c.islower() and ord(c) % 2 == 1)
+```"
+humaneval,42,HumanEval_125,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,46,"```python
+def split_words(txt):
+    if ' ' in txt:
+        return txt.split()
+    elif ',' in txt:
+        return txt.split(',')
+    else:
+        return sum(1 for c in txt if c.islower() and ord(c) % 2 != 0)
+```"
+humaneval,42,HumanEval_125,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,32,"```python
+def split_words(txt):
+    if ' ' in txt:
+        return txt.split()
+    elif ',' in txt:
+        return txt.split(',')
+    else:
+        return sum(1 for c in txt if c.islower() and ord(c) % 2 == 1)
+```"
+humaneval,42,HumanEval_126,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"Here is the completed Python function:
+
+```python
+def is_sorted(lst):
+    '''
+    Given a list of numbers, return whether or not they are sorted
+    in ascending order. If list has more than 1 duplicate of the same
+    number, return False. Assume no negative numbers and only integers.
+
+    Examples
+    is_sorted([5]) ➞ True
+    is_sorted([1, 2, 3, 4, 5]) ➞ True
+    is_sorted([1, 3, 2, 4, 5]) ➞ False
+    is_sorted([1, 2, 3, 4, 5, 6]) ➞ True
+    is_sorted([1, 2, 3, 4, 5, 6, 7]) ➞ True
+    is_sorted([1, 3, 2, 4, 5, 6, 7]) ➞ False
+    is_sorted([1, 2, 2, 3, 3, 4]) ➞ True
+    is_sorted([1, 2, 2, 2, 3, 4]) ➞ False
+    '''
+    
+```"
+humaneval,42,HumanEval_126,fastdllm,DASR + Fast-dLLM (bf16),False,,False,45,"Here is the completed Python function:
+
+```python
+def is_sorted(lst):
+    if len(lst) <= 1:
+        return True
+    for i in range(len(lst) - 1):
+        if lst[i] > lst[i + 1]:
+            return False
+    return True
+```"
+humaneval,42,HumanEval_126,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,44,"Here is the completed Python function:
+
+```python
+def is_sorted(lst):
+    if len(lst) <= 1:
+        return True
+    for i in range(len(lst) - 1):
+        if lst[i] > lst[i + 1]:
+            return False
+    return True
+```"
+humaneval,42,HumanEval_126,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,37,"Here is the completed Python function:
+
+```python
+def is_sorted(lst):
+    if len(lst) <= 1:
+        return True
+    for i in range(len(lst) - 1):
+        if lst[i] > lst[i + 1]:
+            return False
+    return True
+```"
+humaneval,42,HumanEval_127,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for i in range(3, int(n**0.5) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+
+def intersection(interval1, interval2):
+    start1, end1 = interval1
+    start2, end2 = interval2
+
+    if start1 > end2 or start2 > end1:
+        return ""NO""
+
+    intersection_start = max(start1, start2)
+    intersection_end = min(end1, end2)
+
+    intersection_length = intersection_end - intersection_start + 1
+
+    if is_prime(intersection_length):
+        return ""YES""
+    else:
+        return ""NO""
+```"
+humaneval,42,HumanEval_127,fastdllm,DASR + Fast-dLLM (bf16),False,,False,73,"```python
+def is_prime(n):
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for i in range(3, int(n**0.5) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+
+def intersection(interval1, interval2):
+    start1, end1 = interval1
+    start2, end2 = interval2
+
+    if start1 > end2 or start2 > end1:
+        return ""NO""
+
+    intersection_start = max(start1, start2)
+    intersection_end = min(end1, end2)
+
+    intersection_length = intersection_end - intersection_start + 1
+
+    if is_prime(intersection_length):
+        return ""YES""
+    else:
+        return ""NO""
+```"
+humaneval,42,HumanEval_127,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,74,"```python
+def is_prime(n):
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for i in range(3, int(n**0.5) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+
+def intersection(interval1, interval2):
+    start1, end1 = interval1
+    start2, end2 = interval2
+
+    if start1 > end2 or start2 > end1:
+        return ""NO""
+
+    intersection_start = max(start1, start2)
+    intersection_end = min(end1, end2)
+
+    intersection_length = intersection_end - intersection_start + 1
+
+    if is_prime(intersection_length):
+        return ""YES""
+    else:
+        return ""NO""
+```"
+humaneval,42,HumanEval_127,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,47,"```python
+def is_prime(n):
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for i in range(3, int(n**0.5) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+
+def intersection(interval1, interval2):
+    start1, end1 = interval1
+    start2, end2 = interval2
+
+    if start1 > end2 or start2 > end1:
+        return ""NO""
+
+    intersection_start = max(start1, start2)
+    intersection_end = min(end1, end2)
+
+    intersection_length = intersection_end - intersection_start + 1
+
+    if is_prime(intersection_length):
+        return ""YES""
+    else:
+        return ""NO""
+```"
+humaneval,42,HumanEval_128,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def prod_signs(arr):
+    if not arr:
+        return None
+    product = 1
+    sum = 0
+    for num in arr:
+        if num < 0:
+            product *= -1
+        elif num > 0:
+            product *= 1
+        sum += abs(num)
+    return sum * product
+```"
+humaneval,42,HumanEval_128,fastdllm,DASR + Fast-dLLM (bf16),True,,False,59,"Here is the completed Python function:
+
+```python
+def prod_signs(arr):
+    if not arr:
+        return None
+    product = 1
+    for num in arr:
+        if num > 0:
+            product *= 1
+        elif num < 0:
+            product *= -1
+        else:
+            product *= 0
+    return sum(abs(num) for num in arr) * product
+```"
+humaneval,42,HumanEval_128,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,58,"Here is the completed Python function:
+
+```python
+def prod_signs(arr):
+    if not arr:
+        return None
+    product = 1
+    for num in arr:
+        if num > 0:
+            product *= 1
+        elif num < 0:
+            product *= -1
+        else:
+            product *= 0
+    return sum(abs(num) for num in arr) * product
+```"
+humaneval,42,HumanEval_128,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,33,"Here is the completed Python function:
+
+```python
+def prod_signs(arr):
+    if not arr:
+        return None
+    product = 1
+    for num in arr:
+        if num < 0:
+            product *= -1
+        elif num > 0:
+            product *= 1
+    return sum(abs(num) for num in arr) * product
+```"
+humaneval,42,HumanEval_129,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def minPath(grid, k):
+    N = len(grid)
+    path = [0] * k
+    visited = [0] * k
+    res = float('inf')
+
+    def dfs(i, j, step):
+        nonlocal res
+        if step == k:
+            if min(path) < res:
+                res = min(path)
+                path[:k] = path[:k]
+            return
+        for x, y in [(i - 1, j), (i + 1, j), (i, j - 1), (i, j + 1)]:
+            if 0 <= x < N and 0 <= y < N and not visited[x * N + y]:
+                visited[x * N + y] = 1
+                path[step] = grid[x][y]
+                dfs(x, y, step + 1)
+                visited[x * N + y] = 0
+                path[step] = 0
+
+    for i in range(N):
+        for j in range(N):
+            visited[i * N + j] = 1
+            dfs(i, j, 1)
+            visited[i * N + j] 
+
+    return path
+```"
+humaneval,42,HumanEval_129,fastdllm,DASR + Fast-dLLM (bf16),False,,False,71,"Here is the completed Python function:
+
+```python
+def minPath(grid, k):
+    N = len(grid)
+    res = []
+    i = 0
+    j = 0
+    for _ in range(k):
+        res.append(grid[i][j])
+        if j < N - 1:
+            j += 1
+        else:
+            i += 1
+            j = 0
+    return res
+```"
+humaneval,42,HumanEval_129,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,71,"Here is the completed Python function:
+
+```python
+def minPath(grid, k):
+    N = len(grid)
+    res = []
+    i = 0
+    j = 0
+    for _ in range(k):
+        res.append(grid[i][j])
+        if j < N - 1:
+            j += 1
+        else:
+            i += 1
+            j = 0
+    return res
+```"
+humaneval,42,HumanEval_129,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,56,"Here is the completed Python function:
+
+```python
+def minPath(grid, k):
+    N = len(grid)
+    res = []
+    i = 0
+    j = 0
+    for _ in range(k):
+        res.append(grid[i][j])
+        if j < N - 1:
+            j += 1
+        else:
+            i += 1
+            j = 0
+    return res
+```"
+humaneval,42,HumanEval_130,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"Here is the completed Python function:
+
+```python
+def tri(n):
+    sequence = [1, 3]
+    for i in range(2, n + 1):
+        if i % 2 == 0:
+            sequence.append(1 + i // 2)
+        else:
+            sequence.append(sequence[i - 1] + sequence[i - 2] + sequence[i + 1])
+    return sequence
+```"
+humaneval,42,HumanEval_130,fastdllm,DASR + Fast-dLLM (bf16),False,,True,56,"Here is the completed Python function:
+
+```python
+def tri(n):
+    sequence = [1, 3]
+    for i in range(2, n + 1):
+        if i % 2 == 0:
+            sequence.append(1 + i // 2)
+        else:
+            sequence.append(sequence[i - 1] + sequence[i - 2] + sequence[i + 1])
+    return sequence
+```"
+humaneval,42,HumanEval_130,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,True,55,"Here is the completed Python function:
+
+```python
+def tri(n):
+    sequence = [1, 3]
+    for i in range(2, n + 1):
+        if i % 2 == 0:
+            sequence.append(1 + i // 2)
+        else:
+            sequence.append(sequence[i - 1] + sequence[i - 2] + sequence[i + 1])
+    return sequence
+```"
+humaneval,42,HumanEval_130,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,True,39,"Here is the completed Python function:
+
+```python
+def tri(n):
+    sequence = [1, 3]
+    for i in range(2, n + 1):
+        if i % 2 == 0:
+            sequence.append(1 + i // 2)
+        else:
+            sequence.append(sequence[i - 1] + sequence[i - 2] + sequence[i + 1])
+    return sequence
+```"
+humaneval,42,HumanEval_131,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def digits(n):
+    """"""Given a positive integer n, return the product of the odd digits.
+    Return 0 if all digits are even.
+    For example:
+    digits(1)  == 1
+    digits(4)  == 0
+    digits(235) == 15
+    """"""
+    product = 1
+    for digit in str(n):
+        if int(digit) % 2 != 0:
+            product *= int(digit)
+    return product
+```"
+humaneval,42,HumanEval_131,fastdllm,DASR + Fast-dLLM (bf16),False,,True,41,"```python
+def digits(n):
+    """"""Given a positive integer n, return the product of the odd digits.
+    Return 0 if all digits are even.
+    For example:
+    digits(1)  == 1
+    digits(4)  == 0
+    digits(235) == 15
+    """"""
+    product = 1
+    for digit in str(n):
+        if int(digit) % 2 != 0:
+            product *= int(digit)
+    return product
+```"
+humaneval,42,HumanEval_131,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,True,41,"```python
+def digits(n):
+    """"""Given a positive integer n, return the product of the odd digits.
+    Return 0 if all digits are even.
+    For example:
+    digits(1)  == 1
+    digits(4)  == 0
+    digits(235) == 15
+    """"""
+    product = 1
+    for digit in str(n):
+        if int(digit) % 2 != 0:
+            product *= int(digit)
+    return product
+```"
+humaneval,42,HumanEval_131,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,True,32,"```python
+def digits(n):
+    """"""Given a positive integer n, return the product of the odd digits.
+    Return 0 if all digits are even.
+    For example:
+    digits(1)  == 1
+    digits(4)  == 0
+    digits(235) == 15
+    """"""
+    product = 1
+    for digit in str(n):
+        if int(digit) % 2 != 0:
+            product *= int(digit)
+    return product
+```"
+humaneval,42,HumanEval_132,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"Here is the completed Python function:
+
+```python
+def is_nested(string):
+    stack = []
+    for char in string:
+        if char == '[':
+            stack.append(char)
+        elif char == ']':
+            if not stack:
+                return False
+            stack.pop()
+    return bool(stack)
+```
+
+This function works by iterating over each character in the input string. If it encounters an opening bracket '[', it pushes it onto the stack. If it encounters a closing bracket ']', it checks if the stack is empty. If it is, it returns False because there is no matching opening bracket. If the stack is not empty, it pops the top element from the stack. At the end, if the stack is not empty, it means there are unmatched opening brackets, so it returns False. Otherwise, it returns True."
+humaneval,42,HumanEval_132,fastdllm,DASR + Fast-dLLM (bf16),False,,False,52,"Here is the completed Python function:
+
+```python
+def is_nested(string):
+    stack = []
+    for char in string:
+        if char == '[':
+            stack.append(char)
+        elif char == ']':
+            if not stack:
+                return False
+            stack.pop()
+    return len(stack) > 0
+```"
+humaneval,42,HumanEval_132,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,53,"Here is the completed Python function:
+
+```python
+def is_nested(string):
+    stack = []
+    for char in string:
+        if char == '[':
+            stack.append(char)
+        elif char == ']':
+            if not stack:
+                return False
+            stack.pop()
+    return len(stack) > 0
+```"
+humaneval,42,HumanEval_132,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,35,"Here is the completed Python function:
+
+```python
+def is_nested(string):
+    stack = []
+    for char in string:
+        if char == '[':
+            stack.append(char)
+        elif char == ']':
+            if not stack:
+                return False
+            stack.pop()
+    return len(stack) > 0
+```"
+humaneval,42,HumanEval_133,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def sum_squares(lst):
+    """"""You are given a list of numbers.
+    You need to return the sum of squared numbers in the given list,
+    round each element in the list to the upper int(Ceiling) first.
+    Examples:
+    For lst = [1,2,3] the output should be 14
+    For lst = [1,4,9] the output should be 98
+    For lst = [1,3,5,7] the output should be 84
+    For lst = [1.4,4.2,0] the output should be 29
+    For lst = [-2.4,1,1] the output should be 6
+    
+    """"""
+    import math
+    return sum(math.ceil(x)**2 for x in lst)
+```"
+humaneval,42,HumanEval_133,fastdllm,DASR + Fast-dLLM (bf16),True,,False,33,"```python
+import math
+
+def sum_squares(lst):
+    total = 0
+    for num in lst:
+        total += math.ceil(num)**2
+    return total
+```"
+humaneval,42,HumanEval_133,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,38,"```python
+import math
+
+def sum_squares(lst):
+    total = 0
+    for num in lst:
+        num = math.ceil(num)
+        total += num**2
+    return total
+```"
+humaneval,42,HumanEval_133,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,28,"```python
+import math
+
+def sum_squares(lst):
+    total = 0
+    for num in lst:
+        total += math.ceil(num)**2
+    return total
+```"
+humaneval,42,HumanEval_134,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def check_if_last_char_is_a_letter(txt):
+    '''
+    Create a function that returns True if the last character
+    of a given string is an alphabetical character and is not
+    a part of a word, and False otherwise.
+    Note: ""word"" is a group of characters separated by space.
+
+    Examples:
+    check_if_last_char_is_a_letter(""apple pie"") ➞ False
+    check_if_last_char_is_a_letter(""apple pi e"") ➞ True
+    check_if_last_char_is_a_letter(""apple pi e "") ➞ False
+    check_if_last_char_is_a_letter("""") ➞ False 
+    '''
+    words = txt.split()
+    last_word = words[-1]
+    last_char = last_word[-1]
+    if last_char.isalpha():
+        return True
+    else:
+        return False
+```"
+humaneval,42,HumanEval_134,fastdllm,DASR + Fast-dLLM (bf16),False,,False,51,"Here is the completed Python function:
+
+```python
+def check_if_last_char_is_a_letter(txt):
+    words = txt.split()
+    last_word = words[-1]
+    last_char = last_word[-1]
+    if last_char.isalpha():
+        return True
+    else:
+        return False
+```"
+humaneval,42,HumanEval_134,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,38,"Here is the completed Python function:
+
+```python
+def check_if_last_char_is_a_letter(txt):
+    words = txt.split()
+    return words[-1].isalpha()
+```"
+humaneval,42,HumanEval_134,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,36,"Here is the completed Python function:
+
+```python
+def check_if_last_char_is_a_letter(txt):
+    words = txt.split()
+    last_word = words[-1]
+    last_char = last_word[-1]
+    if last_char.isalpha():
+        return True
+    else:
+        return False
+```"
+humaneval,42,HumanEval_135,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def can_arrange(arr):
+    """"""Create a function which returns the largest index of an element which
+    is not greater than or equal to the element immediately preceding it. If
+    no such element exists then return -1. The given array will not contain
+    duplicate values.
+
+    Examples:
+    can_arrange([1,2,4,3,5]) = 3
+    can_arrange([1,2,3]) = -1
+    """"""
+    max_index = -1
+    for i in range(1, len(arr)):
+        if arr[i] < arr[i-1]:
+            max_index = i
+    return max_index
+```"
+humaneval,42,HumanEval_135,fastdllm,DASR + Fast-dLLM (bf16),False,,False,37,"Here is the completed Python function:
+
+```python
+def can_arrange(arr):
+    for i in range(len(arr) - 1, -1, -1):
+        if arr[i] < arr[i - 1]:
+            return i
+    return -1
+```"
+humaneval,42,HumanEval_135,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,37,"Here is the completed Python function:
+
+```python
+def can_arrange(arr):
+    for i in range(len(arr) - 1, -1, -1):
+        if arr[i] < arr[i - 1]:
+            return i
+    return -1
+```"
+humaneval,42,HumanEval_135,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,29,"Here is the completed Python function:
+
+```python
+def can_arrange(arr):
+    for i in range(len(arr) - 1, -1, -1):
+        if arr[i] < arr[i - 1]:
+            return i
+    return -1
+```"
+humaneval,42,HumanEval_136,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def largest_smallest_integers(lst):
+    negative_nums = [num for num in lst if num < 0]
+    positive_nums = [num for num in lst if num > 0]
+    if not negative_nums and not positive_nums:
+        return (None, None)
+    elif not negative_nums:
+        return (None, min(positive_nums))
+    elif not positive_nums:
+        return (max(negative_nums), None)
+    else:
+        return (max(negative_nums), min(positive_nums))
+```"
+humaneval,42,HumanEval_136,fastdllm,DASR + Fast-dLLM (bf16),True,,False,53,"```python
+def largest_smallest_integers(lst):
+    negative_nums = [x for x in lst if x < 0]
+    positive_nums = [x for x in lst if x > 0]
+    if not negative_nums and not positive_nums:
+        return (None, None)
+    elif not negative_nums:
+        return (None, min(positive_nums))
+    elif not positive_nums:
+        return (max(negative_nums), None)
+    else:
+        return (max(negative_nums), min(positive_nums))
+```"
+humaneval,42,HumanEval_136,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,52,"```python
+def largest_smallest_integers(lst):
+    negative_nums = [x for x in lst if x < 0]
+    positive_nums = [x for x in lst if x > 0]
+    if not negative_nums and not positive_nums:
+        return (None, None)
+    elif not negative_nums:
+        return (None, min(positive_nums))
+    elif not positive_nums:
+        return (max(negative_nums), None)
+    else:
+        return (max(negative_nums), min(positive_nums))
+```"
+humaneval,42,HumanEval_136,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,42,"```python
+def largest_smallest_integers(lst):
+    negative_nums = [x for x in lst if x < 0]
+    positive_nums = [x for x in lst if x > 0]
+    if not negative_nums and not positive_nums:
+        return (None, None)
+    elif not negative_nums:
+        return (None, min(positive_nums_nums))
+    elif positive_nums:
+        return (max(negative_nums_nums), None)
+    else:
+        return (max(negative_nums_nums), min(positive_nums_nums))
+```"
+humaneval,42,HumanEval_137,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def compare_one(a, b):
+    """"""
+    Create a function that takes integers, floats, or strings representing
+    real numbers, and returns the larger variable in its given variable type.
+    Return None if the values are equal.
+    Note: If a real number is represented as a string, the floating point might be . or ,
+
+    compare_one(1, 2.5) ➞ 2.5
+    compare_one(1, ""2,3"") ➞ ""2,3""
+    compare_one(""5,1"", ""6"") ➞ ""6""
+    compare_one(""1"", 1) ➞ None
+    """"""
+    if isinstance(a, int) and isinstance(b, int):
+        return max(a, b)
+    elif isinstance(a, float) and isinstance(b, float):
+        return max(a, b)
+    elif isinstance(a, str) and isinstance(b, str):
+        a = float(a.replace(',', '.'))
+        b = float(b.replace(',', '.'))
+        return max(a, b)
+    elif isinstance(a, int) and isinstance(b, str) or isinstance(a, str) and isinstance(b, int):
+        return max(a,b)
+    else:
+        return None
+```"
+humaneval,42,HumanEval_137,fastdllm,DASR + Fast-dLLM (bf16),False,,False,63,"Here is the completed Python function:
+
+```python
+def compare_one(a, b):
+    if isinstance(a, int) and isinstance(b, int):
+        return max(a, b)
+    elif isinstance(a, float) and isinstance(b, float):
+        return max(a, b)
+    elif isinstance(a, str) and isinstance(b, str):
+        return max(a, b, key=lambda x: float(x.replace(',', '.')))
+    else:
+        return None
+```"
+humaneval,42,HumanEval_137,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,62,"Here is the completed Python function:
+
+```python
+def compare_one(a, b):
+    if isinstance(a, int) and isinstance(b, int):
+        return max(a, b)
+    elif isinstance(a, float) and isinstance(b, float):
+        return max(a, b)
+    elif isinstance(a, str) and isinstance(b, str):
+        return max(a, b, key=lambda x: float(x.replace(',', '.')))
+    else:
+        return None
+```"
+humaneval,42,HumanEval_137,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,47,"Here is the completed Python function:
+
+```python
+def compare_one(a, b):
+    if isinstance(a, int) and isinstance(b, int):
+        return max(a, b)
+    elif isinstance(a, float) and isinstance(b, float):
+        return max(a, b)
+    elif isinstance(a, str) and isinstance(b, str):
+        return max(a, b, key=lambda x: float(x.replace(',', '.')))
+    else:
+        return None
+```"
+humaneval,42,HumanEval_138,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def is_equal_to_sum_even(n):
+    """"""Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers
+    Example
+    is_equal_to_sum_even(4) == False
+    is_equal_to_sum_even(6) == False
+    is_equal_to_sum_even(8) == True
+    """"""
+    if n % 2 != 0:
+        return False
+    if n < 8:
+        return False
+    for i in range(2, n, 2):
+        if n % i == 0:
+            return False
+    return True
+```"
+humaneval,42,HumanEval_138,fastdllm,DASR + Fast-dLLM (bf16),True,,False,45,"```python
+def is_equal_to_sum_even(n):
+    """"""Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers
+    Example
+    is_equal_to_sum_even(4) == False
+    is_equal_to_sum_even(6) == False
+    is_equal_to_sum_even(8) == True
+    """"""
+    if n % 2 != 0:
+        return False
+    if n < 8:
+        return False
+    return True
+```"
+humaneval,42,HumanEval_138,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,79,"```python
+def is_equal_to_sum_even(n):
+    """"""Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers
+    Example
+    is_equal_to_sum_even(4) == False
+    is_equal_to_sum_even(6) == False
+    is_equal_to_sum_even(8) == True
+    """"""
+    if n % 2 != 0:
+        return False
+    if n < 8:
+        return False
+    for i in range(2, n, 2):
+        if n - i % 2 != 0:
+            continue
+        if n - i // 2 == 4:
+            return True
+    return False
+```"
+humaneval,42,HumanEval_138,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,34,"```python
+def is_equal_to_sum_even(n):
+    """"""Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers
+    Example
+    is_equal_to_sum_even(4) == False
+    is_equal_to_sum_even(6) == False
+    is_equal_to_sum_even(8) == True
+    """"""
+    if n % 2 != 0:
+        return False
+    if n < 8:
+        return False
+    return True
+```"
+humaneval,42,HumanEval_139,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def special_factorial(n):
+    """"""The Brazilian factorial is defined as:
+    brazilian_factorial(n) = n! * (n-1)! * (n-2)! * ... * 1!
+    where n > 0
+
+    For example:
+    >>> special_factorial(4)
+    288
+
+    The function will receive an integer as input and should return the special
+    factorial of this integer.
+    """"""
+    result = 1
+    for i in range(1, n+1):
+        # Calculate the factorial of i
+        factorial = 1
+        for j in range(1, i+1):
+            factorial *= j
+        result *= factorial
+    return result
+```"
+humaneval,42,HumanEval_139,fastdllm,DASR + Fast-dLLM (bf16),True,,False,46,"Here is the completed Python function:
+
+```python
+import math
+
+def special_factorial(n):
+    if n == 0:
+        return 1
+    result = 1
+    for i in range(1, n + 1):
+        result *= math.factorial(i)
+    return result
+```"
+humaneval,42,HumanEval_139,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,43,"Here is the completed Python function:
+
+```python
+import math
+
+def special_factorial(n):
+    if n == 0:
+        return 1
+    result = 1
+    for i in range(1, n + 1):
+        result *= math.factorial(i)
+    return result
+```"
+humaneval,42,HumanEval_139,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,34,"Here is the completed Python function:
+
+```python
+import math
+
+def special_factorial(n):
+    if n == 0:
+        return 1
+    result = 1
+    for i in range(1, n + 1):
+        result *= math.factorial(i)
+    return result
+```"
+humaneval,42,HumanEval_140,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def fix_spaces(text):
+    """"""
+    Given a string text, replace all spaces in it with underscores, 
+    and if a string has more than 2 consecutive spaces, 
+    then replace all consecutive spaces with - 
+    
+    fix_spaces(""Example"") == ""Example""
+    fix_spaces(""Example 1"") == ""Example_1""
+    fix_spaces("" Example 2"") == ""_Example_2""
+    fix_spaces("" Example   3"") == ""_Example-3""
+    """"""
+    return text.replace("" "", ""_"").replace(""  "", ""-"")
+```"
+humaneval,42,HumanEval_140,fastdllm,DASR + Fast-dLLM (bf16),False,,False,36,"Here is the completed Python function:
+
+```python
+def fix_spaces(text):
+    return text.replace("" "", ""_"").replace(""  "", ""-"")
+```"
+humaneval,42,HumanEval_140,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,36,"Here is the completed Python function:
+
+```python
+def fix_spaces(text):
+    return text.replace("" "", ""_"").replace(""  "", ""-"")
+```"
+humaneval,42,HumanEval_140,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,29,"Here is the completed Python function:
+
+```python
+def fix_spaces(text):
+    return text.replace("" "", ""_"").replace(""  "", ""-"")
+```"
+humaneval,42,HumanEval_141,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def file_name_check(file_name):
+    if not file_name or file_name.count('.') != 1:
+        return 'No'
+    name, extension = file_name.split('.')
+    if not name or not name[0].isalpha():
+        return 'No'
+    if len(name) > 3:
+        return 'No'
+    if extension not in ['txt', 'exe', 'dll']:
+        return 'No'
+    return 'Yes'
+```"
+humaneval,42,HumanEval_141,fastdllm,DASR + Fast-dLLM (bf16),False,,False,86,"Here is the completed Python function:
+
+```python
+def file_name_check(file_name):
+    if file_name.count('.') != 1:
+        return 'No'
+    parts = file_name.split('.')
+    if len(parts) != 2:
+        return 'No'
+    if not parts[0].isalpha():
+        return 'No'
+    if not parts[0].isalpha():
+        return 'No'
+    if not parts[1].endswith(('txt', 'exe', 'dll')):
+        return 'No'
+    return 'Yes'
+```"
+humaneval,42,HumanEval_141,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,87,"Here is the completed Python function:
+
+```python
+def file_name_check(file_name):
+    if file_name.count('.') != 1:
+        return 'No'
+    parts = file_name.split('.')
+    if len(parts) != 2:
+        return 'No'
+    if not parts[0].isalpha():
+        return 'No'
+    if not parts[0].isalpha():
+        return 'No'
+    if not parts[1].endswith(('txt', 'exe', 'dll')):
+        return 'No'
+    return 'Yes'
+```"
+humaneval,42,HumanEval_141,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,61,"Here is the completed Python function:
+
+```python
+def file_name_check(file_name):
+    if file_name.count('.') != 1:
+        return 'No'
+    parts = file_name.split('.')
+    if len(parts) != 2:
+        return 'No'
+    if not parts[0].isalpha():
+        return 'No'
+    if not parts[0].isalpha():
+        return 'No'
+    if not parts[1].endswith(('txt', 'exe', 'dll')):
+        return 'No'
+    return 'Yes'
+```"
+humaneval,42,HumanEval_142,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def sum_squares(lst):
+    total = 0
+    for i in range(len(lst)):
+        if i % 3 == 0:
+            total += lst[i] ** 2
+        elif i % 4 == 0 and i % 3 != 0:
+            total += lst[i] ** 3
+        else:
+            total += lst[i]
+    return total
+```"
+humaneval,42,HumanEval_142,fastdllm,DASR + Fast-dLLM (bf16),True,,False,33,"```python
+def sum_squares(lst):
+    result = []
+    for i, num in enumerate(lst):
+        if i % 3 == 0:
+            result.append(num ** 2)
+        elif i % 4 == 0:
+            result.append(num ** 3)
+        else:
+            result.append(num)
+    return sum(result)
+```"
+humaneval,42,HumanEval_142,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,34,"```python
+def sum_squares(lst):
+    result = []
+    for i, num in enumerate(lst):
+        if i % 3 == 0:
+            result.append(num ** 2)
+        elif i % 4 == 0:
+            result.append(num ** 3)
+        else:
+            result.append(num)
+    return sum(result)
+```"
+humaneval,42,HumanEval_142,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,27,"```python
+def sum_squares(lst):
+    result = []
+    for i, num in enumerate(lst):
+        if i % 3 == 0:
+            result.append(num ** 2)
+        elif i % 4 == 0:
+            result.append(num ** 3)
+        else:
+            result.append(num)
+    return sum(result)
+```"
+humaneval,42,HumanEval_143,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def words_in_sentence(sentence):
+    def is_prime(n):
+        if n < 2:
+            return False
+        for i in range(2, int(n**0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
+
+    words = sentence.split()
+    prime_words = []
+    for word in words:
+        if is_prime(len(word)):
+            prime_words.append(word)
+    return ' '.join(prime_words)
+```"
+humaneval,42,HumanEval_143,fastdllm,DASR + Fast-dLLM (bf16),False,,False,60,"```python
+def words_in_sentence(sentence):
+    def is_prime(n):
+        if n < 2:
+            return False
+        if n == 2:
+            return True
+        if n % 2 == 0:
+            return False
+        for i in range(3, int(n**0.5) + 1, 2):
+            if n % i == 0:
+                return False
+        return True
+
+    words = sentence.split()
+    prime_words = []
+    for word in words:
+        if prime(len(word)):
+            prime_words.append(word)
+    return ' '.join(prime_words)
+```"
+humaneval,42,HumanEval_143,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,54,"```python
+def words_in_sentence(sentence):
+    words = sentence.split()
+    prime_words = []
+    for word in words:
+        if is_prime(len(word)):
+            prime_words.append(word)
+    return ' '.join(prime_words)
+
+def is_prime(n):
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    i = 3
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 2
+    return True
+```"
+humaneval,42,HumanEval_143,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,37,"```python
+def words_in_sentence(sentence):
+    def is_prime(n):
+        if n < 2:
+            return False
+        if n == 2:
+            return True
+        if n % 2 == 0:
+            return False
+        for i in range(3, int(n**0.5) + 1, 2):
+            if n % i == 0:
+                return False
+        return True
+
+    words = sentence.split()
+    prime_words = [word for word in words if is_prime(len(word))]
+    return ' '.join(prime_words)
+```"
+humaneval,42,HumanEval_144,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def simplify(x, n):
+    """"""Your task is to implement a function that will simplify the expression
+    x * n. The function returns True if x * n evaluates to a whole number and False
+    otherwise. Both x and n, are string representation of a fraction, and have the following format,
+    <numerator>/<denominator> where both numerator and denominator are positive whole numbers.
+
+    You can assume that x, and n are valid fractions, and do not have zero as denominator.
+
+    simplify(""1/5"", ""5/1"") = True
+    simplify(""1/6"", ""2/1"") = False
+    simplify(""7/10"", ""10/2"") = False
+    """"""
+    x_numerator, x_denominator = map(int, x.split('/'))
+    n_numerator, n_denominator = map(int, n.split('/'))
+
+    result_numerator = x_numerator * n_numerator
+    result_denominator = x_denominator * n_denominator
+
+    if result_numerator % result_denominator == 0:
+        return True
+    else:
+        return False
+```"
+humaneval,42,HumanEval_144,fastdllm,DASR + Fast-dLLM (bf16),False,,False,67,"Here is the completed function:
+
+```python
+def simplify(x, n):
+    """"""Simplify the expression x * n.""""""
+    x_num, x_den = map(int, x.split('/'))
+    n_num, n_den = map(int, n.split('/'))
+    result_num = x_num * n_den
+    result_den = x_den * n_num
+    return result_num % result_den == 0
+```"
+humaneval,42,HumanEval_144,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,67,"Here is the completed function:
+
+```python
+def simplify(x, n):
+    """"""Simplify the expression x * n.""""""
+    x_num, x_den = map(int, x.split('/'))
+    n_num, n_den = map(int, n.split('/'))
+    result_num = x_num * n_den
+    result_den = x_den * n_num
+    return result_num % result_den == 0
+```"
+humaneval,42,HumanEval_144,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,49,"Here is the completed function:
+
+```python
+def simplify(x, n):
+    """"""Simplify the expression x * n.""""""
+    x_num, x_den = map(int, x.split('/'))
+    n_num, n_den = map(int, n.split('/'))
+    result_num = x_num * n_den
+    result_den = x_den * n_num
+    return result_num % result_den == 0
+```"
+humaneval,42,HumanEval_145,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"Here is the completed Python function:
+
+```python
+def order_by_points(nums):
+    """"""
+    Write a function which sorts the given list of integers
+    in ascending order according to the sum of their digits.
+    Note: if there are several items with similar sum of their digits,
+    order them based on their index in original list.
+
+    For example:
+    >>> order_by_points([1, 11, -1, -11, -12]) == [-1, -11, 1, -12, 11]
+    >>> order_by_points([]) == []
+    """"""
+    def sum_of_digits(n):
+        return sum(int(digit) for digit in str(n))
+
+    return sorted(nums, key=lambda x: (sum_of_digits(x), nums.index(x)))
+```"
+humaneval,42,HumanEval_145,fastdllm,DASR + Fast-dLLM (bf16),False,,False,105,"Here is the completed Python function:
+
+```python
+def order_by_points(nums):
+    def sum_of_digits(n):
+        return sum(int(digit) for digit in str(n))
+
+    return sorted(nums, key=lambda x: (sum_of_digits(x), nums.index(x)))
+```
+
+This function works by first defining a helper function `sum_of_digits` that calculates the sum of the digits of a given number. It then uses the `sorted` function to sort the input list `nums` based on the sum of the digits of each number, and if two numbers have the same sum of digits, it sorts them based on their index in the original list."
+humaneval,42,HumanEval_145,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,54,"Here is the completed Python function:
+
+```python
+def order_by_points(nums):
+    def sum_of_digits(n):
+        return sum(int(digit) for digit in str(n))
+
+    return sorted(nums, key=lambda x: (sum_of_digits(x), nums.index(x)))
+```"
+humaneval,42,HumanEval_145,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,75,"Here is the completed Python function:
+
+```python
+def order_by_points(nums):
+    def sum_of_digits(n):
+        return sum(int(digit) for digit in str(n))
+
+    return sorted(nums, key=lambda x: (sum_of_digits(x), nums.index(x)))
+```
+
+This function works by first defining a helper function `sum_of_digits` that calculates the sum of the digits of a given number. It then uses the `sorted` function to sort the input list `nums` based on the sum of the digits of each number, and if two numbers have the same sum of digits, it sorts them based on their index in the original list."
+humaneval,42,HumanEval_146,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def specialFilter(nums):
+    count = 0
+    for num in nums:
+        if num > 10 and str(num)[0] in ['1', '3', '5', '7', '9'] and str(num)[-1] in ['1', '3', '5', '7', '9']:
+            count += 1
+    return count
+```"
+humaneval,42,HumanEval_146,fastdllm,DASR + Fast-dLLM (bf16),True,,False,47,"Here is the completed Python function:
+
+```python
+def specialFilter(nums):
+    count = 0
+    for num in nums:
+        if num > 10 and str(num)[0] in '1,3,5,7,9' and str(num)[-1] in '1,3,5,7,9':
+            count += 1
+    return count
+```"
+humaneval,42,HumanEval_146,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,50,"Here is the completed Python function:
+
+```python
+def specialFilter(nums):
+    count = 0
+    for num in nums:
+        if num > 10 and str(num)[0] in '1,3,5,7,9' and str(num)[-1] in '1,3,5,7,9':
+            count += 1
+    return count
+```"
+humaneval,42,HumanEval_146,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,33,"Here is the completed Python function:
+
+```python
+def specialFilter(nums):
+    count = 0
+    for num in nums:
+        if num > 10 and str(num)[0] in ['1', '3', '7', '9'] and str(num)[-1] in ['1', '3', '7', '9']:
+            count += 1
+    return count
+```"
+humaneval,42,HumanEval_147,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def get_max_triples(n):
+    a = [i * i - i + 1 for i in range(1, n + 1)]
+    count = 0
+    for i in range(n):
+        for j in range(i + 1, n):
+            for k in range(j + 1, n):
+                if (a[i] + a[j] + a[k]) % 3 == 0:
+                    count += 1
+    return count
+```"
+humaneval,42,HumanEval_147,fastdllm,DASR + Fast-dLLM (bf16),False,,False,44,"```python
+def get_max_triples(n):
+    a = [i * i - i + 1 for i in range(1, n + 1)]
+    count = 0
+    for i in range(n):
+        for j in range(i + 1, n):
+            for k in range(j + 1, n):
+                if a[i] + a[j] + a[k] % 3 == 0:
+                    count += 1
+    return count
+```"
+humaneval,42,HumanEval_147,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,44,"```python
+def get_max_triples(n):
+    a = [i * i - i + 1 for i in range(1, n + 1)]
+    count = 0
+    for i in range(n):
+        for j in range(i + 1, n):
+            for k in range(j + 1, n):
+                if a[i] + a[j] + a[k] % 3 == 0:
+                    count += 1
+    return count
+```"
+humaneval,42,HumanEval_147,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,29,"```python
+def get_max_triples(n):
+    a = [i * i - i + 1 for i in range(1, n + 1)]
+    count = 0
+    for i in range(n):
+        for j in range(i + 1, n):
+            for k in range(j + 1, n):
+                if a[i] + a[j] + a[k] % 3 == 0:
+                    count += 1
+    return count
+```"
+humaneval,42,HumanEval_148,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def bf(planet1, planet2):
+    planets = [""Mercury"", ""Venus"", ""Earth"", ""Mars"", ""Jupiter"", ""Saturn"", ""Uranus"", ""Neptune""]
+    if planet1 not in planets or planet2 not in planets:
+        return ()
+    index1 = planets.index(planet1)
+    index2 = planets.index(planet2)
+    if index1 > index2:
+        index1, index2 = index2, index1
+    result = []
+    for i in range(index1 + 1, index2):
+        result.append(planets[i])
+    return tuple(result)
+```"
+humaneval,42,HumanEval_148,fastdllm,DASR + Fast-dLLM (bf16),False,,False,54,"```python
+def bf(planet1, planet2):
+    planets = [""Mercury"", ""Venus"", ""Earth"", ""Mars"", ""Jupiter"", ""Saturn"", ""Uranus"", ""Neptune""]
+    if planet1 not in planets or planet2 not in planets:
+        return ()
+    index1 = planets.index(planet1)
+    index2 = planets.index(planet2)
+    if index1 > index2:
+        index1, index2 = index2, index1
+    between_planets = planets[index+1:index2]
+    return tuple(between_planets)
+```"
+humaneval,42,HumanEval_148,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,52,"```python
+def bf(planet1, planet2):
+    planets = [""Mercury"", ""Venus"", ""Earth"", ""Mars"", ""Jupiter"", ""Saturn"", ""Uranus"", ""Neptune""]
+    if planet1 not in planets or planet2 not in planets:
+        return ()
+    index1 = planets.index(planet1)
+    index2 = planets.index(planet2)
+    if index1 > index2:
+        index1, index2 = index2, index1
+    between_planets = planets[index1+1:index2]
+    return tuple(between_planets)
+```"
+humaneval,42,HumanEval_148,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,39,"```python
+def bf(planet1, planet2):
+    planets = [""Mercury"", ""Venus"", ""Earth"", ""Mars"", ""Jupiter"", ""Saturn"", ""Uranus"", ""Neptune""]
+    if planet1 not in planets or planet2 not in planets:
+        return ()
+    index1 = planets.index(planet1)
+    index2 = planets.index(planet2)
+    if index1 >= index2:
+        return ()
+    else:
+        return tuple(planets[index1+1:index2])
+```"
+humaneval,42,HumanEval_149,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def sorted_list_sum(lst):
+    even_words = [word for word in lst if len(word) % 2 == 0]
+    even_words.sort(key=lambda word: (len(word), word))
+    return even_words
+```"
+humaneval,42,HumanEval_149,fastdllm,DASR + Fast-dLLM (bf16),True,,False,41,"Here is the completed Python function:
+
+```python
+def sorted_list_sum(lst):
+    lst = [word for word in lst if len(word) % 2 == 0]
+    lst.sort(key=lambda x: (len(x), x))
+    return lst
+```"
+humaneval,42,HumanEval_149,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,41,"Here is the completed Python function:
+
+```python
+def sorted_list_sum(lst):
+    lst = [word for word in lst if len(word) % 2 == 0]
+    lst.sort(key=lambda x: (len(x), x))
+    return lst
+```"
+humaneval,42,HumanEval_149,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,30,"Here is the completed Python function:
+
+```python
+def sorted_list_sum(lst):
+    lst = [word for word in lst if len(word) % 2 == 0]
+    lst.sort(key=lambda x: (len(x), x))
+    return lst
+```"
+humaneval,42,HumanEval_150,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def x_or_y(n, x, y):
+    """"""A simple program which should return the value of x if n is 
+    a prime number and should return the value of y otherwise.
+
+    Examples:
+    for x_or_y(7, 34, 12) == 34
+    for x_or_y(15, 8, 5) == 5
+    
+    """"""
+    def is_prime(num):
+        """"""A helper function to check if a number is prime.""""""
+        if num <= 1:
+            return False
+        if num == 2:
+            return True
+        if num % 2 == 0:
+            return False
+        for i in range(3, int(num**0.5) + 1, 2):
+            if num % i == 0:
+                return False
+        return True
+
+    if is_prime(n):
+        return x
+    else:
+        return y
+```"
+humaneval,42,HumanEval_150,fastdllm,DASR + Fast-dLLM (bf16),True,,False,42,"```python
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for i in range(3, int(n**0.5) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+
+def x_or_y(n, x, y):
+    if is_prime(n):
+        return x
+    else:
+        return y
+```"
+humaneval,42,HumanEval_150,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,44,"```python
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for i in range(3, int(n**0.5) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+
+def x_or_y(n, x, y):
+    if is_prime(n):
+        return x
+    else:
+        return y
+```"
+humaneval,42,HumanEval_150,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,31,"```python
+def is_prime(n(n):
+    if n <= 1:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    for i in range(3, int(n**0.5) + 1, 2):
+        if n % i == 0:
+            return False
+    return True
+
+def x_or_y(n, x, y):
+    if is_prime(n):
+        return x
+    else:
+        return y
+```"
+humaneval,42,HumanEval_151,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def double_the_difference(lst):
+    total = 0
+    for num in lst:
+        if num > 0 and num % 2 != 0:
+            total += num ** 2
+    return total
+```"
+humaneval,42,HumanEval_151,fastdllm,DASR + Fast-dLLM (bf16),False,,False,40,"Here is the completed Python function:
+
+```python
+def double_the_difference(lst):
+    total = 0
+    for num in lst:
+        if num > 0 and num % 2 != 0:
+            total += num ** 2
+    return total
+```"
+humaneval,42,HumanEval_151,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,41,"Here is the completed Python function:
+
+```python
+def double_the_difference(lst):
+    total = 0
+    for num in lst:
+        if num > 0 and num % 2 != 0:
+            total += num ** 2
+    return total
+```"
+humaneval,42,HumanEval_151,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,32,"Here is the completed Python function:
+
+```python
+def double_the_difference(lst):
+    total = 0
+    for num in lst:
+        if num > 0 and num % 2 != 0:
+            total += num ** 2
+    return total
+```"
+humaneval,42,HumanEval_152,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def compare(game, guess):
+    result = []
+    for i in range(len(game)):
+        if game[i] == guess[i]:
+            result.append(0)
+        else:
+            result.append(abs(game[i] - guess[i]))
+    return result
+```"
+humaneval,42,HumanEval_152,fastdllm,DASR + Fast-dLLM (bf16),True,,False,38,"Here is the completed Python function:
+
+```python
+def compare(game, guess):
+    result = []
+    for i in range(len(game)):
+        if game[i] == guess[i]:
+            result.append(0)
+        else:
+            result.append(abs(game[i] - guess[i]))
+    return result
+```"
+humaneval,42,HumanEval_152,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,38,"Here is the completed Python function:
+
+```python
+def compare(game, guess):
+    result = []
+    for i in range(len(game)):
+        if game[i] == guess[i]:
+            result.append(0)
+        else:
+            result.append(abs(game[i] - guess[i]))
+    return result
+```"
+humaneval,42,HumanEval_152,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,29,"Here is the completed Python function:
+
+```python
+def compare(game, guess):
+    result = []
+    for i in range(len(game)):
+        if game[i] == guess[i]:
+            result.append(0)
+        else:
+            result.append(abs(game[i] - guess[i]))
+    return result
+```"
+humaneval,42,HumanEval_153,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def Strongest_Extension(class_name, extensions):
+    strongest_extension = None
+    max_strength = float('-inf')
+    for extension in extensions:
+        CAP = sum(c.isupper() for c in extension)
+        SM = sum(c.islower() for c in extension)
+        strength = CAP - SM
+        if strength > max_strength:
+            max_strength = strength
+            strongest_extension = extension
+    return f'{classname}.{strongest_extension}'
+```"
+humaneval,42,HumanEval_153,fastdllm,DASR + Fast-dLLM (bf16),False,,False,55,"```python
+def Strongest_Extension(class_name, extensions):
+    strongest_extension = extensions[0]
+    strongest_strength = 0
+    for extension in extensions:
+        strength = extension.count(isupper()) - extension.count(islower())
+        if strength > strongest_strength:
+            strongest_extension = extension
+            strongest_strength = strength
+    return f'{class_name}.{strongest_extension}'
+```"
+humaneval,42,HumanEval_153,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,55,"```python
+def Strongest_Extension(class_name, extensions):
+    strongest_extension = extensions[0]
+    strongest_strength = 0
+    for extension in extensions:
+        strength = extension.count(isupper()) - extension.count(islower())
+        if strength > strongest_strength:
+            strongest_extension = extension
+            strongest_strength = strength
+    return f'{class_name}.{strongest_extension}'
+```"
+humaneval,42,HumanEval_153,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,38,"```python
+def Strongest_Extension(class_name, extensions):
+    strongest_extension = extensions[0]
+    strongest_strength = 0
+    for extension in extensions:
+        strength = extension.count(isupper()) - extension.count(islower())
+        if strength > strongest_strength:
+            strongest_extension = extension
+            strongest_strength = strength
+    return class_name + '.' + strongest_extension_extension
+```"
+humaneval,42,HumanEval_154,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def cycpattern_check(a , b):
+    """"""You are given 2 words. You need to return True if the second word or any of its rotations is a substring in the first word
+    cycpattern_check(""abcd"",""abd"") => False
+    cycpattern_check(""hello"",""ell"") => True
+    cycpattern_check(""whassup"",""psus"") => False
+    cycpattern_check(""abab"",""baa"") => True
+    cycpattern_check(""efef"",""eeff"") => False
+    cycpattern_check(""himenss"",""simen"") => True
+
+    """"""
+    # Create a list of all rotations of the second word
+    rotations = [b[i:] + b[:i] for i in range(len(b))]
+
+    # Check if any of the rotations is a substring in the first word
+    for rotation in rotations:
+        if rotation in a:
+            return True
+
+    # If none of the rotations is a substring, return False
+    return False
+```"
+humaneval,42,HumanEval_154,fastdllm,DASR + Fast-dLLM (bf16),False,,False,80,"Here is the completed Python function:
+
+```python
+def cycpattern_check(a, b):
+    b = b + b
+    return b in a + a
+```
+
+This function works by concatenating the second word with itself, and then checking if the first word is a substring of the resulting string. If it is, then the second word or any of its rotations is a substring of the first word."
+humaneval,42,HumanEval_154,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,84,"Here is the completed Python function:
+
+```python
+def cycpattern_check(a, b):
+    b = b + b
+    return b in a + a
+```
+
+This function works by concatenating the second word with itself, and then checking if the second word is a substring of the first word concatenated with itself. This works because if the second word or any of its rotations is a substring of the first word, then it will also be a substring of the first word concatenated with itself."
+humaneval,42,HumanEval_154,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,66,"Here is the completed Python function:
+
+```python
+def cycpattern_check(a, b):
+    b = b + b
+    return b in a + a
+```
+
+This function works by concatenating the second word with itself, and then checking if the first word is a substring of the resulting string. If it is, then the second word or any of its rotations is a substring of the first word."
+humaneval,42,HumanEval_155,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def even_odd_count(num):
+    """"""Given an integer. return a tuple that has the number of even and odd digits respectively.
+
+     Example:
+        even_odd_count(-12) ==> (1, 1)
+        even_odd_count(123) ==> (1, 2)
+    """"""
+    num = abs(num)
+    even_count = 0
+    odd_count = 0
+    while num > 0:
+        digit = num % 10
+        if digit % 2 == 0:
+            even_count += 1
+        else:
+            odd_count += 1
+        num //= 10
+    return (even_count, odd_count)
+```"
+humaneval,42,HumanEval_155,fastdllm,DASR + Fast-dLLM (bf16),False,,False,67,"Here is the completed Python function:
+
+```python
+def even_odd_count(num):
+    """"""Given an integer, return a tuple that has the number of even and odd digits respectively.
+
+     Example:
+        even_odd_count(-12) ==> (1, 1)
+        even_odd_count(123) ==> (1, 2)
+    """"""
+    num = abs(num)  # handle negative numbers
+    even_count = 0
+    odd_count = 0
+
+    while num > 0:
+        digit = num % 10
+        if digit % 2 == 0:
+            even_count += 1
+        else:
+            odd_count += 1
+        num //= 10
+
+    return (even_count, odd_count)
+```"
+humaneval,42,HumanEval_155,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,56,"Here is the completed Python function:
+
+```python
+def even_odd_count(num):
+    """"""Given an integer, return a tuple that has the number of even and odd digits respectively.
+
+     Example:
+        even_odd_count(-12) ==> (1, 1)
+        even_odd_count(123) ==> (1, 2)
+    """"""
+    even_count = 0
+    odd_count = 0
+    for digit in str(num):
+        if digit % 2 == 0:
+            even_count += 1
+        else:
+            odd_count += 1
+    return (even_count, odd_count)
+```"
+humaneval,42,HumanEval_155,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,47,"Here is the completed Python function:
+
+```python
+def even_odd_count(num):
+    """"""Given an integer, return a tuple that has the number of even and odd digits respectively.
+
+     Example:
+        even_odd_count(-12) ==> (1, 1)
+        even_odd_count(123) ==> (1, 2)
+    """"""
+    num = abs(num)  # handle negative numbers
+    even_count = 0
+    odd_count = 0
+
+    while num > 0:
+        digit = num % 10
+        if digit % 2 == 0:
+            even_count += 1
+        else:
+            odd_count += 1
+        num //= 10
+
+    return (even_count, odd_count)
+```"
+humaneval,42,HumanEval_156,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def int_to_mini_roman(number):
+    """"""
+    Given a positive integer, obtain its roman numeral equivalent as a string,
+    and return it in lowercase.
+    Restrictions: 1 <= num <= 1000
+
+    Examples:
+    >>> int_to_mini_roman(19) == 'xix'
+    >>> int_to_mini_roman(152) == 'clii'
+    >>> int_to_mini_roman(426) == 'cdxxvi'
+    """"""
+    result = """"
+    values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+    numerals = [""m"", ""cm"", ""d"", ""cd"", ""c"", ""xc"", ""l"", ""xl"", ""x"", ""ix"", ""v"", ""iv"", ""i""]
+
+    for i in range(len(values)):
+        while number >= values[i]:
+            result += numerals[i]
+            number -= values[i]
+
+    return result
+```"
+humaneval,42,HumanEval_156,fastdllm,DASR + Fast-dLLM (bf16),True,,False,61,"```python
+def int_to_mini_roman(number):
+    mapping = {
+        1000: 'm',
+        900: 'cm',
+        500: 'd',
+        400: 'cd',
+        100: 'c',
+        90: 'xc',
+        50: 'l',
+        40: 'xl',
+        10: 'x',
+        9: 'ix',
+        5: 'v',
+        4: 'iv',
+        5: 'v',
+        4: 'iv',
+        1: 'i'
+    }
+    result = ''
+    for value, numeral in mapping.items():
+        while number >= value:
+            result += numeral
+            number -= value
+    return result
+```"
+humaneval,42,HumanEval_156,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,61,"```python
+def int_to_mini_roman(number):
+    mapping = {
+        1000: 'm',
+        900: 'cm',
+        500: 'd',
+        400: 'cd',
+        100: 'c',
+        90: 'xc',
+        50: 'l',
+        40: 'xl',
+        10: 'x',
+        9: 'ix',
+        5: 'v',
+        4: 'iv',
+        5: 'v',
+        4: 'iv',
+        1: 'i'
+    }
+    result = ''
+    for value, numeral in mapping.items():
+        while number >= value:
+            result += numeral
+            number -= value
+    return result
+```"
+humaneval,42,HumanEval_156,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,46,"```python
+def int_to_mini_roman(number):
+    mapping = {
+        1000: 'm',
+        900: 'cm',
+        500: 'd',
+        400: 'cd',
+        100: 'c',
+        90: 'xc',
+        50: 'l',
+        40: 'xl',
+        10: 'x',
+        9: 'ix',
+        5: 'v',
+        4: 'iv',
+        5: 'v',
+        4: 'iv',
+        1: 'i'
+    }
+    result = ''
+    for value, numeral in mapping.items():
+        while number >= value:
+            result += numeral
+            number -= value
+    return result
+```"
+humaneval,42,HumanEval_157,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def right_angle_triangle(a, b, c):
+    '''
+    Given the lengths of the three sides of a triangle. Return True if the three
+    sides form a right-angled triangle, False otherwise.
+    A right-angled triangle is a triangle in which one angle is right angle or 
+    90 degree.
+    Example:
+    right_angle_triangle(3, 4, 5) == True
+    right_angle_triangle(1, 2, 3) == False
+    '''
+    # Sort the sides in ascending order
+    sides = sorted([a, b, c])
+    
+    # Check if the sides form a right-angled triangle
+    if sides[0]**2 + sides[1]**2 == sides[2]**2:
+        return True
+    else:
+        return False```"
+humaneval,42,HumanEval_157,fastdllm,DASR + Fast-dLLM (bf16),True,,False,30,"```python
+def right_angle_triangle(a, b, c):
+    if a**2 + b**2 == c**2 or a**2 + c**2 == b**2 or b**2 + c**2 == a**2:
+        return True
+    else:
+        return False
+```"
+humaneval,42,HumanEval_157,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,30,"```python
+def right_angle_triangle(a, b, c):
+    if a**2 + b**2 == c**2 or a**2 + c**2 == b**2 or b**2 + c**2 == a**2:
+        return True
+    else:
+        return False
+```"
+humaneval,42,HumanEval_157,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,25,"```python
+def right_angle_triangle(a, b, c):
+    if a**2 + b**2 == c**2 or a**2 + c**2 == b**2 or b**2 + c**2 == a**2:
+        return True
+    else:
+"
+humaneval,42,HumanEval_158,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+def find_max(words):
+    """"""Write a function that accepts a list of strings.
+    The list contains different words. Return the word with maximum number
+    of unique characters. If multiple strings have maximum number of unique
+    characters, return the one which comes first in lexicographical order.
+
+    find_max([""name"", ""of"", ""string""]) == ""string""
+    find_max([""name"", ""enam"", ""game""]) == ""enam""
+    find_max([""aaaaaaa"", ""bb"" ,""cc""]) == ""aaaaaaa""
+    """"""
+    max_unique_chars = 0
+    max_word = None
+    for word in words:
+        unique_chars = set(word)
+        if len(unique_chars) > max_unique_chars:
+            max_unique_chars = len(unique_chars)
+            max_word = word
+        elif len(unique_chars) == max_unique_chars:
+            if max_word is None:
+                max_word = word
+            elif word < max_word:
+                max_word = word
+    return max_word
+```"
+humaneval,42,HumanEval_158,fastdllm,DASR + Fast-dLLM (bf16),True,,False,48,"Here is the completed Python function:
+
+```python
+def find_max(words):
+    max_unique_chars = 0
+    max_word = """"
+    for word in words:
+        unique_chars = set(word)
+        if len(unique_chars) > max_unique_chars:
+            max_unique_chars = len(unique_chars)
+            max_word = word
+        elif len(unique_chars) == max_unique_chars:
+            if max_word > word:
+                max_word = word
+    return max_word
+```"
+humaneval,42,HumanEval_158,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,54,"Here is the completed Python function:
+
+```python
+def find_max(words):
+    max_unique_chars = 0
+    max_word = """"
+    for word in words:
+        unique_chars = set(word)
+        if len(unique_chars) > max_unique_chars or max_unique_chars = len(unique_chars)
+            max_word = word
+    return max_word
+```"
+humaneval,42,HumanEval_158,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,40,"Here is the completed Python function:
+
+```python
+def find_max(words):
+    max_unique_chars = 0
+    max_word = """"
+    for word in words:
+        unique_chars = len(set(word))
+        if unique_chars_chars > max_unique_chars:
+            max_unique_chars = unique_chars
+            max_word = word
+        elif unique_chars == max_unique_chars and \
+            max_word > word:
+            max_word = word
+    return max_word
+```"
+humaneval,42,HumanEval_159,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def eat(number, need, remaining):
+    total_eaten = number + need
+    remaining_carrots = remaining - need
+    return [total_eaten, remaining_carrots]
+```"
+humaneval,42,HumanEval_159,fastdllm,DASR + Fast-dLLM (bf16),False,,False,45,"Here is the completed Python function:
+
+```python
+def eat(number, need, remaining):
+    total_eaten = number + need
+    remaining_carrots = remaining - need
+    return total_eaten, remaining_carrots
+```"
+humaneval,42,HumanEval_159,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,46,"Here is the completed Python function:
+
+```python
+def eat(number, need, remaining):
+    total_eaten = number + need
+    remaining_carrots = remaining - need
+    return total_eaten, remaining_carrots
+```"
+humaneval,42,HumanEval_159,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,38,"Here is the completed Python function:
+
+```python
+def eat(number, need, remaining):
+    total_eaten = number + need
+    remaining_carrots = remaining - need
+    return [totalaten, remaining_carrots]
+```"
+humaneval,42,HumanEval_160,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def do_algebra(operator, operand):
+    stack = []
+    for num in operand:
+        stack.append(num)
+    for op in operator:
+        if op == '+':
+            stack.append(stack.pop() + stack.pop())
+        elif op == '-':
+            stack.append(stack.pop() - stack.pop())
+        elif op == '*':
+            stack.append(stack.pop() * stack.pop())
+        elif op == '//':
+            stack.append(stack.pop() // stack.pop())
+        elif op == '**':
+            stack.append(stack.pop() ** stack.pop())
+    return stack[0]
+```"
+humaneval,42,HumanEval_160,fastdllm,DASR + Fast-dLLM (bf16),False,,False,67,"Here is the completed Python function:
+
+```python
+def do_algebra(operator, operand):
+    stack = [operand[0]]
+    for i in range(1, len(operand)):
+        num = operand[i]
+        op = operator[i - 1]
+        if op == '+':
+            stack.append(stack.pop() + num)
+        elif op == '-':
+            stack.append(stack.pop() - num)
+        elif op == '*':
+            stack.append(stack.pop() * num)
+        elif op == '//':
+            stack.append(stack.pop() // num)
+        elif op == '**':
+            stack.append(stack.pop() ** num)
+    return stack[0]
+```"
+humaneval,42,HumanEval_160,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,67,"Here is the completed Python function:
+
+```python
+def do_algebra(operator, operand):
+    stack = [operand[0]]
+    for i in range(1, len(operand)):
+        num = operand[i]
+        op = operator[i - 1]
+        if op == '+':
+            stack.append(stack.pop() + num)
+        elif op == '-':
+            stack.append(stack.pop() - num)
+        elif op == '*':
+            stack.append(stack.pop() * num)
+        elif op == '//':
+            stack.append(stack.pop() // num)
+        elif op == '**':
+            stack.append(stack.pop() ** num)
+    return stack[0]
+```"
+humaneval,42,HumanEval_160,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,47,"Here is the completed Python function:
+
+```python
+def do_algebra do_algebra):
+    stack = []
+    for num in operand:
+        stack.append(num)
+    for op in operator:
+        if op == '+':
+            stack.append(stack.pop() + stack.pop())
+        elif op == '-':
+            stack.append(stack.pop() - stack.pop())
+        elif op == '*':
+            stack.append(stack.pop() * stack.pop())
+        elif op == '//':
+            stack.append(stack.pop() // stack.pop())
+        elif op == '**':
+            stack.append(stack.pop() ** stack.pop())
+    return stack[0]
+```"
+humaneval,42,HumanEval_161,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def solve(s):
+    result = """"
+    for char in s:
+        if char.isalpha():
+            result += char.swapcase()
+        else:
+            result += char
+    if result.isalpha():
+        return result[::-1]
+    return result
+```"
+humaneval,42,HumanEval_161,fastdllm,DASR + Fast-dLLM (bf16),False,,False,48,"Here is the completed Python function:
+
+```python
+def solve(s):
+    result = """"
+    for char in s:
+        if char.isalpha():
+            result += char.upper() if char.islower() else char.lower()
+        else:
+            result += char
+    return result[::-1]
+```"
+humaneval,42,HumanEval_161,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,48,"Here is the completed Python function:
+
+```python
+def solve(s):
+    result = """"
+    for char in s:
+        if char.isalpha():
+            result += char.upper() if char.islower() else char.lower()
+        else:
+            result += char
+    return result[::-1]
+```"
+humaneval,42,HumanEval_161,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,39,"Here is the completed Python function:
+
+```python
+def solve(s):
+    result = """"
+    for char in s:
+        if char.isalpha():
+            result += char.upper() if char.islower() else char.lower()
+        else:
+            result += char
+    return result[::-1]
+```"
+humaneval,42,HumanEval_162,one_token_per_step,"No cache, one token per step (reference)",True,,True,256,"```python
+import hashlib
+
+def string_to_md5(text):
+    """"""
+    Given a string 'text', return its md5 hash equivalent string.
+    If 'text' is an empty string, return None.
+
+    >>> string_to_md5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'
+    """"""
+    if not text:
+        return None
+    md5 = hashlib.md5(text.encode()).hexdigest()
+    return md5
+```"
+humaneval,42,HumanEval_162,fastdllm,DASR + Fast-dLLM (bf16),True,,False,33,"```python
+import hashlib
+
+def string_to_md5(text):
+    if not text:
+        return None
+    else:
+        return hashlib.md5(text.encode()).hexdigest()
+```"
+humaneval,42,HumanEval_162,fastdllm_int8,DASR + Fast-dLLM (INT8),True,,False,31,"```python
+import hashlib
+
+def string_to_md5(text):
+    if not text:
+        return None
+    else:
+        return hashlib.md5(text.encode()).hexdigest()
+```"
+humaneval,42,HumanEval_162,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",True,,False,27,"```python
+import hashlib
+
+def string_to_md5(text):
+    if not text:
+        return None
+    else:
+        return hashlib.md5(text.encode()).hexdigest()
+```"
+humaneval,42,HumanEval_163,one_token_per_step,"No cache, one token per step (reference)",False,,True,256,"```python
+def generate_integers(a, b):
+    """"""
+    Given two positive integers a and b, return the even digits between a
+    and b, in ascending order.
+
+    For example:
+    generate_integers(2, 8) => [2, 4, 6, 8]
+    generate_integers(8, 2) => [2, 4, 6, 8]
+    generate_integers(10, 14) => []
+    """"""
+    result = []
+    for i in range(a, b + 1):
+        if i % 2 == 0:
+            result.append(i)
+    return result
+```"
+humaneval,42,HumanEval_163,fastdllm,DASR + Fast-dLLM (bf16),False,,False,37,"Here is the completed Python function:
+
+```python
+def generate_integers(a, b):
+    result = []
+    for i in range(a, b + 1):
+        if i % 2 == 0:
+            result.append(i)
+    return result
+```"
+humaneval,42,HumanEval_163,fastdllm_int8,DASR + Fast-dLLM (INT8),False,,False,37,"Here is the completed Python function:
+
+```python
+def generate_integers(a, b):
+    result = []
+    for i in range(a, b + 1):
+        if i % 2 == 0:
+            result.append(i)
+    return result
+```"
+humaneval,42,HumanEval_163,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",False,,False,29,"Here is the completed Python function:
+
+```python
+def generate_integers(a, b):
+    result = []
+    for i in range(a, b + 1):
+        if i % 2 == 0:
+            result.append(i)
+    return result
+```"

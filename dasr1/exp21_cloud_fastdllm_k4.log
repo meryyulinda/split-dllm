@@ -5,3 +5,25 @@ The argument `trust_remote_code` is to be used with Auto classes. It has no effe
 /mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
   warnings.warn(
 Exp21 cloud | fastdllm_k4 | NVIDIA RTX A6000 | listening on 127.0.0.1:6003
+2026-11-28 01:23:32 edge connected from ('127.0.0.1', 54800)
+  warmup bf16: 58 steps, cloud 14.6 s
+  gsm8k_0000 bf16: 58 steps, cloud 12.5 s
+  gsm8k_0000 int8_delta: 63 steps, cloud 12.5 s
+  gsm8k_0001 bf16: 50 steps, cloud 10.8 s
+  gsm8k_0001 int8_delta: 49 steps, cloud 9.9 s
+  gsm8k_0002 bf16: 49 steps, cloud 10.8 s
+  gsm8k_0002 int8_delta: 50 steps, cloud 10.2 s
+  gsm8k_0003 bf16: 41 steps, cloud 8.9 s
+  gsm8k_0003 int8_delta: 41 steps, cloud 8.3 s
+  gsm8k_0004 bf16: 71 steps, cloud 16.8 s
+  gsm8k_0004 int8_delta: 73 steps, cloud 88.6 s
+  gsm8k_0005 bf16: 91 steps, cloud 19.1 s
+  gsm8k_0005 int8_delta: 90 steps, cloud 18.0 s
+  gsm8k_0006 bf16: 49 steps, cloud 10.9 s
+  gsm8k_0006 int8_delta: 49 steps, cloud 10.1 s
+  gsm8k_0007 bf16: 140 steps, cloud 28.6 s
+  gsm8k_0007 int8_delta: 141 steps, cloud 28.1 s
+  gsm8k_0008 bf16: 95 steps, cloud 20.2 s
+  gsm8k_0008 int8_delta: 94 steps, cloud 19.3 s
+  gsm8k_0009 bf16: 80 steps, cloud 17.0 s
+  gsm8k_0009 int8_delta: 85 steps, cloud 17.0 s

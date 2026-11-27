@@ -5,3 +5,15 @@ The argument `trust_remote_code` is to be used with Auto classes. It has no effe
 /mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
   warnings.warn(
 Exp21 cloud | fastdllm_k0 | NVIDIA RTX A6000 | listening on 127.0.0.1:6004
+2026-11-28 01:30:06 edge connected from ('127.0.0.1', 42050)
+  warmup bf16: 63 steps, cloud 3.3 s
+  gsm8k_0000 bf16: 63 steps, cloud 2.5 s
+  gsm8k_0001 bf16: 50 steps, cloud 2.1 s
+  gsm8k_0002 bf16: 50 steps, cloud 2.0 s
+  gsm8k_0003 bf16: 42 steps, cloud 1.7 s
+  gsm8k_0004 bf16: 72 steps, cloud 3.0 s
+  gsm8k_0005 bf16: 112 steps, cloud 4.2 s
+  gsm8k_0006 bf16: 49 steps, cloud 2.1 s
+  gsm8k_0007 bf16: 142 steps, cloud 5.4 s
+  gsm8k_0008 bf16: 95 steps, cloud 3.8 s
+  gsm8k_0009 bf16: 85 steps, cloud 3.3 s

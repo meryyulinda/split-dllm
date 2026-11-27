@@ -1,0 +1,45 @@
+{
+  "experiment": "Exp21 DASR as two programs (edge and cloud) over a real network",
+  "tag": "vast_3060_kr",
+  "edge_gpu": "NVIDIA GeForce RTX 3060",
+  "servers": [
+    {
+      "name": "dllm_cache_split",
+      "backend": "dllm_cache",
+      "split": 4,
+      "addr": "127.0.0.1:6001"
+    },
+    {
+      "name": "dllm_cache_cloud_only",
+      "backend": "dllm_cache",
+      "split": 0,
+      "addr": "127.0.0.1:6002"
+    },
+    {
+      "name": "fastdllm_split",
+      "backend": "fastdllm",
+      "split": 4,
+      "addr": "127.0.0.1:6003"
+    },
+    {
+      "name": "fastdllm_cloud_only",
+      "backend": "fastdllm",
+      "split": 0,
+      "addr": "127.0.0.1:6004"
+    }
+  ],
+  "codecs": [
+    "bf16",
+    "int8_delta"
+  ],
+  "dataset": "gsm8k",
+  "n_cases": 10,
+  "new_tokens": 256,
+  "split_layer_1based": 4,
+  "edge_slowdown": 1.0,
+  "seed": 42,
+  "torch": "2.14.1+cu130",
+  "transformers": "4.46.2",
+  "python": "3.12.16",
+  "host": "5dfa8398aeee"
+}

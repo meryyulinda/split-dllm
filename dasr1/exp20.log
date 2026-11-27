@@ -740,3 +740,68 @@ Exp20 | fastdllm | one GPU (cuda:0) | tasks ['humaneval'] | configs ['one_token_
   HumanEval_105  one_token_per_step=Y fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
   HumanEval_106  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
   HumanEval_107  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_108  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_109  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_110  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_111  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_112  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=-
+  HumanEval_113  one_token_per_step=Y fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_114  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=-
+  HumanEval_115  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_116  one_token_per_step=Y fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_117  one_token_per_step=- fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_118  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_119  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_120  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_121  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_122  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_123  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_124  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_125  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_126  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_127  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_128  one_token_per_step=- fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=-
+  HumanEval_129  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_130  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_131  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_132  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_133  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_134  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_135  one_token_per_step=Y fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_136  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=-
+  HumanEval_137  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_138  one_token_per_step=- fastdllm=Y fastdllm_int8=- fastdllm_gamma0.7=Y
+  HumanEval_139  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_140  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_141  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_142  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_143  one_token_per_step=Y fastdllm=- fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_144  one_token_per_step=Y fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_145  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_146  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=-
+  HumanEval_147  one_token_per_step=Y fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_148  one_token_per_step=Y fastdllm=- fastdllm_int8=Y fastdllm_gamma0.7=-
+  HumanEval_149  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_150  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=-
+  HumanEval_151  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_152  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_153  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_154  one_token_per_step=Y fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_155  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_156  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_157  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=-
+  HumanEval_158  one_token_per_step=Y fastdllm=Y fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_159  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_160  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_161  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+  HumanEval_162  one_token_per_step=Y fastdllm=Y fastdllm_int8=Y fastdllm_gamma0.7=Y
+  HumanEval_163  one_token_per_step=- fastdllm=- fastdllm_int8=- fastdllm_gamma0.7=-
+
+Exp20 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp20_breadth_fastdllm_dream_humaneval
+     task             config  runs  seeds   acc  lost  gained  identical  acc_seed_min  acc_seed_max  mcnemar_p
+humaneval one_token_per_step   164      1 0.591     0       0        164         0.591         0.591      1.000
+humaneval           fastdllm   164      1 0.567    18      14         11         0.567         0.567      0.597
+humaneval      fastdllm_int8   164      1 0.561    18      13         11         0.561         0.561      0.473
+humaneval  fastdllm_gamma0.7   164      1 0.470    30      10          8         0.470         0.470      0.002
+
+Done (2026-11-28 00:29:36).

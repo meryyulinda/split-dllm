@@ -4,3 +4,36 @@
 /mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
   warnings.warn(
 Exp21 cloud | dllm_cache_k4 | NVIDIA RTX A6000 | listening on 127.0.0.1:6001
+2026-11-28 00:39:47 edge connected from ('127.0.0.1', 33662)
+  warmup bf16: 256 steps, cloud 87.2 s
+connection ended: EOFError('connection closed')
+2026-11-28 00:47:17 edge connected from ('127.0.0.1', 54936)
+connection ended: EOFError('connection closed')
+2026-11-28 00:48:07 edge connected from ('127.0.0.1', 49672)
+  warmup bf16: 256 steps, cloud 92.2 s
+  gsm8k_0000 bf16: 256 steps, cloud 109.9 s
+  gsm8k_0000 int8_delta: 256 steps, cloud 63.7 s
+  gsm8k_0001 bf16: 256 steps, cloud 91.6 s
+  gsm8k_0001 int8_delta: 256 steps, cloud 60.8 s
+connection ended: BrokenPipeError(32, 'Broken pipe')
+2026-11-28 00:55:57 edge connected from ('127.0.0.1', 58502)
+connection ended: EOFError('connection closed')
+2026-11-28 00:57:59 edge connected from ('127.0.0.1', 38776)
+  gsm8k_0002 bf16: 256 steps, cloud 82.5 s
+  gsm8k_0002 int8_delta: 256 steps, cloud 59.9 s
+  gsm8k_0003 bf16: 256 steps, cloud 83.4 s
+  gsm8k_0003 int8_delta: 256 steps, cloud 69.7 s
+  gsm8k_0004 bf16: 256 steps, cloud 90.2 s
+  gsm8k_0004 int8_delta: 256 steps, cloud 66.3 s
+  gsm8k_0005 bf16: 256 steps, cloud 91.0 s
+connection ended: EOFError('connection closed')
+2026-11-28 01:07:46 edge connected from ('127.0.0.1', 57988)
+  gsm8k_0005 int8_delta: 256 steps, cloud 153.2 s
+  gsm8k_0006 bf16: 256 steps, cloud 83.1 s
+  gsm8k_0006 int8_delta: 256 steps, cloud 60.0 s
+  gsm8k_0007 bf16: 256 steps, cloud 88.3 s
+  gsm8k_0007 int8_delta: 256 steps, cloud 64.1 s
+  gsm8k_0008 bf16: 256 steps, cloud 124.4 s
+  gsm8k_0008 int8_delta: 256 steps, cloud 62.3 s
+  gsm8k_0009 bf16: 256 steps, cloud 84.6 s
+  gsm8k_0009 int8_delta: 256 steps, cloud 63.2 s

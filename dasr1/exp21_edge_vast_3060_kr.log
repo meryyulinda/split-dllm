@@ -1,0 +1,83 @@
+nohup: ignoring input
+Exp21 edge | NVIDIA GeForce RTX 3060 | split after layer 4 | edge slowdown 1 | servers ['dllm_cache_split', 'dllm_cache_cloud_only', 'fastdllm_split', 'fastdllm_cloud_only']
+
+=== dllm_cache_split at 127.0.0.1:6001  (2026-11-27 16:47:16), 20 answers to do
+  2026-11-27 16:47:52 connection lost during gsm8k_0000 bf16 (EOFError('connection closed')); reconnecting (1/50) ...
+  gsm8k_0000 bf16        ok=True  same=False steps= 256 time= 109.92 s (edge  8.18 s, cloud 11.33 s, wire 96.25 s)
+  gsm8k_0000 int8_delta  ok=True  same=False steps= 256 time=  63.76 s (edge  7.27 s, cloud 11.42 s, wire 50.18 s)
+  gsm8k_0001 bf16        ok=True  same=False steps= 256 time=  91.64 s (edge  7.12 s, cloud 11.58 s, wire 77.90 s)
+  gsm8k_0001 int8_delta  ok=True  same=False steps= 256 time=  60.84 s (edge  8.68 s, cloud 11.36 s, wire 47.32 s)
+  2026-11-27 16:55:41 connection lost during gsm8k_0002 bf16 (EOFError('connection closed')); reconnecting (2/50) ...
+  2026-11-27 16:57:44 connection lost during gsm8k_0002 bf16 (EOFError('connection closed')); reconnecting (3/50) ...
+  gsm8k_0002 bf16        ok=False same=True  steps= 256 time=  82.69 s (edge  7.08 s, cloud 11.36 s, wire 69.08 s)
+  gsm8k_0002 int8_delta  ok=False same=True  steps= 256 time=  59.96 s (edge  7.32 s, cloud 11.57 s, wire 46.20 s)
+  gsm8k_0003 bf16        ok=True  same=True  steps= 256 time=  83.44 s (edge  7.14 s, cloud 11.45 s, wire 69.82 s)
+  gsm8k_0003 int8_delta  ok=True  same=True  steps= 256 time=  69.78 s (edge  7.64 s, cloud 11.49 s, wire 56.12 s)
+  gsm8k_0004 bf16        ok=True  same=False steps= 256 time=  90.30 s (edge  7.77 s, cloud 11.85 s, wire 76.25 s)
+  gsm8k_0004 int8_delta  ok=True  same=False steps= 256 time=  66.36 s (edge  7.78 s, cloud 11.76 s, wire 52.40 s)
+  gsm8k_0005 bf16        ok=False same=False steps= 256 time=  91.14 s (edge  7.22 s, cloud 11.51 s, wire 77.35 s)
+  2026-11-27 17:07:36 connection lost during gsm8k_0005 int8_delta (EOFError('connection closed')); reconnecting (4/50) ...
+  gsm8k_0005 int8_delta  ok=False same=True  steps= 256 time= 153.38 s (edge  7.25 s, cloud 11.34 s, wire 139.80 s)
+  gsm8k_0006 bf16        ok=True  same=True  steps= 256 time=  83.22 s (edge  7.14 s, cloud 11.37 s, wire 69.68 s)
+  gsm8k_0006 int8_delta  ok=True  same=True  steps= 256 time=  60.07 s (edge  7.17 s, cloud 11.59 s, wire 46.30 s)
+  gsm8k_0007 bf16        ok=False same=False steps= 256 time=  88.43 s (edge  7.14 s, cloud 11.62 s, wire 74.61 s)
+  gsm8k_0007 int8_delta  ok=False same=False steps= 256 time=  64.21 s (edge  7.20 s, cloud 11.56 s, wire 50.41 s)
+  gsm8k_0008 bf16        ok=True  same=False steps= 256 time= 124.49 s (edge  7.90 s, cloud 11.81 s, wire 110.49 s)
+  gsm8k_0008 int8_delta  ok=True  same=True  steps= 256 time=  62.40 s (edge  8.14 s, cloud 11.91 s, wire 48.31 s)
+  gsm8k_0009 bf16        ok=True  same=False steps= 256 time=  84.62 s (edge  7.21 s, cloud 11.39 s, wire 70.99 s)
+  gsm8k_0009 int8_delta  ok=True  same=False steps= 256 time=  63.35 s (edge  7.17 s, cloud 11.35 s, wire 49.73 s)
+
+=== dllm_cache_cloud_only at 127.0.0.1:6002  (2026-11-27 17:20:51), 10 answers to do
+  gsm8k_0000 cloud_only  ok=True  same=True  steps= 256 time=  14.28 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0001 cloud_only  ok=True  same=True  steps= 256 time=  14.29 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0002 cloud_only  ok=False same=True  steps= 256 time=  14.69 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0003 cloud_only  ok=True  same=True  steps= 256 time=  14.29 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0004 cloud_only  ok=True  same=True  steps= 256 time=  15.37 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0005 cloud_only  ok=False same=True  steps= 256 time=  14.41 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0006 cloud_only  ok=True  same=True  steps= 256 time=  14.36 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0007 cloud_only  ok=False same=True  steps= 256 time=  14.45 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0008 cloud_only  ok=True  same=True  steps= 256 time=  15.10 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0009 cloud_only  ok=True  same=True  steps= 256 time=  14.43 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+
+=== fastdllm_split at 127.0.0.1:6003  (2026-11-27 17:23:32), 20 answers to do
+  gsm8k_0000 bf16        ok=True  same=False steps=  58 time=  12.57 s (edge  1.12 s, cloud  2.28 s, wire 10.17 s)
+  gsm8k_0000 int8_delta  ok=True  same=False steps=  63 time=  12.60 s (edge  1.09 s, cloud  2.46 s, wire 10.01 s)
+  gsm8k_0001 bf16        ok=True  same=True  steps=  50 time=  10.86 s (edge  0.96 s, cloud  2.06 s, wire  8.68 s)
+  gsm8k_0001 int8_delta  ok=True  same=True  steps=  49 time=   9.96 s (edge  0.96 s, cloud  1.90 s, wire  7.94 s)
+  gsm8k_0002 bf16        ok=False same=False steps=  49 time=  10.88 s (edge  0.96 s, cloud  1.92 s, wire  8.85 s)
+  gsm8k_0002 int8_delta  ok=False same=True  steps=  50 time=  10.31 s (edge  0.97 s, cloud  1.97 s, wire  8.22 s)
+  gsm8k_0003 bf16        ok=True  same=True  steps=  41 time=   8.96 s (edge  0.81 s, cloud  1.62 s, wire  7.23 s)
+  gsm8k_0003 int8_delta  ok=True  same=True  steps=  41 time=   8.32 s (edge  0.83 s, cloud  1.59 s, wire  6.63 s)
+  gsm8k_0004 bf16        ok=True  same=True  steps=  71 time=  16.91 s (edge  1.40 s, cloud  2.92 s, wire 13.85 s)
+  gsm8k_0004 int8_delta  ok=True  same=True  steps=  73 time=  88.72 s (edge  1.36 s, cloud  2.98 s, wire 85.59 s)
+  gsm8k_0005 bf16        ok=True  same=False steps=  91 time=  19.12 s (edge  1.76 s, cloud  3.46 s, wire 15.52 s)
+  gsm8k_0005 int8_delta  ok=True  same=True  steps=  90 time=  18.12 s (edge  1.75 s, cloud  3.50 s, wire 14.47 s)
+  gsm8k_0006 bf16        ok=True  same=True  steps=  49 time=  10.95 s (edge  1.01 s, cloud  1.91 s, wire  8.93 s)
+  gsm8k_0006 int8_delta  ok=True  same=True  steps=  49 time=  10.21 s (edge  1.01 s, cloud  1.92 s, wire  8.18 s)
+  gsm8k_0007 bf16        ok=False same=False steps= 140 time=  28.63 s (edge  2.66 s, cloud  5.19 s, wire 23.26 s)
+  gsm8k_0007 int8_delta  ok=False same=False steps= 141 time=  28.17 s (edge  2.67 s, cloud  5.26 s, wire 22.72 s)
+  gsm8k_0008 bf16        ok=True  same=True  steps=  95 time=  20.31 s (edge  1.91 s, cloud  3.75 s, wire 16.41 s)
+  gsm8k_0008 int8_delta  ok=True  same=False steps=  94 time=  19.40 s (edge  1.92 s, cloud  3.87 s, wire 15.39 s)
+  gsm8k_0009 bf16        ok=True  same=False steps=  80 time=  17.09 s (edge  1.57 s, cloud  3.01 s, wire 13.95 s)
+  gsm8k_0009 int8_delta  ok=True  same=True  steps=  85 time=  17.04 s (edge  1.65 s, cloud  3.23 s, wire 13.68 s)
+
+=== fastdllm_cloud_only at 127.0.0.1:6004  (2026-11-27 17:30:06), 10 answers to do
+  gsm8k_0000 cloud_only  ok=True  same=True  steps=  63 time=   2.55 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0001 cloud_only  ok=True  same=True  steps=  50 time=   2.19 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0002 cloud_only  ok=False same=True  steps=  50 time=   2.08 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0003 cloud_only  ok=True  same=True  steps=  42 time=   1.73 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0004 cloud_only  ok=True  same=True  steps=  72 time=   3.02 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0005 cloud_only  ok=True  same=True  steps= 112 time=   4.25 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0006 cloud_only  ok=True  same=True  steps=  49 time=   2.19 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0007 cloud_only  ok=False same=True  steps= 142 time=   5.50 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0008 cloud_only  ok=True  same=True  steps=  95 time=   3.85 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+  gsm8k_0009 cloud_only  ok=True  same=True  steps=  85 time=   3.35 s (edge  0.00 s, cloud  0.00 s, wire  0.00 s)
+
+Exp21 edge completed. Output: /root/work/split-dllm/dasr1/outputs/exp21_deploy_vast_3060_kr
+               server      codec  runs  acc  same_as_single_process  latency_s  steps   up_mb  edge_s  cloud_s  cloud_gen_s  wire_s  reconnects
+     dllm_cache_split       bf16    10  0.7                       3     92.988  256.0 479.141   7.389   11.526       92.900  79.241           3
+     dllm_cache_split int8_delta    10  0.7                       5     72.410  256.0 253.601   7.560   11.533       72.322  58.677           1
+dllm_cache_cloud_only cloud_only    10  0.7                      10     14.565  256.0   0.001   0.000    0.000       14.485   0.000           0
+       fastdllm_split       bf16    10  0.8                       5     15.629   72.4  34.994   1.416    2.812       15.559  12.685           0
+       fastdllm_split int8_delta    10  0.8                       7     22.284   73.5  19.092   1.420    2.868       22.212  19.282           0
+  fastdllm_cloud_only cloud_only    10  0.8                      10      3.071   76.0   0.001   0.000    0.000        3.000   0.000           0
