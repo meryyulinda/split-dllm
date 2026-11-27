@@ -5,8 +5,8 @@
 #   dLLM-Cache backend (Exp11 script): S0 S1 S2 S3 S4, C1 C2 C4 C5 C6, A1
 #   Fast-dLLM backend  (Exp13 script): F0 F1 K1, K2 (gamma 0.9 and 0.7), K3 K4 K5
 # 30 questions, 128 new tokens (as the authored long prompts), split after layer 4.
-# Downloads the official dev file once and keeps only the first 100 questions
-# (data/hotpotqa/dev_distractor_first100.jsonl).
+# Downloads the dev set once from Hugging Face (hotpotqa/hotpot_qa) and keeps only the
+# first 100 questions (data/hotpotqa/dev_distractor_first100.jsonl).
 # Runs in the background and waits until both GPUs are idle (checked every 5 min):
 #   nohup bash experiments/run_exp23.sh > exp23.log 2>&1 &
 #   SMOKE=1 SKIP_IDLE_CHECK=1 bash experiments/run_exp23.sh > exp23_smoke.log 2>&1   # ~10 min
@@ -22,12 +22,8 @@ WAIT_SECONDS="${WAIT_SECONDS:-300}"
 
 DATA=data/hotpotqa/dev_distractor_first100.jsonl
 if [ ! -s "$DATA" ]; then
-  mkdir -p data/hotpotqa
-  echo "$(date '+%F %T') downloading the HotpotQA dev set (distractor, 46 MB) ..."
-  curl -fL --retry 3 -o data/hotpotqa/hotpot_dev_distractor_v1.json \
-    http://curtis.ml.cmu.edu/datasets/hotpot/hotpot_dev_distractor_v1.json
-  python -c "from src.hotpotqa import prepare; print(prepare('data/hotpotqa/hotpot_dev_distractor_v1.json', '$DATA', 100), 'questions kept')"
-  rm -f data/hotpotqa/hotpot_dev_distractor_v1.json
+  echo "$(date '+%F %T') downloading the HotpotQA dev set (distractor) from Hugging Face ..."
+  python -c "from src.hotpotqa import prepare_from_hub; print(prepare_from_hub('$DATA', 100), 'questions kept')"
 fi
 python - <<'PY' || echo "(prompt-length check skipped)"
 import statistics, transformers

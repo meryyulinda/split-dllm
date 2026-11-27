@@ -1,0 +1,37 @@
+user,j,question,case_id,start,end,cloud_gen_s,n_steps,cloud_ms,sample_ms,wire_ms,edge_ms_reported,up_bytes,down_bytes,edge_wall_s,edge_steps,edge_compute_ms,edge_sleep_ms,edge_up_bytes,edge_down_bytes,config,split,link,mbps,rtt_ms,users,slowdown,latency_s,ok,text
+0,0,0,gsm8k_0000,1795819522.150321,1795819524.795325,2.5379062723368406,63,0.0,0.0,0.0,0.0,0,0,2.6445076717063785,0,0.0,0.0,865,3223,cloud_only,0,paper,100.0,20.0,1,1.0,2.6445076717063785,True,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18"
+0,1,1,gsm8k_0001,1795819524.7953424,1795819526.7845438,1.9669140232726927,50,0.0,0.0,0.0,0.0,0,0,1.98900253046304,0,0.0,0.0,645,3320,cloud_only,0,paper,100.0,20.0,1,1.0,1.98900253046304,True,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3."
+1,0,1,gsm8k_0001,1795819529.6880074,1795819533.1840968,3.473053717985749,50,0.0,0.0,0.0,0.0,0,0,3.4956082608550787,0,0.0,0.0,645,3320,cloud_only,0,paper,100.0,20.0,2,1.0,3.4956082608550787,True,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3."
+0,0,0,gsm8k_0000,1795819529.6880836,1795819533.770808,4.058597811497748,63,0.0,0.0,0.0,0.0,0,0,4.08218764141202,0,0.0,0.0,865,3222,cloud_only,0,paper,100.0,20.0,2,1.0,4.08218764141202,True,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18"
+0,0,0,gsm8k_0000,1795819569.754181,1795819577.946761,8.1689064623788,63,2478.842456817627,48.47910374403,5632.741487585008,499.14707231521606,32974123,3933,8.192029532976449,63,499.14707231521606,998.2941446304321,32974984,4590,split4,4,paper,100.0,20.0,1,3.0,8.192029532976449,True,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18"
+0,1,1,gsm8k_0001,1795819577.9468296,1795819584.4605837,6.491238076239824,50,1913.4463806152344,36.73814404010773,4534.465195611119,375.8480954170227,27755546,3400,6.513231886550784,50,375.8480954170227,751.6961908340454,27756187,4062,split4,4,paper,100.0,20.0,1,3.0,6.513231886550784,True,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3."
+1,0,1,gsm8k_0001,1795819592.5462155,1795819599.8997345,7.305717991665006,50,2120.858730316162,43.86575984954834,5134.687379933894,572.0147519111633,27755546,3400,7.352619090117514,50,572.0147519111633,1144.0295038223267,27756187,4061,split4,4,paper,100.0,20.0,2,3.0,7.352619090117514,True,"The robe takes 2 bolts of blue fiber.
+It also takes half that much white fiber, which is 2/2 = 1 bolt of white fiber.
+In total, the robe takes 2 + 1 = 3 bolts.
+The answer is: 3."
+0,0,0,gsm8k_0000,1795819592.5463555,1795819601.1170344,8.523347990587354,63,2641.2653465270996,48.66313594579697,5825.776407495141,529.527934551239,32974123,3933,8.5700029945001,63,529.527934551239,1059.055869102478,32974984,4594,split4,4,paper,100.0,20.0,2,3.0,8.5700029945001,True,"Janet's ducks lay 16 eggs per day.
+She eats 3 eggs for breakfast and bakes muffins with 4 eggs, so she uses 3 + 4 = 7 eggs per day.
+She sells the remaining eggs at the farmers' market, which is 16 - 7 = 9 eggs per day.
+She sells each egg for $2, so she makes 9 * $2 = $18 per day at the farmers' market.
+The answer is: 18"

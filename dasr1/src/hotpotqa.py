@@ -3,11 +3,13 @@
 Every question comes with 10 Wikipedia paragraphs, the 2 that hold the answer and 8
 retrieved distractors, all given in the prompt (about 1,000-1,500 tokens), so the prompt
 dominates the sequence, as in the authored long-prompt cases, but with public questions
-and gold answers. We use the first questions of the official dev set
-(hotpot_dev_distractor_v1.json, http://curtis.ml.cmu.edu/datasets/hotpot/, CC BY-SA 4.0),
-with the paragraphs in their official order.
+and gold answers. We use the first questions of the official dev set (CC BY-SA 4.0), with the paragraphs
+in their official order. The authors' server (curtis.ml.cmu.edu) is not always reachable,
+so the data comes from the Hugging Face copy, hotpotqa/hotpot_qa (distractor, validation
+= the official dev set, same order).
 
-prepare(json_path, out_path, n)   writes the first n questions as JSON lines
+prepare_from_hub(out_path, n)     writes the first n questions as JSON lines (Hugging Face)
+prepare(json_path, out_path, n)   the same from the official hotpot_dev_distractor_v1.json
 load_hotpotqa(path, n)            cases in the format of the other workloads
 hotpot_score(case, text)          "ok" = the gold answer appears in the reply after the
                                   official answer normalization (lower case, no punctuation
@@ -35,6 +37,44 @@ def prepare(json_path, out_path, n=100):
             f.write(json.dumps({k: r[k] for k in ("_id", "question", "answer", "type", "level",
                                                   "supporting_facts", "context")}) + "\n")
     return len(rows)
+
+
+HUB_REPO = "hotpotqa/hotpot_qa"
+
+
+def prepare_from_hub(out_path, n=100, repo=HUB_REPO):
+    """First n questions of the distractor validation split from the Hugging Face copy,
+    converted to the official JSON layout (context = [[title, [sentences]], ...])."""
+    from huggingface_hub import hf_hub_download, list_repo_files
+    try:
+        import pandas as pd
+        pd.io.parquet.get_engine("auto")
+    except ImportError as exc:
+        raise SystemExit(f"reading parquet needs pyarrow: pip install pyarrow ({exc})")
+    files = []
+    for rev in ("main", "refs/convert/parquet"):
+        names = list_repo_files(repo, repo_type="dataset", revision=rev)
+        files = sorted(f for f in names if f.endswith(".parquet") and "distractor" in f
+                       and "validation" in f)
+        if files:
+            break
+    if not files:
+        raise SystemExit(f"no distractor validation parquet found in {repo}")
+    print(f"HotpotQA from {repo}@{rev}: {files}", flush=True)
+    df = pd.concat([pd.read_parquet(hf_hub_download(repo, f, repo_type="dataset", revision=rev))
+                    for f in files], ignore_index=True).head(int(n))
+    out = Path(out_path)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with out.open("w", encoding="utf-8") as f:
+        for r in df.to_dict("records"):
+            ctx, sf = r["context"], r["supporting_facts"]
+            row = {"_id": r["id"], "question": r["question"], "answer": r["answer"],
+                   "type": r["type"], "level": r["level"],
+                   "supporting_facts": [[t, int(i)] for t, i in zip(sf["title"], sf["sent_id"])],
+                   "context": [[t, [str(x) for x in sents]]
+                               for t, sents in zip(ctx["title"], ctx["sentences"])]}
+            f.write(json.dumps(row) + "\n")
+    return len(df)
 
 
 def build_prompt(row):

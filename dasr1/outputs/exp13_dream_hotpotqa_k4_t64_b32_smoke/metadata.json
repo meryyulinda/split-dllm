@@ -1,0 +1,112 @@
+{
+  "experiment": "Exp13 Fast-dLLM (DualCache + parallel decoding) on the two-GPU split",
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "arch": "dream",
+  "fastdllm_repo": "../../Fast-dLLM",
+  "dataset": "hotpotqa",
+  "n_cases": 2,
+  "split_layer_1based": 4,
+  "new_tokens": 64,
+  "block_length": 32,
+  "thresholds": [
+    0.9,
+    0.7
+  ],
+  "temperature": 0.0,
+  "top_p": null,
+  "seed": 42,
+  "anchor_interval": 32,
+  "variants": [
+    {
+      "name": "F0_nocache_fixed",
+      "cache": "none",
+      "decode": "fixed",
+      "threshold": null,
+      "encoding": "bf16",
+      "reuse": false,
+      "refresh_every": 0,
+      "reuse_scope": "all"
+    },
+    {
+      "name": "F1_nocache_thr0.9",
+      "cache": "none",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "bf16",
+      "reuse": false,
+      "refresh_every": 0,
+      "reuse_scope": "all"
+    },
+    {
+      "name": "K1_dual_fixed",
+      "cache": "dual",
+      "decode": "fixed",
+      "threshold": null,
+      "encoding": "bf16",
+      "reuse": false,
+      "refresh_every": 0,
+      "reuse_scope": "all"
+    },
+    {
+      "name": "K2_dual_thr0.9",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "bf16",
+      "reuse": false,
+      "refresh_every": 0,
+      "reuse_scope": "all"
+    },
+    {
+      "name": "K2_dual_thr0.7",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.7,
+      "encoding": "bf16",
+      "reuse": false,
+      "refresh_every": 0,
+      "reuse_scope": "all"
+    },
+    {
+      "name": "K3_dual_thr0.9_int8",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "int8_delta",
+      "reuse": false,
+      "refresh_every": 0,
+      "reuse_scope": "all"
+    },
+    {
+      "name": "K4_dual_thr0.9_int8abs",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "int8_abs",
+      "reuse": false,
+      "refresh_every": 0,
+      "reuse_scope": "all"
+    },
+    {
+      "name": "K5_dual_thr0.9_int4",
+      "cache": "dual",
+      "decode": "threshold",
+      "threshold": 0.9,
+      "encoding": "int4_group",
+      "reuse": false,
+      "refresh_every": 0,
+      "reuse_scope": "all"
+    }
+  ],
+  "reference": "F0_nocache_fixed",
+  "cloud_only_cache_ref": "K2_dual_thr0.9",
+  "idle_power_w": {
+    "edge": 66.20923665248125,
+    "cloud": 81.10343395630734
+  },
+  "edge_gpu": "NVIDIA RTX A6000",
+  "cloud_gpu": "NVIDIA RTX A6000",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22"
+}

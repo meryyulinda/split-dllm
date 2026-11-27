@@ -1,0 +1,123 @@
+nohup: ignoring input
+2026-11-28 06:52:27 downloading the HotpotQA dev set (distractor) from Hugging Face ...
+HotpotQA from hotpotqa/hotpot_qa@main: ['distractor/validation-00000-of-00001.parquet']
+100 questions kept
+HotpotQA prompts (first 30): mean 1534 tokens, min 429, max 3066
+
+=== 1/2 dLLM-Cache backend, Dream, HotpotQA  (2026-11-28 06:52:35)
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.23it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.50it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.69it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.07it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.86it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=63.1 W, cloud=66.4 W
+Exp11 | dream | hotpotqa n=2 | split after layer 4 | edge=cuda:1 cloud=cuda:0 | 64 tok / 64 steps | cache ('fixed', 25, 2, 0.25)
+warmup done
+
+hotpot_0000 | prompt tokens=1284
+  S0_split_full              ok=True  up= 618.40 MB edge=   1680 ms cloud=  11271 ms mem=3.05/12.80 GiB E=1357+3785 J 'Yes.'
+  S1_split_exact_delta       ok=True  up= 609.07 MB edge=   1676 ms cloud=  11351 ms mem=3.05/12.80 GiB E=1375+3785 J EXACT 'Yes.'
+  S2_split_int8              ok=True  up= 319.03 MB edge=   1676 ms cloud=  11404 ms mem=3.05/12.80 GiB E=1396+3827 J 'Yes'
+  S3_split_int8abs           ok=True  up= 309.37 MB edge=   1677 ms cloud=  11472 ms mem=3.05/12.80 GiB E=1405+3867 J 'Yes'
+  S4_split_int4              ok=True  up= 159.43 MB edge=   1675 ms cloud=  11517 ms mem=3.05/12.80 GiB E=1416+3862 J 'Yes'
+  C1_cache_full              ok=True  up= 618.40 MB edge=    729 ms cloud=   3052 ms mem=3.08/12.80 GiB E=454+1100 J 'Yes.'
+  C2_cache_aware             ok=True  up=  57.41 MB edge=    728 ms cloud=   3055 ms mem=3.07/12.80 GiB E=471+1067 J EXACT 'Yes.'
+  C4_cache_aware_int8        ok=True  up=  43.21 MB edge=    740 ms cloud=   3103 ms mem=3.08/12.80 GiB E=468+1114 J 'Yes.'
+  C5_cache_aware_int8abs     ok=True  up=  28.72 MB edge=    728 ms cloud=   3055 ms mem=3.08/12.80 GiB E=475+1063 J 'Yes.'
+  C6_cache_aware_int4        ok=True  up=  14.80 MB edge=    724 ms cloud=   3057 ms mem=3.08/12.80 GiB E=458+1095 J 'Yes.'
+  A1_adaptive_cache_aware    ok=True  up=  48.21 MB edge=    707 ms cloud=   2871 ms mem=3.05/12.80 GiB E=440+996 J 'Yes.'
+
+hotpot_0001 | prompt tokens=1427
+  S0_split_full              ok=True  up= 684.00 MB edge=   1786 ms cloud=  12497 ms mem=3.07/12.89 GiB E=1541+4149 J 'Chief of Protocol of the United States'
+  S1_split_exact_delta       ok=True  up= 673.68 MB edge=   1786 ms cloud=  12446 ms mem=3.07/12.89 GiB E=1535+4179 J EXACT 'Chief of Protocol of the United States'
+  S2_split_int8              ok=True  up= 352.87 MB edge=   1787 ms cloud=  12476 ms mem=3.07/12.89 GiB E=1551+4169 J 'Chief of Protocol of the United States'
+  S3_split_int8abs           ok=True  up= 342.19 MB edge=   1787 ms cloud=  12501 ms mem=3.07/12.89 GiB E=1548+4157 J 'Chief of Protocol of the United States'
+  S4_split_int4              ok=True  up= 176.34 MB edge=   1788 ms cloud=  12490 ms mem=3.07/12.89 GiB E=1545+4192 J 'Chief of Protocol of the United States'
+  C1_cache_full              ok=True  up= 684.00 MB edge=    767 ms cloud=   3215 ms mem=3.11/12.93 GiB E=494+1103 J 'Chief of Protocol'
+  C2_cache_aware             ok=True  up=  60.48 MB edge=    780 ms cloud=   3516 ms mem=3.11/12.93 GiB E=519+1175 J EXACT 'Chief of Protocol'
+  C4_cache_aware_int8        ok=True  up=  46.28 MB edge=    785 ms cloud=   3205 ms mem=3.11/12.93 GiB E=503+1153 J 'Chief of Protocol'
+  C5_cache_aware_int8abs     ok=True  up=  30.26 MB edge=    764 ms cloud=   3471 ms mem=3.11/12.93 GiB E=505+1135 J 'Chief of Protocol'
+  C6_cache_aware_int4        ok=True  up=  15.59 MB edge=    763 ms cloud=   3204 ms mem=3.11/12.93 GiB E=501+1150 J 'Chief of Protocol'
+  A1_adaptive_cache_aware    ok=True  up=  50.26 MB edge=    740 ms cloud=   3022 ms mem=3.08/12.93 GiB E=468+1036 J 'Chief of Protocol'
+
+Exp11 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp11_hotpotqa_k4_t64_T0.1_smoke
+                variant  runs  acc  regressions  exact_vs_ref  mean_up_mb  up_reduction_vs_S0  mean_edge_ms  mean_cloud_ms  mean_edge_peak_gib  mean_cloud_peak_gib  mean_edge_energy_j  mean_cloud_energy_j
+          S0_split_full     2  1.0            0             0  651.199488            0.000000   1732.641393   11883.777786            3.062831            12.846024           1448.8420            3966.9910
+   S1_split_exact_delta     2  1.0            0             2  641.376548            0.015084   1731.014850   11898.339897            3.062831            12.846024           1454.7015            3982.1130
+          S2_split_int8     2  1.0            0             0  335.951250            0.484104   1731.212815   11940.236534            3.062831            12.846024           1473.1845            3998.1315
+       S3_split_int8abs     2  1.0            0             0  325.781952            0.499720   1731.560480   11986.502197            3.062831            12.846024           1476.4815            4011.8895
+          S4_split_int4     2  1.0            0             0  167.888128            0.742186   1731.510288   12003.609192            3.062831            12.846024           1480.7990            4027.3500
+          C1_cache_full     2  1.0            0             0  651.199488            0.000000    748.058990    3133.446905            3.090475            12.868389            474.2975            1101.2490
+         C2_cache_aware     2  1.0            0             2   58.947072            0.909368    754.075568    3285.613825            3.090336            12.868389            495.1245            1121.2055
+    C4_cache_aware_int8     2  1.0            0             0   44.744442            0.931234    762.522625    3153.804523            3.090499            12.868389            485.0805            1133.2575
+ C5_cache_aware_int8abs     2  1.0            0             0   29.490495            0.954658    745.936898    3262.832247            3.090499            12.868389            489.9865            1098.9755
+    C6_cache_aware_int4     2  1.0            0             0   15.198052            0.976633    743.251342    3130.952766            3.090499            12.868389            479.8000            1122.3965
+A1_adaptive_cache_aware     2  1.0            0             0   49.238016            0.924276    723.420769    2946.327213            3.064098            12.868389            454.0115            1016.0000
+emulated latency written for outputs/exp11_hotpotqa_k4_t64_T0.1_smoke
+
+=== 2/2 Fast-dLLM backend, Dream, HotpotQA  (2026-11-28 06:56:25)
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.59it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.69it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  9.17it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  9.22it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=66.2 W, cloud=81.1 W
+Exp13 | dream | hotpotqa n=2 | split after layer 4 | 64 tokens, blocks of 32 | thresholds [0.9, 0.7] | T=0.0 top_p=None
+warmup done
+
+hotpot_0000 | prompt tokens=1284
+  F0_nocache_fixed         ok=True  steps=  64 up= 618.40 MB edge=  1680 ms cloud= 11534 ms 'yes'
+  F1_nocache_thr0.9        ok=True  steps=   5 up=  48.31 MB edge=   131 ms cloud=   901 ms 'yes'
+  K1_dual_fixed            ok=True  steps=  64 up=  33.55 MB edge=   398 ms cloud=  2269 ms 'Yes'
+  K2_dual_thr0.9           ok=True  steps=   6 up=  20.24 MB edge=    76 ms cloud=   487 ms 'Yes'
+  K2_dual_thr0.7           ok=True  steps=   6 up=  20.24 MB edge=    74 ms cloud=   483 ms 'Yes'
+  K3_dual_thr0.9_int8      ok=True  steps=   6 up=  14.96 MB edge=    76 ms cloud=   486 ms 'Yes'
+  K4_dual_thr0.9_int8abs   ok=True  steps=   6 up=  10.13 MB edge=    76 ms cloud=   485 ms 'Yes'
+  K5_dual_thr0.9_int4      ok=True  steps=   6 up=   5.22 MB edge=    75 ms cloud=   482 ms 'Yes'
+
+hotpot_0001 | prompt tokens=1427
+  F0_nocache_fixed         ok=False steps=  64 up= 684.00 MB edge=  1792 ms cloud= 12410 ms 'ambassador'
+  F1_nocache_thr0.9        ok=False steps=   9 up=  96.19 MB edge=   252 ms cloud=  1748 ms 'ambassador'
+  K1_dual_fixed            ok=True  steps=  64 up=  35.60 MB edge=   403 ms cloud=  2290 ms 'Chief of Protocol'
+  K2_dual_thr0.9           ok=True  steps=   6 up=  22.29 MB edge=    79 ms cloud=   513 ms 'Chief of Protocol'
+  K2_dual_thr0.7           ok=True  steps=   5 up=  22.06 MB edge=    73 ms cloud=   479 ms 'Chief of Protocol'
+  K3_dual_thr0.9_int8      ok=True  steps=   6 up=  16.49 MB edge=    79 ms cloud=   511 ms 'Chief of Protocol'
+  K4_dual_thr0.9_int8abs   ok=False steps=  10 up=  11.61 MB edge=    99 ms cloud=   627 ms 'No'
+  K5_dual_thr0.9_int4      ok=True  steps=   6 up=   5.75 MB edge=    80 ms cloud=   515 ms 'Chief of Protocol'
+
+Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_dream_hotpotqa_k4_t64_b32_smoke
+               variant  runs  acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms
+      F0_nocache_fixed     2  0.5            0             0        1.0        64.0  651.199488             0.000000   1735.614017   11971.962875
+     F1_nocache_thr0.9     2  0.5            0             0        1.0         7.0   72.249968             0.890625    191.459728    1324.888954
+         K1_dual_fixed     2  1.0            0             1        1.0        64.0   34.572288             0.946854    400.572255    2279.241463
+        K2_dual_thr0.9     2  1.0            0             1        1.0         6.0   21.267552             0.967337     77.664176     499.928227
+        K2_dual_thr0.7     2  1.0            0             1        1.0         5.5   21.152856             0.967505     73.528497     480.771578
+   K3_dual_thr0.9_int8     2  1.0            0             1        1.0         6.0   15.724407             0.975851     77.211121     498.376846
+K4_dual_thr0.9_int8abs     2  0.5            0             0        1.0         8.0   10.869294             0.983324     87.426625     555.990643
+   K5_dual_thr0.9_int4     2  1.0            0             1        1.0         6.0    5.483112             0.991579     77.609216     498.491118
+
+Emulated split latency (s), RTT 20 ms, edge 3x slower:
+bandwidth_mbps            1       5      10     25     50    100   1000
+variant                                                                
+F0_nocache_fixed        5228.2  1060.5  539.6  227.0  122.8  70.7  23.8
+F1_nocache_thr0.9        580.1   117.7   59.9   25.2   13.6   7.8   2.6
+K1_dual_fixed            281.4    60.1   32.5   15.9   10.3   7.6   5.1
+K2_dual_thr0.7           170.0    34.7   17.7    7.6    4.2   2.5   1.0
+K2_dual_thr0.9           171.0    34.9   17.9    7.7    4.3   2.6   1.0
+K3_dual_thr0.9_int8      127.0    26.4   13.8    6.3    3.7   2.5   1.4
+K4_dual_thr0.9_int8abs    87.9    18.4    9.7    4.5    2.7   1.9   1.1
+K5_dual_thr0.9_int4       44.7     9.6    5.2    2.6    1.7   1.3   0.9
+
+Cloud-only with the same cache and decoding (s):
+variant
+F0_nocache_fixed          13.89
+F1_nocache_thr0.9          1.55
+K1_dual_fixed              2.74
+K2_dual_thr0.7             0.58
+K2_dual_thr0.9             0.60
+K3_dual_thr0.9_int8        0.60
+K4_dual_thr0.9_int8abs     0.67
+K5_dual_thr0.9_int4        0.60
+
+Exp23 completed (2026-11-28 06:57:40).

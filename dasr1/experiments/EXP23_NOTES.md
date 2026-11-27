@@ -7,9 +7,10 @@ benchmark. HotpotQA in its distractor setting gives every question 10 Wikipedia 
 authored cases, with public questions and gold answers.
 
 ## Data (`src/hotpotqa.py`)
-- Official dev file `hotpot_dev_distractor_v1.json` (Yang et al., EMNLP 2018, CC BY-SA 4.0),
-  downloaded once by `run_exp23.sh`; the first 100 questions are kept in
-  `data/hotpotqa/dev_distractor_first100.jsonl` and the 46 MB file is deleted.
+- Official dev set (Yang et al., EMNLP 2018, CC BY-SA 4.0), distractor setting, downloaded
+  once by `run_exp23.sh` from the Hugging Face copy `hotpotqa/hotpot_qa` (the authors' server
+  curtis.ml.cmu.edu did not resolve from the lab); the first 100 questions are kept in
+  `data/hotpotqa/dev_distractor_first100.jsonl`.
 - Prompt: the 10 paragraphs in their official order ("Paragraph i: title" + text), the
   question, and "Reply with the short answer only".
 - Score: `ok` = the gold answer appears in the reply after HotpotQA's official answer
