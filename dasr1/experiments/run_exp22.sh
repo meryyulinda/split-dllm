@@ -16,7 +16,7 @@ export CUDA_DEVICE_ORDER=PCI_BUS_ID
 GPU_C="${GPU_C:-1}"; GPU_E="${GPU_E:-2}"
 TAG="${TAG:-lab}"
 CONFIGS="${CONFIGS:-cloud_only:0 split4:4 split20:20}"
-LINKS="${LINKS:-paper:100:20 measured:97:155}"     # name:Mbit/s:RTT ms (measured = Exp21 Korea path)
+LINKS="${LINKS:-paper:100:20 measured:89:112}"     # name:Mbit/s:RTT ms (measured = Exp21 Korea path, fitted)
 USERS="${USERS:-1,2,4,8,12,16}"
 POOL="${POOL:-16}"; MINQ="${MINQ:-6}"
 SLOWDOWN="${SLOWDOWN:-3}"                           # edge 3x slower than an A6000, as in the paper

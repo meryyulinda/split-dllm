@@ -13,7 +13,8 @@ one cloud GPU, so the cloud can work for one user while another user's step is o
   thread and CUDA stream. No batching: each user's steps are separate model calls.
 - Network (`src/net_relay.py --duplex`): every user gets their own two-way link.
   - `paper`: 100 Mbit/s, 20 ms round trip (the paper's standard setting).
-  - `measured`: 97 Mbit/s, 155 ms (the Korea-to-lab path measured in Exp21).
+  - `measured`: 89 Mbit/s, 112 ms: the Korea-to-lab path of Exp21, fitted to its 39 answers
+    (network time = steps x round trip + bytes / throughput; median error 6%).
 - Edge (`exp22_edge.py`, GPU 2): N users as threads, each with its own connection and CUDA
   stream, sharing one copy of the edge layers; edge steps slowed 3x (`--slowdown 3`), as in the
   paper.
