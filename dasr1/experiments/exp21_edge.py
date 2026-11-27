@@ -12,6 +12,10 @@ Checks: answers vs the single-process runs of Exp16 ("local", same settings), wh
 identical when the edge runs on the same GPU type (A6000) with bf16 rows; on another GPU
 the edge's arithmetic differs slightly, so some answers may change.
 
+If the connection drops (a long-distance SSH tunnel can), the edge reconnects and redoes
+only the interrupted answer; a restarted run skips the answers already in runs.csv.
+Column "reconnects" counts the drops while an answer was pending.
+
 Outputs: outputs/exp21_deploy_<EXP21_TAG>/ runs.csv, summary.csv, metadata.json
 """
 import json
@@ -50,6 +54,8 @@ N = int(setting("EXP21_N_QUESTIONS", 10))
 NEW_TOKENS = int(setting("EXP21_NEW_TOKENS", 256))
 SLOWDOWN = float(setting("EXP21_EDGE_SLOWDOWN", 1.0))     # 1 on a real edge GPU
 SEED = int(setting("SEED", 42))
+MAX_RECONNECTS = int(setting("EXP21_MAX_RECONNECTS", 50))   # per server
+RECV_TIMEOUT_S = 300           # a silent dead link raises instead of waiting forever
 POLICY = list(setting("EXP11_CACHE_POLICY", ("fixed", 25, 2, 0.25)))
 DLLM_REPO = setting("EXP21_DLLM_CACHE_REPO", setting("EXP9A_OFFICIAL_CACHE_REPO",
                                                       "../../dLLM-cache-official"))
@@ -119,46 +125,75 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     print(f"Exp21 edge | {torch.cuda.get_device_name(dev)} | split after layer {SPLIT} | "
           f"edge slowdown {SLOWDOWN:g} | servers {[s['name'] for s in SERVERS]}", flush=True)
-    runs = []
+    runs, done = [], set()
+    if (OUT / "runs.csv").is_file():                       # resume an interrupted run
+        runs = pd.read_csv(OUT / "runs.csv").to_dict("records")
+        done = {(r["server"], r["codec"], r["case_id"]) for r in runs}
+        print(f"resuming: {len(done)} answers already in {OUT / 'runs.csv'}", flush=True)
     for srv in SERVERS:
         backend, split = srv["backend"], int(srv["split"])
         encodings = CODECS if split > 0 else ["cloud_only"]
-        print(f"\n=== {srv['name']} at {srv['addr']}  ({time.strftime('%F %T')})", flush=True)
-        sock = connect(srv["addr"])
-        try:
-            warm = prepare_input(tok, cases[0]["prompt"], "cpu")[0][0].tolist()
-            runner.session(sock, session_cfg(backend, split, encodings[0] if split else "bf16",
-                                             "warmup"), warm, mask_id)
-            for case in cases:
+        todo = [(case, enc) for case in cases for enc in encodings
+                if (srv["name"], enc, case["case_id"]) not in done]
+        print(f"\n=== {srv['name']} at {srv['addr']}  ({time.strftime('%F %T')}), "
+              f"{len(todo)} answers to do", flush=True)
+        if not todo:
+            continue
+        sock, warmed, drops, pending_drops, i = None, False, 0, 0, 0
+        while i < len(todo):
+            case, enc = todo[i]
+            try:
+                if sock is None:
+                    sock = connect(srv["addr"])
+                    sock.settimeout(RECV_TIMEOUT_S)
+                    if not warmed:
+                        warm = prepare_input(tok, cases[0]["prompt"], "cpu")[0][0].tolist()
+                        runner.session(sock, session_cfg(backend, split, encodings[0] if split
+                                                         else "bf16", "warmup"), warm, mask_id)
+                        warmed = True
                 ids = prepare_input(tok, case["prompt"], "cpu")[0][0].tolist()
-                for enc in encodings:
-                    c = session_cfg(backend, split, enc if split else "bf16", case["case_id"])
-                    answer, info = runner.session(sock, c, ids, mask_id)
-                    text = describe(tok, answer)["text"]
-                    score = score_fn(case, text)
-                    r = ref.get((backend, enc if split else "bf16"), {})
-                    row = {"server": srv["name"], "backend": backend, "split": split,
-                           "codec": enc, "paper_name": PAPER[(backend, enc)],
-                           "case_id": case["case_id"], "prompt_tokens": len(ids),
-                           "latency_s": info["edge_wall_s"], "ok": bool(score["ok"]),
-                           "extracted": score.get("extracted"),
-                           "same_as_single_process": (text == r[case["case_id"]])
-                           if case["case_id"] in r else "", "text": text,
-                           **{k: v for k, v in info.items()}}
-                    runs.append(row)
-                    pd.DataFrame(runs).to_csv(OUT / "runs.csv", index=False)
-                    print(f"  {case['case_id']} {enc:<11s} ok={row['ok']!s:<5} "
-                          f"same={row['same_as_single_process']!s:<5} steps={info['n_steps']:4d} "
-                          f"time={info['edge_wall_s']:7.2f} s (edge {info['edge_compute_ms'] / 1e3:5.2f} s, "
-                          f"cloud {info['cloud_ms'] / 1e3:5.2f} s, wire {info['wire_ms'] / 1e3:5.2f} s)",
-                          flush=True)
-        finally:
+                c = session_cfg(backend, split, enc if split else "bf16", case["case_id"])
+                answer, info = runner.session(sock, c, ids, mask_id)
+            except (EOFError, ConnectionError, OSError) as exc:
+                drops += 1
+                pending_drops += 1
+                print(f"  {time.strftime('%F %T')} connection lost during {case['case_id']} {enc} "
+                      f"({exc!r}); reconnecting ({drops}/{MAX_RECONNECTS}) ...", flush=True)
+                if sock is not None:
+                    sock.close()
+                sock = None
+                if drops > MAX_RECONNECTS:
+                    raise
+                time.sleep(10)
+                continue
+            text = describe(tok, answer)["text"]
+            score = score_fn(case, text)
+            r = ref.get((backend, enc if split else "bf16"), {})
+            row = {"server": srv["name"], "backend": backend, "split": split,
+                   "codec": enc, "paper_name": PAPER[(backend, enc)],
+                   "case_id": case["case_id"], "prompt_tokens": len(ids),
+                   "latency_s": info["edge_wall_s"], "ok": bool(score["ok"]),
+                   "extracted": score.get("extracted"),
+                   "same_as_single_process": (text == r[case["case_id"]])
+                   if case["case_id"] in r else "", "text": text,
+                   "reconnects": pending_drops, "finished_at": time.strftime("%F %T"),
+                   **{k: v for k, v in info.items()}}
+            runs.append(row)
+            pd.DataFrame(runs).to_csv(OUT / "runs.csv", index=False)
+            print(f"  {case['case_id']} {enc:<11s} ok={row['ok']!s:<5} "
+                  f"same={row['same_as_single_process']!s:<5} steps={info['n_steps']:4d} "
+                  f"time={info['edge_wall_s']:7.2f} s (edge {info['edge_compute_ms'] / 1e3:5.2f} s, "
+                  f"cloud {info['cloud_ms'] / 1e3:5.2f} s, wire {info['wire_ms'] / 1e3:5.2f} s)",
+                  flush=True)
+            i, pending_drops = i + 1, 0
+        if sock is not None:
             try:
                 send_frame(sock, F_BYE)
-            finally:
-                sock.close()
+            except OSError:
+                pass
+            sock.close()
     df = pd.DataFrame(runs)
-    df["same"] = df["same_as_single_process"].map(lambda v: v is True)
+    df["same"] = df["same_as_single_process"].astype(str) == "True"   # also after a resume
     summary = df.groupby(["server", "codec"], sort=False).agg(
         paper_name=("paper_name", "first"), runs=("case_id", "size"), acc=("ok", "mean"),
         same_as_single_process=("same", "sum"), latency_s=("latency_s", "mean"),
@@ -166,7 +201,8 @@ def main():
         edge_s=("edge_compute_ms", lambda x: x.mean() / 1e3),
         cloud_s=("cloud_ms", lambda x: x.mean() / 1e3),
         cloud_gen_s=("cloud_gen_s", "mean"),
-        wire_s=("wire_ms", lambda x: x.mean() / 1e3)).reset_index()
+        wire_s=("wire_ms", lambda x: x.mean() / 1e3),
+        reconnects=("reconnects", "sum")).reset_index()
     summary.to_csv(OUT / "summary.csv", index=False)
     (OUT / "metadata.json").write_text(json.dumps({
         "experiment": "Exp21 DASR as two programs (edge and cloud) over a real network",

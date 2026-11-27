@@ -5,6 +5,8 @@
 #   On the lab server (check that the two programs give the single-process answers):
 #     TAG=lab_a6000 GPU=2 nohup bash experiments/run_exp21_edge.sh > exp21_edge_lab.log 2>&1 &
 #   SMOKE=1 ...   2 questions, to check that everything connects
+# If the tunnel drops, the edge reconnects and redoes only the interrupted answer; running the
+# same command again after a crash resumes from outputs/exp21_deploy_<TAG>/runs.csv.
 # Output: outputs/exp21_deploy_<TAG>[_smoke]/
 set -euo pipefail
 export CUDA_DEVICE_ORDER=PCI_BUS_ID
