@@ -9285,3 +9285,965 @@ def bf(planet1, planet2):
     between_planets = tuple(planets[planet1_index+1:planet2_index])
     return between_planets
 ```"
+humaneval,42,HumanEval_149,uncached,No cache (reference),True,,True,256,"Here is the completed Python function:
+
+```python
+def sorted_list_sum(lst):
+    """"""Write a function that accepts a list of strings as a parameter,
+    deletes the strings that have odd lengths from it,
+    and returns the resulted list with a sorted order,
+    The list is always a list of strings and never an array of numbers,
+    and it may contain duplicates.
+    The order of the list should be ascending by length of each word, and you
+    should return the list sorted by that rule.
+    If two words have the same length, sort the list alphabetically.
+    The function should return a list of strings in sorted order.
+    You may assume that all words will have the same length.
+    For example:
+    assert list_sort([""aa"", ""a"", ""aaa""]) => [""aa""]
+    assert list_sort([""ab"", ""a"", ""aaa"", ""cd""]) => [""ab"", ""cd""]
+    """"""
+    lst = [word for word in lst if len(word) % 2 == 0]
+    lst.sort(key=lambda x: (len(x), x))
+    return lst
+```"
+humaneval,42,HumanEval_149,dllm_cache,DASR + dLLM-Cache (bf16),False,,False,256,"Here is the completed Python function:
+
+```python
+def sorted_list_sum(lst):
+    """"""Write a function that accepts a list of strings as a parameter,
+    deletes the strings that have odd lengths from it,
+    and returns the resulted list with a sorted order,
+    The list is always a list of strings and never an array of numbers,
+    and it may contain duplicates.
+    The order of the list should be ascending by length of each word, and you
+    should return the list sorted by that rule.
+    If two words have the same length, sort the list alphabetically.
+    The function should return a list of strings in sorted order.
+    You may assume that all words will have the same length.
+    For example:
+    assert list_sort([""aa"", ""a"", ""aaa""]) => [""aa""]
+    assert list_sort([""ab"", ""a"", ""aaa"", ""cd""]) => [""ab"", ""cd""]
+    """"""
+    return sorted([word for word in lst if len(word) % 2 == 0])
+```"
+humaneval,42,HumanEval_149,dllm_cache_int8,DASR + dLLM-Cache (INT8),False,,False,256,"Here is the completed Python function:
+
+```python
+def sorted_list_sum(lst):
+    """"""Write a function that accepts a list of strings as a parameter,
+    deletes the strings that have odd lengths from it,
+    and returns the resulted list with a sorted order,
+    The list is always a list of strings and never an array of numbers,
+    and it may contain duplicates.
+    The order of the list should be ascending by length of each word, and you
+    should return the list sorted by that rule.
+    If two words have the same length, sort the list alphabetically.
+    The function should return a list of strings in sorted order.
+    You may assume that all words will have the same length.
+    For example:
+    assert list_sort([""aa"", ""a"", ""aaa""]) => [""aa""]
+    assert list_sort([""ab"", ""a"", ""aaa"", ""cd""]) => [""ab"", ""cd""]
+    """"""
+    return sorted([word for word in lst if len(word) % 2 == 0])
+```"
+humaneval,42,HumanEval_149,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",True,,True,256,"Here is the completed Python function:
+
+```python
+def sorted_list_sum(lst):
+    """"""Write a function that accepts a list of strings as a parameter,
+    deletes the strings that have odd lengths from it,
+    and returns the resulted list with a sorted order,
+    The list is always a list of strings and never an array of numbers,
+    and it may contain duplicates.
+    The order of the list should be ascending by length of each word, and you
+    should return the list sorted by that rule.
+    If two words have the same length, sort the list alphabetically.
+    The function should return a list of strings in sorted order.
+    You may assume that all words will have the same length.
+    For example:
+    assert list_sort([""aa"", ""a"", ""aaa""]) => [""aa""]
+    assert list_sort([""ab"", ""a"", ""aaa"", ""cd""]) => [""ab"", ""cd""]
+    """"""
+    lst = [word for word in lst if len(word) % 2 == 0]
+    lst.sort(key=lambda x: (len(x), x))
+    return lst
+```"
+humaneval,42,HumanEval_150,uncached,No cache (reference),True,,True,256,"```python
+def x_or_y(n, x, y):
+    """"""A simple program which should return the value of x if n is 
+    a prime number and should return the value of y otherwise.
+
+    Examples:
+    for x_or_y(7, 34, 12) == 34
+    for x_or_y(15, 8, 5) == 5
+    
+    """"""
+    def is_prime(num):
+        """"""Helper function to check if a number is prime.""""""
+        if num < 2:
+            return False
+        for i in range(2, int(num ** 0.5) + 1):
+            if num % i == 0:
+                return False
+        return True
+
+    if is_prime(n):
+        return x
+    else:
+        return y
+```"
+humaneval,42,HumanEval_150,dllm_cache,DASR + dLLM-Cache (bf16),True,,False,256,"```python
+def x_or_y(n, x, y):
+    def is_prime(num):
+        if num < 2:
+            return False
+        for i in range(2, int(num**0.5) + 1):
+            if num % i == 0:
+                return False
+        return True
+
+    if is_prime(n):
+        return x
+    else:
+        return y
+```"
+humaneval,42,HumanEval_150,dllm_cache_int8,DASR + dLLM-Cache (INT8),True,,False,256,"```python
+def x_or_y(n, x, y):
+    def is_prime(num):
+        if num < 2:
+            return False
+        for i in range(2, int(num**0.5) + 1):
+            if num % i == 0:
+                return False
+        return True
+
+    if is_prime(n):
+        return x
+    else:
+        return y
+```"
+humaneval,42,HumanEval_150,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",True,,True,256,"```python
+def x_or_y(n, x, y):
+    """"""A simple program which should return the value of x if n is 
+    a prime number and should return the value of y otherwise.
+
+    Examples:
+    for x_or_y(7, 34, 12) == 34
+    for x_or_y(15, 8, 5) == 5
+    
+    """"""
+    def is_prime(num):
+        """"""Helper function to check if a number is prime.""""""
+        if num < 2:
+            return False
+        for i in range(2, int(num ** 0.5) + 1):
+            if num % i == 0:
+                return False
+        return True
+
+    if is_prime(n):
+        return x
+    else:
+        return y
+```"
+humaneval,42,HumanEval_151,uncached,No cache (reference),True,,True,256,"Here is the complete Python function:
+
+```python
+def double_the_difference(lst):
+    '''
+    Given a list of numbers, return the sum of squares of the numbers
+    in the list that are odd. Ignore numbers that are negative or not integers.
+    
+    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10
+    double_the_difference([-1, -2, 0]) == 0
+    double_the_difference([9, -2]) == 81
+    double_the_difference([0]) == 0  
+   
+    If the input list is empty, return 0.
+    '''
+    if not lst:
+        return 0
+    return sum([i**2 for i in lst if isinstance(i, int) and i > 0 and i % 2 != 0])
+```"
+humaneval,42,HumanEval_151,dllm_cache,DASR + dLLM-Cache (bf16),False,,False,256,"Here is the completed Python function:
+
+```python
+def double_the_difference(lst):
+    result = 0
+    for num in lst:
+        if num > 0 and num % 2 != 0:
+            result += num ** 2
+    return result
+```"
+humaneval,42,HumanEval_151,dllm_cache_int8,DASR + dLLM-Cache (INT8),True,,False,256,"Here is the completed Python function:
+
+```python
+def double_the_difference(lst):
+    result = 0
+    for num in lst:
+        if isinstance(num, int) and num > 0 and num % 2 != 0:
+            result += num ** 2
+    return result
+```"
+humaneval,42,HumanEval_151,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",True,,False,256,"Here is the completed Python function:
+
+```python
+def double_the_difference(lst):
+    '''
+    Given a list of numbers, return the sum of squares of the numbers
+    in the list that are odd. Ignore numbers that are negative or not integers.
+    
+    double_the_difference([1, 3, 2, 0]) == 1 + 9 + 0 + 0 = 10
+    double_the_difference([-1, -2, 0]) == 0
+    double_the_difference([9, -2]) == 81
+    double_the_difference([0]) == 0  
+   
+    If the input list is empty, return 0.
+    '''
+    if not lst:
+        return 0
+    return sum(num ** 2 for num in lst if isinstance(num, int) and num > 0 and num % 2 != 0)
+```"
+humaneval,42,HumanEval_152,uncached,No cache (reference),True,,True,256,"```python
+def compare(game, guess):
+    result = []
+    for i in range(len(game)):
+        if game[i] == guess[i]:
+            result.append(0)
+        else:
+            result.append(abs(game[i] - guess[i]))
+    return result
+```"
+humaneval,42,HumanEval_152,dllm_cache,DASR + dLLM-Cache (bf16),True,,True,256,"```python
+def compare(game, guess):
+    result = []
+    for i in range(len(game)):
+        if game[i] == guess[i]:
+            result.append(0)
+        else:
+            result.append(abs(game[i] - guess[i]))
+    return result
+```"
+humaneval,42,HumanEval_152,dllm_cache_int8,DASR + dLLM-Cache (INT8),True,,True,256,"```python
+def compare(game, guess):
+    result = []
+    for i in range(len(game)):
+        if game[i] == guess[i]:
+            result.append(0)
+        else:
+            result.append(abs(game[i] - guess[i]))
+    return result
+```"
+humaneval,42,HumanEval_152,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",True,,True,256,"```python
+def compare(game, guess):
+    result = []
+    for i in range(len(game)):
+        if game[i] == guess[i]:
+            result.append(0)
+        else:
+            result.append(abs(game[i] - guess[i]))
+    return result
+```"
+humaneval,42,HumanEval_153,uncached,No cache (reference),False,,True,256,"```python
+def Strongest_Extension(class_name, extensions):
+    strongest_extension = extensions[0]
+    for extension in extensions:
+        strength = extension.count('upper') - extension.count('lower')
+        if strength > strongest_extension.count('upper') - strongest_extension.count('lower'):
+            strongest_extension = extension
+    return f'{class_name}.{strongest_extension}'
+```"
+humaneval,42,HumanEval_153,dllm_cache,DASR + dLLM-Cache (bf16),False,,False,256,"```python
+def Strongest_Extension(class_name, extensions):
+    strongest_extension = extensions[0]
+    for extension in extensions:
+        strength = extension.count('upper') - extension.count('lower')
+        if strength > 0:
+            strongest_extension = extension
+    return f'{class_name}.{strongest_extension}'
+```"
+humaneval,42,HumanEval_153,dllm_cache_int8,DASR + dLLM-Cache (INT8),False,,False,256,"```python
+def Strongest_Extension(class_name, extensions):
+    strongest_extension = extensions[0]
+    for extension in extensions:
+        strength = extension.count('upper') - extension.count('lower')
+        if strength > 0:
+            strongest_extension = extension
+    return f'{class_name}.{strongest_extension}'
+```"
+humaneval,42,HumanEval_153,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",False,,False,256,"```python
+def Strongest_Extension(class_name, extensions):
+    strongest_extension = None
+    strongest_extension_strength = 0
+
+    for extension in extensions:
+        strength = extension.count('upper') - extension.count('lower')
+        if strength > strongest_extension_strength or strength == strongest_extension_strength and strongest_extension is None:
+            strongest_extension = extension
+            strongest_extension_strength = strength
+
+    return f'{class_name}.{strongest_extension}'
+```"
+humaneval,42,HumanEval_154,uncached,No cache (reference),True,,True,256,"Here is the completed Python function:
+
+```python
+def cycpattern_check(a , b):
+    """"""You are given 2 words. You need to return True if the second word or any of its rotations is a substring in the first word
+    cycpattern_check(""abcd"",""abd"") => False
+    cycpattern_check(""hello"",""ell"") => True
+    cycpattern_check(""whassup"",""psus"") => False
+    cycpattern_check(""abab"",""baa"") => True
+    cycpattern_check(""efef"",""eeff"") => False
+    cycpattern_check(""himenss"",""simen"") => True
+
+    """"""
+    # Create a list of all rotations of the second word
+    rotations = [b[i:] + b[:i] for i in range(len(b))]
+
+    # Check if any of the rotations is a substring of the first word
+    for rotation in rotations:
+        if rotation in a:
+            return True
+
+    # If none of the rotations is a substring of the first word, return False
+    return False
+```"
+humaneval,42,HumanEval_154,dllm_cache,DASR + dLLM-Cache (bf16),True,,False,256,"Here is the completed Python function:
+
+```python
+def cycpattern_check(a , b):
+    """"""You are given 2 words. You need to return True if the second word or any of its rotations is a substring in the first word
+    cycpattern_check(""abcd"",""abd"") => False
+    cycpattern_check(""hello"",""ell"") => True
+    cycpattern_check(""whassup"",""psus"") => False
+    cycpattern_check(""abab"",""baa"") => True
+    cycpattern_check(""efef"",""eeff"") => False
+    cycpattern_check(""himenss"",""simen"") => True
+
+    """"""
+    # Create a list of all rotations of the second word
+    rotations = [b[i:] + b[:i] for i in range(len(b))]
+
+    # Check if any of the rotations is a substring of the first word
+    for rotation in rotations:
+        if rotation in a:
+            return True
+
+    # If no rotation is found, return False
+    return False
+```"
+humaneval,42,HumanEval_154,dllm_cache_int8,DASR + dLLM-Cache (INT8),True,,False,256,"Here is the completed Python function:
+
+```python
+def cycpattern_check(a , b):
+    """"""You are given 2 words. You need to return True if the second word or any of its rotations is a substring in the first word
+    cycpattern_check(""abcd"",""abd"") => False
+    cycpattern_check(""hello"",""ell"") => True
+    cycpattern_check(""whassup"",""psus"") => False
+    cycpattern_check(""abab"",""baa"") => True
+    cycpattern_check(""efef"",""eeff"") => False
+    cycpattern_check(""himenss"",""simen"") => True
+
+    """"""
+    if len(b) > len(a):
+        return False
+    for i in range(len(b)):
+        if b[i:] + b[:i] in a:
+            return True
+    return False
+```"
+humaneval,42,HumanEval_154,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",True,,False,256,"Here is the completed Python function:
+
+```python
+def cycpattern_check(a , b):
+    """"""You are given 2 words. You need to return True if the second word or any of its rotations is a substring in the first word
+    cycpattern_check(""abcd"",""abd"") => False
+    cycpattern_check(""hello"",""ell"") => True
+    cycpattern_check(""whassup"",""psus"") => False
+    cycpattern_check(""abab"",""baa"") => True
+    cycpattern_check(""efef"",""eeff"") => False
+    cycpattern_check(""himenss"",""simen"") => True
+
+    """"""
+    # Create a list of all rotations of the second word
+    rotations = [b[i:] + b[:i] for i in range(len(b))]
+
+    # Check if any of the rotations is a substring of the first word
+    for rotation in rotations:
+        if rotation in a:
+            return True
+
+    return False
+```"
+humaneval,42,HumanEval_155,uncached,No cache (reference),False,,True,256,"```python
+def even_odd_count(num):
+    """"""Given an integer. return a tuple that has the number of even and odd digits respectively.
+
+     Example:
+        even_odd_count(-12) ==> (1, 1)
+        even_odd_count(123) ==> (1, 2)
+    """"""
+    num = abs(num)
+    even_count = 0
+    odd_count = 0
+    while num > 0:
+        digit = num % 10
+        if digit % 2 == 0:
+            even_count += 1
+        else:
+            odd_count += 1
+        num //= 10
+    return (even_count, odd_count)
+```"
+humaneval,42,HumanEval_155,dllm_cache,DASR + dLLM-Cache (bf16),False,,False,256,"Here is the complete Python function:
+
+```python
+def even_odd_count(num):
+    """"""Given an integer, return a tuple that has the number of even and odd digits respectively.
+
+    Example:
+        even_odd_count(-12) ==> (1, 1)
+        even_odd_count(123) ==> (1, 2)
+    """"""
+    num = abs(num)  # Convert to absolute value to handle negative numbers
+    even_count = 0
+    odd_count = 0
+
+    while num > 0:
+        digit = num % 10  # Get the last digit
+        if digit % 2 == 0:  # Check if the digit is even
+            even_count += 1  # Increment the even count
+        else:  # If the digit is odd
+            odd_count += 1  # Increment the odd count
+        num //= 10  # Remove the last digit from the number
+
+    return (even_count, odd_count)
+```"
+humaneval,42,HumanEval_155,dllm_cache_int8,DASR + dLLM-Cache (INT8),False,,False,256,"Here is the complete Python function:
+
+```python
+def even_odd_count(num):
+    """"""Given an integer, return a tuple that has the number of even and odd digits respectively.
+
+    Example:
+        even_odd_count(-12) ==> (1, 1)
+        even_odd_count(123) ==> (1, 2)
+    """"""
+    num = abs(num)  # Convert to absolute value to handle negative numbers
+    even_count = 0
+    odd_count = 0
+
+    while num > 0:
+        digit = num % 10  # Get the last digit
+        if digit % 2 == 0:  # Check if the digit is even
+            even_count += 1  # Increment even count
+        else:  # If the digit is odd
+            odd_count += 1  # Increment odd count
+        num //= 10  # Remove the last digit from the number
+
+    return (even_count, odd_count)
+```
+
+This function works by iterating through each digit of the input number, checking if it's even or odd, and incrementing the respective count. The absolute value of the input number is used to ensure that the function works correctly for negative numbers too."
+humaneval,42,HumanEval_155,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",False,,False,256,"Here is the complete Python function:
+
+```python
+def even_odd_count(num):
+    """"""Given an integer. return a tuple that has the number of even and odd digits respectively.
+
+     Example:
+        even_odd_count(-12) ==> (1, 1)
+        even_odd_count(123) ==> (1, 2)
+    """"""
+    num = abs(num)
+    even_count = 0
+    odd_count = 0
+    while num > 0:
+        digit = num % 10
+        if digit % 2 == 0:
+            even_count += 1
+        else:
+            odd_count += 1
+        num //= 10
+    return (even_count, odd_count)
+```"
+humaneval,42,HumanEval_156,uncached,No cache (reference),False,,True,256,"```python
+def int_to_mini_roman(number):
+    """"""
+    Given a positive integer, obtain its roman numeral equivalent as a string,
+    and return it in lowercase.
+    Restrictions: 1 <= num <= 1000
+
+    Examples:
+    >>> int_to_mini_roman(19) == 'xix'
+    >>> int_to_mini_roman(152) == 'clii'
+    >>> int_to_mini_roman(426) == 'cdxxvi'
+    """"""
+    roman = {
+        1: 'i',
+        5: 'v',
+        10: 'x',
+        50: 'l',
+        100: 'c',
+        500: 'd',
+        1000: 'm'
+    }
+    result = ''
+    for value in roman.keys():
+        while number >= value:
+            result += roman[value]
+            number -= value
+    return result
+```"
+humaneval,42,HumanEval_156,dllm_cache,DASR + dLLM-Cache (bf16),False,,False,256,"```python
+def int_to_mini_roman(number):
+    roman = {
+        1: 'i',
+        5: 'v',
+        10: 'x',
+        50: 'l',
+        100: 'c',
+        500: 'd',
+        1000: 'm'
+    }
+    result = ''
+    for value in roman.keys():
+        while number >= value:
+            result += roman[value]
+            number -= value
+    return result
+```"
+humaneval,42,HumanEval_156,dllm_cache_int8,DASR + dLLM-Cache (INT8),False,,False,256,"```python
+def int_to_mini_roman(number):
+    roman = {
+        1: 'i',
+        5: 'v',
+        10: 'x',
+        50: 'l',
+        100: 'c',
+        500: 'd',
+        1000: 'm'
+    }
+    result = ''
+    for value in roman.keys():
+        while number >= value:
+            result += roman[value]
+            number -= value
+    return result
+```"
+humaneval,42,HumanEval_156,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",False,,False,256,"```python
+def int_to_mini_roman(number):
+    roman = {
+        1: 'i',
+        5: 'v',
+        10: 'x',
+        50: 'l',
+        100: 'c',
+        500: 'd',
+        1000: 'm'
+    }
+    result = ''
+    for value in roman.keys():
+        while number >= value:
+            result += roman[value]
+            number -= value
+    return result
+```"
+humaneval,42,HumanEval_157,uncached,No cache (reference),True,,True,256,"```python
+def right_angle_triangle(a, b, c):
+    '''
+    Given the lengths of the three sides of a triangle. Return True if the three
+    sides form a right-angled triangle, False otherwise.
+    A right-angled triangle is a triangle in which one angle is right angle or 
+    90 degree.
+    Example:
+    right_angle_triangle(3, 4, 5) == True
+    right_angle_triangle(1, 2, 3) == False
+    '''
+    if a**2 + b**2 == c**2 or b**2 + c**2 == a**2 or c**2 + a**2 == b**2:
+        return True
+    else:
+        return False
+```"
+humaneval,42,HumanEval_157,dllm_cache,DASR + dLLM-Cache (bf16),True,,True,256,"```python
+def right_angle_triangle(a, b, c):
+    '''
+    Given the lengths of the three sides of a triangle. Return True if the three
+    sides form a right-angled triangle, False otherwise.
+    A right-angled triangle is a triangle in which one angle is right angle or 
+    90 degree.
+    Example:
+    right_angle_triangle(3, 4, 5) == True
+    right_angle_triangle(1, 2, 3) == False
+    '''
+    if a**2 + b**2 == c**2 or b**2 + c**2 == a**2 or c**2 + a**2 == b**2:
+        return True
+    else:
+        return False
+```"
+humaneval,42,HumanEval_157,dllm_cache_int8,DASR + dLLM-Cache (INT8),True,,True,256,"```python
+def right_angle_triangle(a, b, c):
+    '''
+    Given the lengths of the three sides of a triangle. Return True if the three
+    sides form a right-angled triangle, False otherwise.
+    A right-angled triangle is a triangle in which one angle is right angle or 
+    90 degree.
+    Example:
+    right_angle_triangle(3, 4, 5) == True
+    right_angle_triangle(1, 2, 3) == False
+    '''
+    if a**2 + b**2 == c**2 or b**2 + c**2 == a**2 or c**2 + a**2 == b**2:
+        return True
+    else:
+        return False
+```"
+humaneval,42,HumanEval_157,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",True,,True,256,"```python
+def right_angle_triangle(a, b, c):
+    '''
+    Given the lengths of the three sides of a triangle. Return True if the three
+    sides form a right-angled triangle, False otherwise.
+    A right-angled triangle is a triangle in which one angle is right angle or 
+    90 degree.
+    Example:
+    right_angle_triangle(3, 4, 5) == True
+    right_angle_triangle(1, 2, 3) == False
+    '''
+    if a**2 + b**2 == c**2 or b**2 + c**2 == a**2 or c**2 + a**2 == b**2:
+        return True
+    else:
+        return False
+```"
+humaneval,42,HumanEval_158,uncached,No cache (reference),True,,True,256,"Here is the completed Python function:
+
+```python
+def find_max(words):
+    """"""Write a function that accepts a list of strings.
+    The list contains different words. Return the word with maximum number
+    of unique characters. If multiple strings have maximum number of unique
+    characters, return the one which comes first in lexicographical order.
+
+    find_max([""name"", ""of"", ""string""]) == ""string""
+    find_max([""name"", ""enam"", ""game""]) == ""enam""
+    find_max([""aaaaaaa"", ""bb"" ,""cc""]) == ""aaaaaaa""
+    """"""
+    max_unique_chars = 0
+    max_word = """"
+    for word in words:
+        unique_chars = set(word)
+        if len(unique_chars) > max_unique_chars:
+            max_unique_chars = len(unique_chars)
+            max_word = word
+        elif len(unique_chars) == max_unique_chars:
+            if word < max_word:
+                max_word = word
+    return max_word
+```"
+humaneval,42,HumanEval_158,dllm_cache,DASR + dLLM-Cache (bf16),True,,False,256,"Here is the complete Python function:
+
+```python
+def find_max(words):
+    """"""Write a function that accepts a list of strings.
+    The list contains different words. Return the word with maximum number
+    of unique characters. If multiple strings have maximum number of unique
+    characters, return the one which comes first in lexicographical order.
+
+    find_max([""name"", ""of"", ""string""]) == ""string""
+    find_max([""name"", ""enam"", ""game""]) == ""enam""
+    find_max([""aaaaaaa"", ""bb"" ,""cc""]) == """"aaaaaaa""
+    """"""
+    max_unique_chars = 0
+    max_word = """"
+    for word in words:
+        unique_chars = len(set(word))
+        if unique_chars > max_unique_chars:
+            max_unique_chars = unique_chars
+            max_word = word
+        elif unique_chars == max_unique_chars:
+            if word < max_word:
+                max_word = word
+    return max_word
+```"
+humaneval,42,HumanEval_158,dllm_cache_int8,DASR + dLLM-Cache (INT8),True,,True,256,"Here is the completed Python function:
+
+```python
+def find_max(words):
+    """"""Write a function that accepts a list of strings.
+    The list contains different words. Return the word with maximum number
+    of unique characters. If multiple strings have maximum number of unique
+    characters, return the one which comes first in lexicographical order.
+
+    find_max([""name"", ""of"", ""string""]) == ""string""
+    find_max([""name"", ""enam"", ""game""]) == ""enam""
+    find_max([""aaaaaaa"", ""bb"" ,""cc""]) == ""aaaaaaa""
+    """"""
+    max_unique_chars = 0
+    max_word = """"
+    for word in words:
+        unique_chars = set(word)
+        if len(unique_chars) > max_unique_chars:
+            max_unique_chars = len(unique_chars)
+            max_word = word
+        elif len(unique_chars) == max_unique_chars:
+            if word < max_word:
+                max_word = word
+    return max_word
+```"
+humaneval,42,HumanEval_158,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",True,,False,256,"Here is the complete Python function:
+
+```python
+def find_max(words):
+    """"""Write a function that accepts a list of strings.
+    The list contains different words. Return the word with maximum number
+    of unique characters. If multiple strings have maximum number of unique
+    characters, return the one which comes first in lexicographical order.
+
+    find_max([""name"", ""of"", ""string""]) == ""string""
+    find_max([""name"", ""enam"", ""game""]) == ""enam""
+    find_max([""aaaaaaa"", ""bb"" ,""cc""]) == ""aaaaaaa""
+    """"""
+    max_unique_chars = 0
+    max_word = """"
+    for word in words:
+        unique_chars = set(word)
+        if len(unique_chars) > max_unique_chars:
+            max_unique_chars = len(unique_chars)
+            max_word = word
+        elif len(unique_chars) == max_unique_chars:
+            if word < max_word:
+                max_word = word
+    return max_word
+```"
+humaneval,42,HumanEval_159,uncached,No cache (reference),False,,True,256,"```python
+def eat(number, need, remaining):
+    if number + need <= remaining:
+        return [number + need, remaining - (number + need)]
+    else:
+        return [number + remaining, 0]
+```"
+humaneval,42,HumanEval_159,dllm_cache,DASR + dLLM-Cache (bf16),False,,False,256,"```python
+def eat(number, need, remaining):
+    total_eaten = number + need
+    remaining_carrots = remaining - need if remaining >= need else 0
+    return [total_eaten, remaining_carrots]
+```"
+humaneval,42,HumanEval_159,dllm_cache_int8,DASR + dLLM-Cache (INT8),False,,False,256,"```python
+def eat(number, need, remaining):
+    total_eaten = number + need
+    remaining_carrots = remaining - need
+    return [total_eaten, remaining_carrots]
+```"
+humaneval,42,HumanEval_159,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",False,,False,256,"```python
+def eat(number, need, remaining):
+    total_eaten = number + need
+    remaining_left = remaining - need
+    if remaining_left < 0:
+        remaining_left = 0
+    return [total_eaten, remaining_left]
+```"
+humaneval,42,HumanEval_160,uncached,No cache (reference),False,,True,256,"```python
+def do_algebra(operator, operand):
+    stack = []
+    for i in range(len(operator)):
+        if operator[i] == '+':
+            stack.append(operand[i] + operand[i + 1])
+        elif operator[i] == '-':
+            stack.append(operand[i] - operand[i + 1])
+        elif operator[i] == '*':
+            stack.append(operand[i] * operand[i + 1])
+        elif operator[i] == '//':
+            stack.append(operand[i] // operand[i + 1])
+        elif operator[i] == '**':
+            stack.append(operand[i] ** operand[i + 1])
+    return stack[0]
+```"
+humaneval,42,HumanEval_160,dllm_cache,DASR + dLLM-Cache (bf16),False,,False,256,"```python
+def do_algebra(operator, operand):
+    result = operand[0]
+    for i in range(len(operator)):
+        if operator[i] == '+':
+            result += operand[i+1]
+        elif operator[i] == '-':
+            result -= operand[i+1]
+        elif operator[i] == '*':
+            result *= operand[i+1]
+        elif operator[i] == '//':
+            result //= operand[i+1]
+        elif operator[i] == '**':
+            result **= operand[i+1]
+    return result
+```"
+humaneval,42,HumanEval_160,dllm_cache_int8,DASR + dLLM-Cache (INT8),False,,False,256,"```python
+def do_algebra(operator, operand):
+    result = operand[0]
+    for i in range(len(operator)):
+        if operator[i] == '+':
+            result += operand[i + 1]
+        elif operator[i] == '-':
+            result -= operand[i + 1]
+        elif operator[i] == '*':
+            result *= operand[i + 1]
+        elif operator[i] == '//':
+            result //= operand[i + 1]
+        elif operator[i] == '**':
+            result **= operand[i + 1]
+    return result
+```"
+humaneval,42,HumanEval_160,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",False,,False,256,"```python
+def do_algebra(operator, operand):
+    operations = {'+': operator.add, '-': operator.sub, '*': operator.mul, '//': operator.trued, '**': operator.pow}
+    result = operand[0]
+    for i in range(1, len(operator) + 1):
+        result = operations[operator[i-1]](result, operand[i])
+    return result
+```"
+humaneval,42,HumanEval_161,uncached,No cache (reference),False,,True,256,"```python
+def solve(s):
+    result = []
+    for char in s:
+        if char.isalpha():
+            result.append(char.swapcase())
+        else:
+            result.append(char)
+    return ''.join(result[::-1])
+```"
+humaneval,42,HumanEval_161,dllm_cache,DASR + dLLM-Cache (bf16),False,,True,256,"```python
+def solve(s):
+    result = []
+    for char in s:
+        if char.isalpha():
+            result.append(char.swapcase())
+        else:
+            result.append(char)
+    return ''.join(result[::-1])
+```"
+humaneval,42,HumanEval_161,dllm_cache_int8,DASR + dLLM-Cache (INT8),False,,True,256,"```python
+def solve(s):
+    result = []
+    for char in s:
+        if char.isalpha():
+            result.append(char.swapcase())
+        else:
+            result.append(char)
+    return ''.join(result[::-1])
+```"
+humaneval,42,HumanEval_161,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",False,,True,256,"```python
+def solve(s):
+    result = []
+    for char in s:
+        if char.isalpha():
+            result.append(char.swapcase())
+        else:
+            result.append(char)
+    return ''.join(result[::-1])
+```"
+humaneval,42,HumanEval_162,uncached,No cache (reference),True,,True,256,"```python
+import hashlib
+
+def string_to_md5(text):
+    """"""
+    Given a string 'text', return its md5 hash equivalent string.
+    If 'text' is an empty string, return None.
+
+    >>> string_to_md5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'
+    """"""
+    if not text:
+        return None
+    md5_hash = hashlib.md5(text.encode()).hexdigest()
+    return md5_hash
+```"
+humaneval,42,HumanEval_162,dllm_cache,DASR + dLLM-Cache (bf16),True,,False,256,"```python
+import hashlib
+
+def string_to_md5(text):
+    """"""
+    Given a string 'text', return its md5 hash equivalent string.
+    If 'text' is an empty string, return None.
+
+    >>> string_to_md5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'
+    """"""
+    if not text:
+        return None
+    else:
+        return hashlib.md5(text.encode()).hexdigest()
+```"
+humaneval,42,HumanEval_162,dllm_cache_int8,DASR + dLLM-Cache (INT8),True,,False,256,"```python
+import hashlib
+
+def string_to_md5(text):
+    """"""
+    Given a string 'text', return its md5 hash equivalent string.
+    If 'text' is an empty string, return None.
+
+    >>> string_to_md5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'
+    """"""
+    if not text:
+        return None
+    else:
+        return hashlib.md5(text.encode()).hexdigest()
+```"
+humaneval,42,HumanEval_162,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",True,,False,256,"```python
+import hashlib
+
+def string_to_md5(text):
+    """"""
+    Given a string 'text', return its md5 hash equivalent string.
+    If 'text' is an empty string, return None.
+
+    >>> string_to_md5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'
+    """"""
+    if not text:
+        return None
+    md5_hash = hashlib.md5(text.encode('utf-8')).hexdigest()
+    return md5_hash
+```"
+humaneval,42,HumanEval_163,uncached,No cache (reference),False,,True,256,"```python
+def generate_integers(a, b):
+    """"""
+    Given two positive integers a and b, return the even digits between a
+    and b, in ascending order.
+
+    For example:
+    generate_integers(2, 8) => [2, 4, 6, 8]
+    generate_integers(8, 2) => [2, 4, 6, 8]
+    generate_integers(10, 14) => []
+    """"""
+    result = []
+    for i in range(a, b + 1):
+        if i % 2 == 0:
+            result.append(i)
+    return result
+```"
+humaneval,42,HumanEval_163,dllm_cache,DASR + dLLM-Cache (bf16),False,,False,256,"```python
+def generate_integers(a, b):
+    result = []
+    for i in range(a, b + 1):
+        if i % 2 == 0:
+            result.append(i)
+    return result
+```"
+humaneval,42,HumanEval_163,dllm_cache_int8,DASR + dLLM-Cache (INT8),False,,False,256,"```python
+def generate_integers(a, b):
+    even_digits = []
+    for i in range(a, b + 1):
+        if i % 2 == 0:
+            even_digits.append(i)
+    return even_digits
+```"
+humaneval,42,HumanEval_163,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",False,,True,256,"```python
+def generate_integers(a, b):
+    """"""
+    Given two positive integers a and b, return the even digits between a
+    and b, in ascending order.
+
+    For example:
+    generate_integers(2, 8) => [2, 4, 6, 8]
+    generate_integers(8, 2) => [2, 4, 6, 8]
+    generate_integers(10, 14) => []
+    """"""
+    result = []
+    for i in range(a, b + 1):
+        if i % 2 == 0:
+            result.append(i)
+    return result
+```"

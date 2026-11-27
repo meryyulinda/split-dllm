@@ -1,0 +1,7 @@
+nohup: ignoring input
+2026-11-27 23:45:49 GPUs 1,2 idle, starting.
+started dllm_cache split=4 on GPU 1, port 6001 (log exp21_cloud_dllm_cache_k4.log)
+started dllm_cache split=0 on GPU 1, port 6002 (log exp21_cloud_dllm_cache_k0.log)
+started fastdllm split=4 on GPU 2, port 6003 (log exp21_cloud_fastdllm_k4.log)
+started fastdllm split=0 on GPU 2, port 6004 (log exp21_cloud_fastdllm_k0.log)
+2026-11-27 23:45:49 all four cloud programs started; they print 'listening' once loaded.

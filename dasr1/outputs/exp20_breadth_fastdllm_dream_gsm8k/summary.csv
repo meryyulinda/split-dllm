@@ -1,0 +1,5 @@
+task,config,paper_name,runs,seeds,acc,lost,gained,identical,acc_seed_min,acc_seed_max,mcnemar_p
+gsm8k,one_token_per_step,"No cache, one token per step (reference)",100,1,0.85,0,0,100,0.85,0.85,1.0
+gsm8k,fastdllm,DASR + Fast-dLLM (bf16),100,1,0.84,5,4,3,0.84,0.84,1.0
+gsm8k,fastdllm_int8,DASR + Fast-dLLM (INT8),100,1,0.85,4,4,3,0.85,0.85,1.0
+gsm8k,fastdllm_gamma0.7,"DASR + Fast-dLLM (bf16), gamma = 0.7",100,1,0.82,6,3,0,0.82,0.82,0.5078125

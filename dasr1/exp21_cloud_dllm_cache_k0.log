@@ -1,0 +1,6 @@
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.90it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.41it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.54it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.99it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.74it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+Exp21 cloud | dllm_cache_k0 | NVIDIA RTX A6000 | listening on 127.0.0.1:6002

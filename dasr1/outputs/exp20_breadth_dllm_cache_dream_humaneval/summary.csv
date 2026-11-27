@@ -1,0 +1,5 @@
+task,config,paper_name,runs,seeds,acc,lost,gained,identical,acc_seed_min,acc_seed_max,mcnemar_p
+humaneval,uncached,No cache (reference),164,1,0.5853658536585366,0,0,164,0.5853658536585366,0.5853658536585366,1.0
+humaneval,dllm_cache,DASR + dLLM-Cache (bf16),164,1,0.5914634146341463,7,8,63,0.5914634146341463,0.5914634146341463,1.0
+humaneval,dllm_cache_int8,DASR + dLLM-Cache (INT8),164,1,0.573170731707317,7,5,56,0.573170731707317,0.573170731707317,0.7744140625
+humaneval,adaptive,"DASR + dLLM-Cache, adaptive refresh (bf16)",164,1,0.6219512195121951,3,9,64,0.6219512195121951,0.6219512195121951,0.14599609375
