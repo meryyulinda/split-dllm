@@ -1,0 +1,764 @@
+HotpotQA prompts (first 30): mean 1534 tokens, min 429, max 3066
+2026-11-28 08:57:19 GPUs 1,2 idle, starting.
+
+=== 1/2 dLLM-Cache backend, Dream, HotpotQA  (2026-11-28 08:57:19)
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.31it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.41it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.85it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.57it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.17it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=67.4 W, cloud=73.0 W
+Exp11 | dream | hotpotqa n=30 | split after layer 4 | edge=cuda:1 cloud=cuda:0 | 128 tok / 128 steps | cache ('fixed', 25, 2, 0.25)
+warmup done
+
+hotpot_0000 | prompt tokens=1284
+  S0_split_full              ok=True  up=1295.52 MB edge=   3552 ms cloud=  24426 ms mem=3.07/13.20 GiB E=3083+8240 J 'Yes'
+  S1_split_exact_delta       ok=True  up=1286.11 MB edge=   3549 ms cloud=  24585 ms mem=3.07/13.20 GiB E=3081+8251 J EXACT 'Yes'
+  S2_split_int8              ok=True  up= 668.35 MB edge=   3548 ms cloud=  24636 ms mem=3.07/13.20 GiB E=3095+8295 J 'Yes'
+  S3_split_int8abs           ok=True  up= 648.12 MB edge=   3551 ms cloud=  24669 ms mem=3.07/13.20 GiB E=3077+8272 J 'Yes'
+  S4_split_int4              ok=True  up= 334.00 MB edge=   3547 ms cloud=  24692 ms mem=3.07/13.20 GiB E=3088+8329 J 'Yes.'
+  C1_cache_full              ok=True  up=1295.52 MB edge=   1555 ms cloud=   6681 ms mem=3.09/13.22 GiB E=1054+2486 J 'Yes.'
+  C2_cache_aware             ok=True  up= 173.54 MB edge=   1569 ms cloud=   6766 ms mem=3.09/13.22 GiB E=1050+2486 J EXACT 'Yes.'
+  C4_cache_aware_int8        ok=True  up= 117.17 MB edge=   1552 ms cloud=   6685 ms mem=3.09/13.22 GiB E=1037+2477 J 'Yes'
+  C5_cache_aware_int8abs     ok=True  up=  86.82 MB edge=   1552 ms cloud=   6673 ms mem=3.09/13.22 GiB E=1038+2450 J 'Yes'
+  C6_cache_aware_int4        ok=True  up=  44.74 MB edge=   1824 ms cloud=   6678 ms mem=3.09/13.22 GiB E=1053+2480 J 'Yes.'
+  A1_adaptive_cache_aware    ok=True  up= 155.15 MB edge=   1488 ms cloud=   6280 ms mem=3.07/13.21 GiB E=984+2258 J 'Yes.'
+
+hotpot_0001 | prompt tokens=1427
+  S0_split_full              ok=False up=1426.72 MB edge=   4037 ms cloud=  27897 ms mem=3.09/13.26 GiB E=3421+9298 J 'No'
+  S1_split_exact_delta       ok=False up=1416.36 MB edge=   4036 ms cloud=  27921 ms mem=3.09/13.26 GiB E=3429+9304 J EXACT 'No'
+  S2_split_int8              ok=False up= 736.04 MB edge=   4032 ms cloud=  27906 ms mem=3.09/13.26 GiB E=3434+9318 J 'No'
+  S3_split_int8abs           ok=True  up= 713.76 MB edge=   4032 ms cloud=  27914 ms mem=3.09/13.26 GiB E=3434+9319 J 'Chief of Protocol of the United States'
+  S4_split_int4              ok=False up= 367.83 MB edge=   4035 ms cloud=  27919 ms mem=3.09/13.26 GiB E=3429+9320 J 'ortrayed Corliss Archer in the film Kiss and Tell.'
+  C1_cache_full              ok=False up=1426.72 MB edge=   1701 ms cloud=   7018 ms mem=3.12/13.32 GiB E=1113+2593 J 'ortrayed Corliss Archer in the film Kiss and Tell.'
+  C2_cache_aware             ok=False up= 179.69 MB edge=   1708 ms cloud=   7064 ms mem=3.12/13.32 GiB E=1121+2607 J EXACT 'ortrayed Corliss Archer in the film Kiss and Tell.'
+  C4_cache_aware_int8        ok=False up= 123.32 MB edge=   1694 ms cloud=   7017 ms mem=3.12/13.32 GiB E=1099+2589 J 'ortrayed Corliss Archer in the film Kiss and Tell.'
+  C5_cache_aware_int8abs     ok=True  up=  89.90 MB edge=   1691 ms cloud=   7029 ms mem=3.12/13.32 GiB E=1106+2588 J 'Chief of Protocol'
+  C6_cache_aware_int4        ok=True  up=  46.33 MB edge=   1901 ms cloud=   7268 ms mem=3.12/13.32 GiB E=1141+2620 J 'Chief of Protocol'
+  A1_adaptive_cache_aware    ok=False up= 169.47 MB edge=   1647 ms cloud=   6654 ms mem=3.10/13.31 GiB E=1085+2452 J 'ortrayed Corliss Archer in the film Kiss and Tell.'
+
+hotpot_0002 | prompt tokens=1633
+  S0_split_full              ok=True  up=1615.73 MB edge=   4454 ms cloud=  30207 ms mem=3.13/13.38 GiB E=3730+10062 J 'Animorphs'
+  S1_split_exact_delta       ok=True  up=1603.99 MB edge=   4360 ms cloud=  30222 ms mem=3.13/13.38 GiB E=3722+10054 J EXACT 'Animorphs'
+  S2_split_int8              ok=True  up= 833.55 MB edge=   4365 ms cloud=  30227 ms mem=3.13/13.38 GiB E=3731+10092 J 'Animorphs'
+  S3_split_int8abs           ok=True  up= 808.32 MB edge=   4367 ms cloud=  30237 ms mem=3.13/13.38 GiB E=3719+10070 J 'Animorphs'
+  S4_split_int4              ok=True  up= 416.56 MB edge=   4361 ms cloud=  30233 ms mem=3.13/13.38 GiB E=3720+10099 J 'Animorphs'
+  C1_cache_full              ok=True  up=1615.73 MB edge=   1802 ms cloud=   7389 ms mem=3.17/13.45 GiB E=1170+2714 J 'Animorphs'
+  C2_cache_aware             ok=True  up= 188.55 MB edge=   1893 ms cloud=   7391 ms mem=3.17/13.45 GiB E=1192+2710 J EXACT 'Animorphs'
+  C4_cache_aware_int8        ok=True  up= 132.18 MB edge=   1798 ms cloud=   7387 ms mem=3.17/13.45 GiB E=1175+2681 J 'Animorphs'
+  C5_cache_aware_int8abs     ok=True  up=  94.33 MB edge=   1810 ms cloud=   7393 ms mem=3.17/13.45 GiB E=1177+2696 J 'Animorphs'
+  C6_cache_aware_int4        ok=True  up=  48.61 MB edge=   1986 ms cloud=   7383 ms mem=3.17/13.45 GiB E=1178+2722 J 'Animorphs'
+  A1_adaptive_cache_aware    ok=True  up= 165.15 MB edge=   1727 ms cloud=   6768 ms mem=3.14/13.44 GiB E=1096+2462 J 'Animorphs'
+
+hotpot_0003 | prompt tokens=1110
+  S0_split_full              ok=True  up=1135.87 MB edge=   3107 ms cloud=  21362 ms mem=3.07/13.30 GiB E=2654+7326 J 'No'
+  S1_split_exact_delta       ok=True  up=1127.62 MB edge=   3108 ms cloud=  21381 ms mem=3.07/13.30 GiB E=2704+7260 J EXACT 'No'
+  S2_split_int8              ok=True  up= 585.99 MB edge=   3108 ms cloud=  21368 ms mem=3.07/13.30 GiB E=2490+7097 J 'No'
+  S3_split_int8abs           ok=True  up= 568.25 MB edge=   3114 ms cloud=  21366 ms mem=3.07/13.30 GiB E=2517+7095 J 'No.'
+  S4_split_int4              ok=True  up= 292.84 MB edge=   3108 ms cloud=  21386 ms mem=3.07/13.30 GiB E=2552+7074 J 'No'
+  C1_cache_full              ok=True  up=1135.87 MB edge=   1419 ms cloud=   6188 ms mem=3.05/13.11 GiB E=927+2268 J 'No'
+  C2_cache_aware             ok=True  up= 166.06 MB edge=   1415 ms cloud=   6175 ms mem=3.05/13.11 GiB E=932+2285 J EXACT 'No'
+  C4_cache_aware_int8        ok=True  up= 109.68 MB edge=   1613 ms cloud=   6184 ms mem=3.05/13.11 GiB E=947+2308 J 'No'
+  C5_cache_aware_int8abs     ok=True  up=  83.08 MB edge=   1414 ms cloud=   6174 ms mem=3.05/13.11 GiB E=946+2280 J 'No'
+  C6_cache_aware_int4        ok=True  up=  42.81 MB edge=   1418 ms cloud=   6185 ms mem=3.05/13.11 GiB E=942+2281 J 'No'
+  A1_adaptive_cache_aware    ok=True  up= 150.16 MB edge=   1360 ms cloud=   5699 ms mem=3.03/13.10 GiB E=873+2093 J 'No'
+
+hotpot_0004 | prompt tokens=1419
+  S0_split_full              ok=False up=1419.38 MB edge=   4035 ms cloud=  27866 ms mem=3.08/13.20 GiB E=3421+9308 J 'New York City'
+  S1_split_exact_delta       ok=False up=1409.07 MB edge=   4030 ms cloud=  27904 ms mem=3.08/13.20 GiB E=3422+9291 J EXACT 'New York City'
+  S2_split_int8              ok=False up= 732.25 MB edge=   4031 ms cloud=  27913 ms mem=3.08/13.20 GiB E=3444+9332 J 'New York City'
+  S3_split_int8abs           ok=False up= 710.09 MB edge=   4029 ms cloud=  27935 ms mem=3.08/13.20 GiB E=3440+9289 J 'New York City'
+  S4_split_int4              ok=False up= 365.94 MB edge=   4033 ms cloud=  27913 ms mem=3.08/13.20 GiB E=3442+9305 J 'Greenwich Village'
+  C1_cache_full              ok=False up=1419.38 MB edge=   1695 ms cloud=   7017 ms mem=3.12/13.31 GiB E=1093+2569 J 'New York City'
+  C2_cache_aware             ok=False up= 179.35 MB edge=   1691 ms cloud=   7014 ms mem=3.12/13.31 GiB E=1108+2569 J EXACT 'New York City'
+  C4_cache_aware_int8        ok=False up= 122.97 MB edge=   1696 ms cloud=   7046 ms mem=3.12/13.31 GiB E=1115+2591 J 'New York City'
+  C5_cache_aware_int8abs     ok=False up=  89.72 MB edge=   1696 ms cloud=   7042 ms mem=3.12/13.31 GiB E=1119+2601 J 'New York City'
+  C6_cache_aware_int4        ok=False up=  46.24 MB edge=   1687 ms cloud=   7011 ms mem=3.12/13.31 GiB E=1109+2590 J 'Greenwich Village'
+  A1_adaptive_cache_aware    ok=False up= 159.02 MB edge=   1852 ms cloud=   6453 ms mem=3.10/13.30 GiB E=1051+2371 J 'New York City'
+
+hotpot_0005 | prompt tokens=1469
+  S0_split_full              ok=True  up=1465.26 MB edge=   4065 ms cloud=  28101 ms mem=3.11/13.33 GiB E=3471+9353 J 'YG Entertainment'
+  S1_split_exact_delta       ok=True  up=1454.61 MB edge=   4066 ms cloud=  28140 ms mem=3.11/13.33 GiB E=3461+9408 J EXACT 'YG Entertainment'
+  S2_split_int8              ok=True  up= 755.92 MB edge=   4064 ms cloud=  28119 ms mem=3.11/13.33 GiB E=3475+9392 J 'YG Entertainment'
+  S3_split_int8abs           ok=True  up= 733.04 MB edge=   4063 ms cloud=  28126 ms mem=3.11/13.33 GiB E=3469+9380 J 'YG Entertainment'
+  S4_split_int4              ok=True  up= 377.76 MB edge=   4065 ms cloud=  28135 ms mem=3.11/13.33 GiB E=3478+9357 J 'YG Entertainment'
+  C1_cache_full              ok=True  up=1465.26 MB edge=   1713 ms cloud=   7048 ms mem=3.13/13.34 GiB E=1143+2601 J 'YG Entertainment'
+  C2_cache_aware             ok=True  up= 181.50 MB edge=   1827 ms cloud=   7050 ms mem=3.13/13.34 GiB E=1112+2580 J EXACT 'YG Entertainment'
+  C4_cache_aware_int8        ok=True  up= 125.12 MB edge=   1722 ms cloud=   7083 ms mem=3.13/13.34 GiB E=1118+2599 J 'YG Entertainment'
+  C5_cache_aware_int8abs     ok=True  up=  90.80 MB edge=   1700 ms cloud=   7045 ms mem=3.13/13.34 GiB E=1103+2595 J 'YG Entertainment'
+  C6_cache_aware_int4        ok=True  up=  46.79 MB edge=   1703 ms cloud=   7075 ms mem=3.13/13.34 GiB E=1138+2585 J 'YG Entertainment'
+  A1_adaptive_cache_aware    ok=True  up= 160.45 MB edge=   1638 ms cloud=   6718 ms mem=3.10/13.34 GiB E=1075+2401 J 'YG Entertainment'
+
+hotpot_0006 | prompt tokens=1967
+  S0_split_full              ok=True  up=1922.17 MB edge=   5122 ms cloud=  35575 ms mem=3.18/13.49 GiB E=4379+11827 J 'Eenasul Fateh'
+  S1_split_exact_delta       ok=True  up=1908.21 MB edge=   5120 ms cloud=  35632 ms mem=3.18/13.49 GiB E=4371+11855 J EXACT 'Eenasul Fateh'
+  S2_split_int8              ok=True  up= 991.64 MB edge=   5121 ms cloud=  35658 ms mem=3.18/13.49 GiB E=4393+11897 J 'Eenasul Fateh'
+  S3_split_int8abs           ok=True  up= 961.62 MB edge=   5122 ms cloud=  35663 ms mem=3.18/13.49 GiB E=4394+11864 J 'Eenasul Fateh'
+  S4_split_int4              ok=True  up= 495.56 MB edge=   5124 ms cloud=  35639 ms mem=3.18/13.49 GiB E=4377+11841 J 'Eenasul Fateh'
+  C1_cache_full              ok=True  up=1922.17 MB edge=   2032 ms cloud=   8251 ms mem=3.24/13.66 GiB E=1352+3011 J 'Eenasul Fateh'
+  C2_cache_aware             ok=True  up= 202.91 MB edge=   2038 ms cloud=   8263 ms mem=3.24/13.66 GiB E=1334+3009 J EXACT 'Eenasul Fateh'
+  C4_cache_aware_int8        ok=True  up= 146.54 MB edge=   2049 ms cloud=   8228 ms mem=3.24/13.66 GiB E=1338+2997 J 'Eenasul Fateh'
+  C5_cache_aware_int8abs     ok=True  up= 101.51 MB edge=   2147 ms cloud=   8259 ms mem=3.24/13.66 GiB E=1350+3029 J 'Eenasul Fateh'
+  C6_cache_aware_int4        ok=True  up=  52.32 MB edge=   2032 ms cloud=   8232 ms mem=3.24/13.66 GiB E=1341+3002 J 'Eenasul Fateh'
+  A1_adaptive_cache_aware    ok=True  up= 174.73 MB edge=   1956 ms cloud=   7535 ms mem=3.21/13.66 GiB E=1252+2723 J 'Eenasul Fateh'
+
+hotpot_0007 | prompt tokens=3066
+  S0_split_full              ok=False up=2930.51 MB edge=   8267 ms cloud=  56109 ms mem=3.37/14.19 GiB E=6680+18319 J '3,677'
+  S1_split_exact_delta       ok=False up=2909.23 MB edge=   8261 ms cloud=  56138 ms mem=3.37/14.19 GiB E=6676+18341 J EXACT '3,677'
+  S2_split_int8              ok=False up=1511.84 MB edge=   8265 ms cloud=  56137 ms mem=3.37/14.19 GiB E=6701+18375 J '3,677'
+  S3_split_int8abs           ok=False up=1466.07 MB edge=   8266 ms cloud=  56124 ms mem=3.37/14.19 GiB E=6673+18346 J '3,677'
+  S4_split_int4              ok=False up= 755.52 MB edge=   8263 ms cloud=  56139 ms mem=3.37/14.19 GiB E=6662+18382 J '3,677'
+  C1_cache_full              ok=False up=2930.51 MB edge=   2955 ms cloud=  10893 ms mem=3.49/14.59 GiB E=1963+3962 J '3,677'
+  C2_cache_aware             ok=False up= 250.18 MB edge=   3171 ms cloud=  10852 ms mem=3.50/14.59 GiB E=1908+3897 J EXACT '3,677'
+  C4_cache_aware_int8        ok=False up= 193.81 MB edge=   2963 ms cloud=  10847 ms mem=3.50/14.59 GiB E=1753+4019 J '3,677'
+  C5_cache_aware_int8abs     ok=False up= 125.16 MB edge=   2954 ms cloud=  10851 ms mem=3.50/14.59 GiB E=1911+3898 J '3,677'
+  C6_cache_aware_int4        ok=False up=  64.50 MB edge=   2978 ms cloud=  10872 ms mem=3.50/14.59 GiB E=1810+3984 J '3,677'
+  A1_adaptive_cache_aware    ok=False up= 206.24 MB edge=   2844 ms cloud=   9839 ms mem=3.44/14.59 GiB E=1731+3597 J '3,677'
+
+hotpot_0008 | prompt tokens=1429
+  S0_split_full              ok=False up=1428.56 MB edge=   4038 ms cloud=  27872 ms mem=3.20/13.91 GiB E=3453+9300 J 'Annie Morton is older.'
+  S1_split_exact_delta       ok=False up=1418.18 MB edge=   4038 ms cloud=  27929 ms mem=3.20/13.91 GiB E=3442+9331 J EXACT 'Annie Morton is older.'
+  S2_split_int8              ok=False up= 736.99 MB edge=   4033 ms cloud=  27939 ms mem=3.20/13.91 GiB E=3468+9328 J 'Annie Morton is older.'
+  S3_split_int8abs           ok=False up= 714.68 MB edge=   4035 ms cloud=  27913 ms mem=3.20/13.91 GiB E=3445+9331 J 'Annie Morton is older.'
+  S4_split_int4              ok=True  up= 368.30 MB edge=   4038 ms cloud=  27922 ms mem=3.20/13.91 GiB E=3438+9342 J 'Annie Morton is older than Terry Richardson.'
+  C1_cache_full              ok=False up=1428.56 MB edge=   1832 ms cloud=   7014 ms mem=3.12/13.32 GiB E=1113+2569 J 'Annie Morton is older.'
+  C2_cache_aware             ok=False up= 179.78 MB edge=   1711 ms cloud=   7043 ms mem=3.12/13.32 GiB E=1099+2582 J EXACT 'Annie Morton is older.'
+  C4_cache_aware_int8        ok=False up= 123.40 MB edge=   1692 ms cloud=   7007 ms mem=3.12/13.32 GiB E=1107+2564 J 'Annie Morton is older.'
+  C5_cache_aware_int8abs     ok=False up=  89.94 MB edge=   1695 ms cloud=   7053 ms mem=3.12/13.32 GiB E=1119+2598 J 'Annie Morton is older.'
+  C6_cache_aware_int4        ok=False up=  46.35 MB edge=   1697 ms cloud=   7019 ms mem=3.12/13.32 GiB E=1119+2597 J 'Annie Morton is older.'
+  A1_adaptive_cache_aware    ok=False up= 159.30 MB edge=   1630 ms cloud=   6470 ms mem=3.10/13.31 GiB E=1049+2353 J 'Annie Morton is older.'
+
+hotpot_0009 | prompt tokens=1439
+  S0_split_full              ok=True  up=1437.73 MB edge=   4044 ms cloud=  27925 ms mem=3.10/13.32 GiB E=3434+9326 J 'Yes'
+  S1_split_exact_delta       ok=True  up=1427.29 MB edge=   4039 ms cloud=  27973 ms mem=3.10/13.32 GiB E=3436+9306 J EXACT 'Yes'
+  S2_split_int8              ok=True  up= 741.72 MB edge=   4045 ms cloud=  27951 ms mem=3.10/13.32 GiB E=3442+9344 J 'H and For Against are both from the United States.'
+  S3_split_int8abs           ok=True  up= 719.27 MB edge=   4040 ms cloud=  27957 ms mem=3.10/13.32 GiB E=3441+9354 J 'H and For Against are both from the United States.'
+  S4_split_int4              ok=True  up= 370.67 MB edge=   4043 ms cloud=  27966 ms mem=3.10/13.32 GiB E=3446+9348 J 'Yes'
+  C1_cache_full              ok=True  up=1437.73 MB edge=   1702 ms cloud=   7060 ms mem=3.12/13.32 GiB E=1109+2592 J 'Yes'
+  C2_cache_aware             ok=True  up= 180.21 MB edge=   1693 ms cloud=   7021 ms mem=3.12/13.32 GiB E=1125+2569 J EXACT 'Yes'
+  C4_cache_aware_int8        ok=True  up= 123.83 MB edge=   1698 ms cloud=   7010 ms mem=3.12/13.32 GiB E=1113+2581 J 'H and For Against are both from the United States.'
+  C5_cache_aware_int8abs     ok=True  up=  90.15 MB edge=   1696 ms cloud=   7015 ms mem=3.12/13.32 GiB E=1090+2594 J 'H and For Against are both from the United States.'
+  C6_cache_aware_int4        ok=True  up=  46.46 MB edge=   1941 ms cloud=   7007 ms mem=3.12/13.32 GiB E=1135+2590 J 'Yes'
+  A1_adaptive_cache_aware    ok=True  up= 159.59 MB edge=   1625 ms cloud=   6687 ms mem=3.10/13.32 GiB E=1066+2388 J 'Yes'
+
+hotpot_0010 | prompt tokens=1781
+  S0_split_full              ok=True  up=1751.52 MB edge=   4717 ms cloud=  32688 ms mem=3.15/13.42 GiB E=4067+10972 J 'Kansas Song'
+  S1_split_exact_delta       ok=True  up=1738.80 MB edge=   4725 ms cloud=  32724 ms mem=3.15/13.42 GiB E=4124+10827 J EXACT 'Kansas Song'
+  S2_split_int8              ok=True  up= 903.60 MB edge=   4720 ms cloud=  32737 ms mem=3.15/13.42 GiB E=3877+10660 J 'Kansas Song'
+  S3_split_int8abs           ok=True  up= 876.25 MB edge=   4716 ms cloud=  32731 ms mem=3.15/13.42 GiB E=3881+10944 J 'Kansas Song'
+  S4_split_int4              ok=True  up= 451.56 MB edge=   4719 ms cloud=  32692 ms mem=3.15/13.42 GiB E=3756+10645 J 'Kansas Song'
+  C1_cache_full              ok=True  up=1751.52 MB edge=   1920 ms cloud=   7958 ms mem=3.20/13.54 GiB E=1256+2886 J 'Kansas Song'
+  C2_cache_aware             ok=True  up= 194.91 MB edge=   1924 ms cloud=   7891 ms mem=3.20/13.54 GiB E=1252+2858 J EXACT 'Kansas Song'
+  C4_cache_aware_int8        ok=True  up= 138.54 MB edge=   1920 ms cloud=   7835 ms mem=3.20/13.54 GiB E=1249+2862 J 'Kansas Song'
+  C5_cache_aware_int8abs     ok=True  up=  97.51 MB edge=   1923 ms cloud=   7775 ms mem=3.20/13.54 GiB E=1255+2846 J 'Kansas Song'
+  C6_cache_aware_int4        ok=True  up=  50.25 MB edge=   2061 ms cloud=   7748 ms mem=3.20/13.54 GiB E=1263+2860 J 'Kansas Song'
+  A1_adaptive_cache_aware    ok=True  up= 169.40 MB edge=   1836 ms cloud=   7085 ms mem=3.17/13.54 GiB E=1161+2588 J 'Kansas Song'
+
+hotpot_0011 | prompt tokens=1356
+  S0_split_full              ok=True  up=1361.58 MB edge=   3578 ms cloud=  24901 ms mem=3.11/13.42 GiB E=3106+8365 J 'David Weissman'
+  S1_split_exact_delta       ok=True  up=1351.69 MB edge=   3574 ms cloud=  24916 ms mem=3.11/13.42 GiB E=3099+8376 J EXACT 'David Weissman'
+  S2_split_int8              ok=True  up= 702.43 MB edge=   3577 ms cloud=  24907 ms mem=3.11/13.42 GiB E=3099+8385 J 'David Weissman'
+  S3_split_int8abs           ok=True  up= 681.17 MB edge=   3574 ms cloud=  24911 ms mem=3.11/13.42 GiB E=3097+8368 J 'David Weissman'
+  S4_split_int4              ok=True  up= 351.03 MB edge=   3573 ms cloud=  24917 ms mem=3.11/13.42 GiB E=3101+8368 J 'David Weissman'
+  C1_cache_full              ok=True  up=1361.58 MB edge=   1878 ms cloud=   6762 ms mem=3.10/13.26 GiB E=1066+2512 J 'David Weissman'
+  C2_cache_aware             ok=True  up= 176.64 MB edge=   1651 ms cloud=   6776 ms mem=3.10/13.26 GiB E=1057+2464 J EXACT 'David Weissman'
+  C4_cache_aware_int8        ok=True  up= 120.26 MB edge=   1758 ms cloud=   6772 ms mem=3.10/13.26 GiB E=1057+2523 J 'David Weissman'
+  C5_cache_aware_int8abs     ok=True  up=  88.37 MB edge=   1729 ms cloud=   6751 ms mem=3.10/13.26 GiB E=1053+2474 J 'David Weissman'
+  C6_cache_aware_int4        ok=True  up=  45.54 MB edge=   1757 ms cloud=   6775 ms mem=3.10/13.26 GiB E=1062+2509 J 'David Weissman'
+  A1_adaptive_cache_aware    ok=True  up= 157.21 MB edge=   1497 ms cloud=   6195 ms mem=3.08/13.25 GiB E=980+2253 J 'David Weissman'
+
+hotpot_0012 | prompt tokens=1607
+  S0_split_full              ok=True  up=1591.87 MB edge=   4340 ms cloud=  30074 ms mem=3.12/13.33 GiB E=3707+9967 J '1999'
+  S1_split_exact_delta       ok=True  up=1580.31 MB edge=   4338 ms cloud=  30092 ms mem=3.12/13.33 GiB E=3689+9992 J EXACT '1999'
+  S2_split_int8              ok=True  up= 821.24 MB edge=   4339 ms cloud=  30087 ms mem=3.12/13.33 GiB E=3704+10033 J '1999'
+  S3_split_int8abs           ok=True  up= 796.38 MB edge=   4334 ms cloud=  30096 ms mem=3.12/13.33 GiB E=3709+10003 J '1999'
+  S4_split_int4              ok=True  up= 410.41 MB edge=   4342 ms cloud=  30093 ms mem=3.12/13.33 GiB E=3693+10020 J '1999'
+  C1_cache_full              ok=True  up=1591.87 MB edge=   1912 ms cloud=   7368 ms mem=3.16/13.43 GiB E=1191+2728 J '1999'
+  C2_cache_aware             ok=True  up= 187.43 MB edge=   1802 ms cloud=   7402 ms mem=3.16/13.43 GiB E=1165+2732 J EXACT '1999'
+  C4_cache_aware_int8        ok=True  up= 131.06 MB edge=   1800 ms cloud=   7395 ms mem=3.16/13.43 GiB E=1173+2725 J '1999'
+  C5_cache_aware_int8abs     ok=True  up=  93.77 MB edge=   1958 ms cloud=   7384 ms mem=3.16/13.43 GiB E=1187+2707 J '1999'
+  C6_cache_aware_int4        ok=True  up=  48.32 MB edge=   1815 ms cloud=   7370 ms mem=3.16/13.43 GiB E=1177+2691 J '1999'
+  A1_adaptive_cache_aware    ok=True  up= 164.41 MB edge=   1725 ms cloud=   6791 ms mem=3.13/13.42 GiB E=1093+2485 J '1999'
+
+hotpot_0013 | prompt tokens=2780
+  S0_split_full              ok=False up=2668.10 MB edge=   7265 ms cloud=  49730 ms mem=3.31/13.89 GiB E=5964+16351 J 'Yes'
+  S1_split_exact_delta       ok=False up=2648.72 MB edge=   7262 ms cloud=  49813 ms mem=3.31/13.89 GiB E=5957+16361 J EXACT 'Yes'
+  S2_split_int8              ok=False up=1376.46 MB edge=   7255 ms cloud=  49818 ms mem=3.31/13.89 GiB E=5983+16361 J 'Yes'
+  S3_split_int8abs           ok=False up=1334.80 MB edge=   7275 ms cloud=  49791 ms mem=3.31/13.89 GiB E=5966+16381 J 'Yes'
+  S4_split_int4              ok=False up= 687.87 MB edge=   7264 ms cloud=  49795 ms mem=3.31/13.89 GiB E=5968+16364 J 'Yes'
+  C1_cache_full              ok=False up=2668.10 MB edge=   2675 ms cloud=  10113 ms mem=3.43/14.32 GiB E=1707+3741 J 'Yes'
+  C2_cache_aware             ok=False up= 237.88 MB edge=   2676 ms cloud=  10128 ms mem=3.43/14.32 GiB E=1693+3683 J EXACT 'Yes'
+  C4_cache_aware_int8        ok=False up= 181.51 MB edge=   2672 ms cloud=  10118 ms mem=3.43/14.32 GiB E=1704+3687 J 'Yes'
+  C5_cache_aware_int8abs     ok=False up= 119.01 MB edge=   2674 ms cloud=  10324 ms mem=3.43/14.32 GiB E=1707+3715 J 'Yes'
+  C6_cache_aware_int4        ok=False up=  61.33 MB edge=   2669 ms cloud=  10152 ms mem=3.43/14.32 GiB E=1717+3713 J 'Yes'
+  A1_adaptive_cache_aware    ok=False up= 217.96 MB edge=   2605 ms cloud=   9558 ms mem=3.38/14.32 GiB E=1619+3480 J ' and 888 7th Avenue are both used for real estate.'
+
+hotpot_0014 | prompt tokens=1096
+  S0_split_full              ok=False up=1123.03 MB edge=   3098 ms cloud=  21313 ms mem=3.13/13.71 GiB E=2708+7122 J '1986-2013'
+  S1_split_exact_delta       ok=False up=1114.87 MB edge=   3103 ms cloud=  21318 ms mem=3.13/13.71 GiB E=2543+7108 J EXACT '1986-2013'
+  S2_split_int8              ok=False up= 579.37 MB edge=   3101 ms cloud=  21313 ms mem=3.13/13.71 GiB E=2559+7126 J '1986-2013'
+  S3_split_int8abs           ok=False up= 561.83 MB edge=   3098 ms cloud=  21333 ms mem=3.13/13.71 GiB E=2727+7249 J '1986-2013'
+  S4_split_int4              ok=False up= 289.53 MB edge=   3100 ms cloud=  21339 ms mem=3.13/13.71 GiB E=2728+7157 J '1986-2013'
+  C1_cache_full              ok=False up=1123.03 MB edge=   1413 ms cloud=   6330 ms mem=3.04/13.10 GiB E=952+2294 J '1986-2013'
+  C2_cache_aware             ok=False up= 165.45 MB edge=   1412 ms cloud=   6185 ms mem=3.04/13.10 GiB E=938+2249 J EXACT '1986-2013'
+  C4_cache_aware_int8        ok=False up= 109.08 MB edge=   1415 ms cloud=   6190 ms mem=3.04/13.10 GiB E=933+2269 J '1986-2013'
+  C5_cache_aware_int8abs     ok=False up=  82.77 MB edge=   1416 ms cloud=   6193 ms mem=3.04/13.10 GiB E=934+2261 J '1986-2013'
+  C6_cache_aware_int4        ok=False up=  42.66 MB edge=   1426 ms cloud=   6229 ms mem=3.04/13.10 GiB E=961+2312 J '1986-2013'
+  A1_adaptive_cache_aware    ok=False up= 157.60 MB edge=   1379 ms cloud=   5831 ms mem=3.03/13.09 GiB E=899+2121 J '1986-2013'
+
+hotpot_0015 | prompt tokens=1656
+  S0_split_full              ok=False up=1636.83 MB edge=   4384 ms cloud=  30308 ms mem=3.11/13.26 GiB E=3714+10044 J 'y that has a population of 37,000,000 inhabitants.'
+  S1_split_exact_delta       ok=False up=1624.94 MB edge=   4375 ms cloud=  30322 ms mem=3.11/13.26 GiB E=3723+10109 J EXACT 'y that has a population of 37,000,000 inhabitants.'
+  S2_split_int8              ok=False up= 844.43 MB edge=   4384 ms cloud=  30329 ms mem=3.11/13.26 GiB E=3734+10120 J 'y that has a population of 37,000,000 inhabitants.'
+  S3_split_int8abs           ok=False up= 818.87 MB edge=   4382 ms cloud=  30327 ms mem=3.11/13.26 GiB E=3738+10131 J 'y that has a population of 37,000,000 inhabitants.'
+  S4_split_int4              ok=False up= 422.00 MB edge=   4381 ms cloud=  30333 ms mem=3.11/13.26 GiB E=3738+10102 J 'y that has a population of 37,000,000 inhabitants.'
+  C1_cache_full              ok=False up=1636.83 MB edge=   2048 ms cloud=   7429 ms mem=3.17/13.46 GiB E=1206+2763 J 'untry with a population of 37,851,894 inhabitants.'
+  C2_cache_aware             ok=False up= 189.54 MB edge=   1809 ms cloud=   7440 ms mem=3.17/13.46 GiB E=1180+2746 J EXACT 'untry with a population of 37,851,894 inhabitants.'
+  C4_cache_aware_int8        ok=False up= 133.16 MB edge=   1805 ms cloud=   7430 ms mem=3.17/13.46 GiB E=1178+2718 J 'e is in a country with a population of 37,851,800.'
+  C5_cache_aware_int8abs     ok=False up=  94.82 MB edge=   1830 ms cloud=   7428 ms mem=3.17/13.46 GiB E=1204+2716 J 'untry with a population of 37,851,400 inhabitants.'
+  C6_cache_aware_int4        ok=False up=  48.87 MB edge=   1812 ms cloud=   7436 ms mem=3.17/13.46 GiB E=1180+2714 J 'untry with a population of 37,851,894 inhabitants.'
+  A1_adaptive_cache_aware    ok=False up= 177.68 MB edge=   1755 ms cloud=   7008 ms mem=3.14/13.45 GiB E=1142+2556 J 'untry with a population of 37,000,000 inhabitants.'
+
+hotpot_0016 | prompt tokens=1469
+  S0_split_full              ok=True  up=1465.26 MB edge=   4067 ms cloud=  28114 ms mem=3.12/13.41 GiB E=3459+9376 J 'North Atlantic Conference'
+  S1_split_exact_delta       ok=True  up=1454.61 MB edge=   4071 ms cloud=  28145 ms mem=3.12/13.41 GiB E=3454+9359 J EXACT 'North Atlantic Conference'
+  S2_split_int8              ok=True  up= 755.92 MB edge=   4074 ms cloud=  28143 ms mem=3.12/13.41 GiB E=3474+9411 J 'North Atlantic Conference'
+  S3_split_int8abs           ok=True  up= 733.04 MB edge=   4068 ms cloud=  28138 ms mem=3.12/13.41 GiB E=3464+9363 J 'North Atlantic Conference'
+  S4_split_int4              ok=True  up= 377.76 MB edge=   4069 ms cloud=  28150 ms mem=3.12/13.41 GiB E=3464+9419 J 'North Atlantic Conference'
+  C1_cache_full              ok=True  up=1465.26 MB edge=   1814 ms cloud=   7041 ms mem=3.13/13.34 GiB E=1128+2556 J 'North Atlantic Conference'
+  C2_cache_aware             ok=True  up= 181.50 MB edge=   1722 ms cloud=   7104 ms mem=3.13/13.34 GiB E=1117+2596 J EXACT 'North Atlantic Conference'
+  C4_cache_aware_int8        ok=True  up= 125.12 MB edge=   1714 ms cloud=   7059 ms mem=3.13/13.34 GiB E=1093+2609 J 'North Atlantic Conference'
+  C5_cache_aware_int8abs     ok=True  up=  90.80 MB edge=   1707 ms cloud=   7040 ms mem=3.13/13.34 GiB E=1101+2584 J 'North Atlantic Conference'
+  C6_cache_aware_int4        ok=True  up=  46.79 MB edge=   1712 ms cloud=   7069 ms mem=3.13/13.34 GiB E=1134+2577 J 'North Atlantic Conference'
+  A1_adaptive_cache_aware    ok=True  up= 160.45 MB edge=   1897 ms cloud=   6487 ms mem=3.10/13.34 GiB E=1053+2409 J 'North Atlantic Conference'
+
+hotpot_0017 | prompt tokens=1493
+  S0_split_full              ok=True  up=1487.28 MB edge=   4091 ms cloud=  28222 ms mem=3.11/13.35 GiB E=3484+9382 J 'ppe Verdi and Ambroise Thomas are opera composers.'
+  S1_split_exact_delta       ok=True  up=1476.47 MB edge=   4089 ms cloud=  28221 ms mem=3.11/13.35 GiB E=3469+9456 J EXACT 'ppe Verdi and Ambroise Thomas are opera composers.'
+  S2_split_int8              ok=True  up= 767.28 MB edge=   4089 ms cloud=  28270 ms mem=3.11/13.35 GiB E=3489+9439 J 'ppe Verdi and Ambroise Thomas are opera composers.'
+  S3_split_int8abs           ok=True  up= 744.05 MB edge=   4091 ms cloud=  28280 ms mem=3.11/13.35 GiB E=3478+9432 J 'ppe Verdi and Ambroise Thomas are opera composers.'
+  S4_split_int4              ok=True  up= 383.44 MB edge=   4087 ms cloud=  28299 ms mem=3.11/13.35 GiB E=3480+9437 J 'ppe Verdi and Ambroise Thomas are opera composers.'
+  C1_cache_full              ok=True  up=1487.28 MB edge=   1717 ms cloud=   7083 ms mem=3.14/13.36 GiB E=1121+2606 J 'Yes'
+  C2_cache_aware             ok=True  up= 182.53 MB edge=   1721 ms cloud=   7099 ms mem=3.14/13.36 GiB E=1125+2604 J EXACT 'Yes'
+  C4_cache_aware_int8        ok=True  up= 126.15 MB edge=   1720 ms cloud=   7097 ms mem=3.14/13.36 GiB E=1123+2592 J 'Yes'
+  C5_cache_aware_int8abs     ok=True  up=  91.32 MB edge=   1955 ms cloud=   7067 ms mem=3.14/13.36 GiB E=1159+2612 J 'Yes'
+  C6_cache_aware_int4        ok=True  up=  47.06 MB edge=   1844 ms cloud=   7058 ms mem=3.14/13.36 GiB E=1136+2585 J 'Yes'
+  A1_adaptive_cache_aware    ok=True  up= 161.14 MB edge=   1643 ms cloud=   6495 ms mem=3.11/13.35 GiB E=1053+2373 J 'Yes'
+
+hotpot_0018 | prompt tokens=1818
+  S0_split_full              ok=False up=1785.46 MB edge=   4931 ms cloud=  34214 ms mem=3.16/13.45 GiB E=4193+11313 J 'Richard Nixon'
+  S1_split_exact_delta       ok=False up=1772.50 MB edge=   4932 ms cloud=  34234 ms mem=3.16/13.45 GiB E=4161+11303 J EXACT 'Richard Nixon'
+  S2_split_int8              ok=False up= 921.11 MB edge=   4933 ms cloud=  34226 ms mem=3.16/13.45 GiB E=4177+11339 J 'Richard Nixon'
+  S3_split_int8abs           ok=False up= 893.23 MB edge=   4933 ms cloud=  34228 ms mem=3.16/13.45 GiB E=4176+11377 J 'Richard Nixon'
+  S4_split_int4              ok=False up= 460.32 MB edge=   4931 ms cloud=  34225 ms mem=3.16/13.45 GiB E=4178+11324 J 'Richard Nixon'
+  C1_cache_full              ok=False up=1785.46 MB edge=   1974 ms cloud=   7938 ms mem=3.21/13.57 GiB E=1304+2945 J 'Richard Nixon'
+  C2_cache_aware             ok=False up= 196.51 MB edge=   2111 ms cloud=   7926 ms mem=3.21/13.57 GiB E=1299+2913 J EXACT 'Richard Nixon'
+  C4_cache_aware_int8        ok=False up= 140.13 MB edge=   1983 ms cloud=   8265 ms mem=3.21/13.57 GiB E=1319+2943 J 'Richard Nixon'
+  C5_cache_aware_int8abs     ok=False up=  98.31 MB edge=   1969 ms cloud=   8179 ms mem=3.21/13.57 GiB E=1272+2929 J 'Richard Nixon'
+  C6_cache_aware_int4        ok=False up=  50.66 MB edge=   1984 ms cloud=   7931 ms mem=3.21/13.57 GiB E=1285+2882 J '1969-1974'
+  A1_adaptive_cache_aware    ok=False up= 170.46 MB edge=   1888 ms cloud=   7265 ms mem=3.18/13.56 GiB E=1201+2648 J 'Richard Nixon'
+
+hotpot_0019 | prompt tokens=1069
+  S0_split_full              ok=False up=1098.25 MB edge=   3085 ms cloud=  21211 ms mem=3.07/13.35 GiB E=2629+7198 J 'Robert Erskine Childers'
+  S1_split_exact_delta       ok=False up=1090.28 MB edge=   3083 ms cloud=  21248 ms mem=3.07/13.35 GiB E=2702+7096 J EXACT 'Robert Erskine Childers'
+  S2_split_int8              ok=False up= 566.59 MB edge=   3082 ms cloud=  21245 ms mem=3.07/13.35 GiB E=2699+7195 J 'Robert Erskine Childers'
+  S3_split_int8abs           ok=False up= 549.43 MB edge=   3087 ms cloud=  21254 ms mem=3.07/13.35 GiB E=2507+7082 J 'Robert Erskine Childers'
+  S4_split_int4              ok=False up= 283.15 MB edge=   3086 ms cloud=  21248 ms mem=3.07/13.35 GiB E=2699+7105 J 'Robert Erskine Childers'
+  C1_cache_full              ok=False up=1098.25 MB edge=   1412 ms cloud=   6157 ms mem=3.04/13.08 GiB E=944+2277 J 'Robert Erskine Childers'
+  C2_cache_aware             ok=False up= 164.29 MB edge=   1410 ms cloud=   6168 ms mem=3.04/13.08 GiB E=927+2293 J EXACT 'Robert Erskine Childers'
+  C4_cache_aware_int8        ok=False up= 107.92 MB edge=   1411 ms cloud=   6156 ms mem=3.04/13.08 GiB E=962+2278 J 'Robert Erskine Childers'
+  C5_cache_aware_int8abs     ok=False up=  82.19 MB edge=   1459 ms cloud=   6144 ms mem=3.04/13.08 GiB E=935+2270 J 'Robert Erskine Childers'
+  C6_cache_aware_int4        ok=False up=  42.36 MB edge=   1405 ms cloud=   6147 ms mem=3.04/13.08 GiB E=928+2271 J 'Robert Erskine Childers'
+  A1_adaptive_cache_aware    ok=False up= 148.98 MB edge=   1356 ms cloud=   5999 ms mem=3.02/13.08 GiB E=905+2101 J 'Robert Erskine Childers'
+
+hotpot_0020 | prompt tokens=1379
+  S0_split_full              ok=True  up=1382.68 MB edge=   3595 ms cloud=  24994 ms mem=3.07/13.17 GiB E=3112+8391 J 'Pedro Rodríguez'
+  S1_split_exact_delta       ok=True  up=1372.64 MB edge=   3593 ms cloud=  25006 ms mem=3.07/13.17 GiB E=3111+8393 J EXACT 'Pedro Rodríguez'
+  S2_split_int8              ok=True  up= 713.32 MB edge=   3593 ms cloud=  25004 ms mem=3.07/13.17 GiB E=3111+8415 J 'Pedro Rodríguez'
+  S3_split_int8abs           ok=True  up= 691.73 MB edge=   3595 ms cloud=  25006 ms mem=3.07/13.17 GiB E=3118+8433 J 'Pedro Rodríguez'
+  S4_split_int4              ok=True  up= 356.47 MB edge=   3592 ms cloud=  25010 ms mem=3.07/13.17 GiB E=3110+8432 J 'Pedro Rodríguez'
+  C1_cache_full              ok=True  up=1382.68 MB edge=   1882 ms cloud=   6782 ms mem=3.11/13.27 GiB E=1082+2524 J 'Pedro Rodríguez'
+  C2_cache_aware             ok=True  up= 177.63 MB edge=   1825 ms cloud=   6834 ms mem=3.11/13.27 GiB E=1072+2527 J EXACT 'Pedro Rodríguez'
+  C4_cache_aware_int8        ok=True  up= 121.25 MB edge=   1638 ms cloud=   6770 ms mem=3.11/13.27 GiB E=1045+2512 J 'Pedro Rodríguez'
+  C5_cache_aware_int8abs     ok=True  up=  88.86 MB edge=   1727 ms cloud=   6785 ms mem=3.11/13.27 GiB E=1062+2475 J 'Pedro Rodríguez'
+  C6_cache_aware_int4        ok=True  up=  45.80 MB edge=   1738 ms cloud=   6813 ms mem=3.11/13.27 GiB E=1075+2510 J 'Pedro Rodríguez'
+  A1_adaptive_cache_aware    ok=True  up= 157.87 MB edge=   1512 ms cloud=   6232 ms mem=3.08/13.27 GiB E=988+2290 J 'Pedro Rodríguez'
+
+hotpot_0021 | prompt tokens=1647
+  S0_split_full              ok=True  up=1628.57 MB edge=   4369 ms cloud=  30267 ms mem=3.13/13.35 GiB E=3739+10028 J 'Sonic the Hedgehog'
+  S1_split_exact_delta       ok=True  up=1616.74 MB edge=   4370 ms cloud=  30282 ms mem=3.13/13.35 GiB E=3735+10069 J EXACT 'Sonic the Hedgehog'
+  S2_split_int8              ok=True  up= 840.17 MB edge=   4372 ms cloud=  30292 ms mem=3.13/13.35 GiB E=3754+10075 J 'Sonic the Hedgehog'
+  S3_split_int8abs           ok=True  up= 814.74 MB edge=   4373 ms cloud=  30295 ms mem=3.13/13.35 GiB E=3742+10090 J 'Sonic the Hedgehog'
+  S4_split_int4              ok=False up= 419.87 MB edge=   4368 ms cloud=  30287 ms mem=3.13/13.35 GiB E=3733+10087 J 'Jim Cummings'
+  C1_cache_full              ok=True  up=1628.57 MB edge=   1804 ms cloud=   7414 ms mem=3.17/13.46 GiB E=1177+2744 J 'Sonic the Hedgehog'
+  C2_cache_aware             ok=True  up= 189.15 MB edge=   1925 ms cloud=   7471 ms mem=3.17/13.46 GiB E=1194+2736 J EXACT 'Sonic the Hedgehog'
+  C4_cache_aware_int8        ok=True  up= 132.78 MB edge=   1814 ms cloud=   7454 ms mem=3.17/13.46 GiB E=1205+2706 J 'Sonic the Hedgehog'
+  C5_cache_aware_int8abs     ok=True  up=  94.63 MB edge=   1805 ms cloud=   7419 ms mem=3.17/13.46 GiB E=1187+2741 J 'Sonic the Hedgehog'
+  C6_cache_aware_int4        ok=False up=  48.77 MB edge=   1812 ms cloud=   7450 ms mem=3.17/13.46 GiB E=1188+2717 J 'Jim Cummings'
+  A1_adaptive_cache_aware    ok=True  up= 165.55 MB edge=   1737 ms cloud=   6796 ms mem=3.14/13.45 GiB E=1111+2486 J 'Sonic the Hedgehog'
+
+hotpot_0022 | prompt tokens=1815
+  S0_split_full              ok=True  up=1782.71 MB edge=   4934 ms cloud=  34187 ms mem=3.17/13.51 GiB E=4177+11279 J 'Keyboard function keys'
+  S1_split_exact_delta       ok=True  up=1769.76 MB edge=   4931 ms cloud=  34217 ms mem=3.17/13.51 GiB E=4182+11320 J EXACT 'Keyboard function keys'
+  S2_split_int8              ok=True  up= 919.69 MB edge=   4931 ms cloud=  34212 ms mem=3.17/13.51 GiB E=4184+11292 J 'Keyboard function keys'
+  S3_split_int8abs           ok=True  up= 891.85 MB edge=   4931 ms cloud=  34218 ms mem=3.17/13.51 GiB E=4180+11309 J 'Keyboard function keys'
+  S4_split_int4              ok=True  up= 459.61 MB edge=   4934 ms cloud=  34220 ms mem=3.17/13.51 GiB E=4180+11317 J 'Keyboard function keys'
+  C1_cache_full              ok=False up=1782.71 MB edge=   1971 ms cloud=   7948 ms mem=3.21/13.56 GiB E=1291+2919 J 'Keyboard'
+  C2_cache_aware             ok=False up= 196.38 MB edge=   1994 ms cloud=   7979 ms mem=3.21/13.57 GiB E=1275+2917 J EXACT 'Keyboard'
+  C4_cache_aware_int8        ok=False up= 140.00 MB edge=   1970 ms cloud=   8192 ms mem=3.21/13.57 GiB E=1312+2920 J 'Keyboard'
+  C5_cache_aware_int8abs     ok=False up=  98.24 MB edge=   2209 ms cloud=   7971 ms mem=3.21/13.57 GiB E=1309+2932 J 'Keyboard'
+  C6_cache_aware_int4        ok=False up=  50.63 MB edge=   1967 ms cloud=   7923 ms mem=3.21/13.57 GiB E=1294+2910 J 'Keyboard'
+  A1_adaptive_cache_aware    ok=False up= 170.37 MB edge=   1889 ms cloud=   7256 ms mem=3.18/13.56 GiB E=1204+2633 J 'Keyboard'
+
+hotpot_0023 | prompt tokens=1149
+  S0_split_full              ok=True  up=1171.65 MB edge=   3133 ms cloud=  21535 ms mem=3.08/13.37 GiB E=2753+7258 J 'Badly Drawn Boy'
+  S1_split_exact_delta       ok=True  up=1163.14 MB edge=   3135 ms cloud=  21570 ms mem=3.08/13.37 GiB E=2751+7342 J EXACT 'Badly Drawn Boy'
+  S2_split_int8              ok=True  up= 604.45 MB edge=   3136 ms cloud=  21556 ms mem=3.08/13.37 GiB E=2787+7366 J 'Badly Drawn Boy'
+  S3_split_int8abs           ok=True  up= 586.16 MB edge=   3138 ms cloud=  21551 ms mem=3.08/13.37 GiB E=2802+7328 J 'Badly Drawn Boy'
+  S4_split_int4              ok=True  up= 302.07 MB edge=   3136 ms cloud=  21555 ms mem=3.08/13.37 GiB E=2795+7342 J 'Badly Drawn Boy'
+  C1_cache_full              ok=True  up=1171.65 MB edge=   1427 ms cloud=   6223 ms mem=3.06/13.13 GiB E=943+2312 J 'Badly Drawn Boy'
+  C2_cache_aware             ok=True  up= 167.73 MB edge=   1577 ms cloud=   6284 ms mem=3.06/13.13 GiB E=967+2342 J EXACT 'Badly Drawn Boy'
+  C4_cache_aware_int8        ok=True  up= 111.36 MB edge=   1426 ms cloud=   6250 ms mem=3.06/13.13 GiB E=977+2294 J 'Badly Drawn Boy'
+  C5_cache_aware_int8abs     ok=True  up=  83.91 MB edge=   1436 ms cloud=   6277 ms mem=3.06/13.13 GiB E=957+2305 J 'Badly Drawn Boy'
+  C6_cache_aware_int4        ok=True  up=  43.25 MB edge=   1643 ms cloud=   6266 ms mem=3.06/13.13 GiB E=974+2365 J 'Badly Drawn Boy'
+  A1_adaptive_cache_aware    ok=True  up= 151.28 MB edge=   1587 ms cloud=   5735 ms mem=3.04/13.13 GiB E=894+2127 J 'Badly Drawn Boy'
+
+hotpot_0024 | prompt tokens=1361
+  S0_split_full              ok=False up=1366.17 MB edge=   3580 ms cloud=  24913 ms mem=3.07/13.19 GiB E=3130+8351 J 'Peter Schmeichel'
+  S1_split_exact_delta       ok=False up=1356.24 MB edge=   3577 ms cloud=  24926 ms mem=3.07/13.19 GiB E=3111+8358 J EXACT 'Peter Schmeichel'
+  S2_split_int8              ok=False up= 704.80 MB edge=   3580 ms cloud=  24915 ms mem=3.07/13.19 GiB E=3123+8392 J 'Peter Schmeichel'
+  S3_split_int8abs           ok=False up= 683.46 MB edge=   3583 ms cloud=  24928 ms mem=3.07/13.19 GiB E=3098+8399 J 'Peter Schmeichel'
+  S4_split_int4              ok=False up= 352.22 MB edge=   3579 ms cloud=  24922 ms mem=3.07/13.19 GiB E=3112+8367 J 'Peter Schmeichel'
+  C1_cache_full              ok=False up=1366.17 MB edge=   1808 ms cloud=   6780 ms mem=3.10/13.26 GiB E=1068+2517 J 'Peter Schmeichel'
+  C2_cache_aware             ok=False up= 176.85 MB edge=   1764 ms cloud=   6747 ms mem=3.10/13.26 GiB E=1064+2522 J EXACT 'Peter Schmeichel'
+  C4_cache_aware_int8        ok=False up= 120.48 MB edge=   1779 ms cloud=   6740 ms mem=3.10/13.26 GiB E=1052+2460 J 'Peter Schmeichel'
+  C5_cache_aware_int8abs     ok=False up=  88.48 MB edge=   1784 ms cloud=   6747 ms mem=3.10/13.26 GiB E=1062+2515 J 'Peter Schmeichel'
+  C6_cache_aware_int4        ok=False up=  45.60 MB edge=   1760 ms cloud=   6740 ms mem=3.10/13.26 GiB E=1067+2482 J 'Peter Schmeichel'
+  A1_adaptive_cache_aware    ok=False up= 157.35 MB edge=   1496 ms cloud=   6199 ms mem=3.08/13.25 GiB E=972+2267 J 'Peter Schmeichel'
+
+hotpot_0025 | prompt tokens=1237
+  S0_split_full              ok=False up=1252.40 MB edge=   3366 ms cloud=  23246 ms mem=3.07/13.23 GiB E=2897+7820 J 'Lee Hazlewood'
+  S1_split_exact_delta       ok=False up=1243.30 MB edge=   3366 ms cloud=  23274 ms mem=3.07/13.23 GiB E=2882+7825 J EXACT 'Lee Hazlewood'
+  S2_split_int8              ok=False up= 646.11 MB edge=   3367 ms cloud=  23272 ms mem=3.07/13.23 GiB E=2901+7848 J 'Lee Hazlewood'
+  S3_split_int8abs           ok=False up= 626.55 MB edge=   3365 ms cloud=  23293 ms mem=3.07/13.23 GiB E=2900+7852 J 'Lee Hazlewood'
+  S4_split_int4              ok=False up= 322.88 MB edge=   3367 ms cloud=  23307 ms mem=3.07/13.23 GiB E=2902+7844 J 'Lee Hazlewood'
+  C1_cache_full              ok=False up=1252.40 MB edge=   1500 ms cloud=   6495 ms mem=3.08/13.18 GiB E=1001+2413 J 'Lee Hazlewood'
+  C2_cache_aware             ok=False up= 171.52 MB edge=   1710 ms cloud=   6507 ms mem=3.08/13.18 GiB E=1018+2430 J EXACT 'Lee Hazlewood'
+  C4_cache_aware_int8        ok=False up= 115.14 MB edge=   1502 ms cloud=   6505 ms mem=3.08/13.18 GiB E=985+2372 J 'Lee Hazlewood'
+  C5_cache_aware_int8abs     ok=False up=  85.81 MB edge=   1510 ms cloud=   6511 ms mem=3.08/13.18 GiB E=1028+2427 J 'Lee Hazlewood'
+  C6_cache_aware_int4        ok=False up=  44.22 MB edge=   1496 ms cloud=   6464 ms mem=3.08/13.18 GiB E=999+2367 J 'Lee Hazlewood'
+  A1_adaptive_cache_aware    ok=False up= 153.80 MB edge=   1431 ms cloud=   5950 ms mem=3.06/13.18 GiB E=943+2215 J 'Lee Hazlewood'
+
+hotpot_0026 | prompt tokens=1979
+  S0_split_full              ok=True  up=1933.18 MB edge=   5103 ms cloud=  35472 ms mem=3.17/13.40 GiB E=4326+11763 J '1838'
+  S1_split_exact_delta       ok=True  up=1919.14 MB edge=   5103 ms cloud=  35481 ms mem=3.17/13.40 GiB E=4336+11777 J EXACT '1838'
+  S2_split_int8              ok=True  up= 997.32 MB edge=   5103 ms cloud=  35476 ms mem=3.17/13.40 GiB E=4354+11839 J '1838'
+  S3_split_int8abs           ok=True  up= 967.13 MB edge=   5103 ms cloud=  35478 ms mem=3.17/13.40 GiB E=4334+11777 J '1838'
+  S4_split_int4              ok=True  up= 498.40 MB edge=   5106 ms cloud=  35474 ms mem=3.17/13.40 GiB E=4344+11790 J '1838'
+  C1_cache_full              ok=True  up=1933.18 MB edge=   2032 ms cloud=   8242 ms mem=3.25/13.67 GiB E=1349+3010 J '1838'
+  C2_cache_aware             ok=True  up= 203.43 MB edge=   2025 ms cloud=   8237 ms mem=3.25/13.67 GiB E=1326+3030 J EXACT '1838'
+  C4_cache_aware_int8        ok=True  up= 147.06 MB edge=   2082 ms cloud=   8274 ms mem=3.24/13.67 GiB E=1331+3013 J '1838'
+  C5_cache_aware_int8abs     ok=True  up= 101.77 MB edge=   2075 ms cloud=   8371 ms mem=3.25/13.67 GiB E=1350+3028 J '1838'
+  C6_cache_aware_int4        ok=True  up=  52.45 MB edge=   2517 ms cloud=   8234 ms mem=3.25/13.67 GiB E=1363+3039 J '1838'
+  A1_adaptive_cache_aware    ok=True  up= 175.07 MB edge=   1956 ms cloud=   7561 ms mem=3.21/13.66 GiB E=1268+2744 J '1838'
+
+hotpot_0027 | prompt tokens=429
+  S0_split_full              ok=True  up= 511.05 MB edge=   1619 ms cloud=  10812 ms mem=2.98/13.22 GiB E=1388+3773 J 'Yes.'
+  S1_split_exact_delta       ok=True  up= 507.34 MB edge=   1620 ms cloud=  10807 ms mem=2.98/13.22 GiB E=1337+3790 J EXACT 'Yes.'
+  S2_split_int8              ok=True  up= 263.65 MB edge=   1618 ms cloud=  10814 ms mem=2.98/13.22 GiB E=1384+3843 J 'Yes.'
+  S3_split_int8abs           ok=True  up= 255.67 MB edge=   1621 ms cloud=  10816 ms mem=2.98/13.22 GiB E=1336+3776 J 'Yes'
+  S4_split_int4              ok=True  up= 131.76 MB edge=   1621 ms cloud=  10823 ms mem=2.98/13.22 GiB E=1386+3842 J 'Yes'
+  C1_cache_full              ok=True  up= 511.05 MB edge=    953 ms cloud=   4732 ms mem=2.90/12.65 GiB E=657+1755 J 'Yes.'
+  C2_cache_aware             ok=True  up= 136.77 MB edge=    951 ms cloud=   4728 ms mem=2.89/12.65 GiB E=661+1738 J EXACT 'Yes.'
+  C4_cache_aware_int8        ok=True  up=  80.39 MB edge=    944 ms cloud=   4900 ms mem=2.89/12.65 GiB E=672+1748 J 'Yes.'
+  C5_cache_aware_int8abs     ok=True  up=  68.42 MB edge=    976 ms cloud=   4835 ms mem=2.89/12.65 GiB E=674+1748 J 'Yes.'
+  C6_cache_aware_int4        ok=True  up=  35.26 MB edge=   1134 ms cloud=   4716 ms mem=2.89/12.65 GiB E=676+1741 J 'Yes.'
+  A1_adaptive_cache_aware    ok=True  up= 130.63 MB edge=    899 ms cloud=   4433 ms mem=2.89/12.64 GiB E=605+1631 J 'Yes.'
+
+hotpot_0028 | prompt tokens=1334
+  S0_split_full              ok=True  up=1341.39 MB edge=   3554 ms cloud=  24791 ms mem=3.02/12.91 GiB E=3065+8309 J 'Henry J. Kaiser'
+  S1_split_exact_delta       ok=True  up=1331.65 MB edge=   3555 ms cloud=  24799 ms mem=3.02/12.91 GiB E=3071+8351 J EXACT 'Henry J. Kaiser'
+  S2_split_int8              ok=True  up= 692.02 MB edge=   3558 ms cloud=  24797 ms mem=3.02/12.91 GiB E=3090+8344 J 'Henry J. Kaiser'
+  S3_split_int8abs           ok=True  up= 671.07 MB edge=   3556 ms cloud=  24803 ms mem=3.02/12.91 GiB E=3079+8330 J 'Henry J. Kaiser'
+  S4_split_int4              ok=True  up= 345.83 MB edge=   3557 ms cloud=  24796 ms mem=3.02/12.91 GiB E=3081+8344 J 'Henry J. Kaiser'
+  C1_cache_full              ok=True  up=1341.39 MB edge=   1886 ms cloud=   6754 ms mem=3.10/13.24 GiB E=1089+2540 J 'Henry J. Kaiser'
+  C2_cache_aware             ok=True  up= 175.69 MB edge=   1760 ms cloud=   6716 ms mem=3.10/13.24 GiB E=1059+2492 J EXACT 'Henry J. Kaiser'
+  C4_cache_aware_int8        ok=True  up= 119.32 MB edge=   1798 ms cloud=   6772 ms mem=3.10/13.24 GiB E=1052+2484 J 'Henry J. Kaiser'
+  C5_cache_aware_int8abs     ok=True  up=  87.89 MB edge=   1831 ms cloud=   6732 ms mem=3.10/13.24 GiB E=1069+2520 J 'Henry J. Kaiser'
+  C6_cache_aware_int4        ok=True  up=  45.30 MB edge=   1819 ms cloud=   6716 ms mem=3.10/13.24 GiB E=1062+2491 J 'Henry J. Kaiser'
+  A1_adaptive_cache_aware    ok=True  up= 156.58 MB edge=   1494 ms cloud=   6175 ms mem=3.07/13.24 GiB E=989+2273 J 'Henry J. Kaiser'
+
+hotpot_0029 | prompt tokens=1312
+  S0_split_full              ok=True  up=1321.21 MB edge=   3565 ms cloud=  24789 ms mem=3.07/13.24 GiB E=3074+8332 J 'Arena of Khazan'
+  S1_split_exact_delta       ok=True  up=1311.61 MB edge=   3563 ms cloud=  24807 ms mem=3.07/13.24 GiB E=3074+8304 J EXACT 'Arena of Khazan'
+  S2_split_int8              ok=True  up= 681.61 MB edge=   3564 ms cloud=  24820 ms mem=3.07/13.24 GiB E=3096+8367 J 'Arena of Khazan'
+  S3_split_int8abs           ok=True  up= 660.97 MB edge=   3565 ms cloud=  24825 ms mem=3.07/13.24 GiB E=3083+8322 J 'Arena of Khazan'
+  S4_split_int4              ok=True  up= 340.63 MB edge=   3570 ms cloud=  24825 ms mem=3.07/13.24 GiB E=3095+8316 J 'Arena of Khazan'
+  C1_cache_full              ok=True  up=1321.21 MB edge=   1556 ms cloud=   6736 ms mem=3.09/13.23 GiB E=1051+2495 J 'Arena of Khazan'
+  C2_cache_aware             ok=True  up= 174.74 MB edge=   1697 ms cloud=   6704 ms mem=3.09/13.23 GiB E=1036+2460 J EXACT 'Arena of Khazan'
+  C4_cache_aware_int8        ok=True  up= 118.37 MB edge=   1789 ms cloud=   6715 ms mem=3.09/13.23 GiB E=1065+2512 J 'Arena of Khazan'
+  C5_cache_aware_int8abs     ok=True  up=  87.42 MB edge=   1752 ms cloud=   6737 ms mem=3.09/13.23 GiB E=1058+2484 J 'Arena of Khazan'
+  C6_cache_aware_int4        ok=True  up=  45.05 MB edge=   1731 ms cloud=   6702 ms mem=3.09/13.23 GiB E=1073+2482 J 'Arena of Khazan'
+  A1_adaptive_cache_aware    ok=True  up= 155.95 MB edge=   1506 ms cloud=   6205 ms mem=3.07/13.23 GiB E=978+2285 J 'Arena of Khazan'
+
+Exp11 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp11_hotpotqa_k4_t128_T0.1
+                variant  runs      acc  regressions  exact_vs_ref  mean_up_mb  up_reduction_vs_S0  mean_edge_ms  mean_cloud_ms  mean_edge_peak_gib  mean_cloud_peak_gib  mean_edge_energy_j  mean_cloud_energy_j
+          S0_split_full    30 0.633333            0             0 1524.587861            0.000000   4169.852150   28770.705610            3.120792            13.391741         3547.317967          9591.819867
+   S1_split_exact_delta    30 0.633333            0            30 1513.514515            0.007263   4165.702454   28800.946654            3.120792            13.391741         3541.863767          9597.265867
+          S2_split_int8    30 0.633333            0             0  786.528701            0.484104   4166.286392   28802.903312            3.120792            13.391741         3541.679400          9610.714267
+       S3_split_int8abs    30 0.666667            0             0  762.720341            0.499720   4166.817420   28806.917738            3.120792            13.391741         3534.123700          9608.957467
+          S4_split_int4    30 0.633333            1             0  393.059328            0.742186   4166.620518   28808.513455            3.120792            13.391741         3539.065767          9600.634333
+          C1_cache_full    30 0.600000            1             0 1524.587861            0.000000   1799.570551    7228.094727            3.144850            13.392037         1154.022100          2663.391200
+         C2_cache_aware    30 0.600000            1            30  184.276992            0.872239   1806.062372    7232.173388            3.144136            13.392304         1146.873100          2654.150500
+    C4_cache_aware_int8    30 0.600000            1             0  127.903476            0.912659   1780.616898    7246.121255            3.144237            13.392304         1142.906200          2654.330033
+ C5_cache_aware_int8abs    30 0.633333            1             0   92.190936            0.936083   1802.588398    7240.082450            3.144158            13.392304         1150.661767          2653.960800
+    C6_cache_aware_int4    30 0.600000            2             0   47.510432            0.967061   1842.305968    7222.281255            3.144330            13.392304         1152.603100          2655.575667
+A1_adaptive_cache_aware    30 0.600000            1             0  163.966464            0.885576   1695.293209    6678.624953            3.117785            13.386776         1077.298467          2435.473833
+emulated latency written for outputs/exp11_hotpotqa_k4_t128_T0.1
+
+=== 2/2 Fast-dLLM backend, Dream, HotpotQA  (2026-11-28 10:53:19)
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.40it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  7.28it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  7.73it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  8.46it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  7.97it/s]
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`. This was detected when initializing the generation config instance, which means the corresponding file may hold incorrect parameterization and should be fixed.
+  warnings.warn(
+/mnt/mydisk/mery-splitdllm/env/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:590: UserWarning: `do_sample` is set to `False`. However, `temperature` is set to `0.0` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `temperature`.
+  warnings.warn(
+idle power: edge=66.0 W, cloud=80.0 W
+Exp13 | dream | hotpotqa n=30 | split after layer 4 | 128 tokens, blocks of 32 | thresholds [0.9, 0.7] | T=0.0 top_p=None
+warmup done
+
+hotpot_0000 | prompt tokens=1284
+  F0_nocache_fixed         ok=True  steps= 128 up=1295.52 MB edge=  3545 ms cloud= 24603 ms 'yes'
+  F1_nocache_thr0.9        ok=True  steps=   7 up=  70.85 MB edge=   194 ms cloud=  1350 ms 'yes'
+  K1_dual_fixed            ok=True  steps= 128 up=  68.93 MB edge=   787 ms cloud=  4600 ms 'Yes'
+  K2_dual_thr0.9           ok=True  steps=  10 up=  41.86 MB edge=   144 ms cloud=   950 ms 'Yes'
+  K2_dual_thr0.7           ok=True  steps=  10 up=  41.86 MB edge=   144 ms cloud=   952 ms 'Yes'
+  K3_dual_thr0.9_int8      ok=True  steps=  10 up=  26.00 MB edge=   144 ms cloud=   948 ms 'Yes'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  10 up=  20.94 MB edge=   144 ms cloud=   952 ms 'Yes'
+  K5_dual_thr0.9_int4      ok=True  steps=  10 up=  10.79 MB edge=   147 ms cloud=   976 ms 'Yes'
+
+hotpot_0001 | prompt tokens=1427
+  F0_nocache_fixed         ok=False steps= 128 up=1426.72 MB edge=  4032 ms cloud= 27865 ms 'ambassador'
+  F1_nocache_thr0.9        ok=False steps=  11 up= 122.61 MB edge=   347 ms cloud=  2396 ms 'ambassador'
+  K1_dual_fixed            ok=False steps= 128 up=  73.03 MB edge=   797 ms cloud=  4661 ms 'No'
+  K2_dual_thr0.9           ok=False steps=  13 up=  46.65 MB edge=   175 ms cloud=  1143 ms 'No'
+  K2_dual_thr0.7           ok=False steps=  10 up=  45.96 MB edge=   163 ms cloud=  1065 ms 'No government position held'
+  K3_dual_thr0.9_int8      ok=False steps=  13 up=  28.91 MB edge=   174 ms cloud=  1144 ms 'No'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  10 up=  22.99 MB edge=   160 ms cloud=  1060 ms 'Chief of Protocol'
+  K5_dual_thr0.9_int4      ok=False steps=  13 up=  12.03 MB edge=   178 ms cloud=  1158 ms 'No'
+
+hotpot_0002 | prompt tokens=1633
+  F0_nocache_fixed         ok=True  steps= 128 up=1615.73 MB edge=  4356 ms cloud= 30195 ms 'Animorphs'
+  F1_nocache_thr0.9        ok=True  steps=   5 up=  63.11 MB edge=   170 ms cloud=  1180 ms 'Animorphs'
+  K1_dual_fixed            ok=True  steps= 128 up=  78.94 MB edge=   805 ms cloud=  4738 ms 'Animorphs'
+  K2_dual_thr0.9           ok=True  steps=   8 up=  51.41 MB edge=   163 ms cloud=  1073 ms 'Animorphs'
+  K2_dual_thr0.7           ok=True  steps=   8 up=  51.41 MB edge=   159 ms cloud=  1067 ms 'Animorphs'
+  K3_dual_thr0.9_int8      ok=True  steps=   8 up=  32.03 MB edge=   159 ms cloud=  1068 ms 'Animorphs'
+  K4_dual_thr0.9_int8abs   ok=True  steps=   8 up=  25.72 MB edge=   159 ms cloud=  1067 ms 'Animorphs'
+  K5_dual_thr0.9_int4      ok=True  steps=   8 up=  13.25 MB edge=   160 ms cloud=  1066 ms 'Animorphs'
+
+hotpot_0003 | prompt tokens=1110
+  F0_nocache_fixed         ok=False steps= 128 up=1135.87 MB edge=  3113 ms cloud= 21378 ms 'Yes'
+  F1_nocache_thr0.9        ok=False steps=   7 up=  62.12 MB edge=   170 ms cloud=  1168 ms 'Yes'
+  K1_dual_fixed            ok=True  steps= 128 up=  63.94 MB edge=   772 ms cloud=  4485 ms 'No'
+  K2_dual_thr0.9           ok=True  steps=  11 up=  37.10 MB edge=   136 ms cloud=   881 ms 'No'
+  K2_dual_thr0.7           ok=True  steps=  10 up=  36.87 MB edge=   130 ms cloud=   852 ms 'No'
+  K3_dual_thr0.9_int8      ok=True  steps=  11 up=  23.00 MB edge=   135 ms cloud=   881 ms 'No.'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  11 up=  18.56 MB edge=   135 ms cloud=   881 ms 'No.'
+  K5_dual_thr0.9_int4      ok=True  steps=  10 up=   9.51 MB edge=   130 ms cloud=   851 ms 'No.'
+
+hotpot_0004 | prompt tokens=1419
+  F0_nocache_fixed         ok=False steps= 128 up=1419.38 MB edge=  4027 ms cloud= 27834 ms 'Greenwich Village'
+  F1_nocache_thr0.9        ok=False steps=   7 up=  77.62 MB edge=   220 ms cloud=  1522 ms 'Greenwich Village'
+  K1_dual_fixed            ok=False steps= 128 up=  72.80 MB edge=   798 ms cloud=  4652 ms 'New York City'
+  K2_dual_thr0.9           ok=False steps=   8 up=  45.27 MB edge=   147 ms cloud=   993 ms 'New York City'
+  K2_dual_thr0.7           ok=False steps=   8 up=  45.27 MB edge=   149 ms cloud=   996 ms 'New York City'
+  K3_dual_thr0.9_int8      ok=False steps=   8 up=  28.19 MB edge=   148 ms cloud=   996 ms 'New York City'
+  K4_dual_thr0.9_int8abs   ok=False steps=   8 up=  22.65 MB edge=   150 ms cloud=   997 ms 'New York City'
+  K5_dual_thr0.9_int4      ok=False steps=   8 up=  11.67 MB edge=   149 ms cloud=   999 ms 'New York City'
+
+hotpot_0005 | prompt tokens=1469
+  F0_nocache_fixed         ok=True  steps= 128 up=1465.26 MB edge=  4064 ms cloud= 28088 ms 'YG Entertainment'
+  F1_nocache_thr0.9        ok=True  steps=   7 up=  80.13 MB edge=   222 ms cloud=  1538 ms 'YG Entertainment'
+  K1_dual_fixed            ok=True  steps= 128 up=  74.23 MB edge=   793 ms cloud=  4660 ms 'YG Entertainment'
+  K2_dual_thr0.9           ok=True  steps=   8 up=  46.71 MB edge=   149 ms cloud=  1001 ms 'YG Entertainment'
+  K2_dual_thr0.7           ok=True  steps=   8 up=  46.71 MB edge=   149 ms cloud=   999 ms 'YG Entertainment'
+  K3_dual_thr0.9_int8      ok=True  steps=   8 up=  29.09 MB edge=   153 ms cloud=  1018 ms 'YG Entertainment'
+  K4_dual_thr0.9_int8abs   ok=True  steps=   8 up=  23.37 MB edge=   153 ms cloud=  1016 ms 'YG Entertainment'
+  K5_dual_thr0.9_int4      ok=True  steps=   8 up=  12.04 MB edge=   150 ms cloud=  1001 ms 'YG Entertainment'
+
+hotpot_0006 | prompt tokens=1967
+  F0_nocache_fixed         ok=True  steps= 128 up=1922.17 MB edge=  5120 ms cloud= 35581 ms 'Eenasul Fateh'
+  F1_nocache_thr0.9        ok=True  steps=   4 up=  60.07 MB edge=   160 ms cloud=  1112 ms 'Eenasul Fateh'
+  K1_dual_fixed            ok=True  steps= 128 up=  88.51 MB edge=   851 ms cloud=  5030 ms 'Eenasul Fateh'
+  K2_dual_thr0.9           ok=True  steps=   8 up=  60.99 MB edge=   187 ms cloud=  1253 ms 'Eenasul Fateh'
+  K2_dual_thr0.7           ok=True  steps=   8 up=  60.99 MB edge=   184 ms cloud=  1241 ms 'Eenasul Fateh'
+  K3_dual_thr0.9_int8      ok=True  steps=   8 up=  38.01 MB edge=   183 ms cloud=  1240 ms 'Eenasul Fateh'
+  K4_dual_thr0.9_int8abs   ok=True  steps=   8 up=  30.51 MB edge=   184 ms cloud=  1238 ms 'Eenasul Fateh'
+  K5_dual_thr0.9_int4      ok=True  steps=   8 up=  15.72 MB edge=   184 ms cloud=  1237 ms 'Eenasul Fateh'
+
+hotpot_0007 | prompt tokens=3066
+  F0_nocache_fixed         ok=False steps= 128 up=2930.51 MB edge=  8264 ms cloud= 56156 ms '3,677'
+  F1_nocache_thr0.9        ok=False steps=   7 up= 160.26 MB edge=   451 ms cloud=  3072 ms '3,677'
+  K1_dual_fixed            ok=False steps= 128 up= 120.02 MB edge=   939 ms cloud=  5855 ms '3,677'
+  K2_dual_thr0.9           ok=False steps=   9 up=  92.73 MB edge=   286 ms cloud=  1915 ms '3,677'
+  K2_dual_thr0.7           ok=False steps=   8 up=  92.50 MB edge=   281 ms cloud=  1884 ms '3,677'
+  K3_dual_thr0.9_int8      ok=False steps=   9 up=  57.83 MB edge=   288 ms cloud=  1924 ms '3,677'
+  K4_dual_thr0.9_int8abs   ok=False steps=   9 up=  46.39 MB edge=   286 ms cloud=  1920 ms '3,677'
+  K5_dual_thr0.9_int4      ok=False steps=   9 up=  23.91 MB edge=   288 ms cloud=  1918 ms '3,677'
+
+hotpot_0008 | prompt tokens=1429
+  F0_nocache_fixed         ok=False steps= 128 up=1428.56 MB edge=  4031 ms cloud= 27914 ms 'Annie Morton'
+  F1_nocache_thr0.9        ok=False steps=   9 up= 100.45 MB edge=   283 ms cloud=  1963 ms 'Annie Morton'
+  K1_dual_fixed            ok=False steps= 128 up=  73.09 MB edge=   798 ms cloud=  4664 ms 'Annie Morton'
+  K2_dual_thr0.9           ok=False steps=  12 up=  46.48 MB edge=   170 ms cloud=  1117 ms 'Annie Morton'
+  K2_dual_thr0.7           ok=False steps=  10 up=  46.02 MB edge=   160 ms cloud=  1065 ms 'Annie Morton'
+  K3_dual_thr0.9_int8      ok=False steps=  12 up=  28.83 MB edge=   169 ms cloud=  1119 ms 'Annie Morton'
+  K4_dual_thr0.9_int8abs   ok=False steps=  12 up=  23.25 MB edge=   171 ms cloud=  1122 ms 'Annie Morton'
+  K5_dual_thr0.9_int4      ok=True  steps=  11 up=  11.92 MB edge=   166 ms cloud=  1087 ms 'Terry Richardson'
+
+hotpot_0009 | prompt tokens=1439
+  F0_nocache_fixed         ok=True  steps= 128 up=1437.73 MB edge=  4040 ms cloud= 27966 ms 'Yes'
+  F1_nocache_thr0.9        ok=True  steps=   6 up=  67.39 MB edge=   190 ms cloud=  1313 ms 'Yes'
+  K1_dual_fixed            ok=True  steps= 128 up=  73.37 MB edge=   787 ms cloud=  4638 ms 'Yes'
+  K2_dual_thr0.9           ok=True  steps=  10 up=  46.31 MB edge=   160 ms cloud=  1059 ms 'Yes'
+  K2_dual_thr0.7           ok=True  steps=  10 up=  46.31 MB edge=   159 ms cloud=  1057 ms 'Yes'
+  K3_dual_thr0.9_int8      ok=True  steps=  10 up=  28.78 MB edge=   160 ms cloud=  1064 ms 'Yes'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  10 up=  23.17 MB edge=   161 ms cloud=  1061 ms 'Yes'
+  K5_dual_thr0.9_int4      ok=True  steps=  10 up=  11.94 MB edge=   161 ms cloud=  1066 ms 'Yes'
+
+hotpot_0010 | prompt tokens=1781
+  F0_nocache_fixed         ok=True  steps= 128 up=1751.52 MB edge=  4726 ms cloud= 32711 ms 'Kansas Song (We’re From Kansas)'
+  F1_nocache_thr0.9        ok=True  steps=   7 up=  95.79 MB edge=   259 ms cloud=  1790 ms 'Kansas Song (We’re From Kansas)'
+  K1_dual_fixed            ok=True  steps= 128 up=  83.18 MB edge=   808 ms cloud=  4779 ms 'Kansas Song (We’re From Kansas)'
+  K2_dual_thr0.9           ok=True  steps=  10 up=  56.11 MB edge=   182 ms cloud=  1207 ms 'Kansas Song (We’re From Kansas)'
+  K2_dual_thr0.7           ok=True  steps=   9 up=  55.88 MB edge=   175 ms cloud=  1178 ms 'Kansas Song'
+  K3_dual_thr0.9_int8      ok=True  steps=  10 up=  34.91 MB edge=   181 ms cloud=  1219 ms 'Kansas Song (We’re From Kansas)'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  10 up=  28.07 MB edge=   180 ms cloud=  1207 ms 'Kansas Song (We’re From Kansas)'
+  K5_dual_thr0.9_int4      ok=True  steps=  10 up=  14.47 MB edge=   181 ms cloud=  1211 ms 'Kansas Song (We’re From Kansas)'
+
+hotpot_0011 | prompt tokens=1356
+  F0_nocache_fixed         ok=True  steps= 128 up=1361.58 MB edge=  3574 ms cloud= 24926 ms 'David Weissman'
+  F1_nocache_thr0.9        ok=True  steps=   4 up=  42.55 MB edge=   112 ms cloud=   779 ms 'David Weissman'
+  K1_dual_fixed            ok=True  steps= 128 up=  70.99 MB edge=   778 ms cloud=  4569 ms 'David Weissman'
+  K2_dual_thr0.9           ok=True  steps=   8 up=  43.47 MB edge=   135 ms cloud=   906 ms 'David Weissman'
+  K2_dual_thr0.7           ok=True  steps=   8 up=  43.47 MB edge=   135 ms cloud=   903 ms 'David Weissman'
+  K3_dual_thr0.9_int8      ok=True  steps=   8 up=  27.06 MB edge=   135 ms cloud=   904 ms 'David Weissman'
+  K4_dual_thr0.9_int8abs   ok=True  steps=   8 up=  21.75 MB edge=   134 ms cloud=   904 ms 'David Weissman'
+  K5_dual_thr0.9_int4      ok=True  steps=   8 up=  11.21 MB edge=   135 ms cloud=   901 ms 'David Weissman'
+
+hotpot_0012 | prompt tokens=1607
+  F0_nocache_fixed         ok=True  steps= 128 up=1591.87 MB edge=  4334 ms cloud= 30068 ms '1999'
+  F1_nocache_thr0.9        ok=True  steps=   5 up=  62.18 MB edge=   169 ms cloud=  1175 ms '1999'
+  K1_dual_fixed            ok=True  steps= 128 up=  78.19 MB edge=   807 ms cloud=  4741 ms '1999'
+  K2_dual_thr0.9           ok=True  steps=   8 up=  50.66 MB edge=   162 ms cloud=  1070 ms '1999'
+  K2_dual_thr0.7           ok=True  steps=   8 up=  50.66 MB edge=   158 ms cloud=  1062 ms '1999'
+  K3_dual_thr0.9_int8      ok=True  steps=   8 up=  31.56 MB edge=   159 ms cloud=  1065 ms '1999'
+  K4_dual_thr0.9_int8abs   ok=True  steps=   8 up=  25.35 MB edge=   158 ms cloud=  1062 ms '1999'
+  K5_dual_thr0.9_int4      ok=True  steps=   8 up=  13.06 MB edge=   159 ms cloud=  1064 ms '1999'
+
+hotpot_0013 | prompt tokens=2780
+  F0_nocache_fixed         ok=False steps= 128 up=2668.10 MB edge=  7259 ms cloud= 49739 ms 'Yes'
+  F1_nocache_thr0.9        ok=False steps=   6 up= 125.07 MB edge=   341 ms cloud=  2333 ms 'Yes'
+  K1_dual_fixed            ok=False steps= 128 up= 111.82 MB edge=   919 ms cloud=  5489 ms 'Yes'
+  K2_dual_thr0.9           ok=False steps=  11 up=  84.98 MB edge=   268 ms cloud=  1780 ms 'Yes'
+  K2_dual_thr0.7           ok=False steps=  10 up=  84.75 MB edge=   261 ms cloud=  1748 ms 'Yes'
+  K3_dual_thr0.9_int8      ok=False steps=  11 up=  52.93 MB edge=   267 ms cloud=  1781 ms 'Yes'
+  K4_dual_thr0.9_int8abs   ok=False steps=  11 up=  42.52 MB edge=   266 ms cloud=  1777 ms 'Yes'
+  K5_dual_thr0.9_int4      ok=False steps=  11 up=  21.91 MB edge=   266 ms cloud=  1783 ms 'Yes'
+
+hotpot_0014 | prompt tokens=1096
+  F0_nocache_fixed         ok=False steps= 128 up=1123.03 MB edge=  3098 ms cloud= 21334 ms '1986 to 2013'
+  F1_nocache_thr0.9        ok=False steps=  10 up=  87.74 MB edge=   242 ms cloud=  1669 ms '1986 to 2013'
+  K1_dual_fixed            ok=False steps= 128 up=  63.54 MB edge=   758 ms cloud=  4437 ms '1986-2013'
+  K2_dual_thr0.9           ok=False steps=  12 up=  36.93 MB edge=   142 ms cloud=   917 ms '1986-2013'
+  K2_dual_thr0.7           ok=False steps=  10 up=  36.47 MB edge=   130 ms cloud=   853 ms '1986-2013'
+  K3_dual_thr0.9_int8      ok=False steps=  12 up=  22.86 MB edge=   141 ms cloud=   916 ms '1986-2013'
+  K4_dual_thr0.9_int8abs   ok=False steps=  12 up=  18.48 MB edge=   141 ms cloud=   914 ms '1986-2013'
+  K5_dual_thr0.9_int4      ok=False steps=  14 up=   9.64 MB edge=   151 ms cloud=   969 ms '1986-1993'
+
+hotpot_0015 | prompt tokens=1656
+  F0_nocache_fixed         ok=False steps= 128 up=1636.83 MB edge=  4372 ms cloud= 30312 ms 'one'
+  F1_nocache_thr0.9        ok=False steps=  10 up= 127.88 MB edge=   342 ms cloud=  2369 ms 'one'
+  K1_dual_fixed            ok=False steps= 128 up=  79.60 MB edge=   808 ms cloud=  4771 ms 'Brown State Fishing Lake is in the United States.'
+  K2_dual_thr0.9           ok=False steps=  22 up=  55.28 MB edge=   252 ms cloud=  1578 ms 'Brown State Fishing Lake is in the United States.'
+  K2_dual_thr0.7           ok=False steps=  12 up=  52.99 MB edge=   187 ms cloud=  1215 ms 'Brown State Fishing Lake is in the United States.'
+  K3_dual_thr0.9_int8      ok=False steps=  23 up=  34.16 MB edge=   239 ms cloud=  1522 ms 'Brown State Fishing Lake'
+  K4_dual_thr0.9_int8abs   ok=False steps=  21 up=  27.54 MB edge=   234 ms cloud=  1484 ms 'Brown State Fishing Lake is in the United States.'
+  K5_dual_thr0.9_int4      ok=False steps=  22 up=  14.25 MB edge=   233 ms cloud=  1499 ms 'Brown State Fishing Lake is in the United States.'
+
+hotpot_0016 | prompt tokens=1469
+  F0_nocache_fixed         ok=True  steps= 128 up=1465.26 MB edge=  4066 ms cloud= 28129 ms 'North Atlantic Conference'
+  F1_nocache_thr0.9        ok=True  steps=   6 up=  68.68 MB edge=   190 ms cloud=  1317 ms 'North Atlantic Conference'
+  K1_dual_fixed            ok=True  steps= 128 up=  74.23 MB edge=   798 ms cloud=  4680 ms 'North Atlantic Conference'
+  K2_dual_thr0.9           ok=True  steps=   8 up=  46.71 MB edge=   150 ms cloud=  1002 ms 'North Atlantic Conference'
+  K2_dual_thr0.7           ok=True  steps=   8 up=  46.71 MB edge=   149 ms cloud=  1001 ms 'North Atlantic Conference'
+  K3_dual_thr0.9_int8      ok=True  steps=   8 up=  29.09 MB edge=   150 ms cloud=  1001 ms 'North Atlantic Conference'
+  K4_dual_thr0.9_int8abs   ok=True  steps=   8 up=  23.37 MB edge=   150 ms cloud=  1006 ms 'North Atlantic Conference'
+  K5_dual_thr0.9_int4      ok=True  steps=   8 up=  12.04 MB edge=   150 ms cloud=  1001 ms 'North Atlantic Conference'
+
+hotpot_0017 | prompt tokens=1493
+  F0_nocache_fixed         ok=True  steps= 128 up=1487.28 MB edge=  4092 ms cloud= 28270 ms 'Yes'
+  F1_nocache_thr0.9        ok=True  steps=   6 up=  69.72 MB edge=   192 ms cloud=  1328 ms 'Yes'
+  K1_dual_fixed            ok=True  steps= 128 up=  74.92 MB edge=   794 ms cloud=  4669 ms 'Yes'
+  K2_dual_thr0.9           ok=True  steps=  10 up=  47.85 MB edge=   161 ms cloud=  1069 ms 'Yes'
+  K2_dual_thr0.7           ok=True  steps=  10 up=  47.85 MB edge=   161 ms cloud=  1067 ms 'Yes'
+  K3_dual_thr0.9_int8      ok=True  steps=  10 up=  29.75 MB edge=   161 ms cloud=  1068 ms 'Yes'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  10 up=  23.94 MB edge=   160 ms cloud=  1065 ms 'Yes'
+  K5_dual_thr0.9_int4      ok=True  steps=  10 up=  12.34 MB edge=   161 ms cloud=  1087 ms 'Yes'
+
+hotpot_0018 | prompt tokens=1818
+  F0_nocache_fixed         ok=False steps= 128 up=1785.46 MB edge=  4925 ms cloud= 34224 ms '1969-1974'
+  F1_nocache_thr0.9        ok=False steps=   9 up= 125.54 MB edge=   345 ms cloud=  2407 ms 'Nixon administration'
+  K1_dual_fixed            ok=False steps= 128 up=  84.24 MB edge=   823 ms cloud=  4885 ms '1969-1974'
+  K2_dual_thr0.9           ok=False steps=  10 up=  57.17 MB edge=   191 ms cloud=  1269 ms '1969-1974'
+  K2_dual_thr0.7           ok=False steps=  10 up=  57.17 MB edge=   189 ms cloud=  1256 ms '1969-1974'
+  K3_dual_thr0.9_int8      ok=False steps=  10 up=  35.57 MB edge=   189 ms cloud=  1267 ms '1969-1974'
+  K4_dual_thr0.9_int8abs   ok=False steps=  10 up=  28.60 MB edge=   187 ms cloud=  1255 ms 'Richard Nixon'
+  K5_dual_thr0.9_int4      ok=False steps=  11 up=  14.80 MB edge=   192 ms cloud=  1286 ms '1969-1974'
+
+hotpot_0019 | prompt tokens=1069
+  F0_nocache_fixed         ok=False steps= 128 up=1098.25 MB edge=  3083 ms cloud= 21257 ms 'Robert Erskine Childers'
+  F1_nocache_thr0.9        ok=False steps=   6 up=  51.48 MB edge=   144 ms cloud=   997 ms 'Robert Erskine Childers'
+  K1_dual_fixed            ok=False steps= 128 up=  62.77 MB edge=   778 ms cloud=  4510 ms 'Robert Erskine Childers'
+  K2_dual_thr0.9           ok=False steps=  10 up=  35.70 MB edge=   136 ms cloud=   879 ms 'Robert Erskine Childers'
+  K2_dual_thr0.7           ok=False steps=   8 up=  35.24 MB edge=   122 ms cloud=   801 ms 'Robert Erskine Childers'
+  K3_dual_thr0.9_int8      ok=False steps=  10 up=  22.15 MB edge=   132 ms cloud=   859 ms 'Robert Erskine Childers'
+  K4_dual_thr0.9_int8abs   ok=False steps=  10 up=  17.86 MB edge=   129 ms cloud=   845 ms 'Robert Erskine Childers'
+  K5_dual_thr0.9_int4      ok=False steps=  10 up=   9.20 MB edge=   135 ms cloud=   860 ms 'Robert Erskine Childers'
+
+hotpot_0020 | prompt tokens=1379
+  F0_nocache_fixed         ok=True  steps= 128 up=1382.68 MB edge=  3590 ms cloud= 25019 ms 'Pedro Rodríguez'
+  F1_nocache_thr0.9        ok=True  steps=   7 up=  75.62 MB edge=   196 ms cloud=  1370 ms 'Pedro Rodríguez'
+  K1_dual_fixed            ok=True  steps= 128 up=  71.65 MB edge=   783 ms cloud=  4579 ms 'Pedro Rodríguez'
+  K2_dual_thr0.9           ok=True  steps=   9 up=  44.36 MB edge=   142 ms cloud=   940 ms 'Pedro Rodríguez'
+  K2_dual_thr0.7           ok=True  steps=   8 up=  44.13 MB edge=   137 ms cloud=   904 ms 'Pedro Rodríguez'
+  K3_dual_thr0.9_int8      ok=True  steps=   9 up=  27.59 MB edge=   140 ms cloud=   937 ms 'Pedro Rodríguez'
+  K4_dual_thr0.9_int8abs   ok=True  steps=   9 up=  22.19 MB edge=   140 ms cloud=   941 ms 'Pedro Rodríguez'
+  K5_dual_thr0.9_int4      ok=True  steps=   9 up=  11.44 MB edge=   142 ms cloud=   942 ms 'Pedro Rodríguez'
+
+hotpot_0021 | prompt tokens=1647
+  F0_nocache_fixed         ok=True  steps= 128 up=1628.57 MB edge=  4369 ms cloud= 30297 ms 'Sonic the Hedgehog'
+  F1_nocache_thr0.9        ok=True  steps=   7 up=  89.06 MB edge=   239 ms cloud=  1657 ms 'Sonic the Hedgehog'
+  K1_dual_fixed            ok=True  steps= 128 up=  79.34 MB edge=   806 ms cloud=  4721 ms 'Sonic the Hedgehog'
+  K2_dual_thr0.9           ok=True  steps=  10 up=  52.27 MB edge=   172 ms cloud=  1137 ms 'Sonic the Hedgehog'
+  K2_dual_thr0.7           ok=True  steps=   9 up=  52.04 MB edge=   164 ms cloud=  1099 ms 'Sonic the Hedgehog'
+  K3_dual_thr0.9_int8      ok=True  steps=  10 up=  32.51 MB edge=   170 ms cloud=  1145 ms 'Sonic the Hedgehog'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  10 up=  26.15 MB edge=   170 ms cloud=  1132 ms 'Sonic the Hedgehog'
+  K5_dual_thr0.9_int4      ok=True  steps=  10 up=  13.48 MB edge=   169 ms cloud=  1132 ms 'Sonic the Hedgehog'
+
+hotpot_0022 | prompt tokens=1815
+  F0_nocache_fixed         ok=True  steps= 128 up=1782.71 MB edge=  4926 ms cloud= 34218 ms 'keyboard function keys'
+  F1_nocache_thr0.9        ok=True  steps=   8 up= 111.42 MB edge=   308 ms cloud=  2139 ms 'keyboard function keys'
+  K1_dual_fixed            ok=False steps= 128 up=  84.15 MB edge=   819 ms cloud=  4866 ms 'Keyboard'
+  K2_dual_thr0.9           ok=False steps=  10 up=  57.09 MB edge=   187 ms cloud=  1256 ms 'Keyboard'
+  K2_dual_thr0.7           ok=False steps=  10 up=  57.09 MB edge=   188 ms cloud=  1256 ms 'Keyboard'
+  K3_dual_thr0.9_int8      ok=True  steps=  10 up=  35.52 MB edge=   187 ms cloud=  1252 ms 'Keyboard function keys'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  10 up=  28.56 MB edge=   186 ms cloud=  1254 ms 'Keyboard function keys'
+  K5_dual_thr0.9_int4      ok=True  steps=  10 up=  14.72 MB edge=   187 ms cloud=  1256 ms 'Keyboard function keys'
+
+hotpot_0023 | prompt tokens=1149
+  F0_nocache_fixed         ok=True  steps= 128 up=1171.65 MB edge=  3135 ms cloud= 21576 ms 'Badly Drawn Boy'
+  F1_nocache_thr0.9        ok=True  steps=   6 up=  54.92 MB edge=   146 ms cloud=  1011 ms 'Badly Drawn Boy'
+  K1_dual_fixed            ok=True  steps= 128 up=  65.06 MB edge=   761 ms cloud=  4466 ms 'Badly Drawn Boy'
+  K2_dual_thr0.9           ok=True  steps=  10 up=  37.99 MB edge=   132 ms cloud=   861 ms 'Badly Drawn Boy'
+  K2_dual_thr0.7           ok=True  steps=   9 up=  37.76 MB edge=   126 ms cloud=   828 ms 'Badly Drawn Boy'
+  K3_dual_thr0.9_int8      ok=True  steps=  10 up=  23.58 MB edge=   132 ms cloud=   858 ms 'Badly Drawn Boy'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  10 up=  19.01 MB edge=   131 ms cloud=   860 ms 'Badly Drawn Boy'
+  K5_dual_thr0.9_int4      ok=True  steps=  10 up=   9.79 MB edge=   132 ms cloud=   863 ms 'Badly Drawn Boy'
+
+hotpot_0024 | prompt tokens=1361
+  F0_nocache_fixed         ok=False steps= 128 up=1366.17 MB edge=  3577 ms cloud= 24940 ms 'Goalkeeper'
+  F1_nocache_thr0.9        ok=False steps=  12 up= 128.08 MB edge=   336 ms cloud=  2337 ms 'Goalkeeper'
+  K1_dual_fixed            ok=False steps= 128 up=  71.14 MB edge=   775 ms cloud=  4563 ms 'Peter Schmeichel'
+  K2_dual_thr0.9           ok=False steps=   9 up=  43.84 MB edge=   141 ms cloud=   934 ms 'Peter Schmeichel'
+  K2_dual_thr0.7           ok=False steps=   8 up=  43.61 MB edge=   135 ms cloud=   901 ms 'Peter Schmeichel'
+  K3_dual_thr0.9_int8      ok=False steps=   9 up=  27.27 MB edge=   140 ms cloud=   932 ms 'Peter Schmeichel'
+  K4_dual_thr0.9_int8abs   ok=False steps=   9 up=  21.93 MB edge=   139 ms cloud=   933 ms 'Peter Schmeichel'
+  K5_dual_thr0.9_int4      ok=False steps=   9 up=  11.30 MB edge=   144 ms cloud=   946 ms 'Peter Schmeichel'
+
+hotpot_0025 | prompt tokens=1237
+  F0_nocache_fixed         ok=False steps= 128 up=1252.40 MB edge=  3363 ms cloud= 23282 ms 'Lee Hazlewood'
+  F1_nocache_thr0.9        ok=False steps=   5 up=  48.92 MB edge=   131 ms cloud=   911 ms 'Lee Hazlewood'
+  K1_dual_fixed            ok=False steps= 128 up=  67.58 MB edge=   772 ms cloud=  4518 ms 'Lee Hazlewood'
+  K2_dual_thr0.9           ok=False steps=   9 up=  40.28 MB edge=   134 ms cloud=   882 ms 'Lee Hazlewood'
+  K2_dual_thr0.7           ok=False steps=   8 up=  40.05 MB edge=   127 ms cloud=   851 ms 'Lee Hazlewood'
+  K3_dual_thr0.9_int8      ok=False steps=   9 up=  25.04 MB edge=   133 ms cloud=   879 ms 'Lee Hazlewood'
+  K4_dual_thr0.9_int8abs   ok=False steps=   8 up=  20.04 MB edge=   127 ms cloud=   860 ms 'Lee Hazlewood'
+  K5_dual_thr0.9_int4      ok=False steps=   9 up=  10.39 MB edge=   134 ms cloud=   881 ms 'Lee Hazlewood'
+
+hotpot_0026 | prompt tokens=1979
+  F0_nocache_fixed         ok=True  steps= 128 up=1933.18 MB edge=  5075 ms cloud= 35435 ms '1838'
+  F1_nocache_thr0.9        ok=True  steps=   5 up=  75.51 MB edge=   201 ms cloud=  1387 ms '1838'
+  K1_dual_fixed            ok=True  steps= 128 up=  88.86 MB edge=   824 ms cloud=  4904 ms '1838'
+  K2_dual_thr0.9           ok=True  steps=   8 up=  61.33 MB edge=   183 ms cloud=  1233 ms '1838'
+  K2_dual_thr0.7           ok=True  steps=   8 up=  61.33 MB edge=   181 ms cloud=  1233 ms '1838'
+  K3_dual_thr0.9_int8      ok=True  steps=   8 up=  38.23 MB edge=   185 ms cloud=  1245 ms '1838'
+  K4_dual_thr0.9_int8abs   ok=True  steps=   8 up=  30.68 MB edge=   186 ms cloud=  1253 ms '1838'
+  K5_dual_thr0.9_int4      ok=True  steps=   8 up=  15.81 MB edge=   187 ms cloud=  1277 ms '1838'
+
+hotpot_0027 | prompt tokens=429
+  F0_nocache_fixed         ok=True  steps= 128 up= 511.05 MB edge=  1624 ms cloud= 10857 ms 'Yes'
+  F1_nocache_thr0.9        ok=True  steps=   5 up=  19.96 MB edge=    63 ms cloud=   421 ms 'Yes'
+  K1_dual_fixed            ok=True  steps= 128 up=  44.41 MB edge=   744 ms cloud=  4208 ms 'Yes'
+  K2_dual_thr0.9           ok=True  steps=  10 up=  17.35 MB edge=    92 ms cloud=   551 ms 'Yes'
+  K2_dual_thr0.7           ok=True  steps=   9 up=  17.12 MB edge=    83 ms cloud=   509 ms 'Yes'
+  K3_dual_thr0.9_int8      ok=True  steps=  10 up=  10.67 MB edge=    91 ms cloud=   548 ms 'Yes'
+  K4_dual_thr0.9_int8abs   ok=True  steps=  10 up=   8.68 MB edge=    84 ms cloud=   523 ms 'Yes'
+  K5_dual_thr0.9_int4      ok=True  steps=  10 up=   4.47 MB edge=    84 ms cloud=   520 ms 'Yes.'
+
+hotpot_0028 | prompt tokens=1334
+  F0_nocache_fixed         ok=True  steps= 128 up=1341.39 MB edge=  3557 ms cloud= 24799 ms 'Henry J. Kaiser'
+  F1_nocache_thr0.9        ok=True  steps=   6 up=  62.88 MB edge=   167 ms cloud=  1163 ms 'Henry J. Kaiser'
+  K1_dual_fixed            ok=True  steps= 128 up=  70.36 MB edge=   793 ms cloud=  4612 ms 'Henry J. Kaiser'
+  K2_dual_thr0.9           ok=True  steps=   8 up=  42.84 MB edge=   134 ms cloud=   900 ms 'Henry J. Kaiser'
+  K2_dual_thr0.7           ok=True  steps=   8 up=  42.84 MB edge=   135 ms cloud=   897 ms 'Henry J. Kaiser'
+  K3_dual_thr0.9_int8      ok=True  steps=   8 up=  26.67 MB edge=   137 ms cloud=   913 ms 'Henry J. Kaiser'
+  K4_dual_thr0.9_int8abs   ok=True  steps=   8 up=  21.43 MB edge=   138 ms cloud=   913 ms 'Henry J. Kaiser'
+  K5_dual_thr0.9_int4      ok=True  steps=   8 up=  11.04 MB edge=   136 ms cloud=   909 ms 'Henry J. Kaiser'
+
+hotpot_0029 | prompt tokens=1312
+  F0_nocache_fixed         ok=True  steps= 128 up=1321.21 MB edge=  3563 ms cloud= 24799 ms 'Arena of Khazan'
+  F1_nocache_thr0.9        ok=True  steps=   5 up=  51.61 MB edge=   139 ms cloud=   969 ms 'Arena of Khazan'
+  K1_dual_fixed            ok=True  steps= 128 up=  69.73 MB edge=   779 ms cloud=  4570 ms 'Arena of Khazan'
+  K2_dual_thr0.9           ok=True  steps=   8 up=  42.21 MB edge=   133 ms cloud=   894 ms 'Arena of Khazan'
+  K2_dual_thr0.7           ok=True  steps=   8 up=  42.21 MB edge=   137 ms cloud=   907 ms 'Arena of Khazan'
+  K3_dual_thr0.9_int8      ok=True  steps=   8 up=  26.27 MB edge=   133 ms cloud=   899 ms 'Arena of Khazan'
+  K4_dual_thr0.9_int8abs   ok=True  steps=   8 up=  21.11 MB edge=   134 ms cloud=   896 ms 'Arena of Khazan'
+  K5_dual_thr0.9_int4      ok=True  steps=   8 up=  10.88 MB edge=   134 ms cloud=   896 ms 'Arena of Khazan'
+
+Exp13 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp13_dream_hotpotqa_k4_t128_b32
+               variant  runs      acc  regressions  improvements  mcnemar_p  mean_steps  mean_up_mb  up_reduction_vs_ref  mean_edge_ms  mean_cloud_ms
+      F0_nocache_fixed    30 0.600000            0             0        1.0  128.000000 1524.587861             0.000000   4163.289021   28792.407317
+     F1_nocache_thr0.9    30 0.600000            0             0        1.0    6.833333   81.307211             0.946615    222.303625    1538.108188
+         K1_dual_fixed    30 0.600000            1             1        1.0  128.000000   76.087979             0.948355    801.799014    4717.318762
+        K2_dual_thr0.9    30 0.600000            1             1        1.0    9.900000   48.996783             0.967778    164.886768    1088.280470
+        K2_dual_thr0.7    30 0.600000            1             1        1.0    8.933333   48.775038             0.967939    158.619425    1054.862708
+   K3_dual_thr0.9_int8    30 0.633333            0             1        1.0    9.933333   30.468057             0.979973    163.846083    1087.111609
+K4_dual_thr0.9_int8abs    30 0.666667            0             2        0.5    9.733333   24.493014             0.983893    162.632814    1079.976210
+   K5_dual_thr0.9_int4    30 0.666667            0             2        0.5    9.933333   12.634073             0.991691    164.192291    1088.004429
+
+Emulated split latency (s), RTT 20 ms, edge 3x slower:
+bandwidth_mbps             1       5       10     25     50     100   1000
+variant                                                                   
+F0_nocache_fixed        12240.9  2483.5  1263.9  532.0  288.1  166.1  56.4
+F1_nocache_thr0.9         652.8   132.5    67.4   28.4   15.4    8.9   3.0
+K1_dual_fixed             618.5   131.5    70.6   34.1   21.9   15.8  10.4
+K2_dual_thr0.7            391.9    79.8    40.7   17.3    9.5    5.6   2.1
+K2_dual_thr0.9            393.8    80.2    41.0   17.5    9.6    5.7   2.2
+K3_dual_thr0.9_int8       245.6    50.6    26.2   11.6    6.7    4.2   2.0
+K4_dual_thr0.9_int8abs    197.7    41.0    21.4    9.6    5.7    3.7   2.0
+K5_dual_thr0.9_int4       102.9    22.0    11.9    5.8    3.8    2.8   1.9
+
+Cloud-only with the same cache and decoding (s):
+variant
+F0_nocache_fixed          33.31
+F1_nocache_thr0.9          1.80
+K1_dual_fixed              5.62
+K2_dual_thr0.7             1.25
+K2_dual_thr0.9             1.29
+K3_dual_thr0.9_int8        1.28
+K4_dual_thr0.9_int8abs     1.28
+K5_dual_thr0.9_int4        1.29
+
+Exp23 completed (2026-11-28 11:17:49).

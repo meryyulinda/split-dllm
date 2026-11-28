@@ -1,0 +1,94 @@
+{
+  "experiment": "Exp22 several users on one cloud GPU (Fast-dLLM, bf16)",
+  "tag": "lab",
+  "pool": 16,
+  "min_q": 6,
+  "model": "Dream-org/Dream-v0-Instruct-7B",
+  "torch": "2.5.1+cu124",
+  "transformers": "4.46.2",
+  "python": "3.10.22",
+  "host": "asus-ESC4000-E11",
+  "configs": {
+    "cloud_only": {
+      "split": 0,
+      "links": [
+        {
+          "name": "paper",
+          "addr": "127.0.0.1:6211",
+          "mbps": 100.0,
+          "rtt_ms": 20.0
+        },
+        {
+          "name": "measured",
+          "addr": "127.0.0.1:6212",
+          "mbps": 89.0,
+          "rtt_ms": 112.0
+        }
+      ],
+      "users": [
+        1,
+        2,
+        4,
+        8,
+        12,
+        16
+      ],
+      "slowdown": 1.0,
+      "edge_gpu": "NVIDIA RTX A6000"
+    },
+    "split4": {
+      "split": 4,
+      "links": [
+        {
+          "name": "paper",
+          "addr": "127.0.0.1:6211",
+          "mbps": 100.0,
+          "rtt_ms": 20.0
+        },
+        {
+          "name": "measured",
+          "addr": "127.0.0.1:6212",
+          "mbps": 89.0,
+          "rtt_ms": 112.0
+        }
+      ],
+      "users": [
+        1,
+        2,
+        4,
+        8,
+        12,
+        16
+      ],
+      "slowdown": 3.0,
+      "edge_gpu": "NVIDIA RTX A6000"
+    },
+    "split20": {
+      "split": 20,
+      "links": [
+        {
+          "name": "paper",
+          "addr": "127.0.0.1:6211",
+          "mbps": 100.0,
+          "rtt_ms": 20.0
+        },
+        {
+          "name": "measured",
+          "addr": "127.0.0.1:6212",
+          "mbps": 89.0,
+          "rtt_ms": 112.0
+        }
+      ],
+      "users": [
+        1,
+        2,
+        4,
+        8,
+        12,
+        16
+      ],
+      "slowdown": 3.0,
+      "edge_gpu": "NVIDIA RTX A6000"
+    }
+  }
+}

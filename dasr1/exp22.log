@@ -1,0 +1,125 @@
+2026-11-28 07:04:50 GPUs 1,2 idle, starting.
+2026-11-28 07:04:50 === cloud_only (split 0): starting the cloud program on GPU 1
+Exp22 edge | NVIDIA RTX A6000 | cloud_only (split 0) | links ['paper', 'measured'] | users [1, 2, 4, 8, 12, 16] | slowdown 3
+  2026-11-28 07:06:02 paper     users= 1:  16 answers in   52.8 s |  1094.2 answers/h | latency   3.29 s (median   3.22, p90   4.69) | steps  81.3 | acc 0.75
+  2026-11-28 07:06:50 paper     users= 2:  16 answers in   44.6 s |  1387.4 answers/h | latency   5.21 s (median   5.14, p90   7.12) | steps  81.3 | acc 0.75
+  2026-11-28 07:07:57 paper     users= 4:  24 answers in   64.0 s |  1470.7 answers/h | latency   9.88 s (median   9.72, p90  14.30) | steps  82.9 | acc 0.79
+  2026-11-28 07:10:18 paper     users= 8:  48 answers in  138.0 s |  1345.0 answers/h | latency  21.51 s (median  20.59, p90  32.88) | steps  81.3 | acc 0.75
+  2026-11-28 07:13:45 paper     users=12:  72 answers in  204.7 s |  1374.2 answers/h | latency  31.67 s (median  29.82, p90  49.04) | steps  80.8 | acc 0.76
+  2026-11-28 07:18:23 paper     users=16:  96 answers in  275.0 s |  1366.1 answers/h | latency  42.52 s (median  39.89, p90  66.04) | steps  81.3 | acc 0.75
+  2026-11-28 07:19:19 measured  users= 1:  16 answers in   54.0 s |  1070.6 answers/h | latency   3.36 s (median   3.48, p90   4.73) | steps  81.3 | acc 0.75
+  2026-11-28 07:20:07 measured  users= 2:  16 answers in   45.0 s |  1377.2 answers/h | latency   5.25 s (median   5.20, p90   7.19) | steps  81.3 | acc 0.75
+  2026-11-28 07:21:12 measured  users= 4:  24 answers in   62.1 s |  1530.5 answers/h | latency   9.51 s (median   9.35, p90  13.56) | steps  82.9 | acc 0.79
+  2026-11-28 07:23:31 measured  users= 8:  48 answers in  135.8 s |  1367.7 answers/h | latency  21.17 s (median  20.07, p90  32.20) | steps  81.3 | acc 0.75
+  2026-11-28 07:26:58 measured  users=12:  72 answers in  204.2 s |  1373.8 answers/h | latency  31.68 s (median  30.41, p90  48.64) | steps  80.8 | acc 0.76
+  2026-11-28 07:31:36 measured  users=16:  96 answers in  275.0 s |  1365.7 answers/h | latency  42.53 s (median  39.89, p90  65.51) | steps  81.3 | acc 0.75
+
+Exp22 edge cloud_only completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp22_multiuser_lab
+    config     link  users  split  answers  acc  answers_per_hour  answers_per_hour_whole_run  latency_s  latency_median_s  latency_p90_s  steps  up_mb  edge_s  edge_with_slowdown_s  cloud_gen_s  wire_s  same_as_one_user
+cloud_only    paper      1      0       16 0.75           1094.20                     1094.20       3.29              3.22           4.69  81.31    0.0     0.0                   0.0         3.27     0.0               1.0
+cloud_only    paper      2      0       16 0.75           1387.41                     1292.41       5.21              5.14           7.12  81.31    0.0     0.0                   0.0         5.19     0.0               1.0
+cloud_only    paper      4      0       24 0.79           1470.69                     1352.43       9.88              9.72          14.30  82.92    0.0     0.0                   0.0         9.86     0.0               1.0
+cloud_only    paper      8      0       48 0.75           1344.97                     1253.98      21.51             20.59          32.88  81.31    0.0     0.0                   0.0        21.49     0.0               1.0
+cloud_only    paper     12      0       72 0.76           1374.22                     1268.02      31.67             29.82          49.04  80.85    0.0     0.0                   0.0        31.61     0.0               1.0
+cloud_only    paper     16      0       96 0.75           1366.12                     1258.20      42.52             39.89          66.04  81.31    0.0     0.0                   0.0        42.49     0.0               1.0
+cloud_only measured      1      0       16 0.75           1070.64                     1070.64       3.36              3.48           4.73  81.31    0.0     0.0                   0.0         3.25     0.0               1.0
+cloud_only measured      2      0       16 0.75           1377.18                     1281.34       5.25              5.20           7.19  81.31    0.0     0.0                   0.0         5.14     0.0               1.0
+cloud_only measured      4      0       24 0.79           1530.46                     1394.65       9.51              9.35          13.56  82.92    0.0     0.0                   0.0         9.40     0.0               1.0
+cloud_only measured      8      0       48 0.75           1367.67                     1274.40      21.17             20.07          32.20  81.31    0.0     0.0                   0.0        21.05     0.0               1.0
+cloud_only measured     12      0       72 0.76           1373.78                     1271.06      31.68             30.41          48.64  80.85    0.0     0.0                   0.0        31.56     0.0               1.0
+cloud_only measured     16      0       96 0.75           1365.71                     1258.07      42.53             39.89          65.51  81.31    0.0     0.0                   0.0        42.41     0.0               1.0
+2026-11-28 07:31:42 === split4 (split 4): starting the cloud program on GPU 1
+Exp22 edge | NVIDIA RTX A6000 | split4 (split 4) | links ['paper', 'measured'] | users [1, 2, 4, 8, 12, 16] | slowdown 3
+  2026-11-28 07:35:01 paper     users= 1:  16 answers in  158.8 s |   362.9 answers/h | latency   9.92 s (median   9.76, p90  13.85) | steps  81.3 | acc 0.75
+  2026-11-28 07:36:38 paper     users= 2:  16 answers in   89.4 s |   707.9 answers/h | latency  10.25 s (median  10.04, p90  13.94) | steps  81.3 | acc 0.75
+  2026-11-28 07:38:06 paper     users= 4:  24 answers in   79.6 s |  1210.5 answers/h | latency  12.05 s (median  12.13, p90  16.11) | steps  82.9 | acc 0.79
+  2026-11-28 07:40:22 paper     users= 8:  48 answers in  127.6 s |  1475.0 answers/h | latency  19.62 s (median  19.37, p90  28.45) | steps  81.3 | acc 0.75
+  2026-11-28 07:43:37 paper     users=12:  72 answers in  187.3 s |  1507.6 answers/h | latency  28.85 s (median  27.57, p90  43.10) | steps  80.8 | acc 0.76
+  2026-11-28 07:47:51 paper     users=16:  96 answers in  245.2 s |  1537.1 answers/h | latency  37.75 s (median  35.69, p90  57.60) | steps  81.3 | acc 0.75
+  2026-11-28 07:52:51 measured  users= 1:  16 answers in  285.9 s |   201.6 answers/h | latency  17.86 s (median  17.47, p90  25.56) | steps  81.3 | acc 0.75
+  2026-11-28 07:55:43 measured  users= 2:  16 answers in  158.0 s |   403.8 answers/h | latency  18.00 s (median  17.59, p90  25.64) | steps  81.3 | acc 0.75
+  2026-11-28 07:58:05 measured  users= 4:  24 answers in  128.1 s |   762.2 answers/h | latency  19.22 s (median  19.37, p90  25.08) | steps  82.9 | acc 0.79
+  2026-11-28 08:00:50 measured  users= 8:  48 answers in  151.1 s |  1299.8 answers/h | latency  22.37 s (median  20.81, p90  32.62) | steps  81.3 | acc 0.75
+  2026-11-28 08:04:20 measured  users=12:  72 answers in  195.2 s |  1488.0 answers/h | latency  29.29 s (median  27.92, p90  42.62) | steps  80.8 | acc 0.76
+  2026-11-28 08:08:51 measured  users=16:  96 answers in  256.6 s |  1483.4 answers/h | latency  39.11 s (median  36.71, p90  58.86) | steps  81.3 | acc 0.75
+
+Exp22 edge split4 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp22_multiuser_lab
+    config     link  users  split  answers  acc  answers_per_hour  answers_per_hour_whole_run  latency_s  latency_median_s  latency_p90_s  steps  up_mb  edge_s  edge_with_slowdown_s  cloud_gen_s  wire_s  same_as_one_user
+cloud_only    paper      1      0       16 0.75           1094.20                     1094.20       3.29              3.22           4.69  81.31   0.00    0.00                  0.00         3.27    0.00               1.0
+cloud_only    paper      2      0       16 0.75           1387.41                     1292.41       5.21              5.14           7.12  81.31   0.00    0.00                  0.00         5.19    0.00               1.0
+cloud_only    paper      4      0       24 0.79           1470.69                     1352.43       9.88              9.72          14.30  82.92   0.00    0.00                  0.00         9.86    0.00               1.0
+cloud_only    paper      8      0       48 0.75           1344.97                     1253.98      21.51             20.59          32.88  81.31   0.00    0.00                  0.00        21.49    0.00               1.0
+cloud_only    paper     12      0       72 0.76           1374.22                     1268.02      31.67             29.82          49.04  80.85   0.00    0.00                  0.00        31.61    0.00               1.0
+cloud_only    paper     16      0       96 0.75           1366.12                     1258.20      42.52             39.89          66.04  81.31   0.00    0.00                  0.00        42.49    0.00               1.0
+cloud_only measured      1      0       16 0.75           1070.64                     1070.64       3.36              3.48           4.73  81.31   0.00    0.00                  0.00         3.25    0.00               1.0
+cloud_only measured      2      0       16 0.75           1377.18                     1281.34       5.25              5.20           7.19  81.31   0.00    0.00                  0.00         5.14    0.00               1.0
+cloud_only measured      4      0       24 0.79           1530.46                     1394.65       9.51              9.35          13.56  82.92   0.00    0.00                  0.00         9.40    0.00               1.0
+cloud_only measured      8      0       48 0.75           1367.67                     1274.40      21.17             20.07          32.20  81.31   0.00    0.00                  0.00        21.05    0.00               1.0
+cloud_only measured     12      0       72 0.76           1373.78                     1271.06      31.68             30.41          48.64  80.85   0.00    0.00                  0.00        31.56    0.00               1.0
+cloud_only measured     16      0       96 0.75           1365.71                     1258.07      42.53             39.89          65.51  81.31   0.00    0.00                  0.00        42.41    0.00               1.0
+    split4    paper      1      4       16 0.75            362.94                      362.94       9.92              9.76          13.85  81.31  37.11    0.62                  1.85         9.90    6.73               1.0
+    split4    paper      2      4       16 0.75            707.91                      645.26      10.25             10.04          13.94  81.31  37.11    0.60                  1.79        10.23    6.65               1.0
+    split4    paper      4      4       24 0.79           1210.48                     1087.26      12.05             12.13          16.11  82.92  37.57    0.65                  1.95        12.03    6.91               1.0
+    split4    paper      8      4       48 0.75           1475.02                     1356.02      19.62             19.37          28.45  81.31  37.11    0.73                  2.20        19.60    7.19               1.0
+    split4    paper     12      4       72 0.76           1507.57                     1386.26      28.85             27.57          43.10  80.85  36.92    0.72                  2.17        28.82    7.16               1.0
+    split4    paper     16      4       96 0.75           1537.15                     1410.87      37.75             35.69          57.60  81.31  37.11    0.74                  2.21        37.72    7.32               1.0
+    split4 measured      1      4       16 0.75            201.56                      201.56      17.86             17.47          25.56  81.31  37.11    0.60                  1.81        17.75   14.56               1.0
+    split4 measured      2      4       16 0.75            403.80                      364.88      18.00             17.59          25.64  81.31  37.11    0.60                  1.79        17.88   14.52               1.0
+    split4 measured      4      4       24 0.79            762.21                      675.14      19.22             19.37          25.08  82.92  37.57    0.63                  1.90        19.11   14.85               1.0
+    split4 measured      8      4       48 0.75           1299.81                     1145.42      22.37             20.81          32.62  81.31  37.11    0.68                  2.03        22.25   14.80               1.0
+    split4 measured     12      4       72 0.76           1487.96                     1329.93      29.29             27.92          42.62  80.85  36.92    0.70                  2.09        29.18   14.83               1.0
+    split4 measured     16      4       96 0.75           1483.41                     1348.86      39.11             36.71          58.86  81.31  37.11    0.75                  2.26        38.99   15.16               1.0
+2026-11-28 08:08:58 === split20 (split 20): starting the cloud program on GPU 1
+Exp22 edge | NVIDIA RTX A6000 | split20 (split 20) | links ['paper', 'measured'] | users [1, 2, 4, 8, 12, 16] | slowdown 3
+  2026-11-28 08:13:20 paper     users= 1:  16 answers in  215.4 s |   267.5 answers/h | latency  13.46 s (median  13.44, p90  19.03) | steps  81.3 | acc 0.75
+  2026-11-28 08:15:42 paper     users= 2:  16 answers in  131.8 s |   478.3 answers/h | latency  15.16 s (median  15.54, p90  21.22) | steps  81.3 | acc 0.75
+  2026-11-28 08:17:51 paper     users= 4:  24 answers in  117.1 s |   821.3 answers/h | latency  17.77 s (median  17.75, p90  23.99) | steps  82.9 | acc 0.79
+  2026-11-28 08:20:56 paper     users= 8:  48 answers in  174.2 s |  1092.7 answers/h | latency  26.52 s (median  25.47, p90  39.71) | steps  81.3 | acc 0.75
+  2026-11-28 08:25:07 paper     users=12:  72 answers in  240.6 s |  1204.0 answers/h | latency  36.22 s (median  32.17, p90  57.46) | steps  80.8 | acc 0.76
+  2026-11-28 08:30:28 paper     users=16:  96 answers in  309.5 s |  1241.6 answers/h | latency  46.93 s (median  46.27, p90  76.61) | steps  81.3 | acc 0.75
+  2026-11-28 08:36:27 measured  users= 1:  16 answers in  342.7 s |   168.1 answers/h | latency  21.41 s (median  21.12, p90  30.61) | steps  81.3 | acc 0.75
+  2026-11-28 08:39:56 measured  users= 2:  16 answers in  191.5 s |   333.2 answers/h | latency  21.81 s (median  21.43, p90  31.47) | steps  81.3 | acc 0.75
+  2026-11-28 08:42:57 measured  users= 4:  24 answers in  163.3 s |   594.9 answers/h | latency  24.57 s (median  23.65, p90  33.14) | steps  82.9 | acc 0.79
+  2026-11-28 08:46:35 measured  users= 8:  48 answers in  201.9 s |   960.8 answers/h | latency  30.25 s (median  29.21, p90  44.32) | steps  81.3 | acc 0.75
+  2026-11-28 08:51:09 measured  users=12:  72 answers in  257.0 s |  1154.0 answers/h | latency  37.88 s (median  34.00, p90  56.57) | steps  80.8 | acc 0.76
+  2026-11-28 08:56:58 measured  users=16:  96 answers in  331.2 s |  1167.1 answers/h | latency  49.77 s (median  47.40, p90  77.69) | steps  81.3 | acc 0.75
+
+Exp22 edge split20 completed. Output: /mnt/mydisk/mery-splitdllm/split-dllm/dasr1/outputs/exp22_multiuser_lab
+    config     link  users  split  answers  acc  answers_per_hour  answers_per_hour_whole_run  latency_s  latency_median_s  latency_p90_s  steps  up_mb  edge_s  edge_with_slowdown_s  cloud_gen_s  wire_s  same_as_one_user
+cloud_only    paper      1      0       16 0.75           1094.20                     1094.20       3.29              3.22           4.69  81.31   0.00    0.00                  0.00         3.27    0.00               1.0
+cloud_only    paper      2      0       16 0.75           1387.41                     1292.41       5.21              5.14           7.12  81.31   0.00    0.00                  0.00         5.19    0.00               1.0
+cloud_only    paper      4      0       24 0.79           1470.69                     1352.43       9.88              9.72          14.30  82.92   0.00    0.00                  0.00         9.86    0.00               1.0
+cloud_only    paper      8      0       48 0.75           1344.97                     1253.98      21.51             20.59          32.88  81.31   0.00    0.00                  0.00        21.49    0.00               1.0
+cloud_only    paper     12      0       72 0.76           1374.22                     1268.02      31.67             29.82          49.04  80.85   0.00    0.00                  0.00        31.61    0.00               1.0
+cloud_only    paper     16      0       96 0.75           1366.12                     1258.20      42.52             39.89          66.04  81.31   0.00    0.00                  0.00        42.49    0.00               1.0
+cloud_only measured      1      0       16 0.75           1070.64                     1070.64       3.36              3.48           4.73  81.31   0.00    0.00                  0.00         3.25    0.00               1.0
+cloud_only measured      2      0       16 0.75           1377.18                     1281.34       5.25              5.20           7.19  81.31   0.00    0.00                  0.00         5.14    0.00               1.0
+cloud_only measured      4      0       24 0.79           1530.46                     1394.65       9.51              9.35          13.56  82.92   0.00    0.00                  0.00         9.40    0.00               1.0
+cloud_only measured      8      0       48 0.75           1367.67                     1274.40      21.17             20.07          32.20  81.31   0.00    0.00                  0.00        21.05    0.00               1.0
+cloud_only measured     12      0       72 0.76           1373.78                     1271.06      31.68             30.41          48.64  80.85   0.00    0.00                  0.00        31.56    0.00               1.0
+cloud_only measured     16      0       96 0.75           1365.71                     1258.07      42.53             39.89          65.51  81.31   0.00    0.00                  0.00        42.41    0.00               1.0
+    split4    paper      1      4       16 0.75            362.94                      362.94       9.92              9.76          13.85  81.31  37.11    0.62                  1.85         9.90    6.73               1.0
+    split4    paper      2      4       16 0.75            707.91                      645.26      10.25             10.04          13.94  81.31  37.11    0.60                  1.79        10.23    6.65               1.0
+    split4    paper      4      4       24 0.79           1210.48                     1087.26      12.05             12.13          16.11  82.92  37.57    0.65                  1.95        12.03    6.91               1.0
+    split4    paper      8      4       48 0.75           1475.02                     1356.02      19.62             19.37          28.45  81.31  37.11    0.73                  2.20        19.60    7.19               1.0
+    split4    paper     12      4       72 0.76           1507.57                     1386.26      28.85             27.57          43.10  80.85  36.92    0.72                  2.17        28.82    7.16               1.0
+    split4    paper     16      4       96 0.75           1537.15                     1410.87      37.75             35.69          57.60  81.31  37.11    0.74                  2.21        37.72    7.32               1.0
+    split4 measured      1      4       16 0.75            201.56                      201.56      17.86             17.47          25.56  81.31  37.11    0.60                  1.81        17.75   14.56               1.0
+    split4 measured      2      4       16 0.75            403.80                      364.88      18.00             17.59          25.64  81.31  37.11    0.60                  1.79        17.88   14.52               1.0
+    split4 measured      4      4       24 0.79            762.21                      675.14      19.22             19.37          25.08  82.92  37.57    0.63                  1.90        19.11   14.85               1.0
+    split4 measured      8      4       48 0.75           1299.81                     1145.42      22.37             20.81          32.62  81.31  37.11    0.68                  2.03        22.25   14.80               1.0
+    split4 measured     12      4       72 0.76           1487.96                     1329.93      29.29             27.92          42.62  80.85  36.92    0.70                  2.09        29.18   14.83               1.0
+    split4 measured     16      4       96 0.75           1483.41                     1348.86      39.11             36.71          58.86  81.31  37.11    0.75                  2.26        38.99   15.16               1.0
+   split20    paper      1     20       16 0.75            267.52                      267.52      13.46             13.44          19.03  81.31  37.11    2.42                  7.27        13.43   12.16               1.0
+   split20    paper      2     20       16 0.75            478.32                      437.40      15.16             15.54          21.22  81.31  37.11    2.94                  8.82        15.14   13.70               1.0
+   split20    paper      4     20       24 0.79            821.31                      738.55      17.77             17.75          23.99  82.92  37.57    3.68                 11.05        17.75   16.04               1.0
+   split20    paper      8     20       48 0.75           1092.73                      993.40      26.52             25.47          39.71  81.31  37.11    6.48                 19.44        26.49   24.39               1.0
+   split20    paper     12     20       72 0.76           1203.97                     1078.69      36.22             32.17          57.46  80.85  36.92    9.47                 28.42        36.20   33.40               1.0
+   split20    paper     16     20       96 0.75           1241.61                     1117.92      46.93             46.27          76.61  81.31  37.11   12.71                 38.12        46.91   43.14               1.0
+   split20 measured      1     20       16 0.75            168.11                      168.11      21.41             21.12          30.61  81.31  37.11    2.42                  7.27        21.30   20.02               1.0
+   split20 measured      2     20       16 0.75            333.15                      301.18      21.81             21.43          31.47  81.31  37.11    2.55                  7.65        21.70   20.40               1.0
+   split20 measured      4     20       24 0.79            594.93                      529.40      24.57             23.65          33.14  82.92  37.57    3.29                  9.88        24.46   22.88               1.0
+   split20 measured      8     20       48 0.75            960.79                      857.01      30.25             29.21          44.32  81.31  37.11    5.13                 15.38        30.13   28.18               1.0
+   split20 measured     12     20       72 0.76           1154.05                     1009.62      37.88             34.00          56.57  80.85  36.92    7.56                 22.67        37.76   35.42               1.0
+   split20 measured     16     20       96 0.75           1167.10                     1045.08      49.77             47.40          77.69  81.31  37.11   11.21                 33.63        49.66   46.51               1.0
+2026-11-28 08:57:05 Exp22 completed. Output: outputs/exp22_multiuser_lab/
